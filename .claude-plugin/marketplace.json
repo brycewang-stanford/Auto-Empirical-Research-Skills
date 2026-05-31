@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "auto-empirical-research-skills",
+  "version": "1.1.0",
+  "description": "First-party, install-ready Claude Code plugins from the Auto-Empirical-Research-Skills collection (Stanford REAP x CoPaper.AI). Add this marketplace to one-command-install the empirical-research skill stacks (AER manuscript pipeline + explicit Python / Stata / R analysis pipelines); the wider catalog of 50+ third-party skills is browsable in the repo and consumed via copy-into-.claude/skills or --plugin-dir.",
+  "owner": {
+    "name": "Bryce Wang",
+    "email": "brycew6m@stanford.edu",
+    "url": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills"
+  },
+  "plugins": [
+    {
+      "name": "aer-skills",
+      "source": "./skills/50-brycewang-aer-skills",
+      "version": "1.0.0",
+      "description": "Nine-skill stack for top-5 economics manuscripts (AER / AER: Insights / AEJ): topic selection, modern causal identification (DiD / IV / RDD / SCM / Bartik), referee-anticipating robustness, Keith-Head-style introductions, AER booktabs tables, AEA Data and Code Availability deposits (openICPSR-ready), submission preflight, and R&R rebuttal letters. Ships Stata / R / Python templates and classic-AER-paper exemplars.",
+      "author": { "name": "Bryce Wang", "email": "brycew6m@stanford.edu" },
+      "license": "MIT",
+      "homepage": "https://github.com/brycewang-stanford/AER-skills",
+      "repository": "https://github.com/brycewang-stanford/AER-skills",
+      "category": "academic",
+      "keywords": [
+        "economics", "aer", "american-economic-review", "aej", "causal-inference",
+        "difference-in-differences", "instrumental-variables", "regression-discontinuity",
+        "synthetic-control", "replication", "academic-writing", "empirical-research"
+      ]
+    },
+    {
+      "name": "empirical-analysis-python",
+      "source": "./plugins/empirical-analysis-python",
+      "version": "1.0.0",
+      "description": "Explicit 8-step empirical-analysis pipeline in the traditional Python econometrics stack (pandas + statsmodels + linearmodels + pyfixest + rdrobust + econml + causalml): cleaning -> variable construction -> Table 1 -> diagnostics -> estimation (OLS/IV/DID/RDD/PSM/SCM/DML/Causal Forest) -> robustness -> mechanism/heterogeneity/mediation -> publication-ready tables & figures. Includes epidemiology and ML-causal modes.",
+      "author": { "name": "Bryce Wang", "email": "brycew6m@stanford.edu" },
+      "license": "CC-BY-SA-4.0",
+      "homepage": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills",
+      "repository": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills",
+      "category": "academic",
+      "keywords": [
+        "econometrics", "causal-inference", "python", "difference-in-differences",
+        "instrumental-variables", "regression-discontinuity", "double-machine-learning",
+        "empirical-research", "replication"
+      ]
+    },
+    {
+      "name": "empirical-analysis-stata",
+      "source": "./plugins/empirical-analysis-stata",
+      "version": "1.0.0",
+      "description": "Explicit 8-step empirical-analysis pipeline in the traditional Stata ecosystem (reghdfe + ivreg2 + csdid + did_imputation + sdid + rdrobust + synth + psmatch2 + teffects + esttab + coefplot): from use/import to .tex/.rtf tables and .pdf figures, with the full modern DID toolkit (bacondecomp + honestdid + rwolf + ritest). Includes epidemiology and ML-causal modes. The first choice for referee-level Stata replication packs.",
+      "author": { "name": "Bryce Wang", "email": "brycew6m@stanford.edu" },
+      "license": "CC-BY-SA-4.0",
+      "homepage": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills",
+      "repository": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills",
+      "category": "academic",
+      "keywords": [
+        "econometrics", "causal-inference", "stata", "reghdfe", "difference-in-differences",
+        "instrumental-variables", "regression-discontinuity", "synthetic-control",
+        "empirical-research", "replication"
+      ]
+    },
+    {
+      "name": "empirical-analysis-r",
+      "source": "./plugins/empirical-analysis-r",
+      "version": "1.0.0",
+      "description": "Explicit 8-step empirical-analysis pipeline in the modern tidyverse + econometrics R stack (dplyr + haven + fixest + did + synthdid + rdrobust + MatchIt + WeightIt + grf + DoubleML + mediation + marginaleffects + modelsummary). All eight steps fit in a single .qmd; `quarto render` produces a unified PDF/HTML/Word reproducibility report. Includes epidemiology and ML-causal modes.",
+      "author": { "name": "Bryce Wang", "email": "brycew6m@stanford.edu" },
+      "license": "CC-BY-SA-4.0",
+      "homepage": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills",
+      "repository": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills",
+      "category": "academic",
+      "keywords": [
+        "econometrics", "causal-inference", "r", "tidyverse", "fixest",
+        "difference-in-differences", "regression-discontinuity", "quarto",
+        "empirical-research", "reproducible-research"
+      ]
+    }
+  ]
+}

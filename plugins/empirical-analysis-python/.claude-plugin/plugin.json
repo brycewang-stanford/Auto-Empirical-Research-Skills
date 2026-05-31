@@ -1,0 +1,25 @@
+{
+  "name": "empirical-analysis-python",
+  "description": "Explicit 8-step empirical-analysis pipeline in the traditional Python econometrics stack (pandas + statsmodels + linearmodels + pyfixest + rdrobust + econml + causalml). Data cleaning → variable construction → Table 1 → diagnostics → estimation (OLS / IV / DID / RDD / PSM / SCM / DML / Causal Forest) → robustness battery → mechanism / heterogeneity / mediation → publication-ready tables & figures. Also covers epidemiology (TMLE / IPTW / Mendelian randomization / survival) and ML-causal (DML / meta-learners / Dragonnet) modes. Every line is explicit and swappable — built for teaching, referee-level audit, and strict replication.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Bryce Wang",
+    "email": "brycew6m@stanford.edu"
+  },
+  "license": "CC-BY-SA-4.0",
+  "homepage": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills",
+  "repository": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills",
+  "keywords": [
+    "econometrics",
+    "causal-inference",
+    "python",
+    "difference-in-differences",
+    "instrumental-variables",
+    "regression-discontinuity",
+    "propensity-score-matching",
+    "synthetic-control",
+    "double-machine-learning",
+    "empirical-research",
+    "replication"
+  ]
+}

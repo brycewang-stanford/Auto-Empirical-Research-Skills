@@ -1,0 +1,25 @@
+{
+  "name": "empirical-analysis-r",
+  "description": "Explicit 8-step empirical-analysis pipeline in the modern tidyverse + econometrics R stack (dplyr + haven + fixest + did + synthdid + rdrobust + MatchIt + WeightIt + grf + DoubleML + mediation + marginaleffects + modelsummary). All eight steps fit in a single .qmd; `quarto render` produces a unified PDF / HTML / Word reproducibility report. Also covers epidemiology (tmle / ltmle / MendelianRandomization / survival) and ML-causal (DoubleML / grf / policytree) modes. The Quarto-rendered reproducibility report is unique to R.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Bryce Wang",
+    "email": "brycew6m@stanford.edu"
+  },
+  "license": "CC-BY-SA-4.0",
+  "homepage": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills",
+  "repository": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills",
+  "keywords": [
+    "econometrics",
+    "causal-inference",
+    "r",
+    "tidyverse",
+    "fixest",
+    "difference-in-differences",
+    "regression-discontinuity",
+    "synthetic-control",
+    "quarto",
+    "empirical-research",
+    "reproducible-research"
+  ]
+}

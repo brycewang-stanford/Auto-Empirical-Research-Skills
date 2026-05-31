@@ -1,0 +1,25 @@
+{
+  "name": "empirical-analysis-stata",
+  "description": "Explicit 8-step empirical-analysis pipeline in the traditional Stata ecosystem (reghdfe + ivreg2 + csdid + did_imputation + eventstudyinteract + sdid + rdrobust + synth + psmatch2 + teffects + esttab + coefplot). From use / import all the way to .tex / .rtf tables and .pdf figures, with the full modern DID toolkit (bacondecomp + honestdid + rwolf + ritest). Also covers epidemiology and ML-causal (ddml / crforest) modes. The first choice when a referee or co-author insists on a Stata replication pack.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Bryce Wang",
+    "email": "brycew6m@stanford.edu"
+  },
+  "license": "CC-BY-SA-4.0",
+  "homepage": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills",
+  "repository": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills",
+  "keywords": [
+    "econometrics",
+    "causal-inference",
+    "stata",
+    "reghdfe",
+    "difference-in-differences",
+    "instrumental-variables",
+    "regression-discontinuity",
+    "synthetic-control",
+    "do-file",
+    "empirical-research",
+    "replication"
+  ]
+}
