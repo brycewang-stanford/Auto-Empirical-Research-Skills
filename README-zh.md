@@ -123,7 +123,7 @@ make validate
 <details>
 <summary><b>2026-05-04：🤝 首个社区 PR 收录 —— humanize-chinese vendor 进 skills/49</b></summary>
 
-- **🇨🇳 [skills/49-voidborne-d-humanize-chinese](skills/49-voidborne-d-humanize-chinese/)**：由 [@voidborne-d](https://github.com/voidborne-d) 通过 [PR #5](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills/pull/5) 贡献，按 `LICENSE + README-original.md + SKILL.md` 三件套 vendor 进仓库。**同时提供 SKILL.md 和独立 Python CLI**：17 类中文 AI 模式检测 + 7 风格改写器（academic / novel / blog / 小红书 / 微信 等）+ LR ensemble 程序化打分，长度 ≥1500 字自动切长篇 LR，HC3 100 短问答基准 95% 正确分离。**License: MIT (Non-Commercial)** —— 非标准修改版 MIT，明确禁商用（SaaS / 付费 API / 商业产品集成），下游使用请注意。
+- **🇨🇳 [skills/49-voidborne-d-humanize-chinese](skills/49-voidborne-d-humanize-chinese/)**：由 voidborne-d 通过 PR #5 贡献，按 `LICENSE + README-original.md + SKILL.md` 三件套 vendor 进仓库。**同时提供 SKILL.md 和独立 Python CLI**：17 类中文 AI 模式检测 + 7 风格改写器（academic / novel / blog / 小红书 / 微信 等）+ LR ensemble 程序化打分，长度 ≥1500 字自动切长篇 LR，HC3 100 短问答基准 95% 正确分离。**License: MIT (Non-Commercial)** —— 非标准修改版 MIT，明确禁商用（SaaS / 付费 API / 商业产品集成），下游使用请注意。
 - **🤝 欢迎社区 PR**：本仓库长期开放收录有价值的实证研究类 Skill / Agent / 工具。无论是你自己开发的还是发现的好工具，欢迎提 PR —— 我们会**继续保持收录**，认真审查每一条贡献，让这份清单成为社区共建的资产。流程参见 [Contributing](#contributing)。
 
 </details>
@@ -350,7 +350,7 @@ Skill 就是解决这个问题的：它是给 AI 的**方法论操作手册**。
 | 套件 | 核心特色 | 适用场景 | 本地位置 |
 |------|---------|---------|---------|
 | **CoPaper.AI / chinese-de-aigc** 🇨🇳🔥 | **中文学术专用原创 Skill**。针对知网 AMLC / 万方 / 维普 / Turnitin 中文版检测机制设计，17 类中文 AI 痕迹模式库（四字套话 / 虚词堆叠 / 显性连接词 / 绝对化断言 / 句长方差等），五步闭环工作流（定位→诊断→改写→自评→复查），分章节差异化策略，五维评分量表。**这是目前 GitHub 上唯一面向中文学术的降 AIGC Skill** | 中文期刊投稿、学位论文、基金申请书 | [`skills/48`](skills/48-copaper-ai-chinese-de-aigc/) |
-| [voidborne-d/humanize-chinese](https://github.com/voidborne-d/humanize-chinese) 🇨🇳 | **同时提供 SKILL.md 和独立 Python CLI**（仓库根目录含 SKILL.md，本条目侧重 CLI/库的非 agent 用法）。17 类中文 AI 模式检测 + 7 风格改写器（academic / novel / blog / 小红书 / 微信 等），LR ensemble 程序化打分，长度 ≥1500 字自动切长篇 LR；HC3 100 短问答 95% 正确分离。可独立 `pip install` 跑批，亦可作为 SKILL 在 Claude Code / agent 内加载。**License: MIT (Non-Commercial)**——非标准修改版 MIT，禁商用 | 中文学位论文 / 期刊投稿 / 长篇博客 / pipeline 批量降 AIGC | [`skills/49`](skills/49-voidborne-d-humanize-chinese/) |
+| voidborne-d/humanize-chinese 🇨🇳 | **同时提供 SKILL.md 和独立 Python CLI**（本地 vendor snapshot 含 SKILL.md，本条目侧重 CLI/库的非 agent 用法）。17 类中文 AI 模式检测 + 7 风格改写器（academic / novel / blog / 小红书 / 微信 等），LR ensemble 程序化打分，长度 ≥1500 字自动切长篇 LR；HC3 100 短问答 95% 正确分离。可独立 `pip install` 跑批，亦可作为 SKILL 在 Claude Code / agent 内加载。**License: MIT (Non-Commercial)**——非标准修改版 MIT，禁商用 | 中文学位论文 / 期刊投稿 / 长篇博客 / pipeline 批量降 AIGC | [`skills/49`](skills/49-voidborne-d-humanize-chinese/) |
 | **[matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic)** 🔥 | **学术论文专用**。23 种 AI 写作模式检测（内容 6 + 语言 6 + 风格 3 + 填充 3 + 用词 5），示例来自 EMPA-REG OUTCOME 心血管试验，保留合法学术过渡词，基于 Wikipedia "Signs of AI writing" | 医学、生命科学、自然科学论文 | [`skills/44`](skills/44-matsuikentaro1-humanizer_academic/) |
 | **[stephenturner/skill-deslop](https://github.com/stephenturner/skill-deslop)** | **科学写作去 AI 化**。智能区分合法学科惯例（方法论章节的被动语态）vs AI 痕迹，5 维评分量表（直接性/节奏/信任/真实性/密度），附 4 个参考文件（examples/phrases/structures/tropes） | 科学论文、技术博客 | [`skills/45`](skills/45-stephenturner-skill-deslop/) |
 | **[hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop)** | **通用三层检测 + 五维评分**。禁用短语（清喉开场、强调拐杖、商业行话）、结构套路（二元对比、戏剧性碎片化、虚假能动性）、句级规则（禁止 em dash、Wh- 开头）。低于 35/50 分建议重写 | 通用散文、博客、报告 | [`skills/46`](skills/46-hardikpandya-stop-slop/) |

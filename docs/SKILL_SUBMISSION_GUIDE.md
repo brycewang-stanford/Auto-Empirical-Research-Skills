@@ -44,7 +44,7 @@ If the generator cannot infer the right source or license, update `OVERRIDES` in
 
 | 属性 | 说明 |
 |------|------|
-| **来源** | [owner/repo](https://github.com/owner/repo) |
+| **来源** | `owner/repo` or `https://github.com/<owner>/<repo>` |
 | **License** | MIT |
 | **功能** | One-line description of what the skill does |
 | **安装** | `cp -R skills/NN-owner-repo/path ~/.codex/skills/name` |
