@@ -78,10 +78,14 @@
 
 ## 快速开始
 
+- 搜索本地索引：[`docs/search.html`](docs/search.html)
 - 浏览自动生成的本地 catalog：[`docs/SKILL_CATALOG.md`](docs/SKILL_CATALOG.md)
 - 直接复制常用实证工作流：[`docs/GOLDEN_WORKFLOWS.md`](docs/GOLDEN_WORKFLOWS.md)
+- 查看旗舰 demo：[`docs/demos/`](docs/demos/)
+- 安装或复制 skill 到 agent runtime：[`docs/INSTALL.md`](docs/INSTALL.md)
 - 使用机器可读索引：[`catalog/skills.json`](catalog/skills.json)
-- 查看贡献与质量门槛：[`docs/QUALITY_GATE.md`](docs/QUALITY_GATE.md)
+- 查看 provenance 与 license 风险：[`docs/LICENSE_AUDIT.md`](docs/LICENSE_AUDIT.md)
+- 查看贡献与质量门槛：[`docs/QUALITY_GATE.md`](docs/QUALITY_GATE.md) · [`docs/SKILL_SUBMISSION_GUIDE.md`](docs/SKILL_SUBMISSION_GUIDE.md)
 - 查看本轮 repo 体检与路线图：[`docs/REPO_AUDIT_2026-05-31.md`](docs/REPO_AUDIT_2026-05-31.md) · [`docs/ROADMAP.md`](docs/ROADMAP.md)
 - 本地重建与校验：
 
@@ -90,11 +94,21 @@ make catalog
 make validate
 ```
 
+### 30 秒选工作流
+
+| 目标 | 从这里开始 |
+|---|---|
+| 跑完整实证分析流水线 | [`StatsPAI_skill`](skills/00-Full-empirical-analysis-skill_StatsPAI/SKILL.md) |
+| 审顶刊经济学识别策略 | [`aer-identification`](skills/50-brycewang-aer-skills/skills/aer-identification/SKILL.md) |
+| 准备 AER / AEJ 投稿 | [`aer-workflow`](skills/50-brycewang-aer-skills/skills/aer-workflow/SKILL.md) |
+| 整理复现包 | [`aer-replication`](skills/50-brycewang-aer-skills/skills/aer-replication/SKILL.md) |
+| 降低中文学术 AI 写作痕迹 | [`chinese-de-aigc`](skills/48-copaper-ai-chinese-de-aigc/SKILL.md) |
+
 ---
 
 ## 🆕 更新日志
 
-<details open>
+<details>
 <summary><b>2026-05-25：📕 AER-skills 收录 —— Top-5 经济学 (AER / AER:Insights / AEJ) 投稿专用 9 个 skills（skills/50）+ 周更 vendor sync 闭环</b></summary>
 
 - **📕 [skills/50-brycewang-aer-skills](skills/50-brycewang-aer-skills/)**：本仓库原创姊妹项目 [brycewang-stanford/AER-skills](https://github.com/brycewang-stanford/AER-skills) 整仓 vendor 进来，按 StatsPAI 同款 [`scripts/sync-aer-skills.sh`](scripts/sync-aer-skills.sh) + [`.github/workflows/sync-aer-skills.yml`](.github/workflows/sync-aer-skills.yml) 周一 06:00 UTC 自动跑 diff → 漂移则开 PR 的闭环。**抓手很明确**：Top-5 经济学（AER / AER:Insights / AEJ 全家桶）的投稿专用 skill stack，把 StatsPAI / 00.x 那套"跑分析"延伸到"写论文"。

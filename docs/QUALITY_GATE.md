@@ -14,7 +14,10 @@ make validate
 `make catalog` rebuilds:
 
 - `catalog/skills.json` for machines, search UIs, and downstream indexes.
+- `catalog/provenance.json` for source, license, and commercial-use metadata.
+- `catalog/skill-audit.json` for non-blocking vendored skill hygiene metadata.
 - `docs/SKILL_CATALOG.md` for GitHub browsing.
+- `docs/LICENSE_AUDIT.md` and `docs/SKILL_AUDIT.md` for reviewer-facing audits.
 
 `make validate` checks:
 
@@ -22,6 +25,7 @@ make validate
 - Vendored `skills/**/SKILL.md` frontmatter is audited and summarized.
 - AERS-maintained local Markdown links resolve.
 - The generated catalog is current.
+- Generated provenance and skill-audit reports are current.
 
 ## Review Rules
 
@@ -42,6 +46,8 @@ The validator warns, but does not fail, when:
 - A `SKILL.md` file exceeds 500 lines. Long skills may be legitimate vendored upstream artifacts, but new first-party skills should prefer `references/`.
 - Skill names are duplicated. Large vendored packs often reuse generic names, so this is an audit signal rather than an automatic failure.
 - A skill name uses non-portable punctuation.
+
+Run `make audit` when you want the warning stream in the terminal.
 
 ## CI
 

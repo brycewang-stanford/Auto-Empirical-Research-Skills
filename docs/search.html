@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AERS Skill Search</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f7f7f4;
+      --panel: #ffffff;
+      --ink: #1f2933;
+      --muted: #5f6b7a;
+      --line: #d8d8d0;
+      --accent: #0f766e;
+      --warn: #9a3412;
+      --radius: 8px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111312;
+        --panel: #181b1a;
+        --ink: #edf2f0;
+        --muted: #aab6b1;
+        --line: #343a38;
+        --accent: #5eead4;
+        --warn: #fdba74;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font: 15px/1.45 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+    }
+    header, main {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+    header {
+      padding: 28px 0 18px;
+      border-bottom: 1px solid var(--line);
+    }
+    h1 {
+      margin: 0 0 6px;
+      font-size: clamp(26px, 5vw, 42px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+    p { margin: 0; color: var(--muted); }
+    .controls {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) 180px 180px 160px;
+      gap: 10px;
+      margin: 18px 0 16px;
+    }
+    input, select {
+      width: 100%;
+      min-height: 40px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      color: var(--ink);
+      padding: 0 12px;
+      font: inherit;
+    }
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+      color: var(--muted);
+    }
+    .stat {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 6px 10px;
+      background: var(--panel);
+    }
+    .results {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 12px;
+      padding-bottom: 36px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px;
+    }
+    .card h2 {
+      margin: 0 0 8px;
+      font-size: 17px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 10px 0;
+    }
+    .chip {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 2px 8px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .restricted { color: var(--warn); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    @media (max-width: 760px) {
+      .controls { grid-template-columns: 1fr; }
+      header, main { width: min(100% - 20px, 1180px); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>AERS Skill Search</h1>
+    <p>Search the generated local catalog by skill, collection, license, and commercial-use status.</p>
+  </header>
+  <main>
+    <section class="controls" aria-label="Search controls">
+      <input id="query" type="search" placeholder="Search DID, IV, AER, de-AIGC, Stata..." autofocus>
+      <select id="collection"><option value="">All collections</option></select>
+      <select id="license"><option value="">All licenses</option></select>
+      <select id="commercial"><option value="">All use terms</option></select>
+    </section>
+    <section id="stats" class="stats" aria-live="polite"></section>
+    <section id="results" class="results"></section>
+  </main>
+  <script>
+    const state = { skills: [], collections: new Map() };
+    const el = id => document.getElementById(id);
+    const rel = path => "../" + path;
+    const text = value => (value || "").toString();
+
+    async function load() {
+      const [catalog, provenance] = await Promise.all([
+        fetch("../catalog/skills.json").then(r => r.json()),
+        fetch("../catalog/provenance.json").then(r => r.json())
+      ]);
+      for (const record of provenance.collections || []) {
+        state.collections.set(record.id, record);
+      }
+      state.skills = (catalog.skills || []).map(skill => ({
+        ...skill,
+        provenance: state.collections.get(skill.collection) || {}
+      }));
+      hydrateFilters();
+      render();
+    }
+
+    function unique(values) {
+      return [...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b));
+    }
+
+    function hydrateFilters() {
+      for (const collection of unique(state.skills.map(s => s.collection))) {
+        el("collection").append(new Option(collection, collection));
+      }
+      for (const license of unique(state.skills.map(s => s.provenance.license))) {
+        el("license").append(new Option(license, license));
+      }
+      for (const term of unique(state.skills.map(s => s.provenance.commercial_use))) {
+        el("commercial").append(new Option(term, term));
+      }
+      for (const id of ["query", "collection", "license", "commercial"]) {
+        el(id).addEventListener("input", render);
+      }
+    }
+
+    function matches(skill) {
+      const q = el("query").value.trim().toLowerCase();
+      const collection = el("collection").value;
+      const license = el("license").value;
+      const commercial = el("commercial").value;
+      const haystack = [
+        skill.name,
+        skill.description,
+        skill.path,
+        skill.collection,
+        skill.provenance.license,
+        skill.provenance.source_url
+      ].map(text).join(" ").toLowerCase();
+      return (!q || haystack.includes(q))
+        && (!collection || skill.collection === collection)
+        && (!license || skill.provenance.license === license)
+        && (!commercial || skill.provenance.commercial_use === commercial);
+    }
+
+    function render() {
+      const filtered = state.skills.filter(matches);
+      el("stats").innerHTML = [
+        `${filtered.length} of ${state.skills.length} skills`,
+        `${new Set(filtered.map(s => s.collection)).size} collections`,
+        `${new Set(filtered.map(s => s.provenance.license || "unknown")).size} license buckets`
+      ].map(item => `<span class="stat">${item}</span>`).join("");
+      el("results").innerHTML = filtered.slice(0, 240).map(card).join("");
+    }
+
+    function card(skill) {
+      const p = skill.provenance;
+      const restricted = p.commercial_use === "restricted" ? " restricted" : "";
+      const source = p.source_url ? `<a href="${p.source_url}">source</a>` : "source unknown";
+      return `<article class="card">
+        <h2><a href="${rel(skill.path)}"><code>${escapeHtml(skill.name)}</code></a></h2>
+        <p>${escapeHtml(skill.description || "No frontmatter description available.")}</p>
+        <div class="meta">
+          <span class="chip">${escapeHtml(skill.collection)}</span>
+          <span class="chip">${skill.line_count} lines</span>
+          <span class="chip">${escapeHtml(p.license || "license unknown")}</span>
+          <span class="chip${restricted}">${escapeHtml(p.commercial_use || "unknown")}</span>
+          <span class="chip">${source}</span>
+        </div>
+        <a href="${rel(skill.path)}">${escapeHtml(skill.path)}</a>
+      </article>`;
+    }
+
+    function escapeHtml(value) {
+      return text(value).replace(/[&<>"']/g, char => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
+      }[char]));
+    }
+
+    load().catch(error => {
+      el("results").innerHTML = `<article class="card"><h2>Could not load catalog</h2><p>${escapeHtml(error.message)}. Serve the repository locally with <code>python3 -m http.server</code> or open through GitHub Pages.</p></article>`;
+    });
+  </script>
+</body>
+</html>

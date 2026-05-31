@@ -78,10 +78,14 @@ This repository is the **Agent Skills landscape** we compiled while building CoP
 
 ## Start Here
 
+- Search the local index: [`docs/search.html`](docs/search.html)
 - Browse the generated local catalog: [`docs/SKILL_CATALOG.md`](docs/SKILL_CATALOG.md)
 - Copy a ready-to-run empirical workflow: [`docs/GOLDEN_WORKFLOWS.md`](docs/GOLDEN_WORKFLOWS.md)
+- See flagship demos: [`docs/demos/`](docs/demos/)
+- Install or copy skills into an agent runtime: [`docs/INSTALL.md`](docs/INSTALL.md)
 - Use the machine-readable index: [`catalog/skills.json`](catalog/skills.json)
-- Check contribution and validation rules: [`docs/QUALITY_GATE.md`](docs/QUALITY_GATE.md)
+- Check provenance and license risk: [`docs/LICENSE_AUDIT.md`](docs/LICENSE_AUDIT.md)
+- Check contribution and validation rules: [`docs/QUALITY_GATE.md`](docs/QUALITY_GATE.md) · [`docs/SKILL_SUBMISSION_GUIDE.md`](docs/SKILL_SUBMISSION_GUIDE.md)
 - See the repo audit and improvement plan: [`docs/REPO_AUDIT_2026-05-31.md`](docs/REPO_AUDIT_2026-05-31.md) · [`docs/ROADMAP.md`](docs/ROADMAP.md)
 - Rebuild and validate locally:
 
@@ -90,11 +94,21 @@ make catalog
 make validate
 ```
 
+### Pick a Workflow in 30 Seconds
+
+| Goal | Start with |
+|---|---|
+| Run a complete empirical pipeline | [`StatsPAI_skill`](skills/00-Full-empirical-analysis-skill_StatsPAI/SKILL.md) |
+| Audit a top-5 economics identification strategy | [`aer-identification`](skills/50-brycewang-aer-skills/skills/aer-identification/SKILL.md) |
+| Prepare AER / AEJ submission | [`aer-workflow`](skills/50-brycewang-aer-skills/skills/aer-workflow/SKILL.md) |
+| Build a replication package | [`aer-replication`](skills/50-brycewang-aer-skills/skills/aer-replication/SKILL.md) |
+| Lower Chinese academic AI-writing signal | [`chinese-de-aigc`](skills/48-copaper-ai-chinese-de-aigc/SKILL.md) |
+
 ---
 
 ## 🆕 Changelog
 
-<details open>
+<details>
 <summary><b>2026-05-25: 📕 AER-skills vendored — Top-5 economics (AER / AER:Insights / AEJ) submission stack (9 skills, skills/50) + weekly auto-sync workflow</b></summary>
 
 - **📕 [skills/50-brycewang-aer-skills](skills/50-brycewang-aer-skills/)**: This repo's sister project [brycewang-stanford/AER-skills](https://github.com/brycewang-stanford/AER-skills) vendored in whole, with the same StatsPAI-style sync loop ([`scripts/sync-aer-skills.sh`](scripts/sync-aer-skills.sh) + [`.github/workflows/sync-aer-skills.yml`](.github/workflows/sync-aer-skills.yml) — Monday 06:00 UTC weekly diff, PR on drift). **Positioning**: a top-5 economics submission skill stack (AER / AER:Insights / AEJ family), extending the StatsPAI / 00.x "analysis" line to the "manuscript + submission" line.
