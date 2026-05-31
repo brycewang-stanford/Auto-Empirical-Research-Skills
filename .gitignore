@@ -6,3 +6,17 @@ test-notebooks/
 # macOS
 .DS_Store
 **/.DS_Store
+
+# Python / local tooling
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+venv/
+
+# Local secrets
+.env
+.env.*
+!.env.example
