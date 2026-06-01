@@ -4,6 +4,7 @@ catalog:
 	python3 scripts/build-provenance.py
 	python3 scripts/build-skill-audit.py
 	python3 scripts/build-catalog.py
+	python3 scripts/build-catalog-enrich.py
 
 # Catalog/provenance/audit freshness + repo link & frontmatter validation.
 validate:
@@ -11,6 +12,7 @@ validate:
 	python3 scripts/build-provenance.py --check
 	python3 scripts/build-skill-audit.py --check
 	python3 scripts/build-catalog.py --check
+	python3 scripts/build-catalog-enrich.py --check
 
 # Lint eval scenarios (CI gate; needs no candidate outputs).
 evals:

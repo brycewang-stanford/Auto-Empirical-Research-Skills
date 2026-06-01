@@ -17,6 +17,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Catalog enrichment freshness
+        run: python3 scripts/build-catalog-enrich.py --check
+
       - name: Lint eval scenarios
         run: python3 evals/run_evals.py
 
