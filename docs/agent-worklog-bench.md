@@ -55,13 +55,23 @@ Every commit on this branch keeps `make check` green
   `__pycache__`, `.pyc`, and tool-cache commits during parallel work.
 - [x] Wired strict local/CI gates through `make check` and `.github/workflows/quality-evals.yml`,
   including eval coverage floors for scenario count, auto-check count, and categories.
+- [x] Added sharp-RD benchmark task (`rdd-recovery`): deterministic noiseless DGP,
+  pure-stdlib naive/global/local-linear estimators, anti-fabrication cross-check,
+  committed reference candidate, schema sync, and tests. Completes the canonical
+  DiD/IV/RD/matching quartet.
+- [x] Added bad-control benchmark task (`bad-control-recovery`): mediator/
+  post-treatment-bias DGP (Cinelli-Forney-Pearl), recovering total effect with
+  pre-treatment controls vs collapsing to the direct effect under mediator control.
+- [x] Added three causal-identification eval scenarios (`statspai-bad-controls`,
+  `statspai-pretrends-eventstudy`, `statspai-clustered-inference`) and raised the
+  eval coverage floors from 14/66 to 17/80 everywhere they are pinned.
 
 Latest verification:
 
 ```bash
-python3 -m unittest discover -s tests -p 'test_*.py'  # 145 tests OK
+python3 -m unittest discover -s tests -p 'test_*.py'  # 159 tests OK
 python3 eval-harness/run_evals.py \
-  --min-scenarios 14 --min-auto-checks 66 \
+  --min-scenarios 17 --min-auto-checks 80 \
   --expect-categories causal-identification,reproducibility,citation-hygiene,runtime-safety,research-integrity,writing-compliance,writing-style
 python3 eval-harness/run_evals.py --grade eval-harness/candidates/_example \
   --expect-graded 8 --expect-fail-required statspai-weak-iv \
