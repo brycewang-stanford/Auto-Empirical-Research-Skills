@@ -59,6 +59,29 @@ time, so plain TWFE is biased downward.
 A pipeline that handles staggered DID correctly reports TWFE as a diagnostic and
 uses a group-time / not-yet-treated comparison as the main estimate.
 
+## Task: `rdd-recovery`
+
+A deterministic, noiseless sharp regression-discontinuity design: 101 points,
+running variable `x` on `[-1, 1]`, cutoff at 0, sharp treatment `D = 1[x >= 0]`.
+The untreated outcome is linear in `x` with *different slopes* on either side of
+the cutoff, and treatment adds a constant jump. The data ships a `y0`
+counterfactual column the estimators never read, so the true jump is recomputed
+by the checker as `mean(y - y0)` over treated rows.
+
+| Quantity | Value | Meaning |
+|---|---:|---|
+| True effect at the cutoff | **3.000** | The jump in the conditional mean at `x = 0`, by construction. |
+| Naive across-cutoff mean difference | **5.510** | Confounds the jump with the running-variable trend — badly biased. |
+| Global common-slope OLS (`y ~ 1 + D + x`) | **2.940** | A mild specification bias from forcing one slope on two. |
+| Local-linear at the cutoff | **3.000** | Recovers the true jump; bandwidth-robust on exactly-linear sides. |
+
+A pipeline that handles RD correctly recognizes the treatment effect is the
+*jump* at the cutoff (not a difference in side means), so it controls for the
+running-variable trend with a local-linear fit instead of comparing averages
+across the threshold. The reference uses local linear rather than a global
+high-order polynomial, following Gelman & Imbens (2019); see also Imbens &
+Lemieux (2008) and Lee & Lemieux (2010).
+
 ## What makes the golds trustworthy
 
 The checker **recomputes** the data-derived golds (imbalance count, the true

@@ -9,7 +9,7 @@
   "properties": {
     "task": {
       "type": "string",
-      "enum": ["card-iv-recovery", "did-staggered-recovery", "lalonde-recovery"]
+      "enum": ["card-iv-recovery", "did-staggered-recovery", "lalonde-recovery", "rdd-recovery"]
     },
     "method": {
       "type": "string"
@@ -51,6 +51,18 @@
       "type": "number"
     },
     "adjusted_att": {
+      "type": "number"
+    },
+    "true_tau": {
+      "type": "number"
+    },
+    "naive_jump": {
+      "type": "number"
+    },
+    "global_att": {
+      "type": "number"
+    },
+    "local_att": {
       "type": "number"
     },
     "balance": {
@@ -95,6 +107,18 @@
       },
       "then": {
         "required": ["naive_att", "adjusted_att", "balance"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "task": {
+            "const": "rdd-recovery"
+          }
+        }
+      },
+      "then": {
+        "required": ["true_tau", "naive_jump", "global_att", "local_att"]
       }
     }
   ]

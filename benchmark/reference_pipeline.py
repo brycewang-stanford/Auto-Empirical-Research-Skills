@@ -17,6 +17,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent / "lib"))
 import lalonde  # noqa: E402
 import card  # noqa: E402
 import simdid  # noqa: E402
+import rdd  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 CAND = Path(__file__).resolve().parent / "candidates"
@@ -83,11 +84,31 @@ def did_candidate(write_missing_data: bool = True) -> dict:
     }
 
 
+def rdd_candidate(write_missing_data: bool = True) -> dict:
+    data_path = ROOT / "benchmark" / "data" / "sim-rdd.csv"
+    if not data_path.exists():
+        if not write_missing_data:
+            raise FileNotFoundError(data_path)
+        rdd.write_csv(data_path)
+    rows = rdd.load(data_path)
+    return {
+        "task": "rdd-recovery",
+        "method": "Sharp RD: local-linear at the cutoff vs global common-slope OLS vs naive across-cutoff mean difference",
+        "n": len(rows),
+        "bandwidth": rdd.BANDWIDTH,
+        "true_tau": round(rdd.true_tau(rows), 4),
+        "naive_jump": round(rdd.naive_jump(rows), 4),
+        "global_att": round(rdd.global_att(rows), 4),
+        "local_att": round(rdd.local_att(rows), 4),
+    }
+
+
 def reference_candidates(write_missing_data: bool = True) -> list[tuple[Path, dict]]:
     return [
         (CAND / "reference-ols" / "results.json", lalonde_candidate()),
         (CAND / "reference-iv" / "results.json", card_candidate()),
         (CAND / "reference-did" / "results.json", did_candidate(write_missing_data)),
+        (CAND / "reference-rd" / "results.json", rdd_candidate(write_missing_data)),
     ]
 
 
@@ -104,6 +125,11 @@ def print_summary(payloads: list[tuple[Path, dict]]) -> None:
     print(
         f"  staggered DID: TWFE {dc['twfe_att']} -> group-time {dc['cs_att']} "
         f"(true {dc['true_att']})"
+    )
+    rc = by_task["rdd-recovery"]
+    print(
+        f"  sharp RD: naive jump {rc['naive_jump']} -> local-linear {rc['local_att']} "
+        f"(true {rc['true_tau']})"
     )
 
 

@@ -14,6 +14,7 @@ from _helpers import ROOT, load_module
 lalonde = load_module("benchmark/lib/lalonde.py", "aers_lalonde")
 card = load_module("benchmark/lib/card.py", "aers_card")
 simdid = load_module("benchmark/lib/simdid.py", "aers_simdid")
+rdd = load_module("benchmark/lib/rdd.py", "aers_rdd")
 check_benchmark = load_module("benchmark/check_benchmark.py", "aers_check_benchmark")
 reference_pipeline = load_module("benchmark/reference_pipeline.py", "aers_reference_pipeline")
 toml_compat = load_module("scripts/toml_compat.py", "aers_toml_compat")
@@ -21,6 +22,7 @@ toml_compat = load_module("scripts/toml_compat.py", "aers_toml_compat")
 DATA = ROOT / "demo-notebooks" / "_lalonde_data.csv"
 CARD_DATA = ROOT / "demo-StatsPAI-skill" / "data" / "card.csv"
 SIMDID_DATA = ROOT / "benchmark" / "data" / "sim-staggered-did.csv"
+RDD_DATA = ROOT / "benchmark" / "data" / "sim-rdd.csv"
 
 
 class TestLalondeNumbers(unittest.TestCase):
@@ -481,6 +483,67 @@ class TestStaggeredDidGrading(unittest.TestCase):
         graded = check_benchmark.grade(self.task, cand, self.truth)
         req_fail = [g["id"] for g in graded if g["required"] and not g["passed"]]
         self.assertIn("robust-recovers-true-att", req_fail)
+        self.assertIn("honest-reported-numbers", req_fail)
+
+
+class TestRddNumbers(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.rows = rdd.load(RDD_DATA)
+
+    def test_sample_size(self):
+        self.assertEqual(len(self.rows), 101)
+
+    def test_true_tau_recomputed_from_counterfactual(self):
+        self.assertAlmostEqual(rdd.true_tau(self.rows), 3.0, delta=0.0001)
+
+    def test_naive_jump_is_biased_by_the_trend(self):
+        naive = rdd.naive_jump(self.rows)
+        self.assertAlmostEqual(naive, 5.51, delta=0.01)
+        self.assertGreater(abs(naive - rdd.true_tau(self.rows)), 0.5)
+
+    def test_local_linear_recovers_true_jump(self):
+        self.assertAlmostEqual(rdd.local_att(self.rows), 3.0, delta=0.01)
+
+    def test_local_linear_is_bandwidth_robust_on_exact_data(self):
+        for h in (0.2, 0.3, 0.5, 0.8):
+            self.assertAlmostEqual(rdd.local_att(self.rows, h), 3.0, delta=0.01)
+
+    def test_local_linear_at_least_as_close_as_global(self):
+        true = rdd.true_tau(self.rows)
+        local_gap = abs(rdd.local_att(self.rows) - true)
+        global_gap = abs(rdd.global_att(self.rows) - true)
+        self.assertLessEqual(local_gap, global_gap)
+
+
+class TestRddGrading(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        with (ROOT / "benchmark" / "tasks" / "rdd-recovery.toml").open("rb") as fh:
+            cls.task = toml_compat.load(fh)
+        cls.truth = check_benchmark.compute_truth(cls.task)
+
+    def _good(self):
+        rows = rdd.load(RDD_DATA)
+        return {
+            "true_tau": round(rdd.true_tau(rows), 4),
+            "naive_jump": round(rdd.naive_jump(rows), 4),
+            "global_att": round(rdd.global_att(rows), 4),
+            "local_att": round(rdd.local_att(rows), 4),
+        }
+
+    def test_reference_passes(self):
+        graded = check_benchmark.grade(self.task, self._good(), self.truth)
+        self.assertEqual([g["id"] for g in graded if g["required"] and not g["passed"]], [])
+
+    def test_headlining_naive_jump_as_the_effect_fails(self):
+        # A candidate that reports the naive across-cutoff difference as its
+        # local estimate contradicts the recomputed data.
+        cand = self._good()
+        cand["local_att"] = cand["naive_jump"]
+        graded = check_benchmark.grade(self.task, cand, self.truth)
+        req_fail = [g["id"] for g in graded if g["required"] and not g["passed"]]
+        self.assertIn("local-recovers-tau", req_fail)
         self.assertIn("honest-reported-numbers", req_fail)
 
 

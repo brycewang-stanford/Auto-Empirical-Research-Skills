@@ -33,6 +33,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent / "lib"))
 import lalonde  # noqa: E402
 import card  # noqa: E402
 import simdid  # noqa: E402
+import rdd  # noqa: E402
 
 TASKS_DIR = Path(__file__).resolve().parent / "tasks"
 CANDIDATES_DIR = Path(__file__).resolve().parent / "candidates"
@@ -42,6 +43,7 @@ SUPPORTED_TASK_IDS = {
     "card-iv-recovery",
     "did-staggered-recovery",
     "lalonde-recovery",
+    "rdd-recovery",
 }
 CANDIDATE_DIR_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
 KNOWN_CHECKS = {
@@ -98,11 +100,13 @@ CROSS_CHECK_NUMERIC_FIELDS = {
     "card-iv-recovery": ("tol", "f_tol"),
     "did-staggered-recovery": ("tol",),
     "lalonde-recovery": ("naive_tol", "smd_tol"),
+    "rdd-recovery": ("tol",),
 }
 CANDIDATE_NUMERIC_FIELDS = {
     "card-iv-recovery": ("ols_return", "iv_return", "first_stage_F", "first_stage_coef"),
     "did-staggered-recovery": ("true_att", "twfe_att", "cs_att"),
     "lalonde-recovery": ("naive_att", "adjusted_att"),
+    "rdd-recovery": ("true_tau", "naive_jump", "global_att", "local_att"),
 }
 CANDIDATE_NUMERIC_MAP_FIELDS = {
     "lalonde-recovery": ("balance",),
@@ -324,6 +328,16 @@ def compute_truth(task: dict) -> dict:
             "twfe_att": simdid.twfe_att(rows),
             "cs_att": simdid.cs_att(rows),
         }
+    if task["id"] == "rdd-recovery":
+        data = ROOT / task["data"]
+        rows = rdd.load(data)
+        return {
+            "n": len(rows),
+            "true_tau": rdd.true_tau(rows),
+            "naive_jump": rdd.naive_jump(rows),
+            "global_att": rdd.global_att(rows),
+            "local_att": rdd.local_att(rows),
+        }
     raise ValueError(f"unknown task {task['id']}")
 
 
@@ -447,6 +461,14 @@ def grade(task: dict, candidate: dict, truth: dict) -> list[dict]:
                 rt = candidate.get("true_att")
                 if rt is not None and abs(rt - truth["true_att"]) > g["tol"]:
                     problems.append(f"true_att {rt} vs true {truth['true_att']:.4f}")
+            elif task["id"] == "rdd-recovery":
+                for field in ("naive_jump", "global_att", "local_att"):
+                    rv = candidate.get(field)
+                    if rv is None or abs(rv - truth[field]) > g["tol"]:
+                        problems.append(f"{field} {rv} vs true {truth[field]:.4f}")
+                rt = candidate.get("true_tau")
+                if rt is not None and abs(rt - truth["true_tau"]) > g["tol"]:
+                    problems.append(f"true_tau {rt} vs true {truth['true_tau']:.4f}")
             passed = not problems
             detail = "reported numbers match data" if passed else "; ".join(problems[:3])
 

@@ -10,7 +10,7 @@
     "id": {
       "type": "string",
       "description": "Stable benchmark id. It must equal the TOML file stem.",
-      "enum": ["card-iv-recovery", "did-staggered-recovery", "lalonde-recovery"]
+      "enum": ["card-iv-recovery", "did-staggered-recovery", "lalonde-recovery", "rdd-recovery"]
     },
     "title": {
       "type": "string",
@@ -41,6 +41,9 @@
       "type": "number"
     },
     "true_att_by_construction": {
+      "type": "number"
+    },
+    "true_tau_by_construction": {
       "type": "number"
     },
     "gold": {

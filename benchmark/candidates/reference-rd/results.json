@@ -1,0 +1,10 @@
+{
+  "task": "rdd-recovery",
+  "method": "Sharp RD: local-linear at the cutoff vs global common-slope OLS vs naive across-cutoff mean difference",
+  "n": 101,
+  "bandwidth": 0.5,
+  "true_tau": 3.0,
+  "naive_jump": 5.51,
+  "global_att": 2.94,
+  "local_att": 3.0
+}
