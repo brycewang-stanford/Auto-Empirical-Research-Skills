@@ -78,9 +78,11 @@ This repository is the **Agent Skills landscape** we compiled while building CoP
 
 ## Start Here
 
-- Search the local index: [`docs/search.html`](docs/search.html)
-- Browse the generated local catalog: [`docs/SKILL_CATALOG.md`](docs/SKILL_CATALOG.md)
+- **Not sure which skill?** Start with [`docs/CHOOSING_A_SKILL.md`](docs/CHOOSING_A_SKILL.md)
+- Search the local index (faceted by method/stage/language): [`docs/search.html`](docs/search.html)
+- Browse the generated local catalog: [`docs/SKILL_CATALOG.md`](docs/SKILL_CATALOG.md) · taxonomy: [`docs/TAXONOMY.md`](docs/TAXONOMY.md)
 - Copy a ready-to-run empirical workflow: [`docs/GOLDEN_WORKFLOWS.md`](docs/GOLDEN_WORKFLOWS.md)
+- Check skill quality: correctness evals [`evals/`](evals/) · numeric benchmark [`benchmark/`](benchmark/) · hygiene scorecard [`docs/SKILL_QUALITY.md`](docs/SKILL_QUALITY.md)
 - See flagship demos: [`docs/demos/`](docs/demos/)
 - Install or copy skills into an agent runtime: [`docs/INSTALL.md`](docs/INSTALL.md)
 - Use the machine-readable index: [`catalog/skills.json`](catalog/skills.json)
@@ -90,8 +92,9 @@ This repository is the **Agent Skills landscape** we compiled while building CoP
 - Rebuild and validate locally:
 
 ```bash
-make catalog
-make validate
+make catalog     # regenerate catalog, provenance, audit, enrichment
+make validate    # freshness + link/frontmatter checks
+make check       # full gate: validate + unit tests + eval lint + benchmark
 ```
 
 ### Pick a Workflow in 30 Seconds
