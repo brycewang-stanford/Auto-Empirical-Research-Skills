@@ -10872,16 +10872,36 @@
       "line_count": 156,
       "name": "check-citations",
       "path": "skills/62-PHY041-claude-skill-citation-checker/SKILL.md"
+    },
+    {
+      "collection": "63-tondevrel-scientific-agent-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 981,
+      "name": "dowhy",
+      "path": "skills/63-tondevrel-scientific-agent-skills/dowhy/SKILL.md"
+    },
+    {
+      "collection": "63-tondevrel-scientific-agent-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 98,
+      "name": "lifelines",
+      "path": "skills/63-tondevrel-scientific-agent-skills/lifelines/SKILL.md"
     }
   ],
   "schema_version": "1.0",
   "summary": {
     "duplicate_skill_names": 78,
-    "exact_case_skill_files": 1050,
+    "exact_case_skill_files": 1052,
     "missing_description": 4,
     "missing_frontmatter": 4,
     "non_exact_case_skill_files": 0,
-    "over_500_lines": 79,
-    "skill_like_files": 1050
+    "over_500_lines": 80,
+    "skill_like_files": 1052
   }
 }

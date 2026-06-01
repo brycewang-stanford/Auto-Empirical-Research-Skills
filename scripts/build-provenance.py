@@ -200,6 +200,13 @@ OVERRIDES: dict[str, dict[str, object]] = {
         "sync": "manual vendor snapshot",
         "source_confidence": "medium",
     },
+    "63-tondevrel-scientific-agent-skills": {
+        "source_url": "https://github.com/tondevrel/scientific-agent-skills",
+        "license": "MIT",
+        "origin": "vendored upstream snapshot (dowhy + lifelines subset; dowhy SKILL.MD renamed to SKILL.md) 2026-06-01",
+        "sync": "manual vendor snapshot",
+        "source_confidence": "high",
+    },
 }
 
 

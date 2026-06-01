@@ -1,7 +1,7 @@
 # Empirical-Skills Expansion — 2026-06
 
-This pass added **12 vetted, open-source, no-paid-core agent skills** (collections
-`51`–`62`, **73 `SKILL.md` files**) to the catalog, chosen to fill concrete gaps in
+This pass added **13 vetted, open-source, no-paid-core agent skills** (collections
+`51`–`63`, **75 `SKILL.md` files**) to the catalog, chosen to fill concrete gaps in
 the existing 54-collection set. Every addition is a curated upstream snapshot with
 `SKILL.md` frontmatter, an attributed `README-original.md`, and an upstream `LICENSE`
 (or an explicit provenance note where upstream ships none).
@@ -28,6 +28,7 @@ duplicate of an already-vendored owner/repo.
 | 60 | [regisely/superpapers](../skills/60-regisely-superpapers/) | MIT | 16 | **Reproducible empirical paper pipeline** (replication-driven: every number regenerable from raw data with a fixed seed) |
 | 61 | [phdemotions/research-methods](../skills/61-phdemotions-research-methods/) | MIT | 9 | **Data management**: clean / validate / profile / EDA, raw-data immutability, CONSORT exclusion flows, method templates |
 | 62 | [PHY041/claude-skill-citation-checker](../skills/62-PHY041-claude-skill-citation-checker/) | MIT¹ | 1 | **Citation hygiene**: verify `.bib` against CrossRef / Semantic Scholar / OpenAlex; catch hallucinated/chimeric refs |
+| 63 | [tondevrel/scientific-agent-skills](../skills/63-tondevrel-scientific-agent-skills/) | MIT | 2 | **Graphical causal inference + survival analysis**: `dowhy` (identify-estimate-refute, backdoor/frontdoor/IV, refutation tests) and `lifelines` (Kaplan-Meier, Cox, right-censoring) — empirically-relevant subset only |
 
 ¹ `econstack` and `citation-checker` declare MIT in their README (badge / `## License`
 section) but ship no separate `LICENSE` file upstream; recorded with
@@ -81,6 +82,7 @@ local vendored path is noted as `skills/NN` in the function column.
 | [hanlulong/econ-writing-skill](https://github.com/hanlulong/econ-writing-skill) | MIT | Economics paper writing with 13 identification strategies + AEA replication standards (`skills/56`) | Econ manuscript writing |
 | [dgunning/edgartools](https://github.com/dgunning/edgartools) | MIT | SEC EDGAR filings / XBRL / 13F / insider-form data skills, free API (`skills/57`) | Empirical finance / IO data |
 | [charlescoverdale/econstack](https://github.com/charlescoverdale/econstack) | MIT | Official-statistics macro/fiscal briefings + Green Book cost-benefit (`skills/58`) | Policy / macro data work |
+| [tondevrel/scientific-agent-skills](https://github.com/tondevrel/scientific-agent-skills) | MIT | DoWhy identify-estimate-refute (DAG/backdoor/IV + refutation) + lifelines survival analysis (`skills/63`) | Graphical causal inference / duration models |
 ```
 
 **Reproducibility / Data**
@@ -116,11 +118,16 @@ license):
   `nimrodfisher/data-analytics-skills`, `johanfourieza/econtools`,
   `lcrawfurd/claude-skills` (Cunningham referee-2 reproducibility audit) — all **no top-level LICENSE**.
 
+**Rejected on closer inspection:**
+
+- `beita6969/ScienceClaw` (MIT, ~829★) — on tree inspection this is the sprawling
+  *OpenClaw* multi-app monorepo (Android/iOS/macOS apps + messaging-platform extensions);
+  it exposes no clean, focused econometrics skill worth vendoring. The 829★ are for the
+  platform, not an empirical-methods skill. **Not vendored.**
+
 **Deferred — acceptable but lower priority / overlap** (candidates for a future wave):
 
-- `beita6969/ScienceClaw` (MIT, ~829★) — `economics-analysis` skill; strip one hardcoded venv path.
 - `flonat/claude-research` (MIT) — `causal-design` + `pipeline-manifest`; broad, some overlap with 60/61.
-- `tondevrel/scientific-agent-skills` (MIT) — DoWhy identify-estimate-refute.
 - `ondata/skills` (CC-BY-SA-4.0 + GPL-3.0) — OpenAlex + open-data quality scoring.
 - `smartbiblia-solutions/agent-skills` (MIT) — OpenAlex/HAL/Sudoc bibliometric pipeline.
 - `posit-dev/skills` (MIT) — vendor only `quarto-authoring`.

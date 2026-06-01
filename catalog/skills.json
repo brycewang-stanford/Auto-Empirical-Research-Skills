@@ -1053,6 +1053,23 @@
       "source_confidence": "medium",
       "source_url": "https://github.com/PHY041/claude-skill-citation-checker",
       "sync": "manual vendor snapshot"
+    },
+    {
+      "commercial_use": "allowed",
+      "has_license": true,
+      "has_readme": true,
+      "id": "63-tondevrel-scientific-agent-skills",
+      "license": "MIT",
+      "path": "skills/63-tondevrel-scientific-agent-skills",
+      "primary_skill": {
+        "description": "Causal inference framework for answering \"does X cause Y?\" beyond correlation. DoWhy (Microsoft Research) provides the identify-estimate-refute loop: define a causal graph (DAG), identify the causal effect using backdoor/frontdoor/instrumental variable criteria, estimate treatment effects with multiple estimators, and validate results with automated refutation tests. Use when: distinguishing causation from correlation, estimating treatment effects (ATE, ATT, CATE), designing and analyzing A/B tests with confounders, using instrumental variables, performing counterfactual reasoning (\"what would have happened if...\"), validating causal claims with sensitivity analysis, working with observational data where randomization is impossible, or any analysis where the question is \"what is the CAUSAL effect of X on Y\" rather than just \"how do X and Y relate?\"",
+        "name": "dowhy",
+        "path": "skills/63-tondevrel-scientific-agent-skills/dowhy/SKILL.md"
+      },
+      "skill_count": 2,
+      "source_confidence": "high",
+      "source_url": "https://github.com/tondevrel/scientific-agent-skills",
+      "sync": "manual vendor snapshot"
     }
   ],
   "generated_by": "scripts/build-catalog.py",
@@ -17035,14 +17052,46 @@
       "line_count": 156,
       "name": "check-citations",
       "path": "skills/62-PHY041-claude-skill-citation-checker/SKILL.md"
+    },
+    {
+      "collection": "63-tondevrel-scientific-agent-skills",
+      "description": "Causal inference framework for answering \"does X cause Y?\" beyond correlation. DoWhy (Microsoft Research) provides the identify-estimate-refute loop: define a causal graph (DAG), identify the causal effect using backdoor/frontdoor/instrumental variable criteria, estimate treatment effects with multiple estimators, and validate results with automated refutation tests. Use when: distinguishing causation from correlation, estimating treatment effects (ATE, ATT, CATE), designing and analyzing A/B tests with confounders, using instrumental variables, performing counterfactual reasoning (\"what would have happened if...\"), validating causal claims with sensitivity analysis, working with observational data where randomization is impossible, or any analysis where the question is \"what is the CAUSAL effect of X on Y\" rather than just \"how do X and Y relate?\"",
+      "frontmatter_fields": [
+        "description",
+        "license",
+        "name",
+        "version"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 981,
+      "name": "dowhy",
+      "path": "skills/63-tondevrel-scientific-agent-skills/dowhy/SKILL.md"
+    },
+    {
+      "collection": "63-tondevrel-scientific-agent-skills",
+      "description": "Complete survival analysis library in Python. Handles right-censored data, Kaplan-Meier curves, and Cox regression. Standard for clinical trial analysis and epidemiology.",
+      "frontmatter_fields": [
+        "description",
+        "license",
+        "name",
+        "version"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 98,
+      "name": "lifelines",
+      "path": "skills/63-tondevrel-scientific-agent-skills/lifelines/SKILL.md"
     }
   ],
   "summary": {
     "missing_description": 4,
     "missing_frontmatter": 4,
     "missing_name": 4,
-    "oversized_skill_files_over_500_lines": 79,
-    "skill_files": 1050,
-    "top_level_collections": 62
+    "oversized_skill_files_over_500_lines": 80,
+    "skill_files": 1052,
+    "top_level_collections": 63
   }
 }

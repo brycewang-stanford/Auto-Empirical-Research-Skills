@@ -2,22 +2,22 @@
   "generated_by": "scripts/build-catalog-enrich.py",
   "schema_version": 1,
   "summary": {
-    "skills": 1050,
+    "skills": 1052,
     "mean_quality_score": 99.2,
-    "with_frontmatter_description": 1046,
+    "with_frontmatter_description": 1048,
     "body_derived_description": 4,
     "no_description": 0,
-    "tagged": 492
+    "tagged": 494
   },
   "taxonomy": {
     "language": {
       "latex": 82,
-      "python": 40,
+      "python": 41,
       "stata": 23,
       "r": 20
     },
     "method": {
-      "iv": 22,
+      "iv": 23,
       "rdd": 20,
       "panel-fe": 16,
       "staggered-did": 16,
@@ -26,11 +26,11 @@
       "event-study": 8,
       "matching": 8,
       "did": 7,
-      "dml": 6,
-      "survival": 2
+      "dml": 7,
+      "survival": 3
     },
     "stage": {
-      "analysis": 117,
+      "analysis": 119,
       "writing": 76,
       "submission": 70,
       "literature": 58,
@@ -40,7 +40,7 @@
       "presentation": 37,
       "ideation": 32,
       "peer-review": 24,
-      "robustness": 20,
+      "robustness": 21,
       "de-aigc": 16,
       "data": 12
     },
@@ -49,7 +49,7 @@
       "scientific-writing": 62,
       "reproducibility": 55,
       "proofreading": 31,
-      "causal-inference": 23
+      "causal-inference": 24
     }
   },
   "skills": [
@@ -20236,6 +20236,62 @@
       "license": "MIT",
       "commercial_use": "allowed",
       "source_url": "https://github.com/PHY041/claude-skill-citation-checker",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "dowhy",
+      "path": "skills/63-tondevrel-scientific-agent-skills/dowhy/SKILL.md",
+      "collection": "63-tondevrel-scientific-agent-skills",
+      "line_count": 981,
+      "description_effective": "Causal inference framework for answering \"does X cause Y?\" beyond correlation. DoWhy (Microsoft Research) provides the identify-estimate-refute loop: define a causal graph (DAG), identify the causal effect using backdoor/frontdoor/instrumental variable criteria, estimate treatment effects with multiple estimators, and validate results with automated refutation tests. Use when: distinguishing causation from correlation, estimating treatment effects (ATE, ATT, CATE), designing and analyzing A/B tests with confounders, using instrumental variables, performing counterfactual reasoning (\"what would have happened if...\"), validating causal claims with sensitivity analysis, working with observational data where randomization is impossible, or any analysis where the question is \"what is the CAUSAL effect of X on Y\" rather than just \"how do X and Y relate?\"",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "method": [
+          "dml",
+          "iv"
+        ],
+        "stage": [
+          "analysis",
+          "robustness"
+        ],
+        "topic": [
+          "causal-inference"
+        ]
+      },
+      "quality_score": 85,
+      "quality_flags": [
+        "very-long-no-references"
+      ],
+      "license": "MIT",
+      "commercial_use": "allowed",
+      "source_url": "https://github.com/tondevrel/scientific-agent-skills",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "lifelines",
+      "path": "skills/63-tondevrel-scientific-agent-skills/lifelines/SKILL.md",
+      "collection": "63-tondevrel-scientific-agent-skills",
+      "line_count": 98,
+      "description_effective": "Complete survival analysis library in Python. Handles right-censored data, Kaplan-Meier curves, and Cox regression. Standard for clinical trial analysis and epidemiology.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "language": [
+          "python"
+        ],
+        "method": [
+          "survival"
+        ],
+        "stage": [
+          "analysis"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "MIT",
+      "commercial_use": "allowed",
+      "source_url": "https://github.com/tondevrel/scientific-agent-skills",
       "sync": "manual vendor snapshot"
     }
   ]

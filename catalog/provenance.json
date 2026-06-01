@@ -929,15 +929,30 @@
       "source_url": "https://github.com/PHY041/claude-skill-citation-checker",
       "sync": "manual vendor snapshot",
       "vendored_commit": null
+    },
+    {
+      "commercial_use": "allowed",
+      "id": "63-tondevrel-scientific-agent-skills",
+      "last_aers_review": "2026-05-31",
+      "license": "MIT",
+      "license_file": "skills/63-tondevrel-scientific-agent-skills/LICENSE",
+      "origin": "vendored upstream snapshot (dowhy + lifelines subset; dowhy SKILL.MD renamed to SKILL.md) 2026-06-01",
+      "path": "skills/63-tondevrel-scientific-agent-skills",
+      "security_review": "SECURITY-SCAN-REPORT.md",
+      "skill_count": 2,
+      "source_confidence": "high",
+      "source_url": "https://github.com/tondevrel/scientific-agent-skills",
+      "sync": "manual vendor snapshot",
+      "vendored_commit": null
     }
   ],
   "generated_by": "scripts/build-provenance.py",
   "scan_date": "2026-05-31",
   "schema_version": "1.0",
   "summary": {
-    "collections": 62,
+    "collections": 63,
     "commercial_use": {
-      "allowed": 34,
+      "allowed": 35,
       "restricted": 2,
       "share-alike": 4,
       "unknown": 22
@@ -946,12 +961,12 @@
       "Apache-2.0": 1,
       "CC-BY-NC-4.0 (non-commercial)": 1,
       "CC-BY-SA-4.0 (repository default)": 4,
-      "MIT": 33,
+      "MIT": 34,
       "MIT Non-Commercial": 1,
       "UNKNOWN - check upstream": 22
     },
     "source_confidence": {
-      "high": 35,
+      "high": 36,
       "low": 6,
       "medium": 17,
       "unresolved": 4
