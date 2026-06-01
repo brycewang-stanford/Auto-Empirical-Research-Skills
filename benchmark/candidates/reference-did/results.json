@@ -1,0 +1,8 @@
+{
+  "task": "did-staggered-recovery",
+  "method": "Group-time DID with not-yet-treated controls; TWFE diagnostic reported",
+  "n": 600,
+  "true_att": 2.9091,
+  "twfe_att": 1.4545,
+  "cs_att": 2.9091
+}

@@ -15,6 +15,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent / "lib"))
 import lalonde  # noqa: E402
 import card  # noqa: E402
+import simdid  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 CAND = Path(__file__).resolve().parent / "candidates"
@@ -53,13 +54,37 @@ def card_candidate() -> dict:
     }
 
 
+def did_candidate() -> dict:
+    data_path = ROOT / "benchmark" / "data" / "sim-staggered-did.csv"
+    if not data_path.exists():
+        simdid.write_csv(data_path)
+    rows = simdid.load(data_path)
+    return {
+        "task": "did-staggered-recovery",
+        "method": "Group-time DID with not-yet-treated controls; TWFE diagnostic reported",
+        "n": len(rows),
+        "true_att": round(simdid.true_att(rows), 4),
+        "twfe_att": round(simdid.twfe_att(rows), 4),
+        "cs_att": round(simdid.cs_att(rows), 4),
+    }
+
+
 def main() -> int:
     lc = lalonde_candidate()
     write(CAND / "reference-ols" / "results.json", lc)
     print(f"  lalonde: naive {lc['naive_att']:,.0f} -> adjusted {lc['adjusted_att']:,.0f}")
     cc = card_candidate()
     write(CAND / "reference-iv" / "results.json", cc)
-    print(f"  card:    OLS {cc['ols_return']} -> IV {cc['iv_return']} (first-stage F {cc['first_stage_F']})")
+    print(
+        f"  card:    OLS {cc['ols_return']} -> IV {cc['iv_return']} "
+        f"(first-stage F {cc['first_stage_F']})"
+    )
+    dc = did_candidate()
+    write(CAND / "reference-did" / "results.json", dc)
+    print(
+        f"  staggered DID: TWFE {dc['twfe_att']} -> group-time {dc['cs_att']} "
+        f"(true {dc['true_att']})"
+    )
     return 0
 
 
