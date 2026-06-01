@@ -115,6 +115,10 @@
       "skills/42-wanshuiyin-ARIS/skills/skills-codex/grant-proposal/SKILL.md",
       "skills/42-wanshuiyin-ARIS/skills/skills-codex-gemini-review/grant-proposal/SKILL.md"
     ],
+    "hypothesis-generation": [
+      "skills/03-K-Dense-AI-claude-scientific-skills/hypothesis-generation/SKILL.md",
+      "skills/04-K-Dense-AI-claude-scientific-writer/hypothesis-generation/SKILL.md"
+    ],
     "idea-creator": [
       "skills/42-wanshuiyin-ARIS/skills/idea-creator/SKILL.md",
       "skills/42-wanshuiyin-ARIS/skills/skills-codex/idea-creator/SKILL.md",
@@ -157,6 +161,7 @@
     ],
     "literature-review": [
       "skills/03-K-Dense-AI-claude-scientific-skills/literature-review/SKILL.md",
+      "skills/04-K-Dense-AI-claude-scientific-writer/literature-review/SKILL.md",
       "skills/36-taoyunudt-literature-review-skill/SKILL.md"
     ],
     "mermaid-diagram": [
@@ -251,6 +256,10 @@
       "skills/42-wanshuiyin-ARIS/skills/rebuttal/SKILL.md",
       "skills/42-wanshuiyin-ARIS/skills/skills-codex/rebuttal/SKILL.md"
     ],
+    "research-grants": [
+      "skills/03-K-Dense-AI-claude-scientific-skills/research-grants/SKILL.md",
+      "skills/04-K-Dense-AI-claude-scientific-writer/research-grants/SKILL.md"
+    ],
     "research-ideation": [
       "skills/09-meleantonio-awesome-econ-ai-stuff/_skills/ideation/research-ideation/SKILL.md",
       "skills/12-pedrohcgs-claude-code-my-workflow/dot-claude/skills/research-ideation/SKILL.md",
@@ -305,6 +314,10 @@
     "run-experiment": [
       "skills/42-wanshuiyin-ARIS/skills/run-experiment/SKILL.md",
       "skills/42-wanshuiyin-ARIS/skills/skills-codex/run-experiment/SKILL.md"
+    ],
+    "scientific-writing": [
+      "skills/03-K-Dense-AI-claude-scientific-skills/scientific-writing/SKILL.md",
+      "skills/04-K-Dense-AI-claude-scientific-writer/scientific-writing/SKILL.md"
     ],
     "slide-excellence": [
       "skills/12-pedrohcgs-claude-code-my-workflow/dot-claude/skills/slide-excellence/SKILL.md",
@@ -388,29 +401,29 @@
     {
       "collection": "01-lishix520-academic-paper-skills",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 855,
-      "name": "composer",
+      "name": "academic-paper-composer",
       "path": "skills/01-lishix520-academic-paper-skills/composer/SKILL.md"
     },
     {
       "collection": "01-lishix520-academic-paper-skills",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 685,
-      "name": "strategist",
+      "name": "academic-paper-strategist",
       "path": "skills/01-lishix520-academic-paper-skills/strategist/SKILL.md"
     },
     {
       "collection": "02-luwill-research-skills",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 185,
       "name": "medical-imaging-review",
       "path": "skills/02-luwill-research-skills/medical-imaging-review/SKILL.md"
@@ -418,9 +431,9 @@
     {
       "collection": "02-luwill-research-skills",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 479,
       "name": "paper-slide-deck",
       "path": "skills/02-luwill-research-skills/paper-slide-deck/SKILL.md"
@@ -428,9 +441,9 @@
     {
       "collection": "02-luwill-research-skills",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 588,
       "name": "research-proposal",
       "path": "skills/02-luwill-research-skills/research-proposal/SKILL.md"
@@ -438,9 +451,9 @@
     {
       "collection": "03-K-Dense-AI-claude-scientific-skills",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 239,
       "name": "hypothesis-generation",
       "path": "skills/03-K-Dense-AI-claude-scientific-skills/hypothesis-generation/SKILL.md"
@@ -458,9 +471,9 @@
     {
       "collection": "03-K-Dense-AI-claude-scientific-skills",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 968,
       "name": "research-grants",
       "path": "skills/03-K-Dense-AI-claude-scientific-skills/research-grants/SKILL.md"
@@ -468,9 +481,9 @@
     {
       "collection": "03-K-Dense-AI-claude-scientific-skills",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 446,
       "name": "scientific-writing",
       "path": "skills/03-K-Dense-AI-claude-scientific-skills/scientific-writing/SKILL.md"
@@ -478,9 +491,9 @@
     {
       "collection": "04-K-Dense-AI-claude-scientific-writer",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 1215,
       "name": "citation-management",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/citation-management/SKILL.md"
@@ -488,9 +501,9 @@
     {
       "collection": "04-K-Dense-AI-claude-scientific-writer",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 236,
       "name": "hypothesis-generation",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/hypothesis-generation/SKILL.md"
@@ -498,9 +511,9 @@
     {
       "collection": "04-K-Dense-AI-claude-scientific-writer",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 656,
       "name": "literature-review",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/literature-review/SKILL.md"
@@ -508,9 +521,9 @@
     {
       "collection": "04-K-Dense-AI-claude-scientific-writer",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 582,
       "name": "peer-review",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/peer-review/SKILL.md"
@@ -518,9 +531,9 @@
     {
       "collection": "04-K-Dense-AI-claude-scientific-writer",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 952,
       "name": "research-grants",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/research-grants/SKILL.md"
@@ -538,9 +551,9 @@
     {
       "collection": "04-K-Dense-AI-claude-scientific-writer",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 581,
       "name": "scientific-critical-thinking",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/scientific-critical-thinking/SKILL.md"
@@ -548,9 +561,9 @@
     {
       "collection": "04-K-Dense-AI-claude-scientific-writer",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 593,
       "name": "scientific-writing",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/scientific-writing/SKILL.md"
@@ -558,109 +571,109 @@
     {
       "collection": "05-kthorn-research-superpower",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 120,
-      "name": "getting-started",
+      "name": "Getting Started with Research Superpowers",
       "path": "skills/05-kthorn-research-superpower/getting-started/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 621,
-      "name": "answering-research-questions",
+      "name": "Answering Research Questions",
       "path": "skills/05-kthorn-research-superpower/research/answering-research-questions/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 602,
-      "name": "building-screening-rubrics",
+      "name": "Building Paper Screening Rubrics",
       "path": "skills/05-kthorn-research-superpower/research/building-screening-rubrics/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 418,
-      "name": "checking-chembl",
+      "name": "Checking ChEMBL for Structured SAR Data",
       "path": "skills/05-kthorn-research-superpower/research/checking-chembl/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 453,
-      "name": "cleaning-up-research-sessions",
+      "name": "Cleaning Up Research Sessions",
       "path": "skills/05-kthorn-research-superpower/research/cleaning-up-research-sessions/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 599,
-      "name": "evaluating-paper-relevance",
+      "name": "Evaluating Paper Relevance",
       "path": "skills/05-kthorn-research-superpower/research/evaluating-paper-relevance/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 355,
-      "name": "finding-open-access-papers",
+      "name": "Finding Open Access Papers",
       "path": "skills/05-kthorn-research-superpower/research/finding-open-access-papers/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 213,
-      "name": "searching-literature",
+      "name": "Searching Scientific Literature",
       "path": "skills/05-kthorn-research-superpower/research/searching-literature/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 618,
-      "name": "subagent-driven-review",
+      "name": "Subagent-Driven Literature Review",
       "path": "skills/05-kthorn-research-superpower/research/subagent-driven-review/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 302,
-      "name": "traversing-citations",
+      "name": "Traversing Citation Networks",
       "path": "skills/05-kthorn-research-superpower/research/traversing-citations/SKILL.md"
     },
     {
       "collection": "06-fuhaoda-stats-paper-writing",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 179,
       "name": "stat-writing",
       "path": "skills/06-fuhaoda-stats-paper-writing/stat-writing/SKILL.md"
@@ -668,9 +681,9 @@
     {
       "collection": "07-Orchestra-Research-AI-Research-SKILLs",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 498,
       "name": "academic-plotting",
       "path": "skills/07-Orchestra-Research-AI-Research-SKILLs/academic-plotting/SKILL.md"
@@ -678,11 +691,11 @@
     {
       "collection": "07-Orchestra-Research-AI-Research-SKILLs",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 426,
-      "name": "autoresearch-skill",
+      "name": "autoresearch",
       "path": "skills/07-Orchestra-Research-AI-Research-SKILLs/autoresearch-skill/SKILL.md"
     },
     {
@@ -10118,10 +10131,10 @@
   ],
   "schema_version": "1.0",
   "summary": {
-    "duplicate_skill_names": 72,
+    "duplicate_skill_names": 75,
     "exact_case_skill_files": 977,
-    "missing_description": 32,
-    "missing_frontmatter": 32,
+    "missing_description": 4,
+    "missing_frontmatter": 4,
     "non_exact_case_skill_files": 0,
     "over_500_lines": 75,
     "skill_like_files": 977

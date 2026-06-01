@@ -76,8 +76,8 @@
       "license": "MIT",
       "path": "skills/01-lishix520-academic-paper-skills",
       "primary_skill": {
-        "description": "",
-        "name": "composer",
+        "description": "Systematic writing framework for philosophy and interdisciplinary academic papers from optimized outline to submission-ready manuscript. Use when users want to: (1) write a paper from a detailed outline, (2) ensure quality control during writing, (3) maintain consistency across chapters, (4) prepare a submission-ready manuscript, or (5) systematically execute a planned paper. Triggered by phrases like 'write the paper from this outline,' 'compose the full manuscript,' 'execute the outline,' or when users have completed strategic planning (academic-paper-strategist skill) and are ready to write. Takes optimized outline as input; outputs complete manuscript with iterative quality checks.",
+        "name": "academic-paper-composer",
         "path": "skills/01-lishix520-academic-paper-skills/composer/SKILL.md"
       },
       "skill_count": 2,
@@ -93,7 +93,7 @@
       "license": "MIT",
       "path": "skills/02-luwill-research-skills",
       "primary_skill": {
-        "description": "",
+        "description": "Write comprehensive literature reviews for medical imaging AI research. Use when writing survey papers, systematic reviews, or literature analyses on topics like segmentation, detection, classification in CT, MRI, X-ray, ultrasound, or pathology imaging. Triggers on requests for \"review paper\", \"survey\", \"literature review\", \"综述\", \"systematic review\", or mentions of writing academic reviews on deep learning for medical imaging.",
         "name": "medical-imaging-review",
         "path": "skills/02-luwill-research-skills/medical-imaging-review/SKILL.md"
       },
@@ -110,7 +110,7 @@
       "license": "MIT",
       "path": "skills/03-K-Dense-AI-claude-scientific-skills",
       "primary_skill": {
-        "description": "",
+        "description": "Structured hypothesis formulation from observations. Use when you have experimental observations or data and need to formulate testable hypotheses with predictions, propose mechanisms, and design experiments to test them. Follows scientific method framework. For open-ended ideation use scientific-brainstorming; for automated LLM-driven hypothesis testing on datasets use hypogenic.",
         "name": "hypothesis-generation",
         "path": "skills/03-K-Dense-AI-claude-scientific-skills/hypothesis-generation/SKILL.md"
       },
@@ -127,7 +127,7 @@
       "license": "MIT",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer",
       "primary_skill": {
-        "description": "",
+        "description": "Comprehensive citation management for academic research. Search Google Scholar and PubMed for papers, extract accurate metadata, validate citations, and generate properly formatted BibTeX entries. This skill should be used when you need to find papers, verify citation information, convert DOIs to BibTeX, or ensure reference accuracy in scientific writing.",
         "name": "citation-management",
         "path": "skills/04-K-Dense-AI-claude-scientific-writer/citation-management/SKILL.md"
       },
@@ -144,8 +144,8 @@
       "license": "MIT",
       "path": "skills/05-kthorn-research-superpower",
       "primary_skill": {
-        "description": "",
-        "name": "getting-started",
+        "description": "Introduction to literature search & review skills - systematic paper finding, screening, extraction, and citation traversal",
+        "name": "Getting Started with Research Superpowers",
         "path": "skills/05-kthorn-research-superpower/getting-started/SKILL.md"
       },
       "skill_count": 10,
@@ -161,7 +161,7 @@
       "license": "MIT",
       "path": "skills/06-fuhaoda-stats-paper-writing",
       "primary_skill": {
-        "description": "",
+        "description": "End-to-end statistical writing assistant for LaTeX - draft title/abstract/keywords, expand outlines into sections, audit manuscripts, write reviewer reports and response letters, and scaffold book manuscripts.",
         "name": "stat-writing",
         "path": "skills/06-fuhaoda-stats-paper-writing/stat-writing/SKILL.md"
       },
@@ -178,7 +178,7 @@
       "license": "MIT",
       "path": "skills/07-Orchestra-Research-AI-Research-SKILLs",
       "primary_skill": {
-        "description": "",
+        "description": "Generates publication-quality figures for ML papers from research context. Given a paper section or description, extracts system components and relationships to generate architecture diagrams via Gemini. Given experiment results or data, auto-selects chart type and generates data-driven figures via matplotlib/seaborn. Use when creating any figure for a conference paper.",
         "name": "academic-plotting",
         "path": "skills/07-Orchestra-Research-AI-Research-SKILLs/academic-plotting/SKILL.md"
       },
@@ -916,66 +916,91 @@
     },
     {
       "collection": "01-lishix520-academic-paper-skills",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Systematic writing framework for philosophy and interdisciplinary academic papers from optimized outline to submission-ready manuscript. Use when users want to: (1) write a paper from a detailed outline, (2) ensure quality control during writing, (3) maintain consistency across chapters, (4) prepare a submission-ready manuscript, or (5) systematically execute a planned paper. Triggered by phrases like 'write the paper from this outline,' 'compose the full manuscript,' 'execute the outline,' or when users have completed strategic planning (academic-paper-strategist skill) and are ready to write. Takes optimized outline as input; outputs complete manuscript with iterative quality checks.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 855,
-      "name": "composer",
+      "name": "academic-paper-composer",
       "path": "skills/01-lishix520-academic-paper-skills/composer/SKILL.md"
     },
     {
       "collection": "01-lishix520-academic-paper-skills",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Systematic strategic planning framework for philosophy and interdisciplinary academic papers targeting preprint platforms (PhilArchive, arXiv, PhilSci-Archive). Use when users want to: (1) plan a paper on a specific topic, (2) identify research gaps and assess originality, (3) develop optimized paper outlines, (4) prepare for preprint submission, or (5) understand platform requirements and writing standards. Triggered by phrases like 'plan a paper on,' 'help me design a paper about,' 'identify research gaps in,' 'is this idea original,' or when users need structured research planning. The skill guides through three phases: Platform Analysis (identifying target venue and studying sample papers), Theoretical Framework (AI-driven literature search and gap identification), and Outline Optimization (structured design with reviewer-perspective self-assessment). Each phase includes quality evaluation standards and validation checkpoints. Output: optimized detailed outline ready for systematic writing (use with academic-paper-composer skill).",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 685,
-      "name": "strategist",
+      "name": "academic-paper-strategist",
       "path": "skills/01-lishix520-academic-paper-skills/strategist/SKILL.md"
     },
     {
       "collection": "02-luwill-research-skills",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Write comprehensive literature reviews for medical imaging AI research. Use when writing survey papers, systematic reviews, or literature analyses on topics like segmentation, detection, classification in CT, MRI, X-ray, ultrasound, or pathology imaging. Triggers on requests for \"review paper\", \"survey\", \"literature review\", \"综述\", \"systematic review\", or mentions of writing academic reviews on deep learning for medical imaging.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "metadata",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 185,
       "name": "medical-imaging-review",
       "path": "skills/02-luwill-research-skills/medical-imaging-review/SKILL.md"
     },
     {
       "collection": "02-luwill-research-skills",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Generate professional slide deck images from academic papers and content. Creates comprehensive outlines with style instructions, auto-detects figures from PDFs, then generates individual slide images. Use when user asks to \"create slides\", \"make a presentation\", \"generate deck\", or \"slide deck\" for papers.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 479,
       "name": "paper-slide-deck",
       "path": "skills/02-luwill-research-skills/paper-slide-deck/SKILL.md"
     },
     {
       "collection": "02-luwill-research-skills",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Generate academic research proposals for PhD applications. Use when user asks to \"write a research proposal\", \"create PhD proposal\", \"generate research plan\", \"撰写研究计划\", \"写博士申请\", \"doctoral proposal\", or mentions specific research topics for PhD application. Supports STEM, humanities, and social sciences with field-specific adaptations. Follows Nature Reviews-style academic writing conventions. Supports both English and Chinese output based on user preference.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "metadata",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 588,
       "name": "research-proposal",
       "path": "skills/02-luwill-research-skills/research-proposal/SKILL.md"
     },
     {
       "collection": "03-K-Dense-AI-claude-scientific-skills",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Structured hypothesis formulation from observations. Use when you have experimental observations or data and need to formulate testable hypotheses with predictions, propose mechanisms, and design experiments to test them. Follows scientific method framework. For open-ended ideation use scientific-brainstorming; for automated LLM-driven hypothesis testing on datasets use hypogenic.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "license",
+        "metadata",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 239,
       "name": "hypothesis-generation",
       "path": "skills/03-K-Dense-AI-claude-scientific-skills/hypothesis-generation/SKILL.md"
@@ -999,77 +1024,109 @@
     },
     {
       "collection": "03-K-Dense-AI-claude-scientific-skills",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Write competitive research proposals for NSF, NIH, DOE, DARPA, and Taiwan NSTC. Agency-specific formatting, review criteria, budget preparation, broader impacts, significance statements, innovation narratives, and compliance with submission requirements.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "license",
+        "metadata",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 968,
       "name": "research-grants",
       "path": "skills/03-K-Dense-AI-claude-scientific-skills/research-grants/SKILL.md"
     },
     {
       "collection": "03-K-Dense-AI-claude-scientific-skills",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Core skill for the deep research and writing tool. Write scientific manuscripts in full paragraphs (never bullet points). Use two-stage process with (1) section outlines with key points using research-lookup then (2) convert to flowing prose. IMRAD structure, citations (APA/AMA/Vancouver), figures/tables, reporting guidelines (CONSORT/STROBE/PRISMA), for research papers and journal submissions.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "license",
+        "metadata",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 446,
       "name": "scientific-writing",
       "path": "skills/03-K-Dense-AI-claude-scientific-skills/scientific-writing/SKILL.md"
     },
     {
       "collection": "04-K-Dense-AI-claude-scientific-writer",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Comprehensive citation management for academic research. Search Google Scholar and PubMed for papers, extract accurate metadata, validate citations, and generate properly formatted BibTeX entries. This skill should be used when you need to find papers, verify citation information, convert DOIs to BibTeX, or ensure reference accuracy in scientific writing.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 1215,
       "name": "citation-management",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/citation-management/SKILL.md"
     },
     {
       "collection": "04-K-Dense-AI-claude-scientific-writer",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Generate testable hypotheses. Formulate from observations, design experiments, explore competing explanations, develop predictions, propose mechanisms, for scientific inquiry across domains.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 236,
       "name": "hypothesis-generation",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/hypothesis-generation/SKILL.md"
     },
     {
       "collection": "04-K-Dense-AI-claude-scientific-writer",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Conduct comprehensive, systematic literature reviews using multiple academic databases (PubMed, arXiv, bioRxiv, Semantic Scholar, etc.). This skill should be used when conducting systematic literature reviews, meta-analyses, research synthesis, or comprehensive literature searches across biomedical, scientific, and technical domains. Creates professionally formatted markdown documents and PDFs with verified citations in multiple citation styles (APA, Nature, Vancouver, etc.).",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 656,
       "name": "literature-review",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/literature-review/SKILL.md"
     },
     {
       "collection": "04-K-Dense-AI-claude-scientific-writer",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Systematic peer review toolkit. Evaluate methodology, statistics, design, reproducibility, ethics, figure integrity, reporting standards, for manuscript and grant review across disciplines.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 582,
       "name": "peer-review",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/peer-review/SKILL.md"
     },
     {
       "collection": "04-K-Dense-AI-claude-scientific-writer",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Write competitive research proposals for NSF, NIH, DOE, and DARPA. Agency-specific formatting, review criteria, budget preparation, broader impacts, significance statements, innovation narratives, and compliance with submission requirements.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 952,
       "name": "research-grants",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/research-grants/SKILL.md"
@@ -1087,167 +1144,246 @@
     },
     {
       "collection": "04-K-Dense-AI-claude-scientific-writer",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Evaluate research rigor. Assess methodology, experimental design, statistical validity, biases, confounding, evidence quality (GRADE, Cochrane ROB), for critical analysis of scientific claims.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 581,
       "name": "scientific-critical-thinking",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/scientific-critical-thinking/SKILL.md"
     },
     {
       "collection": "04-K-Dense-AI-claude-scientific-writer",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Core skill for the deep research and writing tool. Write scientific manuscripts in full paragraphs (never bullet points). Use two-stage process: (1) create section outlines with key points using research-lookup, (2) convert to flowing prose. IMRAD structure, citations (APA/AMA/Vancouver), figures/tables, reporting guidelines (CONSORT/STROBE/PRISMA), for research papers and journal submissions.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 593,
       "name": "scientific-writing",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/scientific-writing/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Introduction to literature search & review skills - systematic paper finding, screening, extraction, and citation traversal",
+      "frontmatter_fields": [
+        "description",
+        "name",
+        "version",
+        "when_to_use"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 120,
-      "name": "getting-started",
+      "name": "Getting Started with Research Superpowers",
       "path": "skills/05-kthorn-research-superpower/getting-started/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Main orchestration workflow for systematic literature research - search, evaluate, traverse, synthesize",
+      "frontmatter_fields": [
+        "description",
+        "name",
+        "version",
+        "when_to_use"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 621,
-      "name": "answering-research-questions",
+      "name": "Answering Research Questions",
       "path": "skills/05-kthorn-research-superpower/research/answering-research-questions/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Collaboratively build and refine paper screening rubrics through brainstorming, test-driven development, and iterative feedback",
+      "frontmatter_fields": [
+        "description",
+        "name",
+        "version",
+        "when_to_use"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 602,
-      "name": "building-screening-rubrics",
+      "name": "Building Paper Screening Rubrics",
       "path": "skills/05-kthorn-research-superpower/research/building-screening-rubrics/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Check if medicinal chemistry papers are in ChEMBL database to access curated bioactivity data",
+      "frontmatter_fields": [
+        "description",
+        "name",
+        "version",
+        "when_to_use"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 418,
-      "name": "checking-chembl",
+      "name": "Checking ChEMBL for Structured SAR Data",
       "path": "skills/05-kthorn-research-superpower/research/checking-chembl/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Safely remove intermediate files from completed research sessions while preserving important data",
+      "frontmatter_fields": [
+        "description",
+        "name",
+        "version",
+        "when_to_use"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 453,
-      "name": "cleaning-up-research-sessions",
+      "name": "Cleaning Up Research Sessions",
       "path": "skills/05-kthorn-research-superpower/research/cleaning-up-research-sessions/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Two-stage paper screening - abstract scoring then deep dive for specific data extraction",
+      "frontmatter_fields": [
+        "description",
+        "name",
+        "version",
+        "when_to_use"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 599,
-      "name": "evaluating-paper-relevance",
+      "name": "Evaluating Paper Relevance",
       "path": "skills/05-kthorn-research-superpower/research/evaluating-paper-relevance/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Use Unpaywall API to find free full-text versions of paywalled papers",
+      "frontmatter_fields": [
+        "description",
+        "name",
+        "version",
+        "when_to_use"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 355,
-      "name": "finding-open-access-papers",
+      "name": "Finding Open Access Papers",
       "path": "skills/05-kthorn-research-superpower/research/finding-open-access-papers/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "PubMed search with keyword optimization, result parsing, and metadata extraction",
+      "frontmatter_fields": [
+        "description",
+        "name",
+        "version",
+        "when_to_use"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 213,
-      "name": "searching-literature",
+      "name": "Searching Scientific Literature",
       "path": "skills/05-kthorn-research-superpower/research/searching-literature/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Use parallel subagents for large-scale paper screening and deep dive analysis",
+      "frontmatter_fields": [
+        "description",
+        "name",
+        "version",
+        "when_to_use"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 618,
-      "name": "subagent-driven-review",
+      "name": "Subagent-Driven Literature Review",
       "path": "skills/05-kthorn-research-superpower/research/subagent-driven-review/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Smart backward and forward citation following via Semantic Scholar, with relevance filtering and deduplication",
+      "frontmatter_fields": [
+        "description",
+        "name",
+        "version",
+        "when_to_use"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 302,
-      "name": "traversing-citations",
+      "name": "Traversing Citation Networks",
       "path": "skills/05-kthorn-research-superpower/research/traversing-citations/SKILL.md"
     },
     {
       "collection": "06-fuhaoda-stats-paper-writing",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "End-to-end statistical writing assistant for LaTeX - draft title/abstract/keywords, expand outlines into sections, audit manuscripts, write reviewer reports and response letters, and scaffold book manuscripts.",
+      "frontmatter_fields": [
+        "compatibility",
+        "description",
+        "license",
+        "metadata",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 179,
       "name": "stat-writing",
       "path": "skills/06-fuhaoda-stats-paper-writing/stat-writing/SKILL.md"
     },
     {
       "collection": "07-Orchestra-Research-AI-Research-SKILLs",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Generates publication-quality figures for ML papers from research context. Given a paper section or description, extracts system components and relationships to generate architecture diagrams via Gemini. Given experiment results or data, auto-selects chart type and generates data-driven figures via matplotlib/seaborn. Use when creating any figure for a conference paper.",
+      "frontmatter_fields": [
+        "author",
+        "dependencies",
+        "description",
+        "license",
+        "name",
+        "tags",
+        "version"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 498,
       "name": "academic-plotting",
       "path": "skills/07-Orchestra-Research-AI-Research-SKILLs/academic-plotting/SKILL.md"
     },
     {
       "collection": "07-Orchestra-Research-AI-Research-SKILLs",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Orchestrates end-to-end autonomous AI research projects using a two-loop architecture. The inner loop runs rapid experiment iterations with clear optimization targets. The outer loop synthesizes results, identifies patterns, and steers research direction. Routes to domain-specific skills for execution, supports continuous agent operation via Claude Code /loop and OpenClaw heartbeat, and produces research presentations and papers. Use when starting a research project, running autonomous experiments, or managing a multi-hypothesis research effort.",
+      "frontmatter_fields": [
+        "author",
+        "description",
+        "license",
+        "name",
+        "tags",
+        "version"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 426,
-      "name": "autoresearch-skill",
+      "name": "autoresearch",
       "path": "skills/07-Orchestra-Research-AI-Research-SKILLs/autoresearch-skill/SKILL.md"
     },
     {
@@ -15628,9 +15764,9 @@
     }
   ],
   "summary": {
-    "missing_description": 32,
-    "missing_frontmatter": 32,
-    "missing_name": 32,
+    "missing_description": 4,
+    "missing_frontmatter": 4,
+    "missing_name": 4,
     "oversized_skill_files_over_500_lines": 75,
     "skill_files": 977,
     "top_level_collections": 50
