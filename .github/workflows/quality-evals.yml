@@ -1,0 +1,32 @@
+name: Quality (evals + benchmark + tests)
+
+# Complements validate-catalog.yml (which checks catalog freshness). This job
+# enforces the eval/benchmark/test layer. All steps are stdlib-only; no pip.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Lint eval scenarios
+        run: python3 evals/run_evals.py
+
+      - name: Unit tests (stdlib unittest)
+        run: python3 -m unittest discover -s tests -p "test_*.py"
+
+      - name: Benchmark (reference pipeline + strict grading)
+        run: |
+          python3 benchmark/reference_pipeline.py
+          python3 benchmark/check_benchmark.py --strict
+
+      - name: Grade example candidates (smoke)
+        run: python3 evals/run_evals.py --grade evals/candidates/_example

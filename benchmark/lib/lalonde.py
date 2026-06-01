@@ -16,7 +16,8 @@ COVARIATES = ["age", "educ", "black", "hispan", "married", "nodegree", "re74", "
 
 
 def load(data_path: Path) -> list[dict]:
-    rows = list(csv.DictReader(data_path.open(encoding="utf-8")))
+    with data_path.open(encoding="utf-8") as fh:
+        rows = list(csv.DictReader(fh))
     for r in rows:
         # Derive race dummies used as covariates.
         r["black"] = "1" if r.get("race") == "black" else "0"

@@ -1,0 +1,33 @@
+# Local, network-free pre-commit hooks for AERS quality gates.
+# Install once:  pip install pre-commit && pre-commit install
+# Run on demand: pre-commit run --all-files
+#
+# All hooks are `language: system` and call the repo's own stdlib-only tools, so
+# there is nothing to download and they work offline.
+repos:
+  - repo: local
+    hooks:
+      - id: aers-evals-lint
+        name: AERS eval scenarios lint
+        entry: python3 evals/run_evals.py
+        language: system
+        pass_filenames: false
+        files: ^evals/
+      - id: aers-unit-tests
+        name: AERS unit tests
+        entry: python3 -m unittest discover -s tests -p "test_*.py"
+        language: system
+        pass_filenames: false
+        files: ^(tests/|evals/|benchmark/|scripts/)
+      - id: aers-benchmark
+        name: AERS benchmark (strict)
+        entry: bash -c 'python3 benchmark/reference_pipeline.py >/dev/null && python3 benchmark/check_benchmark.py --strict >/dev/null'
+        language: system
+        pass_filenames: false
+        files: ^benchmark/
+      - id: aers-repo-validate
+        name: AERS repo validate (links + frontmatter)
+        entry: python3 scripts/validate-repo.py
+        language: system
+        pass_filenames: false
+        files: ^(skills/|docs/|README|catalog/)
