@@ -14,6 +14,5 @@
     "nodegree": 0.235,
     "re74": -0.596,
     "re75": -0.287
-  },
-  "notes": "Reference pipeline: pure-stdlib OLS. Naive comparison is negative; adjustment conditioning on re74/re75 flips it positive and near the experimental benchmark."
+  }
 }

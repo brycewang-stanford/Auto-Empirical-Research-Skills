@@ -25,6 +25,23 @@ A pipeline that handles this correctly **surfaces the imbalance**, **does not
 report −$635 as the causal effect**, and after adjustment **recovers a positive
 estimate near the experimental benchmark**.
 
+## Task: `card-iv-recovery`
+
+Card (1995) instruments years of schooling with proximity to a 4-year college
+(`nearc4`), data vendored at
+[`demo-StatsPAI-skill/data/card.csv`](../demo-StatsPAI-skill/data/card.csv)
+(3,010 observations). All values reproducible from the data:
+
+| Quantity | Value | Meaning |
+|---|---:|---|
+| OLS return to schooling | **0.075** | Naive OLS estimate of the wage return. |
+| IV return to schooling | **0.131** | 2SLS with `nearc4` — *exceeds* OLS, the canonical surprise. |
+| First-stage F (`nearc4`) | **13.3** | Real but only moderately strong instrument; must be reported. |
+
+A pipeline that handles IV correctly recovers a positive OLS return, an IV return
+that **exceeds** it, and **reports the first-stage strength** instead of assuming
+the instrument is strong.
+
 ## What makes the golds trustworthy
 
 The checker **recomputes** the data-derived golds (imbalance count, the true
@@ -39,15 +56,16 @@ methods are genuinely not guaranteed to nail it.
 ## Run it
 
 ```bash
-# 1. Produce the reference candidate (pure-stdlib OLS pipeline)
+# 1. Produce the reference candidates (pure-stdlib pipelines, one per task)
 python3 benchmark/reference_pipeline.py
 
-# 2. Grade it against the golds
+# 2. Grade all tasks against the golds
 python3 benchmark/check_benchmark.py
-#    -> Score: 15/15, no required failures
+#    -> lalonde-recovery 15/15, card-iv-recovery 14/14, no required failures
 
-# 3. Grade a real agent run instead (drop its results.json in a candidate dir)
-python3 benchmark/check_benchmark.py --candidate benchmark/candidates/<run-name>
+# 3. Grade one task / a real agent run (drop its results.json in a candidate dir)
+python3 benchmark/check_benchmark.py --task card-iv-recovery
+python3 benchmark/check_benchmark.py --candidate <run-name>
 ```
 
 ### Candidate `results.json` schema
@@ -70,11 +88,13 @@ shape; the checker is pipeline-agnostic.
 
 ```
 benchmark/
-  tasks/lalonde-recovery.toml   # task + gold definitions + literature constants
+  tasks/lalonde-recovery.toml   # observational DiD/matching recovery task
+  tasks/card-iv-recovery.toml   # IV (returns-to-schooling) recovery task
   lib/lalonde.py                # pure-stdlib loaders, SMD, naive ATT, OLS
-  reference_pipeline.py         # writes candidates/reference-ols/results.json
-  check_benchmark.py            # grades a candidate, recomputing data golds
-  candidates/reference-ols/     # the reference candidate (committed)
+  lib/card.py                   # pure-stdlib OLS+SE, first-stage F, 2SLS
+  reference_pipeline.py         # writes candidates/reference-ols + reference-iv
+  check_benchmark.py            # grades all tasks, recomputing data golds
+  candidates/reference-*/       # the committed reference candidates
   results/                      # generated scorecards
 ```
 
@@ -93,7 +113,7 @@ Score: 2/15
 
 ## Extending
 
-Add a task by dropping a new `tasks/<id>.toml` and the matching gold checks. Good
-next candidates: Card returns-to-schooling (IV; data already at
-[`demo-StatsPAI-skill/data/card.csv`](../demo-StatsPAI-skill/data/card.csv)),
-and a staggered-DiD recovery task on simulated data with a known ATT.
+Add a task by dropping a new `tasks/<id>.toml`, a `compute_truth` branch, and any
+new gold-check handlers in `check_benchmark.py`. A good next candidate is a
+staggered-DiD recovery task on simulated data with a known ATT (verifying a
+pipeline recovers the true effect with Callaway–Sant'Anna and not biased TWFE).

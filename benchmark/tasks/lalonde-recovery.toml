@@ -3,6 +3,7 @@ title = "LaLonde observational recovery: does the pipeline avoid the naive trap?
 data = "demo-notebooks/_lalonde_data.csv"
 treatment = "treat"
 outcome = "re78"
+reference_candidate = "reference-ols"
 
 description = """
 The LaLonde (1986) / Dehejia-Wahba (1999) data is the canonical stress test for

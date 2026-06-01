@@ -1,12 +1,9 @@
 #!/usr/bin/env python3
-"""Produce a reference candidate result for the LaLonde recovery benchmark.
+"""Produce reference candidate results for the AERS benchmark tasks.
 
-This is a deliberately simple, transparent, dependency-free pipeline: it computes
-the naive ATT, a pre-adjustment SMD balance table, and a regression-adjusted ATT
-(OLS conditioning on pre-period earnings). It writes a candidate results.json
-that the benchmark checker then grades. It exists so the benchmark is runnable
-end to end out of the box; a real agent run would drop its own results.json in a
-sibling candidate directory.
+Deliberately simple, transparent, dependency-free reference pipelines so the
+benchmark is runnable end to end out of the box. A real agent run would drop its
+own results.json into a sibling candidate directory and grade against it.
 """
 
 from __future__ import annotations
@@ -17,34 +14,52 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent / "lib"))
 import lalonde  # noqa: E402
+import card  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA = ROOT / "demo-notebooks" / "_lalonde_data.csv"
-OUT = Path(__file__).resolve().parent / "candidates" / "reference-ols" / "results.json"
+CAND = Path(__file__).resolve().parent / "candidates"
 
 
-def main() -> int:
-    rows = lalonde.load(DATA)
-    treated, control = lalonde.split(rows, "treat")
-    result = {
+def write(path: Path, payload: dict) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    print(f"Wrote {path.relative_to(ROOT)}")
+
+
+def lalonde_candidate() -> dict:
+    rows = lalonde.load(ROOT / "demo-notebooks" / "_lalonde_data.csv")
+    t, c = lalonde.split(rows, "treat")
+    return {
         "task": "lalonde-recovery",
         "method": "OLS regression adjustment (full controls incl. re74, re75)",
-        "n_treated": len(treated),
-        "n_control": len(control),
+        "n_treated": len(t), "n_control": len(c),
         "naive_att": round(lalonde.naive_att(rows, "treat", "re78"), 1),
         "adjusted_att": round(lalonde.adjusted_att(rows, "treat", "re78"), 1),
         "balance": {k: round(v, 3) for k, v in lalonde.smd_table(rows, "treat").items()},
-        "notes": "Reference pipeline: pure-stdlib OLS. Naive comparison is "
-                 "negative; adjustment conditioning on re74/re75 flips it positive "
-                 "and near the experimental benchmark.",
     }
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
-    print(f"Wrote {OUT.relative_to(ROOT)}")
-    print(f"  naive ATT     = {result['naive_att']:>10,.1f}")
-    print(f"  adjusted ATT  = {result['adjusted_att']:>10,.1f}")
-    print(f"  imbalanced covariates (|SMD|>0.25): "
-          f"{sum(1 for v in result['balance'].values() if abs(v) > 0.25)}")
+
+
+def card_candidate() -> dict:
+    rows = card.load(ROOT / "demo-StatsPAI-skill" / "data" / "card.csv")
+    coef, f = card.first_stage(rows)
+    return {
+        "task": "card-iv-recovery",
+        "method": "OLS vs 2SLS (nearc4 instrument), manual two-stage",
+        "n": len(rows),
+        "ols_return": round(card.ols_return(rows), 4),
+        "iv_return": round(card.iv_return(rows), 4),
+        "first_stage_coef": round(coef, 4),
+        "first_stage_F": round(f, 2),
+    }
+
+
+def main() -> int:
+    lc = lalonde_candidate()
+    write(CAND / "reference-ols" / "results.json", lc)
+    print(f"  lalonde: naive {lc['naive_att']:,.0f} -> adjusted {lc['adjusted_att']:,.0f}")
+    cc = card_candidate()
+    write(CAND / "reference-iv" / "results.json", cc)
+    print(f"  card:    OLS {cc['ols_return']} -> IV {cc['iv_return']} (first-stage F {cc['first_stage_F']})")
     return 0
 
 
