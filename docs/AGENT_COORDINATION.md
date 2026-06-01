@@ -16,7 +16,7 @@ git status --short --branch
 ## Low-Conflict Work Areas
 
 - New docs under `docs/` with stable links.
-- New scripts under `scripts/` that are wired into `make validate`.
+- New scripts under `scripts/` that are wired into `make validate` or `make check`.
 - New machine-readable metadata under a dedicated top-level directory such as `evals/`.
 - GitHub templates and workflow hardening, when kept narrowly scoped.
 

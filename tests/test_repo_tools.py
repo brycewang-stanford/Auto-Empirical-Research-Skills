@@ -132,6 +132,20 @@ class TestLocalAndCiGates(unittest.TestCase):
         self.assertIn("aers-tracked-file-hygiene", text)
         self.assertIn("python3 scripts/check-repo-hygiene.py", text)
 
+    def test_maintainer_docs_point_to_full_local_gate(self):
+        docs = [
+            ".github/pull_request_template.md",
+            "CONTRIBUTING.md",
+            "docs/SKILL_SUBMISSION_GUIDE.md",
+            "README-zh.md",
+        ]
+        for rel_path in docs:
+            with self.subTest(path=rel_path):
+                text = (ROOT / rel_path).read_text(encoding="utf-8")
+                self.assertIn("make check", text)
+        trust = (ROOT / "docs" / "TRUST.md").read_text(encoding="utf-8")
+        self.assertIn("--fail-on-orphans --fail-on-partial --no-write", trust)
+
 
 if __name__ == "__main__":
     unittest.main()

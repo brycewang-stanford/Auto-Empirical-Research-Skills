@@ -22,7 +22,7 @@ A skill should be:
 
 ```bash
 make catalog
-make validate
+make check
 ```
 
 ## Metadata Checklist

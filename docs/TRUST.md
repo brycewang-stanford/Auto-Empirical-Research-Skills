@@ -61,7 +61,7 @@ python3 eval-harness/run_evals.py \
 python3 eval-harness/run_evals.py --grade eval-harness/candidates/_example \
   --expect-graded 8 --expect-fail-required statspai-weak-iv \
   --expect-graded-categories causal-identification,reproducibility,citation-hygiene,runtime-safety,research-integrity \
-  --fail-on-orphans --fail-on-partial
+  --fail-on-orphans --fail-on-partial --no-write
 ```
 
 Only the deliberately bad weak-IV fixture may fail required rubric items. Some
@@ -71,6 +71,8 @@ human review. The smoke gate also requires graded fixtures for causal
 identification, reproducibility, citation hygiene, runtime safety, and research
 integrity. Any new unexpected required failure, missing trust category, orphan
 candidate file, or non-required machine-check regression breaks `make check`.
+Routine gates use `--no-write` so scorecard files under `eval-harness/results/`
+only change during intentional refreshes.
 
 ## Compatibility Floor
 
