@@ -15,19 +15,27 @@ jobs:
   quality:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.12"]
     steps:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: ${{ matrix.python-version }}
 
       - name: Catalog enrichment freshness
         run: python3 scripts/build-catalog-enrich.py --check
 
       - name: Lint eval-harness scenarios
-        run: python3 eval-harness/run_evals.py
+        run: >-
+          python3 eval-harness/run_evals.py
+          --min-scenarios 14
+          --min-auto-checks 66
+          --expect-categories causal-identification,reproducibility,citation-hygiene,runtime-safety,research-integrity,writing-compliance,writing-style
 
       - name: Unit tests (stdlib unittest)
         run: python3 -m unittest discover -s tests -p "test_*.py"
@@ -35,7 +43,14 @@ jobs:
       - name: Benchmark (reference pipeline + strict grading)
         run: |
           python3 benchmark/reference_pipeline.py
-          python3 benchmark/check_benchmark.py --strict
+          python3 benchmark/check_benchmark.py --strict --fail-on-partial --fail-on-orphan-results
 
       - name: Grade example candidates (smoke)
-        run: python3 eval-harness/run_evals.py --grade eval-harness/candidates/_example
+        run: >-
+          python3 eval-harness/run_evals.py
+          --grade eval-harness/candidates/_example
+          --expect-graded 8
+          --expect-fail-required statspai-weak-iv
+          --expect-graded-categories causal-identification,reproducibility,citation-hygiene,runtime-safety,research-integrity
+          --fail-on-orphans
+          --fail-on-partial

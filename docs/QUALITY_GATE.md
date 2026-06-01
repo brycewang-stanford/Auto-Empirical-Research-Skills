@@ -9,6 +9,7 @@ Run these before opening a pull request:
 ```bash
 make catalog
 make validate
+make check
 ```
 
 `make catalog` rebuilds:
@@ -22,6 +23,8 @@ make validate
 
 For multi-agent work, follow [`docs/AGENT_COORDINATION.md`](AGENT_COORDINATION.md). For recurring maintainer work, follow [`docs/MAINTAINER_PLAYBOOK.md`](MAINTAINER_PLAYBOOK.md).
 
+For a high-level map of the repository trust surface, see [`docs/TRUST.md`](TRUST.md).
+
 `make validate` checks:
 
 - Required project files exist.
@@ -31,6 +34,13 @@ For multi-agent work, follow [`docs/AGENT_COORDINATION.md`](AGENT_COORDINATION.m
 - The generated catalog is current.
 - Generated provenance and skill-audit reports are current.
 - Flagship eval prompt docs are current and every referenced skill path exists.
+
+`make check` adds the stdlib unit tests, executable eval-harness lint,
+example-candidate grading smoke test, and numeric benchmark. The eval-harness
+lint gate enforces minimum scenario count, auto-check count, and category
+coverage so accidental eval deletion fails locally and in CI. The benchmark gate
+uses `--strict --fail-on-partial --fail-on-orphan-results` so stale generated
+scorecards from removed or renamed tasks do not masquerade as current coverage.
 
 ## Review Rules
 
@@ -57,5 +67,7 @@ Run `make audit` when you want the warning stream in the terminal.
 ## CI
 
 `.github/workflows/validate-catalog.yml` runs `make validate` on pushes and pull requests. This makes catalog, provenance, audit, eval-doc, workflow-policy, and local-link drift visible whenever a contributor adds, removes, or moves skills.
+
+`.github/workflows/quality-evals.yml` runs the executable eval harness, stdlib unit tests, and numeric benchmark on Python 3.9 and 3.12. The matrix intentionally covers both the macOS system-Python floor used by many local contributors and a current CI Python.
 
 Dependabot checks GitHub Actions updates weekly via `.github/dependabot.yml`. `.github/workflows/scorecard.yml` runs OpenSSF Scorecard on `main` and uploads SARIF to GitHub code scanning.
