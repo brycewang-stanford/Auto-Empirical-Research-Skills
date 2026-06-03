@@ -1,6 +1,6 @@
 ---
 name: data-analysis
-description: End-to-end R data analysis for the sewage project. Writes analysis scripts following project conventions (here::here, arrow/parquet, fixest, modelsummary, native pipe), runs code review, and produces publication-ready tables and figures. This skill should be used when asked to "run an analysis", "estimate the model", "add a specification", or "write an R script".
+description: "End-to-end R data analysis for the sewage project. Writes analysis scripts following project conventions (here::here, arrow/parquet, fixest, modelsummary, native pipe), runs code review, and produces publication-ready tables and figures. This skill should be used when asked to run an analysis, estimate the model, add a specification, or write an R script."
 argument-hint: "[dataset path, analysis goal, or specification description]"
 allowed-tools: ["Read", "Grep", "Glob", "Write", "Edit", "Bash", "Agent"]
 ---

@@ -1,6 +1,6 @@
 ---
 name: aer-submission
-description: Use when running the final pre-submission audit for an AER, AER:Insights, or AEJ manuscript — length, format, cover letter, per-author disclosure statements, file packaging, and routing among the AEA journal family. Apply immediately before clicking submit.
+description: "Use when running the final pre-submission audit for an AER, AER:Insights, or AEJ manuscript — length, format, cover letter, per-author disclosure statements, file packaging, and routing among the AEA journal family. Apply immediately before clicking submit."
 ---
 
 # AER Submission

@@ -1,6 +1,6 @@
 ---
 name: write-paper
-description: Draft a full academic paper manuscript from analysis outputs, project spec, and lit review. Make sure to use this skill whenever the user wants to turn completed analysis into a written paper — not to run analysis or review existing writing. Triggers include: "write the paper", "draft the manuscript", "write up the results", "start the paper", "turn my results into a paper", "write the introduction", "draft the empirics section", "I have my results, now write the paper", "help me write this up", "write the abstract", or any request to produce academic prose from existing research outputs.
+description: "Draft a full academic paper manuscript from analysis outputs, project spec, and lit review. Make sure to use this skill whenever the user wants to turn completed analysis into a written paper — not to run analysis or review existing writing. Triggers include: write the paper, draft the manuscript, write up the results, start the paper, turn my results into a paper, write the introduction, draft the empirics section, I have my results, now write the paper, help me write this up, write the abstract, or any request to produce academic prose from existing research outputs."
 argument-hint: "[paper title, research question, or 'from spec']"
 allowed-tools: ["Read", "Grep", "Glob", "Write", "Edit", "Task"]
 ---

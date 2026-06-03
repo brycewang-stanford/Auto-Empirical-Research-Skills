@@ -1,6 +1,6 @@
 ---
 name: "idea-discovery-robot"
-description: "Workflow 1 adaptation for robotics and embodied AI. Orchestrates robotics-aware literature survey, idea generation, novelty check, and critical review to go from a broad robotics direction to benchmark-grounded, simulation-first ideas. Use when user says \\\"robotics idea discovery\\\", \\\"\u673a\u5668\u4eba\u627eidea\\\", \\\"embodied AI idea\\\", \\\"\u673a\u5668\u4eba\u65b9\u5411\u63a2\u7d22\\\", \\\"sim2real \u9009\u9898\\\", or wants ideas for manipulation, locomotion, navigation, drones, humanoids, or general robot learning."
+description: "Workflow 1 adaptation for robotics and embodied AI. Orchestrates robotics-aware literature survey, idea generation, novelty check, and critical review to go from a broad robotics direction to benchmark-grounded, simulation-first ideas. Use when user says \\\\\\robotics idea discovery\\\\\\, \\\\\\\\u673a\\u5668\\u4eba\\u627eidea\\\\\\, \\\\\\embodied AI idea\\\\\\, \\\\\\\\u673a\\u5668\\u4eba\\u65b9\\u5411\\u63a2\\u7d22\\\\\\, \\\\\\sim2real \\u9009\\u9898\\\\\\, or wants ideas for manipulation, locomotion, navigation, drones, humanoids, or general robot learning."
 ---
 
 # Robotics Idea Discovery Pipeline

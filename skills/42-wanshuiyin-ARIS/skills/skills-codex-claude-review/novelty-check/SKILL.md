@@ -1,6 +1,6 @@
 ---
 name: "novelty-check"
-description: "Verify research idea novelty against recent literature. Use when user says \"查新\", \"novelty check\", \"有没有人做过\", \"check novelty\", or wants to verify a research idea is novel before implementing."
+description: "Verify research idea novelty against recent literature. Use when user says \\查新\\, \\novelty check\\, \\有没有人做过\\, \\check novelty\\, or wants to verify a research idea is novel before implementing."
 ---
 
 > Override for Codex users who want **Claude Code**, not a second Codex agent, to act as the reviewer. Install this package **after** `skills/skills-codex/*`.

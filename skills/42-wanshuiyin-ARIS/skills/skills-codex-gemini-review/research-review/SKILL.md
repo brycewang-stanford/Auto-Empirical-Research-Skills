@@ -1,6 +1,6 @@
 ---
 name: "research-review"
-description: "Get a deep critical review of research from Gemini via gemini-review MCP. Use when user says \"review my research\", \"help me review\", \"get external review\", or wants critical feedback on research ideas, papers, or experimental results."
+description: "Get a deep critical review of research from Gemini via gemini-review MCP. Use when user says \\review my research\\, \\help me review\\, \\get external review\\, or wants critical feedback on research ideas, papers, or experimental results."
 ---
 
 > Override for Codex users who want **Gemini**, not a second Codex agent, to act as the reviewer. Install this package **after** `skills/skills-codex/*`.

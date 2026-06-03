@@ -1,6 +1,6 @@
 ---
 name: "auto-review-loop"
-description: "Autonomous multi-round research review loop. Repeatedly reviews using Claude Code via claude-review MCP, implements fixes, and re-reviews until positive assessment or max rounds reached. Use when user says \"auto review loop\", \"review until it passes\", or wants autonomous iterative improvement."
+description: "Autonomous multi-round research review loop. Repeatedly reviews using Claude Code via claude-review MCP, implements fixes, and re-reviews until positive assessment or max rounds reached. Use when user says \\auto review loop\\, \\review until it passes\\, or wants autonomous iterative improvement."
 ---
 
 > Override for Codex users who want **Claude Code**, not a second Codex agent, to act as the reviewer. Install this package **after** `skills/skills-codex/*`.

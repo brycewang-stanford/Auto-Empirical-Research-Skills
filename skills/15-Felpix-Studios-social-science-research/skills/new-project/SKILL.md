@@ -1,6 +1,6 @@
 ---
 name: new-project
-description: Start a new research project by conducting a structured interview to formalize a research idea, then generates research questions with identification strategies and a project spec. Make sure to use this skill whenever the user wants to develop or document a new research idea — not to search for literature or data. Triggers include: "new project", "start research", "I have an idea", "help me develop this", "I want to study X", "help me formalize this idea", "what's my research question", "what identification strategy should I use", "write up my project idea", or when the user describes a topic they want to turn into a paper.
+description: "Start a new research project by conducting a structured interview to formalize a research idea, then generates research questions with identification strategies and a project spec. Make sure to use this skill whenever the user wants to develop or document a new research idea — not to search for literature or data. Triggers include: new project, start research, I have an idea, help me develop this, I want to study X, help me formalize this idea, what's my research question, what identification strategy should I use, write up my project idea, or when the user describes a topic they want to turn into a paper."
 argument-hint: "[brief topic or 'start fresh']"
 allowed-tools: ["Read", "Grep", "Glob", "Write"]
 ---

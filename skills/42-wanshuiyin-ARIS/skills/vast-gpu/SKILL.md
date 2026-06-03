@@ -1,6 +1,6 @@
 ---
 name: vast-gpu
-description: "Rent, manage, and destroy GPU instances on vast.ai. Use when user says \"rent gpu\", \"vast.ai\", \"rent a server\", \"cloud gpu\", or needs on-demand GPU without owning hardware."
+description: "Rent, manage, and destroy GPU instances on vast.ai. Use when user says \\rent gpu\\, \\vast.ai\\, \\rent a server\\, \\cloud gpu\\, or needs on-demand GPU without owning hardware."
 argument-hint: [task-description or action]
 allowed-tools: Bash(*), Read, Write, Edit, Grep, Glob, Agent
 ---

@@ -1,6 +1,6 @@
 ---
 name: data-finder
-description: Find and assess datasets for a research question. Dispatches Explorer agents to search across data source categories, then Explorer-Critic to stress-test each candidate. Produces a ranked list with feasibility grades. Make sure to use this skill whenever the user wants to identify or evaluate data sources — not to search for papers or run analysis. Triggers include: "find data", "what data should I use", "find a dataset for this", "where can I get data on X", "assess datasets", "what datasets exist for", "help me find data", "is there data on this", "what are my data options", "I need data for this project", or any request to locate empirical data sources for a research question.
+description: "Find and assess datasets for a research question. Dispatches Explorer agents to search across data source categories, then Explorer-Critic to stress-test each candidate. Produces a ranked list with feasibility grades. Make sure to use this skill whenever the user wants to identify or evaluate data sources — not to search for papers or run analysis. Triggers include: find data, what data should I use, find a dataset for this, where can I get data on X, assess datasets, what datasets exist for, help me find data, is there data on this, what are my data options, I need data for this project, or any request to locate empirical data sources for a research question."
 argument-hint: "[research topic or 'from spec']"
 allowed-tools: ["Read", "Grep", "Glob", "Write", "WebSearch", "WebFetch", "Task"]
 ---

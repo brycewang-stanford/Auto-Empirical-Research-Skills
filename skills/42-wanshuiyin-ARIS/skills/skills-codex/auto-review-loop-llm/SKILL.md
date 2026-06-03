@@ -1,6 +1,6 @@
 ---
 name: "auto-review-loop-llm"
-description: "Autonomous research review loop using any OpenAI-compatible LLM API. Configure via llm-chat MCP server or environment variables. Trigger with \"auto review loop llm\" or \"llm review\"."
+description: "Autonomous research review loop using any OpenAI-compatible LLM API. Configure via llm-chat MCP server or environment variables. Trigger with \\auto review loop llm\\ or \\llm review\\."
 ---
 
 # Auto Review Loop (Generic LLM): Autonomous Research Improvement

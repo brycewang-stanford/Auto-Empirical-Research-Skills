@@ -1,6 +1,6 @@
 ---
 name: lit-review
-description: Structured literature review using a parallel fleet of Librarian agents. Searches top journals, working paper repositories (NBER, SSRN, IZA), and traces citation chains from key papers. Make sure to use this skill whenever the user wants to survey existing research on a topic — not to find datasets or write a paper. Triggers include: "review the literature", "find related papers", "what's been done on X", "search for papers on", "do a lit review", "find papers about", "what papers should I cite", "who has written about this", "survey the literature", "find prior work on", or any request to locate and summarize academic publications on a topic.
+description: "Structured literature review using a parallel fleet of Librarian agents. Searches top journals, working paper repositories (NBER, SSRN, IZA), and traces citation chains from key papers. Make sure to use this skill whenever the user wants to survey existing research on a topic — not to find datasets or write a paper. Triggers include: review the literature, find related papers, what's been done on X, search for papers on, do a lit review, find papers about, what papers should I cite, who has written about this, survey the literature, find prior work on, or any request to locate and summarize academic publications on a topic."
 argument-hint: "[topic, research question, or anchor paper title]"
 allowed-tools: ["Read", "Grep", "Glob", "Write", "WebSearch", "WebFetch", "Task", "AskUserQuestion"]
 ---

@@ -1,6 +1,6 @@
 ---
 name: review-r
-description: R code review for the sewage project. Checks script structure, reproducibility, function design, figure quality, and professional polish against project conventions (here::here, arrow/parquet, fixest, modelsummary, native pipe). This skill should be used when asked to "review the code", "check my script", or "code review".
+description: "R code review for the sewage project. Checks script structure, reproducibility, function design, figure quality, and professional polish against project conventions (here::here, arrow/parquet, fixest, modelsummary, native pipe). This skill should be used when asked to review the code, check my script, or code review."
 argument-hint: "[filename, directory, or 'all']"
 allowed-tools: ["Read", "Grep", "Glob", "Write", "Agent"]
 ---

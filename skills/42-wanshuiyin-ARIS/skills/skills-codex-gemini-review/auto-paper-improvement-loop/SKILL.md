@@ -1,6 +1,6 @@
 ---
 name: "auto-paper-improvement-loop"
-description: "Autonomously improve a generated paper via Gemini review through gemini-review MCP → implement fixes → recompile, for 2 rounds. Use when user says \"改论文\", \"improve paper\", \"论文润色循环\", \"auto improve\", or wants to iteratively polish a generated paper."
+description: "Autonomously improve a generated paper via Gemini review through gemini-review MCP → implement fixes → recompile, for 2 rounds. Use when user says \\改论文\\, \\improve paper\\, \\论文润色循环\\, \\auto improve\\, or wants to iteratively polish a generated paper."
 ---
 
 > Override for Codex users who want **Gemini**, not a second Codex agent, to act as the reviewer. Install this package **after** `skills/skills-codex/*`.

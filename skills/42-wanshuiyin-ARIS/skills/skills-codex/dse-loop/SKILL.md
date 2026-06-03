@@ -1,6 +1,6 @@
 ---
 name: "dse-loop"
-description: "Autonomous design space exploration loop for computer architecture and EDA. Runs a program, analyzes results, tunes parameters, and iterates until objective is met or timeout. Use when user says \\\"DSE\\\", \\\"design space exploration\\\", \\\"sweep parameters\\\", \\\"optimize\\\", \\\"find best config\\\", or wants iterative parameter tuning."
+description: "Autonomous design space exploration loop for computer architecture and EDA. Runs a program, analyzes results, tunes parameters, and iterates until objective is met or timeout. Use when user says \\\\\\DSE\\\\\\, \\\\\\design space exploration\\\\\\, \\\\\\sweep parameters\\\\\\, \\\\\\optimize\\\\\\, \\\\\\find best config\\\\\\, or wants iterative parameter tuning."
 ---
 
 # DSE Loop: Autonomous Design Space Exploration

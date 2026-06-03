@@ -1,6 +1,6 @@
 ---
 name: review-r
-description: Run the R code review protocol on R scripts. Checks code quality, reproducibility, domain correctness, and professional standards. Produces a report without editing files. Make sure to use this skill whenever the user wants their existing R code evaluated or audited — not when they want new analysis written. Triggers include: "review my R script", "check my R code", "is my code replication-ready", "audit this R file", "does this code follow conventions", "will this reproduce", "check my analysis script", "code review", "review-r", or when the user has an existing .R file and wants quality feedback rather than new code.
+description: "Run the R code review protocol on R scripts. Checks code quality, reproducibility, domain correctness, and professional standards. Produces a report without editing files. Make sure to use this skill whenever the user wants their existing R code evaluated or audited — not when they want new analysis written. Triggers include: review my R script, check my R code, is my code replication-ready, audit this R file, does this code follow conventions, will this reproduce, check my analysis script, code review, review-r, or when the user has an existing .R file and wants quality feedback rather than new code."
 argument-hint: "[filename, 'all', or analysis name pattern]"
 allowed-tools: ["Read", "Grep", "Glob", "Write", "Task", "AskUserQuestion"]
 ---

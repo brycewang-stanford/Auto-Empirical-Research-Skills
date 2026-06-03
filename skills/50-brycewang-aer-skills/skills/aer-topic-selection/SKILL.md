@@ -1,6 +1,6 @@
 ---
 name: aer-topic-selection
-description: Use when evaluating whether a research idea clears the AER top-5 bar, when routing between AER, AER:Insights, and the AEJ family, or when sharpening a fuzzy contribution sentence into one publishable claim. Apply before any writing begins.
+description: "Use when evaluating whether a research idea clears the AER top-5 bar, when routing between AER, AER:Insights, and the AEJ family, or when sharpening a fuzzy contribution sentence into one publishable claim. Apply before any writing begins."
 ---
 
 # AER Topic Selection

@@ -1,6 +1,6 @@
 ---
 name: "auto-review-loop"
-description: "Autonomous multi-round research review loop. Repeatedly reviews using a secondary Codex agent, implements fixes, and re-reviews until positive assessment or max rounds reached. Use when user says \"auto review loop\", \"review until it passes\", or wants autonomous iterative improvement."
+description: "Autonomous multi-round research review loop. Repeatedly reviews using a secondary Codex agent, implements fixes, and re-reviews until positive assessment or max rounds reached. Use when user says \\auto review loop\\, \\review until it passes\\, or wants autonomous iterative improvement."
 ---
 
 # Auto Review Loop: Autonomous Research Improvement

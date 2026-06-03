@@ -1,6 +1,6 @@
 ---
 name: assess-outline
-description: 'Assesses a research paper outline (.qmd file) against structured criteria from Kosuke Imai''s empirical research guide. Evaluates the abstract and section outline for: research question clarity, stated contributions, hypotheses and testable implications, data description, planned results and inferential approach, and robustness checks. Detects causal papers from the abstract and conditionally assesses identification strategy only when causal framing is present. Produces a structured markdown report with PASS/PARTIAL/FAIL assessments and actionable suggestions. Use when asked to assess, evaluate, review, or check a paper outline, abstract-and-outline, or research plan in a .qmd file.'
+description: "'Assesses a research paper outline (.qmd file) against structured criteria from Kosuke Imai''s empirical research guide. Evaluates the abstract and section outline for: research question clarity, stated contributions, hypotheses and testable implications, data description, planned results and inferential approach, and robustness checks. Detects causal papers from the abstract and conditionally assesses identification strategy only when causal framing is present. Produces a structured markdown report with PASS/PARTIAL/FAIL assessments and actionable suggestions. Use when asked to assess, evaluate, review, or check a paper outline, abstract-and-outline, or research plan in a .qmd file.'"
 metadata:
   author: Christopher T. Kenny
   version: 1.0

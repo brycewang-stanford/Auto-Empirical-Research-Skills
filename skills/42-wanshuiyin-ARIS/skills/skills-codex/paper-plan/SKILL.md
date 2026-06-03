@@ -1,6 +1,6 @@
 ---
 name: "paper-plan"
-description: "Generate a structured paper outline from review conclusions and experiment results. Use when user says \\\"\u5199\u5927\u7eb2\\\", \\\"paper outline\\\", \\\"plan the paper\\\", \\\"\u8bba\u6587\u89c4\u5212\\\", or wants to create a paper plan before writing."
+description: "Generate a structured paper outline from review conclusions and experiment results. Use when user says \\\\\\\\u5199\\u5927\\u7eb2\\\\\\, \\\\\\paper outline\\\\\\, \\\\\\plan the paper\\\\\\, \\\\\\\\u8bba\\u6587\\u89c4\\u5212\\\\\\, or wants to create a paper plan before writing."
 ---
 
 # Paper Plan: From Review Conclusions to Paper Outline

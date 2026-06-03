@@ -1,6 +1,6 @@
 ---
 name: aer-replication
-description: Use when assembling the AEA Data and Code Availability deposit for an AER, AER:Insights, or AEJ acceptance, writing the README, or auditing a replication package before the AEA Data Editor review. Implements the current AEA policy, including the February 2026 Data and Code Availability Policy.
+description: "Use when assembling the AEA Data and Code Availability deposit for an AER, AER:Insights, or AEJ acceptance, writing the README, or auditing a replication package before the AEA Data Editor review. Implements the current AEA policy, including the February 2026 Data and Code Availability Policy."
 ---
 
 # AER Replication

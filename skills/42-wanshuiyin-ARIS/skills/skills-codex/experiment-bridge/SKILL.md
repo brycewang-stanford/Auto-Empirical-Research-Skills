@@ -1,6 +1,6 @@
 ---
 name: experiment-bridge
-description: "Workflow 1.5: Bridge between idea discovery and auto review. Reads EXPERIMENT_PLAN.md, implements experiment code, deploys to GPU, collects initial results. Use when user says \"实现实验\", \"implement experiments\", \"bridge\", \"从计划到跑实验\", \"deploy the plan\", or has an experiment plan ready to execute."
+description: "Workflow 1.5: Bridge between idea discovery and auto review. Reads EXPERIMENT_PLAN.md, implements experiment code, deploys to GPU, collects initial results. Use when user says \\实现实验\\, \\implement experiments\\, \\bridge\\, \\从计划到跑实验\\, \\deploy the plan\\, or has an experiment plan ready to execute."
 ---
 
 # Workflow 1.5: Experiment Bridge

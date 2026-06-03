@@ -1,6 +1,6 @@
 ---
 name: paper-figure
-description: "Generate publication-quality figures and tables from experiment results. Use when user says \"画图\", \"作图\", \"generate figures\", \"paper figures\", or needs plots for a paper."
+description: "Generate publication-quality figures and tables from experiment results. Use when user says \\画图\\, \\作图\\, \\generate figures\\, \\paper figures\\, or needs plots for a paper."
 argument-hint: [figure-plan-or-data-path]
 allowed-tools: Bash(*), Read, Write, Edit, Grep, Glob, Agent, mcp__codex__codex, mcp__codex__codex-reply
 ---

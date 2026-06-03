@@ -1,20 +1,9 @@
 ---
 name: bayesian-workflow
-description: >
-  Opinionated Bayesian modeling workflow with PyMC and ArviZ. Contains critical guardrails
-  (nutpie sampler, prior/posterior predictive checks, LOO-PIT calibration, prior sensitivity
-  checks, 94% HDI, non-centered parameterizations, reproducible seeds) that agents won't
-  apply unprompted — always consult before writing Bayesian model code. Trigger on: building
-  probabilistic/Bayesian models, prior elicitation, MCMC inference, convergence diagnostics
-  (divergences, R-hat, ESS), model comparison (LOO-CV, ELPD, stacking weights),
-  hierarchical/multilevel models, count regressions, logistic regression with uncertainty,
-  prior sensitivity analysis, reporting Bayesian results, or mentions of PyMC, ArviZ,
-  InferenceData, credible intervals, posterior distributions, shrinkage, uncertainty
-  quantification. Also trigger for model comparison, diagnosing sampling problems, choosing
-  priors, or presenting stats to non-technical audiences.
+description: "Opinionated Bayesian modeling workflow with PyMC and ArviZ. Contains critical guardrails (nutpie sampler, prior/posterior predictive checks, LOO-PIT calibration, prior sensitivity checks, 94% HDI, non-centered parameterizations, reproducible seeds) that agents won't apply unprompted. Trigger on: Bayesian models, prior elicitation, MCMC, convergence diagnostics, model comparison, hierarchical models, count regressions, PyMC, ArviZ."
 license: MIT
 metadata:
-  author: [Alexandre Andorra](https://alexandorra.github.io/)
+  author: "Alexandre Andorra"
   version: "1.2"
 ---
 

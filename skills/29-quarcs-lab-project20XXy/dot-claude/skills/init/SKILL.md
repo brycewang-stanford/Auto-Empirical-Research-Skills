@@ -1,6 +1,6 @@
 ---
 name: init
-description: Fills all [FILL:] placeholders across the template to initialize a new research project. Use when setting up a freshly cloned project.
+description: "Fills all [FILL:] placeholders across the template to initialize a new research project. Use when setting up a freshly cloned project."
 disable-model-invocation: true
 allowed-tools: Bash, Read, Write, Edit, Glob, Grep
 ---

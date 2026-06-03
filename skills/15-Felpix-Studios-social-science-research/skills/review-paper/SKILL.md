@@ -1,6 +1,6 @@
 ---
 name: review-paper
-description: Comprehensive manuscript review covering argument structure, econometric specification, citation completeness, and potential referee objections. Make sure to use this skill whenever the user wants substantive academic feedback on a paper — not just surface edits. Triggers include: "review my paper", "give me feedback on this draft", "what would a referee say", "anticipate referee objections", "act as a referee", "check my identification strategy", "is my argument convincing", "review this manuscript", "critique my paper", "will this pass review", or any request for deep critique of academic writing beyond typos and grammar.
+description: "Comprehensive manuscript review covering argument structure, econometric specification, citation completeness, and potential referee objections. Make sure to use this skill whenever the user wants substantive academic feedback on a paper — not just surface edits. Triggers include: review my paper, give me feedback on this draft, what would a referee say, anticipate referee objections, act as a referee, check my identification strategy, is my argument convincing, review this manuscript, critique my paper, will this pass review, or any request for deep critique of academic writing beyond typos and grammar."
 argument-hint: "[paper filename in manuscripts/ or path to .tex/.pdf]"
 allowed-tools: ["Read", "Grep", "Glob", "Write", "Task"]
 ---

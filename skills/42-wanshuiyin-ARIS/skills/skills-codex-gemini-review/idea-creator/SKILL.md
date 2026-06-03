@@ -1,6 +1,6 @@
 ---
 name: "idea-creator"
-description: "Generate and rank research ideas given a broad direction. Use when user says \"\u627eidea\", \"brainstorm ideas\", \"generate research ideas\", \"what can we work on\", or wants to explore a research area for publishable directions."
+description: "Generate and rank research ideas given a broad direction. Use when user says \\\\u627eidea\\, \\brainstorm ideas\\, \\generate research ideas\\, \\what can we work on\\, or wants to explore a research area for publishable directions."
 ---
 
 > Override for Codex users who want **Gemini**, not a second Codex agent, to act as the reviewer. Install this package **after** `skills/skills-codex/*`.

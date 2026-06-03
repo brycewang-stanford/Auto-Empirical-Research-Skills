@@ -1,6 +1,6 @@
 ---
 name: "research-refine"
-description: "Turn a vague research direction into a problem-anchored, elegant, frontier-aware, implementation-oriented method plan via iterative GPT-5.4 review. Use when the user says \"refine my approach\", \"\u5e2e\u6211\u7ec6\u5316\u65b9\u6848\", \"decompose this problem\", \"\u6253\u78e8idea\", \"refine research plan\", \"\u7ec6\u5316\u7814\u7a76\u65b9\u6848\", or wants a concrete research method that stays simple, focused, and top-venue ready instead of a vague or overbuilt idea."
+description: "Turn a vague research direction into a problem-anchored, elegant, frontier-aware, implementation-oriented method plan via iterative GPT-5.4 review. Use when the user says \\refine my approach\\, \\\\u5e2e\\u6211\\u7ec6\\u5316\\u65b9\\u6848\\, \\decompose this problem\\, \\\\u6253\\u78e8idea\\, \\refine research plan\\, \\\\u7ec6\\u5316\\u7814\\u7a76\\u65b9\\u6848\\, or wants a concrete research method that stays simple, focused, and top-venue ready instead of a vague or overbuilt idea."
 ---
 
 # Research Refine: Problem-Anchored, Elegant, Frontier-Aware Plan Refinement

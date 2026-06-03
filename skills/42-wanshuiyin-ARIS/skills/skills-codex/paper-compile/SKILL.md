@@ -1,6 +1,6 @@
 ---
 name: "paper-compile"
-description: "Compile LaTeX paper to PDF, fix errors, and verify output. Use when user says \\\"\u7f16\u8bd1\u8bba\u6587\\\", \\\"compile paper\\\", \\\"build PDF\\\", \\\"\u751f\u6210PDF\\\", or wants to compile LaTeX into a submission-ready PDF."
+description: "Compile LaTeX paper to PDF, fix errors, and verify output. Use when user says \\\\\\\\u7f16\\u8bd1\\u8bba\\u6587\\\\\\, \\\\\\compile paper\\\\\\, \\\\\\build PDF\\\\\\, \\\\\\\\u751f\\u6210PDF\\\\\\, or wants to compile LaTeX into a submission-ready PDF."
 ---
 
 # Paper Compile: LaTeX to Submission-Ready PDF

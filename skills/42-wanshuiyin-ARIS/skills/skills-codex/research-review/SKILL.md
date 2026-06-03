@@ -1,6 +1,6 @@
 ---
 name: "research-review"
-description: "Get a deep critical review of research from GPT using a secondary Codex agent. Use when user says \"review my research\", \"help me review\", \"get external review\", or wants critical feedback on research ideas, papers, or experimental results."
+description: "Get a deep critical review of research from GPT using a secondary Codex agent. Use when user says \\review my research\\, \\help me review\\, \\get external review\\, or wants critical feedback on research ideas, papers, or experimental results."
 ---
 
 # Research Review via a secondary Codex agent (xhigh reasoning)

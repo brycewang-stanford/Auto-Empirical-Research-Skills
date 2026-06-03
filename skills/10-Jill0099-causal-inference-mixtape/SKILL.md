@@ -1,6 +1,6 @@
 ---
 name: causal-inference-mixtape
-description: 'This skill should be used when the user asks to "implement a DiD regression", "write a causal inference pipeline", "set up an event study", "implement instrumental variables", "run a regression discontinuity design", "build a synthetic control model", "implement propensity score matching", "write parallel trends test", "implement Bacon decomposition", or needs code templates for causal inference methods in Python, R, or Stata. Based on Scott Cunningham''s Causal Inference: The Mixtape.'
+description: "'This skill should be used when the user asks to implement a DiD regression, write a causal inference pipeline, set up an event study, implement instrumental variables, run a regression discontinuity design, build a synthetic control model, implement propensity score matching, write parallel trends test, implement Bacon decomposition, or needs code templates for causal inference methods in Python, R, or Stata. Based on Scott Cunningham''s Causal Inference: The Mixtape.'"
 version: 1.0.0
 ---
 

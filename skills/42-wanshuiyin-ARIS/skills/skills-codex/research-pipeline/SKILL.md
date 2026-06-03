@@ -1,6 +1,6 @@
 ---
 name: "research-pipeline"
-description: "Full research pipeline: Workflow 1 (idea discovery) \u2192 implementation \u2192 Workflow 2 (auto review loop). Goes from a broad research direction all the way to a submission-ready paper. Use when user says \\\"\u5168\u6d41\u7a0b\\\", \\\"full pipeline\\\", \\\"\u4ece\u627eidea\u5230\u6295\u7a3f\\\", \\\"end-to-end research\\\", or wants the complete autonomous research lifecycle."
+description: "Full research pipeline: Workflow 1 (idea discovery) \\u2192 implementation \\u2192 Workflow 2 (auto review loop). Goes from a broad research direction all the way to a submission-ready paper. Use when user says \\\\\\\\u5168\\u6d41\\u7a0b\\\\\\, \\\\\\full pipeline\\\\\\, \\\\\\\\u4ece\\u627eidea\\u5230\\u6295\\u7a3f\\\\\\, \\\\\\end-to-end research\\\\\\, or wants the complete autonomous research lifecycle."
 ---
 
 # Full Research Pipeline: Idea → Experiments → Submission

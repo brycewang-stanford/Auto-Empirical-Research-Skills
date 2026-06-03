@@ -1,6 +1,6 @@
 ---
 name: pseudo-merge
-description: 'Takes a proofread or apsa-style report file (or any markdown file using **Original:** / **Recommended:** syntax) and rewrites the original source file with git merge conflict markers so the user can accept or reject each suggested edit using VS Code or Positron''s built-in merge conflict UI. Branch names are "original" and "claude-edits". Use when asked to apply edits, insert conflict markers, or set up merge resolution for a copy-edit report. Supports an optional @sec-label argument to restrict markers to one section.'
+description: "'Takes a proofread or apsa-style report file (or any markdown file using **Original:** / **Recommended:** syntax) and rewrites the original source file with git merge conflict markers so the user can accept or reject each suggested edit using VS Code or Positron''s built-in merge conflict UI. Branch names are original and claude-edits. Use when asked to apply edits, insert conflict markers, or set up merge resolution for a copy-edit report. Supports an optional @sec-label argument to restrict markers to one section.'"
 metadata:
   author: Christopher T. Kenny
   version: 1.0

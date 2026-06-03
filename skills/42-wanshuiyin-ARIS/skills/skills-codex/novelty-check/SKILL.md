@@ -1,6 +1,6 @@
 ---
 name: "novelty-check"
-description: "Verify research idea novelty against recent literature. Use when user says \"\u67e5\u65b0\", \"novelty check\", \"\u6709\u6ca1\u6709\u4eba\u505a\u8fc7\", \"check novelty\", or wants to verify a research idea is novel before implementing."
+description: "Verify research idea novelty against recent literature. Use when user says \\\\u67e5\\u65b0\\, \\novelty check\\, \\\\u6709\\u6ca1\\u6709\\u4eba\\u505a\\u8fc7\\, \\check novelty\\, or wants to verify a research idea is novel before implementing."
 ---
 
 # Novelty Check Skill

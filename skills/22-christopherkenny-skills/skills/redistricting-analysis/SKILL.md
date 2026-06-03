@@ -1,6 +1,6 @@
 ---
 name: redistricting-analysis
-description: 'Redistricting analysis in R using the redistverse ecosystem. Use whenever the user is working with redist, redistmetrics, ggredist, geomander, adj, alarmdata, PL94171, censable, easycensus, tinytiger, baf, rict, or redistio. Covers the complete pipeline: Census and spatial data loading, adjacency graph construction, SMC/MCMC simulation, constraints (population balance, county splits, VRA compliance), convergence diagnostics, plan metrics (compactness, partisan fairness, splits), visualization, summary tables, and interactive plan drawing. Invoke whenever the user mentions redistricting, gerrymandering, district plans, simulation ensembles, or any redistverse package by name.'
+description: "'Redistricting analysis in R using the redistverse ecosystem. Use whenever the user is working with redist, redistmetrics, ggredist, geomander, adj, alarmdata, PL94171, censable, easycensus, tinytiger, baf, rict, or redistio. Covers the complete pipeline: Census and spatial data loading, adjacency graph construction, SMC/MCMC simulation, constraints (population balance, county splits, VRA compliance), convergence diagnostics, plan metrics (compactness, partisan fairness, splits), visualization, summary tables, and interactive plan drawing. Invoke whenever the user mentions redistricting, gerrymandering, district plans, simulation ensembles, or any redistverse package by name.'"
 ---
 
 # Redistricting Analysis with the redistverse

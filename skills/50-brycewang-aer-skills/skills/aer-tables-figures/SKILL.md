@@ -1,6 +1,6 @@
 ---
 name: aer-tables-figures
-description: Use when constructing or revising regression tables, descriptive statistics tables, or figures for an AER, AER:Insights, or AEJ manuscript. Implements AER booktabs house style, the standard regression-table layout, and the figure-notes convention.
+description: "Use when constructing or revising regression tables, descriptive statistics tables, or figures for an AER, AER:Insights, or AEJ manuscript. Implements AER booktabs house style, the standard regression-table layout, and the figure-notes convention."
 ---
 
 # AER Tables and Figures
