@@ -1,0 +1,54 @@
+id = "aer-identification-staggered"
+skill = "skills/50-brycewang-aer-skills/skills/aer-identification"
+title = "Identification audit must gate plain TWFE behind the 2x2 conditions"
+category = "causal-identification"
+severity = "critical"
+context_data = []
+
+prompt = """
+Referee me. My design: 30 US states adopted a tax credit between 2008 and 2016
+(staggered), 20 states never adopted it. My headline specification is a two-way
+fixed-effects regression of firm investment on a post-treatment indicator with
+state and year fixed effects. Audit the identification strategy and tell me what
+a top-5 referee will object to.
+"""
+
+[[rubric]]
+id = "flags-forbidden-comparisons"
+check = "regex_any"
+required = true
+weight = 4
+description = "Explains that with staggered timing, TWFE makes forbidden comparisons (already-treated units act as controls), biasing the estimate under treatment-effect heterogeneity."
+patterns = ['(?i)already.?treated', '(?i)forbidden comparison', '(?i)negative weight', '(?i)heterogen', '(?i)bad comparison']
+
+[[rubric]]
+id = "mandates-robust-estimator"
+check = "regex_any"
+required = true
+weight = 4
+description = "Mandates a heterogeneity-robust estimator instead of plain TWFE."
+patterns = ['(?i)callaway', "(?i)sant'?anna", '(?i)sun.{0,3}abraham', '(?i)borusyak', '(?i)de ?chaisemartin', '(?i)imputation estimator']
+
+[[rubric]]
+id = "bacon-weight-check"
+check = "regex_any"
+required = false
+weight = 2
+description = "Recommends a Goodman-Bacon decomposition to quantify how much weight comes from forbidden comparisons."
+patterns = ['(?i)goodman.?bacon', '(?i)bacon decomp']
+
+[[rubric]]
+id = "pretrends-evidence"
+check = "regex_any"
+required = true
+weight = 3
+description = "Requires pre-trends / event-study evidence and warns against asserting parallel trends without a test."
+patterns = ['(?i)pre.?trend', '(?i)event.?study', '(?i)parallel trends? (test|assumption)', '(?i)honest.?did', '(?i)rambachan']
+
+[[rubric]]
+id = "referee-framing"
+check = "manual"
+required = false
+weight = 2
+description = "Frames objections the way an actual top-5 referee would (anticipates the specific reject reasons), not generic advice."
+guidance = "Pass if at least two objections are concrete and design-specific; fail if the response is generic 'add robustness checks' boilerplate."

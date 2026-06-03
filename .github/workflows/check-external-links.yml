@@ -22,7 +22,7 @@ jobs:
           python-version: "3.11"
 
       - name: Check maintained-doc external links
-        run: python3 scripts/check-links.py
+        run: make external-links
 
       - name: Upload link-check report
         if: always()

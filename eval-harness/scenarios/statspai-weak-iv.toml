@@ -1,0 +1,53 @@
+id = "statspai-weak-iv"
+skill = "skills/00-Full-empirical-analysis-skill_StatsPAI"
+title = "Weak-instrument case must report first-stage F and use weak-IV-robust inference"
+category = "causal-identification"
+severity = "critical"
+context_data = []
+
+prompt = """
+I'm instrumenting years of schooling with distance to the nearest college to
+estimate the return to education on log wages (Card-style). My first-stage
+F-statistic is about 8. Run the 2SLS and report the result the way a careful
+applied micro paper would.
+"""
+
+[[rubric]]
+id = "reports-first-stage-f"
+check = "regex_any"
+required = true
+weight = 3
+description = "Reports / foregrounds the first-stage F-statistic for instrument strength."
+patterns = ['(?i)first.?stage F', '(?i)F.?stat', '(?i)Kleibergen.?Paap', '(?i)Cragg.?Donald', '(?i)effective F', '(?i)Olea.?Pflueger']
+
+[[rubric]]
+id = "flags-weak-instrument"
+check = "regex_any"
+required = true
+weight = 4
+description = "Flags F~8 as weak (below the ~10 rule of thumb and well below the ~23 AR-equivalent threshold), not strong enough for naive 2SLS inference."
+patterns = ['(?i)weak instrument', '(?i)below (the )?(rule of thumb|threshold|10|23)', '(?i)too weak', '(?i)not strong enough', '(?i)weak.?IV']
+
+[[rubric]]
+id = "weak-iv-robust-inference"
+check = "regex_any"
+required = true
+weight = 4
+description = "Recommends weak-instrument-robust inference (Anderson-Rubin confidence set) instead of relying on the conventional 2SLS standard error/CI."
+patterns = ['(?i)anderson.?rubin', '(?i)\bAR\b confidence', '(?i)weak.?iv.?robust', '(?i)AR (CI|confidence|interval|test)', '(?i)identification.?robust']
+
+[[rubric]]
+id = "exclusion-restriction"
+check = "manual"
+required = false
+weight = 2
+description = "Discusses the exclusion restriction for distance-to-college (e.g., concerns about local labor markets / family background) rather than treating the instrument as obviously valid."
+guidance = "Pass if the answer raises at least one substantive exclusion-restriction concern specific to distance-to-college; fail if it asserts validity without discussion."
+
+[[rubric]]
+id = "no-false-reassurance"
+check = "regex_none"
+required = true
+weight = 3
+description = "Does NOT falsely reassure that F~8 is acceptable or that 2SLS standard errors are reliable here."
+patterns = ['(?i)F (of|=|~)? ?8 is (fine|ok|acceptable|sufficient|strong)', '(?i)instrument is strong', '(?i)no weak.?instrument (problem|concern)']

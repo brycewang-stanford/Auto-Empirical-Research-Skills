@@ -1,0 +1,114 @@
+# Sharp Edges - Production gotchas discovered through skill testing
+
+sharp_edges:
+  - id: manual-filing-construction
+    summary: Never manually construct Filing objects
+    severity: critical
+    solution: |
+      from edgar import find
+      filing = find("0001193125-24-276418")  # Accession → Filing
+      company = find("AAPL")                  # Ticker → Company
+      entity = find(320193)                   # CIK → Entity
+    detection_pattern: 'Filing\s*\(.*cik|Filing\s*\(.*accession'
+
+  - id: manual-regex-search
+    summary: Use filing.search() not doc.text() + regex
+    severity: high
+    solution: |
+      results = filing.search("artificial intelligence")  # BM25 ranked
+      for match in results[:5]:
+          print(f"Score: {match.score}, Context: {str(match)[:200]}")
+    detection_pattern: 'doc(ument)?\.text\(\).*re\.|re\.(search|findall).*document'
+
+  - id: confusing-search-methods
+    summary: filing.search() vs filing.docs.search() do different things
+    severity: medium
+    solution: |
+      filing.search("compensation")      # Search filing CONTENT
+      filing.docs.search("xbrl")         # Search API DOCS
+
+  - id: xbrl-instead-of-financials
+    summary: Use get_financials() not filing.xbrl() for financial data
+    severity: high
+    solution: |
+      financials = company.get_financials()
+      revenue = financials.get_revenue()
+      margin = net_income / revenue
+    detection_pattern: 'xbrl\(\)\.statements|filing\.xbrl\(\).*income_statement'
+
+  - id: get-revenue-for-trends
+    summary: Use get_financials() for up to 3 years, get_facts() only for 4+
+    severity: medium
+    solution: |
+      # Up to 3 years (PREFERRED):
+      financials = company.get_financials()
+      income = financials.income_statement()          # 3-year table
+      revenue = financials.get_revenue()              # Current year
+
+      # 4+ years only:
+      facts = company.get_facts()
+      income = facts.income_statement(periods=5)      # 5-year table
+
+  - id: unbounded-filing-iteration
+    summary: Always limit filings before iterating
+    severity: critical
+    solution: |
+      filings = company.get_filings(form="10-K").head(10)
+      for filing in filings:
+          process(filing.obj())
+    detection_pattern: 'for\s+\w+\s+in\s+.*get_filings\(\)\s*:'
+
+  - id: rate-limit-recovery
+    summary: SEC 429 = wait 10+ min, never retry immediately
+    severity: critical
+    solution: |
+      # If you get RATE_LIMIT error_code from MCP or HTTP 429:
+      # 1. Wait at least 10 minutes before retrying
+      # 2. Reduce request frequency (max 10 req/sec)
+      # 3. Ensure EDGAR_IDENTITY is set (anonymous = stricter limits)
+      import time
+      time.sleep(600)  # 10 minutes minimum
+    detection_pattern: '429|rate.?limit|too many requests'
+
+  - id: identity-not-set
+    summary: Set EDGAR_IDENTITY before any SEC requests
+    severity: critical
+    solution: |
+      from edgar import set_identity
+      set_identity("Your Name your@email.com")
+      # Or set env var: EDGAR_IDENTITY="Your Name your@email.com"
+      # Must be set BEFORE any Company(), get_filings(), find() calls
+    detection_pattern: 'IDENTITY_NOT_SET|set_identity|EDGAR_IDENTITY'
+
+  - id: error-code-handling
+    summary: MCP responses include error_code for programmatic branching
+    severity: high
+    solution: |
+      # MCP tool responses include error_code when something fails:
+      # RATE_LIMIT       → wait 10+ min, retry
+      # IDENTITY_NOT_SET → call set_identity() first
+      # COMPANY_NOT_FOUND → try CIK, use find(), or edgar_search
+      # NO_FACTS_DATA    → company may not file XBRL; try filing.obj() instead
+      # NO_XBRL_DATA     → filing has no XBRL; use filing.document()
+      # FILING_NOT_FOUND → check accession number format
+      # NETWORK_TIMEOUT  → retry once after brief wait
+    detection_pattern: 'error_code|RATE_LIMIT|COMPANY_NOT_FOUND|NO_FACTS_DATA'
+
+  - id: company-not-found-recovery
+    summary: Try CIK, use find(), or edgar_search when company lookup fails
+    severity: high
+    solution: |
+      # If Company("NAME") fails, try progressive fallback:
+      from edgar import Company, find
+      company = Company("AAPL")              # 1. Try ticker
+      company = Company(320193)              # 2. Try CIK number
+      results = find("Apple")               # 3. Fuzzy name search
+      company = results[0]                   # Pick best match
+    detection_pattern: 'COMPANY_NOT_FOUND|company.*not found|no.*match'
+
+  - id: repr-instead-of-str
+    summary: Use str() not repr() for LLM output
+    severity: medium
+    solution: |
+      print(str(filings))           # Indexed list, 50 per page
+      print(filing.to_context())    # Shows available methods

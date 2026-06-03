@@ -1,0 +1,204 @@
+id: edgartools-reports
+name: EdgarTools Reports
+version: "1.1"
+
+# See also: sharp-edges.yaml for production gotchas
+
+identity: Report section analyst. Extract items from 10-K, 10-Q, 8-K, 20-F, 40-F using report.items or convenience properties.
+
+patterns:
+  - name: Get Report Object
+    when: Need structured access to filing sections
+    code: |
+      tenk = company.get_filings(form="10-K")[0].obj()   # TenK object
+      tenq = company.get_filings(form="10-Q")[0].obj()   # TenQ object
+      eightk = company.get_filings(form="8-K")[0].obj()  # EightK object
+      forty_f = company.get_filings(form="40-F")[0].obj() # FortyF (Canadian MJDS)
+
+  - name: 10-K Sections
+    when: Extract annual report sections
+    code: |
+      # Convenience properties
+      tenk.business                     # Item 1: Business description
+      tenk.risk_factors                 # Item 1A: Risk factors
+      tenk.management_discussion        # Item 7: MD&A
+
+      # Access any item by key
+      tenk['Item 1']                    # By item number
+      tenk['Item 7A']                   # Quantitative risk disclosures
+
+      tenk.items                        # List: ['Item 1', 'Item 1A', 'Item 2', ...]
+
+      tenk.auditor                      # AuditorInfo: .name .firm_id .location .icfr_attestation
+      tenk.subsidiaries                 # SubsidiaryList from EX-21 (TenK only), .to_dataframe()
+      tenk.reports                      # Reports from FilingSummary.xml (statements, notes, details)
+      tenk.notes                        # Notes collection (see "Notes & Disclosures" pattern below)
+
+  - name: Notes & Disclosures
+    when: Need the detail behind a financial statement number (debt terms, revenue recognition, leases, contingencies)
+    code: |
+      tenk = filing.obj()
+
+      # Browse all notes
+      tenk.notes                          # Notes collection — shows table of contents
+      len(tenk.notes)                     # Number of notes
+      tenk.notes[5]                       # By number (1-based)
+      tenk.notes['Debt']                  # By title (case-insensitive, exact match)
+      tenk.notes.search('debt')           # Fuzzy search → ranked list of Notes
+
+      # Explore a single note
+      note = tenk.notes['Debt']
+      note.title                          # 'Debt'
+      note.text                           # Narrative text (plain text from TextBlock)
+      note.html                           # Raw HTML content
+      note.tables                         # Child table Statements (XBRL data)
+      note.policies                       # Accounting policy Statements
+      note.details                        # Detail breakdown Statements
+      note.expands                        # Statement line items this note explains
+      note.expands_statements             # Which statements (e.g., ['BalanceSheet'])
+
+      # Get table data
+      note.tables[0].to_dataframe()             # XBRL-structured DataFrame
+      note.tables[0].report.to_dataframe()      # HTML-extracted DataFrame
+
+      # AI-optimized context
+      note.to_context(detail='standard')         # For LLM consumption
+      tenk.notes.to_context(focus=['debt', 'revenue'])  # Filtered context
+
+  - name: Drill Down from Statements
+    when: See a number on a financial statement and need the note that explains it
+    code: |
+      bs = tenk.balance_sheet
+      bs['Cash and cash equivalents']            # Exact match → StatementLineItem
+      bs.search('cash')                          # Fuzzy → ranked list of StatementLineItems
+
+      item = bs['Commercial paper']
+      item.label                                 # 'Commercial paper'
+      item.concept                               # 'us-gaap_CommercialPaper'
+      item.note                                  # → Note (most specific match)
+      item.notes                                 # → [Note, ...] (all related)
+      item.note.title                            # 'Debt'
+      item.note.tables                           # Child table Statements
+    note: |
+      stmt['label'] is EXACT match (case-insensitive). Use stmt.search('keyword') for fuzzy.
+      .note returns the single most relevant Note. .notes returns all matches ranked by specificity.
+      Works on any Statement: balance_sheet, income_statement, cashflow_statement.
+
+  - name: 10-Q Sections
+    when: Extract quarterly report sections
+    code: |
+      tenq['Item 1']                    # Financial statements
+      tenq['Item 2']                    # MD&A
+      tenq['Item 3']                    # Market risk disclosures
+      tenq.items                        # List available items
+
+  - name: 40-F Sections (Canadian MJDS)
+    when: Extract sections from Canadian annual reports (Shopify, Royal Bank, etc.)
+    code: |
+      forty_f = company.get_filings(form="40-F")[0].obj()  # FortyF object
+
+      # Convenience properties (NI 51-102 AIF sections)
+      forty_f.business                    # Business description from AIF
+      forty_f.risk_factors                # Risk factors
+      forty_f.corporate_structure         # Corporate structure
+      forty_f.dividends                   # Dividends
+      forty_f.capital_structure           # Capital structure (if present)
+      forty_f.directors_and_officers      # Directors and officers
+      forty_f.legal_proceedings           # Legal proceedings
+
+      # Fuzzy lookup by keyword
+      forty_f["business"]                 # Matches "Description Of The Business"
+      forty_f["dividends"]               # Case-insensitive
+
+      # Full AIF text for LLM context
+      forty_f.aif_text                    # Plain text (100K+ chars)
+      forty_f.aif_html                    # Raw HTML
+
+      # List detected sections
+      forty_f.items                       # ['Corporate Structure', 'Risk Factors', ...]
+
+      # Financials (XBRL, same as 10-K)
+      forty_f.financials                  # Financials object
+      forty_f.income_statement            # Income statement
+      forty_f.balance_sheet               # Balance sheet
+
+      forty_f.auditor                     # AuditorInfo or None
+      forty_f.reports                     # Reports from FilingSummary.xml
+    note: |
+      40-F uses NI 51-102 AIF section headings, NOT US "Item 1", "Item 2" numbers.
+      Sections are detected by regex; not all sections appear in every filing.
+      Properties return None when a section is absent (e.g. capital_structure for SHOP).
+      Use fuzzy keyword lookup: forty_f["business"] matches any heading containing "business".
+
+  - name: 424B Prospectus / Deal Summary
+    when: Need offering terms, deal economics, underwriting, or dilution from a 424B filing
+    code: |
+      prospectus = company.get_filings(form="424B5")[0].obj()  # Prospectus424B
+      deal = prospectus.deal                   # Deal (never None)
+
+      # Core economics
+      deal.price                               # Per-share price (float | None)
+      deal.shares                              # Shares offered (int | None)
+      deal.gross_proceeds                      # Total offering amount
+      deal.net_proceeds                        # After underwriting fees
+      deal.discount_rate                       # Fee / price (0.05 = 5%)
+
+      # Classification
+      deal.offering_type                       # OfferingType enum
+      deal.is_atm                              # True for at-the-market
+      deal.security_type                       # "Common Stock", etc.
+
+      # Underwriting
+      deal.lead_bookrunner                     # Lead bank name
+      deal.underwriter_count                   # Syndicate size
+      deal.total_fees                          # Total fees
+
+      # Dilution (equity offerings only)
+      deal.dilution_per_share                  # Dilution to new investors
+      deal.shares_before                       # Pre-offering outstanding
+      deal.shares_after                        # Post-offering outstanding
+
+      # Selling stockholders (PIPE resale filings, typically 424B3)
+      ss = prospectus.selling_stockholders     # SellingStockholdersData | None
+      if ss:
+          ss.count                             # Number of stockholders
+          for e in ss.stockholders:
+              e.name, e.shares, e.shares_before, e.shares_after  # parsed int
+              e.pct_before, e.pct_after        # parsed float
+              e.warrants                       # warrants/convertibles (int | None)
+          df = ss.to_dataframe()               # Numeric DataFrame
+
+      # Serialization
+      deal.to_dict()                           # Flat dict, no None values
+      deal.to_context()                        # Text for LLM prompts
+      prospectus.lifecycle                     # ShelfLifecycle (S-3 → 424B chain)
+    note: |
+      deal is always returned (never None); individual fields are None when absent.
+      424B3 = resale; 424B4 = IPO final; 424B5 = shelf takedown / ATM.
+      selling_stockholders returns None if no table found; numeric properties return None on parse failure.
+
+  - name: 8-K Events
+    when: Extract current report events
+    code: |
+      eightk.items                      # ['Item 1.01', 'Item 2.02', ...]
+
+      # Common 8-K items:
+      # Item 1.01 - Material agreement
+      # Item 2.02 - Results of operations (earnings)
+      # Item 5.02 - Director/officer changes
+      # Item 7.01 - Regulation FD disclosure
+      # Item 8.01 - Other events
+
+  - name: Item Content
+    when: Work with extracted text
+    code: |
+      item = tenk.risk_factors
+      item.text                         # Full text content
+      item.title                        # "Risk Factors"
+      len(item.text)                    # Character count
+
+avoid:
+  - pattern: "filing.document().text"
+    when: Need specific section
+    fix: "filing.obj().risk_factors.text"
+    why: Report objects parse sections; document() gives raw HTML

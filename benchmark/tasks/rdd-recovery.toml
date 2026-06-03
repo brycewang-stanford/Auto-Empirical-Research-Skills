@@ -1,0 +1,70 @@
+id = "rdd-recovery"
+title = "Sharp RD recovery: does the pipeline control for the running-variable trend instead of comparing means across the cutoff?"
+data = "benchmark/data/sim-rdd.csv"
+reference_candidate = "reference-rd"
+
+description = """
+A deterministic, noiseless sharp regression-discontinuity design (101 points,
+running variable x on [-1, 1], cutoff at 0, sharp treatment D = 1[x >= 0]). The
+untreated potential outcome is linear in x but with DIFFERENT slopes on either
+side of the cutoff, and treatment adds a constant jump TAU = 3.0. The data ships
+a y0 counterfactual column the estimators never read, so the true effect at the
+cutoff is recomputed by the checker as mean(y - y0) over treated rows.
+
+This encodes the foundational RD lesson (Imbens & Lemieux 2008; Lee & Lemieux
+2010): the treatment effect is the JUMP in the conditional mean at the cutoff,
+not the difference in average outcomes on either side. A naive across-cutoff
+mean comparison confounds the jump with the running-variable trend and is badly
+biased (here +5.51 vs a true 3.0). A local linear fit on each side at the cutoff
+recovers the true jump. Gelman & Imbens (2019) is the reason the reference
+estimator uses local linear regression rather than a global high-order
+polynomial: local methods are less specification-sensitive and have better
+coverage.
+
+A pipeline that handles RD correctly must: (1) recognize that the naive
+across-cutoff mean difference is biased by the trend, and (2) report a
+local-linear (running-variable-controlled) estimate at the cutoff that recovers
+the true effect. Data-derived golds are recomputed from the dataset by the
+checker, so a candidate cannot pass by fabricating numbers.
+"""
+
+# Construction constant (informational; the checker recomputes true_tau from y0).
+true_tau_by_construction = 3.0
+
+[[gold]]
+id = "local-recovers-tau"
+required = true
+weight = 4
+description = "A local-linear RD estimate at the cutoff recovers the true jump recomputed from the data."
+check = "recovers_truth"
+field = "local_att"
+truth_key = "true_tau"
+tol = 0.05
+
+[[gold]]
+id = "naive-is-biased"
+required = true
+weight = 3
+description = "Reports the naive across-cutoff mean difference and it is far from the true effect (surfaces the running-variable confound rather than headlining it as the effect)."
+check = "biased_away"
+field = "naive_jump"
+truth_key = "true_tau"
+min_gap = 0.5
+
+[[gold]]
+id = "local-beats-global"
+required = false
+weight = 2
+description = "The local-linear estimate is closer to the truth than the global common-slope OLS fit (Gelman-Imbens: prefer local linear over a global polynomial; informational)."
+check = "closer_to_truth"
+near_field = "local_att"
+far_field = "global_att"
+truth_key = "true_tau"
+
+[[gold]]
+id = "honest-reported-numbers"
+required = true
+weight = 3
+description = "The candidate's reported naive, global, and local-linear estimates match what the checker recomputes by running each estimator on the data (no fabricated numbers)."
+check = "cross_check"
+tol = 0.02

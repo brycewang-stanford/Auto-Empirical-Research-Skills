@@ -1,0 +1,100 @@
+---
+title: "{{TITLE}}"
+author:
+  - name: "{{AUTHOR}}"
+    affiliations:
+      - "{{INSTITUTION}}"
+date: today
+format:
+  html:
+    toc: true
+    code-fold: true
+  docx:
+    reference-doc: null
+  pdf:
+    documentclass: article
+    geometry: margin=1in
+bibliography: references.bib
+csl: apa.csl
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+## Abstract
+
+{{ABSTRACT}}
+
+**Keywords:** {{KEYWORDS}}
+
+## Introduction
+
+{{INTRODUCTION}}
+
+## Theoretical Background
+
+### {{CONSTRUCT_1}}
+
+### {{CONSTRUCT_2}}
+
+### Hypotheses
+
+Based on the theoretical framework above, we propose:
+
+**H1:**
+
+**H2:**
+
+**H3:**
+
+## Method
+
+### Participants and Procedure
+
+### Measures
+
+#### {{MEASURE_1}}
+
+#### {{MEASURE_2}}
+
+### Analytical Strategy
+
+## Results
+
+### Descriptive Statistics
+
+```{r}
+#| label: tbl-descriptives
+#| tbl-cap: "Descriptive Statistics and Correlations"
+
+# Load from targets pipeline:
+# targets::tar_read(table1)
+```
+
+### Hypothesis Tests
+
+#### Hypothesis 1
+
+```{r}
+#| label: tbl-h1
+#| tbl-cap: "Hypothesis 1 Results"
+
+# targets::tar_read(h1_model) |> modelsummary::modelsummary()
+```
+
+#### Hypothesis 2
+
+### Robustness Checks
+
+## Discussion
+
+### Theoretical Contributions
+
+### Practical Implications
+
+### Limitations and Future Directions
+
+## Conclusion
+
+## References

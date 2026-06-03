@@ -28,13 +28,34 @@ def maintained_docs() -> list[Path]:
     return sorted(set(paths))
 
 
-def iter_links(paths: list[Path]) -> dict[str, list[str]]:
+def is_in_fenced_code(text: str, offset: int) -> bool:
+    in_fence = False
+    for line in text[:offset].splitlines():
+        if line.lstrip().startswith("```"):
+            in_fence = not in_fence
+    return in_fence
+
+
+def normalize_url(raw_url: str) -> str:
+    return raw_url.rstrip(".,")
+
+
+def iter_links(paths: list[Path], *, include_code_fences: bool = False) -> dict[str, list[str]]:
     links: dict[str, list[str]] = {}
     for path in paths:
         text = path.read_text(encoding="utf-8", errors="replace")
         for match in LINK_RE.finditer(text):
-            url = match.group(1).rstrip(".,")
-            links.setdefault(url, []).append(path.relative_to(ROOT).as_posix())
+            if (
+                path.suffix.lower() == ".md"
+                and not include_code_fences
+                and is_in_fenced_code(text, match.start())
+            ):
+                continue
+            url = normalize_url(match.group(1))
+            file_path = path.relative_to(ROOT).as_posix()
+            links.setdefault(url, [])
+            if file_path not in links[url]:
+                links[url].append(file_path)
     return links
 
 
@@ -94,14 +115,25 @@ def retry_get(url: str, timeout: float, tolerated_status: int | None = None, err
         return {"url": url, "status": None, "ok": False, "error": error or str(get_error)}
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--timeout", type=float, default=12.0)
     parser.add_argument("--max-links", type=int, default=0, help="debug limit; 0 checks all links")
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
-    args = parser.parse_args()
+    parser.add_argument(
+        "--include-code-fences",
+        action="store_true",
+        help="also check links shown inside Markdown fenced code blocks",
+    )
+    parser.add_argument(
+        "--no-write",
+        action="store_true",
+        help="run checks without writing the JSON report",
+    )
+    args = parser.parse_args(argv)
 
-    links = iter_links(maintained_docs())
+    docs = maintained_docs()
+    links = iter_links(docs, include_code_fences=args.include_code_fences)
     urls = sorted(links)
     if args.max_links:
         urls = urls[: args.max_links]
@@ -114,13 +146,16 @@ def main() -> int:
         print(f"[{index}/{len(urls)}] {url} -> {result.get('status')} {'ok' if result['ok'] else 'FAIL'}")
 
     payload = {
-        "checked_files": [path.relative_to(ROOT).as_posix() for path in maintained_docs()],
+        "checked_files": [path.relative_to(ROOT).as_posix() for path in docs],
         "checked_links": len(results),
         "failures": [result for result in results if not result["ok"]],
         "results": results,
     }
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    if args.no_write:
+        print("Link-check report write skipped (--no-write).")
+    else:
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        args.output.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     if payload["failures"]:
         print(f"{len(payload['failures'])} external link(s) failed.", file=sys.stderr)

@@ -5,7 +5,7 @@ This roadmap is scoped to making AERS a high-quality, high-trust GitHub project 
 ## Now
 
 - Keep `catalog/skills.json` and `docs/SKILL_CATALOG.md` current.
-- Require `make validate` for all pull requests.
+- Require `make check` for all pull requests.
 - Keep README links and docs category links green.
 - Preserve the no-paid/proprietary-core scope rule for new listings.
 - Keep `catalog/provenance.json`, `docs/LICENSE_AUDIT.md`, and `docs/SKILL_AUDIT.md` current.

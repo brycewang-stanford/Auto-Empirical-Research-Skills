@@ -41,6 +41,25 @@ def rel(path: Path) -> str:
     return path.relative_to(ROOT).as_posix()
 
 
+def _skip_leading_comment(lines: list[str]) -> list[str]:
+    """Drop a leading HTML comment banner plus surrounding blank lines.
+
+    Vendored snapshots prepend a CoPaper.AI provenance banner (`<!-- ... -->`)
+    before the YAML frontmatter, which would otherwise hide the frontmatter from
+    a parser that requires `---` on the first line.
+    """
+    i = 0
+    while i < len(lines) and not lines[i].strip():
+        i += 1
+    if i < len(lines) and lines[i].lstrip().startswith("<!--"):
+        while i < len(lines) and "-->" not in lines[i]:
+            i += 1
+        i += 1  # move past the line containing -->
+        while i < len(lines) and not lines[i].strip():
+            i += 1
+    return lines[i:]
+
+
 def parse_frontmatter(text: str) -> dict[str, str]:
     """Parse the simple YAML frontmatter shape used by SKILL.md files.
 
@@ -48,7 +67,7 @@ def parse_frontmatter(text: str) -> dict[str, str]:
     block scalars, which covers the fields the catalog needs: name/description.
     """
 
-    lines = text.splitlines()
+    lines = _skip_leading_comment(text.splitlines())
     if not lines or lines[0].strip() != "---":
         return {}
 

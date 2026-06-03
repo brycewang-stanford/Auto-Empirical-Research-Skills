@@ -1,0 +1,18 @@
+{
+  "task": "lalonde-recovery",
+  "method": "OLS regression adjustment (full controls incl. re74, re75)",
+  "n_treated": 185,
+  "n_control": 429,
+  "naive_att": -635.0,
+  "adjusted_att": 1548.2,
+  "balance": {
+    "age": -0.242,
+    "educ": 0.045,
+    "black": 1.668,
+    "hispan": -0.277,
+    "married": -0.719,
+    "nodegree": 0.235,
+    "re74": -0.596,
+    "re75": -0.287
+  }
+}

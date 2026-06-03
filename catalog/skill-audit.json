@@ -8,6 +8,10 @@
       "skills/09-meleantonio-awesome-econ-ai-stuff/_skills/writing/academic-paper-writer/SKILL.md",
       "skills/31-thalysandratos-claude-code-skills/_skills/writing/academic-paper-writer/SKILL.md"
     ],
+    "analyze": [
+      "skills/16-hsantanna88-clo-author/dot-claude/skills/analyze/SKILL.md",
+      "skills/61-phdemotions-research-methods/skills/analyze/SKILL.md"
+    ],
     "analyze-results": [
       "skills/42-wanshuiyin-ARIS/skills/analyze-results/SKILL.md",
       "skills/42-wanshuiyin-ARIS/skills/skills-codex/analyze-results/SKILL.md"
@@ -48,6 +52,10 @@
       "skills/11-James-Traina-compound-science/skills/causal-inference/SKILL.md",
       "skills/23-Learning-Bayesian-Statistics-baygent-skills/causal-inference/SKILL.md"
     ],
+    "citation-management": [
+      "skills/04-K-Dense-AI-claude-scientific-writer/citation-management/SKILL.md",
+      "skills/60-regisely-superpapers/skills/citation-management/SKILL.md"
+    ],
     "commit": [
       "skills/12-pedrohcgs-claude-code-my-workflow/dot-claude/skills/commit/SKILL.md",
       "skills/14-luischanci-claude-code-research-starter/dot-claude/skills/commit/SKILL.md",
@@ -56,7 +64,8 @@
     ],
     "compile-latex": [
       "skills/12-pedrohcgs-claude-code-my-workflow/dot-claude/skills/compile-latex/SKILL.md",
-      "skills/14-luischanci-claude-code-research-starter/dot-claude/skills/compile-latex/SKILL.md"
+      "skills/14-luischanci-claude-code-research-starter/dot-claude/skills/compile-latex/SKILL.md",
+      "skills/60-regisely-superpapers/skills/compile-latex/SKILL.md"
     ],
     "context-status": [
       "skills/12-pedrohcgs-claude-code-my-workflow/dot-claude/skills/context-status/SKILL.md",
@@ -115,6 +124,10 @@
       "skills/42-wanshuiyin-ARIS/skills/skills-codex/grant-proposal/SKILL.md",
       "skills/42-wanshuiyin-ARIS/skills/skills-codex-gemini-review/grant-proposal/SKILL.md"
     ],
+    "hypothesis-generation": [
+      "skills/03-K-Dense-AI-claude-scientific-skills/hypothesis-generation/SKILL.md",
+      "skills/04-K-Dense-AI-claude-scientific-writer/hypothesis-generation/SKILL.md"
+    ],
     "idea-creator": [
       "skills/42-wanshuiyin-ARIS/skills/idea-creator/SKILL.md",
       "skills/42-wanshuiyin-ARIS/skills/skills-codex/idea-creator/SKILL.md",
@@ -157,7 +170,9 @@
     ],
     "literature-review": [
       "skills/03-K-Dense-AI-claude-scientific-skills/literature-review/SKILL.md",
-      "skills/36-taoyunudt-literature-review-skill/SKILL.md"
+      "skills/04-K-Dense-AI-claude-scientific-writer/literature-review/SKILL.md",
+      "skills/36-taoyunudt-literature-review-skill/SKILL.md",
+      "skills/54-scdenney-open-science-skills/skills/literature-review/SKILL.md"
     ],
     "mermaid-diagram": [
       "skills/42-wanshuiyin-ARIS/skills/mermaid-diagram/SKILL.md",
@@ -221,7 +236,8 @@
     "paper-writing": [
       "skills/42-wanshuiyin-ARIS/skills/paper-writing/SKILL.md",
       "skills/42-wanshuiyin-ARIS/skills/skills-codex/paper-writing/SKILL.md",
-      "skills/42-wanshuiyin-ARIS/skills/skills-codex-gemini-review/paper-writing/SKILL.md"
+      "skills/42-wanshuiyin-ARIS/skills/skills-codex-gemini-review/paper-writing/SKILL.md",
+      "skills/60-regisely-superpapers/skills/paper-writing/SKILL.md"
     ],
     "pixel-art": [
       "skills/42-wanshuiyin-ARIS/skills/pixel-art/SKILL.md",
@@ -250,6 +266,10 @@
     "rebuttal": [
       "skills/42-wanshuiyin-ARIS/skills/rebuttal/SKILL.md",
       "skills/42-wanshuiyin-ARIS/skills/skills-codex/rebuttal/SKILL.md"
+    ],
+    "research-grants": [
+      "skills/03-K-Dense-AI-claude-scientific-skills/research-grants/SKILL.md",
+      "skills/04-K-Dense-AI-claude-scientific-writer/research-grants/SKILL.md"
     ],
     "research-ideation": [
       "skills/09-meleantonio-awesome-econ-ai-stuff/_skills/ideation/research-ideation/SKILL.md",
@@ -302,9 +322,17 @@
       "skills/28-maxwell2732-paper-replicate-agent-demo/dot-claude/skills/review-r/SKILL.md",
       "skills/41-sticerd-eee-sewage-econometrics-check/skills/review-r/SKILL.md"
     ],
+    "robustness-checks": [
+      "skills/43-wentorai-research-plugins/skills/analysis/econometrics/robustness-checks/SKILL.md",
+      "skills/60-regisely-superpapers/skills/robustness-checks/SKILL.md"
+    ],
     "run-experiment": [
       "skills/42-wanshuiyin-ARIS/skills/run-experiment/SKILL.md",
       "skills/42-wanshuiyin-ARIS/skills/skills-codex/run-experiment/SKILL.md"
+    ],
+    "scientific-writing": [
+      "skills/03-K-Dense-AI-claude-scientific-skills/scientific-writing/SKILL.md",
+      "skills/04-K-Dense-AI-claude-scientific-writer/scientific-writing/SKILL.md"
     ],
     "slide-excellence": [
       "skills/12-pedrohcgs-claude-code-my-workflow/dot-claude/skills/slide-excellence/SKILL.md",
@@ -388,29 +416,29 @@
     {
       "collection": "01-lishix520-academic-paper-skills",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 855,
-      "name": "composer",
+      "name": "academic-paper-composer",
       "path": "skills/01-lishix520-academic-paper-skills/composer/SKILL.md"
     },
     {
       "collection": "01-lishix520-academic-paper-skills",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 685,
-      "name": "strategist",
+      "name": "academic-paper-strategist",
       "path": "skills/01-lishix520-academic-paper-skills/strategist/SKILL.md"
     },
     {
       "collection": "02-luwill-research-skills",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 185,
       "name": "medical-imaging-review",
       "path": "skills/02-luwill-research-skills/medical-imaging-review/SKILL.md"
@@ -418,9 +446,9 @@
     {
       "collection": "02-luwill-research-skills",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 479,
       "name": "paper-slide-deck",
       "path": "skills/02-luwill-research-skills/paper-slide-deck/SKILL.md"
@@ -428,9 +456,9 @@
     {
       "collection": "02-luwill-research-skills",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 588,
       "name": "research-proposal",
       "path": "skills/02-luwill-research-skills/research-proposal/SKILL.md"
@@ -438,9 +466,9 @@
     {
       "collection": "03-K-Dense-AI-claude-scientific-skills",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 239,
       "name": "hypothesis-generation",
       "path": "skills/03-K-Dense-AI-claude-scientific-skills/hypothesis-generation/SKILL.md"
@@ -458,9 +486,9 @@
     {
       "collection": "03-K-Dense-AI-claude-scientific-skills",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 968,
       "name": "research-grants",
       "path": "skills/03-K-Dense-AI-claude-scientific-skills/research-grants/SKILL.md"
@@ -468,9 +496,9 @@
     {
       "collection": "03-K-Dense-AI-claude-scientific-skills",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 446,
       "name": "scientific-writing",
       "path": "skills/03-K-Dense-AI-claude-scientific-skills/scientific-writing/SKILL.md"
@@ -478,9 +506,9 @@
     {
       "collection": "04-K-Dense-AI-claude-scientific-writer",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 1215,
       "name": "citation-management",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/citation-management/SKILL.md"
@@ -488,9 +516,9 @@
     {
       "collection": "04-K-Dense-AI-claude-scientific-writer",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 236,
       "name": "hypothesis-generation",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/hypothesis-generation/SKILL.md"
@@ -498,9 +526,9 @@
     {
       "collection": "04-K-Dense-AI-claude-scientific-writer",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 656,
       "name": "literature-review",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/literature-review/SKILL.md"
@@ -508,9 +536,9 @@
     {
       "collection": "04-K-Dense-AI-claude-scientific-writer",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 582,
       "name": "peer-review",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/peer-review/SKILL.md"
@@ -518,9 +546,9 @@
     {
       "collection": "04-K-Dense-AI-claude-scientific-writer",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 952,
       "name": "research-grants",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/research-grants/SKILL.md"
@@ -538,9 +566,9 @@
     {
       "collection": "04-K-Dense-AI-claude-scientific-writer",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 581,
       "name": "scientific-critical-thinking",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/scientific-critical-thinking/SKILL.md"
@@ -548,9 +576,9 @@
     {
       "collection": "04-K-Dense-AI-claude-scientific-writer",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 593,
       "name": "scientific-writing",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/scientific-writing/SKILL.md"
@@ -558,109 +586,109 @@
     {
       "collection": "05-kthorn-research-superpower",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 120,
-      "name": "getting-started",
+      "name": "Getting Started with Research Superpowers",
       "path": "skills/05-kthorn-research-superpower/getting-started/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 621,
-      "name": "answering-research-questions",
+      "name": "Answering Research Questions",
       "path": "skills/05-kthorn-research-superpower/research/answering-research-questions/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 602,
-      "name": "building-screening-rubrics",
+      "name": "Building Paper Screening Rubrics",
       "path": "skills/05-kthorn-research-superpower/research/building-screening-rubrics/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 418,
-      "name": "checking-chembl",
+      "name": "Checking ChEMBL for Structured SAR Data",
       "path": "skills/05-kthorn-research-superpower/research/checking-chembl/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 453,
-      "name": "cleaning-up-research-sessions",
+      "name": "Cleaning Up Research Sessions",
       "path": "skills/05-kthorn-research-superpower/research/cleaning-up-research-sessions/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 599,
-      "name": "evaluating-paper-relevance",
+      "name": "Evaluating Paper Relevance",
       "path": "skills/05-kthorn-research-superpower/research/evaluating-paper-relevance/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 355,
-      "name": "finding-open-access-papers",
+      "name": "Finding Open Access Papers",
       "path": "skills/05-kthorn-research-superpower/research/finding-open-access-papers/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 213,
-      "name": "searching-literature",
+      "name": "Searching Scientific Literature",
       "path": "skills/05-kthorn-research-superpower/research/searching-literature/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 618,
-      "name": "subagent-driven-review",
+      "name": "Subagent-Driven Literature Review",
       "path": "skills/05-kthorn-research-superpower/research/subagent-driven-review/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 302,
-      "name": "traversing-citations",
+      "name": "Traversing Citation Networks",
       "path": "skills/05-kthorn-research-superpower/research/traversing-citations/SKILL.md"
     },
     {
       "collection": "06-fuhaoda-stats-paper-writing",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 179,
       "name": "stat-writing",
       "path": "skills/06-fuhaoda-stats-paper-writing/stat-writing/SKILL.md"
@@ -668,9 +696,9 @@
     {
       "collection": "07-Orchestra-Research-AI-Research-SKILLs",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 498,
       "name": "academic-plotting",
       "path": "skills/07-Orchestra-Research-AI-Research-SKILLs/academic-plotting/SKILL.md"
@@ -678,11 +706,11 @@
     {
       "collection": "07-Orchestra-Research-AI-Research-SKILLs",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 426,
-      "name": "autoresearch-skill",
+      "name": "autoresearch",
       "path": "skills/07-Orchestra-Research-AI-Research-SKILLs/autoresearch-skill/SKILL.md"
     },
     {
@@ -10114,16 +10142,766 @@
       "line_count": 86,
       "name": "aer-workflow",
       "path": "skills/50-brycewang-aer-skills/skills/aer-workflow/SKILL.md"
+    },
+    {
+      "collection": "51-pymc-labs-CausalPy",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 46,
+      "name": "choosing-causalpy-methods",
+      "path": "skills/51-pymc-labs-CausalPy/skills/choosing-causalpy-methods/SKILL.md"
+    },
+    {
+      "collection": "51-pymc-labs-CausalPy",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 57,
+      "name": "running-causalpy-experiments",
+      "path": "skills/51-pymc-labs-CausalPy/skills/running-causalpy-experiments/SKILL.md"
+    },
+    {
+      "collection": "51-pymc-labs-CausalPy",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 26,
+      "name": "running-placebo-analysis",
+      "path": "skills/51-pymc-labs-CausalPy/skills/running-placebo-analysis/SKILL.md"
+    },
+    {
+      "collection": "52-keemanxp-slr-prisma",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 418,
+      "name": "slr-prisma",
+      "path": "skills/52-keemanxp-slr-prisma/SKILL.md"
+    },
+    {
+      "collection": "53-keemanxp-thematic-analysis-skill",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 328,
+      "name": "thematic-analysis",
+      "path": "skills/53-keemanxp-thematic-analysis-skill/thematic-analysis/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 138,
+      "name": "citation-check",
+      "path": "skills/54-scdenney-open-science-skills/skills/citation-check/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 207,
+      "name": "conjoint-cleaning",
+      "path": "skills/54-scdenney-open-science-skills/skills/conjoint-cleaning/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 115,
+      "name": "conjoint-design",
+      "path": "skills/54-scdenney-open-science-skills/skills/conjoint-design/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 171,
+      "name": "conjoint-diagnostics",
+      "path": "skills/54-scdenney-open-science-skills/skills/conjoint-diagnostics/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 80,
+      "name": "cross-national-design",
+      "path": "skills/54-scdenney-open-science-skills/skills/cross-national-design/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 72,
+      "name": "diverge",
+      "path": "skills/54-scdenney-open-science-skills/skills/diverge/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 153,
+      "name": "fair-check",
+      "path": "skills/54-scdenney-open-science-skills/skills/fair-check/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 140,
+      "name": "figure-table-audit",
+      "path": "skills/54-scdenney-open-science-skills/skills/figure-table-audit/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 129,
+      "name": "figures",
+      "path": "skills/54-scdenney-open-science-skills/skills/figures/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 88,
+      "name": "hypothesis-building",
+      "path": "skills/54-scdenney-open-science-skills/skills/hypothesis-building/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 339,
+      "name": "journal-review",
+      "path": "skills/54-scdenney-open-science-skills/skills/journal-review/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 96,
+      "name": "list-experiment",
+      "path": "skills/54-scdenney-open-science-skills/skills/list-experiment/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 145,
+      "name": "literature-review",
+      "path": "skills/54-scdenney-open-science-skills/skills/literature-review/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 91,
+      "name": "methods-reporting",
+      "path": "skills/54-scdenney-open-science-skills/skills/methods-reporting/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 77,
+      "name": "narrative-building",
+      "path": "skills/54-scdenney-open-science-skills/skills/narrative-building/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 194,
+      "name": "paper-review-lite",
+      "path": "skills/54-scdenney-open-science-skills/skills/paper-review-lite/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 94,
+      "name": "post-ocr-cleanup",
+      "path": "skills/54-scdenney-open-science-skills/skills/post-ocr-cleanup/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 76,
+      "name": "pre-registration-writing",
+      "path": "skills/54-scdenney-open-science-skills/skills/pre-registration-writing/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 373,
+      "name": "replication-package",
+      "path": "skills/54-scdenney-open-science-skills/skills/replication-package/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 77,
+      "name": "survey-design",
+      "path": "skills/54-scdenney-open-science-skills/skills/survey-design/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 123,
+      "name": "tables",
+      "path": "skills/54-scdenney-open-science-skills/skills/tables/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 115,
+      "name": "text-classification",
+      "path": "skills/54-scdenney-open-science-skills/skills/text-classification/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 117,
+      "name": "topic-modeling",
+      "path": "skills/54-scdenney-open-science-skills/skills/topic-modeling/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 85,
+      "name": "vlm-ocr-pipeline",
+      "path": "skills/54-scdenney-open-science-skills/skills/vlm-ocr-pipeline/SKILL.md"
+    },
+    {
+      "collection": "55-ab604-claude-code-r-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 433,
+      "name": "r-bayes",
+      "path": "skills/55-ab604-claude-code-r-skills/skills/r-bayes/SKILL.md"
+    },
+    {
+      "collection": "55-ab604-claude-code-r-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 313,
+      "name": "r-oop",
+      "path": "skills/55-ab604-claude-code-r-skills/skills/r-oop/SKILL.md"
+    },
+    {
+      "collection": "55-ab604-claude-code-r-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 404,
+      "name": "r-package-development",
+      "path": "skills/55-ab604-claude-code-r-skills/skills/r-package-development/SKILL.md"
+    },
+    {
+      "collection": "55-ab604-claude-code-r-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 353,
+      "name": "r-performance",
+      "path": "skills/55-ab604-claude-code-r-skills/skills/r-performance/SKILL.md"
+    },
+    {
+      "collection": "55-ab604-claude-code-r-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 343,
+      "name": "r-style-guide",
+      "path": "skills/55-ab604-claude-code-r-skills/skills/r-style-guide/SKILL.md"
+    },
+    {
+      "collection": "55-ab604-claude-code-r-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 316,
+      "name": "rlang-patterns",
+      "path": "skills/55-ab604-claude-code-r-skills/skills/rlang-patterns/SKILL.md"
+    },
+    {
+      "collection": "55-ab604-claude-code-r-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 840,
+      "name": "tdd-workflow",
+      "path": "skills/55-ab604-claude-code-r-skills/skills/tdd-workflow/SKILL.md"
+    },
+    {
+      "collection": "55-ab604-claude-code-r-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 417,
+      "name": "tidyverse-patterns",
+      "path": "skills/55-ab604-claude-code-r-skills/skills/tidyverse-patterns/SKILL.md"
+    },
+    {
+      "collection": "56-hanlulong-econ-writing-skill",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 741,
+      "name": "econ-write",
+      "path": "skills/56-hanlulong-econ-writing-skill/econ-write/SKILL.md"
+    },
+    {
+      "collection": "57-dgunning-edgartools",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 49,
+      "name": "EdgarTools",
+      "path": "skills/57-dgunning-edgartools/skills/core/SKILL.md"
+    },
+    {
+      "collection": "58-charlescoverdale-econstack",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 391,
+      "name": "briefing-note",
+      "path": "skills/58-charlescoverdale-econstack/briefing-note/SKILL.md"
+    },
+    {
+      "collection": "58-charlescoverdale-econstack",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 759,
+      "name": "cost-benefit",
+      "path": "skills/58-charlescoverdale-econstack/cost-benefit/SKILL.md"
+    },
+    {
+      "collection": "58-charlescoverdale-econstack",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 380,
+      "name": "econ-audit",
+      "path": "skills/58-charlescoverdale-econstack/econ-audit/SKILL.md"
+    },
+    {
+      "collection": "58-charlescoverdale-econstack",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 357,
+      "name": "fiscal-briefing",
+      "path": "skills/58-charlescoverdale-econstack/fiscal-briefing/SKILL.md"
+    },
+    {
+      "collection": "58-charlescoverdale-econstack",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 530,
+      "name": "longlist",
+      "path": "skills/58-charlescoverdale-econstack/longlist/SKILL.md"
+    },
+    {
+      "collection": "58-charlescoverdale-econstack",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 355,
+      "name": "macro-briefing",
+      "path": "skills/58-charlescoverdale-econstack/macro-briefing/SKILL.md"
+    },
+    {
+      "collection": "58-charlescoverdale-econstack",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 371,
+      "name": "market-research",
+      "path": "skills/58-charlescoverdale-econstack/market-research/SKILL.md"
+    },
+    {
+      "collection": "59-shiquda-openalex-skill",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 372,
+      "name": "openalex",
+      "path": "skills/59-shiquda-openalex-skill/openalex/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 71,
+      "name": "academic-baseline",
+      "path": "skills/60-regisely-superpapers/skills/academic-baseline/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 98,
+      "name": "brainstorm",
+      "path": "skills/60-regisely-superpapers/skills/brainstorm/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 80,
+      "name": "citation-management",
+      "path": "skills/60-regisely-superpapers/skills/citation-management/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 73,
+      "name": "compile-latex",
+      "path": "skills/60-regisely-superpapers/skills/compile-latex/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 72,
+      "name": "data-collection",
+      "path": "skills/60-regisely-superpapers/skills/data-collection/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 122,
+      "name": "execute-plan",
+      "path": "skills/60-regisely-superpapers/skills/execute-plan/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 101,
+      "name": "journal-guidelines",
+      "path": "skills/60-regisely-superpapers/skills/journal-guidelines/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 80,
+      "name": "journal-selection",
+      "path": "skills/60-regisely-superpapers/skills/journal-selection/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 85,
+      "name": "literature-search",
+      "path": "skills/60-regisely-superpapers/skills/literature-search/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 105,
+      "name": "paper-review",
+      "path": "skills/60-regisely-superpapers/skills/paper-review/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 90,
+      "name": "paper-writing",
+      "path": "skills/60-regisely-superpapers/skills/paper-writing/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 131,
+      "name": "replication-driven-research",
+      "path": "skills/60-regisely-superpapers/skills/replication-driven-research/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 137,
+      "name": "robustness-checks",
+      "path": "skills/60-regisely-superpapers/skills/robustness-checks/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 108,
+      "name": "statistical-modeling",
+      "path": "skills/60-regisely-superpapers/skills/statistical-modeling/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 153,
+      "name": "tables-and-figures",
+      "path": "skills/60-regisely-superpapers/skills/tables-and-figures/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 114,
+      "name": "write-plan",
+      "path": "skills/60-regisely-superpapers/skills/write-plan/SKILL.md"
+    },
+    {
+      "collection": "61-phdemotions-research-methods",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 137,
+      "name": "analyze",
+      "path": "skills/61-phdemotions-research-methods/skills/analyze/SKILL.md"
+    },
+    {
+      "collection": "61-phdemotions-research-methods",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 99,
+      "name": "data-clean",
+      "path": "skills/61-phdemotions-research-methods/skills/data-clean/SKILL.md"
+    },
+    {
+      "collection": "61-phdemotions-research-methods",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 208,
+      "name": "data-profile",
+      "path": "skills/61-phdemotions-research-methods/skills/data-profile/SKILL.md"
+    },
+    {
+      "collection": "61-phdemotions-research-methods",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 89,
+      "name": "data-validate",
+      "path": "skills/61-phdemotions-research-methods/skills/data-validate/SKILL.md"
+    },
+    {
+      "collection": "61-phdemotions-research-methods",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 137,
+      "name": "eda",
+      "path": "skills/61-phdemotions-research-methods/skills/eda/SKILL.md"
+    },
+    {
+      "collection": "61-phdemotions-research-methods",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 146,
+      "name": "process-model",
+      "path": "skills/61-phdemotions-research-methods/skills/process-model/SKILL.md"
+    },
+    {
+      "collection": "61-phdemotions-research-methods",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 79,
+      "name": "research-init",
+      "path": "skills/61-phdemotions-research-methods/skills/research-init/SKILL.md"
+    },
+    {
+      "collection": "61-phdemotions-research-methods",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 102,
+      "name": "research-intake",
+      "path": "skills/61-phdemotions-research-methods/skills/research-intake/SKILL.md"
+    },
+    {
+      "collection": "61-phdemotions-research-methods",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 141,
+      "name": "visualize",
+      "path": "skills/61-phdemotions-research-methods/skills/visualize/SKILL.md"
+    },
+    {
+      "collection": "62-PHY041-claude-skill-citation-checker",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 156,
+      "name": "check-citations",
+      "path": "skills/62-PHY041-claude-skill-citation-checker/SKILL.md"
+    },
+    {
+      "collection": "63-tondevrel-scientific-agent-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 981,
+      "name": "dowhy",
+      "path": "skills/63-tondevrel-scientific-agent-skills/dowhy/SKILL.md"
+    },
+    {
+      "collection": "63-tondevrel-scientific-agent-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 98,
+      "name": "lifelines",
+      "path": "skills/63-tondevrel-scientific-agent-skills/lifelines/SKILL.md"
     }
   ],
   "schema_version": "1.0",
   "summary": {
-    "duplicate_skill_names": 72,
-    "exact_case_skill_files": 977,
-    "missing_description": 32,
-    "missing_frontmatter": 32,
+    "duplicate_skill_names": 78,
+    "exact_case_skill_files": 1052,
+    "missing_description": 4,
+    "missing_frontmatter": 4,
     "non_exact_case_skill_files": 0,
-    "over_500_lines": 75,
-    "skill_like_files": 977
+    "over_500_lines": 80,
+    "skill_like_files": 1052
   }
 }

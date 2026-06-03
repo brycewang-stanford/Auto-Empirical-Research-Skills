@@ -1,0 +1,45 @@
+# Local, network-free pre-commit hooks for AERS quality gates.
+# Install once:  pip install pre-commit && pre-commit install
+# Run on demand: pre-commit run --all-files
+#
+# All hooks are `language: system` and call the repo's own stdlib-only tools, so
+# there is nothing to download and they work offline.
+repos:
+  - repo: local
+    hooks:
+      - id: aers-eval-harness-lint
+        name: AERS eval-harness scenarios lint
+        entry: python3 eval-harness/run_evals.py
+        language: system
+        pass_filenames: false
+        files: ^eval-harness/
+      - id: aers-unit-tests
+        name: AERS unit tests
+        entry: python3 -m unittest discover -s tests -p "test_*.py"
+        language: system
+        pass_filenames: false
+        files: ^(tests/|eval-harness/|benchmark/|scripts/)
+      - id: aers-python-compat
+        name: AERS Python tooling compile
+        entry: make python-compat
+        language: system
+        pass_filenames: false
+        files: ^(tests/|eval-harness/|benchmark/|scripts/|Makefile)
+      - id: aers-benchmark
+        name: AERS benchmark (strict)
+        entry: bash -c 'python3 benchmark/check_benchmark.py --lint >/dev/null && python3 benchmark/reference_pipeline.py --check >/dev/null && python3 benchmark/check_benchmark.py --strict --fail-on-partial --fail-on-orphan-results >/dev/null'
+        language: system
+        pass_filenames: false
+        files: ^benchmark/
+      - id: aers-tracked-file-hygiene
+        name: AERS tracked-file hygiene
+        entry: python3 scripts/check-repo-hygiene.py
+        language: system
+        pass_filenames: false
+        files: ^(.DS_Store|.*(__pycache__|\.py[cod]|\.pytest_cache|\.ruff_cache|\.mypy_cache)|scripts/check-repo-hygiene\.py)
+      - id: aers-repo-validate
+        name: AERS repo validate (links + frontmatter)
+        entry: python3 scripts/validate-repo.py
+        language: system
+        pass_filenames: false
+        files: ^(skills/|docs/|README|catalog/)

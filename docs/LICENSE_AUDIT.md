@@ -6,10 +6,10 @@ Scan date: 2026-05-31.
 
 ## Summary
 
-- Collections audited: 50
-- License buckets: CC-BY-SA-4.0 (repository default)=4, MIT=23, MIT Non-Commercial=1, UNKNOWN - check upstream=22
-- Commercial-use buckets: allowed=23, restricted=1, share-alike=4, unknown=22
-- Source-confidence buckets: high=25, low=6, medium=15, unresolved=4
+- Collections audited: 63
+- License buckets: Apache-2.0=1, CC-BY-NC-4.0 (non-commercial)=1, CC-BY-SA-4.0 (repository default)=4, MIT=34, MIT Non-Commercial=1, UNKNOWN - check upstream=22
+- Commercial-use buckets: allowed=35, restricted=2, share-alike=4, unknown=22
+- Source-confidence buckets: high=36, low=6, medium=17, unresolved=4
 
 ## Interpretation
 
@@ -72,3 +72,16 @@ Scan date: 2026-05-31.
 | [`48-copaper-ai-chinese-de-aigc`](../skills/48-copaper-ai-chinese-de-aigc/) | [source](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills) | high | CC-BY-SA-4.0 (repository default) | share-alike | manual |
 | [`49-voidborne-d-humanize-chinese`](../skills/49-voidborne-d-humanize-chinese/) | UNKNOWN | unresolved | MIT Non-Commercial | restricted | manual vendor snapshot |
 | [`50-brycewang-aer-skills`](../skills/50-brycewang-aer-skills/) | [source](https://github.com/brycewang-stanford/AER-skills) | high | MIT | allowed | weekly GitHub Actions sync |
+| [`51-pymc-labs-CausalPy`](../skills/51-pymc-labs-CausalPy/) | [source](https://github.com/pymc-labs/CausalPy) | high | Apache-2.0 | allowed | manual vendor snapshot |
+| [`52-keemanxp-slr-prisma`](../skills/52-keemanxp-slr-prisma/) | [source](https://github.com/keemanxp/slr-prisma) | high | MIT | allowed | manual vendor snapshot |
+| [`53-keemanxp-thematic-analysis-skill`](../skills/53-keemanxp-thematic-analysis-skill/) | [source](https://github.com/keemanxp/thematic-analysis-skill) | high | MIT | allowed | manual vendor snapshot |
+| [`54-scdenney-open-science-skills`](../skills/54-scdenney-open-science-skills/) | [source](https://github.com/scdenney/open-science-skills) | high | CC-BY-NC-4.0 (non-commercial) | restricted | manual vendor snapshot |
+| [`55-ab604-claude-code-r-skills`](../skills/55-ab604-claude-code-r-skills/) | [source](https://github.com/ab604/claude-code-r-skills) | high | MIT | allowed | manual vendor snapshot |
+| [`56-hanlulong-econ-writing-skill`](../skills/56-hanlulong-econ-writing-skill/) | [source](https://github.com/hanlulong/econ-writing-skill) | high | MIT | allowed | manual vendor snapshot |
+| [`57-dgunning-edgartools`](../skills/57-dgunning-edgartools/) | [source](https://github.com/dgunning/edgartools) | high | MIT | allowed | manual vendor snapshot |
+| [`58-charlescoverdale-econstack`](../skills/58-charlescoverdale-econstack/) | [source](https://github.com/charlescoverdale/econstack) | medium | MIT | allowed | manual vendor snapshot |
+| [`59-shiquda-openalex-skill`](../skills/59-shiquda-openalex-skill/) | [source](https://github.com/shiquda/openalex-skill) | high | MIT | allowed | manual vendor snapshot |
+| [`60-regisely-superpapers`](../skills/60-regisely-superpapers/) | [source](https://github.com/regisely/superpapers) | high | MIT | allowed | manual vendor snapshot |
+| [`61-phdemotions-research-methods`](../skills/61-phdemotions-research-methods/) | [source](https://github.com/phdemotions/research-methods) | high | MIT | allowed | manual vendor snapshot |
+| [`62-PHY041-claude-skill-citation-checker`](../skills/62-PHY041-claude-skill-citation-checker/) | [source](https://github.com/PHY041/claude-skill-citation-checker) | medium | MIT | allowed | manual vendor snapshot |
+| [`63-tondevrel-scientific-agent-skills`](../skills/63-tondevrel-scientific-agent-skills/) | [source](https://github.com/tondevrel/scientific-agent-skills) | high | MIT | allowed | manual vendor snapshot |

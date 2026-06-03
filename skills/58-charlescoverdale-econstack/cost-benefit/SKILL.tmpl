@@ -1,0 +1,703 @@
+---
+name: cost-benefit
+description: Cost-benefit analysis. Produces economic NPV and financial NPV side by side, with BCR, optimism bias (with mitigation), Marginal Excess Tax Burden, real-terms rebasing, WELLBY / QALY / VPF wellbeing valuation, sensitivity, switching values, EANC for unequal-life options, validation gate, and a one-line headline verdict (socially worthwhile vs financially self-sustaining). Backed by the greenbook R package (HM Treasury Green Book primitives) when available, with graceful fallback. Supports HMT Green Book, EU Better Regulation, World Bank, ADB, and Victorian HVHR. Reads a longlist markdown file directly via --from.
+allowed-tools:
+  - Bash
+  - Read
+  - Write
+  - Glob
+  - AskUserQuestion
+  - Skill
+---
+
+**Only stop to ask the user when:** project description is missing, there are fewer than 2 options (including do-nothing), or cost / benefit magnitudes cannot be estimated.
+**Never stop to ask about:** perspective, additionality rates, stakeholder tagging, sensitivity method, output filename, or formatting. Pick sensible defaults and keep moving.
+
+{{PREAMBLE}}
+
+{{LEARNINGS}}
+
+{{PARAMETER_CHECK}}
+
+{{SAFETY_HOOKS}}
+
+{{COMPLETION_STATUS}}
+
+# /cost-benefit: Cost-Benefit Analysis
+
+Produces a Green Book-style economic case (NPV, BCR, optimism bias, sensitivity) alongside a parallel financial case (cash flow to the sponsor, Financial NPV, payback, DSCR if debt is involved), with a one-line headline verdict telling you whether the project is socially worthwhile **and** financially self-sustaining.
+
+```
+/longlist       = "Brainstorm benefits and costs"
+     ↓
+/cost-benefit   = "Now monetise and compute NPV"     (this skill)
+     ↓
+/business-case  = "Wrap in the Five Case Model"
+```
+
+Default output: one clean deliverable with headline verdict, options, costs, benefits, economic case, financial case, sensitivity, and recommendation. Power users can grab just one section via `--section`.
+
+## Arguments
+
+```
+/cost-benefit [project description] [options]
+```
+
+**Examples:**
+```
+/cost-benefit "New secondary school in Leeds, GBP 40m capex, 60-year appraisal"
+/cost-benefit --from longlist-italy-city-greening-2026-04-10.md
+/cost-benefit "Rural water project, Indonesia" --framework adb
+/cost-benefit "Victorian level crossing removal" --framework au-vic
+```
+
+**Options:**
+- `--framework <name>` : `uk-gb` (default), `eu-brg`, `wb`, `adb`, or `au-vic`. Auto-detected from context if not set.
+- `--from <file.md>` : Import project, options, costs, benefits, and Cash flow tags from a `/longlist` markdown file. Skips the interactive entry.
+- `--sponsor <type>` : `government` (default), `private`, `blended`, `philanthropic`. Drives the financial case discount rate. Carried through from the longlist if `--from` is used.
+- `--section <name>` : Emit only one sub-component. Options: `full` (default), `headline`, `costs`, `benefits`, `economic`, `financial`, `sensitivity`, `stakeholder`, `validation`. Combinable with commas.
+- `--format <type>` : Output format(s). `markdown` (default, always generated), `xlsx`, `word`, `pptx`, `pdf`, or `all`. Comma-separate for multiple.
+- `--distributional` : Apply Green Book Annex A4 iso-elastic welfare weights (eta = 1.3, reference = median equivalised income). Silent if not set.
+- `--stage <name>` : `soc` (Strategic Outline Case), `obc` (Outline Business Case, default), `fbc` (Full Business Case). Drives the optimism bias uplift.
+- `--ob-mitigation <pct>` : Optimism bias mitigation factor in `[0, 1]`. Default `0`. Use `0.3` to `0.5` once an active risk register is in place. Greenbook: `gb_apply_ob(mitigation = ...)`.
+- `--price-base <year>` : Price base year for real-terms rebasing. Default = current calendar year. All cash inputs are re-based via `gb_rebase()` before discounting. Greenbook: `gb_deflator()` / `gb_real()` / `gb_rebase()`.
+- `--carbon-scenario <name>` : `low` / `central` (default) / `high`. Pulls from the consolidated DESNZ Nov-2023 series. Greenbook: `gb_carbon_value()`.
+- `--schedule <name>` : `standard` (default), `health` (1.5% baseline for QALY/WELLBY-monetised consequences only), `catastrophic` (3.0% for projects where catastrophic risk dominates). Greenbook: `gb_stpr(schedule = ...)`.
+- `--horizon <years>` : Override the default appraisal period (60 infrastructure / 30 programmes / 10 IT). For horizons > 30 years the kinked STPR schedule kicks in automatically.
+- `--cea` : Cost-effectiveness mode. When monetisation of the dominant benefit is impossible (low-monetisability flag from /longlist), replaces BCR with cost per output unit. Greenbook: `gb_cost_per_unit()`.
+- `--audit` / `--no-audit` : Auto-run /econ-audit on the produced markdown at the end. Default: `--audit`.
+- `--validate-only` : Run the validation gate against the longlist + parameters and exit with a structured report. No NPV produced. Useful in CI.
+
+## Supported frameworks
+
+| Flag | Discount rate | Optimism bias | Carbon price | VPF / VSL | VTTS | METB | Wellbeing |
+|------|--------------|---------------|--------------|-----------|------|------|-----------|
+| `uk-gb` | Kinked STPR: 3.5% y0-30, 3.0% y31-75, 2.5% y76-125, 2.0% y126-200, 1.5% y201-300 | Mott MacDonald 2002 by project type, with `--ob-mitigation` | DESNZ Nov-2023 single consolidated series, low/central/high | DfT TAG v2.03FC anchor 2023 = GBP 2.474m WTP, +2% real per capita growth | DfT TAG Data Book | **20% on tax-financed costs (mandatory)** | WELLBY GBP 13k (2019 prices); QALY GBP 70k (2024 prices, DHSC) |
+| `eu-brg` | 3% advanced / 5% convergence (flat) | Not used; scenario sensitivity | EU ETS + EC shadow | EUR 3.6m (DG MOVE) | EU TEN-T values | n/a | n/a |
+| `wb` | 6% (country-specific ERR) | Not used; scenario sensitivity | WB shadow (USD 40-80/tCO2e, rising to 50-100 by 2030) | By country income group | Local shadow wages | n/a | n/a |
+| `adb` | 9% EIRR (6% for climate / health / education per 2017 revision) | Not used; switching values mandatory | ADB shadow (USD 36.30+/tCO2e) | Country-specific | ADB shadow wages | n/a | n/a |
+| `au-vic` | 4% infrastructure / 7% non-infrastructure (flat) | Vic DTF ILG risk allowance, P50 + P90 | Australian shadow carbon | AUD 5.4m | ATAP PV5 | n/a | n/a |
+
+**Auto-detection rules:**
+- "HVHR", "Victorian", "Melbourne", AUD context → `au-vic`
+- "ADB", Asian DMC context → `adb`
+- "World Bank", "IBRD", "IDA" → `wb`
+- "EU", "regulation", "directive", EUR context → `eu-brg`
+- Everything else → `uk-gb`
+
+## Instructions
+
+### Step 0: Detect computation backend (silent)
+
+Check whether the greenbook R package is reachable through the bridge script:
+
+```bash
+GB_VERSION="$(echo '{"action":"version"}' | ~/.claude/skills/econstack/bin/econstack-greenbook 2>/dev/null)"
+GB_OK="$(echo "$GB_VERSION" | python3 -c 'import sys, json; d=json.loads(sys.stdin.read() or "{}"); print("yes" if d.get("ok") else "no")' 2>/dev/null || echo "no")"
+```
+
+- If `GB_OK=yes`: set `BACKEND=greenbook`. Use the bridge for NPV / BCR / discount factors / OB / METB / VPF / QALY / WELLBY / EANC / carbon. Stash the `data_versions` array for the KEY NUMBERS block. **All numerical claims should match `gb_economic_case()` to within ±0.01.**
+- If `GB_OK=no`: set `BACKEND=skill`. Compute internally using the formulas below. Add a footnote to the output: "Computed without greenbook backend; install with `install.packages('greenbook')` or set `GREENBOOK_DEV_PATH` for full reproducibility and vintage stamping."
+
+Do not narrate the backend choice to the user unless they ask. Continue with Step 1.
+
+### Step 1: Load project, options, costs, and benefits
+
+**If `--from <file.md>` specified**: read the longlist markdown file and parse:
+- Project name and counterfactual from the header block
+- Framework and sponsor from the header block (default if missing)
+- Benefits table: for each item, capture Name, Description, Materiality, Cash flow tag, Quantification method, Monetisation method
+- Costs table: same six columns
+- Excluded section (note for reference but do not include in NPV)
+
+Skip the interactive entry and proceed to Step 2.
+
+**Otherwise**: ask the user in ONE `AskUserQuestion` batch:
+
+1. **Project**: one or two sentences (what, where, why).
+2. **Options**: the alternatives being compared. Must include "Do nothing" (the counterfactual). Typically 3 options: do nothing, do minimum, preferred.
+3. **Costs**: total capital (phased over how many years) and annual operating cost. If an estimate doesn't exist, ask for a range and mark the field as "Estimated".
+4. **Benefits**: annual benefit at maturity, plus benefit type (e.g. "health QALYs", "user time savings", "avoided flood damage").
+
+Do NOT ask perspective, referent group, distributional weights, sensitivity method, appraisal period, optimism bias rate, or discount rate. Detect sector from the description. Default:
+- Appraisal period: 60 years (infrastructure), 30 years (programmes), 10 years (IT). Override with `--horizon`.
+- Optimism bias: HMT supplementary Table 1 for the detected project type and stage. Mitigation factor 0 unless `--ob-mitigation` is set.
+- Additionality: 20% deadweight, 25% displacement, 10% leakage (net factor 0.54) unless user provides different values.
+- Perspective: social / national for government sponsors; investor for private sponsors.
+- Referent group: all residents of the host country (or region for au-vic).
+- Price base year: current calendar year unless `--price-base` overrides. Real-terms rebasing applied to all cash inputs before discounting (uk-gb only; greenbook `gb_rebase()`).
+- Schedule: `standard` for the main appraisal. The `health` schedule is applied **only** to QALY / WELLBY benefit lines; do not apply 1.5% to monetary or non-health benefits.
+
+### Step 2: Compute (silent)
+
+Run the computations internally. Do not narrate; show results in the output. **When `BACKEND=greenbook`, prefer the bridge over inline math** — call `econstack-greenbook` with action `appraise` (or specific action for sub-computations) and read NPV / BCR / OB-adjusted streams / METB / discount factors back from JSON.
+
+#### 2.1 Real-terms rebasing (uk-gb only)
+
+If any cash input is in a price base year other than `--price-base`:
+
+```
+rebased_value = gb_rebase(value, from = source_year, to = price_base_year)
+# bridge:
+echo '{"action":"appraise", ..., "base_year": <price_base>}' | econstack-greenbook
+```
+
+Greenbook bundles HMT's December-2025 GDP deflator. Outputs cite the deflator vintage in the KEY NUMBERS block. For non-uk-gb frameworks, the user supplies values already in the chosen base year.
+
+#### 2.2 Discount factors
+
+When `BACKEND=greenbook` (uk-gb): factors come back from the `appraise` action; for ad-hoc factor lookup use action `discount_factor`. Greenbook schedules: `standard` (default), `health` (1.5% baseline; apply only to QALY/WELLBY rows), `catastrophic` (3.0%).
+
+When `BACKEND=skill` (uk-gb), compute cumulatively across the kinked bands:
+
+```
+df(0) = 1.0
+For t = 1 to horizon:
+  r = STPR(t):  3.5% (1-30), 3.0% (31-75), 2.5% (76-125), 2.0% (126-200), 1.5% (201-300)
+  df(t) = df(t-1) / (1 + r)
+```
+
+**CRITICAL**: cumulative compounding only. Never apply the lower rate from year 0.
+
+For `eu-brg`, `wb`, `adb`, `au-vic` (flat rate): `df(t) = 1 / (1 + r)^t`.
+
+#### 2.3 Capital cost phasing (S-curve)
+
+```
+construction_years > 1: apply S-curve weights
+  5-year: [0.10, 0.20, 0.30, 0.25, 0.15]
+  3-year: [0.20, 0.50, 0.30]
+construction_years == 1: all capex in year 0.
+```
+
+#### 2.4 Optimism bias with mitigation (uk-gb)
+
+Lookup the project category and apply the percentage from the Mott MacDonald 2002 table (greenbook: `gb_optimism_bias()` then `gb_apply_ob(..., mitigation = ...)`). Mitigation reduces the uplift proportionally:
+
+```
+ob_effective = ob_raw * (1 - mitigation)
+adjusted_capex = capex * (1 + ob_effective)
+```
+
+Default mitigation = 0. Set `--ob-mitigation 0.3` to `0.5` once an active risk register is in place. Typical raw uplifts: 24-44% at SOC stage, 12-24% at OBC, 3-10% at FBC. **No optimism bias on opex** unless the user explicitly states a duration uplift.
+
+For `eu-brg`, `wb`, `adb`: skip OB; rely on scenario sensitivity. For `au-vic`: use Vic DTF ILG P50/P90 in place of OB.
+
+#### 2.5 METB (Marginal Excess Tax Burden) — uk-gb mandatory
+
+For tax-financed costs (any cost line where the sponsor is `government` or where the longlist tag indicates public funding), apply 20% METB after optimism bias. Greenbook: `gb_metb(rate = 0.20)`. Bridge action: `metb`.
+
+```
+costs_with_metb = costs_after_ob * (1 + 0.20)
+```
+
+This is mandatory under Green Book 2022 §5.36. **Skip METB only when sponsor is `private` or `philanthropic`** (no distortion from raising the funds). Show as a dedicated row in Table 2 (Costs).
+
+#### 2.6 Wellbeing valuation (WELLBY / QALY / VPF)
+
+When a benefit row's quantification method is one of `wellby`, `qaly`, or `vpf`, **route the monetisation through the dedicated greenbook function** rather than generic prices. These rows are also discounted on the `health` schedule (1.5%) when `--schedule` is not overridden.
+
+```
+WELLBY:  echo '{"action":"wellby","life_satisfaction_change":0.5,"persons":1000,"years":3}' | bridge
+QALY:    echo '{"action":"qaly","qalys":120,"scenario":"dhsc","base_year":2024}' | bridge
+VPF:     echo '{"action":"vpf","year":2026,"series":"central"}' | bridge
+```
+
+Vintage and base year flow through to the KEY NUMBERS block.
+
+#### 2.7 Benefit ramp-up
+
+```
+linear ramp over N years:
+  benefit(i) = full_annual_benefit * (i / N) for i = 1..N
+post-ramp:
+  benefit(i > N) = full_annual_benefit * (1 + growth_rate)^(i - N)
+```
+
+Default ramp: 3 years for infrastructure, 1 year for programmes. `growth_rate` defaults to 0; override only for programmes with documented per-capita growth (e.g. transport demand).
+
+#### 2.8 Carbon valuation (DESNZ Nov-2023 single consolidated series)
+
+For uk-gb, use the consolidated `central` series (DESNZ Nov-2023 collapsed the historical traded / non-traded split). Override with `--carbon-scenario {low|central|high}`. Bridge action: `carbon_npv`.
+
+```
+phases: 'embodied' (construction years, always a cost) and 'operational' (in-use)
+For each year t:
+  carbon_value(t) = tCO2e(t) * carbon_price(t, scenario)
+NOT adjusted for additionality (global externality).
+```
+
+For other frameworks: EU ETS + EC shadow (`eu-brg`); WB shadow USD 40-80 rising to 50-100 by 2030 (`wb`); ADB USD 36.30+ (`adb`); Australian shadow carbon (`au-vic`).
+
+#### 2.9 Do Nothing baseline
+
+If the counterfactual has costs (deterioration, emergency repairs, rising congestion), compute their PV. For intervention options:
+
+```
+NPV = PV_benefits + PV_avoided_do_nothing_costs - PV_intervention_costs
+```
+
+Avoided counterfactual costs count as benefits of the intervention.
+
+#### 2.10 Additionality
+
+Apply to all monetised benefits **except**: carbon (global externality), WELLBY/QALY/VPF (already net of relevant counterfactuals when computed correctly), tax-revenue items (excluded as transfers in social CBA).
+
+```
+adjusted_benefit = gross_benefit * (1 - deadweight) * (1 - displacement) * (1 - leakage)
+```
+
+#### 2.11 Present values and economic-case metrics
+
+```
+PV_costs    = sum over t of [adjusted_cost(t)    * df(t)]
+PV_benefits = sum over t of [adjusted_benefit(t) * df(t)]
+Economic_NPV = PV_benefits - PV_costs
+Economic_BCR = PV_benefits / PV_costs
+
+VfM category (uk-gb only):
+  BCR < 1.0  -> Poor
+  1.0 - 1.5  -> Low
+  1.5 - 2.0  -> Medium
+  2.0 - 4.0  -> High
+  > 4.0      -> Very High
+```
+
+#### 2.12 Distributional weighting (`--distributional`)
+
+When set, weight cashflows by stakeholder income relative to median equivalised income, eta = 1.3 (Green Book Annex A4 iso-elastic). Bridge action: `dist_weighted_npv`. Add Table 8 (Distributionally weighted NPV by stakeholder group) to the output.
+
+```
+echo '{"action":"dist_weighted_npv","cashflow":[...],"recipient_income":[...],"eta":1.3}' | bridge
+```
+
+#### 2.13 Cost-effectiveness fallback (`--cea`)
+
+If the dominant benefit is flagged as low-monetisability on the longlist (or `--cea` is set), skip BCR and report cost per output unit. Greenbook: `gb_cost_per_unit()`. The economic NPV is still computed; only the BCR row is suppressed and replaced with `cost per [unit]`.
+
+### Step 3: Financial case (silent)
+
+If the longlist has Cash flow tags (cash_in / cash_out / non_cash), compute the financial case using **only** the cash items. Non-cash items (heat mortality avoided, WELLBYs, biodiversity, air quality, carbon unless credits are sold) are excluded entirely.
+
+If the project was entered interactively without cash tags, auto-tag:
+- Capital costs → cash_out
+- Operating costs → cash_out
+- User fees, tariffs, grants → cash_in
+- Avoided municipal or sponsor expenditure → cash_in
+- Everything else → non_cash
+
+**Financial discount rate** by sponsor type (flat, not declining):
+- government: 4.5% real
+- private: 10% real (ask for hurdle rate if stated)
+- blended: weighted average of sources by capex share
+- philanthropic: 0% (grants, not repayable)
+
+**Financial computations**:
+
+```
+For each year t:
+  Cash_inflow(t) = sum of cash_in items in year t
+  Cash_outflow(t) = sum of cash_out items in year t
+  Net_cash_flow(t) = Cash_inflow(t) - Cash_outflow(t)
+  Cumulative_cash_flow(t) = Cumulative_cash_flow(t-1) + Net_cash_flow(t)
+
+Financial_NPV = sum over t of [Net_cash_flow(t) / (1 + r_financial)^t]
+
+Total_funding_requirement = max over t of [-Cumulative_cash_flow(t)]
+  (the peak financing need: how much money the sponsor must commit before any net inflow)
+
+Payback_period = smallest t such that Cumulative_cash_flow(t) >= 0
+  (if never, report "Does not pay back within appraisal period")
+
+Financial_IRR = the r_financial value that makes Financial_NPV = 0
+  (compute numerically; report "Undefined" if no real positive root)
+```
+
+**DSCR (only if project involves debt)**: if the user or longlist specifies debt parameters, compute DSCR per year of the debt term:
+
+```
+For each year t in the debt term:
+  Operating_cash_flow_for_debt(t) = Cash_inflow(t) - (Cash_outflow(t) excluding capex and debt service)
+  Debt_service(t) = scheduled interest + scheduled principal per repayment profile
+  DSCR(t) = Operating_cash_flow_for_debt(t) / Debt_service(t)
+
+Minimum_DSCR = min over debt term
+Average_DSCR = mean over debt term
+```
+
+Flag if minimum DSCR < 1.2: "Minimum DSCR of [val] is below the typical 1.2x lender covenant. The project cannot support this debt structure. Reduce gearing, extend tenor, or find non-debt funding."
+
+### Step 4: Headline verdict (silent)
+
+```
+economic_sign  = "positive" if Economic_NPV > 0 else "negative"
+financial_sign = "positive" if Financial_NPV > 0 else "negative"
+
+If economic positive AND financial positive:
+  "Both cases positive. Project is socially worthwhile AND financially self-sustaining. Viable for commercial or blended funding."
+If economic positive AND financial negative:
+  "Economic case positive, financial case negative. Project is socially worthwhile but requires public subsidy, grant, or philanthropic backing. Not viable for commercial debt on standalone cash flows."
+If economic negative AND financial positive:
+  "Economic case negative, financial case positive. Project generates cash for the sponsor but destroys social value (often through displacement or unpriced external costs). Reconsider before proceeding."
+If economic negative AND financial negative:
+  "Both cases negative. Do not proceed on these numbers."
+```
+
+### Step 5: Sensitivity (silent)
+
+Run four tests and summarise in one paragraph:
+
+1. **Scenario sensitivity**: Pessimistic (benefits -20%, costs +20%), Central, Optimistic (benefits +20%, costs -20%). Compute NPV and BCR for each.
+2. **Switching values**: For the top 2-3 variables, the percentage change that makes NPV = 0. Interpret correctly based on NPV sign.
+3. **Tornado test**: For the top 5 variables by PV magnitude, ±20% shifts holding other variables central. Report the widest-range variable.
+4. **Discount rate sensitivity**: Test the central framework rate plus one higher and one lower rate.
+
+Report all four in one paragraph. No multi-table sensitivity section.
+
+**EANC for unequal-life options**: if the options have different appraisal periods (e.g. 30-year vs 60-year), compute the equivalent annual net cost via greenbook `gb_eanc()` (bridge action: `eanc`) and add an extra row to Table 4. Without EANC, NPVs across options of unequal life are not directly comparable; flag this explicitly if EANC cannot be computed (e.g. `BACKEND=skill`).
+
+```
+echo '{"action":"eanc","npv":42.5,"years":60,"schedule":"standard"}' | bridge
+```
+
+### Step 6: Referent group identity check (silent, uk-gb and au-vic)
+
+For uk-gb and au-vic projects with a clear referent group, compute:
+
+```
+Efficiency_NPV = PV_all_benefits - PV_all_costs
+Referent_Group_NPV = PV_referent_benefits - PV_referent_costs
+Non_Referent_NPV = PV_non_referent_benefits - PV_non_referent_costs
+
+Identity: Efficiency_NPV = Referent_Group_NPV + Non_Referent_NPV
+```
+
+If the identity does not hold, flag a tagging error. If Efficiency NPV is positive but Referent Group NPV is negative, note prominently that value is leaking outside the referent group.
+
+Skip for wb and adb (distributional analysis by income decile replaces referent group for those frameworks).
+
+### Step 6.5: Validation gate (silent, abort on failure)
+
+Before writing anything to disk, run the validation gate. The goal is to catch the well-known broken-CBA patterns that `gb_validate()` and `/econ-audit` check for, but **at the source** so a malformed appraisal never produces a file.
+
+When `BACKEND=greenbook`: pass the appraisal spec through bridge action `validate`.
+
+In all backends, enforce these checks:
+
+1. **Counterfactual present**: Do Nothing option must exist with a non-empty description.
+2. **Optimism bias applied to capex** when framework is `uk-gb` and project is investment-type.
+3. **METB applied** when uk-gb and sponsor is government-funded (no exception for blended).
+4. **No transfers in benefits**: tax receipts, welfare payments, intra-government grants, pure VAT recovery flagged and removed.
+5. **No double counts**: construction employment + capex; journey time savings + land value uplift; gross earnings + tax receipts; PV of carbon savings + carbon credits sold.
+6. **Carbon split**: if any embodied or operational carbon is in scope, it appears as its own row (not bundled into capex).
+7. **Cash flow tags**: every line has exactly one of `cash_in`, `cash_out`, `non_cash`.
+8. **Real-terms basis**: all cash inputs share the same `--price-base` year after rebasing.
+9. **Schedule alignment**: `health` schedule applied **only** to QALY/WELLBY rows; not to the project as a whole.
+
+If any check fails, do **not** write the file. Instead, print:
+
+```
+STATUS: BLOCKED | validation_gate_failed
+Issue: [short description]
+Fix: [pointer to the longlist field or skill flag that needs to change]
+```
+
+Do not fall back to a "best-effort" output. A broken CBA is worse than no CBA.
+
+### Step 7: Write the output
+
+Save `cba-[slug]-[YYYY-MM-DD].md` with this exact structure.
+
+```markdown
+<!-- KEY NUMBERS
+framework: [framework]
+sponsor: [sponsor]
+project: [project name]
+preferred_option: [name]
+economic_npv_m: [val]
+economic_bcr: [val]
+economic_eanc_m: [val or n/a]
+vfm_category: [category or n/a]
+pv_costs_m: [val]
+pv_benefits_m: [val]
+financial_npv_m: [val]
+financial_discount_rate: [val]
+total_funding_requirement_m: [val]
+payback_years: [val or "does not pay back"]
+financial_irr_pct: [val or "undefined"]
+min_dscr: [val or "n/a"]
+optimism_bias_pct: [val]
+ob_mitigation_pct: [val]
+metb_applied: [yes|no]
+metb_rate_pct: [val or n/a]
+additionality_factor: [val]
+distributional_eta: [val or n/a]
+discount_schedule: [standard|health|catastrophic]
+discount_rate_baseline_pct: [val]
+appraisal_period: [val]
+price_base_year: [val]
+carbon_scenario: [low|central|high]
+backend: [greenbook|skill]
+greenbook_version: [val or n/a]
+stpr_vintage: [val or n/a]
+deflator_vintage: [val or n/a]
+optimism_bias_vintage: [val or n/a]
+metb_vintage: [val or n/a]
+carbon_values_vintage: [val or n/a]
+vpf_vintage: [val or n/a]
+qaly_vintage: [val or n/a]
+wellby_vintage: [val or n/a]
+date: [YYYY-MM-DD]
+-->
+
+# Cost-Benefit Analysis: [Project name]
+
+**Framework**: [framework] · **Sponsor**: [sponsor] · **Stage**: [stage] · **Date**: [YYYY-MM-DD]
+
+## Headline
+
+**Economic NPV**: [currency][val]m (at [social discount rate]% [declining|flat])
+**Financial NPV**: [currency][val]m (at [financial discount rate]% flat)
+**Verdict**: **[one-line verdict from Step 4]**
+
+| | Economic case | Financial case |
+|---|---|---|
+| NPV | [val] | [val] |
+| BCR / IRR | [BCR] | [IRR]% |
+| Discount rate | [social] | [financial] |
+| Includes | All items | Cash in and Cash out only |
+| Interpretation | Societal welfare | Sponsor cash position |
+
+## Options
+
+Table 1: Options considered.
+
+| # | Option | Description |
+|---|--------|------------|
+| 1 | Do Nothing | [Counterfactual: what happens without intervention] |
+| 2 | [Do Minimum] | [description] |
+| 3 | [Preferred] | [description] |
+
+The counterfactual is dynamic: it projects forward what happens without intervention, including existing trends and committed policies.
+
+## Costs
+
+Table 2: Cost streams ([currency] [price base] prices, discounted at [rate]).
+
+| Cost category | Cash flow | Undiscounted ([currency]m) | OB raw / mitigated | METB | Adjusted ([currency]m) | PV ([currency]m) |
+|--------------|:---------:|---------------------------:|-------------------:|-----:|----------------------:|------------------:|
+| Capital | Cash out | [val] | [X]% / [Y]% effective | +20% | [val] | [val] |
+| Operating | Cash out | [val] | 0% | +20% | [val] | [val] |
+| [Other] | [tag] | [val] | [val]% | [+20% or n/a] | [val] | [val] |
+| **Total** | | **[val]** | | | **[val]** | **[val]** |
+
+The METB column is `+20%` for tax-financed (government / blended) costs and `n/a` for private / philanthropic sponsors. Set to `n/a` for non-uk-gb frameworks.
+
+## Benefits
+
+Table 3: Benefit streams ([currency] [price base] prices).
+
+| Benefit category | Cash flow | Undiscounted ([currency]m) | Additionality | Adjusted ([currency]m) | PV ([currency]m) |
+|-----------------|:---------:|--------------------------:|--------------:|----------------------:|------------------:|
+| [Category 1] | [tag] | [val] | [X]% | [val] | [val] |
+| [Category 2] | [tag] | [val] | [X]% | [val] | [val] |
+| [Carbon, if applicable] | Non-cash | [val] | 100% | [val] | [val] |
+| **Total monetised** | | **[val]** | | **[val]** | **[val]** |
+
+**Non-monetised benefits** (listed qualitatively, not in the BCR):
+- [Benefit with direction and estimated magnitude]
+
+## Economic case
+
+Table 4: Economic NPV and BCR comparison.
+
+| Metric | Do Nothing | [Option 2] | [Option 3] |
+|--------|-----------:|-----------:|-----------:|
+| PV Costs ([currency]m) | 0 | [val] | [val] |
+| PV Benefits ([currency]m) | 0 | [val] | [val] |
+| **Economic NPV ([currency]m)** | **0** | **[val]** | **[val]** |
+| **BCR** | - | **[val]** | **[val]** |
+| **VfM category** | - | **[category]** | **[category]** |
+
+[Preferred option] has an economic NPV of [currency][val]m and a BCR of [val], representing [category] value for money.
+
+## Financial case
+
+Only Cash in and Cash out items counted. Non-cash social benefits excluded entirely.
+
+Table 5: Cash flow profile ([currency]m).
+
+| Year | Cash in | Cash out | Net cash flow | Cumulative |
+|------|--------:|---------:|--------------:|-----------:|
+| 1 | [val] | [val] | [val] | [val] |
+| 2 | [val] | [val] | [val] | [val] |
+| ... | ... | ... | ... | ... |
+
+Table 6: Financial metrics.
+
+| Metric | Value |
+|--------|------:|
+| Total funding requirement (peak financing need) | [currency][val]m |
+| Financial NPV | [currency][val]m |
+| Financial IRR | [val]% or "Undefined" |
+| Payback period | [val] years or "does not pay back" |
+| Minimum DSCR (if debt) | [val] or "n/a" |
+
+**Interpretation**: [one paragraph drawn from the verdict block, explaining the economic-vs-financial split and what it means for funding strategy]
+
+## Sensitivity
+
+[One paragraph covering all four sensitivity tests. Example shape: "The Economic NPV is robust under pessimistic scenario (NPV [val], BCR [val]) and remains positive at discount rates up to [X]%. The top sensitivity is [variable] (widest tornado range, [val]m span). Benefits could fall by [X]% before the NPV turns negative. The Financial NPV is [structurally negative / positive under all scenarios] and [is / is not] rescued by any plausible parameter change."]
+
+## Stakeholder (if uk-gb or au-vic)
+
+Table 7: Multiple account view.
+
+| Stakeholder group | In referent group? | PV costs ([currency]m) | PV benefits ([currency]m) | Net position |
+|-------------------|:-----------------:|----------------------:|--------------------------:|-------------:|
+| [Local residents] | Yes | [val] | [val] | [val] |
+| [Municipality] | Yes | [val] | [val] | [val] |
+| [Foreign contractors] | No | [val] | [val] | [val] |
+| **Referent group total** | | **[val]** | **[val]** | **[val]** |
+| **Efficiency total** | | **[val]** | **[val]** | **[val]** |
+
+Identity check: Referent Group NPV + Non-Referent NPV = Efficiency NPV. [Any deviation is a tagging error.]
+
+## Recommendation
+
+[One paragraph: preferred option, key conditions for proceeding (e.g. "subject to securing PNRR grant of EUR 40m"), and flags on the biggest risks from the sensitivity paragraph.]
+
+## Next step
+
+- `/business-case` to wrap this in the Five Case Model for a spending bid (when revived).
+- `/econ-audit` to check for residual CBA errors.
+```
+
+That is the full default deliverable.
+
+### Step 7.5: Sidecar JSON
+
+Alongside the markdown, write a structured `cba-[slug]-[YYYY-MM-DD].json` file containing the full appraisal object: every input (costs, benefits, years, framework, sponsor, schedule, base year), every parameter (OB, OB mitigation, METB, additionality, distributional eta, carbon scenario), every output (NPV, BCR, EANC, PV, optimism_bias_pct, METB applied, costs_adjusted, benefits_adjusted), and the full `data_versions` array from the bridge. Schema version `1`.
+
+The JSON is the structured handoff that `/business-case` (when revived) will consume as the Economic Case of the Five Case Model.
+
+### Step 8: Auto-audit hook (default on)
+
+After Steps 7 and 7.5 complete, invoke the `econ-audit` skill against the produced markdown unless `--no-audit` is set.
+
+```
+Skill(econ-audit) with input: cba-[slug]-[date].md
+```
+
+Capture the audit's RAG counts and append to the closing message (single line: `Audit: 0 RED, 1 AMBER`). Do not paste the full audit into the chat. The user can re-run `/econ-audit cba-[slug]-[date].md` for the full report.
+
+If RED count > 0, change the closing status from `DONE` to `DONE_WITH_CONCERNS` and include the first RED issue's headline.
+
+**Sub-component selection** (via `--section`): emit only the requested parts. Always include the KEY NUMBERS comment and header block.
+
+- `full` (default): the whole structure above.
+- `headline`: header + headline block only.
+- `costs`: header + costs table only.
+- `benefits`: header + benefits table only.
+- `economic`: header + economic case only.
+- `financial`: header + financial case only.
+- `sensitivity`: header + sensitivity paragraph only.
+- `stakeholder`: header + stakeholder table only.
+- Combinable: `--section headline,financial,sensitivity`.
+
+**Format exports** (multi-format via `--format`):
+- **Markdown (.md)**: always generated. `cba-[slug]-[date].md`.
+- **Excel (.xlsx)** (if `xlsx` in `--format`): invoke the `xlsx` skill. Workbook with sheets: `Summary` (headline and key numbers), `Costs`, `Benefits`, `Cash flow` (year-by-year), `Sensitivity`, `Stakeholder`. Blue input cells for key assumptions so the user can re-run scenarios. Save as `cba-[slug]-[date].xlsx`.
+- **Word (.docx)** (if `word` in `--format`): invoke the `docx` skill. One document, the full structure with cover page and hyperlinked references. Save as `cba-[slug]-[date].docx`.
+- **PowerPoint (.pptx)** (if `pptx` in `--format`): invoke the `pptx` skill. 8 slides: (1) Problem and options, (2) Headline verdict, (3) Costs, (4) Benefits, (5) Economic NPV, (6) Financial case, (7) Sensitivity, (8) Recommendation. Action titles. Save as `cba-[slug]-[date].pptx`.
+- **PDF** (if `pdf` in `--format`): render markdown through econstack Quarto template. Save as `cba-[slug]-[date].pdf`.
+- **`all`**: expand to all five formats.
+
+Tell the user (listing only files actually produced):
+```
+CBA complete. [Preferred option] NPV [val], BCR [val], VfM [category]. METB applied: [yes|no]. Backend: [greenbook|skill]. Audit: [N] RED, [N] AMBER.
+
+Saved:
+  cba-[slug]-[date].md
+  cba-[slug]-[date].json
+  [other formats if requested]
+
+Next: /econ-audit cba-[slug]-[date].md for the full audit report.
+```
+
+If `--no-audit` was set, omit the `Audit:` field from the headline. If `BACKEND=skill`, append a one-line note recommending `install.packages('greenbook')` for full reproducibility and vintage stamping.
+
+## Framework-specific rules
+
+### `uk-gb` (UK HMT Green Book)
+- Kinked STPR: 3.5% years 0-30, 3.0% 31-75, 2.5% 76-125, 2.0% 126-200, 1.5% 201-300 (greenbook `gb_stpr()`).
+- Optimism bias mandatory on capital costs per HMT supplementary Table 1 (Mott MacDonald 2002) by project type and stage. Mitigation factor 0 unless `--ob-mitigation` is set; typical 30-50% reduction once an active risk register is in place.
+- **METB of 20% on all tax-financed costs** (mandatory per Green Book 2022 §5.36). Skip only when sponsor is private or philanthropic.
+- Real-terms rebasing via the bundled HMT December-2025 GDP deflator. Set price base via `--price-base`.
+- Additionality: standard 20% deadweight, 25% displacement, 10% leakage unless user overrides.
+- Health outcomes use the `health` schedule (1.5% baseline) on QALY/WELLBY rows only. Monetary benefits stay on `standard` (3.5%).
+- WELLBY (HMT Wellbeing Guidance July 2021), QALY (DHSC supplementary), VPF (DfT TAG v2.03FC) all sourced from greenbook with vintage metadata.
+- Carbon: DESNZ Nov-2023 single consolidated series (`low` / `central` / `high`); historical traded vs non-traded split has been retired.
+- Referent group analysis mandatory if stakeholder groups cross the national boundary.
+- Distributional weights (Annex A4 iso-elastic, eta = 1.3, reference = median equivalised income) under `--distributional`.
+
+### `eu-brg` (EU Better Regulation)
+- Flat 3% (advanced Member States) or 5% (convergence MS) discount rate.
+- No optimism bias; use scenario sensitivity.
+- SME test mandatory for regulations affecting business.
+- Fundamental rights impact must be screened.
+- EU ETS price for carbon, EEA NEEDS for air quality damage costs.
+
+### `wb` (World Bank)
+- Country-specific ERR (typically 6%).
+- Distributional incidence mandatory: report NPV by income decile and poverty headcount impact.
+- WB shadow carbon price (USD 40-80/tCO2, rising to USD 50-100 by 2030).
+- Shadow wages for labour (typically 30-50% of market wage for non-working time in low-income contexts).
+- No optimism bias; use scenario sensitivity.
+
+### `adb` (ADB)
+- 9% EIRR hurdle (6% for climate, health, education per 2017 revision).
+- Switching values mandatory on all major variables.
+- Poverty and gender disaggregation mandatory.
+- ADB shadow carbon price (USD 36.30+/tCO2).
+- Local shadow wages by country and skill level.
+- No optimism bias.
+
+### `au-vic` (Victorian HVHR)
+- 4% for infrastructure, 7% for non-infrastructure (flat).
+- Vic DTF ILG risk allowance replaces optimism bias; typically P50 and P90 estimates.
+- Benefit Management Plan structure: every benefit must have owner, KPI, baseline, target, realisation timeframe.
+- ATAP M1 for transport sub-cases; ATAP PV5 for unit values.
+- Referent group typically Victorian residents; all-Australian for interstate benefits.
+
+## Important rules
+
+- **Counterfactual is mandatory.** Every benefit and cost is incremental to Do Nothing. The counterfactual must be dynamic, not a static snapshot of today.
+- **One interactive moment.** Step 1 collects project, options, costs, benefits in one batch. No other AskUserQuestion calls unless a longlist file is malformed.
+- **Silent working.** Do not narrate the discount computation, optimism bias lookup, METB, real-terms rebasing, or sensitivity logic. Show the result.
+- **METB is mandatory under Green Book 2022 §5.36** for tax-financed costs (uk-gb, sponsor government or blended). 20% rate. Skip only when sponsor is private or philanthropic.
+- **Optimism bias mitigation never zero by handwaving.** If the user claims mitigation > 0, the validation gate requires a corresponding risks block on the longlist or `--risks`. Otherwise reset to 0.
+- **Carbon is not adjusted for additionality** (global externality). Always split into embodied (construction) and operational (in-use). DESNZ Nov-2023 retired the traded / non-traded distinction; use a single consolidated series per scenario.
+- **Transfers are excluded** from social CBA. Tax receipts, welfare payments, grant receipts between government bodies are not net social benefits. METB sits **above** this rule: it is a real distortion on the funds raised, not a transfer.
+- **Sunk costs are excluded.** Resources already committed that cannot be recovered are irrelevant to the forward-looking decision.
+- **Cash flow tags drive the financial case.** Only items tagged `Cash in` or `Cash out` on the longlist count for Financial NPV. Non-cash items are excluded entirely, no matter how large.
+- **Two discount rates.** The economic case uses the kinked STPR (uk-gb) or framework flat rate. The financial case uses the sponsor's cost of capital (flat, typically 4.5% for government, 8-12% for private). Do not conflate them.
+- **Health schedule scope.** The 1.5% `health` schedule is applied **only** to QALY and WELLBY rows. Do not run a whole appraisal at 1.5% just because it has a health benefit.
+- **Real-terms basis is shared.** All cash inputs must rebase to the same `--price-base` year before discounting. Mixing 2020 and 2024 prices without rebasing is a validation-gate failure.
+- **Do not double count.** If a longlist flagged construction employment + capex, or journey time savings + land value uplift, or gross earnings + tax receipts, those are already handled upstream by `/longlist`. Do not re-add them here.
+- **EANC for unequal lives.** Whenever options have different appraisal periods, present EANC alongside NPV. Without it, NPV comparison across options is misleading.
+- **Sensitivity in one paragraph.** Scenario, switching values, tornado, discount rate, EANC where relevant: all in one compact paragraph, not separate tables.
+- **Vintage stamping is non-negotiable.** Every output must include the greenbook version and the data_versions for STPR, deflator, OB, METB, carbon, VPF, QALY, WELLBY in the KEY NUMBERS block. If `BACKEND=skill`, mark the affected vintages as `n/a` and note the loss of reproducibility.
+- **Em dashes**: never use em dashes. Use commas, colons, parentheses, or "and".
+
+## Integration with other skills
+
+- `/longlist` produces the markdown file this skill reads via `--from`. The Cash flow column drives the financial case; quantification methods route benefits to WELLBY / QALY / VPF / monetary.
+- `/business-case` (when revived in v0.15.0) will consume the sidecar JSON as the Economic Case of the Five Case Model.
+- `/econ-audit` runs automatically at the end (Step 8) unless `--no-audit`. The validation gate (Step 6.5) catches structural errors before writing; econ-audit catches presentational and methodological errors after writing.
+
+## Backend dependencies
+
+- **greenbook R package** (recommended): `install.packages("greenbook")` (CRAN) or set `GREENBOOK_DEV_PATH` to a local clone of <https://github.com/charlescoverdale/greenbook>. Provides STPR, GDP deflator, OB lookups, METB, carbon, VPF, QALY, WELLBY with bundled vintage metadata.
+- **bridge script**: `~/.claude/skills/econstack/bin/econstack-greenbook` — JSON in/out wrapper around greenbook. Returns `{"ok": false, "error": "greenbook_not_installed"}` cleanly when greenbook is unavailable; the skill falls back to `BACKEND=skill` (LLM computes the math, with reduced reproducibility).
+- **jsonlite** R package required by the bridge. Already a near-universal dep on any modern R install.

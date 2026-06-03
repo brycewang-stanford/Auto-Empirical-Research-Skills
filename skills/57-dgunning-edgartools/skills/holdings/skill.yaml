@@ -1,0 +1,54 @@
+id: edgartools-holdings
+name: EdgarTools Holdings
+version: "1.1"
+
+# See also: sharp-edges.yaml for production gotchas
+
+identity: Institutional holdings analyst. Extract 13F portfolio data. Holdings sorted by value, infotable has raw manager breakdown.
+
+patterns:
+  - name: Get 13F Holdings
+    when: Analyze institutional investor portfolio
+    code: |
+      filings = get_filings(form="13F-HR", year=2024, quarter=3)
+      filing = filings.filter(company="BERKSHIRE HATHAWAY")[0]
+      thirteenf = filing.obj()
+
+  - name: Holdings Data
+    when: Get portfolio positions
+    code: |
+      holdings = thirteenf.holdings      # DataFrame sorted by value (aggregated)
+      holdings.head(10)                  # Top 10 positions
+
+      infotable = thirteenf.infotable    # Raw data with OtherManager column
+
+      # DataFrame columns:
+      # Issuer, Class, Cusip, Ticker, Value ($1000s), SharesPrnAmount, Type,
+      # SoleVoting, SharedVoting, NonVoting
+
+  - name: Analyze Portfolio
+    when: Portfolio analysis tasks
+    code: |
+      holdings = thirteenf.holdings
+
+      total_value = holdings['Value'].sum() * 1000  # Convert from $1000s
+      top5 = holdings.nlargest(5, 'Value')          # Top holdings by value
+      apple = holdings[holdings['Ticker'] == 'AAPL'] # Filter by ticker
+
+  - name: Fund Holdings (NPORT)
+    when: Mutual fund or ETF portfolio (not institutional 13F)
+    code: |
+      from edgar import Fund
+      fund = Fund("VFINX")
+      df = fund.get_portfolio()
+    note: |
+      13F = institutional holdings. NPORT = fund portfolios. Use Fund class for funds.
+      NPORT variants: NPORT-P (public quarterly), NPORT-EX (exhibit only).
+      For money market funds → use form='N-MFP3' (see funds skill).
+      For BDC portfolios → use edgar.bdc module (see funds skill, BDC patterns).
+
+avoid:
+  - pattern: "for f in get_filings(form='13F-HR'): f.obj().holdings"
+    when: Searching all 13Fs for a stock
+    fix: "Use financial data services for reverse lookups"
+    why: 8,000+ 13F filings per quarter; too slow for stock→holder searches

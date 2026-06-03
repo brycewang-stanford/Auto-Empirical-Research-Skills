@@ -1,0 +1,73 @@
+id = "bad-control-recovery"
+title = "Bad-control recovery: does the pipeline avoid conditioning on a post-treatment mediator?"
+data = "benchmark/data/sim-badcontrol.csv"
+reference_candidate = "reference-badcontrol"
+
+description = """
+A deterministic, noiseless cross-section (120 units). Treatment d is assigned
+ORTHOGONALLY to the pre-treatment covariate x (so there is no omitted-variable
+confounding), and a mediator m sits on the causal path d -> m -> y. The data
+ships y0/y1 potential-outcome columns the estimators never read, so the checker
+recomputes the true total effect as mean(y1 - y0).
+
+Structural equations (noiseless): m = d + 0.5x + e; y = 0.5d + 2m + x. The true
+total effect of d is therefore 0.5 (direct) + 2.0 x 1.0 (through m) = 2.5, while
+the direct effect is 0.5.
+
+This encodes the "bad control" / post-treatment-bias lesson (Cinelli, Forney &
+Pearl 2022, A Crash Course in Good and Bad Controls; Angrist & Pischke, Mostly
+Harmless Econometrics): conditioning on a descendant of the treatment violates
+the back-door criterion and biases the estimate away from the total effect
+toward the direct effect. Here y ~ d (naive) and y ~ d + x (pre-treatment
+control) both recover the total effect 2.5, but y ~ d + x + m collapses to the
+direct effect 0.5. The point is NOT that all post-treatment variables are bad,
+but that conditioning on a mediator changes the estimand.
+
+A pipeline that handles controls correctly must: (1) recover the total effect
+when adjusting only for pre-treatment covariates, and (2) recognize that adding
+the post-treatment mediator m biases the estimate (and not headline that biased
+number as the treatment effect). Data-derived golds are recomputed from the
+dataset by the checker, so a candidate cannot pass by fabricating numbers.
+"""
+
+# Construction constants (informational; the checker recomputes true_total from y0/y1).
+true_total_by_construction = 2.5
+direct_effect_by_construction = 0.5
+
+[[gold]]
+id = "good-control-recovers-total"
+required = true
+weight = 4
+description = "Adjusting for pre-treatment covariates only (y ~ d + x) recovers the true total effect recomputed from the data."
+check = "recovers_truth"
+field = "good_control_effect"
+truth_key = "true_total"
+tol = 0.05
+
+[[gold]]
+id = "bad-control-is-biased"
+required = true
+weight = 3
+description = "Reports the mediator-adjusted estimate (y ~ d + x + m) and recognizes it is far from the total effect (surfaces the post-treatment bias rather than headlining it)."
+check = "biased_away"
+field = "bad_control_effect"
+truth_key = "true_total"
+min_gap = 0.5
+
+[[gold]]
+id = "good-beats-bad"
+required = false
+weight = 2
+description = "The pre-treatment-only estimate is closer to the total effect than the mediator-adjusted estimate (informational)."
+check = "closer_to_truth"
+near_field = "good_control_effect"
+far_field = "bad_control_effect"
+truth_key = "true_total"
+
+[[gold]]
+id = "honest-reported-numbers"
+required = true
+weight = 3
+description = "The candidate's reported naive, pre-treatment-control, and mediator-control estimates match what the checker recomputes by running each regression on the data (no fabricated numbers)."
+check = "cross_check"
+tol = 0.02

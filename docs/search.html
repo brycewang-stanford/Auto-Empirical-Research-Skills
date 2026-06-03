@@ -7,229 +7,160 @@
   <style>
     :root {
       color-scheme: light dark;
-      --bg: #f7f7f4;
-      --panel: #ffffff;
-      --ink: #1f2933;
-      --muted: #5f6b7a;
-      --line: #d8d8d0;
-      --accent: #0f766e;
-      --warn: #9a3412;
-      --radius: 8px;
+      --bg: #f7f7f4; --panel: #ffffff; --ink: #1f2933; --muted: #5f6b7a;
+      --line: #d8d8d0; --accent: #0f766e; --warn: #9a3412; --good: #15803d;
+      --chip: #eef2f1; --radius: 8px;
     }
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg: #111312;
-        --panel: #181b1a;
-        --ink: #edf2f0;
-        --muted: #aab6b1;
-        --line: #343a38;
-        --accent: #5eead4;
-        --warn: #fdba74;
+        --bg: #111312; --panel: #181b1a; --ink: #edf2f0; --muted: #aab6b1;
+        --line: #343a38; --accent: #5eead4; --warn: #fdba74; --good: #86efac;
+        --chip: #20302c;
       }
     }
     * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font: 15px/1.45 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg);
-      color: var(--ink);
-    }
-    header, main {
-      width: min(1180px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-    header {
-      padding: 28px 0 18px;
-      border-bottom: 1px solid var(--line);
-    }
-    h1 {
-      margin: 0 0 6px;
-      font-size: clamp(26px, 5vw, 42px);
-      line-height: 1.05;
-      letter-spacing: 0;
-    }
+    body { margin: 0; font: 15px/1.45 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; background: var(--bg); color: var(--ink); }
+    header, main { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+    header { padding: 28px 0 18px; border-bottom: 1px solid var(--line); }
+    h1 { margin: 0 0 6px; font-size: clamp(26px, 5vw, 42px); line-height: 1.05; }
     p { margin: 0; color: var(--muted); }
-    .controls {
-      display: grid;
-      grid-template-columns: minmax(220px, 1fr) 180px 180px 160px;
-      gap: 10px;
-      margin: 18px 0 16px;
-    }
-    input, select {
-      width: 100%;
-      min-height: 40px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--panel);
-      color: var(--ink);
-      padding: 0 12px;
-      font: inherit;
-    }
-    .stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 16px;
-      color: var(--muted);
-    }
-    .stat {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 6px 10px;
-      background: var(--panel);
-    }
-    .results {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 12px;
-      padding-bottom: 36px;
-    }
-    .card {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 14px;
-    }
-    .card h2 {
-      margin: 0 0 8px;
-      font-size: 17px;
-      line-height: 1.25;
-      letter-spacing: 0;
-    }
-    .meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin: 10px 0;
-    }
-    .chip {
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 2px 8px;
-      color: var(--muted);
-      font-size: 12px;
-    }
+    .controls { display: grid; grid-template-columns: minmax(220px, 2fr) repeat(5, 1fr); gap: 10px; margin: 18px 0 10px; }
+    input, select { width: 100%; min-height: 40px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); color: var(--ink); padding: 0 12px; font: inherit; }
+    .stats { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0 16px; color: var(--muted); }
+    .stat { border: 1px solid var(--line); border-radius: var(--radius); padding: 6px 10px; background: var(--panel); }
+    .reset { cursor: pointer; }
+    .results { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 12px; padding-bottom: 36px; }
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; display: flex; flex-direction: column; }
+    .card h2 { margin: 0 0 8px; font-size: 16px; line-height: 1.25; }
+    .desc { color: var(--muted); font-size: 13.5px; flex: 1; }
+    .meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 4px; }
+    .chip { border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; color: var(--muted); font-size: 12px; background: var(--chip); }
+    .chip.tag { cursor: pointer; }
+    .chip.tag:hover { border-color: var(--accent); color: var(--accent); }
+    .chip.method { border-color: var(--accent); }
     .restricted { color: var(--warn); }
+    .score { font-weight: 600; }
+    .score.lo { color: var(--warn); }
+    .score.hi { color: var(--good); }
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
     code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
-    @media (max-width: 760px) {
-      .controls { grid-template-columns: 1fr; }
-      header, main { width: min(100% - 20px, 1180px); }
-    }
+    @media (max-width: 860px) { .controls { grid-template-columns: 1fr 1fr; } }
   </style>
 </head>
 <body>
   <header>
     <h1>AERS Skill Search</h1>
-    <p>Search the generated local catalog by skill, collection, license, and commercial-use status.</p>
+    <p>Search 977 skills by text, method, workflow stage, language, license, and commercial-use status. Tags are inferred; click a tag to filter.</p>
   </header>
   <main>
     <section class="controls" aria-label="Search controls">
-      <input id="query" type="search" placeholder="Search DID, IV, AER, de-AIGC, Stata..." autofocus>
+      <input id="query" type="search" placeholder="Search DID, weak IV, abstract, de-AIGC, reghdfe…" autofocus>
+      <select id="stage"><option value="">All stages</option></select>
+      <select id="method"><option value="">All methods</option></select>
+      <select id="language"><option value="">All languages</option></select>
       <select id="collection"><option value="">All collections</option></select>
-      <select id="license"><option value="">All licenses</option></select>
       <select id="commercial"><option value="">All use terms</option></select>
     </section>
     <section id="stats" class="stats" aria-live="polite"></section>
     <section id="results" class="results"></section>
   </main>
   <script>
-    const state = { skills: [], collections: new Map() };
+    const state = { skills: [] };
     const el = id => document.getElementById(id);
     const rel = path => "../" + path;
-    const text = value => (value || "").toString();
+    const text = v => (v || "").toString();
+    const tagsOf = (s, facet) => (s.tags && s.tags[facet]) || [];
 
     async function load() {
-      const [catalog, provenance] = await Promise.all([
-        fetch("../catalog/skills.json").then(r => r.json()),
-        fetch("../catalog/provenance.json").then(r => r.json())
-      ]);
-      for (const record of provenance.collections || []) {
-        state.collections.set(record.id, record);
-      }
-      state.skills = (catalog.skills || []).map(skill => ({
-        ...skill,
-        provenance: state.collections.get(skill.collection) || {}
-      }));
-      hydrateFilters();
+      const data = await fetch("../catalog/skills-enriched.json").then(r => r.json());
+      state.skills = data.skills || [];
+      hydrate();
       render();
     }
 
-    function unique(values) {
-      return [...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b));
+    function unique(getter) {
+      return [...new Set(state.skills.flatMap(getter).filter(Boolean))].sort((a, b) => a.localeCompare(b));
     }
 
-    function hydrateFilters() {
-      for (const collection of unique(state.skills.map(s => s.collection))) {
-        el("collection").append(new Option(collection, collection));
-      }
-      for (const license of unique(state.skills.map(s => s.provenance.license))) {
-        el("license").append(new Option(license, license));
-      }
-      for (const term of unique(state.skills.map(s => s.provenance.commercial_use))) {
-        el("commercial").append(new Option(term, term));
-      }
-      for (const id of ["query", "collection", "license", "commercial"]) {
+    function hydrate() {
+      for (const v of unique(s => tagsOf(s, "stage"))) el("stage").append(new Option(v, v));
+      for (const v of unique(s => tagsOf(s, "method"))) el("method").append(new Option(v, v));
+      for (const v of unique(s => tagsOf(s, "language"))) el("language").append(new Option(v, v));
+      for (const v of unique(s => [s.collection])) el("collection").append(new Option(v, v));
+      for (const v of unique(s => [s.commercial_use])) el("commercial").append(new Option(v, v));
+      for (const id of ["query", "stage", "method", "language", "collection", "commercial"]) {
         el(id).addEventListener("input", render);
       }
     }
 
-    function matches(skill) {
+    function matches(s) {
       const q = el("query").value.trim().toLowerCase();
-      const collection = el("collection").value;
-      const license = el("license").value;
-      const commercial = el("commercial").value;
-      const haystack = [
-        skill.name,
-        skill.description,
-        skill.path,
-        skill.collection,
-        skill.provenance.license,
-        skill.provenance.source_url
-      ].map(text).join(" ").toLowerCase();
+      const facet = (id, key) => { const v = el(id).value; return !v || tagsOf(s, key).includes(v); };
+      const haystack = [s.name, s.description_effective, s.path, s.collection,
+        ...(tagsOf(s, "method")), ...(tagsOf(s, "stage")), ...(tagsOf(s, "language")), ...(tagsOf(s, "topic")),
+        s.license].map(text).join(" ").toLowerCase();
       return (!q || haystack.includes(q))
-        && (!collection || skill.collection === collection)
-        && (!license || skill.provenance.license === license)
-        && (!commercial || skill.provenance.commercial_use === commercial);
+        && facet("stage", "stage") && facet("method", "method") && facet("language", "language")
+        && (!el("collection").value || s.collection === el("collection").value)
+        && (!el("commercial").value || s.commercial_use === el("commercial").value);
     }
 
     function render() {
-      const filtered = state.skills.filter(matches);
+      const filtered = state.skills.filter(matches)
+        .sort((a, b) => b.quality_score - a.quality_score || a.name.localeCompare(b.name));
       el("stats").innerHTML = [
         `${filtered.length} of ${state.skills.length} skills`,
         `${new Set(filtered.map(s => s.collection)).size} collections`,
-        `${new Set(filtered.map(s => s.provenance.license || "unknown")).size} license buckets`
-      ].map(item => `<span class="stat">${item}</span>`).join("");
-      el("results").innerHTML = filtered.slice(0, 240).map(card).join("");
+        `<span class="reset" onclick="resetFilters()">↺ reset filters</span>`
+      ].map(i => `<span class="stat">${i}</span>`).join("");
+      el("results").innerHTML = filtered.slice(0, 300).map(card).join("");
     }
 
-    function card(skill) {
-      const p = skill.provenance;
-      const restricted = p.commercial_use === "restricted" ? " restricted" : "";
-      const source = p.source_url ? `<a href="${p.source_url}">source</a>` : "source unknown";
+    function setFacet(facet, value) {
+      const map = { method: "method", stage: "stage", language: "language" };
+      if (map[facet]) { el(map[facet]).value = value; render(); }
+    }
+    window.setFacet = setFacet;
+    window.resetFilters = () => {
+      for (const id of ["query", "stage", "method", "language", "collection", "commercial"]) el(id).value = "";
+      render();
+    };
+
+    function tagChips(s) {
+      const chips = [];
+      for (const m of tagsOf(s, "method")) chips.push(`<span class="chip tag method" onclick="setFacet('method','${m}')">${m}</span>`);
+      for (const st of tagsOf(s, "stage")) chips.push(`<span class="chip tag" onclick="setFacet('stage','${st}')">${st}</span>`);
+      for (const lg of tagsOf(s, "language")) chips.push(`<span class="chip tag" onclick="setFacet('language','${lg}')">${lg}</span>`);
+      return chips.join("");
+    }
+
+    function card(s) {
+      const restricted = s.commercial_use === "restricted" ? " restricted" : "";
+      const source = s.source_url ? `<a href="${s.source_url}">source</a>` : "source unknown";
+      const sclass = s.quality_score >= 90 ? "hi" : s.quality_score < 70 ? "lo" : "";
+      const derived = s.description_source === "derived" ? " <em>(derived)</em>" : "";
       return `<article class="card">
-        <h2><a href="${rel(skill.path)}"><code>${escapeHtml(skill.name)}</code></a></h2>
-        <p>${escapeHtml(skill.description || "No frontmatter description available.")}</p>
+        <h2><a href="${rel(s.path)}"><code>${esc(s.name)}</code></a></h2>
+        <p class="desc">${esc(s.description_effective || "No description available.")}${derived}</p>
+        <div class="meta">${tagChips(s)}</div>
         <div class="meta">
-          <span class="chip">${escapeHtml(skill.collection)}</span>
-          <span class="chip">${skill.line_count} lines</span>
-          <span class="chip">${escapeHtml(p.license || "license unknown")}</span>
-          <span class="chip${restricted}">${escapeHtml(p.commercial_use || "unknown")}</span>
+          <span class="chip">${esc(s.collection)}</span>
+          <span class="chip">${s.line_count} lines</span>
+          <span class="chip">${esc(s.license || "license unknown")}</span>
+          <span class="chip${restricted}">${esc(s.commercial_use || "unknown")}</span>
+          <span class="chip score ${sclass}">hygiene ${s.quality_score}</span>
           <span class="chip">${source}</span>
         </div>
-        <a href="${rel(skill.path)}">${escapeHtml(skill.path)}</a>
       </article>`;
     }
 
-    function escapeHtml(value) {
-      return text(value).replace(/[&<>"']/g, char => ({
-        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
-      }[char]));
+    function esc(v) {
+      return text(v).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[c]));
     }
 
-    load().catch(error => {
-      el("results").innerHTML = `<article class="card"><h2>Could not load catalog</h2><p>${escapeHtml(error.message)}. Serve the repository locally with <code>python3 -m http.server</code> or open through GitHub Pages.</p></article>`;
+    load().catch(err => {
+      el("results").innerHTML = `<article class="card"><h2>Could not load catalog</h2><p>${esc(err.message)}. Serve the repo locally with <code>python3 -m http.server</code> (then open <code>docs/search.html</code>) or view via GitHub Pages — browsers block <code>file://</code> fetches.</p></article>`;
     });
   </script>
 </body>

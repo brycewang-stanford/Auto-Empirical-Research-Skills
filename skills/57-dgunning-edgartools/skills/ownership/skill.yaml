@@ -1,0 +1,64 @@
+id: edgartools-ownership
+name: EdgarTools Ownership
+version: "1.1"
+
+# See also: sharp-edges.yaml for production gotchas
+
+identity: Insider trading analyst. Use get_ownership_summary() for computed metrics (net_change, net_value, primary_activity).
+
+patterns:
+  - name: Form 4 Transactions
+    when: Analyze insider trades
+    code: |
+      filing = company.get_filings(form="4")[0]
+      form4 = filing.obj()
+      summary = form4.get_ownership_summary()  # Returns ONE TransactionSummary object
+
+      summary.insider_name              # "Tim Cook"
+      summary.position                  # "CEO"
+      summary.issuer                    # "Apple Inc. (AAPL)"
+      summary.net_change                # Net shares: positive=buy, negative=sell
+      summary.net_value                 # Net dollar value
+      summary.primary_activity          # "Purchase", "Sale", "Mixed", "Grant/Award"
+      summary.remaining_shares          # Shares owned after transaction
+    note: |
+      get_ownership_summary() returns a SINGLE TransactionSummary object, NOT a list.
+      Do NOT iterate over it. Access properties directly: summary.insider_name, summary.net_value, etc.
+      For individual transactions within a filing, use summary.transactions (see below).
+
+  - name: Individual Transactions
+    when: Need transaction-level details
+    code: |
+      for trans in summary.transactions:
+          trans.transaction_type        # "purchase", "sale", "exercise"
+          trans.code                    # P=Purchase, S=Sale, A=Grant, M=Exercise, F=Tax, G=Gift
+          trans.shares_numeric          # Shares (handles footnotes)
+          trans.price_numeric           # Price per share
+          trans.value_numeric           # Total value
+
+      df = summary.to_dataframe(detailed=True)   # One row per transaction
+      df = summary.to_dataframe(detailed=False)  # Aggregated summary row
+
+  - name: Screen Large Transactions
+    when: Find significant insider activity
+    code: |
+      for filing in company.get_filings(form="4")[:30]:
+          summary = filing.obj().get_ownership_summary()
+          if summary.net_change > 10000 and summary.net_value > 100000:
+              print(f"{summary.insider_name}: {summary.net_change:,} shares (${summary.net_value:,.0f})")
+
+  - name: Form 3 and 5
+    when: Initial ownership or annual summary
+    code: |
+      # Form 3 - Initial statement (when becoming insider)
+      initial = company.get_filings(form="3")[0].obj().get_ownership_summary()
+      initial.total_shares              # Total shares owned
+      initial.holdings                  # List of SecurityHolding
+
+      # Form 5 - Annual summary (small/late transactions)
+      annual = company.get_filings(form="5")[0].obj().get_ownership_summary()
+
+avoid:
+  - pattern: "form4.common_stock_sales.iterrows()"
+    fix: "form4.get_ownership_summary().net_change"
+    why: TransactionSummary has computed net_change, net_value, primary_activity

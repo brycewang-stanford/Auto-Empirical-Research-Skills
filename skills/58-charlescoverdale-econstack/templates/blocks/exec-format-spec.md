@@ -1,0 +1,1 @@
+Formatting: Action title 24-28pt bold navy (#003078). Must be a complete sentence stating an insight, NOT a topic label. Body 14-16pt, one key number bolded per bullet. Footer 10pt light grey with source + date. Clean white background, no decorative elements. Slide numbers bottom-right. Charts in navy (#003078) / grey (#666666) / light blue (#4472C4) palette.

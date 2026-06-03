@@ -12,8 +12,8 @@ This playbook summarizes the routine maintenance loop for AERS.
 ```bash
 git fetch origin
 make catalog
-make validate
-python3 -m py_compile scripts/*.py
+make check
+make python-compat
 git diff --check
 ```
 

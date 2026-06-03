@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this research data or code, please cite as below."
+title: "{{PROJECT_NAME}}"
+type: dataset
+authors:
+  - family-names: "{{LAST_NAME}}"
+    given-names: "{{FIRST_NAME}}"
+    orcid: "https://orcid.org/{{ORCID}}"
+    affiliation: "{{INSTITUTION}}"
+date-released: "{{DATE}}"
+version: "1.0.0"
+license: MIT
+repository-code: "{{REPO_URL}}"
+url: "{{OSF_URL}}"
+keywords:
+  - "{{KEYWORD_1}}"
+  - "{{KEYWORD_2}}"

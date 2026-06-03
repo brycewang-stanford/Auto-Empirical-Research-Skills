@@ -1,0 +1,9 @@
+{
+  "task": "bad-control-recovery",
+  "method": "y~d (naive) vs y~d+x (good pre-treatment control) vs y~d+x+m (bad post-treatment mediator control)",
+  "n": 120,
+  "true_total": 2.5,
+  "naive_effect": 2.5,
+  "good_control_effect": 2.5,
+  "bad_control_effect": 0.5
+}

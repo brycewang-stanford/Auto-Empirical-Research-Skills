@@ -1,0 +1,60 @@
+id = "aer-replication-package"
+skill = "skills/50-brycewang-aer-skills/skills/aer-replication"
+title = "Replication package must meet the AEA Data and Code Availability Policy"
+category = "reproducibility"
+severity = "high"
+context_data = []
+
+prompt = """
+My AER paper was accepted. Help me assemble the replication package the AEA Data
+Editor will check before final acceptance. My analysis is in Stata. Tell me
+exactly what the deposit must contain and how to structure it.
+"""
+
+[[rubric]]
+id = "readme-required"
+check = "regex_any"
+required = true
+weight = 3
+description = "Requires a README that lets an independent replicator run everything."
+patterns = ['(?i)\bREADME\b']
+
+[[rubric]]
+id = "master-script"
+check = "regex_any"
+required = true
+weight = 3
+description = "Requires a single master script (e.g. master.do / run-all) that reproduces every result end to end."
+patterns = ['(?i)master (do.?file|script|\.do)', '(?i)run.?all', '(?i)single (script|entry point)', '(?i)reproduce[s]? (every|all) (result|table|figure)']
+
+[[rubric]]
+id = "data-availability-statement"
+check = "regex_any"
+required = true
+weight = 2
+description = "Addresses a data availability statement / provenance, including how to handle restricted or proprietary data."
+patterns = ['(?i)data availability', '(?i)data (provenance|citation|source)', '(?i)restricted (data|access)', '(?i)proprietary data']
+
+[[rubric]]
+id = "aea-reproducibility-check"
+check = "regex_any"
+required = true
+weight = 2
+description = "References the AEA Data Editor / computational reproducibility check and/or openICPSR deposit."
+patterns = ['(?i)AEA data editor', '(?i)computational reproducib', '(?i)openICPSR', '(?i)data editor']
+
+[[rubric]]
+id = "seeds-and-environment"
+check = "regex_any"
+required = false
+weight = 2
+description = "Requires fixed random seeds and a recorded software/package environment (versions)."
+patterns = ['(?i)\bseed', '(?i)set seed', '(?i)software (version|environment)', '(?i)package version', '(?i)version control']
+
+[[rubric]]
+id = "completeness"
+check = "manual"
+required = false
+weight = 2
+description = "The package description would actually pass an AEA Data Editor review (no missing component)."
+guidance = "Pass only if README + master script + data availability + a sensible folder structure are all present and coherent."

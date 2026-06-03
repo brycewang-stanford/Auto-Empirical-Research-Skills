@@ -1,0 +1,89 @@
+# Collaboration - How the core skill works with specialized skills
+
+delegation_triggers:
+  - trigger: "financial analysis|income statement|balance sheet|ratios"
+    delegate_to: financials
+
+  - trigger: "10-K|10-Q|8-K|MD&A|risk factors|Item 1|Item 7"
+    delegate_to: reports
+
+  - trigger: "13F|holdings|portfolio|institutional|hedge fund"
+    delegate_to: holdings
+
+  - trigger: "Form 4|Form 3|insider|executive|director|transaction"
+    delegate_to: ownership
+
+  - trigger: "XBRL|facts|concepts|taxonomy|dimensions|us-gaap"
+    delegate_to: xbrl
+
+  - trigger: "BDC|business development company|schedule of investments"
+    delegate_to: funds
+
+handoffs:
+  - to: financials
+    when: Deep financial analysis, multi-period comparison, ratios
+    provides: company object
+    returns: calculated metrics, formatted tables
+
+  - to: reports
+    when: Report sections (MD&A, risk factors, Item 1-8)
+    provides: filing object
+    returns: extracted section content
+
+  - to: holdings
+    when: 13F analysis, portfolio composition
+    provides: company/filing object
+    returns: holdings data, portfolio summary
+
+  - to: ownership
+    when: Form 4 insider transactions, ownership patterns
+    provides: company object
+    returns: transaction details, ownership summary
+
+  - to: xbrl
+    when: Raw XBRL facts, taxonomy concepts, dimensions
+    provides: filing with XBRL
+    returns: raw fact values, dimensional breakdowns
+
+common_combinations:
+  - name: Company Deep Dive
+    skills: [core, financials, reports]
+    flow: "Company lookup → financials analysis → MD&A narrative"
+
+  - name: Institutional Holdings
+    skills: [core, holdings]
+    flow: "find investor → parse 13F → analyze positions"
+
+  - name: Insider Activity
+    skills: [core, ownership]
+    flow: "Company lookup → Form 4 filings → transaction analysis"
+
+  - name: Multi-Company Comparison
+    skills: [core, financials]
+    flow: "Multiple Company() → get_financial_metrics() each → compare"
+
+  - name: Event-Driven Analysis
+    skills: [core, reports]
+    flow: "get_current_filings(form='8-K') → parse EightK items"
+
+  - name: Fund/BDC Analysis
+    skills: [core, funds]
+    flow: "Fund() or get_bdc_list() → portfolio data → holdings analysis"
+
+boundaries:
+  core_handles:
+    - Company/entity lookup (find, Company)
+    - Filing discovery/filtering (get_filings)
+    - Basic filing access (obj, document, xbrl)
+    - Simple financial metrics (get_revenue, get_net_income)
+    - Content search (filing.search)
+    - Output formatting (str, to_context)
+    - API discovery (object.docs)
+
+  delegates:
+    - Complex financial analysis → financials
+    - Report section extraction → reports
+    - 13F holdings analysis → holdings
+    - Insider transactions → ownership
+    - Raw XBRL access → xbrl
+    - BDC portfolio analysis → funds

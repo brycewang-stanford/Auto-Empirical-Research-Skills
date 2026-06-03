@@ -4,9 +4,11 @@
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import re
 import sys
+import unicodedata
 from collections import Counter
 from pathlib import Path
 from urllib.parse import unquote
@@ -15,6 +17,7 @@ from urllib.parse import unquote
 ROOT = Path(__file__).resolve().parents[1]
 SKILLS_DIR = ROOT / "skills"
 MARKDOWN_LINK_RE = re.compile(r"!?\[[^\]]*]\(([^)]+)\)")
+CATALOG_JSON = ROOT / "catalog" / "skills.json"
 
 
 def read_text(path: Path) -> str:
@@ -25,8 +28,30 @@ def rel(path: Path) -> str:
     return path.relative_to(ROOT).as_posix()
 
 
+def display_path(path: Path) -> str:
+    try:
+        return rel(path)
+    except ValueError:
+        return str(path)
+
+
+def _skip_leading_comment(lines: list[str]) -> list[str]:
+    """Drop a leading HTML comment banner (vendored CoPaper.AI provenance banner)
+    plus surrounding blank lines, so frontmatter after the banner is detected."""
+    i = 0
+    while i < len(lines) and not lines[i].strip():
+        i += 1
+    if i < len(lines) and lines[i].lstrip().startswith("<!--"):
+        while i < len(lines) and "-->" not in lines[i]:
+            i += 1
+        i += 1  # move past the line containing -->
+        while i < len(lines) and not lines[i].strip():
+            i += 1
+    return lines[i:]
+
+
 def parse_frontmatter(text: str) -> dict[str, str]:
-    lines = text.splitlines()
+    lines = _skip_leading_comment(text.splitlines())
     if not lines or lines[0].strip() != "---":
         return {}
 
@@ -93,7 +118,7 @@ def iter_nonstandard_skill_files() -> list[Path]:
     return sorted(paths)
 
 
-def normalize_markdown_target(raw_target: str) -> str | None:
+def parse_markdown_target(raw_target: str) -> tuple[str, str] | None:
     target = raw_target.strip()
     if not target:
         return None
@@ -103,13 +128,24 @@ def normalize_markdown_target(raw_target: str) -> str | None:
         target = target.split()[0]
 
     target = target.strip()
-    if not target or target.startswith("#"):
+    if not target:
         return None
     if re.match(r"^[a-zA-Z][a-zA-Z0-9+.-]*:", target):
         return None
     if target.startswith("//"):
         return None
-    return unquote(target.split("#", 1)[0])
+    path, _, fragment = target.partition("#")
+    if not path and not fragment:
+        return None
+    return unquote(path), unquote(fragment)
+
+
+def normalize_markdown_target(raw_target: str) -> str | None:
+    parsed = parse_markdown_target(raw_target)
+    if parsed is None:
+        return None
+    path, _fragment = parsed
+    return path
 
 
 def iter_project_markdown() -> list[Path]:
@@ -127,17 +163,22 @@ def iter_project_markdown() -> list[Path]:
 def validate_markdown_links() -> tuple[list[str], list[str]]:
     errors: list[str] = []
     warnings: list[str] = []
+    anchors_by_path: dict[Path, set[str]] = {}
+    repo_root = ROOT.resolve()
 
     for md_path in iter_project_markdown():
         text = read_text(md_path)
         for match in MARKDOWN_LINK_RE.finditer(text):
-            target = normalize_markdown_target(match.group(1))
-            if target is None:
+            if is_in_fenced_code(text, match.start()):
                 continue
+            parsed = parse_markdown_target(match.group(1))
+            if parsed is None:
+                continue
+            target, fragment = parsed
 
-            resolved = (md_path.parent / target).resolve()
+            resolved = md_path.resolve() if not target else (md_path.parent / target).resolve()
             try:
-                resolved.relative_to(ROOT)
+                resolved.relative_to(repo_root)
             except ValueError:
                 warnings.append(f"{rel(md_path)} links outside repo: {target}")
                 continue
@@ -145,8 +186,67 @@ def validate_markdown_links() -> tuple[list[str], list[str]]:
             if not resolved.exists():
                 line_no = text.count("\n", 0, match.start()) + 1
                 errors.append(f"{rel(md_path)}:{line_no} missing local link: {target}")
+                continue
+
+            if fragment and resolved.suffix.lower() in {".md", ".markdown"}:
+                anchors = anchors_by_path.setdefault(resolved, markdown_anchors(read_text(resolved)))
+                if normalize_anchor_fragment(fragment) not in anchors:
+                    line_no = text.count("\n", 0, match.start()) + 1
+                    errors.append(
+                        f"{rel(md_path)}:{line_no} missing markdown anchor: "
+                        f"{target or rel(md_path)}#{fragment}"
+                    )
 
     return errors, warnings
+
+
+def normalize_anchor_fragment(fragment: str) -> str:
+    return fragment.strip().lstrip("#").lower()
+
+
+def github_heading_slug(heading: str) -> str:
+    text = heading.strip()
+    text = re.sub(r"\s+#+\s*$", "", text)
+    text = re.sub(r"`([^`]*)`", r"\1", text)
+    text = re.sub(r"!\[([^\]]*)]\([^)]+\)", r"\1", text)
+    text = re.sub(r"\[([^\]]+)]\([^)]+\)", r"\1", text)
+    text = re.sub(r"<[^>]+>", "", text)
+    text = text.lower()
+
+    chars: list[str] = []
+    for char in text:
+        category = unicodedata.category(char)
+        if category.startswith("M"):
+            continue
+        if char.isspace():
+            chars.append("-")
+        elif category[0] in {"P", "S"} and char not in {"-", "_"}:
+            continue
+        else:
+            chars.append(char)
+    return "".join(chars)
+
+
+def markdown_anchors(text: str) -> set[str]:
+    anchors = {"top"}
+    seen: Counter[str] = Counter()
+    for line in text.splitlines():
+        match = re.match(r"^(#{1,6})\s+(.+?)\s*$", line)
+        if not match:
+            continue
+        base = github_heading_slug(match.group(2))
+        count = seen[base]
+        seen[base] += 1
+        anchors.add(base if count == 0 else f"{base}-{count}")
+    return anchors
+
+
+def is_in_fenced_code(text: str, offset: int) -> bool:
+    in_fence = False
+    for line in text[:offset].splitlines():
+        if line.lstrip().startswith("```"):
+            in_fence = not in_fence
+    return in_fence
 
 
 def validate_skill_frontmatter() -> tuple[list[str], list[str]]:
@@ -230,7 +330,7 @@ def validate_required_files() -> tuple[list[str], list[str]]:
     warnings: list[str] = []
     required = [
         "README.md",
-        "README-zh.md",
+        "README-en.md",
         "CHANGELOG.md",
         "CONTRIBUTING.md",
         "LICENSE",
@@ -240,6 +340,9 @@ def validate_required_files() -> tuple[list[str], list[str]]:
         ".github/dependabot.yml",
         ".github/workflows/check-external-links.yml",
         ".github/workflows/scorecard.yml",
+        "benchmark/README.md",
+        "benchmark/schema/candidate.schema.json",
+        "benchmark/schema/task.schema.json",
         "catalog/skills.json",
         "catalog/provenance.json",
         "catalog/skill-audit.json",
@@ -257,12 +360,66 @@ def validate_required_files() -> tuple[list[str], list[str]]:
         "evals/flagship-evals.json",
         "docs/demos/README.md",
         "docs/search.html",
+        "eval-harness/README.md",
+        "eval-harness/schema/scenario.schema.json",
+        "scripts/check-repo-hygiene.py",
     ]
     for item in required:
         if not (ROOT / item).exists():
             errors.append(f"missing required project file: {item}")
     if not (ROOT / ".github" / "workflows").exists():
         warnings.append("missing .github/workflows directory")
+    return errors, warnings
+
+
+def validate_catalog_snapshot(catalog_path: Path = CATALOG_JSON) -> tuple[list[str], list[str]]:
+    """Fast consistency check between the committed catalog summary and skills/.
+
+    The full builders still own deterministic freshness. This cheap check catches
+    the common multi-agent failure mode where skill directories are added or
+    removed but the catalog has not been regenerated yet.
+    """
+
+    errors: list[str] = []
+    warnings: list[str] = []
+    if not catalog_path.exists():
+        return errors, warnings
+
+    try:
+        payload = json.loads(catalog_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        return [f"{display_path(catalog_path)} is not valid JSON: {exc.msg}"], warnings
+
+    summary = payload.get("summary", {})
+    skills = payload.get("skills", [])
+    collections = payload.get("collections", [])
+    skill_paths = iter_skill_files() if SKILLS_DIR.exists() else []
+    collection_ids = {
+        path.relative_to(SKILLS_DIR).parts[0]
+        for path in skill_paths
+        if path.relative_to(SKILLS_DIR).parts
+    }
+
+    expected = {
+        "skill_files": len(skill_paths),
+        "top_level_collections": len(collection_ids),
+    }
+    for key, value in expected.items():
+        if summary.get(key) != value:
+            errors.append(
+                f"{display_path(catalog_path)} summary `{key}`={summary.get(key)!r} "
+                f"does not match skills/ ({value})"
+            )
+
+    if isinstance(skills, list) and len(skills) != len(skill_paths):
+        errors.append(
+            f"{display_path(catalog_path)} has {len(skills)} skill records but skills/ has {len(skill_paths)} SKILL.md files"
+        )
+    if isinstance(collections, list) and len(collections) != len(collection_ids):
+        errors.append(
+            f"{display_path(catalog_path)} has {len(collections)} collection records but skills/ has {len(collection_ids)} collections"
+        )
+
     return errors, warnings
 
 
@@ -274,6 +431,7 @@ def main() -> int:
 
     checks = [
         validate_required_files,
+        validate_catalog_snapshot,
         validate_skill_frontmatter,
         validate_markdown_links,
     ]

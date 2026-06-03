@@ -12,7 +12,7 @@ We welcome contributions! Here's how you can help.
 
 ```bash
 make catalog
-make validate
+make check
 ```
 
 4. Submit a Pull Request
@@ -48,7 +48,7 @@ This is not a quality judgment — such tools may be excellent. If a tool later 
 
 ## Quality Gate
 
-All pull requests should pass `make validate`. The check verifies required project files, local Markdown links, `SKILL.md` frontmatter, generated catalog freshness, provenance/audit freshness, and flagship eval docs. See [`docs/QUALITY_GATE.md`](docs/QUALITY_GATE.md) for details.
+All pull requests should pass `make check`. The full gate verifies required project files, local Markdown links, `SKILL.md` frontmatter, generated catalog/provenance/audit freshness, flagship eval docs, unit tests, eval-harness coverage, and numeric benchmark recovery. See [`docs/QUALITY_GATE.md`](docs/QUALITY_GATE.md) for details.
 
 ## Especially Welcome
 

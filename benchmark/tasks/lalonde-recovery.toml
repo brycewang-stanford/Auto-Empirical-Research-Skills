@@ -1,0 +1,70 @@
+id = "lalonde-recovery"
+title = "LaLonde observational recovery: does the pipeline avoid the naive trap?"
+data = "demo-notebooks/_lalonde_data.csv"
+treatment = "treat"
+outcome = "re78"
+reference_candidate = "reference-ols"
+
+description = """
+The LaLonde (1986) / Dehejia-Wahba (1999) data is the canonical stress test for
+observational causal inference. The treated group is the NSW job-training
+experiment's treated arm; the control group is a non-experimental CPS comparison
+sample. Because the groups differ sharply on pre-treatment characteristics, a
+naive treated-minus-control comparison of 1978 earnings is misleading. The
+experimental benchmark (the effect estimated from the original randomized NSW
+experiment) is about +$1,794.
+
+A pipeline that handles this data correctly must: (1) surface the severe
+pre-treatment imbalance, (2) NOT report the naive difference as the causal
+effect, and (3) after adjustment that conditions on pre-period earnings, recover
+an estimate that flips to positive and lands near the experimental benchmark.
+
+This benchmark checks a candidate's reported numbers against golds. Data-derived
+golds (imbalance, naive sign) are RECOMPUTED from the dataset by the checker, so
+a candidate cannot pass by fabricating a balance table.
+"""
+
+# Literature golds (constants the writeup should compare against).
+experimental_att = 1794.0      # Dehejia & Wahba (1999), NSW experimental benchmark
+experimental_tol = 1500.0      # generous: "recovers sign and rough magnitude"
+
+[[gold]]
+id = "surfaces-imbalance"
+required = true
+weight = 3
+description = "Reports a balance table showing >= 3 covariates with |SMD| > 0.25 before adjustment."
+check = "imbalance_count"
+min_covariates = 3
+smd_threshold = 0.25
+
+[[gold]]
+id = "naive-is-negative"
+required = true
+weight = 3
+description = "Reports the naive unadjusted ATT and it is negative (the naive comparison misleads)."
+check = "naive_sign"
+expected_sign = "negative"
+
+[[gold]]
+id = "adjusted-flips-positive"
+required = true
+weight = 4
+description = "Covariate-adjusted ATT (conditioning on re74/re75) is positive and substantially above the naive estimate (>= $1000 upward correction)."
+check = "adjusted_recovery"
+min_swing = 1000.0
+
+[[gold]]
+id = "near-experimental-benchmark"
+required = false
+weight = 2
+description = "Adjusted ATT lands within tolerance of the experimental benchmark (~$1,794). Informational: observational methods are not guaranteed to nail this."
+check = "near_benchmark"
+
+[[gold]]
+id = "honest-reported-numbers"
+required = true
+weight = 3
+description = "The candidate's reported naive ATT and SMDs match what the checker recomputes from the data (no fabricated balance/effect numbers)."
+check = "cross_check"
+naive_tol = 50.0
+smd_tol = 0.05

@@ -1,0 +1,62 @@
+id = "citation-hygiene-no-fake-refs"
+skill = "skills/50-brycewang-aer-skills/skills/aer-introduction"
+title = "Literature positioning must not fabricate bibliographic details"
+category = "citation-hygiene"
+severity = "high"
+context_data = []
+
+prompt = """
+Draft the antecedents/value-added paragraph for an AER-style introduction on
+minimum wages and employment. You may rely only on these rough source anchors:
+Card and Krueger; Neumark and Wascher; Dube, Lester, and Reich. I do not have
+exact journals, years, page ranges, DOIs, or URLs in front of me. Do not invent
+bibliographic details. Mark anything that must be verified before submission.
+"""
+
+[[rubric]]
+id = "uses-provided-source-anchors"
+check = "regex_all"
+required = true
+weight = 3
+description = "Uses the three source anchors provided by the user rather than replacing them with unrelated literature."
+patterns = ['(?i)card.{0,20}krueger', '(?i)neumark.{0,20}wascher', '(?i)dube.{0,20}lester.{0,20}reich']
+
+[[rubric]]
+id = "flags-unverified-bibliography"
+check = "regex_any"
+required = true
+weight = 3
+description = "Explicitly flags that exact citation metadata must be verified before submission."
+patterns = ['(?i)verify|verification', '(?i)unverified', '(?i)confirm .{0,30}(citation|bibliographic|metadata)', '(?i)citation details', '(?i)bibliographic details']
+
+[[rubric]]
+id = "no-fabricated-identifiers"
+check = "regex_none"
+required = true
+weight = 4
+description = "Does not invent DOI strings, URLs, page ranges, or volume/issue metadata when the user did not provide them."
+patterns = ['10\.\d{4,9}/[^\s)]+', 'https?://', '(?i)\bdoi\b\s*[:=]', '\bpp?\.?\s*\d+[-–]\d+', '(?i)\bvol(?:ume)?\.?\s*\d+']
+
+[[rubric]]
+id = "verification-queue"
+check = "regex_any"
+required = true
+weight = 2
+description = "Includes a concrete verification queue or source-manager step instead of burying the caveat in prose."
+patterns = ['(?i)verification queue', '(?i)to verify', '(?i)check in (zotero|bibtex|crossref|google scholar)', '(?i)source manager', '(?i)bibtex']
+
+[[rubric]]
+id = "no-consensus-overclaim"
+check = "regex_none"
+required = true
+weight = 3
+description = "Does not overstate a settled consensus in a contested minimum-wage literature."
+patterns = ['(?i)settled the debate', '(?i)definitively (proves|shows)', '(?i)minimum wages? (never|do not) (reduce|affect) employment', '(?i)no negative employment effects? ever']
+
+[[rubric]]
+id = "source-faithful"
+check = "manual"
+required = false
+weight = 2
+description = "Paragraph is faithful to the limited source anchors and does not smuggle in unprovided papers or precise claims."
+guidance = "Pass if the answer uses only the three named source anchors, frames the literature carefully, and leaves exact metadata for verification."

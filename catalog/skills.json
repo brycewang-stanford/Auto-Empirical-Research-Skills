@@ -76,8 +76,8 @@
       "license": "MIT",
       "path": "skills/01-lishix520-academic-paper-skills",
       "primary_skill": {
-        "description": "",
-        "name": "composer",
+        "description": "Systematic writing framework for philosophy and interdisciplinary academic papers from optimized outline to submission-ready manuscript. Use when users want to: (1) write a paper from a detailed outline, (2) ensure quality control during writing, (3) maintain consistency across chapters, (4) prepare a submission-ready manuscript, or (5) systematically execute a planned paper. Triggered by phrases like 'write the paper from this outline,' 'compose the full manuscript,' 'execute the outline,' or when users have completed strategic planning (academic-paper-strategist skill) and are ready to write. Takes optimized outline as input; outputs complete manuscript with iterative quality checks.",
+        "name": "academic-paper-composer",
         "path": "skills/01-lishix520-academic-paper-skills/composer/SKILL.md"
       },
       "skill_count": 2,
@@ -93,7 +93,7 @@
       "license": "MIT",
       "path": "skills/02-luwill-research-skills",
       "primary_skill": {
-        "description": "",
+        "description": "Write comprehensive literature reviews for medical imaging AI research. Use when writing survey papers, systematic reviews, or literature analyses on topics like segmentation, detection, classification in CT, MRI, X-ray, ultrasound, or pathology imaging. Triggers on requests for \"review paper\", \"survey\", \"literature review\", \"综述\", \"systematic review\", or mentions of writing academic reviews on deep learning for medical imaging.",
         "name": "medical-imaging-review",
         "path": "skills/02-luwill-research-skills/medical-imaging-review/SKILL.md"
       },
@@ -110,7 +110,7 @@
       "license": "MIT",
       "path": "skills/03-K-Dense-AI-claude-scientific-skills",
       "primary_skill": {
-        "description": "",
+        "description": "Structured hypothesis formulation from observations. Use when you have experimental observations or data and need to formulate testable hypotheses with predictions, propose mechanisms, and design experiments to test them. Follows scientific method framework. For open-ended ideation use scientific-brainstorming; for automated LLM-driven hypothesis testing on datasets use hypogenic.",
         "name": "hypothesis-generation",
         "path": "skills/03-K-Dense-AI-claude-scientific-skills/hypothesis-generation/SKILL.md"
       },
@@ -127,7 +127,7 @@
       "license": "MIT",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer",
       "primary_skill": {
-        "description": "",
+        "description": "Comprehensive citation management for academic research. Search Google Scholar and PubMed for papers, extract accurate metadata, validate citations, and generate properly formatted BibTeX entries. This skill should be used when you need to find papers, verify citation information, convert DOIs to BibTeX, or ensure reference accuracy in scientific writing.",
         "name": "citation-management",
         "path": "skills/04-K-Dense-AI-claude-scientific-writer/citation-management/SKILL.md"
       },
@@ -144,8 +144,8 @@
       "license": "MIT",
       "path": "skills/05-kthorn-research-superpower",
       "primary_skill": {
-        "description": "",
-        "name": "getting-started",
+        "description": "Introduction to literature search & review skills - systematic paper finding, screening, extraction, and citation traversal",
+        "name": "Getting Started with Research Superpowers",
         "path": "skills/05-kthorn-research-superpower/getting-started/SKILL.md"
       },
       "skill_count": 10,
@@ -161,7 +161,7 @@
       "license": "MIT",
       "path": "skills/06-fuhaoda-stats-paper-writing",
       "primary_skill": {
-        "description": "",
+        "description": "End-to-end statistical writing assistant for LaTeX - draft title/abstract/keywords, expand outlines into sections, audit manuscripts, write reviewer reports and response letters, and scaffold book manuscripts.",
         "name": "stat-writing",
         "path": "skills/06-fuhaoda-stats-paper-writing/stat-writing/SKILL.md"
       },
@@ -178,7 +178,7 @@
       "license": "MIT",
       "path": "skills/07-Orchestra-Research-AI-Research-SKILLs",
       "primary_skill": {
-        "description": "",
+        "description": "Generates publication-quality figures for ML papers from research context. Given a paper section or description, extracts system components and relationships to generate architecture diagrams via Gemini. Given experiment results or data, auto-selects chart type and generates data-driven figures via matplotlib/seaborn. Use when creating any figure for a conference paper.",
         "name": "academic-plotting",
         "path": "skills/07-Orchestra-Research-AI-Research-SKILLs/academic-plotting/SKILL.md"
       },
@@ -849,6 +849,227 @@
       "source_confidence": "high",
       "source_url": "https://github.com/brycewang-stanford/AER-skills",
       "sync": "weekly GitHub Actions sync"
+    },
+    {
+      "commercial_use": "allowed",
+      "has_license": true,
+      "has_readme": true,
+      "id": "51-pymc-labs-CausalPy",
+      "license": "Apache-2.0",
+      "path": "skills/51-pymc-labs-CausalPy",
+      "primary_skill": {
+        "description": "Choose the appropriate CausalPy experiment class from a causal question, data structure, treatment assignment, and identification assumptions. Use before writing analysis code when the method is not yet settled.",
+        "name": "choosing-causalpy-methods",
+        "path": "skills/51-pymc-labs-CausalPy/skills/choosing-causalpy-methods/SKILL.md"
+      },
+      "skill_count": 3,
+      "source_confidence": "high",
+      "source_url": "https://github.com/pymc-labs/CausalPy",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "commercial_use": "allowed",
+      "has_license": true,
+      "has_readme": true,
+      "id": "52-keemanxp-slr-prisma",
+      "license": "MIT",
+      "path": "skills/52-keemanxp-slr-prisma",
+      "primary_skill": {
+        "description": "Guide users through writing a systematic literature review (SLR) following the PRISMA 2020 framework. Use this skill whenever the user mentions 'systematic review', 'systematic literature review', 'SLR', 'PRISMA', 'PRISMA 2020', 'PRISMA flow diagram', 'PRISMA checklist', or asks for help writing, structuring, or auditing a literature review that follows reporting guidelines. Also trigger when the user asks about inclusion/exclusion criteria for a review, search strategies for databases like Scopus/WoS/PubMed, study selection processes, risk of bias assessment, or narrative synthesis for a review paper. This skill covers the full PRISMA 2020 checklist (27 items), produces a Word document manuscript in strict journal article format, generates an annotated PRISMA flow diagram, and enforces APA 7th Edition referencing throughout. It does NOT cover meta-analysis or statistical pooling. By Chuah Kee Man.",
+        "name": "slr-prisma",
+        "path": "skills/52-keemanxp-slr-prisma/SKILL.md"
+      },
+      "skill_count": 1,
+      "source_confidence": "high",
+      "source_url": "https://github.com/keemanxp/slr-prisma",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "commercial_use": "allowed",
+      "has_license": true,
+      "has_readme": true,
+      "id": "53-keemanxp-thematic-analysis-skill",
+      "license": "MIT",
+      "path": "skills/53-keemanxp-thematic-analysis-skill",
+      "primary_skill": {
+        "description": "Conduct rigorous thematic analysis (TA) of qualitative data following Braun and Clarke's (2006) six-phase framework. Use whenever the user mentions 'thematic analysis', 'TA', 'Braun and Clarke', 'qualitative coding', 'identifying themes', or asks for help analysing interviews, focus groups, open-ended survey responses, or transcripts to identify patterns. Also trigger for questions about inductive vs theoretical coding, semantic vs latent themes, essentialist vs constructionist epistemology, building a thematic map, or writing up a qualitative findings section. Covers all six phases, the four upfront analytic decisions, the 15-point quality checklist, and the five common pitfalls. Produces a Word document write-up and an annotated thematic map. Does NOT cover IPA, grounded theory, discourse analysis, conversation analysis, or narrative analysis — use a different method for those.",
+        "name": "thematic-analysis",
+        "path": "skills/53-keemanxp-thematic-analysis-skill/thematic-analysis/SKILL.md"
+      },
+      "skill_count": 1,
+      "source_confidence": "high",
+      "source_url": "https://github.com/keemanxp/thematic-analysis-skill",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "commercial_use": "restricted",
+      "has_license": true,
+      "has_readme": true,
+      "id": "54-scdenney-open-science-skills",
+      "license": "CC-BY-NC-4.0 (non-commercial)",
+      "path": "skills/54-scdenney-open-science-skills",
+      "primary_skill": {
+        "description": "Audit in-text/reference parity, DOIs, claim support, and citation style.",
+        "name": "citation-check",
+        "path": "skills/54-scdenney-open-science-skills/skills/citation-check/SKILL.md"
+      },
+      "skill_count": 24,
+      "source_confidence": "high",
+      "source_url": "https://github.com/scdenney/open-science-skills",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "commercial_use": "allowed",
+      "has_license": true,
+      "has_readme": true,
+      "id": "55-ab604-claude-code-r-skills",
+      "license": "MIT",
+      "path": "skills/55-ab604-claude-code-r-skills",
+      "primary_skill": {
+        "description": "Patterns for Bayesian inference in R using brms, including multilevel models, DAG validation, and marginal effects. Use when performing Bayesian analysis.",
+        "name": "r-bayes",
+        "path": "skills/55-ab604-claude-code-r-skills/skills/r-bayes/SKILL.md"
+      },
+      "skill_count": 8,
+      "source_confidence": "high",
+      "source_url": "https://github.com/ab604/claude-code-r-skills",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "commercial_use": "allowed",
+      "has_license": true,
+      "has_readme": true,
+      "id": "56-hanlulong-econ-writing-skill",
+      "license": "MIT",
+      "path": "skills/56-hanlulong-econ-writing-skill",
+      "primary_skill": {
+        "description": "Expert economics paper writing assistant synthesizing advice from 50+ top guides by Cochrane, McCloskey, Shapiro, Head, Bellemare, Goldin, Glaeser, Kremer, and other leading economists. USE THIS SKILL whenever the user writes, edits, reviews, rewrites, or structures any economics paper, thesis, job market paper, abstract, introduction, conclusion, results section, literature review, or referee response. Also handles LaTeX formatting, presentations, and paper audits. Covers all paper types (applied, theory, structural, mixed) and all sections.",
+        "name": "econ-write",
+        "path": "skills/56-hanlulong-econ-writing-skill/econ-write/SKILL.md"
+      },
+      "skill_count": 1,
+      "source_confidence": "high",
+      "source_url": "https://github.com/hanlulong/econ-writing-skill",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "commercial_use": "allowed",
+      "has_license": true,
+      "has_readme": true,
+      "id": "57-dgunning-edgartools",
+      "license": "MIT",
+      "path": "skills/57-dgunning-edgartools",
+      "primary_skill": {
+        "description": "Query and analyze SEC filings using EdgarTools",
+        "name": "EdgarTools",
+        "path": "skills/57-dgunning-edgartools/skills/core/SKILL.md"
+      },
+      "skill_count": 1,
+      "source_confidence": "high",
+      "source_url": "https://github.com/dgunning/edgartools",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "commercial_use": "allowed",
+      "has_license": false,
+      "has_readme": true,
+      "id": "58-charlescoverdale-econstack",
+      "license": "MIT",
+      "path": "skills/58-charlescoverdale-econstack",
+      "primary_skill": {
+        "description": "Structured policy briefing note (1-2 pages). Issue, background, analysis, options, recommendation. UK GES, Australian Treasury, consulting formats. Auto-populates from econstack data skills.",
+        "name": "briefing-note",
+        "path": "skills/58-charlescoverdale-econstack/briefing-note/SKILL.md"
+      },
+      "skill_count": 7,
+      "source_confidence": "medium",
+      "source_url": "https://github.com/charlescoverdale/econstack",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "commercial_use": "allowed",
+      "has_license": true,
+      "has_readme": true,
+      "id": "59-shiquda-openalex-skill",
+      "license": "MIT",
+      "path": "skills/59-shiquda-openalex-skill",
+      "primary_skill": {
+        "description": "Use when the user asks about academic literature, research papers, scholarly works, authors, citations, institutions, journals, or any academic metadata. Trigger when users want to search for papers, find author profiles, track citations, discover related works, or explore academic topics. Also use when users mention DOIs, ORCIDs, h-index, publication venues, or research metrics.",
+        "name": "openalex",
+        "path": "skills/59-shiquda-openalex-skill/openalex/SKILL.md"
+      },
+      "skill_count": 1,
+      "source_confidence": "high",
+      "source_url": "https://github.com/shiquda/openalex-skill",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "commercial_use": "allowed",
+      "has_license": true,
+      "has_readme": true,
+      "id": "60-regisely-superpapers",
+      "license": "MIT",
+      "path": "skills/60-regisely-superpapers",
+      "primary_skill": {
+        "description": "Use when working on any empirical academic research context — paper writing, data analysis, literature review, or any task involving citations, results, or publication artifacts. Establishes non-negotiable principles that govern all other superpapers skills.",
+        "name": "academic-baseline",
+        "path": "skills/60-regisely-superpapers/skills/academic-baseline/SKILL.md"
+      },
+      "skill_count": 16,
+      "source_confidence": "high",
+      "source_url": "https://github.com/regisely/superpapers",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "commercial_use": "allowed",
+      "has_license": true,
+      "has_readme": true,
+      "id": "61-phdemotions-research-methods",
+      "license": "MIT",
+      "path": "skills/61-phdemotions-research-methods",
+      "primary_skill": {
+        "description": "Confirmatory hypothesis testing matched to pre-registration, with full assumption testing, effect sizes, confidence intervals, and APA 7th formatted output. Supports OLS/GLM regression, panel regression (fixest), mixed models (lme4), SEM/CFA (lavaan), meta-analysis (metafor), and delegates PROCESS models to /process-model. Reads pre-registration to align planned analyses, flags deviations, and generates decision log entries for post-hoc choices. Use when the user says \"test hypotheses,\" \"run analysis,\" \"confirmatory,\" \"regression,\" \"SEM,\" \"mediation,\" \"mixed model,\" \"meta-analysis,\" or when /eda completes. Triggers on \"analyze,\" \"hypothesis,\" \"regression,\" \"model,\" \"test.\"",
+        "name": "analyze",
+        "path": "skills/61-phdemotions-research-methods/skills/analyze/SKILL.md"
+      },
+      "skill_count": 9,
+      "source_confidence": "high",
+      "source_url": "https://github.com/phdemotions/research-methods",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "commercial_use": "allowed",
+      "has_license": false,
+      "has_readme": true,
+      "id": "62-PHY041-claude-skill-citation-checker",
+      "license": "MIT",
+      "path": "skills/62-PHY041-claude-skill-citation-checker",
+      "primary_skill": {
+        "description": "Verify academic citations against CrossRef, Semantic Scholar, and OpenAlex. Detects AI-hallucinated references, chimeric citations, and suspicious patterns.",
+        "name": "check-citations",
+        "path": "skills/62-PHY041-claude-skill-citation-checker/SKILL.md"
+      },
+      "skill_count": 1,
+      "source_confidence": "medium",
+      "source_url": "https://github.com/PHY041/claude-skill-citation-checker",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "commercial_use": "allowed",
+      "has_license": true,
+      "has_readme": true,
+      "id": "63-tondevrel-scientific-agent-skills",
+      "license": "MIT",
+      "path": "skills/63-tondevrel-scientific-agent-skills",
+      "primary_skill": {
+        "description": "Causal inference framework for answering \"does X cause Y?\" beyond correlation. DoWhy (Microsoft Research) provides the identify-estimate-refute loop: define a causal graph (DAG), identify the causal effect using backdoor/frontdoor/instrumental variable criteria, estimate treatment effects with multiple estimators, and validate results with automated refutation tests. Use when: distinguishing causation from correlation, estimating treatment effects (ATE, ATT, CATE), designing and analyzing A/B tests with confounders, using instrumental variables, performing counterfactual reasoning (\"what would have happened if...\"), validating causal claims with sensitivity analysis, working with observational data where randomization is impossible, or any analysis where the question is \"what is the CAUSAL effect of X on Y\" rather than just \"how do X and Y relate?\"",
+        "name": "dowhy",
+        "path": "skills/63-tondevrel-scientific-agent-skills/dowhy/SKILL.md"
+      },
+      "skill_count": 2,
+      "source_confidence": "high",
+      "source_url": "https://github.com/tondevrel/scientific-agent-skills",
+      "sync": "manual vendor snapshot"
     }
   ],
   "generated_by": "scripts/build-catalog.py",
@@ -916,66 +1137,91 @@
     },
     {
       "collection": "01-lishix520-academic-paper-skills",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Systematic writing framework for philosophy and interdisciplinary academic papers from optimized outline to submission-ready manuscript. Use when users want to: (1) write a paper from a detailed outline, (2) ensure quality control during writing, (3) maintain consistency across chapters, (4) prepare a submission-ready manuscript, or (5) systematically execute a planned paper. Triggered by phrases like 'write the paper from this outline,' 'compose the full manuscript,' 'execute the outline,' or when users have completed strategic planning (academic-paper-strategist skill) and are ready to write. Takes optimized outline as input; outputs complete manuscript with iterative quality checks.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 855,
-      "name": "composer",
+      "name": "academic-paper-composer",
       "path": "skills/01-lishix520-academic-paper-skills/composer/SKILL.md"
     },
     {
       "collection": "01-lishix520-academic-paper-skills",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Systematic strategic planning framework for philosophy and interdisciplinary academic papers targeting preprint platforms (PhilArchive, arXiv, PhilSci-Archive). Use when users want to: (1) plan a paper on a specific topic, (2) identify research gaps and assess originality, (3) develop optimized paper outlines, (4) prepare for preprint submission, or (5) understand platform requirements and writing standards. Triggered by phrases like 'plan a paper on,' 'help me design a paper about,' 'identify research gaps in,' 'is this idea original,' or when users need structured research planning. The skill guides through three phases: Platform Analysis (identifying target venue and studying sample papers), Theoretical Framework (AI-driven literature search and gap identification), and Outline Optimization (structured design with reviewer-perspective self-assessment). Each phase includes quality evaluation standards and validation checkpoints. Output: optimized detailed outline ready for systematic writing (use with academic-paper-composer skill).",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 685,
-      "name": "strategist",
+      "name": "academic-paper-strategist",
       "path": "skills/01-lishix520-academic-paper-skills/strategist/SKILL.md"
     },
     {
       "collection": "02-luwill-research-skills",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Write comprehensive literature reviews for medical imaging AI research. Use when writing survey papers, systematic reviews, or literature analyses on topics like segmentation, detection, classification in CT, MRI, X-ray, ultrasound, or pathology imaging. Triggers on requests for \"review paper\", \"survey\", \"literature review\", \"综述\", \"systematic review\", or mentions of writing academic reviews on deep learning for medical imaging.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "metadata",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 185,
       "name": "medical-imaging-review",
       "path": "skills/02-luwill-research-skills/medical-imaging-review/SKILL.md"
     },
     {
       "collection": "02-luwill-research-skills",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Generate professional slide deck images from academic papers and content. Creates comprehensive outlines with style instructions, auto-detects figures from PDFs, then generates individual slide images. Use when user asks to \"create slides\", \"make a presentation\", \"generate deck\", or \"slide deck\" for papers.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 479,
       "name": "paper-slide-deck",
       "path": "skills/02-luwill-research-skills/paper-slide-deck/SKILL.md"
     },
     {
       "collection": "02-luwill-research-skills",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Generate academic research proposals for PhD applications. Use when user asks to \"write a research proposal\", \"create PhD proposal\", \"generate research plan\", \"撰写研究计划\", \"写博士申请\", \"doctoral proposal\", or mentions specific research topics for PhD application. Supports STEM, humanities, and social sciences with field-specific adaptations. Follows Nature Reviews-style academic writing conventions. Supports both English and Chinese output based on user preference.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "metadata",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 588,
       "name": "research-proposal",
       "path": "skills/02-luwill-research-skills/research-proposal/SKILL.md"
     },
     {
       "collection": "03-K-Dense-AI-claude-scientific-skills",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Structured hypothesis formulation from observations. Use when you have experimental observations or data and need to formulate testable hypotheses with predictions, propose mechanisms, and design experiments to test them. Follows scientific method framework. For open-ended ideation use scientific-brainstorming; for automated LLM-driven hypothesis testing on datasets use hypogenic.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "license",
+        "metadata",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 239,
       "name": "hypothesis-generation",
       "path": "skills/03-K-Dense-AI-claude-scientific-skills/hypothesis-generation/SKILL.md"
@@ -999,77 +1245,109 @@
     },
     {
       "collection": "03-K-Dense-AI-claude-scientific-skills",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Write competitive research proposals for NSF, NIH, DOE, DARPA, and Taiwan NSTC. Agency-specific formatting, review criteria, budget preparation, broader impacts, significance statements, innovation narratives, and compliance with submission requirements.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "license",
+        "metadata",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 968,
       "name": "research-grants",
       "path": "skills/03-K-Dense-AI-claude-scientific-skills/research-grants/SKILL.md"
     },
     {
       "collection": "03-K-Dense-AI-claude-scientific-skills",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Core skill for the deep research and writing tool. Write scientific manuscripts in full paragraphs (never bullet points). Use two-stage process with (1) section outlines with key points using research-lookup then (2) convert to flowing prose. IMRAD structure, citations (APA/AMA/Vancouver), figures/tables, reporting guidelines (CONSORT/STROBE/PRISMA), for research papers and journal submissions.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "license",
+        "metadata",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 446,
       "name": "scientific-writing",
       "path": "skills/03-K-Dense-AI-claude-scientific-skills/scientific-writing/SKILL.md"
     },
     {
       "collection": "04-K-Dense-AI-claude-scientific-writer",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Comprehensive citation management for academic research. Search Google Scholar and PubMed for papers, extract accurate metadata, validate citations, and generate properly formatted BibTeX entries. This skill should be used when you need to find papers, verify citation information, convert DOIs to BibTeX, or ensure reference accuracy in scientific writing.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 1215,
       "name": "citation-management",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/citation-management/SKILL.md"
     },
     {
       "collection": "04-K-Dense-AI-claude-scientific-writer",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Generate testable hypotheses. Formulate from observations, design experiments, explore competing explanations, develop predictions, propose mechanisms, for scientific inquiry across domains.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 236,
       "name": "hypothesis-generation",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/hypothesis-generation/SKILL.md"
     },
     {
       "collection": "04-K-Dense-AI-claude-scientific-writer",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Conduct comprehensive, systematic literature reviews using multiple academic databases (PubMed, arXiv, bioRxiv, Semantic Scholar, etc.). This skill should be used when conducting systematic literature reviews, meta-analyses, research synthesis, or comprehensive literature searches across biomedical, scientific, and technical domains. Creates professionally formatted markdown documents and PDFs with verified citations in multiple citation styles (APA, Nature, Vancouver, etc.).",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 656,
       "name": "literature-review",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/literature-review/SKILL.md"
     },
     {
       "collection": "04-K-Dense-AI-claude-scientific-writer",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Systematic peer review toolkit. Evaluate methodology, statistics, design, reproducibility, ethics, figure integrity, reporting standards, for manuscript and grant review across disciplines.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 582,
       "name": "peer-review",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/peer-review/SKILL.md"
     },
     {
       "collection": "04-K-Dense-AI-claude-scientific-writer",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Write competitive research proposals for NSF, NIH, DOE, and DARPA. Agency-specific formatting, review criteria, budget preparation, broader impacts, significance statements, innovation narratives, and compliance with submission requirements.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 952,
       "name": "research-grants",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/research-grants/SKILL.md"
@@ -1087,167 +1365,246 @@
     },
     {
       "collection": "04-K-Dense-AI-claude-scientific-writer",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Evaluate research rigor. Assess methodology, experimental design, statistical validity, biases, confounding, evidence quality (GRADE, Cochrane ROB), for critical analysis of scientific claims.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 581,
       "name": "scientific-critical-thinking",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/scientific-critical-thinking/SKILL.md"
     },
     {
       "collection": "04-K-Dense-AI-claude-scientific-writer",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Core skill for the deep research and writing tool. Write scientific manuscripts in full paragraphs (never bullet points). Use two-stage process: (1) create section outlines with key points using research-lookup, (2) convert to flowing prose. IMRAD structure, citations (APA/AMA/Vancouver), figures/tables, reporting guidelines (CONSORT/STROBE/PRISMA), for research papers and journal submissions.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 593,
       "name": "scientific-writing",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/scientific-writing/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Introduction to literature search & review skills - systematic paper finding, screening, extraction, and citation traversal",
+      "frontmatter_fields": [
+        "description",
+        "name",
+        "version",
+        "when_to_use"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 120,
-      "name": "getting-started",
+      "name": "Getting Started with Research Superpowers",
       "path": "skills/05-kthorn-research-superpower/getting-started/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Main orchestration workflow for systematic literature research - search, evaluate, traverse, synthesize",
+      "frontmatter_fields": [
+        "description",
+        "name",
+        "version",
+        "when_to_use"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 621,
-      "name": "answering-research-questions",
+      "name": "Answering Research Questions",
       "path": "skills/05-kthorn-research-superpower/research/answering-research-questions/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Collaboratively build and refine paper screening rubrics through brainstorming, test-driven development, and iterative feedback",
+      "frontmatter_fields": [
+        "description",
+        "name",
+        "version",
+        "when_to_use"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 602,
-      "name": "building-screening-rubrics",
+      "name": "Building Paper Screening Rubrics",
       "path": "skills/05-kthorn-research-superpower/research/building-screening-rubrics/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Check if medicinal chemistry papers are in ChEMBL database to access curated bioactivity data",
+      "frontmatter_fields": [
+        "description",
+        "name",
+        "version",
+        "when_to_use"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 418,
-      "name": "checking-chembl",
+      "name": "Checking ChEMBL for Structured SAR Data",
       "path": "skills/05-kthorn-research-superpower/research/checking-chembl/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Safely remove intermediate files from completed research sessions while preserving important data",
+      "frontmatter_fields": [
+        "description",
+        "name",
+        "version",
+        "when_to_use"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 453,
-      "name": "cleaning-up-research-sessions",
+      "name": "Cleaning Up Research Sessions",
       "path": "skills/05-kthorn-research-superpower/research/cleaning-up-research-sessions/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Two-stage paper screening - abstract scoring then deep dive for specific data extraction",
+      "frontmatter_fields": [
+        "description",
+        "name",
+        "version",
+        "when_to_use"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 599,
-      "name": "evaluating-paper-relevance",
+      "name": "Evaluating Paper Relevance",
       "path": "skills/05-kthorn-research-superpower/research/evaluating-paper-relevance/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Use Unpaywall API to find free full-text versions of paywalled papers",
+      "frontmatter_fields": [
+        "description",
+        "name",
+        "version",
+        "when_to_use"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 355,
-      "name": "finding-open-access-papers",
+      "name": "Finding Open Access Papers",
       "path": "skills/05-kthorn-research-superpower/research/finding-open-access-papers/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "PubMed search with keyword optimization, result parsing, and metadata extraction",
+      "frontmatter_fields": [
+        "description",
+        "name",
+        "version",
+        "when_to_use"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 213,
-      "name": "searching-literature",
+      "name": "Searching Scientific Literature",
       "path": "skills/05-kthorn-research-superpower/research/searching-literature/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Use parallel subagents for large-scale paper screening and deep dive analysis",
+      "frontmatter_fields": [
+        "description",
+        "name",
+        "version",
+        "when_to_use"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 618,
-      "name": "subagent-driven-review",
+      "name": "Subagent-Driven Literature Review",
       "path": "skills/05-kthorn-research-superpower/research/subagent-driven-review/SKILL.md"
     },
     {
       "collection": "05-kthorn-research-superpower",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Smart backward and forward citation following via Semantic Scholar, with relevance filtering and deduplication",
+      "frontmatter_fields": [
+        "description",
+        "name",
+        "version",
+        "when_to_use"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 302,
-      "name": "traversing-citations",
+      "name": "Traversing Citation Networks",
       "path": "skills/05-kthorn-research-superpower/research/traversing-citations/SKILL.md"
     },
     {
       "collection": "06-fuhaoda-stats-paper-writing",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "End-to-end statistical writing assistant for LaTeX - draft title/abstract/keywords, expand outlines into sections, audit manuscripts, write reviewer reports and response letters, and scaffold book manuscripts.",
+      "frontmatter_fields": [
+        "compatibility",
+        "description",
+        "license",
+        "metadata",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 179,
       "name": "stat-writing",
       "path": "skills/06-fuhaoda-stats-paper-writing/stat-writing/SKILL.md"
     },
     {
       "collection": "07-Orchestra-Research-AI-Research-SKILLs",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Generates publication-quality figures for ML papers from research context. Given a paper section or description, extracts system components and relationships to generate architecture diagrams via Gemini. Given experiment results or data, auto-selects chart type and generates data-driven figures via matplotlib/seaborn. Use when creating any figure for a conference paper.",
+      "frontmatter_fields": [
+        "author",
+        "dependencies",
+        "description",
+        "license",
+        "name",
+        "tags",
+        "version"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 498,
       "name": "academic-plotting",
       "path": "skills/07-Orchestra-Research-AI-Research-SKILLs/academic-plotting/SKILL.md"
     },
     {
       "collection": "07-Orchestra-Research-AI-Research-SKILLs",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
+      "description": "Orchestrates end-to-end autonomous AI research projects using a two-loop architecture. The inner loop runs rapid experiment iterations with clear optimization targets. The outer loop synthesizes results, identifies patterns, and steers research direction. Routes to domain-specific skills for execution, supports continuous agent operation via Claude Code /loop and OpenClaw heartbeat, and produces research presentations and papers. Use when starting a research project, running autonomous experiments, or managing a multi-hypothesis research effort.",
+      "frontmatter_fields": [
+        "author",
+        "description",
+        "license",
+        "name",
+        "tags",
+        "version"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 426,
-      "name": "autoresearch-skill",
+      "name": "autoresearch",
       "path": "skills/07-Orchestra-Research-AI-Research-SKILLs/autoresearch-skill/SKILL.md"
     },
     {
@@ -15625,14 +15982,1116 @@
       "line_count": 86,
       "name": "aer-workflow",
       "path": "skills/50-brycewang-aer-skills/skills/aer-workflow/SKILL.md"
+    },
+    {
+      "collection": "51-pymc-labs-CausalPy",
+      "description": "Choose the appropriate CausalPy experiment class from a causal question, data structure, treatment assignment, and identification assumptions. Use before writing analysis code when the method is not yet settled.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 46,
+      "name": "choosing-causalpy-methods",
+      "path": "skills/51-pymc-labs-CausalPy/skills/choosing-causalpy-methods/SKILL.md"
+    },
+    {
+      "collection": "51-pymc-labs-CausalPy",
+      "description": "Fit, summarize, plot, and interpret a chosen CausalPy experiment. Use after the causal method has been selected, including when configuring PyMC/sklearn models and scale-aware custom priors.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 57,
+      "name": "running-causalpy-experiments",
+      "path": "skills/51-pymc-labs-CausalPy/skills/running-causalpy-experiments/SKILL.md"
+    },
+    {
+      "collection": "51-pymc-labs-CausalPy",
+      "description": "Performs placebo-in-time sensitivity analysis with hierarchical null model and optional Bayesian assurance. Use when checking model robustness, verifying lack of pre-intervention effects, or estimating study power.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 26,
+      "name": "running-placebo-analysis",
+      "path": "skills/51-pymc-labs-CausalPy/skills/running-placebo-analysis/SKILL.md"
+    },
+    {
+      "collection": "52-keemanxp-slr-prisma",
+      "description": "Guide users through writing a systematic literature review (SLR) following the PRISMA 2020 framework. Use this skill whenever the user mentions 'systematic review', 'systematic literature review', 'SLR', 'PRISMA', 'PRISMA 2020', 'PRISMA flow diagram', 'PRISMA checklist', or asks for help writing, structuring, or auditing a literature review that follows reporting guidelines. Also trigger when the user asks about inclusion/exclusion criteria for a review, search strategies for databases like Scopus/WoS/PubMed, study selection processes, risk of bias assessment, or narrative synthesis for a review paper. This skill covers the full PRISMA 2020 checklist (27 items), produces a Word document manuscript in strict journal article format, generates an annotated PRISMA flow diagram, and enforces APA 7th Edition referencing throughout. It does NOT cover meta-analysis or statistical pooling. By Chuah Kee Man.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 418,
+      "name": "slr-prisma",
+      "path": "skills/52-keemanxp-slr-prisma/SKILL.md"
+    },
+    {
+      "collection": "53-keemanxp-thematic-analysis-skill",
+      "description": "Conduct rigorous thematic analysis (TA) of qualitative data following Braun and Clarke's (2006) six-phase framework. Use whenever the user mentions 'thematic analysis', 'TA', 'Braun and Clarke', 'qualitative coding', 'identifying themes', or asks for help analysing interviews, focus groups, open-ended survey responses, or transcripts to identify patterns. Also trigger for questions about inductive vs theoretical coding, semantic vs latent themes, essentialist vs constructionist epistemology, building a thematic map, or writing up a qualitative findings section. Covers all six phases, the four upfront analytic decisions, the 15-point quality checklist, and the five common pitfalls. Produces a Word document write-up and an annotated thematic map. Does NOT cover IPA, grounded theory, discourse analysis, conversation analysis, or narrative analysis — use a different method for those.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 328,
+      "name": "thematic-analysis",
+      "path": "skills/53-keemanxp-thematic-analysis-skill/thematic-analysis/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "description": "Audit in-text/reference parity, DOIs, claim support, and citation style.",
+      "frontmatter_fields": [
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 138,
+      "name": "citation-check",
+      "path": "skills/54-scdenney-open-science-skills/skills/citation-check/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "description": "Clean and reshape Qualtrics conjoint exports to analysis-ready long format.",
+      "frontmatter_fields": [
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 207,
+      "name": "conjoint-cleaning",
+      "path": "skills/54-scdenney-open-science-skills/skills/conjoint-cleaning/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "description": "Design conjoint experiments: attributes, power, AMCE/AMIE estimation.",
+      "frontmatter_fields": [
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 115,
+      "name": "conjoint-design",
+      "path": "skills/54-scdenney-open-science-skills/skills/conjoint-design/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "description": "Diagnose conjoint design integrity, estimation choices, and validity.",
+      "frontmatter_fields": [
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 171,
+      "name": "conjoint-diagnostics",
+      "path": "skills/54-scdenney-open-science-skills/skills/conjoint-diagnostics/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "description": "Design cross-national survey experiments: power, equivalence, localization.",
+      "frontmatter_fields": [
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 80,
+      "name": "cross-national-design",
+      "path": "skills/54-scdenney-open-science-skills/skills/cross-national-design/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "description": "Before implementing, generate 3-5 conceptually distinct approaches labeled by creativity dimension (Novel, Surprising, Diverse, Conventional), then hold for selection. Brainstorm-then-select to resist defaulting to the most obvious solution.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 72,
+      "name": "diverge",
+      "path": "skills/54-scdenney-open-science-skills/skills/diverge/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "description": "Audit manuscript and replication package against FAIR open-science principles.",
+      "frontmatter_fields": [
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 153,
+      "name": "fair-check",
+      "path": "skills/54-scdenney-open-science-skills/skills/fair-check/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "description": "Audit figures, tables, captions, cross-references, and statistical notes.",
+      "frontmatter_fields": [
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 140,
+      "name": "figure-table-audit",
+      "path": "skills/54-scdenney-open-science-skills/skills/figure-table-audit/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "description": "Design and format publication-quality figures: chart choice, color, scales, legends, captions, reproducibility.",
+      "frontmatter_fields": [
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 129,
+      "name": "figures",
+      "path": "skills/54-scdenney-open-science-skills/skills/figures/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "description": "Build falsifiable causal hypotheses: DAGs, FPCI, equivalence testing.",
+      "frontmatter_fields": [
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 88,
+      "name": "hypothesis-building",
+      "path": "skills/54-scdenney-open-science-skills/skills/hypothesis-building/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "description": "Draft a senior peer-review report on a social-science manuscript.",
+      "frontmatter_fields": [
+        "argument-hint",
+        "context",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 339,
+      "name": "journal-review",
+      "path": "skills/54-scdenney-open-science-skills/skills/journal-review/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "description": "Design and diagnose list experiments (item count technique).",
+      "frontmatter_fields": [
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 96,
+      "name": "list-experiment",
+      "path": "skills/54-scdenney-open-science-skills/skills/list-experiment/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "description": "Build or audit a literature review: evidence map, gaps, synthesis plan.",
+      "frontmatter_fields": [
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 145,
+      "name": "literature-review",
+      "path": "skills/54-scdenney-open-science-skills/skills/literature-review/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "description": "Check methods reporting against CONSORT, JARS, DA-RT standards.",
+      "frontmatter_fields": [
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 91,
+      "name": "methods-reporting",
+      "path": "skills/54-scdenney-open-science-skills/skills/methods-reporting/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "description": "Draft scientific introductions: argument logic, framing, multi-experiment coherence.",
+      "frontmatter_fields": [
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 77,
+      "name": "narrative-building",
+      "path": "skills/54-scdenney-open-science-skills/skills/narrative-building/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "description": "Pre-submission audit: argument, numerics, refs, writing, figures, replication.",
+      "frontmatter_fields": [
+        "argument-hint",
+        "context",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 194,
+      "name": "paper-review-lite",
+      "path": "skills/54-scdenney-open-science-skills/skills/paper-review-lite/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "description": "Clean post-OCR text: correction, QA, multilingual handling, provenance.",
+      "frontmatter_fields": [
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 94,
+      "name": "post-ocr-cleanup",
+      "path": "skills/54-scdenney-open-science-skills/skills/post-ocr-cleanup/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "description": "Write pre-analysis plans: PAP structure, registry, analysis strategy.",
+      "frontmatter_fields": [
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 76,
+      "name": "pre-registration-writing",
+      "path": "skills/54-scdenney-open-science-skills/skills/pre-registration-writing/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "description": "Scaffold or audit a social-science replication package at a target directory. Generates folder structure, README, master.R, figure/table crosswalk, codebook template, LICENSE placeholder, and pre-release checklist. Adapted from Yusaku Horiuchi's replication-package-guide with FAIR-principle integration; platform-neutral (Harvard Dataverse, OSF, Zenodo, GitHub releases, institutional archives).",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 373,
+      "name": "replication-package",
+      "path": "skills/54-scdenney-open-science-skills/skills/replication-package/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "description": "Design survey instruments: questions, scales, flow, social desirability.",
+      "frontmatter_fields": [
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 77,
+      "name": "survey-design",
+      "path": "skills/54-scdenney-open-science-skills/skills/survey-design/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "description": "Design and format publication-quality tables: column order, row grouping, notes, precision, reproducibility.",
+      "frontmatter_fields": [
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 123,
+      "name": "tables",
+      "path": "skills/54-scdenney-open-science-skills/skills/tables/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "description": "LLM-based text classification: codebook, validation, agreement statistics.",
+      "frontmatter_fields": [
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 115,
+      "name": "text-classification",
+      "path": "skills/54-scdenney-open-science-skills/skills/text-classification/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "description": "Structural topic modeling: STM spec, topic count, coherence-exclusivity.",
+      "frontmatter_fields": [
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 117,
+      "name": "topic-modeling",
+      "path": "skills/54-scdenney-open-science-skills/skills/topic-modeling/SKILL.md"
+    },
+    {
+      "collection": "54-scdenney-open-science-skills",
+      "description": "VLM-based OCR pipeline: model selection, prompts, architecture, evaluation.",
+      "frontmatter_fields": [
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 85,
+      "name": "vlm-ocr-pipeline",
+      "path": "skills/54-scdenney-open-science-skills/skills/vlm-ocr-pipeline/SKILL.md"
+    },
+    {
+      "collection": "55-ab604-claude-code-r-skills",
+      "description": "Patterns for Bayesian inference in R using brms, including multilevel models, DAG validation, and marginal effects. Use when performing Bayesian analysis.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 433,
+      "name": "r-bayes",
+      "path": "skills/55-ab604-claude-code-r-skills/skills/r-bayes/SKILL.md"
+    },
+    {
+      "collection": "55-ab604-claude-code-r-skills",
+      "description": "R object-oriented programming guide for S7, S3, S4, and vctrs. Use when designing R classes or choosing an OOP system.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 313,
+      "name": "r-oop",
+      "path": "skills/55-ab604-claude-code-r-skills/skills/r-oop/SKILL.md"
+    },
+    {
+      "collection": "55-ab604-claude-code-r-skills",
+      "description": "R package development guide covering dependencies, API design, testing, and documentation. Use when developing R packages.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 404,
+      "name": "r-package-development",
+      "path": "skills/55-ab604-claude-code-r-skills/skills/r-package-development/SKILL.md"
+    },
+    {
+      "collection": "55-ab604-claude-code-r-skills",
+      "description": "R performance best practices including profiling, benchmarking, vctrs, and optimization strategies. Use when optimizing R code.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 353,
+      "name": "r-performance",
+      "path": "skills/55-ab604-claude-code-r-skills/skills/r-performance/SKILL.md"
+    },
+    {
+      "collection": "55-ab604-claude-code-r-skills",
+      "description": "R style guide covering naming conventions, spacing, layout, and function design best practices. Use when writing R code.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 343,
+      "name": "r-style-guide",
+      "path": "skills/55-ab604-claude-code-r-skills/skills/r-style-guide/SKILL.md"
+    },
+    {
+      "collection": "55-ab604-claude-code-r-skills",
+      "description": "rlang metaprogramming patterns for data-masking, injection operators, and dynamic dots. Use when writing functions that use tidy evaluation.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 316,
+      "name": "rlang-patterns",
+      "path": "skills/55-ab604-claude-code-r-skills/skills/rlang-patterns/SKILL.md"
+    },
+    {
+      "collection": "55-ab604-claude-code-r-skills",
+      "description": "Test-driven development workflow for R using testthat. Use when writing new features, fixing bugs, or refactoring code. Enforces test-first development with 80%+ coverage.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 840,
+      "name": "tdd-workflow",
+      "path": "skills/55-ab604-claude-code-r-skills/skills/tdd-workflow/SKILL.md"
+    },
+    {
+      "collection": "55-ab604-claude-code-r-skills",
+      "description": "Modern tidyverse patterns for R including pipes, joins, grouping, purrr, and stringr. Use when writing tidyverse R code.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 417,
+      "name": "tidyverse-patterns",
+      "path": "skills/55-ab604-claude-code-r-skills/skills/tidyverse-patterns/SKILL.md"
+    },
+    {
+      "collection": "56-hanlulong-econ-writing-skill",
+      "description": "Expert economics paper writing assistant synthesizing advice from 50+ top guides by Cochrane, McCloskey, Shapiro, Head, Bellemare, Goldin, Glaeser, Kremer, and other leading economists. USE THIS SKILL whenever the user writes, edits, reviews, rewrites, or structures any economics paper, thesis, job market paper, abstract, introduction, conclusion, results section, literature review, or referee response. Also handles LaTeX formatting, presentations, and paper audits. Covers all paper types (applied, theory, structural, mixed) and all sections.",
+      "frontmatter_fields": [
+        "argument-hint",
+        "description",
+        "name",
+        "user-invocable"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 741,
+      "name": "econ-write",
+      "path": "skills/56-hanlulong-econ-writing-skill/econ-write/SKILL.md"
+    },
+    {
+      "collection": "57-dgunning-edgartools",
+      "description": "Query and analyze SEC filings using EdgarTools",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 49,
+      "name": "EdgarTools",
+      "path": "skills/57-dgunning-edgartools/skills/core/SKILL.md"
+    },
+    {
+      "collection": "58-charlescoverdale-econstack",
+      "description": "Structured policy briefing note (1-2 pages). Issue, background, analysis, options, recommendation. UK GES, Australian Treasury, consulting formats. Auto-populates from econstack data skills.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 391,
+      "name": "briefing-note",
+      "path": "skills/58-charlescoverdale-econstack/briefing-note/SKILL.md"
+    },
+    {
+      "collection": "58-charlescoverdale-econstack",
+      "description": "Cost-benefit analysis. Produces economic NPV and financial NPV side by side, with BCR, optimism bias (with mitigation), Marginal Excess Tax Burden, real-terms rebasing, WELLBY / QALY / VPF wellbeing valuation, sensitivity, switching values, EANC for unequal-life options, validation gate, and a one-line headline verdict (socially worthwhile vs financially self-sustaining). Backed by the greenbook R package (HM Treasury Green Book primitives) when available, with graceful fallback. Supports HMT Green Book, EU Better Regulation, World Bank, ADB, and Victorian HVHR. Reads a longlist markdown file directly via --from.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 759,
+      "name": "cost-benefit",
+      "path": "skills/58-charlescoverdale-econstack/cost-benefit/SKILL.md"
+    },
+    {
+      "collection": "58-charlescoverdale-econstack",
+      "description": "Audit economic analysis outputs (fiscal briefings, macro briefings, market research, longlists, and other quantitative economic documents) against methodology standards, academic literature, and common errors. Runs structured checks across core categories including counterfactual, additionality, discounting, double counting, distributional analysis, Aqua Book RIGOUR, and Flyvbjerg-style strategic misrepresentation detection. Returns a RAG scorecard with issues ranked by severity.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 380,
+      "name": "econ-audit",
+      "path": "skills/58-charlescoverdale-econstack/econ-audit/SKILL.md"
+    },
+    {
+      "collection": "58-charlescoverdale-econstack",
+      "description": "Public finances briefing. Supports UK, US, and Australia. Produces a single compact briefing on borrowing, debt, receipts, spending, and fiscal rules. Optional debt sustainability analysis via the debtkit R package. User-selectable sub-components and multi-format export.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 357,
+      "name": "fiscal-briefing",
+      "path": "skills/58-charlescoverdale-econstack/fiscal-briefing/SKILL.md"
+    },
+    {
+      "collection": "58-charlescoverdale-econstack",
+      "description": "Brainstorm a longlist of benefits and costs for a project. Outputs two clean tables (benefits and costs), each with materiality (H/M/L), a cash flow tag (cash in / cash out / non-cash), a quantification method, and a monetisation method. Supports HMT Green Book, EU Better Regulation Guidelines, World Bank, Asian Development Bank, and the Victorian Treasury High Value High Risk (HVHR) framework.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 530,
+      "name": "longlist",
+      "path": "skills/58-charlescoverdale-econstack/longlist/SKILL.md"
+    },
+    {
+      "collection": "58-charlescoverdale-econstack",
+      "description": "Macroeconomic monitor. Supports UK, US, Euro area, and Australia. Pulls GDP, inflation, employment, wages, rates, trade, housing, and fiscal data. Each country follows its central bank's reporting structure. Produces a single clean briefing with a traffic-light assessment and user-selectable sub-components.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 355,
+      "name": "macro-briefing",
+      "path": "skills/58-charlescoverdale-econstack/macro-briefing/SKILL.md"
+    },
+    {
+      "collection": "58-charlescoverdale-econstack",
+      "description": "Industry and market research. Market sizing, structure, competition, regulation, supply chains, pricing, M&A. Produces a single compact, source-cited research report with Porter's Five Forces, HHI / CR4, PESTLE, and trade flows. Supports UK, US, EU, Australia, and global scope, with multi-geography comparison.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 371,
+      "name": "market-research",
+      "path": "skills/58-charlescoverdale-econstack/market-research/SKILL.md"
+    },
+    {
+      "collection": "59-shiquda-openalex-skill",
+      "description": "Use when the user asks about academic literature, research papers, scholarly works, authors, citations, institutions, journals, or any academic metadata. Trigger when users want to search for papers, find author profiles, track citations, discover related works, or explore academic topics. Also use when users mention DOIs, ORCIDs, h-index, publication venues, or research metrics.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 372,
+      "name": "openalex",
+      "path": "skills/59-shiquda-openalex-skill/openalex/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "description": "Use when working on any empirical academic research context — paper writing, data analysis, literature review, or any task involving citations, results, or publication artifacts. Establishes non-negotiable principles that govern all other superpapers skills.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 71,
+      "name": "academic-baseline",
+      "path": "skills/60-regisely-superpapers/skills/academic-baseline/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "description": "Use when starting a new research project, exploring a research idea, deciding whether a question is viable, or before touching code or data for a new paper. Runs a research-focused brainstorm that clarifies research question, identification strategy, data feasibility, and contribution before any implementation.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 98,
+      "name": "brainstorm",
+      "path": "skills/60-regisely-superpapers/skills/brainstorm/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "description": "Use when adding citations to a .bib file, importing references by DOI, cleaning a bibliography, detecting duplicate entries, or normalizing citation keys. Uses direct .bib manipulation with CrossRef API for metadata resolution — no external tool dependencies.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 80,
+      "name": "citation-management",
+      "path": "skills/60-regisely-superpapers/skills/citation-management/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "description": "Use when compiling a LaTeX paper, debugging LaTeX errors, building a paper PDF, or when a .tex file fails to produce output. Handles engine detection (xelatex vs pdflatex), bibliography systems (biber vs bibtex), and multi-pass compilation.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 73,
+      "name": "compile-latex",
+      "path": "skills/60-regisely-superpapers/skills/compile-latex/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "description": "Use when collecting data for a research project, downloading time series, building a dataset, accessing economic or social data APIs, or scraping data from a non-API source. Handles source discovery, respectful collection, local caching, and manifest documentation.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 72,
+      "name": "data-collection",
+      "path": "skills/60-regisely-superpapers/skills/data-collection/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "description": "Use when a research implementation plan exists in docs/superpapers/plans/ and the user is ready to execute it — collecting data, running analysis, producing outputs, writing the paper. Orchestrates task execution with replication-driven verification and two-stage review at phase boundaries.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 122,
+      "name": "execute-plan",
+      "path": "skills/60-regisely-superpapers/skills/execute-plan/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "description": "Use when preparing a paper for submission to a specific journal, checking formatting requirements, parsing instructions for authors, building a submission checklist, or adapting a paper to a journal template. Fetches the journal's official guidelines via web and produces a verifiable checklist.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 101,
+      "name": "journal-guidelines",
+      "path": "skills/60-regisely-superpapers/skills/journal-guidelines/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "description": "Use when choosing a target journal for a paper, comparing journal rankings, asking \"where should I submit this\", or building a submission strategy across multiple journals. Field-agnostic — detects the paper's research area and suggests appropriate outlets across tiers.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 80,
+      "name": "journal-selection",
+      "path": "skills/60-regisely-superpapers/skills/journal-selection/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "description": "Use when the user asks to search for papers, review literature, find references on a topic, verify a paper exists, or build a bibliography. Enforces web verification of every citation via web fetch to prevent hallucinated references.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 85,
+      "name": "literature-search",
+      "path": "skills/60-regisely-superpapers/skills/literature-search/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "description": "Use when a paper is complete or near-complete and a holistic pre-submission audit is needed. Cross-cuts text, code, tables, figures, results, citations, and reproducibility in a single pass and produces a persistent audit report. Works standalone on papers written outside the plugin.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 105,
+      "name": "paper-review",
+      "path": "skills/60-regisely-superpapers/skills/paper-review/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "description": "Use when drafting, rewriting, reviewing, or auditing prose for any section of an empirical academic paper (Abstract, Introduction, Methods, Data, Results, Discussion, Conclusion) or specialized output (job market paper, grant proposal, policy brief, referee response).",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 90,
+      "name": "paper-writing",
+      "path": "skills/60-regisely-superpapers/skills/paper-writing/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "description": "Use when starting empirical analysis, creating a data pipeline, generating results, or when data or model specifications change. Enforces end-to-end reproducibility — every number in the paper must be regenerable from raw data by a script with a fixed seed. Replaces TDD for the research domain.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 131,
+      "name": "replication-driven-research",
+      "path": "skills/60-regisely-superpapers/skills/replication-driven-research/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "description": "Use when a main specification has produced a result, when preparing a paper appendix, when a reviewer requests robustness, or before declaring any empirical finding final. Guides selection of design-appropriate checks without mandating a fixed checklist.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 137,
+      "name": "robustness-checks",
+      "path": "skills/60-regisely-superpapers/skills/robustness-checks/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "description": "Use when estimating a statistical or econometric model, running a regression, specifying an identification strategy, testing a hypothesis, or fitting any model to empirical data. Guides the process (assumptions, estimation, reporting, diagnostics) without forcing a fixed method list.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 108,
+      "name": "statistical-modeling",
+      "path": "skills/60-regisely-superpapers/skills/statistical-modeling/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "description": "Use when generating a LaTeX results table, creating a figure for a paper, formatting descriptive statistics, preparing regression output for publication, or producing vector-quality graphics. Enforces booktabs, threeparttable, vector PDFs, and script-generated output.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 153,
+      "name": "tables-and-figures",
+      "path": "skills/60-regisely-superpapers/skills/tables-and-figures/SKILL.md"
+    },
+    {
+      "collection": "60-regisely-superpapers",
+      "description": "Use when a research design spec exists and the user is ready to translate it into a concrete implementation plan with phased tasks, artifacts, and verification criteria. Produces a research execution plan organized in canonical research phases — collection, preparation, analysis, robustness, writing, submission.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 114,
+      "name": "write-plan",
+      "path": "skills/60-regisely-superpapers/skills/write-plan/SKILL.md"
+    },
+    {
+      "collection": "61-phdemotions-research-methods",
+      "description": "Confirmatory hypothesis testing matched to pre-registration, with full assumption testing, effect sizes, confidence intervals, and APA 7th formatted output. Supports OLS/GLM regression, panel regression (fixest), mixed models (lme4), SEM/CFA (lavaan), meta-analysis (metafor), and delegates PROCESS models to /process-model. Reads pre-registration to align planned analyses, flags deviations, and generates decision log entries for post-hoc choices. Use when the user says \"test hypotheses,\" \"run analysis,\" \"confirmatory,\" \"regression,\" \"SEM,\" \"mediation,\" \"mixed model,\" \"meta-analysis,\" or when /eda completes. Triggers on \"analyze,\" \"hypothesis,\" \"regression,\" \"model,\" \"test.\"",
+      "frontmatter_fields": [
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 137,
+      "name": "analyze",
+      "path": "skills/61-phdemotions-research-methods/skills/analyze/SKILL.md"
+    },
+    {
+      "collection": "61-phdemotions-research-methods",
+      "description": "Produce documented data cleaning scripts that log every transformation with N before/after each step, generate a CONSORT-style exclusion flow diagram, create decision log entries for every subjective choice, compute scale reliability and composites, and write cleaned data to data/processed/. Never modifies raw data. Use when the user says \"clean data,\" \"prepare data,\" \"apply exclusion criteria,\" \"handle missing data,\" \"create composites,\" \"data preprocessing,\" or when /data-validate found issues to address. Triggers on \"clean,\" \"exclusion,\" \"missing data,\" \"preprocessing,\" \"composites,\" \"reverse code.\"",
+      "frontmatter_fields": [
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 99,
+      "name": "data-clean",
+      "path": "skills/61-phdemotions-research-methods/skills/data-clean/SKILL.md"
+    },
+    {
+      "collection": "61-phdemotions-research-methods",
+      "description": "Generate a complete, manuscript-ready data profile: demographics summary table, scale identification with reliability (alpha, omega, CFA), comprehensive codebook, sample characteristics, and measurement documentation — all following current best practices at the time of execution. Searches for the latest reporting standards (JARS, TOP, APA) before generating output. Produces everything a Methods section needs to describe the data. Use when the user says \"describe my data for the manuscript,\" \"demographics table,\" \"what scales are in here,\" \"codebook,\" \"Methods section data,\" \"sample characteristics,\" or any time they need data documented for publication. Triggers on \"profile,\" \"demographics,\" \"scales,\" \"codebook,\" \"sample description,\" \"Methods section.\"",
+      "frontmatter_fields": [
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 208,
+      "name": "data-profile",
+      "path": "skills/61-phdemotions-research-methods/skills/data-profile/SKILL.md"
+    },
+    {
+      "collection": "61-phdemotions-research-methods",
+      "description": "Run declarative data quality checks and generate a codebook. Checks completeness, distributions, impossible values, duplicates, outliers, encoding issues, attention check failures, and manipulation check results. Produces a pointblank/pandera validation report and an auto-generated codebook. Use when the user says \"validate data,\" \"check data quality,\" \"generate codebook,\" \"what's wrong with my data,\" \"data audit,\" \"check my dataset,\" or when /research-intake identifies missing validation. Triggers on \"validate,\" \"data quality,\" \"codebook,\" \"check my data.\"",
+      "frontmatter_fields": [
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 89,
+      "name": "data-validate",
+      "path": "skills/61-phdemotions-research-methods/skills/data-validate/SKILL.md"
+    },
+    {
+      "collection": "61-phdemotions-research-methods",
+      "description": "Comprehensive exploratory data analysis with publication-quality descriptive tables, correlation matrices, distribution plots, and assumption testing. Generates a standalone EDA report with Table 1 (gtsummary/great_tables), correlation heatmap, distribution diagnostics, VIF for multicollinearity, and normality/homoscedasticity tests. All figures are APA-formatted and colorblind-safe. Use when the user says \"exploratory analysis,\" \"EDA,\" \"descriptive statistics,\" \"explore the data,\" \"Table 1,\" \"correlations,\" \"distributions,\" or when /data-clean completes successfully. Triggers on \"EDA,\" \"descriptive,\" \"Table 1,\" \"explore,\" \"correlations.\"",
+      "frontmatter_fields": [
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 137,
+      "name": "eda",
+      "path": "skills/61-phdemotions-research-methods/skills/eda/SKILL.md"
+    },
+    {
+      "collection": "61-phdemotions-research-methods",
+      "description": "Implement Hayes PROCESS mediation and moderation models transparently via lavaan and bruceR, with bootstrap CIs, index of moderated mediation, Johnson-Neyman regions of significance, and APA-formatted output that matches familiar PROCESS tables. Maps model numbers (1-24) to inspectable lavaan syntax instead of black-box macros. Use when the user says \"PROCESS model,\" \"mediation,\" \"moderated mediation,\" \"conditional indirect effect,\" \"Hayes model,\" \"indirect effect,\" \"moderation,\" or when /analyze encounters a mediation/moderation hypothesis. Triggers on \"PROCESS,\" \"mediation,\" \"moderation,\" \"indirect effect,\" \"Hayes.\"",
+      "frontmatter_fields": [
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 146,
+      "name": "process-model",
+      "path": "skills/61-phdemotions-research-methods/skills/process-model/SKILL.md"
+    },
+    {
+      "collection": "61-phdemotions-research-methods",
+      "description": "Scaffold a new research project with full reproducibility infrastructure in R and/or Python. Creates directory structure, pipeline stubs (targets/Snakemake), environment lockfiles (renv/uv), documentation templates (codebook, decision log, pre-registration, Cornell README), Quarto manuscript template, and proper .gitignore. Can wrap existing data in gold-standard structure. Use when the user says \"new project,\" \"scaffold,\" \"start a study,\" \"set up a project,\" \"I have data and need to organize it,\" or when /research-intake recommends scaffolding.",
+      "frontmatter_fields": [
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 79,
+      "name": "research-init",
+      "path": "skills/61-phdemotions-research-methods/skills/research-init/SKILL.md"
+    },
+    {
+      "collection": "61-phdemotions-research-methods",
+      "description": "Bidirectional review — THE entry point for every research engagement. Reviews everything the researcher has (data, docs, code, instruments) and produces two outputs: (1) a gap analysis showing what their project needs to meet gold standards, and (2) suite-learning findings identifying what our skill suite can learn from what they brought. Runs at the START of every engagement and in lighter form at session END. Use when the user says \"I have data,\" \"review what I have,\" \"where do I start,\" \"look at my project,\" \"what am I missing,\" or at the beginning of any research engagement. Also triggers on \"intake,\" \"gap analysis,\" \"audit my materials,\" \"what should I improve.\"",
+      "frontmatter_fields": [
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 102,
+      "name": "research-intake",
+      "path": "skills/61-phdemotions-research-methods/skills/research-intake/SKILL.md"
+    },
+    {
+      "collection": "61-phdemotions-research-methods",
+      "description": "Create publication-quality figures that meet journal submission standards. APA 7th defaults with journal-specific overrides. Supports interaction plots, mediation path diagrams, forest plots, marginal effects, Johnson-Neyman plots, correlation heatmaps, and coefficient plots. All figures are colorblind-safe, high DPI, and exported in multiple formats (PDF, PNG, SVG, TIFF). Use when the user says \"publication figures,\" \"journal figures,\" \"APA figures,\" \"visualize results,\" \"make plots,\" \"interaction plot,\" \"path diagram,\" \"forest plot,\" or when /analyze or /process-model or /robustness completes. Triggers on \"visualize,\" \"figure,\" \"plot,\" \"diagram.\"",
+      "frontmatter_fields": [
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 141,
+      "name": "visualize",
+      "path": "skills/61-phdemotions-research-methods/skills/visualize/SKILL.md"
+    },
+    {
+      "collection": "62-PHY041-claude-skill-citation-checker",
+      "description": "Verify academic citations against CrossRef, Semantic Scholar, and OpenAlex. Detects AI-hallucinated references, chimeric citations, and suspicious patterns.",
+      "frontmatter_fields": [
+        "description",
+        "metadata",
+        "name",
+        "version"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 156,
+      "name": "check-citations",
+      "path": "skills/62-PHY041-claude-skill-citation-checker/SKILL.md"
+    },
+    {
+      "collection": "63-tondevrel-scientific-agent-skills",
+      "description": "Causal inference framework for answering \"does X cause Y?\" beyond correlation. DoWhy (Microsoft Research) provides the identify-estimate-refute loop: define a causal graph (DAG), identify the causal effect using backdoor/frontdoor/instrumental variable criteria, estimate treatment effects with multiple estimators, and validate results with automated refutation tests. Use when: distinguishing causation from correlation, estimating treatment effects (ATE, ATT, CATE), designing and analyzing A/B tests with confounders, using instrumental variables, performing counterfactual reasoning (\"what would have happened if...\"), validating causal claims with sensitivity analysis, working with observational data where randomization is impossible, or any analysis where the question is \"what is the CAUSAL effect of X on Y\" rather than just \"how do X and Y relate?\"",
+      "frontmatter_fields": [
+        "description",
+        "license",
+        "name",
+        "version"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 981,
+      "name": "dowhy",
+      "path": "skills/63-tondevrel-scientific-agent-skills/dowhy/SKILL.md"
+    },
+    {
+      "collection": "63-tondevrel-scientific-agent-skills",
+      "description": "Complete survival analysis library in Python. Handles right-censored data, Kaplan-Meier curves, and Cox regression. Standard for clinical trial analysis and epidemiology.",
+      "frontmatter_fields": [
+        "description",
+        "license",
+        "name",
+        "version"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 98,
+      "name": "lifelines",
+      "path": "skills/63-tondevrel-scientific-agent-skills/lifelines/SKILL.md"
     }
   ],
   "summary": {
-    "missing_description": 32,
-    "missing_frontmatter": 32,
-    "missing_name": 32,
-    "oversized_skill_files_over_500_lines": 75,
-    "skill_files": 977,
-    "top_level_collections": 50
+    "missing_description": 4,
+    "missing_frontmatter": 4,
+    "missing_name": 4,
+    "oversized_skill_files_over_500_lines": 80,
+    "skill_files": 1052,
+    "top_level_collections": 63
   }
 }

@@ -1,0 +1,41 @@
+# Sharp Edges - Production gotchas for Holdings (13F) Analysis
+
+sharp_edges:
+  - id: reverse-lookup-trap
+    summary: Never iterate all 13Fs to find holders of a stock
+    severity: critical
+    solution: |
+      # WRONG: "Who holds Apple?" - don't iterate 8,000+ filings
+      # RIGHT: "What does Berkshire hold?" - filter by filer
+      filing = get_filings(form="13F-HR").filter(company="BERKSHIRE")[0]
+      holdings = filing.obj().holdings
+    detection_pattern: 'for.*in.*get_filings.*13F.*:.*\.obj\(\)'
+
+  - id: value-in-thousands
+    summary: Holdings Value column is in $1000s, not dollars
+    severity: high
+    solution: |
+      holdings = thirteenf.holdings
+      total_value = holdings['Value'].sum() * 1000  # Convert to dollars
+    detection_pattern: "holdings\\['Value'\\]\\.sum\\(\\)(?!\\s*\\*\\s*1000)"
+
+  - id: holdings-vs-infotable
+    summary: holdings is aggregated, infotable has manager breakdown
+    severity: medium
+    solution: |
+      holdings = thirteenf.holdings      # Aggregated by security
+      infotable = thirteenf.infotable    # Raw with OtherManager column
+
+  - id: cusip-vs-ticker
+    summary: CUSIP is authoritative, Ticker may be missing
+    severity: low
+    solution: |
+      apple = holdings[holdings['Cusip'] == '037833100']  # Reliable
+      apple = holdings[holdings['Ticker'] == 'AAPL']       # May miss some
+
+  - id: quarter-lag
+    summary: 13F filings have 45-day delay from quarter end
+    severity: low
+    solution: |
+      # Q3 2024 (Sep 30) holdings available after Nov 14
+      filings = get_filings(form="13F-HR", year=2024, quarter=3)

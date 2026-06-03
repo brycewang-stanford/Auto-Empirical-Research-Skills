@@ -1,0 +1,3 @@
+- Never use em dashes.
+- Never attribute econstack to any individual.
+- Every section stands alone.

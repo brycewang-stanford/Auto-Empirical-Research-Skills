@@ -1,0 +1,60 @@
+id = "card-iv-recovery"
+title = "Card IV recovery: does the pipeline get the IV>OLS schooling result and report instrument strength?"
+data = "demo-StatsPAI-skill/data/card.csv"
+reference_candidate = "reference-iv"
+
+description = """
+Card (1995) instruments years of schooling with proximity to a 4-year college
+(nearc4) to estimate the return to schooling on log wages. The canonical, initially
+surprising result is that the IV estimate (~0.13) EXCEEDS the OLS estimate (~0.075),
+and the instrument's first stage is real but only moderately strong (F ~ 13).
+
+A pipeline that handles IV correctly recovers a positive OLS return, an IV return
+that exceeds it, and — crucially — REPORTS the first-stage strength rather than
+treating the instrument as obviously strong. Data-derived golds are recomputed by
+the checker, so a candidate cannot fabricate the numbers.
+"""
+
+[[gold]]
+id = "ols-return-positive"
+required = true
+weight = 2
+description = "Reports a positive OLS return to schooling near the literature value (~0.075)."
+check = "value_near"
+field = "ols_return"
+expected = 0.075
+tol = 0.03
+
+[[gold]]
+id = "iv-exceeds-ols"
+required = true
+weight = 4
+description = "IV return to schooling is positive and exceeds the OLS return (the canonical Card result)."
+check = "iv_gt_ols"
+
+[[gold]]
+id = "first-stage-reported-and-adequate"
+required = true
+weight = 3
+description = "Reports the first-stage F for the instrument, and it clears the rule-of-thumb (> 10)."
+check = "first_stage_min"
+min_f = 10.0
+
+[[gold]]
+id = "iv-near-literature"
+required = false
+weight = 2
+description = "IV estimate lands near the canonical ~0.13 (informational; IV is less precise than OLS)."
+check = "value_near"
+field = "iv_return"
+expected = 0.13
+tol = 0.05
+
+[[gold]]
+id = "honest-reported-numbers"
+required = true
+weight = 3
+description = "Reported OLS, IV, and first-stage F match what the checker recomputes from the data."
+check = "cross_check"
+tol = 0.01
+f_tol = 1.0

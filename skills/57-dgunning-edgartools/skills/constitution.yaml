@@ -1,0 +1,102 @@
+version: "1.0"
+goals:
+  - id: correctness
+    name: Correctness
+    weight: 0.30
+    description: Code patterns use real, working EdgarTools API methods
+    passing_criteria:
+      - All expected_patterns match
+      - No hallucinated methods
+    primary_skill_files:
+      - core/skill.yaml
+      - core/sharp-edges.yaml
+    indicator_patterns:
+      - "Company\\("
+      - "get_filings\\("
+      - "\\.obj\\(\\)"
+      - "find\\("
+
+  - id: routing
+    name: Routing
+    weight: 0.25
+    description: Skills guide to the right entry point per task type
+    passing_criteria:
+      - Idiomatic entry point used (find(), get_financials(), filing.obj())
+      - No detours through low-level APIs
+    primary_skill_files:
+      - core/skill.yaml
+      - core/collaboration.yaml
+    indicator_patterns:
+      - "find\\("
+      - "get_financials\\("
+      - "\\.obj\\(\\)"
+    anti_patterns:
+      - "\\.xbrl\\(\\).*statements"
+      - "document\\(\\)\\.text"
+      - "Filing\\s*\\("
+
+  - id: efficiency
+    name: Efficiency
+    weight: 0.20
+    description: Minimal API calls, no unbounded iteration
+    passing_criteria:
+      - Uses .head() or index access
+      - Quick getters for single values
+    primary_skill_files:
+      - core/skill.yaml
+      - financials/skill.yaml
+    indicator_patterns:
+      - "\\.head\\("
+      - "get_revenue\\("
+      - "\\[0\\]"
+    anti_patterns:
+      - "for\\s+.*\\s+in\\s+.*get_filings\\(\\)"
+      - "list\\(.*get_filings"
+
+  - id: sharp_edges
+    name: Sharp Edges
+    weight: 0.15
+    description: Gotchas communicated, no anti-patterns in generated code
+    passing_criteria:
+      - No forbidden_patterns violated
+      - Form codes correct
+    primary_skill_files:
+      - core/sharp-edges.yaml
+      - financials/sharp-edges.yaml
+      - reports/sharp-edges.yaml
+      - holdings/sharp-edges.yaml
+      - ownership/sharp-edges.yaml
+      - xbrl/sharp-edges.yaml
+    anti_patterns:
+      - "Filing\\s*\\(.*cik"
+      - "repr\\s*\\("
+
+  - id: token_economy
+    name: Token Economy
+    weight: 0.10
+    description: >
+      Skills themselves are concise and communicate efficiently
+      without wasting context window tokens. Generated code is
+      also within token budget.
+    passing_criteria:
+      - Generated code token count <= max_tokens
+      - efficiency_score >= 0.7
+      - Each skill YAML stays within its token budget
+    skill_token_budgets:
+      core/skill.yaml: 4500
+      financials/skill.yaml: 1000
+      holdings/skill.yaml: 800
+      ownership/skill.yaml: 1100
+      reports/skill.yaml: 900
+      xbrl/skill.yaml: 1000
+    primary_skill_files:
+      - core/skill.yaml
+
+  - id: completeness
+    name: Completeness
+    weight: 0.0
+    description: Every task category has a clear skill path
+    passing_criteria:
+      - No category scores below 0.5 mean
+    primary_skill_files:
+      - core/collaboration.yaml
