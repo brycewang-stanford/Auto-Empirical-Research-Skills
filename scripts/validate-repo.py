@@ -330,7 +330,7 @@ def validate_required_files() -> tuple[list[str], list[str]]:
     warnings: list[str] = []
     required = [
         "README.md",
-        "README-zh.md",
+        "README-en.md",
         "CHANGELOG.md",
         "CONTRIBUTING.md",
         "LICENSE",
