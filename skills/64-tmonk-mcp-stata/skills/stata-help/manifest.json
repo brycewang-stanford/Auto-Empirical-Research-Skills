@@ -1,0 +1,20 @@
+{
+  "version": "3.2.7",
+  "invocation_type": "slash-command",
+  "argument_hint": "<topic>",
+  "allowed_tools": [
+    "mcp__mcp-stata__stata_get_help"
+  ],
+  "supported_agents": [
+    "claude",
+    "codex",
+    "gemini",
+    "cursor",
+    "windsurf",
+    "vscode"
+  ],
+  "trigger_text": "Look up Stata command documentation and display formatted help text.",
+  "display_name": "Stata Help",
+  "short_description": "Fetch formatted Stata help for a command or topic.",
+  "default_prompt": "Use the stata-help skill to retrieve and summarize Stata documentation."
+}

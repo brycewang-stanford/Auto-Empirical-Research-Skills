@@ -1,0 +1,24 @@
+{
+  "version": "3.2.7",
+  "invocation_type": "context-skill",
+  "allowed_tools": [],
+  "supported_agents": [
+    "claude",
+    "codex",
+    "gemini",
+    "cursor",
+    "windsurf",
+    "vscode"
+  ],
+  "trigger_text": "Run replication, robustness, and specification-sensitivity workflows for Stata projects. Use when a researcher wants to reproduce a result, rerun a pipeline, compare specifications, audit a do-file sequence, or check whether a claim is stable.",
+  "references": [
+    "references/workflow.md"
+  ],
+  "scripts": [
+    "scripts/compare_specs.py",
+    "scripts/summarize_log.py"
+  ],
+  "display_name": "Stata Replication",
+  "short_description": "Run replication and robustness checks with structured comparisons.",
+  "default_prompt": "Use the stata-replication skill to reproduce a result and compare robustness variants in a structured way."
+}

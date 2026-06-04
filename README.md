@@ -235,7 +235,7 @@ make check       # 完整 gate：validate + Python 编译 + 单元测试 + eval 
 | [dylantmoore/stata-skill](https://github.com/dylantmoore/stata-skill) | Stata 全覆盖：语法、数据管理、计量、因果推断、Mata、20+ 社区包 | Stata 用户 |
 | [SepineTam/stata-mcp](https://github.com/SepineTam/stata-mcp) | LLM 通过 MCP 直接驱动 Stata 回归 | Stata 计量分析 |
 | [hanlulong/stata-mcp](https://github.com/hanlulong/stata-mcp) | Stata-MCP 编辑器扩展（VS Code/Cursor/Antigravity）：直接跑 `.do`、实时输出、数据/图查看；MIT · 414★（与上方 SepineTam 同名不同项目） | 编辑器内 AI 协作跑 Stata |
-| [tmonk/mcp-stata](https://github.com/tmonk/mcp-stata) | Stata MCP server **内置 skills 目录**：复现 / 数据审计 / 发表 QA / 旧码现代化 / referee 回应 / power；**AGPL-3.0** | Stata 复现与稳健性审计 |
+| [tmonk/mcp-stata](https://github.com/tmonk/mcp-stata) · 已收录 [`skills/64`](skills/64-tmonk-mcp-stata/) | Stata MCP server 的 **20 个 SKILL.md**：复现 / 数据审计 / 发表 QA / 旧码现代化 / referee 回应 / power / 因果推断；**AGPL-3.0**（聚合保留原许可，未 vendor 服务端代码） | Stata 复现与稳健性审计 |
 | [PovertyAction/ipa-stata-template](https://github.com/PovertyAction/ipa-stata-template) | IPA 可复现 Stata 研究模板 + `.claude/skills`：编号流水线、断言式防御编程、LaTeX 表格；MIT | 发展经济学 / 田野实证复现 |
 | [lcrawfurd/claude-skills](https://github.com/lcrawfurd/claude-skills) | 学术 skill：paper / code review、referee、预审；code-review 内置 Stata/R/Python 编码规范（DIME / Reif / AEA Data Editor） | 投稿前审稿与代码复核 |
 | [AEADataEditor/replication-template](https://github.com/AEADataEditor/replication-template) | AEA 数据主编官方复现包模板（Stata 为主，`REPLICATION.md`）—— 经济学复现"黄金标准" | AEA / 顶刊复现包打包 |

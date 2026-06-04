@@ -1,0 +1,20 @@
+{
+  "version": "3.2.7",
+  "invocation_type": "context-skill",
+  "allowed_tools": [],
+  "supported_agents": [
+    "claude",
+    "codex",
+    "gemini",
+    "cursor",
+    "windsurf",
+    "vscode"
+  ],
+  "trigger_text": "Organize and execute Stata workflows for referee responses, robustness requests, and coauthor follow-ups. Use when the user needs to answer a critique with targeted reruns, tables, figures, and a defensible audit trail.",
+  "references": [
+    "references/response-patterns.md"
+  ],
+  "display_name": "Stata Referee Response",
+  "short_description": "Handle referee-response reruns and evidence tracking in Stata.",
+  "default_prompt": "Use the stata-referee-response skill to organize and execute a referee-response workflow in Stata."
+}

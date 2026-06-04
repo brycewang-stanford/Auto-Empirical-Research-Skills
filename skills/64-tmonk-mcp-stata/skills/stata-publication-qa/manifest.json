@@ -1,0 +1,23 @@
+{
+  "version": "3.2.7",
+  "invocation_type": "context-skill",
+  "allowed_tools": [],
+  "supported_agents": [
+    "claude",
+    "codex",
+    "gemini",
+    "cursor",
+    "windsurf",
+    "vscode"
+  ],
+  "trigger_text": "Review regression outputs, tables, and graphs for publication readiness. Use when the user asks whether a result is ready for a paper, appendix, seminar, referee response, or coauthor review.",
+  "references": [
+    "references/checklist.md"
+  ],
+  "scripts": [
+    "scripts/graph_qa_checklist.py"
+  ],
+  "display_name": "Stata Publication QA",
+  "short_description": "Review tables and figures for publication-quality presentation.",
+  "default_prompt": "Use the stata-publication-qa skill to review tables and figures for publication readiness."
+}

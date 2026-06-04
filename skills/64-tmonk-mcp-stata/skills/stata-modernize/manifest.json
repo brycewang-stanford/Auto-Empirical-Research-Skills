@@ -1,0 +1,20 @@
+{
+  "version": "3.2.7",
+  "invocation_type": "context-skill",
+  "allowed_tools": [],
+  "supported_agents": [
+    "claude",
+    "codex",
+    "gemini",
+    "cursor",
+    "windsurf",
+    "vscode"
+  ],
+  "trigger_text": "Improve, modernize, and optimize existing Stata code for performance, portability, and maintainability. Use when legacy patterns such as preserve/restore, cd, #delimit, slow aggregation, or weak fixed-effects workflows appear in code under review.",
+  "references": [
+    "references/patterns.md"
+  ],
+  "display_name": "Stata Modernize",
+  "short_description": "Replace legacy Stata patterns with modern, faster, more portable ones.",
+  "default_prompt": "Use the stata-modernize skill to identify and replace legacy Stata patterns with modern alternatives."
+}

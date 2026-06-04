@@ -1,0 +1,20 @@
+{
+  "version": "3.2.7",
+  "invocation_type": "slash-command",
+  "argument_hint": "<path>",
+  "allowed_tools": [
+    "mcp__mcp-stata__stata_inspect_data"
+  ],
+  "supported_agents": [
+    "claude",
+    "codex",
+    "gemini",
+    "cursor",
+    "windsurf",
+    "vscode"
+  ],
+  "trigger_text": "Run static analysis on a Stata .do or .ado file and report style and best-practice issues.",
+  "display_name": "Stata Lint",
+  "short_description": "Lint a Stata do-file or ado-file for style and modernization issues.",
+  "default_prompt": "Use the stata-lint skill to lint a Stata do-file or ado-file and explain any findings."
+}

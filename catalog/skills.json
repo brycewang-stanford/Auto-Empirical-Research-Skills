@@ -1070,6 +1070,23 @@
       "source_confidence": "high",
       "source_url": "https://github.com/tondevrel/scientific-agent-skills",
       "sync": "manual vendor snapshot"
+    },
+    {
+      "commercial_use": "share-alike",
+      "has_license": true,
+      "has_readme": true,
+      "id": "64-tmonk-mcp-stata",
+      "license": "AGPL-3.0",
+      "path": "skills/64-tmonk-mcp-stata",
+      "primary_skill": {
+        "description": "Design, run, and critique causal inference workflows in Stata. Use when the user is working on identification, treatment effects, DiD, IV, event studies, RD, or assumption-sensitive empirical claims.",
+        "name": "stata-causal-inference",
+        "path": "skills/64-tmonk-mcp-stata/skills/stata-causal-inference/SKILL.md"
+      },
+      "skill_count": 20,
+      "source_confidence": "high",
+      "source_url": "https://github.com/tmonk/mcp-stata",
+      "sync": "manual vendor snapshot"
     }
   ],
   "generated_by": "scripts/build-catalog.py",
@@ -17084,6 +17101,286 @@
       "line_count": 98,
       "name": "lifelines",
       "path": "skills/63-tondevrel-scientific-agent-skills/lifelines/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "description": "Show mcp-stata identity, connected tools, and status. Use when the user asks if mcp-stata is available, asks about access to the toolkit, or asks what Stata tools are connected.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 46,
+      "name": "stata",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "description": "Design, run, and critique causal inference workflows in Stata. Use when the user is working on identification, treatment effects, DiD, IV, event studies, RD, or assumption-sensitive empirical claims.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 14,
+      "name": "stata-causal-inference",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-causal-inference/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "description": "Audit datasets for structure, missingness, labeling, suspicious values, duplicate identifiers, and documentation readiness. Use when a researcher asks for data QA, codebook review, sanity checks, or pre-analysis cleanup guidance.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 14,
+      "name": "stata-data-audit",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-data-audit/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "description": "Track dataset lineage, transformation steps, merge logic, and reproducibility risks in Stata workflows. Use when the user needs to explain where data came from, how it changed, or why a pipeline can be trusted.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 14,
+      "name": "stata-data-provenance",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-data-provenance/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "description": "Diagnose local Stata, MCP, package, startup, graph-export, and permissions issues. Use when setup is failing, Stata is not discovered, packages are missing, logs are truncated, or a managed machine behaves differently from a normal workstation.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 15,
+      "name": "stata-environment-diagnose",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-environment-diagnose/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "description": "List, export, and review Stata graphs from the current session.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 17,
+      "name": "stata-graph",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-graph/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "description": "Look up Stata command documentation and display formatted help text.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 20,
+      "name": "stata-help",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-help/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "description": "Describe and summarize the current dataset in memory. Optionally inspect a specific variable with codebook.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 14,
+      "name": "stata-inspect",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-inspect/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "description": "Run static analysis on a Stata .do or .ado file and report style and best-practice issues.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 18,
+      "name": "stata-lint",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-lint/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "description": "Tail, read, or search a Stata log file from a previous command or background task.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 29,
+      "name": "stata-log",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-log/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "description": "Improve, modernize, and optimize existing Stata code for performance, portability, and maintainability. Use when legacy patterns such as preserve/restore, cd, #delimit, slow aggregation, or weak fixed-effects workflows appear in code under review.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 14,
+      "name": "stata-modernize",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-modernize/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "description": "Plan and critique power, MDE, and sample-size calculations for Stata-based research workflows. Use when the user is designing a study, checking detectability, or defending precision claims.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 14,
+      "name": "stata-power-analysis",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-power-analysis/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "description": "Review regression outputs, tables, and graphs for publication readiness. Use when the user asks whether a result is ready for a paper, appendix, seminar, referee response, or coauthor review.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 14,
+      "name": "stata-publication-qa",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-publication-qa/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "description": "Organize and execute Stata workflows for referee responses, robustness requests, and coauthor follow-ups. Use when the user needs to answer a critique with targeted reruns, tables, figures, and a defensible audit trail.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 14,
+      "name": "stata-referee-response",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-referee-response/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "description": "Run replication, robustness, and specification-sensitivity workflows for Stata projects. Use when a researcher wants to reproduce a result, rerun a pipeline, compare specifications, audit a do-file sequence, or check whether a claim is stable.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 15,
+      "name": "stata-replication",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-replication/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "description": "Fetch and display stored r(), e(), and s() results from the last Stata command.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 16,
+      "name": "stata-results",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-results/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "description": "Run arbitrary Stata code or a .do file and display the result.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 23,
+      "name": "stata-run",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-run/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "description": "Install, configure, update, or verify mcp-stata across Claude Code, Codex, Gemini CLI, Cursor, Windsurf, and VS Code. Activate when users ask to set up the Stata toolkit or troubleshoot the installation.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 75,
+      "name": "stata-setup",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-setup/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "description": "Build and review paper-ready regression, balance, and summary tables from Stata outputs. Use when the user needs a clean table for a draft, appendix, or coauthor share-out.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 14,
+      "name": "stata-table-builder",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-table-builder/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "description": "Activate when users mention Stata commands, .do files, regressions, econometrics, stored results, graphs, dataset inspection, replication, or Stata errors. Route the task through mcp-stata tools and the specialized research skills instead of treating it as plain text coding.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 35,
+      "name": "stata-toolkit",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-toolkit/SKILL.md"
     }
   ],
   "summary": {
@@ -17091,7 +17388,7 @@
     "missing_frontmatter": 4,
     "missing_name": 4,
     "oversized_skill_files_over_500_lines": 80,
-    "skill_files": 1052,
-    "top_level_collections": 63
+    "skill_files": 1072,
+    "top_level_collections": 64
   }
 }

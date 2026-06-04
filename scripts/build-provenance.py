@@ -207,6 +207,14 @@ OVERRIDES: dict[str, dict[str, object]] = {
         "sync": "manual vendor snapshot",
         "source_confidence": "high",
     },
+    # --- 2026-06-03 Stata expansion ---
+    "64-tmonk-mcp-stata": {
+        "source_url": "https://github.com/tmonk/mcp-stata",
+        "license": "AGPL-3.0",
+        "origin": "vendored upstream snapshot (plugin/skills component only — 20 SKILL.md skills + LICENSE; Python/Rust MCP server, installers, tests excluded) 2026-06-03. AGPL-3.0 retained as a separately-licensed aggregate; not relicensed under the repo default.",
+        "sync": "manual vendor snapshot",
+        "source_confidence": "high",
+    },
 }
 
 
@@ -310,6 +318,10 @@ def commercial_use(license_name: str) -> str:
     if lower.startswith(("mit", "apache", "bsd")):
         return "allowed"
     if lower.startswith("cc-by-sa"):
+        return "share-alike"
+    if "agpl" in lower or "gpl" in lower:
+        # Copyleft: commercial use permitted, but derivative/network use must
+        # share source under the same license.
         return "share-alike"
     return "unknown"
 

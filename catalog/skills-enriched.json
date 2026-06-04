@@ -2,23 +2,23 @@
   "generated_by": "scripts/build-catalog-enrich.py",
   "schema_version": 1,
   "summary": {
-    "skills": 1052,
+    "skills": 1072,
     "mean_quality_score": 99.2,
-    "with_frontmatter_description": 1048,
+    "with_frontmatter_description": 1068,
     "body_derived_description": 4,
     "no_description": 0,
-    "tagged": 494
+    "tagged": 514
   },
   "taxonomy": {
     "language": {
       "latex": 82,
+      "stata": 43,
       "python": 41,
-      "stata": 23,
       "r": 20
     },
     "method": {
-      "iv": 23,
-      "rdd": 20,
+      "iv": 24,
+      "rdd": 21,
       "panel-fe": 16,
       "staggered-did": 16,
       "bayesian": 13,
@@ -30,26 +30,26 @@
       "survival": 3
     },
     "stage": {
-      "analysis": 119,
+      "analysis": 123,
       "writing": 76,
-      "submission": 70,
+      "submission": 72,
       "literature": 58,
-      "reproduction": 55,
+      "reproduction": 58,
       "citation": 46,
       "tables-figures": 40,
       "presentation": 37,
       "ideation": 32,
       "peer-review": 24,
-      "robustness": 21,
+      "robustness": 23,
       "de-aigc": 16,
       "data": 12
     },
     "topic": {
-      "econometrics": 65,
+      "econometrics": 66,
       "scientific-writing": 62,
-      "reproducibility": 55,
+      "reproducibility": 58,
       "proofreading": 31,
-      "causal-inference": 24
+      "causal-inference": 25
     }
   },
   "skills": [
@@ -20292,6 +20292,448 @@
       "license": "MIT",
       "commercial_use": "allowed",
       "source_url": "https://github.com/tondevrel/scientific-agent-skills",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "stata-causal-inference",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-causal-inference/SKILL.md",
+      "collection": "64-tmonk-mcp-stata",
+      "line_count": 14,
+      "description_effective": "Design, run, and critique causal inference workflows in Stata. Use when the user is working on identification, treatment effects, DiD, IV, event studies, RD, or assumption-sensitive empirical claims.",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {
+        "language": [
+          "stata"
+        ],
+        "method": [
+          "iv",
+          "rdd"
+        ],
+        "stage": [
+          "analysis"
+        ],
+        "topic": [
+          "causal-inference"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "AGPL-3.0",
+      "commercial_use": "share-alike",
+      "source_url": "https://github.com/tmonk/mcp-stata",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "stata-data-audit",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-data-audit/SKILL.md",
+      "collection": "64-tmonk-mcp-stata",
+      "line_count": 14,
+      "description_effective": "Audit datasets for structure, missingness, labeling, suspicious values, duplicate identifiers, and documentation readiness. Use when a researcher asks for data QA, codebook review, sanity checks, or pre-analysis cleanup guidance.",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {
+        "language": [
+          "stata"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "AGPL-3.0",
+      "commercial_use": "share-alike",
+      "source_url": "https://github.com/tmonk/mcp-stata",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "stata-data-provenance",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-data-provenance/SKILL.md",
+      "collection": "64-tmonk-mcp-stata",
+      "line_count": 14,
+      "description_effective": "Track dataset lineage, transformation steps, merge logic, and reproducibility risks in Stata workflows. Use when the user needs to explain where data came from, how it changed, or why a pipeline can be trusted.",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {
+        "language": [
+          "stata"
+        ],
+        "stage": [
+          "reproduction"
+        ],
+        "topic": [
+          "reproducibility"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "AGPL-3.0",
+      "commercial_use": "share-alike",
+      "source_url": "https://github.com/tmonk/mcp-stata",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "stata-environment-diagnose",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-environment-diagnose/SKILL.md",
+      "collection": "64-tmonk-mcp-stata",
+      "line_count": 15,
+      "description_effective": "Diagnose local Stata, MCP, package, startup, graph-export, and permissions issues. Use when setup is failing, Stata is not discovered, packages are missing, logs are truncated, or a managed machine behaves differently from a normal workstation.",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {
+        "language": [
+          "stata"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "AGPL-3.0",
+      "commercial_use": "share-alike",
+      "source_url": "https://github.com/tmonk/mcp-stata",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "stata-graph",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-graph/SKILL.md",
+      "collection": "64-tmonk-mcp-stata",
+      "line_count": 17,
+      "description_effective": "List, export, and review Stata graphs from the current session.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "language": [
+          "stata"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "AGPL-3.0",
+      "commercial_use": "share-alike",
+      "source_url": "https://github.com/tmonk/mcp-stata",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "stata-help",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-help/SKILL.md",
+      "collection": "64-tmonk-mcp-stata",
+      "line_count": 20,
+      "description_effective": "Look up Stata command documentation and display formatted help text.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "language": [
+          "stata"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "AGPL-3.0",
+      "commercial_use": "share-alike",
+      "source_url": "https://github.com/tmonk/mcp-stata",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "stata-inspect",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-inspect/SKILL.md",
+      "collection": "64-tmonk-mcp-stata",
+      "line_count": 14,
+      "description_effective": "Describe and summarize the current dataset in memory. Optionally inspect a specific variable with codebook.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "language": [
+          "stata"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "AGPL-3.0",
+      "commercial_use": "share-alike",
+      "source_url": "https://github.com/tmonk/mcp-stata",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "stata-lint",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-lint/SKILL.md",
+      "collection": "64-tmonk-mcp-stata",
+      "line_count": 18,
+      "description_effective": "Run static analysis on a Stata .do or .ado file and report style and best-practice issues.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "language": [
+          "stata"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "AGPL-3.0",
+      "commercial_use": "share-alike",
+      "source_url": "https://github.com/tmonk/mcp-stata",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "stata-log",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-log/SKILL.md",
+      "collection": "64-tmonk-mcp-stata",
+      "line_count": 29,
+      "description_effective": "Tail, read, or search a Stata log file from a previous command or background task.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "language": [
+          "stata"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "AGPL-3.0",
+      "commercial_use": "share-alike",
+      "source_url": "https://github.com/tmonk/mcp-stata",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "stata-modernize",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-modernize/SKILL.md",
+      "collection": "64-tmonk-mcp-stata",
+      "line_count": 14,
+      "description_effective": "Improve, modernize, and optimize existing Stata code for performance, portability, and maintainability. Use when legacy patterns such as preserve/restore, cd, #delimit, slow aggregation, or weak fixed-effects workflows appear in code under review.",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {
+        "language": [
+          "stata"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "AGPL-3.0",
+      "commercial_use": "share-alike",
+      "source_url": "https://github.com/tmonk/mcp-stata",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "stata-power-analysis",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-power-analysis/SKILL.md",
+      "collection": "64-tmonk-mcp-stata",
+      "line_count": 14,
+      "description_effective": "Plan and critique power, MDE, and sample-size calculations for Stata-based research workflows. Use when the user is designing a study, checking detectability, or defending precision claims.",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {
+        "language": [
+          "stata"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "AGPL-3.0",
+      "commercial_use": "share-alike",
+      "source_url": "https://github.com/tmonk/mcp-stata",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "stata-publication-qa",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-publication-qa/SKILL.md",
+      "collection": "64-tmonk-mcp-stata",
+      "line_count": 14,
+      "description_effective": "Review regression outputs, tables, and graphs for publication readiness. Use when the user asks whether a result is ready for a paper, appendix, seminar, referee response, or coauthor review.",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {
+        "language": [
+          "stata"
+        ],
+        "stage": [
+          "analysis",
+          "submission"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "AGPL-3.0",
+      "commercial_use": "share-alike",
+      "source_url": "https://github.com/tmonk/mcp-stata",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "stata-referee-response",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-referee-response/SKILL.md",
+      "collection": "64-tmonk-mcp-stata",
+      "line_count": 14,
+      "description_effective": "Organize and execute Stata workflows for referee responses, robustness requests, and coauthor follow-ups. Use when the user needs to answer a critique with targeted reruns, tables, figures, and a defensible audit trail.",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {
+        "language": [
+          "stata"
+        ],
+        "stage": [
+          "robustness",
+          "submission"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "AGPL-3.0",
+      "commercial_use": "share-alike",
+      "source_url": "https://github.com/tmonk/mcp-stata",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "stata-replication",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-replication/SKILL.md",
+      "collection": "64-tmonk-mcp-stata",
+      "line_count": 15,
+      "description_effective": "Run replication, robustness, and specification-sensitivity workflows for Stata projects. Use when a researcher wants to reproduce a result, rerun a pipeline, compare specifications, audit a do-file sequence, or check whether a claim is stable.",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {
+        "language": [
+          "stata"
+        ],
+        "stage": [
+          "reproduction",
+          "robustness"
+        ],
+        "topic": [
+          "reproducibility"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "AGPL-3.0",
+      "commercial_use": "share-alike",
+      "source_url": "https://github.com/tmonk/mcp-stata",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "stata-results",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-results/SKILL.md",
+      "collection": "64-tmonk-mcp-stata",
+      "line_count": 16,
+      "description_effective": "Fetch and display stored r(), e(), and s() results from the last Stata command.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "language": [
+          "stata"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "AGPL-3.0",
+      "commercial_use": "share-alike",
+      "source_url": "https://github.com/tmonk/mcp-stata",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "stata-run",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-run/SKILL.md",
+      "collection": "64-tmonk-mcp-stata",
+      "line_count": 23,
+      "description_effective": "Run arbitrary Stata code or a .do file and display the result.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "language": [
+          "stata"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "AGPL-3.0",
+      "commercial_use": "share-alike",
+      "source_url": "https://github.com/tmonk/mcp-stata",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "stata-setup",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-setup/SKILL.md",
+      "collection": "64-tmonk-mcp-stata",
+      "line_count": 75,
+      "description_effective": "Install, configure, update, or verify mcp-stata across Claude Code, Codex, Gemini CLI, Cursor, Windsurf, and VS Code. Activate when users ask to set up the Stata toolkit or troubleshoot the installation.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "language": [
+          "stata"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "AGPL-3.0",
+      "commercial_use": "share-alike",
+      "source_url": "https://github.com/tmonk/mcp-stata",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "stata-table-builder",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-table-builder/SKILL.md",
+      "collection": "64-tmonk-mcp-stata",
+      "line_count": 14,
+      "description_effective": "Build and review paper-ready regression, balance, and summary tables from Stata outputs. Use when the user needs a clean table for a draft, appendix, or coauthor share-out.",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {
+        "language": [
+          "stata"
+        ],
+        "stage": [
+          "analysis"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "AGPL-3.0",
+      "commercial_use": "share-alike",
+      "source_url": "https://github.com/tmonk/mcp-stata",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "stata-toolkit",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-toolkit/SKILL.md",
+      "collection": "64-tmonk-mcp-stata",
+      "line_count": 35,
+      "description_effective": "Activate when users mention Stata commands, .do files, regressions, econometrics, stored results, graphs, dataset inspection, replication, or Stata errors. Route the task through mcp-stata tools and the specialized research skills instead of treating it as plain text coding.",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {
+        "language": [
+          "stata"
+        ],
+        "stage": [
+          "analysis",
+          "reproduction"
+        ],
+        "topic": [
+          "econometrics",
+          "reproducibility"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "AGPL-3.0",
+      "commercial_use": "share-alike",
+      "source_url": "https://github.com/tmonk/mcp-stata",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "stata",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata/SKILL.md",
+      "collection": "64-tmonk-mcp-stata",
+      "line_count": 46,
+      "description_effective": "Show mcp-stata identity, connected tools, and status. Use when the user asks if mcp-stata is available, asks about access to the toolkit, or asks what Stata tools are connected.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "language": [
+          "stata"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "AGPL-3.0",
+      "commercial_use": "share-alike",
+      "source_url": "https://github.com/tmonk/mcp-stata",
       "sync": "manual vendor snapshot"
     }
   ]

@@ -1,0 +1,18 @@
+{
+  "version": "3.2.7",
+  "invocation_type": "slash-command",
+  "argument_hint": "",
+  "allowed_tools": [],
+  "supported_agents": [
+    "claude",
+    "codex",
+    "gemini",
+    "cursor",
+    "windsurf",
+    "vscode"
+  ],
+  "trigger_text": "Install, configure, update, or verify mcp-stata across Claude Code, Codex, Gemini CLI, Cursor, Windsurf, and VS Code. Activate when users ask to set up the Stata toolkit or troubleshoot the installation.",
+  "display_name": "Stata Setup",
+  "short_description": "Install or verify the mcp-stata toolkit across supported agents.",
+  "default_prompt": "Use the stata-setup skill to install, configure, or verify the mcp-stata toolkit."
+}

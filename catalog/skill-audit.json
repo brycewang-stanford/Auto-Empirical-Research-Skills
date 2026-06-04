@@ -340,7 +340,8 @@
     ],
     "stata": [
       "skills/14-luischanci-claude-code-research-starter/dot-claude/skills/stata/SKILL.md",
-      "skills/32-dylantmoore-stata-skill/plugins/stata/skills/stata/SKILL.md"
+      "skills/32-dylantmoore-stata-skill/plugins/stata/skills/stata/SKILL.md",
+      "skills/64-tmonk-mcp-stata/skills/stata/SKILL.md"
     ],
     "stata-accounting-research": [
       "skills/18-jusi-aalto-stata-accounting-research/SKILL.md",
@@ -10892,16 +10893,216 @@
       "line_count": 98,
       "name": "lifelines",
       "path": "skills/63-tondevrel-scientific-agent-skills/lifelines/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 46,
+      "name": "stata",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 14,
+      "name": "stata-causal-inference",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-causal-inference/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 14,
+      "name": "stata-data-audit",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-data-audit/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 14,
+      "name": "stata-data-provenance",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-data-provenance/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 15,
+      "name": "stata-environment-diagnose",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-environment-diagnose/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 17,
+      "name": "stata-graph",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-graph/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 20,
+      "name": "stata-help",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-help/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 14,
+      "name": "stata-inspect",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-inspect/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 18,
+      "name": "stata-lint",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-lint/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 29,
+      "name": "stata-log",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-log/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 14,
+      "name": "stata-modernize",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-modernize/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 14,
+      "name": "stata-power-analysis",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-power-analysis/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 14,
+      "name": "stata-publication-qa",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-publication-qa/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 14,
+      "name": "stata-referee-response",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-referee-response/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 15,
+      "name": "stata-replication",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-replication/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 16,
+      "name": "stata-results",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-results/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 23,
+      "name": "stata-run",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-run/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 75,
+      "name": "stata-setup",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-setup/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 14,
+      "name": "stata-table-builder",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-table-builder/SKILL.md"
+    },
+    {
+      "collection": "64-tmonk-mcp-stata",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 35,
+      "name": "stata-toolkit",
+      "path": "skills/64-tmonk-mcp-stata/skills/stata-toolkit/SKILL.md"
     }
   ],
   "schema_version": "1.0",
   "summary": {
     "duplicate_skill_names": 78,
-    "exact_case_skill_files": 1052,
+    "exact_case_skill_files": 1072,
     "missing_description": 4,
     "missing_frontmatter": 4,
     "non_exact_case_skill_files": 0,
     "over_500_lines": 80,
-    "skill_like_files": 1052
+    "skill_like_files": 1072
   }
 }

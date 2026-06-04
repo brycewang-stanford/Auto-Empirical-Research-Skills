@@ -1,0 +1,23 @@
+{
+  "version": "3.2.7",
+  "invocation_type": "context-skill",
+  "allowed_tools": [],
+  "supported_agents": [
+    "claude",
+    "codex",
+    "gemini",
+    "cursor",
+    "windsurf",
+    "vscode"
+  ],
+  "trigger_text": "Build and review paper-ready regression, balance, and summary tables from Stata outputs. Use when the user needs a clean table for a draft, appendix, or coauthor share-out.",
+  "references": [
+    "references/table-patterns.md"
+  ],
+  "scripts": [
+    "scripts/check_table_ready.py"
+  ],
+  "display_name": "Stata Table Builder",
+  "short_description": "Build and review paper-ready tables from Stata outputs.",
+  "default_prompt": "Use the stata-table-builder skill to assemble and review a paper-ready table from Stata outputs."
+}

@@ -1,0 +1,3 @@
+display_name: "Stata Data Audit"
+short_description: "Run a structured quality audit on the active dataset."
+default_prompt: "Use the stata-data-audit skill to audit the active dataset and report concrete data quality risks."

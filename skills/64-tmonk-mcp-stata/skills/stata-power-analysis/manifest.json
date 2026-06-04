@@ -1,0 +1,20 @@
+{
+  "version": "3.2.7",
+  "invocation_type": "context-skill",
+  "allowed_tools": [],
+  "supported_agents": [
+    "claude",
+    "codex",
+    "gemini",
+    "cursor",
+    "windsurf",
+    "vscode"
+  ],
+  "trigger_text": "Plan and critique power, MDE, and sample-size calculations for Stata-based research workflows. Use when the user is designing a study, checking detectability, or defending precision claims.",
+  "references": [
+    "references/power-checklist.md"
+  ],
+  "display_name": "Stata Power Analysis",
+  "short_description": "Guide power, MDE, and sample-size reasoning for empirical work.",
+  "default_prompt": "Use the stata-power-analysis skill to plan or critique a power and minimum-detectable-effect analysis."
+}

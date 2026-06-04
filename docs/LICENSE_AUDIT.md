@@ -6,10 +6,10 @@ Scan date: 2026-05-31.
 
 ## Summary
 
-- Collections audited: 63
-- License buckets: Apache-2.0=1, CC-BY-NC-4.0 (non-commercial)=1, CC-BY-SA-4.0 (repository default)=4, MIT=34, MIT Non-Commercial=1, UNKNOWN - check upstream=22
-- Commercial-use buckets: allowed=35, restricted=2, share-alike=4, unknown=22
-- Source-confidence buckets: high=36, low=6, medium=17, unresolved=4
+- Collections audited: 64
+- License buckets: AGPL-3.0=1, Apache-2.0=1, CC-BY-NC-4.0 (non-commercial)=1, CC-BY-SA-4.0 (repository default)=4, MIT=34, MIT Non-Commercial=1, UNKNOWN - check upstream=22
+- Commercial-use buckets: allowed=35, restricted=2, share-alike=5, unknown=22
+- Source-confidence buckets: high=37, low=6, medium=17, unresolved=4
 
 ## Interpretation
 
@@ -85,3 +85,4 @@ Scan date: 2026-05-31.
 | [`61-phdemotions-research-methods`](../skills/61-phdemotions-research-methods/) | [source](https://github.com/phdemotions/research-methods) | high | MIT | allowed | manual vendor snapshot |
 | [`62-PHY041-claude-skill-citation-checker`](../skills/62-PHY041-claude-skill-citation-checker/) | [source](https://github.com/PHY041/claude-skill-citation-checker) | medium | MIT | allowed | manual vendor snapshot |
 | [`63-tondevrel-scientific-agent-skills`](../skills/63-tondevrel-scientific-agent-skills/) | [source](https://github.com/tondevrel/scientific-agent-skills) | high | MIT | allowed | manual vendor snapshot |
+| [`64-tmonk-mcp-stata`](../skills/64-tmonk-mcp-stata/) | [source](https://github.com/tmonk/mcp-stata) | high | AGPL-3.0 | share-alike | manual vendor snapshot |
