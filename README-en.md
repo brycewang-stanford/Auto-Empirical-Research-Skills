@@ -234,6 +234,11 @@ The first-party flagships ([StatsPAI](skills/00-Full-empirical-analysis-skill_St
 | [fuhaoda/stats-paper-writing-agent-skills](https://github.com/fuhaoda/stats-paper-writing-agent-skills) | LaTeX statistical-paper writing, front-end draft generation | Statistics & econometrics papers |
 | [dylantmoore/stata-skill](https://github.com/dylantmoore/stata-skill) | Full Stata coverage: syntax, data management, econometrics, causal inference, Mata, 20+ packages | Stata users |
 | [SepineTam/stata-mcp](https://github.com/SepineTam/stata-mcp) | LLM drives Stata regressions directly via MCP | Stata econometrics |
+| [hanlulong/stata-mcp](https://github.com/hanlulong/stata-mcp) | Stata-MCP editor extension (VS Code/Cursor/Antigravity): run `.do` directly, live output, data/graph viewer; MIT · 414★ (same name as SepineTam above, different project) | In-editor AI pairing with Stata |
+| [tmonk/mcp-stata](https://github.com/tmonk/mcp-stata) | Stata MCP server **with built-in skills catalog**: replication / data audit / publication QA / legacy modernization / referee response / power; **AGPL-3.0** | Stata replication & robustness audits |
+| [PovertyAction/ipa-stata-template](https://github.com/PovertyAction/ipa-stata-template) | IPA reproducible Stata research template + `.claude/skills`: numbered pipeline, assertion-based defensive programming, LaTeX tables; MIT | Development economics / field-RCT replication |
+| [lcrawfurd/claude-skills](https://github.com/lcrawfurd/claude-skills) | Academic skills: paper / code review, referee, pre-submission; code-review encodes Stata/R/Python coding standards (DIME / Reif / AEA Data Editor) | Pre-submission review & code audit |
+| [AEADataEditor/replication-template](https://github.com/AEADataEditor/replication-template) | AEA Data Editor's official replication-package template (Stata-centric, `REPLICATION.md`) — the reproducibility "gold standard" | AEA / top-journal replication packaging |
 
 </details>
 
