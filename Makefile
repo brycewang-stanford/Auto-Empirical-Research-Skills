@@ -1,4 +1,4 @@
-.PHONY: catalog validate check audit hygiene clean external-links external-links-dry evals eval-harness eval-smoke benchmark-lint benchmark benchmark-refresh test python-compat
+.PHONY: catalog validate check audit hygiene clean external-links external-links-dry tools-links tools-links-dry evals eval-harness eval-smoke benchmark-lint benchmark benchmark-refresh test python-compat
 
 catalog:
 	python3 scripts/build-provenance.py
@@ -81,3 +81,10 @@ external-links:
 
 external-links-dry:
 	python3 scripts/check-links.py --no-write
+
+# Network-bound drift guard for the tools catalog (not part of `make validate`).
+tools-links:
+	python3 scripts/check-tools-links.py
+
+tools-links-dry:
+	python3 scripts/check-tools-links.py --no-write

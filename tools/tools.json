@@ -1447,6 +1447,49 @@
     {
       "automation_level": "library",
       "category": "econometrics-library",
+      "description": "Classical and novel spatial accessibility-to-services measures (floating catchment, gravity, RAAM) within the PySAL ecosystem.",
+      "homepage": "https://access.readthedocs.io/",
+      "id": "access",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2025-12",
+      "license": "BSD-3-Clause",
+      "maintained": "active",
+      "name": "access",
+      "owner_repo": "pysal/access",
+      "stars_approx": 27,
+      "subcategory": [
+        "spatial",
+        "spatial-accessibility"
+      ],
+      "url": "https://github.com/pysal/access",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Stata module providing comprehensive aggregate-data meta-analysis and forest plots; deprecated since 2020 in favor of metan/ipdmetan.",
+      "homepage": null,
+      "id": "admetan",
+      "languages": [
+        "stata"
+      ],
+      "last_activity": "2019-02",
+      "license": "GPL-3.0-only",
+      "maintained": "dormant",
+      "name": "admetan",
+      "owner_repo": "boc/bocode:s458561",
+      "stars_approx": null,
+      "subcategory": [
+        "meta-analysis"
+      ],
+      "url": "https://ideas.repec.org/c/boc/bocode/s458561.html",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
       "description": "Applied Econometrics with R companion package providing IV (ivreg), tobit, count and other econometric estimators and datasets.",
       "homepage": "https://cran.r-project.org/package=AER",
       "id": "aer",
@@ -1491,6 +1534,51 @@
     {
       "automation_level": "library",
       "category": "econometrics-library",
+      "description": "Implements ANES-style iterative raking to weight survey data to known target population margins with automatic variable selection.",
+      "homepage": null,
+      "id": "anesrake",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2018-04",
+      "license": "GPL-2.0-or-later",
+      "maintained": "dormant",
+      "name": "anesrake",
+      "owner_repo": "cran/anesrake",
+      "stars_approx": null,
+      "subcategory": [
+        "raking",
+        "survey-weighting"
+      ],
+      "url": "https://cran.r-project.org/package=anesrake",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Builds ARDL and unrestricted/restricted error-correction models and runs the Pesaran-Shin-Smith (2001) bounds test for cointegration.",
+      "homepage": "https://cran.r-project.org/package=ARDL",
+      "id": "ardl",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2026-05",
+      "license": "GPL-3.0-only",
+      "maintained": "active",
+      "name": "ARDL",
+      "owner_repo": "Natsiopoulos/ARDL",
+      "stars_approx": 21,
+      "subcategory": [
+        "ardl",
+        "cointegration",
+        "time-series"
+      ],
+      "url": "https://github.com/Natsiopoulos/ARDL",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
       "description": "Augmented synthetic control method (and multisynth for staggered adoption) that de-biases SCM when pre-treatment fit is imperfect.",
       "homepage": null,
       "id": "augsynth",
@@ -1513,6 +1601,51 @@
     {
       "automation_level": "library",
       "category": "econometrics-library",
+      "description": "Julia toolkit for vector autoregressions with OLS estimation and structural impulse-response computation with bootstrap confidence bands.",
+      "homepage": null,
+      "id": "autoregressivemodels-jl",
+      "languages": [
+        "julia"
+      ],
+      "last_activity": "2024-04",
+      "license": "MIT",
+      "maintained": "maintained",
+      "name": "AutoregressiveModels.jl",
+      "owner_repo": "junyuan-chen/AutoregressiveModels.jl",
+      "stars_approx": 12,
+      "subcategory": [
+        "var",
+        "svar",
+        "impulse-response"
+      ],
+      "url": "https://github.com/junyuan-chen/AutoregressiveModels.jl",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Performs fast, tidy-friendly iterative proportional fitting (raking) to generate survey weights matching target population distributions.",
+      "homepage": "https://cran.r-project.org/package=autumn",
+      "id": "autumn",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2024-01",
+      "license": "MIT",
+      "maintained": "maintained",
+      "name": "autumn",
+      "owner_repo": "aaronrudkin/autumn",
+      "stars_approx": 45,
+      "subcategory": [
+        "raking",
+        "survey-weighting"
+      ],
+      "url": "https://github.com/aaronrudkin/autumn",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
       "description": "Goodman-Bacon decomposition of two-way fixed-effects DiD estimates into their underlying 2x2 comparison weights.",
       "homepage": "https://cran.r-project.org/package=bacondecomp",
       "id": "bacondecomp",
@@ -1530,6 +1663,50 @@
         "event-study"
       ],
       "url": "https://cran.r-project.org/package=bacondecomp",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Workflow and methods (IPW, raking, post-stratification) for adjusting biased samples to infer about a target population.",
+      "homepage": "https://import-balance.org/",
+      "id": "balance",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2026-06",
+      "license": "MIT",
+      "maintained": "active",
+      "name": "balance",
+      "owner_repo": "facebookresearch/balance",
+      "stars_approx": 747,
+      "subcategory": [
+        "survey-weighting",
+        "raking"
+      ],
+      "url": "https://github.com/facebookresearch/balance",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Bayesian random-effects meta-analysis and meta-regression, returning posterior and predictive distributions and shrinkage estimates.",
+      "homepage": "https://gitlab.gwdg.de/croever/bayesmeta",
+      "id": "bayesmeta",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2025-08",
+      "license": "GPL-2.0-or-later",
+      "maintained": "maintained",
+      "name": "bayesmeta",
+      "owner_repo": "cran/bayesmeta",
+      "stars_approx": null,
+      "subcategory": [
+        "meta-analysis",
+        "bayesian"
+      ],
+      "url": "https://cran.r-project.org/package=bayesmeta",
       "verified": true
     },
     {
@@ -1596,6 +1773,74 @@
         "inference-se"
       ],
       "url": "https://github.com/droodman/boottest",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Fits Bayesian generalized (non-)linear multivariate multilevel models via Stan, widely used as the multilevel-regression engine for MRP.",
+      "homepage": "https://paulbuerkner.com/brms/",
+      "id": "brms",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2026-06",
+      "license": "GPL-2.0-only",
+      "maintained": "active",
+      "name": "brms",
+      "owner_repo": "paul-buerkner/brms",
+      "stars_approx": 1408,
+      "subcategory": [
+        "bayesian",
+        "mrp"
+      ],
+      "url": "https://github.com/paul-buerkner/brms",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Hierarchical Bayesian VAR estimation with Giannone-Lenza-Primiceri conjugate-prior selection, computing impulse responses, forecasts and FEVD.",
+      "homepage": "https://cran.r-project.org/package=BVAR",
+      "id": "bvar",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2024-02",
+      "license": "GPL-3.0-only",
+      "maintained": "maintained",
+      "name": "BVAR",
+      "owner_repo": "nk027/bvar",
+      "stars_approx": 57,
+      "subcategory": [
+        "bayesian-var",
+        "var",
+        "time-series"
+      ],
+      "url": "https://github.com/nk027/bvar",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Bayesian estimation of a time-varying-parameter VAR with stochastic volatility (Primiceri 2005) for posterior predictive densities and impulse responses.",
+      "homepage": "https://sites.google.com/site/fk83research/code",
+      "id": "bvarsv",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2015-10",
+      "license": "GPL-2.0-or-later",
+      "maintained": "dormant",
+      "name": "bvarsv",
+      "owner_repo": null,
+      "stars_approx": null,
+      "subcategory": [
+        "bayesian-var",
+        "time-varying-parameter",
+        "stochastic-volatility"
+      ],
+      "url": "https://cran.r-project.org/web/packages/bvarsv/index.html",
       "verified": true
     },
     {
@@ -1681,6 +1926,27 @@
         "event-study"
       ],
       "url": "https://github.com/benjann/coefplot",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Converts a wide range of test statistics into effect sizes (d, g, r, z', OR) with variances, CIs, and p-values for meta-analysis.",
+      "homepage": "https://acdelre.github.io",
+      "id": "compute-es",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2026-01",
+      "license": "GPL-2.0-or-later",
+      "maintained": "active",
+      "name": "compute.es",
+      "owner_repo": "cran/compute.es",
+      "stars_approx": null,
+      "subcategory": [
+        "meta-analysis"
+      ],
+      "url": "https://cran.r-project.org/package=compute.es",
       "verified": true
     },
     {
@@ -1929,6 +2195,27 @@
     {
       "automation_level": "library",
       "category": "econometrics-library",
+      "description": "Companion package of helper functions for the 'Doing Meta-Analysis in R' guide, extending meta, metafor, and netmeta with diagnostics and visualizations.",
+      "homepage": "https://dmetar.protectlab.org/",
+      "id": "dmetar",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2025-05",
+      "license": "GPL-3.0-only",
+      "maintained": "maintained",
+      "name": "dmetar",
+      "owner_repo": "MathiasHarrer/dmetar",
+      "stars_approx": 46,
+      "subcategory": [
+        "meta-analysis"
+      ],
+      "url": "https://github.com/MathiasHarrer/dmetar",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
       "description": "Doubly-robust difference-in-differences estimators (Sant'Anna & Zhao 2020) for Stata; the building block for csdid.",
       "homepage": "https://github.com/friosavila/csdid_drdid",
       "id": "drdid-stata",
@@ -1945,6 +2232,29 @@
         "did"
       ],
       "url": "https://github.com/friosavila/stpackages/tree/main/drdid",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Estimates single-equation ARDL/error-correction models, dynamically simulates and plots their responses, and tests for cointegration (Jordan & Philips).",
+      "homepage": "https://cran.r-project.org/package=dynamac",
+      "id": "dynamac",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2022-11",
+      "license": "GPL-2.0-or-later",
+      "maintained": "dormant",
+      "name": "dynamac",
+      "owner_repo": "andyphilips/dynamac",
+      "stars_approx": null,
+      "subcategory": [
+        "ardl",
+        "cointegration",
+        "dynamic-simulation"
+      ],
+      "url": "https://github.com/andyphilips/dynamac",
       "verified": true
     },
     {
@@ -1988,6 +2298,50 @@
         "iv"
       ],
       "url": "https://github.com/Nosferican/Econometrics.jl",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Computes effect sizes and their variances (d, g, r, OR, etc.) from diverse reported statistics for use in meta-analysis.",
+      "homepage": "https://cran.r-project.org/package=esc",
+      "id": "esc",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2023-09",
+      "license": "GPL-3.0-only",
+      "maintained": "dormant",
+      "name": "esc",
+      "owner_repo": "strengejacke/esc",
+      "stars_approx": 21,
+      "subcategory": [
+        "meta-analysis"
+      ],
+      "url": "https://github.com/strengejacke/esc",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Exploratory spatial data analysis: global and local autocorrelation (Moran's I, Geary, Getis-Ord, local Moran/LISA) for continuous and binary areal data.",
+      "homepage": "https://pysal.org/esda/",
+      "id": "esda",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2026-03",
+      "license": "BSD-3-Clause",
+      "maintained": "active",
+      "name": "esda",
+      "owner_repo": "pysal/esda",
+      "stars_approx": 255,
+      "subcategory": [
+        "spatial",
+        "spatial-autocorrelation",
+        "esda"
+      ],
+      "url": "https://github.com/pysal/esda",
       "verified": true
     },
     {
@@ -2216,6 +2570,52 @@
       "verified": true
     },
     {
+      "automation_level": "application",
+      "category": "econometrics-library",
+      "description": "Cross-platform desktop GUI for exploratory spatial data analysis, LISA mapping, spatial weights and basic spatial regression on lattice data.",
+      "homepage": "https://geodacenter.github.io/",
+      "id": "geoda",
+      "languages": [
+        "cpp"
+      ],
+      "last_activity": "2025-09",
+      "license": "GPL-3.0-only",
+      "maintained": "active",
+      "name": "GeoDa",
+      "owner_repo": "GeoDaCenter/geoda",
+      "stars_approx": 801,
+      "subcategory": [
+        "spatial",
+        "esda",
+        "desktop-gui"
+      ],
+      "url": "https://github.com/GeoDaCenter/geoda",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Geospatial distribution dynamics: spatial Markov chains, rank/mobility and directional LISA analysis of longitudinal spatial data.",
+      "homepage": "https://pysal.org/giddy/",
+      "id": "giddy",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2025-12",
+      "license": "BSD-3-Clause",
+      "maintained": "active",
+      "name": "giddy",
+      "owner_repo": "pysal/giddy",
+      "stars_approx": 77,
+      "subcategory": [
+        "spatial",
+        "spatial-dynamics",
+        "spatio-temporal"
+      ],
+      "url": "https://github.com/pysal/giddy",
+      "verified": true
+    },
+    {
       "automation_level": "library",
       "category": "econometrics-library",
       "description": "Estimates GLMs (logit, Poisson, etc.) with high-dimensional fixed effects in Julia (ppmlhdfe analog).",
@@ -2302,6 +2702,70 @@
         "event-study"
       ],
       "url": "https://github.com/asheshrambachan/HonestDiD",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Stata module for two-stage individual-participant-data meta-analysis with subgroup and forest-plot support.",
+      "homepage": null,
+      "id": "ipdmetan",
+      "languages": [
+        "stata"
+      ],
+      "last_activity": "2022-10",
+      "license": "GPL-3.0-only",
+      "maintained": "dormant",
+      "name": "ipdmetan",
+      "owner_repo": "boc/bocode:s457785",
+      "stars_approx": null,
+      "subcategory": [
+        "meta-analysis"
+      ],
+      "url": "https://ideas.repec.org/c/boc/bocode/s457785.html",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Implements N-dimensional iterative proportional fitting to adjust a data matrix so its margins match specified target totals.",
+      "homepage": "https://pypi.org/project/ipfn/",
+      "id": "ipfn",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2024-05",
+      "license": "MIT",
+      "maintained": "maintained",
+      "name": "ipfn",
+      "owner_repo": "Dirguis/ipfn",
+      "stars_approx": 105,
+      "subcategory": [
+        "raking"
+      ],
+      "url": "https://github.com/Dirguis/ipfn",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Stata module performing iterative proportional fitting (raking) to calibrate complex survey weights to control totals with trimming and diagnostics.",
+      "homepage": null,
+      "id": "ipfraking",
+      "languages": [
+        "stata"
+      ],
+      "last_activity": "2018-05",
+      "license": "GPL-3.0-only",
+      "maintained": "dormant",
+      "name": "ipfraking",
+      "owner_repo": "boc/bocode:s458430",
+      "stars_approx": null,
+      "subcategory": [
+        "raking",
+        "survey-weighting"
+      ],
+      "url": "https://ideas.repec.org/c/boc/bocode/s458430.html",
       "verified": true
     },
     {
@@ -2440,6 +2904,29 @@
     {
       "automation_level": "library",
       "category": "econometrics-library",
+      "description": "Core PySAL components: spatial weights construction, computational geometry, graphs, and I/O underpinning the spatial-econometrics stack.",
+      "homepage": "https://pysal.org/libpysal/",
+      "id": "libpysal",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2026-01",
+      "license": "BSD-3-Clause",
+      "maintained": "active",
+      "name": "libpysal",
+      "owner_repo": "pysal/libpysal",
+      "stars_approx": 290,
+      "subcategory": [
+        "spatial",
+        "spatial-weights",
+        "core"
+      ],
+      "url": "https://github.com/pysal/libpysal",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
       "description": "Panel (fixed/random effects), IV/2SLS-GMM, system and asset-pricing estimators missing from statsmodels.",
       "homepage": "https://bashtage.github.io/linearmodels/",
       "id": "linearmodels",
@@ -2458,6 +2945,98 @@
         "inference-se"
       ],
       "url": "https://github.com/bashtage/linearmodels",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Implements Jordà (2005) local-projection impulse responses for single-entity time series and panel data, including threshold/state-dependent variants.",
+      "homepage": "https://pypi.org/project/localprojections/",
+      "id": "localprojections",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2023-09",
+      "license": "MIT",
+      "maintained": "dormant",
+      "name": "localprojections",
+      "owner_repo": "suahjl/localprojections",
+      "stars_approx": 42,
+      "subcategory": [
+        "local-projections",
+        "impulse-response",
+        "panel"
+      ],
+      "url": "https://github.com/suahjl/localprojections",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Julia implementation of local-projection methods for impulse-response estimation, including lag-augmented and smoothed local projections.",
+      "homepage": null,
+      "id": "localprojections-jl",
+      "languages": [
+        "julia"
+      ],
+      "last_activity": "2024-04",
+      "license": "MIT",
+      "maintained": "maintained",
+      "name": "LocalProjections.jl",
+      "owner_repo": "junyuan-chen/LocalProjections.jl",
+      "stars_approx": 29,
+      "subcategory": [
+        "local-projections",
+        "impulse-response",
+        "time-series"
+      ],
+      "url": "https://github.com/junyuan-chen/LocalProjections.jl",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Stata (SSC) command estimating linear and nonlinear local-projection IRFs for time-series and panel data, supporting IV and quantile-regression variants (Ugarte Ruiz).",
+      "homepage": "https://www.bbvaresearch.com/en/publicaciones/locproj-and-lpgraph-stata-commands-to-estimate-local-projections/",
+      "id": "locproj",
+      "languages": [
+        "stata"
+      ],
+      "last_activity": "2026-02",
+      "license": "GPL-3.0-only",
+      "maintained": "active",
+      "name": "locproj",
+      "owner_repo": null,
+      "stars_approx": null,
+      "subcategory": [
+        "local-projections",
+        "impulse-response",
+        "panel"
+      ],
+      "url": "https://ideas.repec.org/c/boc/bocode/s459204.html",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Estimates linear and nonlinear (state-dependent) impulse responses via Jordà (2005) local projections for time-series and panel data, with identified-shock and IV options.",
+      "homepage": "https://cran.r-project.org/package=lpirfs",
+      "id": "lpirfs",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2025-12",
+      "license": "GPL-2.0-or-later",
+      "maintained": "active",
+      "name": "lpirfs",
+      "owner_repo": "AdaemmerP/lpirfs",
+      "stars_approx": 53,
+      "subcategory": [
+        "local-projections",
+        "impulse-response",
+        "time-series"
+      ],
+      "url": "https://github.com/AdaemmerP/lpirfs",
       "verified": true
     },
     {
@@ -2505,6 +3084,175 @@
     {
       "automation_level": "library",
       "category": "econometrics-library",
+      "description": "Standard meta-analysis methods including fixed/random-effects models, meta-regression, bias tests, and forest/funnel plots.",
+      "homepage": "https://cran.r-project.org/package=meta",
+      "id": "meta",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2026-05",
+      "license": "GPL-2.0",
+      "maintained": "active",
+      "name": "meta",
+      "owner_repo": "guido-s/meta",
+      "stars_approx": 104,
+      "subcategory": [
+        "meta-analysis"
+      ],
+      "url": "https://github.com/guido-s/meta",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Stata's built-in meta suite for fixed/random-effects meta-analysis, meta-regression, forest/funnel plots, and small-study-effect tests.",
+      "homepage": "https://www.stata.com/features/meta-analysis/",
+      "id": "meta-2",
+      "languages": [
+        "stata"
+      ],
+      "last_activity": "2026-06",
+      "license": "proprietary",
+      "maintained": "active",
+      "name": "meta",
+      "owner_repo": null,
+      "stars_approx": null,
+      "subcategory": [
+        "meta-analysis"
+      ],
+      "url": "https://www.stata.com/manuals/meta.pdf",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Stata module testing for small-study effects / funnel-plot asymmetry (Egger, Begg, Harbord tests) in meta-analysis.",
+      "homepage": null,
+      "id": "metabias",
+      "languages": [
+        "stata"
+      ],
+      "last_activity": "2010-12",
+      "license": "GPL-3.0-only",
+      "maintained": "dormant",
+      "name": "metabias",
+      "owner_repo": "boc/bocode:s404901",
+      "stars_approx": null,
+      "subcategory": [
+        "meta-analysis"
+      ],
+      "url": "https://ideas.repec.org/c/boc/bocode/s404901.html",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Comprehensive R package for conducting meta-analyses, including effect-size computation, fixed/random/mixed-effects models, moderators, and forest/funnel plots.",
+      "homepage": "https://www.metafor-project.org/",
+      "id": "metafor",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2026-05",
+      "license": "GPL-2.0-or-later",
+      "maintained": "active",
+      "name": "metafor",
+      "owner_repo": "wviechtb/metafor",
+      "stars_approx": 298,
+      "subcategory": [
+        "meta-analysis"
+      ],
+      "url": "https://github.com/wviechtb/metafor",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Comprehensive Stata module for fixed- and random-effects meta-analysis of binary, continuous, or generic effect estimates with flexible forest plots.",
+      "homepage": null,
+      "id": "metan",
+      "languages": [
+        "stata"
+      ],
+      "last_activity": "2024-07",
+      "license": "GPL-3.0-only",
+      "maintained": "maintained",
+      "name": "metan",
+      "owner_repo": "boc/bocode:s456798",
+      "stars_approx": null,
+      "subcategory": [
+        "meta-analysis"
+      ],
+      "url": "https://ideas.repec.org/c/boc/bocode/s456798.html",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Stata module performing random-effects meta-regression on study-level summary data with permutation-test p-values.",
+      "homepage": null,
+      "id": "metareg",
+      "languages": [
+        "stata"
+      ],
+      "last_activity": "2009-01",
+      "license": "GPL-3.0-only",
+      "maintained": "dormant",
+      "name": "metareg",
+      "owner_repo": "boc/bocode:s446201",
+      "stars_approx": null,
+      "subcategory": [
+        "meta-analysis"
+      ],
+      "url": "https://ideas.repec.org/c/boc/bocode/s446201.html",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Conducts meta-analysis via structural equation modeling (using OpenMx/lavaan), including fixed/random-effects and meta-analytic SEM on correlation matrices.",
+      "homepage": "https://cran.r-project.org/package=metaSEM",
+      "id": "metasem",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2026-05",
+      "license": "GPL-2.0-or-later",
+      "maintained": "active",
+      "name": "metaSEM",
+      "owner_repo": "mikewlcheung/metasem",
+      "stars_approx": 33,
+      "subcategory": [
+        "meta-analysis"
+      ],
+      "url": "https://github.com/mikewlcheung/metasem",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Calibration, inference and prediction for (multiscale) geographically weighted regression across GLM families with model diagnostics.",
+      "homepage": "https://pysal.org/mgwr/",
+      "id": "mgwr",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2024-01",
+      "license": "BSD-3-Clause",
+      "maintained": "maintained",
+      "name": "mgwr",
+      "owner_repo": "pysal/mgwr",
+      "stars_approx": 428,
+      "subcategory": [
+        "spatial",
+        "geographically-weighted-regression"
+      ],
+      "url": "https://github.com/pysal/mgwr",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
       "description": "Publication-quality regression and summary tables (and coefficient plots) for many model classes in multiple output formats.",
       "homepage": "https://modelsummary.com/",
       "id": "modelsummary",
@@ -2521,6 +3269,69 @@
         "inference-se"
       ],
       "url": "https://cran.r-project.org/package=modelsummary",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Stata module for multivariate random-effects meta-analysis and meta-regression on point estimates, variances, and covariances.",
+      "homepage": null,
+      "id": "mvmeta",
+      "languages": [
+        "stata"
+      ],
+      "last_activity": "2022-04",
+      "license": "GPL-3.0-only",
+      "maintained": "dormant",
+      "name": "mvmeta",
+      "owner_repo": "boc/bocode:s456970",
+      "stars_approx": null,
+      "subcategory": [
+        "meta-analysis"
+      ],
+      "url": "https://ideas.repec.org/c/boc/bocode/s456970.html",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Frequentist network meta-analysis for simultaneously comparing multiple treatments across studies, with inconsistency assessment and network graphs.",
+      "homepage": "https://cran.r-project.org/package=netmeta",
+      "id": "netmeta",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2026-05",
+      "license": "GPL-2.0-or-later",
+      "maintained": "active",
+      "name": "netmeta",
+      "owner_repo": "guido-s/netmeta",
+      "stars_approx": 40,
+      "subcategory": [
+        "meta-analysis"
+      ],
+      "url": "https://github.com/guido-s/netmeta",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Stata module for network (mixed-treatment-comparison) meta-analysis using contrast-based multivariate meta-regression with inconsistency checks.",
+      "homepage": null,
+      "id": "network",
+      "languages": [
+        "stata"
+      ],
+      "last_activity": "2018-04",
+      "license": "GPL-3.0-only",
+      "maintained": "dormant",
+      "name": "network",
+      "owner_repo": "boc/bocode:s458319",
+      "stars_approx": null,
+      "subcategory": [
+        "meta-analysis"
+      ],
+      "url": "https://ideas.repec.org/c/boc/bocode/s458319.html",
       "verified": true
     },
     {
@@ -2634,6 +3445,27 @@
     {
       "automation_level": "library",
       "category": "econometrics-library",
+      "description": "Tools and datasets for designing complex survey samples, computing sample sizes, and constructing/weighting survey samples.",
+      "homepage": null,
+      "id": "practools",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2026-01",
+      "license": "GPL-3.0-only",
+      "maintained": "active",
+      "name": "PracTools",
+      "owner_repo": "cran/PracTools",
+      "stars_approx": null,
+      "subcategory": [
+        "survey-weighting"
+      ],
+      "url": "https://cran.r-project.org/package=PracTools",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
       "description": "Computes the power of pre-trends tests and visualizes detectable violations of parallel trends in event studies.",
       "homepage": null,
       "id": "pretrends",
@@ -2678,6 +3510,48 @@
     {
       "automation_level": "library",
       "category": "econometrics-library",
+      "description": "Psychometric meta-analysis toolkit for bare-bones and artifact-corrected meta-analysis of correlations and d-values (Hunter-Schmidt methods).",
+      "homepage": "https://cran.r-project.org/package=psychmeta",
+      "id": "psychmeta",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2024-06",
+      "license": "GPL-3.0-or-later",
+      "maintained": "maintained",
+      "name": "psychmeta",
+      "owner_repo": "psychmeta/psychmeta",
+      "stars_approx": 66,
+      "subcategory": [
+        "meta-analysis"
+      ],
+      "url": "https://github.com/psychmeta/psychmeta",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Publication-bias-correcting meta-analysis methods (p-uniform / p-uniform*) based on the distribution of conditional p-values.",
+      "homepage": "https://cran.r-project.org/package=puniform",
+      "id": "puniform",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2025-12",
+      "license": "GPL-2.0-or-later",
+      "maintained": "active",
+      "name": "puniform",
+      "owner_repo": "RobbievanAert/puniform",
+      "stars_approx": 3,
+      "subcategory": [
+        "meta-analysis"
+      ],
+      "url": "https://github.com/RobbievanAert/puniform",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
       "description": "Fast high-dimensional fixed-effects OLS/IV/Poisson regression in Python following fixest syntax, with clustered and wild-bootstrap inference.",
       "homepage": "https://py-econometrics.github.io/pyfixest/",
       "id": "pyfixest",
@@ -2698,6 +3572,72 @@
         "inference-se"
       ],
       "url": "https://github.com/s3alfisc/pyfixest",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Python meta-analysis and regression engine providing mixed-effects meta-regression estimators and effect-size combination.",
+      "homepage": "https://pymare.readthedocs.io/",
+      "id": "pymare",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2025-04",
+      "license": "MIT",
+      "maintained": "maintained",
+      "name": "PyMARE",
+      "owner_repo": "neurostuff/PyMARE",
+      "stars_approx": 57,
+      "subcategory": [
+        "meta-analysis"
+      ],
+      "url": "https://github.com/neurostuff/PyMARE",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Meta-package bundling the Python Spatial Analysis Library submodules (libpysal, esda, spreg, mgwr, giddy, etc.) for spatial analysis and econometrics.",
+      "homepage": "https://pysal.org/",
+      "id": "pysal",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2026-01",
+      "license": "BSD-3-Clause",
+      "maintained": "active",
+      "name": "pysal",
+      "owner_repo": "pysal/pysal",
+      "stars_approx": 1400,
+      "subcategory": [
+        "spatial",
+        "meta-package"
+      ],
+      "url": "https://github.com/pysal/pysal",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Small Python package for SVAR estimation and impulse responses across recursive (Cholesky), sign-restriction and optimization-based identification schemes.",
+      "homepage": null,
+      "id": "pysvar",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2024-06",
+      "license": "unverified",
+      "maintained": "maintained",
+      "name": "PySVAR",
+      "owner_repo": "fangli-DX3906/PySVAR",
+      "stars_approx": 4,
+      "subcategory": [
+        "svar",
+        "var",
+        "impulse-response"
+      ],
+      "url": "https://github.com/fangli-DX3906/PySVAR",
       "verified": true
     },
     {
@@ -2742,6 +3682,49 @@
         "did"
       ],
       "url": "https://github.com/MasaAsami/pysynthdid",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Python module for meta-analysis in evidence-based-medicine systematic reviews, with fixed/random-effects pooling and forest/funnel plots.",
+      "homepage": "http://www.pymeta.com",
+      "id": "pythonmeta",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2021-11",
+      "license": "GPL-3.0-only",
+      "maintained": "dormant",
+      "name": "PythonMeta",
+      "owner_repo": null,
+      "stars_approx": null,
+      "subcategory": [
+        "meta-analysis"
+      ],
+      "url": "https://pypi.org/project/PythonMeta/",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Python 3 survey-data processing and analysis toolkit handling multiple-choice data, metadata, and case weighting (including raking).",
+      "homepage": "https://pypi.org/project/quantipy3/",
+      "id": "quantipy3",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2026-04",
+      "license": "MIT",
+      "maintained": "active",
+      "name": "quantipy3",
+      "owner_repo": "Quantipy/quantipy3",
+      "stars_approx": 42,
+      "subcategory": [
+        "survey-weighting",
+        "raking"
+      ],
+      "url": "https://github.com/Quantipy/quantipy3",
       "verified": true
     },
     {
@@ -2927,6 +3910,161 @@
     {
       "automation_level": "library",
       "category": "econometrics-library",
+      "description": "R interface to libgeoda/GeoDa for ESDA, LISA spatial autocorrelation, spatial clustering and regionalization.",
+      "homepage": "https://cran.r-project.org/package=rgeoda",
+      "id": "rgeoda",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2026-02",
+      "license": "GPL-2.0-or-later",
+      "maintained": "active",
+      "name": "rgeoda",
+      "owner_repo": "GeoDaCenter/rgeoda",
+      "stars_approx": 77,
+      "subcategory": [
+        "spatial",
+        "esda",
+        "spatial-clustering"
+      ],
+      "url": "https://github.com/GeoDaCenter/rgeoda",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Robust Bayesian model-averaged meta-analysis that adjusts for publication bias via selection models and PET-PEESE ensembles.",
+      "homepage": "https://fbartos.github.io/RoBMA/",
+      "id": "robma",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2026-06",
+      "license": "GPL-3.0-only",
+      "maintained": "active",
+      "name": "RoBMA",
+      "owner_repo": "FBartos/RoBMA",
+      "stars_approx": 10,
+      "subcategory": [
+        "meta-analysis",
+        "bayesian"
+      ],
+      "url": "https://github.com/FBartos/RoBMA",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Robust variance estimation (RVE) meta-regression with large- and small-sample estimators for dependent effect sizes without distributional assumptions.",
+      "homepage": "https://cran.r-project.org/package=robumeta",
+      "id": "robumeta",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2023-03",
+      "license": "GPL-2.0-only",
+      "maintained": "dormant",
+      "name": "robumeta",
+      "owner_repo": "zackfisher/robumeta",
+      "stars_approx": null,
+      "subcategory": [
+        "meta-analysis"
+      ],
+      "url": "https://github.com/zackfisher/robumeta",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Bayesian applied regression modeling with Stan using familiar R formula syntax, commonly used to fit the multilevel models in MRP.",
+      "homepage": "https://mc-stan.org/rstanarm/",
+      "id": "rstanarm",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2026-06",
+      "license": "GPL-3.0-only",
+      "maintained": "active",
+      "name": "rstanarm",
+      "owner_repo": "stan-dev/rstanarm",
+      "stars_approx": 400,
+      "subcategory": [
+        "bayesian",
+        "mrp"
+      ],
+      "url": "https://github.com/stan-dev/rstanarm",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Minimal package fitting a spatial-lag instrumental-variable regression by spatial two-stage least squares.",
+      "homepage": "https://rdrr.io/cran/S2sls/",
+      "id": "s2sls",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2016-08",
+      "license": "GPL-2.0-or-later",
+      "maintained": "dormant",
+      "name": "S2sls",
+      "owner_repo": null,
+      "stars_approx": null,
+      "subcategory": [
+        "spatial",
+        "spatial-regression",
+        "2sls"
+      ],
+      "url": "https://cran.r-project.org/package=S2sls",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Design-based analysis of complex survey data covering sample selection, weighting/calibration, estimation, and small area estimation.",
+      "homepage": "https://samplics-org.github.io/samplics/",
+      "id": "samplics",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2026-03",
+      "license": "MIT",
+      "maintained": "active",
+      "name": "samplics",
+      "owner_repo": "samplics-org/samplics",
+      "stars_approx": 72,
+      "subcategory": [
+        "survey-weighting",
+        "raking"
+      ],
+      "url": "https://github.com/samplics-org/samplics",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Provides survey sampling selection algorithms and calibration/weight estimators including variance estimation for complex designs.",
+      "homepage": null,
+      "id": "sampling",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2025-07",
+      "license": "GPL-2.0-or-later",
+      "maintained": "maintained",
+      "name": "sampling",
+      "owner_repo": "cran/sampling",
+      "stars_approx": null,
+      "subcategory": [
+        "survey-weighting",
+        "raking"
+      ],
+      "url": "https://cran.r-project.org/package=sampling",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
       "description": "Object-oriented model-robust covariance matrix estimators (HC, HAC, clustered, panel-corrected).",
       "homepage": "https://sandwich.r-forge.r-project.org/",
       "id": "sandwich",
@@ -3016,6 +4154,366 @@
     {
       "automation_level": "library",
       "category": "econometrics-library",
+      "description": "Fits mixed-effect models with spatially correlated random effects (geostatistical and Markov-random-field GLMMs) via Laplace/h-likelihood approximations.",
+      "homepage": "https://cran.r-project.org/web/packages/spaMM/index.html",
+      "id": "spamm",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2026-04",
+      "license": "CeCILL-2.0",
+      "maintained": "active",
+      "name": "spaMM",
+      "owner_repo": null,
+      "stars_approx": null,
+      "subcategory": [
+        "spatial",
+        "mixed-models",
+        "glmm"
+      ],
+      "url": "https://cran.r-project.org/package=spaMM",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Julia package for spatial weights matrices, spatial-autocorrelation tests (global/local Moran, Geary, Getis-Ord, LISA) and choropleth ESDA.",
+      "homepage": "https://javierbarbero.github.io/SpatialDependence.jl/stable/",
+      "id": "spatialdependence-jl",
+      "languages": [
+        "julia"
+      ],
+      "last_activity": "2025-12",
+      "license": "MIT",
+      "maintained": "active",
+      "name": "SpatialDependence.jl",
+      "owner_repo": "javierbarbero/SpatialDependence.jl",
+      "stars_approx": 14,
+      "subcategory": [
+        "spatial",
+        "esda",
+        "spatial-autocorrelation"
+      ],
+      "url": "https://github.com/javierbarbero/SpatialDependence.jl",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Utilities for spatial data manipulation, sampling and modelling including autologistic models, spatial smoothing and landscape/point-pattern metrics.",
+      "homepage": "https://cran.r-project.org/package=spatialEco",
+      "id": "spatialeco",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2026-05",
+      "license": "GPL-3.0-only",
+      "maintained": "active",
+      "name": "spatialEco",
+      "owner_repo": "jeffreyevans/spatialEco",
+      "stars_approx": 121,
+      "subcategory": [
+        "spatial",
+        "spatial-statistics",
+        "utilities"
+      ],
+      "url": "https://github.com/jeffreyevans/spatialEco",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Estimates spatial cross-sectional lattice/areal models (SAR, SEM, SAC, Durbin) by maximum likelihood, spatial 2SLS and GMM following Cliff-Ord and Kelejian-Prucha.",
+      "homepage": "https://cran.r-project.org/package=spatialreg",
+      "id": "spatialreg",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2026-03",
+      "license": "GPL-2.0-only",
+      "maintained": "active",
+      "name": "spatialreg",
+      "owner_repo": "r-spatial/spatialreg",
+      "stars_approx": 52,
+      "subcategory": [
+        "spatial",
+        "spatial-regression"
+      ],
+      "url": "https://github.com/r-spatial/spatialreg",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Builds spatial weights matrices from contiguities/distances and computes spatial-autocorrelation tests (Moran's I, Geary's C, Getis-Ord, local LISA).",
+      "homepage": "https://cran.r-project.org/package=spdep",
+      "id": "spdep",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2026-05",
+      "license": "GPL-2.0-or-later",
+      "maintained": "active",
+      "name": "spdep",
+      "owner_repo": "r-spatial/spdep",
+      "stars_approx": 148,
+      "subcategory": [
+        "spatial",
+        "spatial-weights",
+        "spatial-autocorrelation"
+      ],
+      "url": "https://github.com/r-spatial/spdep",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Sparse-compatible generalized linear models (Gaussian, Poisson, logistic) serving as the estimation base for PySAL's spint and GWR modules.",
+      "homepage": "https://pysal.org/spglm/",
+      "id": "spglm",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2023-10",
+      "license": "BSD-3-Clause",
+      "maintained": "dormant",
+      "name": "spglm",
+      "owner_repo": "pysal/spglm",
+      "stars_approx": 36,
+      "subcategory": [
+        "spatial",
+        "glm"
+      ],
+      "url": "https://github.com/pysal/spglm",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Fits Cliff-Ord spatial autoregressive models with heteroskedastic innovations via GMM/IV, including spatial HAC standard errors.",
+      "homepage": "https://cran.r-project.org/package=sphet",
+      "id": "sphet",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2024-12",
+      "license": "GPL-2.0-only",
+      "maintained": "maintained",
+      "name": "sphet",
+      "owner_repo": "gpiras/sphet",
+      "stars_approx": 8,
+      "subcategory": [
+        "spatial",
+        "spatial-regression",
+        "gmm"
+      ],
+      "url": "https://github.com/gpiras/sphet",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Calibrates gravity-type spatial interaction models (unconstrained and production/attraction-constrained Poisson) via entropy maximization.",
+      "homepage": "https://pysal.org/spint/",
+      "id": "spint",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2020-09",
+      "license": "BSD-3-Clause",
+      "maintained": "dormant",
+      "name": "spint",
+      "owner_repo": "pysal/spint",
+      "stars_approx": 58,
+      "subcategory": [
+        "spatial",
+        "spatial-interaction"
+      ],
+      "url": "https://github.com/pysal/spint",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Maximum-likelihood and GM estimation plus diagnostic testing of fixed/random-effects econometric models for spatial panel data (Millo & Piras).",
+      "homepage": "https://cran.r-project.org/web/packages/splm/index.html",
+      "id": "splm",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2023-12",
+      "license": "GPL-2.0-only",
+      "maintained": "maintained",
+      "name": "splm",
+      "owner_repo": null,
+      "stars_approx": null,
+      "subcategory": [
+        "spatial",
+        "panel",
+        "spatial-panel"
+      ],
+      "url": "https://cran.r-project.org/package=splm",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Estimates Moran-eigenvector spatial/spatio-temporal regression models with spatially varying coefficients for Gaussian and non-Gaussian data.",
+      "homepage": "https://cran.r-project.org/package=spmoran",
+      "id": "spmoran",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2024-12",
+      "license": "GPL-2.0-or-later",
+      "maintained": "maintained",
+      "name": "spmoran",
+      "owner_repo": "dmuraka/spmoran",
+      "stars_approx": 28,
+      "subcategory": [
+        "spatial",
+        "spatial-random-effects",
+        "varying-coefficients"
+      ],
+      "url": "https://github.com/dmuraka/spmoran",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Community Stata (SSC) precursor to official Sp: builds spatial-weighting matrices (spmat) and fits SAR/SEM/SAC by ML and GS2SLS (spreg, spivreg) by Drukker, Peng, Prucha & Raciborski.",
+      "homepage": "https://journals.sagepub.com/doi/10.1177/1536867X1301300202",
+      "id": "sppack-spreg-spivreg-spmat",
+      "languages": [
+        "stata"
+      ],
+      "last_activity": "2018-12",
+      "license": "GPL-3.0-only",
+      "maintained": "dormant",
+      "name": "sppack (spreg/spivreg/spmat)",
+      "owner_repo": null,
+      "stars_approx": null,
+      "subcategory": [
+        "spatial",
+        "spatial-regression",
+        "spatial-weights"
+      ],
+      "url": "https://ideas.repec.org/c/boc/bocode/s457245.html",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "PySAL spatial econometric regression: OLS/2SLS with spatial lag and error (SAR/SEM/SARAR/Durbin), GM/ML estimators, panel and regimes models.",
+      "homepage": "https://pysal.org/spreg/",
+      "id": "spreg",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2026-05",
+      "license": "BSD-3-Clause",
+      "maintained": "active",
+      "name": "spreg",
+      "owner_repo": "pysal/spreg",
+      "stars_approx": 87,
+      "subcategory": [
+        "spatial",
+        "spatial-regression"
+      ],
+      "url": "https://github.com/pysal/spreg",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Tests and estimates spatial Seemingly Unrelated Regression (SUR-SLM/SEM/SDM/SLX) systems by maximum likelihood and three-stage least squares.",
+      "homepage": "https://cran.r-project.org/package=spsur",
+      "id": "spsur",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2025-09",
+      "license": "GPL-3.0-only",
+      "maintained": "active",
+      "name": "spsur",
+      "owner_repo": "rominsal/spsur",
+      "stars_approx": null,
+      "subcategory": [
+        "spatial",
+        "seemingly-unrelated-regression"
+      ],
+      "url": "https://github.com/rominsal/spsur",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Finite-population block kriging to predict totals and weighted sums from spatially autocorrelated sample data (Ver Hoef 2008).",
+      "homepage": "https://cran.r-project.org/web/packages/sptotal/index.html",
+      "id": "sptotal",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2023-09",
+      "license": "GPL-2.0-or-later",
+      "maintained": "dormant",
+      "name": "sptotal",
+      "owner_repo": "highamm/sptotal",
+      "stars_approx": null,
+      "subcategory": [
+        "spatial",
+        "spatial-prediction",
+        "kriging"
+      ],
+      "url": "https://github.com/highamm/sptotal",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Stata module that reweights survey microdata to external aggregate totals using Deville-Sarndal calibration methods.",
+      "homepage": null,
+      "id": "sreweight",
+      "languages": [
+        "stata"
+      ],
+      "last_activity": "2014-01",
+      "license": "GPL-3.0-only",
+      "maintained": "dormant",
+      "name": "sreweight",
+      "owner_repo": "boc/bocode:s457312",
+      "stars_approx": null,
+      "subcategory": [
+        "survey-weighting",
+        "raking"
+      ],
+      "url": "https://ideas.repec.org/c/boc/bocode/s457312.html",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Provides dplyr-like syntax for computing summary statistics on complex survey data by wrapping the survey package.",
+      "homepage": "https://cran.r-project.org/package=srvyr",
+      "id": "srvyr",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2026-03",
+      "license": "GPL-2.0-or-later",
+      "maintained": "active",
+      "name": "srvyr",
+      "owner_repo": "gergness/srvyr",
+      "stars_approx": 223,
+      "subcategory": [
+        "survey-weighting"
+      ],
+      "url": "https://github.com/gergness/srvyr",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
       "description": "Stacked event-study estimator (Cengiz et al.) that builds clean cohort-vs-never-treated stacks to avoid bad TWFE comparisons.",
       "homepage": null,
       "id": "stackedev",
@@ -3060,6 +4558,75 @@
     {
       "automation_level": "library",
       "category": "econometrics-library",
+      "description": "Official Stata (18+) commands estimating Jordà local-projection impulse-response functions, with ivlpirf adding instrumental-variables identification.",
+      "homepage": "https://www.stata.com/features/overview/local-projections-impulse-response-functions/",
+      "id": "stata-lpirf-ivlpirf",
+      "languages": [
+        "stata"
+      ],
+      "last_activity": "2026-01",
+      "license": "proprietary",
+      "maintained": "active",
+      "name": "Stata lpirf / ivlpirf",
+      "owner_repo": null,
+      "stars_approx": null,
+      "subcategory": [
+        "local-projections",
+        "impulse-response",
+        "time-series"
+      ],
+      "url": "https://www.stata.com/manuals/tslpirf.pdf",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Official Stata Sp suite fitting cross-sectional and panel spatial autoregressive models (SAR/SEM/SAC, with endogenous covariates) by ML and GS2SLS.",
+      "homepage": "https://www.stata.com/features/spatial-autoregressive-models/",
+      "id": "stata-sp-spregress-spxtregress-spivregress",
+      "languages": [
+        "stata"
+      ],
+      "last_activity": "2026-01",
+      "license": "proprietary",
+      "maintained": "active",
+      "name": "Stata sp (spregress/spxtregress/spivregress)",
+      "owner_repo": null,
+      "stars_approx": null,
+      "subcategory": [
+        "spatial",
+        "spatial-regression",
+        "spatial-panel"
+      ],
+      "url": "https://www.stata.com/manuals/sp.pdf",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Official Stata time-series suite estimating reduced-form and structural VARs (var, svar, varbasic) with IRF/FEVD via the irf subsystem.",
+      "homepage": "https://www.stata.com/features/time-series/",
+      "id": "stata-var-svar-varbasic",
+      "languages": [
+        "stata"
+      ],
+      "last_activity": "2026-01",
+      "license": "proprietary",
+      "maintained": "active",
+      "name": "Stata var / svar / varbasic",
+      "owner_repo": null,
+      "stars_approx": null,
+      "subcategory": [
+        "var",
+        "svar",
+        "time-series"
+      ],
+      "url": "https://www.stata.com/manuals/tsvar.pdf",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
       "description": "General-purpose statistical modeling library (OLS/GLM, robust/clustered SE, panel and time-series tools); a foundation rather than a quasi-experimental-specific package.",
       "homepage": "https://www.statsmodels.org/",
       "id": "statsmodels",
@@ -3078,6 +4645,94 @@
         "inference-se"
       ],
       "url": "https://github.com/statsmodels/statsmodels",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Analysis of complex survey samples including design-based summary statistics, generalized linear models, calibration and raking of survey weights.",
+      "homepage": "http://r-survey.r-forge.r-project.org/survey/",
+      "id": "survey",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2026-02",
+      "license": "GPL-2.0-or-later",
+      "maintained": "active",
+      "name": "survey",
+      "owner_repo": "cran/survey",
+      "stars_approx": null,
+      "subcategory": [
+        "survey-weighting",
+        "raking"
+      ],
+      "url": "https://cran.r-project.org/package=survey",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Data-driven identification of structural VARs (changes in volatility, GARCH, independent-component analysis, non-Gaussian ML) with IRFs and bootstrap inference.",
+      "homepage": "https://cran.r-project.org/package=svars",
+      "id": "svars",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2025-10",
+      "license": "MIT",
+      "maintained": "maintained",
+      "name": "svars",
+      "owner_repo": "alexanderlange53/svars",
+      "stars_approx": 55,
+      "subcategory": [
+        "svar",
+        "var",
+        "time-series"
+      ],
+      "url": "https://github.com/alexanderlange53/svars",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Stata's built-in survey-data prefix and estimators that account for sampling weights, stratification, and clustering in complex survey designs.",
+      "homepage": "https://www.stata.com/features/survey-methods/",
+      "id": "svy",
+      "languages": [
+        "stata"
+      ],
+      "last_activity": "2026-06",
+      "license": "proprietary",
+      "maintained": "active",
+      "name": "svy",
+      "owner_repo": null,
+      "stars_approx": null,
+      "subcategory": [
+        "survey-weighting"
+      ],
+      "url": "https://www.stata.com/manuals/svy.pdf",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Quickly and flexibly applies rake weighting to survey data, extending the survey package's weighting interface to correct for non-response.",
+      "homepage": "https://cran.r-project.org/package=svyweight",
+      "id": "svyweight",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2026-03",
+      "license": "GPL-3.0-only",
+      "maintained": "active",
+      "name": "svyweight",
+      "owner_repo": "mainwaringb/svyweight",
+      "stars_approx": 3,
+      "subcategory": [
+        "raking",
+        "survey-weighting"
+      ],
+      "url": "https://github.com/mainwaringb/svyweight",
       "verified": true
     },
     {
@@ -3233,6 +4888,98 @@
     {
       "automation_level": "library",
       "category": "econometrics-library",
+      "description": "Nonlinear and regime-switching time-series models including linear VAR/VECM and threshold TVAR/TVECM with associated cointegration tests.",
+      "homepage": "https://cran.r-project.org/package=tsDyn",
+      "id": "tsdyn",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2024-10",
+      "license": "GPL-2.0-or-later",
+      "maintained": "maintained",
+      "name": "tsDyn",
+      "owner_repo": "MatthieuStigler/tsDyn",
+      "stars_approx": null,
+      "subcategory": [
+        "var",
+        "nonlinear-time-series",
+        "threshold-var"
+      ],
+      "url": "https://github.com/MatthieuStigler/tsDyn",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Identifies VAR impulse responses using a high-frequency external instrument (proxy-SVAR / Gertler-Karadi), extending models fit with the vars package.",
+      "homepage": null,
+      "id": "varexternalinstrument",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2019-07",
+      "license": "MIT",
+      "maintained": "dormant",
+      "name": "varexternalinstrument",
+      "owner_repo": "angusmoore/varexternalinstrument",
+      "stars_approx": 8,
+      "subcategory": [
+        "svar",
+        "proxy-svar",
+        "external-instruments"
+      ],
+      "url": "https://github.com/angusmoore/varexternalinstrument",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Estimation, lag selection, diagnostics, forecasting, Granger causality, IRFs and FEVD for VAR models plus SVAR and SVEC estimation (Pfaff).",
+      "homepage": "https://cran.r-project.org/package=vars",
+      "id": "vars",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2024-03",
+      "license": "GPL-2.0-or-later",
+      "maintained": "maintained",
+      "name": "vars",
+      "owner_repo": "bpfaff/vars",
+      "stars_approx": 47,
+      "subcategory": [
+        "var",
+        "svar",
+        "time-series"
+      ],
+      "url": "https://github.com/bpfaff/vars",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Identifies structural shocks in Bayesian VARs via sign restrictions (Uhlig rejection and penalty, Rubio-Ramirez QR, Fry-Pagan median target).",
+      "homepage": "https://rdrr.io/cran/VARsignR/",
+      "id": "varsignr",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2015-12",
+      "license": "GPL-3.0-only",
+      "maintained": "dormant",
+      "name": "VARsignR",
+      "owner_repo": "chrstdanne/VARsignR",
+      "stars_approx": 22,
+      "subcategory": [
+        "svar",
+        "sign-restrictions",
+        "bayesian-var"
+      ],
+      "url": "https://github.com/chrstdanne/VARsignR",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
       "description": "Provides robust and clustered variance-covariance estimators as a backend for Julia regression packages.",
       "homepage": null,
       "id": "vcov-jl",
@@ -3249,6 +4996,29 @@
         "inference-se"
       ],
       "url": "https://github.com/FixedEffects/Vcov.jl",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Julia VAR/BVAR/FAVAR estimation with IRF identification (Cholesky, long-run, sign restrictions) and asymptotic/bootstrap confidence bands.",
+      "homepage": "https://lucabrugnolini.github.io/code/var/",
+      "id": "vectorautoregressions-jl",
+      "languages": [
+        "julia"
+      ],
+      "last_activity": "2022-06",
+      "license": "MIT",
+      "maintained": "dormant",
+      "name": "VectorAutoregressions.jl",
+      "owner_repo": "lucabrugnolini/VectorAutoregressions.jl",
+      "stars_approx": 39,
+      "subcategory": [
+        "var",
+        "svar",
+        "bayesian-var"
+      ],
+      "url": "https://github.com/lucabrugnolini/VectorAutoregressions.jl",
       "verified": true
     },
     {
@@ -3276,6 +5046,28 @@
     {
       "automation_level": "library",
       "category": "econometrics-library",
+      "description": "A modern, lightweight RIM (iterative raking) library for weighting survey/people data, a fork-style successor to quantipy's weighting.",
+      "homepage": "https://pypi.org/project/weightipy/",
+      "id": "weightipy",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2026-02",
+      "license": "MIT",
+      "maintained": "active",
+      "name": "weightipy",
+      "owner_repo": "kaitumisuuringute-keskus/Weightipy",
+      "stars_approx": 14,
+      "subcategory": [
+        "raking",
+        "survey-weighting"
+      ],
+      "url": "https://github.com/kaitumisuuringute-keskus/Weightipy",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
       "description": "Generates balancing weights (propensity scores, entropy balancing, CBPS, energy balancing) for binary, multi-category and continuous treatments.",
       "homepage": "https://ngreifer.github.io/WeightIt/",
       "id": "weightit",
@@ -3292,6 +5084,48 @@
         "matching"
       ],
       "url": "https://cran.r-project.org/package=WeightIt",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Estimates the Vevea and Hedges (1995) weight-function model to assess and correct for publication bias in meta-analysis.",
+      "homepage": null,
+      "id": "weightr",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2019-07",
+      "license": "GPL-2.0-or-later",
+      "maintained": "dormant",
+      "name": "weightr",
+      "owner_repo": "cran/weightr",
+      "stars_approx": null,
+      "subcategory": [
+        "meta-analysis"
+      ],
+      "url": "https://cran.r-project.org/package=weightr",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Computes weighted descriptive statistics and tests (weighted correlations, t-tests, chi-squared) plus weighted graphics for survey data.",
+      "homepage": null,
+      "id": "weights",
+      "languages": [
+        "r"
+      ],
+      "last_activity": "2025-06",
+      "license": "GPL-2.0-or-later",
+      "maintained": "maintained",
+      "name": "weights",
+      "owner_repo": "cran/weights",
+      "stars_approx": null,
+      "subcategory": [
+        "survey-weighting"
+      ],
+      "url": "https://cran.r-project.org/package=weights",
       "verified": true
     },
     {
@@ -3334,6 +5168,28 @@
         "inference-se"
       ],
       "url": "https://github.com/droodman/WildBootTests.jl",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "econometrics-library",
+      "description": "Stata (SSC) command estimating fixed/random-effects spatial panel models (SAR, SEM, Durbin, dynamic) by quasi-maximum likelihood with direct/indirect/total effects (Belotti, Hughes & Piano Mortari).",
+      "homepage": "https://journals.sagepub.com/doi/abs/10.1177/1536867X1701700109",
+      "id": "xsmle",
+      "languages": [
+        "stata"
+      ],
+      "last_activity": "2017-01",
+      "license": "unverified",
+      "maintained": "dormant",
+      "name": "xsmle",
+      "owner_repo": null,
+      "stars_approx": null,
+      "subcategory": [
+        "spatial",
+        "spatial-panel"
+      ],
+      "url": "https://ideas.repec.org/c/boc/bocode/s457610.html",
       "verified": true
     },
     {

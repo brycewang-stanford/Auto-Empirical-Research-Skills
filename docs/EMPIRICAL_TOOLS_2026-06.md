@@ -1,15 +1,18 @@
 # Empirical-Tools Catalog — 2026-06
 
-This pass added a new first-party module, [`tools/`](../tools/), cataloging **251
+This pass added a new first-party module, [`tools/`](../tools/), cataloging **335
 software tools** for automated empirical research and causal inference — a layer
 distinct from the agent **skills** under [`skills/`](../skills/). A *skill* is an
 instruction pack an agent reads; a *tool* is the external software or service an
 agent (or researcher) actually invokes. The two were deliberately separated so the
 new index does not dilute the semantics of the skills catalog.
 
-> **Updated 2026-06-04:** added the **51-entry `research-agent` category**
-> (autonomous research & data-science agents) in a second wave — superseding the
-> "deferred" note that originally appeared below.
+> **Updated 2026-06-04:** grew from the initial 200 tools to **335** over three
+> waves — (1) the original five categories, (2) the **51-entry `research-agent`
+> category** (autonomous research & data-science agents), and (3) an **84-entry
+> niche-econometrics expansion** (spatial econometrics, local projections/IRF &
+> (S)VAR, survey weighting/MRP/raking, meta-analysis) growing `econometrics-library`
+> from 86 to 170. The "deferred" notes that originally appeared below are superseded.
 
 Source of truth: [`tools/tools.json`](../tools/tools.json). Browsable view:
 [`tools/CATALOG.md`](../tools/CATALOG.md) (generated). Both are validated and kept
@@ -23,16 +26,16 @@ Three categories were requested, plus two adjacent support categories:
 | Category | Count | What it covers |
 |---|---:|---|
 | `causal-inference-library` | 32 | Treatment-effect / causal-ML estimation: DoWhy, EconML, CausalML, DoubleML (py+R), CausalPy, causallib, grf, CATENets, TMLE family, Mendelian randomization, uplift modeling |
-| `econometrics-library` | 86 | Panel FE, DiD (incl. modern/staggered), event study, RDD, IV, synthetic control/SDID, matching & weighting, sensitivity — across R / Python / Stata / Julia |
+| `econometrics-library` | 170 | Panel FE, DiD (incl. modern/staggered), event study, RDD, IV, synthetic control/SDID, matching & weighting, sensitivity — **plus** spatial econometrics (spdep, PySAL/spreg, GeoDa, Stata `sp`), local projections/IRF & (S)VAR (lpirfs, vars, svars), survey weighting/MRP/raking (survey, samplics, balance, anesrake), and meta-analysis (metafor, meta, netmeta, metan) — across R / Python / Stata / Julia |
 | `mcp-server` | 48 | Stats-execution MCPs (StatsPAI, Stata, R, Jupyter) + data-access MCPs (FRED, World Bank, IMF, OECD, Eurostat, Census, BEA, BLS, SEC EDGAR, OpenAlex, Semantic Scholar, PubMed, Zotero, arXiv) |
 | `causal-discovery` | 25 | Structure learning: causal-learn, Tetrad/py-tetrad, gCastle, CDT, tigramite (PCMCI), LiNGAM, NOTEARS/DAGMA, pcalg, bnlearn, pgmpy |
 | `research-agent` | 51 | Autonomous research & data-science agents: AI-Scientist, data-to-paper, Agent Laboratory, RD-Agent, AI-Researcher, STORM, PaperQA2, gpt-researcher, DeepAnalyze, MetaGPT (Data Interpreter), Biomni, AIDE, AutoGluon-Assistant |
 | `benchmark-dataset` | 9 | Known-ground-truth datasets/simulators: causaldata, IHDP/Twins, ACIC competition data, RealCause, JustCause, Tübingen pairs, bnlearn network repository |
 
-Coverage signals (snapshot, June 2026): **147 Python · 65 R · 36 Stata · 16 TypeScript
-· 7 Julia**; **142 active · 75 maintained · 34 dormant**; **161 permissive · 50 copyleft
-· 37 unverified/unmapped · 3 non-OSI/custom** licenses. Every record is `verified: true`
-(its repo was fetched during curation to confirm license and activity).
+Coverage signals (snapshot, June 2026): **165 Python · 109 R · 53 Stata · 16 TypeScript
+· 11 Julia**; **181 active · 95 maintained · 59 dormant**; **184 permissive · 104 copyleft
+· 39 unverified/unmapped · 8 proprietary/non-OSI/custom** licenses. Every record is
+`verified: true` (its repo was fetched during curation to confirm license and activity).
 
 **Second wave (2026-06-04) — `research-agent`:** 51 end-to-end *autonomous research &
 data-science agents*, split across two verified sweeps (AI-scientist / paper-writing
@@ -45,6 +48,21 @@ verbatim. Pure general-purpose agents with only a data sub-module (OpenManus, Au
 JoyAgent) and closed/hosted systems (Google AI co-scientist, Intology Zochi, Autoscience
 Carl, FutureHouse hosted platform) were excluded; their open components (PaperQA2, Aviary,
 Robin) are included.
+
+**Third wave (2026-06-04) — niche-econometrics expansion (`econometrics-library` 86 → 170):**
+84 packages from two verified sweeps closing the gaps flagged in the original backlog:
+**spatial econometrics** (R: spdep, spatialreg, sphet, splm, spsur, spmoran, spaMM, rgeoda;
+Python PySAL: libpysal, spreg, esda, mgwr, giddy; Stata `sp`/`sppack`/`xsmle`; GeoDa; Julia
+SpatialDependence.jl), **local projections / IRF & (S)VAR** (R: lpirfs, vars, svars, BVAR,
+ARDL; Python: localprojections, statsmodels VAR; Stata `lpirf`/`var`/`svar`, `locproj`; Julia
+LocalProjections.jl), **survey weighting / MRP / raking** (R: survey, srvyr, anesrake, autumn,
+PracTools; Python: samplics, ipfn, balance; Stata: ipfraking, sreweight, `svy`; MRP engines
+brms, rstanarm), and **meta-analysis** (R: metafor, meta, netmeta, metaSEM, robumeta, dmetar,
+RoBMA; Python: PythonMeta, PyMARE; Stata: metan, admetan, ipdmetan, `meta`). Built-in Stata
+commands are recorded `license: proprietary`, `automation_level: built-in-command`; SSC modules
+`community-command` (GPL-3 per RePEc); CRAN-only packages use the canonical CRAN URL with
+`owner_repo: cran/<pkg>`. `spaMM` is CeCILL-2.0. One overlap (`statsmodels`) was de-duplicated
+against the existing entry.
 
 ## Method
 
@@ -100,9 +118,12 @@ inclusion is not an endorsement of their security. The existing
 ## Backlog (not added yet)
 
 - ~~Autonomous research agents as a sixth category~~ — **done 2026-06-04** (`research-agent`, 51 entries).
-- **Spatial econometrics, local projections / impulse responses, MRP / survey weighting,
-  meta-analysis** tooling — present as functions inside broader packages already listed,
-  but a few dedicated libraries (e.g. `spdep`, `lpirfs`, `metafor`) could be added.
-- **Periodic link/license re-check** for the catalog, analogous to the skills
-  external-link workflow — especially important for the fast-moving `research-agent`
-  entries (stars/activity/licenses change quickly).
+- ~~Spatial econometrics, local projections / impulse responses, MRP / survey weighting,
+  meta-analysis tooling~~ — **done 2026-06-04** (84 entries; see "Third wave" above).
+- ~~Periodic link/license re-check workflow for the catalog~~ — **done 2026-06-04**
+  ([`scripts/check-tools-links.py`](../scripts/check-tools-links.py) +
+  [`.github/workflows/check-tools-links.yml`](../.github/workflows/check-tools-links.yml),
+  scheduled monthly). Re-verifying `stars_approx` / `last_activity` still needs a manual
+  GitHub-API pass.
+- **Remaining:** ARDL depth (`dLagM`, `ardl.nardl`), a dedicated Julia spatial-regression
+  package (none mature as of 2026-06), and broadening `research-agent` as that space evolves.

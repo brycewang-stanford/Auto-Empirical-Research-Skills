@@ -84,7 +84,7 @@ Numbers in this README are kept honest and disambiguated. "Vendored" means the f
 | Behavioral **eval scenarios / rubric items** | **17 / 95** | [`eval-harness/`](eval-harness/) |
 | Security audit of the **original baseline** (collections / files) | **52 / 2,940+**, 52/52 CLEAN | [`SECURITY-SCAN-REPORT.md`](SECURITY-SCAN-REPORT.md) |
 | Curated **map of the wider ecosystem** | **23,000+ skills / 119 repos** | this README · [`docs/SKILL_CATALOG.md`](docs/SKILL_CATALOG.md) |
-| **Tools catalog** (`tools/`): causal/econometrics libraries, autonomous research agents, MCP servers, causal discovery, benchmark datasets | **251 tools / 6 categories** | [`tools/tools.json`](tools/tools.json) · [`tools/CATALOG.md`](tools/CATALOG.md) |
+| **Tools catalog** (`tools/`): causal/econometrics libraries, autonomous research agents, MCP servers, causal discovery, benchmark datasets | **335 tools / 6 categories** | [`tools/tools.json`](tools/tools.json) · [`tools/CATALOG.md`](tools/CATALOG.md) |
 
 > The security audit covered the original **52-collection / 2,940-file baseline (52/52 CLEAN)**. Skills vendored after that baseline are tracked in [`catalog/provenance.json`](catalog/provenance.json), [`docs/LICENSE_AUDIT.md`](docs/LICENSE_AUDIT.md), and [`docs/SKILL_AUDIT.md`](docs/SKILL_AUDIT.md); run `make audit` before relying on them in high-trust contexts.
 
@@ -279,10 +279,10 @@ The first-party flagships ([StatsPAI](skills/00-Full-empirical-analysis-skill_St
 
 > Unlike the skills above, [`tools/`](tools/) catalogs the **software and services an agent (or researcher) actually invokes** — structured, license- and maintenance-aware, and wired into `make validate`. Source of truth: [`tools/tools.json`](tools/tools.json); browsable list: [`tools/CATALOG.md`](tools/CATALOG.md).
 
-**251 tools across 6 categories** (curated 2026-06):
+**335 tools across 6 categories** (curated 2026-06):
 
 - **Causal-inference / treatment-effect libraries (32)** — DoWhy · EconML · CausalML · DoubleML · CausalPy · causallib · grf · CATENets · TMLE family · Mendelian randomization …
-- **Econometrics / quasi-experimental libraries (86)** — panel FE · DiD (incl. modern/staggered) · event study · RDD · IV · synthetic control/SDID · matching & weighting · sensitivity, across R/Python/Stata/Julia (fixest · did · HonestDiD · rdrobust · synthdid · reghdfe · csdid · sdid · pyfixest · linearmodels · FixedEffectModels.jl …).
+- **Econometrics / quasi-experimental libraries (170)** — panel FE · DiD (incl. modern/staggered) · event study · RDD · IV · synthetic control/SDID · matching & weighting · sensitivity (fixest · did · HonestDiD · rdrobust · synthdid · reghdfe · csdid · sdid · pyfixest · linearmodels …); **plus** spatial econometrics (spdep · PySAL/spreg · GeoDa), local projections/IRF & (S)VAR (lpirfs · vars · svars), survey weighting/MRP/raking (survey · samplics · balance), and meta-analysis (metafor · meta · netmeta · metan) — across R/Python/Stata/Julia.
 - **Autonomous research / data-science agents (51)** — end-to-end research & data analysis: AI-Scientist · data-to-paper · Agent Laboratory · RD-Agent · AI-Researcher · STORM · PaperQA2 · gpt-researcher · DeepAnalyze · MetaGPT (DI) · Biomni …  (⚠️ includes non-OSI / no-LICENSE repos — confirm terms before use).
 - **MCP servers (48)** — stats execution (StatsPAI · stata-mcp · R/Jupyter MCP) + data access (FRED · World Bank · IMF · OECD · Eurostat · Census · BEA · BLS · SEC EDGAR · OpenAlex · Semantic Scholar · PubMed · Zotero · arXiv …).
 - **Causal discovery / structure learning (25)** — causal-learn · Tetrad/py-tetrad · gCastle · CDT · tigramite (PCMCI) · LiNGAM · NOTEARS/DAGMA · pcalg · bnlearn · pgmpy …

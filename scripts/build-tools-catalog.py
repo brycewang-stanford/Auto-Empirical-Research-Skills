@@ -174,10 +174,12 @@ def summary_tables(tools: list[dict]) -> str:
         lic = t["license"]
         if lic in {"unverified", "NOASSERTION"}:
             by_license_class["unverified / unmapped"] += 1
-        elif any(tag in lic for tag in ("Commons Clause", "Responsible-AI", "Scientist Source", "custom")):
-            by_license_class["non-OSI / custom"] += 1
-        elif lic.startswith(("GPL", "AGPL", "LGPL")):
-            by_license_class["copyleft (GPL/AGPL/LGPL)"] += 1
+        elif lic == "proprietary" or any(
+            tag in lic for tag in ("Commons Clause", "Responsible-AI", "Scientist Source", "custom")
+        ):
+            by_license_class["proprietary / non-OSI / custom"] += 1
+        elif lic.startswith(("GPL", "AGPL", "LGPL")) or "CeCILL" in lic:
+            by_license_class["copyleft (GPL/AGPL/LGPL/CeCILL)"] += 1
         else:
             by_license_class["permissive (MIT/BSD/Apache/…)"] += 1
 

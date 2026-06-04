@@ -16,12 +16,12 @@
 
 <!-- BEGIN GENERATED: summary (scripts/build-tools-catalog.py) -->
 
-**251 tools** across 6 categories.
+**335 tools** across 6 categories.
 
 | Category | Count |
 |---|---:|
 | Causal-inference & treatment-effect libraries | 32 |
-| Econometrics & quasi-experimental libraries | 86 |
+| Econometrics & quasi-experimental libraries | 170 |
 | Causal discovery / structure learning | 25 |
 | Autonomous research & data-science agents | 51 |
 | MCP servers (data & stats execution) | 48 |
@@ -29,18 +29,18 @@
 
 | By language | Tools | | By maintenance | Tools | | By license | Tools |
 |---|---:|:-:|---|---:|:-:|---|---:|
-| Python | 147 |  | 🟢 active | 142 |  | permissive (MIT/BSD/Apache/…) | 161 |
-| R | 65 |  | 🟡 maintained | 75 |  | copyleft (GPL/AGPL/LGPL) | 50 |
-| Stata | 36 |  | 🔴 dormant | 34 |  | unverified / unmapped | 37 |
-| TypeScript | 16 |  |  |  |  | non-OSI / custom | 3 |
-| Julia | 7 |  |  |  |  |  |  |
-| C++ | 5 |  |  |  |  |  |  |
+| Python | 165 |  | 🟢 active | 181 |  | permissive (MIT/BSD/Apache/…) | 184 |
+| R | 109 |  | 🟡 maintained | 95 |  | copyleft (GPL/AGPL/LGPL/CeCILL) | 104 |
+| Stata | 53 |  | 🔴 dormant | 59 |  | unverified / unmapped | 39 |
+| TypeScript | 16 |  |  |  |  | proprietary / non-OSI / custom | 8 |
+| Julia | 11 |  |  |  |  |  |  |
+| C++ | 6 |  |  |  |  |  |  |
 | Java | 3 |  |  |  |  |  |  |
 | JavaScript | 3 |  |  |  |  |  |  |
 
 <!-- END GENERATED: summary -->
 
-完整可浏览清单（按类目分组、可点击、含语言/许可/维护状态）见 **[CATALOG.md](CATALOG.md)**；机器可读事实源见 **[tools.json](tools.json)**。
+完整可浏览清单（按类目分组、可点击、含语言/许可/维护状态）见 **[CATALOG.md](CATALOG.md)**；机器可读事实源见 **[tools.json](tools.json)**；可交互筛选检索见 **[../docs/tools-search.html](../docs/tools-search.html)**（本地 `python3 -m http.server` 或 GitHub Pages 打开）。
 
 ---
 
@@ -49,7 +49,7 @@
 本模块当前覆盖 6 个类目：
 
 1. **因果推断库 / 处理效应库（`causal-inference-library`）** — DoWhy、EconML、CausalML、DoubleML、CausalPy、causallib、grf、CATENets、TMLE 系列、Mendelian randomization 等。
-2. **计量 / 准实验库（`econometrics-library`）** — 面板/固定效应、DiD（含 staggered/现代 DiD）、事件研究、断点回归 RDD、工具变量 IV、合成控制 SCM/SDID、匹配/加权、敏感性分析；覆盖 R / Python / Stata / Julia（fixest、did、HonestDiD、rdrobust、synthdid、reghdfe、csdid、sdid、pyfixest、linearmodels、FixedEffectModels.jl 等）。
+2. **计量 / 准实验库（`econometrics-library`）** — 面板/固定效应、DiD（含 staggered/现代 DiD）、事件研究、断点回归 RDD、工具变量 IV、合成控制 SCM/SDID、匹配/加权、敏感性分析（fixest、did、HonestDiD、rdrobust、synthdid、reghdfe、csdid、sdid、pyfixest、linearmodels、FixedEffectModels.jl …）；并覆盖 **空间计量**（spdep、spatialreg、PySAL/spreg、GeoDa、Stata sp）、**局部投影/IRF & (S)VAR**（lpirfs、vars、svars、localprojections、Stata lpirf）、**调查加权 / MRP / raking**（survey、srvyr、samplics、balance、anesrake）、**元分析**（metafor、meta、netmeta、metan）；横跨 R / Python / Stata / Julia。
 3. **因果发现 / 结构学习（`causal-discovery`）** — causal-learn、Tetrad/py-tetrad、gCastle、CDT、tigramite(PCMCI)、LiNGAM、NOTEARS/DAGMA、pcalg、bnlearn、pgmpy 等。
 4. **自动化研究 / 数据科学 Agent（`research-agent`）** — 端到端自动做科研/数据分析的系统：AI-Scientist、data-to-paper、Agent Laboratory、RD-Agent、AI-Researcher、STORM、PaperQA2、gpt-researcher、DeepAnalyze、MetaGPT(Data Interpreter)、Biomni 等。⚠️ 许可注意：SakanaAI AI-Scientist 用自定义 Responsible-AI 许可（非 OSI），部分仓库无 LICENSE（标 `unverified`）——用前务必到上游确认授权。
 5. **MCP 服务（`mcp-server`）** — 供 agent 直接调用的统计执行与数据获取服务（StatsPAI、stata-mcp、R/Jupyter MCP、FRED、World Bank、IMF、OECD、Eurostat、Census、BEA、BLS、SEC EDGAR、OpenAlex、Semantic Scholar、PubMed、Zotero、arXiv 等）。

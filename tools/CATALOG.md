@@ -6,12 +6,12 @@ Curated, license- and maintenance-aware index of **software tools** for automate
 
 ## Summary
 
-**251 tools** across 6 categories.
+**335 tools** across 6 categories.
 
 | Category | Count |
 |---|---:|
 | Causal-inference & treatment-effect libraries | 32 |
-| Econometrics & quasi-experimental libraries | 86 |
+| Econometrics & quasi-experimental libraries | 170 |
 | Causal discovery / structure learning | 25 |
 | Autonomous research & data-science agents | 51 |
 | MCP servers (data & stats execution) | 48 |
@@ -19,12 +19,12 @@ Curated, license- and maintenance-aware index of **software tools** for automate
 
 | By language | Tools | | By maintenance | Tools | | By license | Tools |
 |---|---:|:-:|---|---:|:-:|---|---:|
-| Python | 147 |  | 🟢 active | 142 |  | permissive (MIT/BSD/Apache/…) | 161 |
-| R | 65 |  | 🟡 maintained | 75 |  | copyleft (GPL/AGPL/LGPL) | 50 |
-| Stata | 36 |  | 🔴 dormant | 34 |  | unverified / unmapped | 37 |
-| TypeScript | 16 |  |  |  |  | non-OSI / custom | 3 |
-| Julia | 7 |  |  |  |  |  |  |
-| C++ | 5 |  |  |  |  |  |  |
+| Python | 165 |  | 🟢 active | 181 |  | permissive (MIT/BSD/Apache/…) | 184 |
+| R | 109 |  | 🟡 maintained | 95 |  | copyleft (GPL/AGPL/LGPL/CeCILL) | 104 |
+| Stata | 53 |  | 🔴 dormant | 59 |  | unverified / unmapped | 39 |
+| TypeScript | 16 |  |  |  |  | proprietary / non-OSI / custom | 8 |
+| Julia | 11 |  |  |  |  |  |  |
+| C++ | 6 |  |  |  |  |  |  |
 | Java | 3 |  |  |  |  |  |  |
 | JavaScript | 3 |  |  |  |  |  |  |
 
@@ -67,21 +67,33 @@ Curated, license- and maintenance-aware index of **software tools** for automate
 | [UpliftML](https://github.com/bookingcom/upliftml) | Python | Apache-2.0 | 🔴 dormant · 2022-12 | Booking.com's scalable uplift modeling package with PySpark/H2O implementations of metalearners, uplift random forests, and retrospective/constrained estimation. |
 | [zEpid](https://github.com/pzivich/zEpid) | Python | MIT | 🟡 maintained · 2022-10 | Epidemiology analysis package with causal inference estimators including IPTW/AIPW, g-formula (parametric and Monte Carlo), and TMLE. |
 
-## Econometrics & quasi-experimental libraries (86)
+## Econometrics & quasi-experimental libraries (170)
 
 | Tool | Lang | License | Status | What it does |
 |---|---|---|---|---|
+| [access](https://github.com/pysal/access) | Python | BSD-3-Clause | 🟢 active · 2025-12 | Classical and novel spatial accessibility-to-services measures (floating catchment, gravity, RAAM) within the PySAL ecosystem. |
+| [admetan](https://ideas.repec.org/c/boc/bocode/s458561.html) | Stata | GPL-3.0-only | 🔴 dormant · 2019-02 | Stata module providing comprehensive aggregate-data meta-analysis and forest plots; deprecated since 2020 in favor of metan/ipdmetan. |
 | [AER](https://cran.r-project.org/package=AER) | R | GPL-2.0-or-later | 🟢 active · 2026-02 | Applied Econometrics with R companion package providing IV (ivreg), tobit, count and other econometric estimators and datasets. |
 | [allsynth](https://ideas.repec.org/c/boc/bocode/s459076.html) | Stata | GPL-3.0 | 🟡 maintained | Wrapper around synth automating bias-correction, in-space placebo inference and stacked multi-unit synthetic control (Wiltshire). |
+| [anesrake](https://cran.r-project.org/package=anesrake) | R | GPL-2.0-or-later | 🔴 dormant · 2018-04 | Implements ANES-style iterative raking to weight survey data to known target population margins with automatic variable selection. |
+| [ARDL](https://github.com/Natsiopoulos/ARDL) | R | GPL-3.0-only | 🟢 active · 2026-05 | Builds ARDL and unrestricted/restricted error-correction models and runs the Pesaran-Shin-Smith (2001) bounds test for cointegration. |
 | [augsynth](https://github.com/ebenmichael/augsynth) | R | MIT | 🟡 maintained · 2024 | Augmented synthetic control method (and multisynth for staggered adoption) that de-biases SCM when pre-treatment fit is imperfect. |
+| [AutoregressiveModels.jl](https://github.com/junyuan-chen/AutoregressiveModels.jl) | Julia | MIT | 🟡 maintained · 2024-04 | Julia toolkit for vector autoregressions with OLS estimation and structural impulse-response computation with bootstrap confidence bands. |
+| [autumn](https://github.com/aaronrudkin/autumn) | R | MIT | 🟡 maintained · 2024-01 | Performs fast, tidy-friendly iterative proportional fitting (raking) to generate survey weights matching target population distributions. |
 | [bacondecomp](https://cran.r-project.org/package=bacondecomp) | R | MIT | 🔴 dormant · 2020-01 | Goodman-Bacon decomposition of two-way fixed-effects DiD estimates into their underlying 2x2 comparison weights. |
+| [balance](https://github.com/facebookresearch/balance) | Python | MIT | 🟢 active · 2026-06 | Workflow and methods (IPW, raking, post-stratification) for adjusting biased samples to infer about a target population. |
+| [bayesmeta](https://cran.r-project.org/package=bayesmeta) | R | GPL-2.0-or-later | 🟡 maintained · 2025-08 | Bayesian random-effects meta-analysis and meta-regression, returning posterior and predictive distributions and shrinkage estimates. |
 | [binscatter](https://github.com/michaelstepner/binscatter) | Stata | unverified | 🟡 maintained | Generates binned scatterplots to visualize conditional means / OLS relationships in Stata. |
 | [binsreg](https://cran.r-project.org/package=binsreg) | R · Python · Stata | GPL-3.0 | 🟢 active · 2026-05 | Binscatter least-squares, quantile and GLM regression with valid confidence bands and shape-restriction tests. |
 | [boottest](https://github.com/droodman/boottest) | Stata | GPL-3.0 | 🟢 active · 2026-04 | Fast wild bootstrap (null-imposed) and score bootstrap for cluster-robust inference with few clusters in Stata. |
+| [brms](https://github.com/paul-buerkner/brms) | R | GPL-2.0-only | 🟢 active · 2026-06 | Fits Bayesian generalized (non-)linear multivariate multilevel models via Stan, widely used as the multilevel-regression engine for MRP. |
+| [BVAR](https://github.com/nk027/bvar) | R | GPL-3.0-only | 🟡 maintained · 2024-02 | Hierarchical Bayesian VAR estimation with Giannone-Lenza-Primiceri conjugate-prior selection, computing impulse responses, forecasts and FEVD. |
+| [bvarsv](https://cran.r-project.org/web/packages/bvarsv/index.html) | R | GPL-2.0-or-later | 🔴 dormant · 2015-10 | Bayesian estimation of a time-varying-parameter VAR with stochastic volatility (Primiceri 2005) for posterior predictive densities and impulse responses. |
 | [cem](https://cran.r-project.org/package=cem) | R | GPL-2.0 | 🔴 dormant · 2022-09 | Coarsened exact matching for reducing imbalance between treatment and control groups in observational data. |
 | [clubSandwich](https://cran.r-project.org/package=clubSandwich) | R | GPL-3.0 | 🟢 active · 2026-05 | Cluster-robust (CR2) variance estimators with small-sample corrections and Satterthwaite/Wald hypothesis tests. |
 | [cobalt](https://cran.r-project.org/package=cobalt) | R | GPL-2.0-or-later | 🟢 active · 2026-05 | Balance tables and love-plots for samples preprocessed by matching, weighting or subclassification. |
 | [coefplot](https://github.com/benjann/coefplot) | Stata | MIT | 🟢 active · 2025-08 | Plots coefficients/confidence intervals from estimation results or matrices (widely used for event-study graphs). |
+| [compute.es](https://cran.r-project.org/package=compute.es) | R | GPL-2.0-or-later | 🟢 active · 2026-01 | Converts a wide range of test statistics into effect sizes (d, g, r, z', OR) with variances, CIs, and p-values for meta-analysis. |
 | [csdid (Python)](https://github.com/d2cml-ai/csdid) | Python | MIT | 🟢 active · 2025 | Python port of the Callaway & Sant'Anna group-time ATT estimator for staggered DiD. |
 | [csdid (Stata)](https://github.com/friosavila/stpackages/tree/main/csdid) | Stata | MIT | 🟢 active · 2025 | Stata implementation of Callaway & Sant'Anna group-time ATTs with panel and repeated cross-section support (Rios-Avila). |
 | [csdid2](https://github.com/friosavila/stpackages/tree/main/csdid2) | Stata | MIT | 🟢 active · 2025 | Faster all-Mata reimplementation of csdid (Callaway-Sant'Anna staggered DiD) with extended functionality. |
@@ -93,9 +105,13 @@ Curated, license- and maintenance-aware index of **software tools** for automate
 | [DIDmultiplegt](https://github.com/chaisemartinPackages/did_multiplegt) | R · Stata | MIT | 🟢 active · 2026-02 | de Chaisemartin & D'Haultfoeuille heterogeneity-robust DiD estimators for multiple groups, periods and non-binary treatments (original version). |
 | [DIDmultiplegtDYN](https://github.com/chaisemartinPackages/did_multiplegt_dyn) | R · Stata | MIT | 🟢 active · 2026-05 | Dynamic (event-study) heterogeneity-robust DiD estimator allowing treatments that switch on and off multiple times. |
 | [differences](https://github.com/bernardodionisi/differences) | Python | GPL-3.0 | 🟢 active · 2026-04 | Difference-in-differences estimation in Python (Callaway-Sant'Anna and related estimators) for staggered adoption with heterogeneous effects. |
+| [dmetar](https://github.com/MathiasHarrer/dmetar) | R | GPL-3.0-only | 🟡 maintained · 2025-05 | Companion package of helper functions for the 'Doing Meta-Analysis in R' guide, extending meta, metafor, and netmeta with diagnostics and visualizations. |
 | [drdid (Stata)](https://github.com/friosavila/stpackages/tree/main/drdid) | Stata | MIT | 🟢 active · 2025 | Doubly-robust difference-in-differences estimators (Sant'Anna & Zhao 2020) for Stata; the building block for csdid. |
+| [dynamac](https://github.com/andyphilips/dynamac) | R | GPL-2.0-or-later | 🔴 dormant · 2022-11 | Estimates single-equation ARDL/error-correction models, dynamically simulates and plots their responses, and tests for cointegration (Jordan & Philips). |
 | [ebal](https://cran.r-project.org/package=ebal) | R | GPL-2.0-or-later | 🟢 active · 2026-04 | Entropy balancing reweighting so covariate moments match user-specified targets in observational studies (Hainmueller). |
 | [Econometrics.jl](https://github.com/Nosferican/Econometrics.jl) | Julia | ISC | 🟡 maintained · 2024-12 | General econometrics package for Julia covering panel models, IV and discrete-choice estimators. |
+| [esc](https://github.com/strengejacke/esc) | R | GPL-3.0-only | 🔴 dormant · 2023-09 | Computes effect sizes and their variances (d, g, r, OR, etc.) from diverse reported statistics for use in meta-analysis. |
+| [esda](https://github.com/pysal/esda) | Python | BSD-3-Clause | 🟢 active · 2026-03 | Exploratory spatial data analysis: global and local autocorrelation (Moran's I, Geary, Getis-Ord, local Moran/LISA) for continuous and binary areal data. |
 | [estimatr](https://cran.r-project.org/package=estimatr) | R | MIT | 🟡 maintained · 2025-02 | Fast design-based OLS/IV estimators (lm_robust, iv_robust, difference_in_means) with robust and cluster-robust standard errors. |
 | [estout (esttab)](https://github.com/benjann/estout) | Stata | MIT | 🟢 active · 2026-04 | Produces publication-quality regression tables (esttab/estout) exportable to LaTeX, RTF, HTML and CSV. |
 | [etwfe](https://github.com/grantmcdermott/etwfe) | R | MIT | 🟢 active · 2026-03 | Extended two-way fixed effects (Wooldridge) DiD via saturated cohort-by-time interactions plus marginal-effects aggregation. |
@@ -106,30 +122,59 @@ Curated, license- and maintenance-aware index of **software tools** for automate
 | [fixest](https://github.com/lrberge/fixest) | R | GPL-3.0 | 🟢 active · 2026-05 | Fast and user-friendly estimation of OLS, GLM and IV models with multiple high-dimensional fixed effects, with built-in clustered/robust inference and event-study tooling. |
 | [ftools](https://github.com/sergiocorreia/ftools) | Stata | MIT | 🟢 active · 2026-01 | Fast Mata-based data manipulation backend (collapse/merge/egen) that powers reghdfe and other Stata commands. |
 | [fwildclusterboot](https://github.com/s3alfisc/fwildclusterboot) | R | GPL-3.0 | 🔴 dormant · 2023-07 | Fast wild cluster bootstrap inference for OLS/IV with few clusters (R port of boottest); archived on CRAN, source remains on GitHub. |
+| [GeoDa](https://github.com/GeoDaCenter/geoda) | C++ | GPL-3.0-only | 🟢 active · 2025-09 | Cross-platform desktop GUI for exploratory spatial data analysis, LISA mapping, spatial weights and basic spatial regression on lattice data. |
+| [giddy](https://github.com/pysal/giddy) | Python | BSD-3-Clause | 🟢 active · 2025-12 | Geospatial distribution dynamics: spatial Markov chains, rank/mobility and directional LISA analysis of longitudinal spatial data. |
 | [GLFixedEffectModels.jl](https://github.com/jmboehm/GLFixedEffectModels.jl) | Julia | MIT | 🟢 active · 2026-03 | Estimates GLMs (logit, Poisson, etc.) with high-dimensional fixed effects in Julia (ppmlhdfe analog). |
 | [gsynth](https://github.com/xuyiqing/gsynth) | R | MIT | 🟢 active · 2026-03 | Generalized synthetic control imputing counterfactuals via interactive fixed-effects models, supporting multiple treated units and staggered timing. |
 | [gtools](https://github.com/mcaceresb/stata-gtools) | Stata | MIT | 🟡 maintained · 2024-06 | C-plugin accelerated versions of common Stata data commands (collapse, egen, reshape, pctile) used in large-panel workflows. |
 | [HonestDiD](https://github.com/asheshrambachan/HonestDiD) | R | MIT | 🟢 active · 2026-04 | Robust inference and sensitivity analysis for DiD/event-study designs under relaxations of the parallel-trends assumption (Rambachan & Roth). |
+| [ipdmetan](https://ideas.repec.org/c/boc/bocode/s457785.html) | Stata | GPL-3.0-only | 🔴 dormant · 2022-10 | Stata module for two-stage individual-participant-data meta-analysis with subgroup and forest-plot support. |
+| [ipfn](https://github.com/Dirguis/ipfn) | Python | MIT | 🟡 maintained · 2024-05 | Implements N-dimensional iterative proportional fitting to adjust a data matrix so its margins match specified target totals. |
+| [ipfraking](https://ideas.repec.org/c/boc/bocode/s458430.html) | Stata | GPL-3.0-only | 🔴 dormant · 2018-05 | Stata module performing iterative proportional fitting (raking) to calibrate complex survey weights to control totals with trimming and diagnostics. |
 | [ivmodel](https://cran.r-project.org/package=ivmodel) | R | GPL-2.0 | 🔴 dormant · 2023-04 | IV estimation with weak-instrument-robust inference (AR, CLR), power and sensitivity analysis for a single endogenous regressor. |
 | [ivreg](https://cran.r-project.org/package=ivreg) | R | GPL-2.0-or-later | 🟢 active · 2026-03 | Instrumental-variables (2SLS/2SM/2SMM) regression with weak-instrument and endogeneity diagnostics. |
 | [ivreg2](https://ideas.repec.org/c/boc/bocode/s425401.html) | Stata | GPL-3.0 | 🟡 maintained · 2024-08 | Extended IV/2SLS/LIML/GMM estimation with weak-instrument and overidentification diagnostics (Baum, Schaffer & Stillman). |
 | [ivreghdfe](https://github.com/sergiocorreia/ivreghdfe) | Stata | MIT | 🟢 active · 2025-12 | Combines ivreg2 and reghdfe to run IV/2SLS/GMM regressions with many high-dimensional fixed effects. |
 | [kmatch](https://github.com/benjann/kmatch) | Stata | MIT | 🟢 active · 2026-02 | Multivariate-distance and propensity-score matching with entropy balancing, IPW, CEM and regression adjustment. |
 | [lfe](https://cran.r-project.org/package=lfe) | R | Apache-2.0 | 🟡 maintained · 2025-02 | Estimates linear models with multiple high-dimensional group fixed effects (and IV) by transforming away factors before OLS. |
+| [libpysal](https://github.com/pysal/libpysal) | Python | BSD-3-Clause | 🟢 active · 2026-01 | Core PySAL components: spatial weights construction, computational geometry, graphs, and I/O underpinning the spatial-econometrics stack. |
 | [linearmodels](https://github.com/bashtage/linearmodels) | Python | NCSA | 🟢 active · 2025-10 | Panel (fixed/random effects), IV/2SLS-GMM, system and asset-pricing estimators missing from statsmodels. |
+| [localprojections](https://github.com/suahjl/localprojections) | Python | MIT | 🔴 dormant · 2023-09 | Implements Jordà (2005) local-projection impulse responses for single-entity time series and panel data, including threshold/state-dependent variants. |
+| [LocalProjections.jl](https://github.com/junyuan-chen/LocalProjections.jl) | Julia | MIT | 🟡 maintained · 2024-04 | Julia implementation of local-projection methods for impulse-response estimation, including lag-augmented and smoothed local projections. |
+| [locproj](https://ideas.repec.org/c/boc/bocode/s459204.html) | Stata | GPL-3.0-only | 🟢 active · 2026-02 | Stata (SSC) command estimating linear and nonlinear local-projection IRFs for time-series and panel data, supporting IV and quantile-regression variants (Ugarte Ruiz). |
+| [lpirfs](https://github.com/AdaemmerP/lpirfs) | R | GPL-2.0-or-later | 🟢 active · 2025-12 | Estimates linear and nonlinear (state-dependent) impulse responses via Jordà (2005) local projections for time-series and panel data, with identified-shock and IV options. |
 | [marginaleffects](https://cran.r-project.org/package=marginaleffects) | R | GPL-3.0 | 🟢 active · 2026-02 | Computes predictions, marginal effects/slopes, comparisons and marginal means with delta-method or simulation inference for 100+ model classes. |
 | [MatchIt](https://github.com/kosukeimai/MatchIt) | R | GPL-2.0-or-later | 🟢 active · 2025-05 | Unified interface to nearest-neighbor, optimal, full, genetic and coarsened-exact matching for covariate balance in observational studies. |
+| [meta](https://github.com/guido-s/meta) | R | GPL-2.0 | 🟢 active · 2026-05 | Standard meta-analysis methods including fixed/random-effects models, meta-regression, bias tests, and forest/funnel plots. |
+| [meta](https://www.stata.com/manuals/meta.pdf) | Stata | proprietary | 🟢 active · 2026-06 | Stata's built-in meta suite for fixed/random-effects meta-analysis, meta-regression, forest/funnel plots, and small-study-effect tests. |
+| [metabias](https://ideas.repec.org/c/boc/bocode/s404901.html) | Stata | GPL-3.0-only | 🔴 dormant · 2010-12 | Stata module testing for small-study effects / funnel-plot asymmetry (Egger, Begg, Harbord tests) in meta-analysis. |
+| [metafor](https://github.com/wviechtb/metafor) | R | GPL-2.0-or-later | 🟢 active · 2026-05 | Comprehensive R package for conducting meta-analyses, including effect-size computation, fixed/random/mixed-effects models, moderators, and forest/funnel plots. |
+| [metan](https://ideas.repec.org/c/boc/bocode/s456798.html) | Stata | GPL-3.0-only | 🟡 maintained · 2024-07 | Comprehensive Stata module for fixed- and random-effects meta-analysis of binary, continuous, or generic effect estimates with flexible forest plots. |
+| [metareg](https://ideas.repec.org/c/boc/bocode/s446201.html) | Stata | GPL-3.0-only | 🔴 dormant · 2009-01 | Stata module performing random-effects meta-regression on study-level summary data with permutation-test p-values. |
+| [metaSEM](https://github.com/mikewlcheung/metasem) | R | GPL-2.0-or-later | 🟢 active · 2026-05 | Conducts meta-analysis via structural equation modeling (using OpenMx/lavaan), including fixed/random-effects and meta-analytic SEM on correlation matrices. |
+| [mgwr](https://github.com/pysal/mgwr) | Python | BSD-3-Clause | 🟡 maintained · 2024-01 | Calibration, inference and prediction for (multiscale) geographically weighted regression across GLM families with model diagnostics. |
 | [modelsummary](https://cran.r-project.org/package=modelsummary) | R | GPL-3.0 | 🟢 active · 2026-02 | Publication-quality regression and summary tables (and coefficient plots) for many model classes in multiple output formats. |
+| [mvmeta](https://ideas.repec.org/c/boc/bocode/s456970.html) | Stata | GPL-3.0-only | 🔴 dormant · 2022-04 | Stata module for multivariate random-effects meta-analysis and meta-regression on point estimates, variances, and covariances. |
+| [netmeta](https://github.com/guido-s/netmeta) | R | GPL-2.0-or-later | 🟢 active · 2026-05 | Frequentist network meta-analysis for simultaneously comparing multiple treatments across studies, with inconsistency assessment and network graphs. |
+| [network](https://ideas.repec.org/c/boc/bocode/s458319.html) | Stata | GPL-3.0-only | 🔴 dormant · 2018-04 | Stata module for network (mixed-treatment-comparison) meta-analysis using contrast-based multivariate meta-regression with inconsistency checks. |
 | [optmatch](https://cran.r-project.org/package=optmatch) | R | MIT | 🟡 maintained · 2024-09 | Optimal bipartite matching using minimum-cost flow for distance/propensity-score matched designs. |
 | [outreg2](https://ideas.repec.org/c/boc/bocode/s456416.html) | Stata | unverified | 🔴 dormant · 2014-08 | Produces formatted regression-output tables for Word/Excel/LaTeX from Stata estimation results (Roy Wada). |
 | [panelView](https://github.com/xuyiqing/panelView) | R | MIT | 🟡 maintained · 2024-06 | Visualizes treatment status, missingness and outcome dynamics for panel/DiD datasets. |
 | [plm](https://cran.r-project.org/package=plm) | R | GPL-2.0-or-later | 🟢 active · 2025-11 | Comprehensive panel-data econometrics toolkit with fixed/random effects estimators, robust covariances and panel diagnostic tests. |
 | [ppmlhdfe](https://github.com/sergiocorreia/ppmlhdfe) | Stata | MIT | 🟢 active · 2026-01 | Poisson pseudo-maximum-likelihood regression with multiple high-dimensional fixed effects and robust separation handling. |
+| [PracTools](https://cran.r-project.org/package=PracTools) | R | GPL-3.0-only | 🟢 active · 2026-01 | Tools and datasets for designing complex survey samples, computing sample sizes, and constructing/weighting survey samples. |
 | [pretrends](https://github.com/jonathandroth/pretrends) | R | MIT | 🟡 maintained · 2024 | Computes the power of pre-trends tests and visualizes detectable violations of parallel trends in event studies. |
 | [psmatch2](https://ideas.repec.org/c/boc/bocode/s432001.html) | Stata | unverified | 🔴 dormant · 2018-02 | Mahalanobis and propensity-score matching with common-support graphing and covariate-imbalance testing (Leuven & Sianesi). |
+| [psychmeta](https://github.com/psychmeta/psychmeta) | R | GPL-3.0-or-later | 🟡 maintained · 2024-06 | Psychometric meta-analysis toolkit for bare-bones and artifact-corrected meta-analysis of correlations and d-values (Hunter-Schmidt methods). |
+| [puniform](https://github.com/RobbievanAert/puniform) | R | GPL-2.0-or-later | 🟢 active · 2025-12 | Publication-bias-correcting meta-analysis methods (p-uniform / p-uniform*) based on the distribution of conditional p-values. |
 | [pyfixest](https://github.com/s3alfisc/pyfixest) | Python | MIT | 🟢 active · 2026-04 | Fast high-dimensional fixed-effects OLS/IV/Poisson regression in Python following fixest syntax, with clustered and wild-bootstrap inference. |
+| [PyMARE](https://github.com/neurostuff/PyMARE) | Python | MIT | 🟡 maintained · 2025-04 | Python meta-analysis and regression engine providing mixed-effects meta-regression estimators and effect-size combination. |
+| [pysal](https://github.com/pysal/pysal) | Python | BSD-3-Clause | 🟢 active · 2026-01 | Meta-package bundling the Python Spatial Analysis Library submodules (libpysal, esda, spreg, mgwr, giddy, etc.) for spatial analysis and econometrics. |
+| [PySVAR](https://github.com/fangli-DX3906/PySVAR) | Python | unverified | 🟡 maintained · 2024-06 | Small Python package for SVAR estimation and impulse responses across recursive (Cholesky), sign-restriction and optimization-based identification schemes. |
 | [pysyncon](https://github.com/sdfordham/pysyncon) | Python | MIT | 🟡 maintained · 2025-01 | Python implementation of classic, robust, augmented and penalized synthetic control plus synthetic DiD. |
 | [pysynthdid](https://github.com/MasaAsami/pysynthdid) | Python | Apache-2.0 | 🔴 dormant · 2023 | Python implementation of the synthetic difference-in-differences (SDID) estimator. |
+| [PythonMeta](https://pypi.org/project/PythonMeta/) | Python | GPL-3.0-only | 🔴 dormant · 2021-11 | Python module for meta-analysis in evidence-based-medicine systematic reviews, with fixed/random-effects pooling and forest/funnel plots. |
+| [quantipy3](https://github.com/Quantipy/quantipy3) | Python | MIT | 🟢 active · 2026-04 | Python 3 survey-data processing and analysis toolkit handling multiple-choice data, metadata, and case weighting (including raking). |
 | [rddensity](https://github.com/rdpackages/rddensity) | R · Python · Stata | GPL-3.0 | 🟢 active · 2025 | Manipulation (density-discontinuity) testing for RD designs using local polynomial density estimators (McCrary-style sorting test). |
 | [rdlocrand](https://github.com/rdpackages/rdlocrand) | R · Python · Stata | GPL-3.0 | 🟢 active · 2026-05 | Local-randomization methods for estimation, inference and window selection in regression discontinuity designs. |
 | [rdmulti](https://github.com/rdpackages/rdmulti) | R · Python · Stata | GPL-3.0 | 🟡 maintained · 2025 | RD estimation and inference with multiple cutoffs or multiple running variables/scores. |
@@ -138,13 +183,43 @@ Curated, license- and maintenance-aware index of **software tools** for automate
 | [reghdfe](https://github.com/sergiocorreia/reghdfe) | Stata | MIT | 🟢 active · 2026-01 | Linear regression with multiple high-dimensional fixed effects and clustered/robust standard errors in Stata. |
 | [RegressionTables.jl](https://github.com/jmboehm/RegressionTables.jl) | Julia | MIT | 🟢 active · 2025-10 | Generates publication-quality regression tables (esttab/stargazer analog) for Julia models. |
 | [regsensitivity](https://github.com/mattmasten/regsensitivity) | Stata | MIT | 🟡 maintained | Regression sensitivity analysis (Masten & Poirier breakdown frontiers) quantifying robustness to omitted-variable bias. |
+| [rgeoda](https://github.com/GeoDaCenter/rgeoda) | R | GPL-2.0-or-later | 🟢 active · 2026-02 | R interface to libgeoda/GeoDa for ESDA, LISA spatial autocorrelation, spatial clustering and regionalization. |
+| [RoBMA](https://github.com/FBartos/RoBMA) | R | GPL-3.0-only | 🟢 active · 2026-06 | Robust Bayesian model-averaged meta-analysis that adjusts for publication bias via selection models and PET-PEESE ensembles. |
+| [robumeta](https://github.com/zackfisher/robumeta) | R | GPL-2.0-only | 🔴 dormant · 2023-03 | Robust variance estimation (RVE) meta-regression with large- and small-sample estimators for dependent effect sizes without distributional assumptions. |
+| [rstanarm](https://github.com/stan-dev/rstanarm) | R | GPL-3.0-only | 🟢 active · 2026-06 | Bayesian applied regression modeling with Stan using familiar R formula syntax, commonly used to fit the multilevel models in MRP. |
+| [S2sls](https://cran.r-project.org/package=S2sls) | R | GPL-2.0-or-later | 🔴 dormant · 2016-08 | Minimal package fitting a spatial-lag instrumental-variable regression by spatial two-stage least squares. |
+| [samplics](https://github.com/samplics-org/samplics) | Python | MIT | 🟢 active · 2026-03 | Design-based analysis of complex survey data covering sample selection, weighting/calibration, estimation, and small area estimation. |
+| [sampling](https://cran.r-project.org/package=sampling) | R | GPL-2.0-or-later | 🟡 maintained · 2025-07 | Provides survey sampling selection algorithms and calibration/weight estimators including variance estimation for complex designs. |
 | [sandwich](https://cran.r-project.org/package=sandwich) | R | GPL-2.0-or-later | 🟡 maintained · 2024-09 | Object-oriented model-robust covariance matrix estimators (HC, HAC, clustered, panel-corrected). |
 | [scpi](https://github.com/nppackages/scpi) | R · Python · Stata | MIT | 🟢 active · 2025 | Estimation, prediction-interval inference and graphics for synthetic control (scest/scpi), including multiple treated units and staggered adoption. |
 | [sdid](https://github.com/Daniel-Pailanir/sdid) | Stata | GPL-3.0 | 🟢 active · 2025 | Synthetic difference-in-differences estimation with inference and graphics for Stata (Arkhangelsky et al. 2021). |
 | [sensemakr](https://github.com/carloscinelli/sensemakr) | R · Python · Stata | GPL-3.0 | 🟡 maintained · 2024-07 | Sensitivity analysis to unobserved confounders for OLS via robustness values and contour plots (Cinelli & Hazlett). |
+| [spaMM](https://cran.r-project.org/package=spaMM) | R | CeCILL-2.0 | 🟢 active · 2026-04 | Fits mixed-effect models with spatially correlated random effects (geostatistical and Markov-random-field GLMMs) via Laplace/h-likelihood approximations. |
+| [SpatialDependence.jl](https://github.com/javierbarbero/SpatialDependence.jl) | Julia | MIT | 🟢 active · 2025-12 | Julia package for spatial weights matrices, spatial-autocorrelation tests (global/local Moran, Geary, Getis-Ord, LISA) and choropleth ESDA. |
+| [spatialEco](https://github.com/jeffreyevans/spatialEco) | R | GPL-3.0-only | 🟢 active · 2026-05 | Utilities for spatial data manipulation, sampling and modelling including autologistic models, spatial smoothing and landscape/point-pattern metrics. |
+| [spatialreg](https://github.com/r-spatial/spatialreg) | R | GPL-2.0-only | 🟢 active · 2026-03 | Estimates spatial cross-sectional lattice/areal models (SAR, SEM, SAC, Durbin) by maximum likelihood, spatial 2SLS and GMM following Cliff-Ord and Kelejian-Prucha. |
+| [spdep](https://github.com/r-spatial/spdep) | R | GPL-2.0-or-later | 🟢 active · 2026-05 | Builds spatial weights matrices from contiguities/distances and computes spatial-autocorrelation tests (Moran's I, Geary's C, Getis-Ord, local LISA). |
+| [spglm](https://github.com/pysal/spglm) | Python | BSD-3-Clause | 🔴 dormant · 2023-10 | Sparse-compatible generalized linear models (Gaussian, Poisson, logistic) serving as the estimation base for PySAL's spint and GWR modules. |
+| [sphet](https://github.com/gpiras/sphet) | R | GPL-2.0-only | 🟡 maintained · 2024-12 | Fits Cliff-Ord spatial autoregressive models with heteroskedastic innovations via GMM/IV, including spatial HAC standard errors. |
+| [spint](https://github.com/pysal/spint) | Python | BSD-3-Clause | 🔴 dormant · 2020-09 | Calibrates gravity-type spatial interaction models (unconstrained and production/attraction-constrained Poisson) via entropy maximization. |
+| [splm](https://cran.r-project.org/package=splm) | R | GPL-2.0-only | 🟡 maintained · 2023-12 | Maximum-likelihood and GM estimation plus diagnostic testing of fixed/random-effects econometric models for spatial panel data (Millo & Piras). |
+| [spmoran](https://github.com/dmuraka/spmoran) | R | GPL-2.0-or-later | 🟡 maintained · 2024-12 | Estimates Moran-eigenvector spatial/spatio-temporal regression models with spatially varying coefficients for Gaussian and non-Gaussian data. |
+| [sppack (spreg/spivreg/spmat)](https://ideas.repec.org/c/boc/bocode/s457245.html) | Stata | GPL-3.0-only | 🔴 dormant · 2018-12 | Community Stata (SSC) precursor to official Sp: builds spatial-weighting matrices (spmat) and fits SAR/SEM/SAC by ML and GS2SLS (spreg, spivreg) by Drukker, Peng, Prucha & Raciborski. |
+| [spreg](https://github.com/pysal/spreg) | Python | BSD-3-Clause | 🟢 active · 2026-05 | PySAL spatial econometric regression: OLS/2SLS with spatial lag and error (SAR/SEM/SARAR/Durbin), GM/ML estimators, panel and regimes models. |
+| [spsur](https://github.com/rominsal/spsur) | R | GPL-3.0-only | 🟢 active · 2025-09 | Tests and estimates spatial Seemingly Unrelated Regression (SUR-SLM/SEM/SDM/SLX) systems by maximum likelihood and three-stage least squares. |
+| [sptotal](https://github.com/highamm/sptotal) | R | GPL-2.0-or-later | 🔴 dormant · 2023-09 | Finite-population block kriging to predict totals and weighted sums from spatially autocorrelated sample data (Ver Hoef 2008). |
+| [sreweight](https://ideas.repec.org/c/boc/bocode/s457312.html) | Stata | GPL-3.0-only | 🔴 dormant · 2014-01 | Stata module that reweights survey microdata to external aggregate totals using Deville-Sarndal calibration methods. |
+| [srvyr](https://github.com/gergness/srvyr) | R | GPL-2.0-or-later | 🟢 active · 2026-03 | Provides dplyr-like syntax for computing summary statistics on complex survey data by wrapping the survey package. |
 | [stackedev](https://github.com/joshbleiberg/stackedev) | Stata | unverified | 🟡 maintained | Stacked event-study estimator (Cengiz et al.) that builds clean cohort-vs-never-treated stacks to avoid bad TWFE comparisons. |
 | [staggered](https://github.com/jonathandroth/staggered) | R | unverified | 🟢 active · 2025-12 | Efficient estimators (Roth & Sant'Anna) for difference-in-differences settings with randomized/as-good-as-random treatment timing. |
+| [Stata lpirf / ivlpirf](https://www.stata.com/manuals/tslpirf.pdf) | Stata | proprietary | 🟢 active · 2026-01 | Official Stata (18+) commands estimating Jordà local-projection impulse-response functions, with ivlpirf adding instrumental-variables identification. |
+| [Stata sp (spregress/spxtregress/spivregress)](https://www.stata.com/manuals/sp.pdf) | Stata | proprietary | 🟢 active · 2026-01 | Official Stata Sp suite fitting cross-sectional and panel spatial autoregressive models (SAR/SEM/SAC, with endogenous covariates) by ML and GS2SLS. |
+| [Stata var / svar / varbasic](https://www.stata.com/manuals/tsvar.pdf) | Stata | proprietary | 🟢 active · 2026-01 | Official Stata time-series suite estimating reduced-form and structural VARs (var, svar, varbasic) with IRF/FEVD via the irf subsystem. |
 | [statsmodels](https://github.com/statsmodels/statsmodels) | Python | BSD-3-Clause | 🟢 active · 2025-12 | General-purpose statistical modeling library (OLS/GLM, robust/clustered SE, panel and time-series tools); a foundation rather than a quasi-experimental-specific package. |
+| [survey](https://cran.r-project.org/package=survey) | R | GPL-2.0-or-later | 🟢 active · 2026-02 | Analysis of complex survey samples including design-based summary statistics, generalized linear models, calibration and raking of survey weights. |
+| [svars](https://github.com/alexanderlange53/svars) | R | MIT | 🟡 maintained · 2025-10 | Data-driven identification of structural VARs (changes in volatility, GARCH, independent-component analysis, non-Gaussian ML) with IRFs and bootstrap inference. |
+| [svy](https://www.stata.com/manuals/svy.pdf) | Stata | proprietary | 🟢 active · 2026-06 | Stata's built-in survey-data prefix and estimators that account for sampling weights, stratification, and clustering in complex survey designs. |
+| [svyweight](https://github.com/mainwaringb/svyweight) | R | GPL-3.0-only | 🟢 active · 2026-03 | Quickly and flexibly applies rake weighting to survey data, extending the survey package's weighting interface to correct for non-response. |
 | [Synth](https://cran.r-project.org/package=Synth) | R | GPL-2.0-or-later | 🟢 active · 2026-04 | Classic synthetic control method (Abadie, Diamond & Hainmueller) for comparative case studies with a single treated unit. |
 | [synth](https://ideas.repec.org/c/boc/bocode/s457334.html) | Stata | unverified | 🟡 maintained | Original Stata implementation of the synthetic control method (Abadie, Diamond & Hainmueller). |
 | [synth_runner](https://github.com/bquistorff/synth_runner) | Stata | unverified | 🔴 dormant · 2017-08 | Automates running synth across treated units/placebos to perform inference and produce synthetic-control plots. |
@@ -152,11 +227,20 @@ Curated, license- and maintenance-aware index of **software tools** for automate
 | [synthdid](https://github.com/synth-inference/synthdid) | R | BSD-3-Clause | 🟡 maintained · 2024 | Reference R implementation of the synthetic difference-in-differences (SDID) estimator of Arkhangelsky et al. (2021). |
 | [synthdid.py](https://github.com/d2cml-ai/synthdid.py) | Python | MIT | 🟡 maintained · 2025 | Python port of synthetic DiD supporting SDID/SC/DiD estimators with bootstrap, placebo and jackknife inference. |
 | [SyntheticControlMethods](https://github.com/OscarEngelbrektson/SyntheticControlMethods) | Python | Apache-2.0 | 🔴 dormant · 2023 | Python package for classic and Differenced (robust) synthetic control estimation with placebo-based inference. |
+| [tsDyn](https://github.com/MatthieuStigler/tsDyn) | R | GPL-2.0-or-later | 🟡 maintained · 2024-10 | Nonlinear and regime-switching time-series models including linear VAR/VECM and threshold TVAR/TVECM with associated cointegration tests. |
+| [varexternalinstrument](https://github.com/angusmoore/varexternalinstrument) | R | MIT | 🔴 dormant · 2019-07 | Identifies VAR impulse responses using a high-frequency external instrument (proxy-SVAR / Gertler-Karadi), extending models fit with the vars package. |
+| [vars](https://github.com/bpfaff/vars) | R | GPL-2.0-or-later | 🟡 maintained · 2024-03 | Estimation, lag selection, diagnostics, forecasting, Granger causality, IRFs and FEVD for VAR models plus SVAR and SVEC estimation (Pfaff). |
+| [VARsignR](https://github.com/chrstdanne/VARsignR) | R | GPL-3.0-only | 🔴 dormant · 2015-12 | Identifies structural shocks in Bayesian VARs via sign restrictions (Uhlig rejection and penalty, Rubio-Ramirez QR, Fry-Pagan median target). |
 | [Vcov.jl](https://github.com/FixedEffects/Vcov.jl) | Julia | unverified | 🟢 active · 2026-03 | Provides robust and clustered variance-covariance estimators as a backend for Julia regression packages. |
+| [VectorAutoregressions.jl](https://github.com/lucabrugnolini/VectorAutoregressions.jl) | Julia | MIT | 🔴 dormant · 2022-06 | Julia VAR/BVAR/FAVAR estimation with IRF identification (Cholesky, long-run, sign restrictions) and asymptotic/bootstrap confidence bands. |
 | [weakiv](https://github.com/kfinlay/weakiv) | Stata | unverified | 🔴 dormant | Weak-instrument-robust tests and confidence sets (AR, CLR, K) for IV/probit/tobit models (Finlay, Magnusson & Schaffer). |
+| [weightipy](https://github.com/kaitumisuuringute-keskus/Weightipy) | Python | MIT | 🟢 active · 2026-02 | A modern, lightweight RIM (iterative raking) library for weighting survey/people data, a fork-style successor to quantipy's weighting. |
 | [WeightIt](https://cran.r-project.org/package=WeightIt) | R | GPL-2.0-or-later | 🟢 active · 2026-04 | Generates balancing weights (propensity scores, entropy balancing, CBPS, energy balancing) for binary, multi-category and continuous treatments. |
+| [weightr](https://cran.r-project.org/package=weightr) | R | GPL-2.0-or-later | 🔴 dormant · 2019-07 | Estimates the Vevea and Hedges (1995) weight-function model to assess and correct for publication bias in meta-analysis. |
+| [weights](https://cran.r-project.org/package=weights) | R | GPL-2.0-or-later | 🟡 maintained · 2025-06 | Computes weighted descriptive statistics and tests (weighted correlations, t-tests, chi-squared) plus weighted graphics for survey data. |
 | [wildboottest](https://github.com/s3alfisc/wildboottest) | Python | MIT | 🟡 maintained · 2024-08 | Fast wild cluster bootstrap algorithms for inference on OLS coefficients in Python. |
 | [WildBootTests.jl](https://github.com/droodman/WildBootTests.jl) | Julia | unverified | 🟡 maintained | Julia engine for fast wild (cluster) bootstrap tests and confidence sets, used as the backend for boottest and fwildclusterboot. |
+| [xsmle](https://ideas.repec.org/c/boc/bocode/s457610.html) | Stata | unverified | 🔴 dormant · 2017-01 | Stata (SSC) command estimating fixed/random-effects spatial panel models (SAR, SEM, Durbin, dynamic) by quasi-maximum likelihood with direct/indirect/total effects (Belotti, Hughes & Piano Mortari). |
 
 ## Causal discovery / structure learning (25)
 

@@ -1,0 +1,36 @@
+name: Check tools links
+
+# Network-bound drift guard for tools/tools.json. Pings each tool's primary URL
+# (and homepage, as a non-fatal warning) so a maintainer pass can re-verify or
+# retire entries whose upstream moved. Not part of the blocking validate gate.
+
+on:
+  schedule:
+    - cron: "0 8 1 * *"  # 08:00 UTC on the 1st of each month
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  tools-links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Check tools-catalog links
+        run: make tools-links
+
+      - name: Upload tools link-check report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: tools-link-check
+          path: catalog/tools-link-check.json
