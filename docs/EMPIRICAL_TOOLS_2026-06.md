@@ -1,11 +1,15 @@
 # Empirical-Tools Catalog — 2026-06
 
-This pass added a new first-party module, [`tools/`](../tools/), cataloging **200
+This pass added a new first-party module, [`tools/`](../tools/), cataloging **251
 software tools** for automated empirical research and causal inference — a layer
 distinct from the agent **skills** under [`skills/`](../skills/). A *skill* is an
 instruction pack an agent reads; a *tool* is the external software or service an
 agent (or researcher) actually invokes. The two were deliberately separated so the
 new index does not dilute the semantics of the skills catalog.
+
+> **Updated 2026-06-04:** added the **51-entry `research-agent` category**
+> (autonomous research & data-science agents) in a second wave — superseding the
+> "deferred" note that originally appeared below.
 
 Source of truth: [`tools/tools.json`](../tools/tools.json). Browsable view:
 [`tools/CATALOG.md`](../tools/CATALOG.md) (generated). Both are validated and kept
@@ -22,17 +26,25 @@ Three categories were requested, plus two adjacent support categories:
 | `econometrics-library` | 86 | Panel FE, DiD (incl. modern/staggered), event study, RDD, IV, synthetic control/SDID, matching & weighting, sensitivity — across R / Python / Stata / Julia |
 | `mcp-server` | 48 | Stats-execution MCPs (StatsPAI, Stata, R, Jupyter) + data-access MCPs (FRED, World Bank, IMF, OECD, Eurostat, Census, BEA, BLS, SEC EDGAR, OpenAlex, Semantic Scholar, PubMed, Zotero, arXiv) |
 | `causal-discovery` | 25 | Structure learning: causal-learn, Tetrad/py-tetrad, gCastle, CDT, tigramite (PCMCI), LiNGAM, NOTEARS/DAGMA, pcalg, bnlearn, pgmpy |
+| `research-agent` | 51 | Autonomous research & data-science agents: AI-Scientist, data-to-paper, Agent Laboratory, RD-Agent, AI-Researcher, STORM, PaperQA2, gpt-researcher, DeepAnalyze, MetaGPT (Data Interpreter), Biomni, AIDE, AutoGluon-Assistant |
 | `benchmark-dataset` | 9 | Known-ground-truth datasets/simulators: causaldata, IHDP/Twins, ACIC competition data, RealCause, JustCause, Tübingen pairs, bnlearn network repository |
 
-Coverage signals (snapshot, June 2026): **98 Python · 65 R · 36 Stata · 10 TypeScript
-· 7 Julia**; **117 active · 59 maintained · 24 dormant**; **121 permissive · 49 copyleft
-· 30 unverified/unmapped** licenses. Every record is `verified: true` (its repo was
-fetched during curation to confirm license and activity).
+Coverage signals (snapshot, June 2026): **147 Python · 65 R · 36 Stata · 16 TypeScript
+· 7 Julia**; **142 active · 75 maintained · 34 dormant**; **161 permissive · 50 copyleft
+· 37 unverified/unmapped · 3 non-OSI/custom** licenses. Every record is `verified: true`
+(its repo was fetched during curation to confirm license and activity).
 
-**Deliberately deferred:** end-to-end *autonomous research agents* (AI-Scientist,
-data-to-paper, AgentLaboratory, DeepAnalyze, …). These are systems/frameworks rather
-than tools/libraries; they remain listed in the README "Multi-agent systems" section
-and can become a sixth category (`research-agent`) in a future pass if wanted.
+**Second wave (2026-06-04) — `research-agent`:** 51 end-to-end *autonomous research &
+data-science agents*, split across two verified sweeps (AI-scientist / paper-writing
+systems, and data-science / deep-research agents) then de-duplicated. **License caution:**
+SakanaAI's **AI-Scientist** and **AI-Scientist-v2** now ship a custom *AI Scientist Source
+Code License v1.0* (Responsible-AI behavioral-use, non-OSI); **Coscientist** is Apache-2.0
+**+ Commons Clause** (no commercial use); and 7 agent repos ship no `LICENSE` file (recorded
+`unverified`). These are catalogued (indexed, not redistributed) with the license recorded
+verbatim. Pure general-purpose agents with only a data sub-module (OpenManus, AutoAgent,
+JoyAgent) and closed/hosted systems (Google AI co-scientist, Intology Zochi, Autoscience
+Carl, FutureHouse hosted platform) were excluded; their open components (PaperQA2, Aviary,
+Robin) are included.
 
 ## Method
 
@@ -85,11 +97,12 @@ inclusion is not an endorsement of their security. The existing
 - Snapshots (`stars_approx`, `last_activity`, `maintained`) will age; a periodic
   re-verification pass should refresh them and re-bucket any tool whose status changed.
 
-## Backlog (not added this pass)
+## Backlog (not added yet)
 
-- **Autonomous research agents** as a sixth category (see "Deliberately deferred").
+- ~~Autonomous research agents as a sixth category~~ — **done 2026-06-04** (`research-agent`, 51 entries).
 - **Spatial econometrics, local projections / impulse responses, MRP / survey weighting,
   meta-analysis** tooling — present as functions inside broader packages already listed,
   but a few dedicated libraries (e.g. `spdep`, `lpirfs`, `metafor`) could be added.
 - **Periodic link/license re-check** for the catalog, analogous to the skills
-  external-link workflow.
+  external-link workflow — especially important for the fast-moving `research-agent`
+  entries (stars/activity/licenses change quickly).

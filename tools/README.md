@@ -16,22 +16,23 @@
 
 <!-- BEGIN GENERATED: summary (scripts/build-tools-catalog.py) -->
 
-**200 tools** across 5 categories.
+**251 tools** across 6 categories.
 
 | Category | Count |
 |---|---:|
 | Causal-inference & treatment-effect libraries | 32 |
 | Econometrics & quasi-experimental libraries | 86 |
 | Causal discovery / structure learning | 25 |
+| Autonomous research & data-science agents | 51 |
 | MCP servers (data & stats execution) | 48 |
 | Benchmarks & datasets | 9 |
 
 | By language | Tools | | By maintenance | Tools | | By license | Tools |
 |---|---:|:-:|---|---:|:-:|---|---:|
-| Python | 98 |  | 🟢 active | 117 |  | permissive (MIT/BSD/Apache/…) | 121 |
-| R | 65 |  | 🟡 maintained | 59 |  | copyleft (GPL/AGPL/LGPL) | 49 |
-| Stata | 36 |  | 🔴 dormant | 24 |  | unverified / unmapped | 30 |
-| TypeScript | 10 |  |  |  |  |  |  |
+| Python | 147 |  | 🟢 active | 142 |  | permissive (MIT/BSD/Apache/…) | 161 |
+| R | 65 |  | 🟡 maintained | 75 |  | copyleft (GPL/AGPL/LGPL) | 50 |
+| Stata | 36 |  | 🔴 dormant | 34 |  | unverified / unmapped | 37 |
+| TypeScript | 16 |  |  |  |  | non-OSI / custom | 3 |
 | Julia | 7 |  |  |  |  |  |  |
 | C++ | 5 |  |  |  |  |  |  |
 | Java | 3 |  |  |  |  |  |  |
@@ -45,18 +46,14 @@
 
 ## 收录范围 / Scope
 
-本模块当前覆盖三大类（按你在 issue 里勾选的范围）：
+本模块当前覆盖 6 个类目：
 
 1. **因果推断库 / 处理效应库（`causal-inference-library`）** — DoWhy、EconML、CausalML、DoubleML、CausalPy、causallib、grf、CATENets、TMLE 系列、Mendelian randomization 等。
 2. **计量 / 准实验库（`econometrics-library`）** — 面板/固定效应、DiD（含 staggered/现代 DiD）、事件研究、断点回归 RDD、工具变量 IV、合成控制 SCM/SDID、匹配/加权、敏感性分析；覆盖 R / Python / Stata / Julia（fixest、did、HonestDiD、rdrobust、synthdid、reghdfe、csdid、sdid、pyfixest、linearmodels、FixedEffectModels.jl 等）。
-3. **MCP 服务（`mcp-server`）** — 供 agent 直接调用的统计执行与数据获取服务（StatsPAI、stata-mcp、R/Jupyter MCP、FRED、World Bank、IMF、OECD、Eurostat、Census、BEA、BLS、SEC EDGAR、OpenAlex、Semantic Scholar、PubMed、Zotero、arXiv 等）。
-
-并附两类辅助资源：
-
-4. **因果发现 / 结构学习（`causal-discovery`）** — causal-learn、Tetrad/py-tetrad、gCastle、CDT、tigramite(PCMCI)、LiNGAM、NOTEARS/DAGMA、pcalg、bnlearn、pgmpy 等。
-5. **基准与数据集（`benchmark-dataset`）** — causaldata、IHDP/Twins、ACIC 竞赛数据、RealCause、JustCause、Tübingen cause-effect pairs、bnlearn 网络库等，用于评估因果方法（已知 ground truth）。
-
-**暂未纳入（留作下一波）：** 端到端"自动化研究 Agent"（如 AI-Scientist、data-to-paper、AgentLaboratory 等）。它们更接近"系统/框架"而非"工具/库"，可在确认后单列第 6 类。
+3. **因果发现 / 结构学习（`causal-discovery`）** — causal-learn、Tetrad/py-tetrad、gCastle、CDT、tigramite(PCMCI)、LiNGAM、NOTEARS/DAGMA、pcalg、bnlearn、pgmpy 等。
+4. **自动化研究 / 数据科学 Agent（`research-agent`）** — 端到端自动做科研/数据分析的系统：AI-Scientist、data-to-paper、Agent Laboratory、RD-Agent、AI-Researcher、STORM、PaperQA2、gpt-researcher、DeepAnalyze、MetaGPT(Data Interpreter)、Biomni 等。⚠️ 许可注意：SakanaAI AI-Scientist 用自定义 Responsible-AI 许可（非 OSI），部分仓库无 LICENSE（标 `unverified`）——用前务必到上游确认授权。
+5. **MCP 服务（`mcp-server`）** — 供 agent 直接调用的统计执行与数据获取服务（StatsPAI、stata-mcp、R/Jupyter MCP、FRED、World Bank、IMF、OECD、Eurostat、Census、BEA、BLS、SEC EDGAR、OpenAlex、Semantic Scholar、PubMed、Zotero、arXiv 等）。
+6. **基准与数据集（`benchmark-dataset`）** — causaldata、IHDP/Twins、ACIC 竞赛数据、RealCause、JustCause、Tübingen cause-effect pairs、bnlearn 网络库等，用于评估因果方法（已知 ground truth）。
 
 ---
 
@@ -80,13 +77,13 @@
 |---|---|
 | `id` | 稳定 slug（由 name 生成，唯一） |
 | `name` | 工具名 |
-| `category` | `causal-inference-library` / `econometrics-library` / `causal-discovery` / `mcp-server` / `benchmark-dataset` |
+| `category` | `causal-inference-library` / `econometrics-library` / `causal-discovery` / `research-agent` / `mcp-server` / `benchmark-dataset` |
 | `subcategory` | 方法标签（如 `did`、`rdd`、`uplift`、`time-series`、`economic-data` …） |
 | `languages` | `python` / `r` / `stata` / `julia` / `typescript` / … |
 | `license` | SPDX 标识；`unverified` = 上游无正式 LICENSE（多见于 Stata SSC 包）；`NOASSERTION` = GitHub 检测到但无法映射 |
 | `owner_repo` · `url` · `homepage` | 来源定位 |
 | `stars_approx` · `last_activity` · `maintained` | 维护信号快照（`active` ≈ 近半年有提交 · `maintained` ≈ 近两年 · `dormant` ≈ 更早） |
-| `automation_level` | `library` / `framework` / `mcp-server` / `dataset` |
+| `automation_level` | `library` / `framework` / `application` / `mcp-server` / `dataset` |
 | `data_source` | 仅 MCP 条目：它服务的数据源 |
 | `verified` | 收录时是否实际访问仓库核实过 license/活跃度 |
 
@@ -97,7 +94,7 @@
 收录门槛（与 [`../docs/SKILL_SUBMISSION_GUIDE.md`](../docs/SKILL_SUBMISSION_GUIDE.md) 对齐）：开源且可独立运行/检视；与实证研究、因果推断、数据获取相关；有可用的来源 URL。
 
 - **快照性质**：`stars_approx` / `last_activity` 为收录当次（2026-06）的时间点快照，会过时——依赖前请到上游确认。
-- **license 核实**：每条都已实际访问仓库核实（`verified: true`）；约 30 条标 `unverified`/`NOASSERTION`，包括无正式 LICENSE 文件的 Stata SSC 包（请按各自 RePEc/SSC 声明使用）与 GitHub 未能映射许可证的部分 MCP 仓库——依赖前请到上游确认授权。
+- **license 核实**：每条都已实际访问仓库核实（`verified: true`）。约 37 条标 `unverified`/`NOASSERTION`（无正式 LICENSE 的 Stata SSC 包、未声明许可证的部分 MCP/agent 仓库）；另有 3 条**非 OSI/自定义许可**——SakanaAI **AI-Scientist / v2**（自定义 Responsible-AI 行为约束许可）与 **Coscientist**（Apache-2.0 + Commons Clause，禁商用）。依赖前务必到上游确认授权。
 - **收录 ≠ 背书**：本目录不对第三方工具的正确性、安全性或适用性作保证。
 
 ---

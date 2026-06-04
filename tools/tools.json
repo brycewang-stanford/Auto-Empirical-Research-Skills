@@ -4408,6 +4408,1190 @@
       ],
       "url": "https://github.com/54yyyu/zotero-mcp",
       "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "End-to-end autonomous research workflow with literature-review, experimentation, and report-writing phases (and AgentRxiv shared-preprint collaboration) to turn a human research idea into a paper plus code.",
+      "homepage": "https://agentlaboratory.github.io/",
+      "id": "agent-laboratory",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2025-08",
+      "license": "MIT",
+      "maintained": "maintained",
+      "name": "Agent Laboratory",
+      "owner_repo": "SamuelSchmidgall/AgentLaboratory",
+      "stars_approx": 5700,
+      "subcategory": [
+        "end-to-end",
+        "paper-generation",
+        "literature-review",
+        "experiment-automation"
+      ],
+      "url": "https://github.com/SamuelSchmidgall/AgentLaboratory",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "An adaptive multi-agent framework (Google ADK + Claude Agent SDK) that separates planning from execution with continuous validation to complete end-to-end data-science tasks.",
+      "homepage": null,
+      "id": "agentic-data-scientist",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2026-05",
+      "license": "MIT",
+      "maintained": "active",
+      "name": "Agentic Data Scientist",
+      "owner_repo": "K-Dense-AI/agentic-data-scientist",
+      "stars_approx": 647,
+      "subcategory": [
+        "data-science",
+        "eda",
+        "end-to-end"
+      ],
+      "url": "https://github.com/K-Dense-AI/agentic-data-scientist",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "A library of specialized LLM agents (data cleaning, EDA, feature engineering, SQL, H2O AutoML, visualization) orchestrated by a supervisor to automate common data-science tasks.",
+      "homepage": null,
+      "id": "ai-data-science-team",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2025-12",
+      "license": "MIT",
+      "maintained": "active",
+      "name": "AI Data Science Team",
+      "owner_repo": "business-science/ai-data-science-team",
+      "stars_approx": 5300,
+      "subcategory": [
+        "data-science",
+        "eda",
+        "automl",
+        "end-to-end"
+      ],
+      "url": "https://github.com/business-science/ai-data-science-team",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "Fully autonomous research system (NeurIPS 2025) that runs the whole pipeline from literature review and idea generation through algorithm implementation to manuscript writing, primarily for AI/ML research.",
+      "homepage": "https://novix.science/chat",
+      "id": "ai-researcher",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2025-10",
+      "license": "unverified",
+      "maintained": "maintained",
+      "name": "AI-Researcher",
+      "owner_repo": "HKUDS/AI-Researcher",
+      "stars_approx": 5400,
+      "subcategory": [
+        "end-to-end",
+        "paper-generation",
+        "literature-review",
+        "experiment-automation",
+        "idea-generation",
+        "domain-ml"
+      ],
+      "url": "https://github.com/HKUDS/AI-Researcher",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "Tree-search ML-engineering agent that autonomously drafts, debugs, and benchmarks code to maximize a user-defined metric, reaching strong Kaggle/MLE-bench performance. (Overlaps with the data-science agent bucket.)",
+      "homepage": "https://www.aide.ml/",
+      "id": "aide-aideml",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2026-05",
+      "license": "MIT",
+      "maintained": "active",
+      "name": "AIDE (aideml)",
+      "owner_repo": "WecoAI/aideml",
+      "stars_approx": 1300,
+      "subcategory": [
+        "experiment-automation",
+        "code-generation",
+        "domain-ml",
+        "automl",
+        "end-to-end"
+      ],
+      "url": "https://github.com/WecoAI/aideml",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "A modular multi-agent AI data-scientist platform (DSPy-based) automating cleaning, statistical analysis, scikit-learn modeling, and Plotly visualization.",
+      "homepage": "https://www.autoanalyst.ai/",
+      "id": "auto-analyst",
+      "languages": [
+        "typescript",
+        "python"
+      ],
+      "last_activity": "2026-05",
+      "license": "MIT",
+      "maintained": "active",
+      "name": "Auto-Analyst",
+      "owner_repo": "FireBird-Technologies/Auto-Analyst",
+      "stars_approx": 700,
+      "subcategory": [
+        "data-science",
+        "eda",
+        "automl",
+        "end-to-end"
+      ],
+      "url": "https://github.com/FireBird-Technologies/Auto-Analyst",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "A cost-efficient open Deep Research alternative (built on the AutoAgent framework) that autonomously gathers and synthesizes web information; strong on GAIA.",
+      "homepage": null,
+      "id": "auto-deep-research",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2025-02",
+      "license": "MIT",
+      "maintained": "maintained",
+      "name": "Auto-Deep-Research",
+      "owner_repo": "HKUDS/Auto-Deep-Research",
+      "stars_approx": 1600,
+      "subcategory": [
+        "deep-research"
+      ],
+      "url": "https://github.com/HKUDS/Auto-Deep-Research",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "A multi-agent system that transforms raw multimodal data (tabular, image, text, audio) into trained ML solutions end-to-end with zero human intervention, using MCTS-guided code generation over AutoGluon.",
+      "homepage": null,
+      "id": "autogluon-assistant-mlzero",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2026-03",
+      "license": "Apache-2.0",
+      "maintained": "active",
+      "name": "AutoGluon Assistant (MLZero)",
+      "owner_repo": "autogluon/autogluon-assistant",
+      "stars_approx": 285,
+      "subcategory": [
+        "automl",
+        "end-to-end",
+        "multimodal"
+      ],
+      "url": "https://github.com/autogluon/autogluon-assistant",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "A multi-agent framework with five cooperating agents that autonomously complete Kaggle tabular competitions across six pipeline phases.",
+      "homepage": null,
+      "id": "autokaggle",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2024-12",
+      "license": "Apache-2.0",
+      "maintained": "maintained",
+      "name": "AutoKaggle",
+      "owner_repo": "multimodal-art-projection/AutoKaggle",
+      "stars_approx": 303,
+      "subcategory": [
+        "automl",
+        "eda",
+        "end-to-end"
+      ],
+      "url": "https://github.com/multimodal-art-projection/AutoKaggle",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "An adaptive, knowledge-grounded data-science agent using an expert knowledge base plus agentic tree search to build ML pipelines (beats AIDE on MLE-bench).",
+      "homepage": null,
+      "id": "automind",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2025-10",
+      "license": "MIT",
+      "maintained": "active",
+      "name": "AutoMind",
+      "owner_repo": "innovatingAI/AutoMind",
+      "stars_approx": 92,
+      "subcategory": [
+        "automl",
+        "end-to-end"
+      ],
+      "url": "https://github.com/innovatingAI/AutoMind",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "Self-reinforcing 23-stage autonomous research pipeline (literature discovery, multi-agent hypothesis debate, sandboxed self-healing experiments, peer review, LaTeX export) that turns an idea into a conference-ready paper.",
+      "homepage": "https://huggingface.co/papers/2605.20025",
+      "id": "autoresearchclaw",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2026-06",
+      "license": "MIT",
+      "maintained": "active",
+      "name": "AutoResearchClaw",
+      "owner_repo": "aiming-lab/AutoResearchClaw",
+      "stars_approx": 13100,
+      "subcategory": [
+        "end-to-end",
+        "paper-generation",
+        "literature-review",
+        "experiment-automation",
+        "idea-generation"
+      ],
+      "url": "https://github.com/aiming-lab/AutoResearchClaw",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "NeurIPS 2024 method that automatically writes comprehensive literature surveys via retrieval, parallel subsection drafting by specialized LLMs, and iterative refinement with automated evaluation.",
+      "homepage": null,
+      "id": "autosurvey",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2025-02",
+      "license": "unverified",
+      "maintained": "dormant",
+      "name": "AutoSurvey",
+      "owner_repo": "AutoSurveys/AutoSurvey",
+      "stars_approx": 470,
+      "subcategory": [
+        "literature-review",
+        "survey-generation"
+      ],
+      "url": "https://github.com/AutoSurveys/AutoSurvey",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "research-agent",
+      "description": "Gymnasium/framework of language-agent environments for challenging scientific tasks (literature QA, DNA manipulation, protein engineering) used to build and train autonomous research agents.",
+      "homepage": "https://futurehouse.gitbook.io/futurehouse-cookbook",
+      "id": "aviary",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2026-06",
+      "license": "Apache-2.0",
+      "maintained": "active",
+      "name": "Aviary",
+      "owner_repo": "Future-House/aviary",
+      "stars_approx": 270,
+      "subcategory": [
+        "agent-framework",
+        "experiment-automation",
+        "scientific-discovery"
+      ],
+      "url": "https://github.com/Future-House/aviary",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "A general-purpose autonomous biomedical research agent combining LLM reasoning, retrieval-augmented planning, and code execution over a large library of biomedical tools.",
+      "homepage": null,
+      "id": "biomni",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2025-10",
+      "license": "Apache-2.0",
+      "maintained": "active",
+      "name": "Biomni",
+      "owner_repo": "snap-stanford/Biomni",
+      "stars_approx": 3200,
+      "subcategory": [
+        "domain-biomed",
+        "deep-research",
+        "end-to-end"
+      ],
+      "url": "https://github.com/snap-stanford/Biomni",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "An LLM agent augmented with chemistry tools (RDKit, paper-qa, reaction/retrosynthesis databases) that autonomously solves reasoning-intensive chemistry tasks.",
+      "homepage": null,
+      "id": "chemcrow",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2024-03",
+      "license": "MIT",
+      "maintained": "dormant",
+      "name": "ChemCrow",
+      "owner_repo": "ur-whitelab/chemcrow-public",
+      "stars_approx": 920,
+      "subcategory": [
+        "domain-chem"
+      ],
+      "url": "https://github.com/ur-whitelab/chemcrow-public",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "An LLM-driven autonomous lab agent (from the Nature paper) that plans, designs, and optimizes chemical experiments and synthesis.",
+      "homepage": null,
+      "id": "coscientist",
+      "languages": [
+        "python"
+      ],
+      "last_activity": null,
+      "license": "Apache-2.0 (Commons Clause)",
+      "maintained": "dormant",
+      "name": "Coscientist",
+      "owner_repo": "gomesgroup/coscientist",
+      "stars_approx": 205,
+      "subcategory": [
+        "domain-chem"
+      ],
+      "url": "https://github.com/gomesgroup/coscientist",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "AI agent framework for rigorous, automated scientific experimentation that handles the full hypothesis-to-analysis loop (experiment design, environment setup, execution, analysis) with reproducibility guarantees.",
+      "homepage": "https://www.just-curieous.com/",
+      "id": "curie",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2025-09",
+      "license": "Apache-2.0",
+      "maintained": "maintained",
+      "name": "Curie",
+      "owner_repo": "Just-Curieous/Curie",
+      "stars_approx": 360,
+      "subcategory": [
+        "experiment-automation",
+        "scientific-discovery",
+        "domain-ml"
+      ],
+      "url": "https://github.com/Just-Curieous/Curie",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "Open-source ecosystem of trained models (CycleResearcher + CycleReviewer) that iteratively generate research papers and improve them via automated peer review, focused on ML research.",
+      "homepage": "https://wengsyx.github.io/Researcher/",
+      "id": "cycleresearcher",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2026-03",
+      "license": "unverified",
+      "maintained": "active",
+      "name": "CycleResearcher",
+      "owner_repo": "zhu-minjun/Researcher",
+      "stars_approx": 390,
+      "subcategory": [
+        "paper-generation",
+        "automated-review",
+        "domain-ml"
+      ],
+      "url": "https://github.com/zhu-minjun/Researcher",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "An AI tool with data-loading, exploration, and chart-style-refinement agents that transform and visualize data via a blend of UI interactions and natural language.",
+      "homepage": null,
+      "id": "data-formulator",
+      "languages": [
+        "typescript",
+        "python"
+      ],
+      "last_activity": "2026-05",
+      "license": "MIT",
+      "maintained": "active",
+      "name": "Data Formulator",
+      "owner_repo": "microsoft/data-formulator",
+      "stars_approx": 15800,
+      "subcategory": [
+        "data-science",
+        "eda"
+      ],
+      "url": "https://github.com/microsoft/data-formulator",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "An LLM agent that self-designs interface tools then dispatches them to autonomously query, process, analyze, and visualize (financial) data.",
+      "homepage": null,
+      "id": "data-copilot",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2023",
+      "license": "MIT",
+      "maintained": "dormant",
+      "name": "Data-Copilot",
+      "owner_repo": "zwq2018/Data-Copilot",
+      "stars_approx": 1500,
+      "subcategory": [
+        "data-science",
+        "eda",
+        "domain-finance"
+      ],
+      "url": "https://github.com/zwq2018/Data-Copilot",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "Multi-agent system that goes from a raw dataset and research goal to a verifiable, data-traceable scientific paper, emphasizing reproducibility in data-driven (e.g. biomedical/clinical) research.",
+      "homepage": null,
+      "id": "data-to-paper",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2025-07",
+      "license": "MIT",
+      "maintained": "maintained",
+      "name": "data-to-paper",
+      "owner_repo": "Technion-Kishony-lab/data-to-paper",
+      "stars_approx": 800,
+      "subcategory": [
+        "end-to-end",
+        "paper-generation",
+        "experiment-automation",
+        "data-analysis"
+      ],
+      "url": "https://github.com/Technion-Kishony-lab/data-to-paper",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "An open data-synthesis + agent-training recipe yielding generalist data-analytic LLMs (DataMind-7B/14B) that do multi-step, code-based reasoning over CSV/Excel/SQLite.",
+      "homepage": null,
+      "id": "datamind",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2026-06",
+      "license": "Apache-2.0",
+      "maintained": "active",
+      "name": "DataMind",
+      "owner_repo": "zjunlp/DataMind",
+      "stars_approx": 102,
+      "subcategory": [
+        "data-science",
+        "eda"
+      ],
+      "url": "https://github.com/zjunlp/DataMind",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "A compact open-source deep-research agent that recursively searches, scrapes, and reasons over the web to produce reports, tracking goals across iterations.",
+      "homepage": null,
+      "id": "deep-research-dzhng",
+      "languages": [
+        "typescript"
+      ],
+      "last_activity": "2026-04",
+      "license": "MIT",
+      "maintained": "active",
+      "name": "deep-research (dzhng)",
+      "owner_repo": "dzhng/deep-research",
+      "stars_approx": 19000,
+      "subcategory": [
+        "deep-research"
+      ],
+      "url": "https://github.com/dzhng/deep-research",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "An agentic LLM (DeepAnalyze-8B) that autonomously runs the end-to-end data-science pipeline from raw structured/semi-structured/unstructured data to analyst-grade research reports.",
+      "homepage": "https://ruc-deepanalyze.github.io/",
+      "id": "deepanalyze",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2026-03",
+      "license": "MIT",
+      "maintained": "active",
+      "name": "DeepAnalyze",
+      "owner_repo": "ruc-datalab/DeepAnalyze",
+      "stars_approx": 4200,
+      "subcategory": [
+        "data-science",
+        "eda",
+        "deep-research",
+        "end-to-end",
+        "notebook"
+      ],
+      "url": "https://github.com/ruc-datalab/DeepAnalyze",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "A production-ready 'self-driving' data agent system that autonomously orchestrates multi-step workflows to produce dashboards, analytical reports, and data videos from heterogeneous data.",
+      "homepage": null,
+      "id": "deepeye",
+      "languages": [
+        "python",
+        "typescript"
+      ],
+      "last_activity": "2026-05",
+      "license": "Apache-2.0",
+      "maintained": "active",
+      "name": "DeepEye",
+      "owner_repo": "HKUSTDial/DeepEye",
+      "stars_approx": 199,
+      "subcategory": [
+        "data-science",
+        "eda",
+        "end-to-end"
+      ],
+      "url": "https://github.com/HKUSTDial/DeepEye",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "An ICML'24 data-science agent that uses case-based reasoning over Kaggle expert knowledge to iteratively build and train ML models across tabular/text/time-series.",
+      "homepage": null,
+      "id": "ds-agent",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2024",
+      "license": "unverified",
+      "maintained": "dormant",
+      "name": "DS-Agent",
+      "owner_repo": "guosyjlu/DS-Agent",
+      "stars_approx": 233,
+      "subcategory": [
+        "automl",
+        "end-to-end"
+      ],
+      "url": "https://github.com/guosyjlu/DS-Agent",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "Customizable multi-agent framework (ManagerAgent orchestrating Ideation/Experiment/Writeup agents) for building personalized systems that run continuous autonomous research toward publication-grade reports.",
+      "homepage": "https://freephdlabor.github.io/",
+      "id": "freephdlabor",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2026-05",
+      "license": "MIT",
+      "maintained": "active",
+      "name": "freephdlabor",
+      "owner_repo": "ltjed/freephdlabor",
+      "stars_approx": 560,
+      "subcategory": [
+        "end-to-end",
+        "paper-generation",
+        "idea-generation",
+        "experiment-automation",
+        "multi-agent"
+      ],
+      "url": "https://github.com/ltjed/freephdlabor",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "Autonomous deep-research agent that plans sub-questions, scrapes and aggregates many web/local sources, and synthesizes a long-form cited research report. (Also relevant to the data-science/deep-research bucket.)",
+      "homepage": "https://gptr.dev/",
+      "id": "gpt-researcher",
+      "languages": [
+        "python",
+        "typescript"
+      ],
+      "last_activity": "2026-05",
+      "license": "Apache-2.0",
+      "maintained": "active",
+      "name": "GPT Researcher",
+      "owner_repo": "assafelovic/gpt-researcher",
+      "stars_approx": 27500,
+      "subcategory": [
+        "literature-review",
+        "report-generation",
+        "deep-research"
+      ],
+      "url": "https://github.com/assafelovic/gpt-researcher",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "A JupyterLab extension (v3) connecting agentic AI models to notebooks so they can read/write files, run code, and act via a built-in MCP server for data work.",
+      "homepage": null,
+      "id": "jupyter-ai",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2026-04",
+      "license": "BSD-3-Clause",
+      "maintained": "active",
+      "name": "Jupyter AI",
+      "owner_repo": "jupyterlab/jupyter-ai",
+      "stars_approx": 4300,
+      "subcategory": [
+        "notebook",
+        "data-science"
+      ],
+      "url": "https://github.com/jupyterlab/jupyter-ai",
+      "verified": true
+    },
+    {
+      "automation_level": "library",
+      "category": "research-agent",
+      "description": "An LLM agent that automatically summarizes data, generates analysis goals, and writes/executes/edits visualization code (treating viz as code) across grammars.",
+      "homepage": null,
+      "id": "lida",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2024-03",
+      "license": "MIT",
+      "maintained": "dormant",
+      "name": "LIDA",
+      "owner_repo": "microsoft/lida",
+      "stars_approx": 3300,
+      "subcategory": [
+        "eda"
+      ],
+      "url": "https://github.com/microsoft/lida",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "Multi-agent framework whose Data Interpreter (and SELA tree-search AutoML extension) agent plans, writes, and self-debugs code to solve data-analysis, ML, and modeling tasks.",
+      "homepage": null,
+      "id": "metagpt-data-interpreter-sela",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2026-01",
+      "license": "MIT",
+      "maintained": "active",
+      "name": "MetaGPT (Data Interpreter / SELA)",
+      "owner_repo": "geekan/MetaGPT",
+      "stars_approx": 68500,
+      "subcategory": [
+        "data-science",
+        "automl",
+        "eda",
+        "end-to-end"
+      ],
+      "url": "https://github.com/geekan/MetaGPT",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "An AI companion that autonomously builds ML/AI baselines and end-to-end solutions (incl. Kaggle) with integrated arXiv/paper search.",
+      "homepage": null,
+      "id": "mle-agent",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2024-10",
+      "license": "MIT",
+      "maintained": "dormant",
+      "name": "MLE-Agent",
+      "owner_repo": "MLSysOps/MLE-agent",
+      "stars_approx": 1600,
+      "subcategory": [
+        "automl",
+        "end-to-end"
+      ],
+      "url": "https://github.com/MLSysOps/MLE-agent",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "Machine-learning research assistant framework where LLM agents autonomously generate research ideas from papers and implement/execute the corresponding experiments.",
+      "homepage": null,
+      "id": "mlr-copilot",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2025-03",
+      "license": "unverified",
+      "maintained": "maintained",
+      "name": "MLR-Copilot",
+      "owner_repo": "du-nlp-lab/MLR-Copilot",
+      "stars_approx": 70,
+      "subcategory": [
+        "idea-generation",
+        "experiment-automation",
+        "domain-ml"
+      ],
+      "url": "https://github.com/du-nlp-lab/MLR-Copilot",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "A configurable, fully open-source deep-research agent (LangGraph-based) that works across many model/search providers; ranks on Deep Research Bench.",
+      "homepage": null,
+      "id": "open-deep-research-langchain",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2025-08",
+      "license": "MIT",
+      "maintained": "active",
+      "name": "Open Deep Research (LangChain)",
+      "owner_repo": "langchain-ai/open_deep_research",
+      "stars_approx": 11600,
+      "subcategory": [
+        "deep-research"
+      ],
+      "url": "https://github.com/langchain-ai/open_deep_research",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "An open Deep Research clone that reasons over large amounts of web data extracted via Firecrawl to generate research analyses.",
+      "homepage": null,
+      "id": "open-deep-research-nickscamara-firecrawl",
+      "languages": [
+        "typescript"
+      ],
+      "last_activity": "2025-02",
+      "license": "Apache-2.0",
+      "maintained": "maintained",
+      "name": "Open Deep Research (nickscamara/Firecrawl)",
+      "owner_repo": "nickscamara/open-deep-research",
+      "stars_approx": 6200,
+      "subcategory": [
+        "deep-research"
+      ],
+      "url": "https://github.com/nickscamara/open-deep-research",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "A natural-language code-execution agent that runs Python/shell locally to plot, clean, and analyze datasets (and general computer tasks), with human approval of generated code.",
+      "homepage": null,
+      "id": "open-interpreter",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2024-10",
+      "license": "AGPL-3.0",
+      "maintained": "dormant",
+      "name": "Open Interpreter",
+      "owner_repo": "OpenInterpreter/open-interpreter",
+      "stars_approx": 63800,
+      "subcategory": [
+        "data-science",
+        "eda",
+        "notebook"
+      ],
+      "url": "https://github.com/OpenInterpreter/open-interpreter",
+      "verified": true
+    },
+    {
+      "automation_level": "application",
+      "category": "research-agent",
+      "description": "AI research-assistant platform that uses retrieval-augmented generation over scientific literature to autonomously answer research questions, summarize, and recommend papers with source citations.",
+      "homepage": null,
+      "id": "openresearcher",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2024-10",
+      "license": "Apache-2.0",
+      "maintained": "dormant",
+      "name": "OpenResearcher",
+      "owner_repo": "GAIR-NLP/OpenResearcher",
+      "stars_approx": 510,
+      "subcategory": [
+        "literature-review",
+        "rag",
+        "report-generation"
+      ],
+      "url": "https://github.com/GAIR-NLP/OpenResearcher",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "A conversational data-analysis agent that turns natural-language questions over CSV/SQL/parquet data lakes into executed analysis code and charts.",
+      "homepage": null,
+      "id": "pandasai",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2025-10",
+      "license": "MIT",
+      "maintained": "active",
+      "name": "PandasAI",
+      "owner_repo": "Sinaptik-AI/pandas-ai",
+      "stars_approx": 23600,
+      "subcategory": [
+        "data-science",
+        "eda",
+        "nl2sql"
+      ],
+      "url": "https://github.com/Sinaptik-AI/pandas-ai",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "Multi-agent LLM system that autonomously converts an ML research paper into a faithful, runnable code repository via planning, analysis, and generation stages.",
+      "homepage": null,
+      "id": "paper2code-papercoder",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2026-03",
+      "license": "Apache-2.0",
+      "maintained": "active",
+      "name": "Paper2Code (PaperCoder)",
+      "owner_repo": "going-doer/Paper2Code",
+      "stars_approx": 4600,
+      "subcategory": [
+        "code-generation",
+        "reproduction",
+        "domain-ml"
+      ],
+      "url": "https://github.com/going-doer/Paper2Code",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "Agentic high-accuracy RAG system over full-text scientific literature that autonomously retrieves, ranks, and synthesizes cited answers and literature summaries with superhuman accuracy on QA/contradiction tasks.",
+      "homepage": "https://www.futurehouse.org/",
+      "id": "paperqa2",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2026-03",
+      "license": "Apache-2.0",
+      "maintained": "active",
+      "name": "PaperQA2",
+      "owner_repo": "Future-House/paper-qa",
+      "stars_approx": 8600,
+      "subcategory": [
+        "literature-review",
+        "rag",
+        "report-generation"
+      ],
+      "url": "https://github.com/Future-House/paper-qa",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "Microsoft's R&D automation framework that iteratively proposes hypotheses and implements/evolves them as code, targeting data-driven R&D such as quantitative finance factor/model discovery and ML engineering.",
+      "homepage": "https://rdagent.azurewebsites.net/",
+      "id": "rd-agent",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2026-05",
+      "license": "MIT",
+      "maintained": "active",
+      "name": "RD-Agent",
+      "owner_repo": "microsoft/RD-Agent",
+      "stars_approx": 13300,
+      "subcategory": [
+        "end-to-end",
+        "experiment-automation",
+        "idea-generation",
+        "domain-ml",
+        "data-analysis",
+        "data-science",
+        "automl",
+        "quant"
+      ],
+      "url": "https://github.com/microsoft/RD-Agent",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "LLM system (NAACL 2025) that iteratively generates research problems, methods, and experiment designs grounded in an academic citation graph, refined by collaborating reviewing agents.",
+      "homepage": null,
+      "id": "researchagent",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2025-08",
+      "license": "unverified",
+      "maintained": "maintained",
+      "name": "ResearchAgent",
+      "owner_repo": "JinheonBaek/ResearchAgent",
+      "stars_approx": 40,
+      "subcategory": [
+        "idea-generation",
+        "literature-review"
+      ],
+      "url": "https://github.com/JinheonBaek/ResearchAgent",
+      "verified": true
+    },
+    {
+      "automation_level": "application",
+      "category": "research-agent",
+      "description": "Multi-agent system (built on Aviary/PaperQA) that automates therapeutics discovery by generating hypotheses, proposing experiments, and analyzing experimental data, demonstrated by identifying a novel dry-AMD drug candidate.",
+      "homepage": "https://www.futurehouse.org/research-announcements/demonstrating-end-to-end-scientific-discovery-with-robin-a-multi-agent-system",
+      "id": "robin",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2026-04",
+      "license": "Apache-2.0",
+      "maintained": "active",
+      "name": "Robin",
+      "owner_repo": "Future-House/robin",
+      "stars_approx": 490,
+      "subcategory": [
+        "end-to-end",
+        "scientific-discovery",
+        "experiment-automation",
+        "hypothesis-generation",
+        "domain-bio"
+      ],
+      "url": "https://github.com/Future-House/robin",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "LLM knowledge-curation system that researches a topic via multi-perspective simulated expert conversations and web search to autonomously synthesize a full, Wikipedia-style cited report (Co-STORM adds human-in-the-loop).",
+      "homepage": "https://storm.genie.stanford.edu/",
+      "id": "storm-co-storm",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2025-09",
+      "license": "MIT",
+      "maintained": "maintained",
+      "name": "STORM / Co-STORM",
+      "owner_repo": "stanford-oval/storm",
+      "stars_approx": 28300,
+      "subcategory": [
+        "literature-review",
+        "report-generation",
+        "deep-research"
+      ],
+      "url": "https://github.com/stanford-oval/storm",
+      "verified": true
+    },
+    {
+      "automation_level": "application",
+      "category": "research-agent",
+      "description": "Academic survey-automation system that takes a title and keywords and autonomously retrieves literature and generates a structured, cited survey paper (open-source release is offline-only; full service is hosted).",
+      "homepage": "https://www.surveyx.cn/",
+      "id": "surveyx",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2026-01",
+      "license": "unverified",
+      "maintained": "maintained",
+      "name": "SurveyX",
+      "owner_repo": "IAAR-Shanghai/SurveyX",
+      "stars_approx": 980,
+      "subcategory": [
+        "literature-review",
+        "survey-generation",
+        "paper-generation"
+      ],
+      "url": "https://github.com/IAAR-Shanghai/SurveyX",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "A LangGraph-based pre-built agent for the TableGPT2 model that answers analytical questions and runs code over tabular datasets.",
+      "homepage": null,
+      "id": "tablegpt-agent",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2025-03",
+      "license": "Apache-2.0",
+      "maintained": "maintained",
+      "name": "TableGPT Agent",
+      "owner_repo": "tablegpt/tablegpt-agent",
+      "stars_approx": 638,
+      "subcategory": [
+        "data-science",
+        "eda"
+      ],
+      "url": "https://github.com/tablegpt/tablegpt-agent",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "A code-first agent framework that plans and executes data-analytics tasks via generated Python, with stateful code/plugin memory (repo archived March 2026).",
+      "homepage": null,
+      "id": "taskweaver",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2026-03",
+      "license": "MIT",
+      "maintained": "dormant",
+      "name": "TaskWeaver",
+      "owner_repo": "microsoft/TaskWeaver",
+      "stars_approx": 6200,
+      "subcategory": [
+        "data-science",
+        "eda",
+        "end-to-end"
+      ],
+      "url": "https://github.com/microsoft/TaskWeaver",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "Fully automated pipeline that generates ML research ideas, writes and runs experiment code, and drafts complete LaTeX papers with an automated reviewer, in machine-learning domains.",
+      "homepage": "https://sakana.ai/ai-scientist/",
+      "id": "the-ai-scientist",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2025-12",
+      "license": "AI Scientist Source Code License v1.0 (custom, Responsible-AI based)",
+      "maintained": "maintained",
+      "name": "The AI Scientist",
+      "owner_repo": "SakanaAI/AI-Scientist",
+      "stars_approx": 13900,
+      "subcategory": [
+        "end-to-end",
+        "paper-generation",
+        "scientific-discovery",
+        "experiment-automation",
+        "idea-generation",
+        "domain-ml"
+      ],
+      "url": "https://github.com/SakanaAI/AI-Scientist",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "Template-free successor to The AI Scientist that uses agentic tree search and an experiment-manager agent to autonomously produce workshop-level ML papers end-to-end.",
+      "homepage": "https://sakana.ai/ai-scientist-first-publication/",
+      "id": "the-ai-scientist-v2",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2025-12",
+      "license": "AI Scientist Source Code License v1.0 (custom, Responsible-AI based)",
+      "maintained": "maintained",
+      "name": "The AI Scientist-v2",
+      "owner_repo": "SakanaAI/AI-Scientist-v2",
+      "stars_approx": 6500,
+      "subcategory": [
+        "end-to-end",
+        "paper-generation",
+        "scientific-discovery",
+        "experiment-automation",
+        "idea-generation",
+        "domain-ml"
+      ],
+      "url": "https://github.com/SakanaAI/AI-Scientist-v2",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "Team of LLM agents (AI PI, domain researchers, scientific critic) that hold structured meetings to autonomously design scientific pipelines, demonstrated by designing new SARS-CoV-2 nanobodies.",
+      "homepage": null,
+      "id": "the-virtual-lab",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2025-12",
+      "license": "MIT",
+      "maintained": "maintained",
+      "name": "The Virtual Lab",
+      "owner_repo": "zou-group/virtual-lab",
+      "stars_approx": 690,
+      "subcategory": [
+        "scientific-discovery",
+        "experiment-automation",
+        "multi-agent",
+        "domain-bio"
+      ],
+      "url": "https://github.com/zou-group/virtual-lab",
+      "verified": true
+    },
+    {
+      "automation_level": "framework",
+      "category": "research-agent",
+      "description": "Multi-agent 'science of science' system (ACL 2025) that simulates teams of scientist agents through team organization and inter/intra-team discussion to autonomously generate and evaluate novel research ideas.",
+      "homepage": null,
+      "id": "virtual-scientists-virsci",
+      "languages": [
+        "python"
+      ],
+      "last_activity": "2025-07",
+      "license": "Apache-2.0",
+      "maintained": "maintained",
+      "name": "Virtual Scientists (VirSci)",
+      "owner_repo": "InternScience/Virtual-Scientists",
+      "stars_approx": 140,
+      "subcategory": [
+        "idea-generation",
+        "multi-agent",
+        "scientific-discovery"
+      ],
+      "url": "https://github.com/InternScience/Virtual-Scientists",
+      "verified": true
     }
   ]
 }

@@ -40,6 +40,7 @@ CATEGORIES = {
     "causal-inference-library": "Causal-inference & treatment-effect libraries",
     "econometrics-library": "Econometrics & quasi-experimental libraries",
     "causal-discovery": "Causal discovery / structure learning",
+    "research-agent": "Autonomous research & data-science agents",
     "benchmark-dataset": "Benchmarks & datasets",
     "mcp-server": "MCP servers (data & stats execution)",
 }
@@ -48,11 +49,12 @@ CATEGORY_ORDER = [
     "causal-inference-library",
     "econometrics-library",
     "causal-discovery",
+    "research-agent",
     "mcp-server",
     "benchmark-dataset",
 ]
 MAINTAINED = {"active", "maintained", "dormant", None}
-AUTOMATION = {"library", "framework", "mcp-server", "dataset", None}
+AUTOMATION = {"library", "framework", "application", "mcp-server", "dataset", None}
 REQUIRED_KEYS = {
     "id",
     "name",
@@ -172,6 +174,8 @@ def summary_tables(tools: list[dict]) -> str:
         lic = t["license"]
         if lic in {"unverified", "NOASSERTION"}:
             by_license_class["unverified / unmapped"] += 1
+        elif any(tag in lic for tag in ("Commons Clause", "Responsible-AI", "Scientist Source", "custom")):
+            by_license_class["non-OSI / custom"] += 1
         elif lic.startswith(("GPL", "AGPL", "LGPL")):
             by_license_class["copyleft (GPL/AGPL/LGPL)"] += 1
         else:

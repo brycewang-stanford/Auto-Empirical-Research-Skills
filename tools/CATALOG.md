@@ -6,22 +6,23 @@ Curated, license- and maintenance-aware index of **software tools** for automate
 
 ## Summary
 
-**200 tools** across 5 categories.
+**251 tools** across 6 categories.
 
 | Category | Count |
 |---|---:|
 | Causal-inference & treatment-effect libraries | 32 |
 | Econometrics & quasi-experimental libraries | 86 |
 | Causal discovery / structure learning | 25 |
+| Autonomous research & data-science agents | 51 |
 | MCP servers (data & stats execution) | 48 |
 | Benchmarks & datasets | 9 |
 
 | By language | Tools | | By maintenance | Tools | | By license | Tools |
 |---|---:|:-:|---|---:|:-:|---|---:|
-| Python | 98 |  | 🟢 active | 117 |  | permissive (MIT/BSD/Apache/…) | 121 |
-| R | 65 |  | 🟡 maintained | 59 |  | copyleft (GPL/AGPL/LGPL) | 49 |
-| Stata | 36 |  | 🔴 dormant | 24 |  | unverified / unmapped | 30 |
-| TypeScript | 10 |  |  |  |  |  |  |
+| Python | 147 |  | 🟢 active | 142 |  | permissive (MIT/BSD/Apache/…) | 161 |
+| R | 65 |  | 🟡 maintained | 75 |  | copyleft (GPL/AGPL/LGPL) | 50 |
+| Stata | 36 |  | 🔴 dormant | 34 |  | unverified / unmapped | 37 |
+| TypeScript | 16 |  |  |  |  | non-OSI / custom | 3 |
 | Julia | 7 |  |  |  |  |  |  |
 | C++ | 5 |  |  |  |  |  |  |
 | Java | 3 |  |  |  |  |  |  |
@@ -186,6 +187,62 @@ Curated, license- and maintenance-aware index of **software tools** for automate
 | [Tetrad](https://github.com/cmu-phil/tetrad) | Java | GPL-3.0 | 🟢 active · 2026-06 | Long-running Java toolkit and GUI for causal discovery and graphical-causal-model search, the reference implementation of many constraint- and score-based algorithms. |
 | [tigramite](https://github.com/jakobrunge/tigramite) | Python | GPL-3.0 | 🟢 active · 2026-01 | Python package for causal discovery in time series via the PCMCI/PCMCI+/LPCMCI family of conditional-independence-based algorithms. |
 | [typed-DAG (t-DAG)](https://github.com/ServiceNow/typed-DAG) | Python | Apache-2.0 | 🔴 dormant · 2023-07 | Reference implementation of causal discovery with typed directed acyclic graphs, integrating variable-type knowledge into structure learning. |
+
+## Autonomous research & data-science agents (51)
+
+| Tool | Lang | License | Status | What it does |
+|---|---|---|---|---|
+| [Agent Laboratory](https://github.com/SamuelSchmidgall/AgentLaboratory) | Python | MIT | 🟡 maintained · 2025-08 | End-to-end autonomous research workflow with literature-review, experimentation, and report-writing phases (and AgentRxiv shared-preprint collaboration) to turn a human research idea into a paper plus code. |
+| [Agentic Data Scientist](https://github.com/K-Dense-AI/agentic-data-scientist) | Python | MIT | 🟢 active · 2026-05 | An adaptive multi-agent framework (Google ADK + Claude Agent SDK) that separates planning from execution with continuous validation to complete end-to-end data-science tasks. |
+| [AI Data Science Team](https://github.com/business-science/ai-data-science-team) | Python | MIT | 🟢 active · 2025-12 | A library of specialized LLM agents (data cleaning, EDA, feature engineering, SQL, H2O AutoML, visualization) orchestrated by a supervisor to automate common data-science tasks. |
+| [AI-Researcher](https://github.com/HKUDS/AI-Researcher) | Python | unverified | 🟡 maintained · 2025-10 | Fully autonomous research system (NeurIPS 2025) that runs the whole pipeline from literature review and idea generation through algorithm implementation to manuscript writing, primarily for AI/ML research. |
+| [AIDE (aideml)](https://github.com/WecoAI/aideml) | Python | MIT | 🟢 active · 2026-05 | Tree-search ML-engineering agent that autonomously drafts, debugs, and benchmarks code to maximize a user-defined metric, reaching strong Kaggle/MLE-bench performance. (Overlaps with the data-science agent bucket.) |
+| [Auto-Analyst](https://github.com/FireBird-Technologies/Auto-Analyst) | TypeScript · Python | MIT | 🟢 active · 2026-05 | A modular multi-agent AI data-scientist platform (DSPy-based) automating cleaning, statistical analysis, scikit-learn modeling, and Plotly visualization. |
+| [Auto-Deep-Research](https://github.com/HKUDS/Auto-Deep-Research) | Python | MIT | 🟡 maintained · 2025-02 | A cost-efficient open Deep Research alternative (built on the AutoAgent framework) that autonomously gathers and synthesizes web information; strong on GAIA. |
+| [AutoGluon Assistant (MLZero)](https://github.com/autogluon/autogluon-assistant) | Python | Apache-2.0 | 🟢 active · 2026-03 | A multi-agent system that transforms raw multimodal data (tabular, image, text, audio) into trained ML solutions end-to-end with zero human intervention, using MCTS-guided code generation over AutoGluon. |
+| [AutoKaggle](https://github.com/multimodal-art-projection/AutoKaggle) | Python | Apache-2.0 | 🟡 maintained · 2024-12 | A multi-agent framework with five cooperating agents that autonomously complete Kaggle tabular competitions across six pipeline phases. |
+| [AutoMind](https://github.com/innovatingAI/AutoMind) | Python | MIT | 🟢 active · 2025-10 | An adaptive, knowledge-grounded data-science agent using an expert knowledge base plus agentic tree search to build ML pipelines (beats AIDE on MLE-bench). |
+| [AutoResearchClaw](https://github.com/aiming-lab/AutoResearchClaw) | Python | MIT | 🟢 active · 2026-06 | Self-reinforcing 23-stage autonomous research pipeline (literature discovery, multi-agent hypothesis debate, sandboxed self-healing experiments, peer review, LaTeX export) that turns an idea into a conference-ready paper. |
+| [AutoSurvey](https://github.com/AutoSurveys/AutoSurvey) | Python | unverified | 🔴 dormant · 2025-02 | NeurIPS 2024 method that automatically writes comprehensive literature surveys via retrieval, parallel subsection drafting by specialized LLMs, and iterative refinement with automated evaluation. |
+| [Aviary](https://github.com/Future-House/aviary) | Python | Apache-2.0 | 🟢 active · 2026-06 | Gymnasium/framework of language-agent environments for challenging scientific tasks (literature QA, DNA manipulation, protein engineering) used to build and train autonomous research agents. |
+| [Biomni](https://github.com/snap-stanford/Biomni) | Python | Apache-2.0 | 🟢 active · 2025-10 | A general-purpose autonomous biomedical research agent combining LLM reasoning, retrieval-augmented planning, and code execution over a large library of biomedical tools. |
+| [ChemCrow](https://github.com/ur-whitelab/chemcrow-public) | Python | MIT | 🔴 dormant · 2024-03 | An LLM agent augmented with chemistry tools (RDKit, paper-qa, reaction/retrosynthesis databases) that autonomously solves reasoning-intensive chemistry tasks. |
+| [Coscientist](https://github.com/gomesgroup/coscientist) | Python | Apache-2.0 (Commons Clause) | 🔴 dormant | An LLM-driven autonomous lab agent (from the Nature paper) that plans, designs, and optimizes chemical experiments and synthesis. |
+| [Curie](https://github.com/Just-Curieous/Curie) | Python | Apache-2.0 | 🟡 maintained · 2025-09 | AI agent framework for rigorous, automated scientific experimentation that handles the full hypothesis-to-analysis loop (experiment design, environment setup, execution, analysis) with reproducibility guarantees. |
+| [CycleResearcher](https://github.com/zhu-minjun/Researcher) | Python | unverified | 🟢 active · 2026-03 | Open-source ecosystem of trained models (CycleResearcher + CycleReviewer) that iteratively generate research papers and improve them via automated peer review, focused on ML research. |
+| [Data Formulator](https://github.com/microsoft/data-formulator) | TypeScript · Python | MIT | 🟢 active · 2026-05 | An AI tool with data-loading, exploration, and chart-style-refinement agents that transform and visualize data via a blend of UI interactions and natural language. |
+| [Data-Copilot](https://github.com/zwq2018/Data-Copilot) | Python | MIT | 🔴 dormant · 2023 | An LLM agent that self-designs interface tools then dispatches them to autonomously query, process, analyze, and visualize (financial) data. |
+| [data-to-paper](https://github.com/Technion-Kishony-lab/data-to-paper) | Python | MIT | 🟡 maintained · 2025-07 | Multi-agent system that goes from a raw dataset and research goal to a verifiable, data-traceable scientific paper, emphasizing reproducibility in data-driven (e.g. biomedical/clinical) research. |
+| [DataMind](https://github.com/zjunlp/DataMind) | Python | Apache-2.0 | 🟢 active · 2026-06 | An open data-synthesis + agent-training recipe yielding generalist data-analytic LLMs (DataMind-7B/14B) that do multi-step, code-based reasoning over CSV/Excel/SQLite. |
+| [deep-research (dzhng)](https://github.com/dzhng/deep-research) | TypeScript | MIT | 🟢 active · 2026-04 | A compact open-source deep-research agent that recursively searches, scrapes, and reasons over the web to produce reports, tracking goals across iterations. |
+| [DeepAnalyze](https://github.com/ruc-datalab/DeepAnalyze) | Python | MIT | 🟢 active · 2026-03 | An agentic LLM (DeepAnalyze-8B) that autonomously runs the end-to-end data-science pipeline from raw structured/semi-structured/unstructured data to analyst-grade research reports. |
+| [DeepEye](https://github.com/HKUSTDial/DeepEye) | Python · TypeScript | Apache-2.0 | 🟢 active · 2026-05 | A production-ready 'self-driving' data agent system that autonomously orchestrates multi-step workflows to produce dashboards, analytical reports, and data videos from heterogeneous data. |
+| [DS-Agent](https://github.com/guosyjlu/DS-Agent) | Python | unverified | 🔴 dormant · 2024 | An ICML'24 data-science agent that uses case-based reasoning over Kaggle expert knowledge to iteratively build and train ML models across tabular/text/time-series. |
+| [freephdlabor](https://github.com/ltjed/freephdlabor) | Python | MIT | 🟢 active · 2026-05 | Customizable multi-agent framework (ManagerAgent orchestrating Ideation/Experiment/Writeup agents) for building personalized systems that run continuous autonomous research toward publication-grade reports. |
+| [GPT Researcher](https://github.com/assafelovic/gpt-researcher) | Python · TypeScript | Apache-2.0 | 🟢 active · 2026-05 | Autonomous deep-research agent that plans sub-questions, scrapes and aggregates many web/local sources, and synthesizes a long-form cited research report. (Also relevant to the data-science/deep-research bucket.) |
+| [Jupyter AI](https://github.com/jupyterlab/jupyter-ai) | Python | BSD-3-Clause | 🟢 active · 2026-04 | A JupyterLab extension (v3) connecting agentic AI models to notebooks so they can read/write files, run code, and act via a built-in MCP server for data work. |
+| [LIDA](https://github.com/microsoft/lida) | Python | MIT | 🔴 dormant · 2024-03 | An LLM agent that automatically summarizes data, generates analysis goals, and writes/executes/edits visualization code (treating viz as code) across grammars. |
+| [MetaGPT (Data Interpreter / SELA)](https://github.com/geekan/MetaGPT) | Python | MIT | 🟢 active · 2026-01 | Multi-agent framework whose Data Interpreter (and SELA tree-search AutoML extension) agent plans, writes, and self-debugs code to solve data-analysis, ML, and modeling tasks. |
+| [MLE-Agent](https://github.com/MLSysOps/MLE-agent) | Python | MIT | 🔴 dormant · 2024-10 | An AI companion that autonomously builds ML/AI baselines and end-to-end solutions (incl. Kaggle) with integrated arXiv/paper search. |
+| [MLR-Copilot](https://github.com/du-nlp-lab/MLR-Copilot) | Python | unverified | 🟡 maintained · 2025-03 | Machine-learning research assistant framework where LLM agents autonomously generate research ideas from papers and implement/execute the corresponding experiments. |
+| [Open Deep Research (LangChain)](https://github.com/langchain-ai/open_deep_research) | Python | MIT | 🟢 active · 2025-08 | A configurable, fully open-source deep-research agent (LangGraph-based) that works across many model/search providers; ranks on Deep Research Bench. |
+| [Open Deep Research (nickscamara/Firecrawl)](https://github.com/nickscamara/open-deep-research) | TypeScript | Apache-2.0 | 🟡 maintained · 2025-02 | An open Deep Research clone that reasons over large amounts of web data extracted via Firecrawl to generate research analyses. |
+| [Open Interpreter](https://github.com/OpenInterpreter/open-interpreter) | Python | AGPL-3.0 | 🔴 dormant · 2024-10 | A natural-language code-execution agent that runs Python/shell locally to plot, clean, and analyze datasets (and general computer tasks), with human approval of generated code. |
+| [OpenResearcher](https://github.com/GAIR-NLP/OpenResearcher) | Python | Apache-2.0 | 🔴 dormant · 2024-10 | AI research-assistant platform that uses retrieval-augmented generation over scientific literature to autonomously answer research questions, summarize, and recommend papers with source citations. |
+| [PandasAI](https://github.com/Sinaptik-AI/pandas-ai) | Python | MIT | 🟢 active · 2025-10 | A conversational data-analysis agent that turns natural-language questions over CSV/SQL/parquet data lakes into executed analysis code and charts. |
+| [Paper2Code (PaperCoder)](https://github.com/going-doer/Paper2Code) | Python | Apache-2.0 | 🟢 active · 2026-03 | Multi-agent LLM system that autonomously converts an ML research paper into a faithful, runnable code repository via planning, analysis, and generation stages. |
+| [PaperQA2](https://github.com/Future-House/paper-qa) | Python | Apache-2.0 | 🟢 active · 2026-03 | Agentic high-accuracy RAG system over full-text scientific literature that autonomously retrieves, ranks, and synthesizes cited answers and literature summaries with superhuman accuracy on QA/contradiction tasks. |
+| [RD-Agent](https://github.com/microsoft/RD-Agent) | Python | MIT | 🟢 active · 2026-05 | Microsoft's R&D automation framework that iteratively proposes hypotheses and implements/evolves them as code, targeting data-driven R&D such as quantitative finance factor/model discovery and ML engineering. |
+| [ResearchAgent](https://github.com/JinheonBaek/ResearchAgent) | Python | unverified | 🟡 maintained · 2025-08 | LLM system (NAACL 2025) that iteratively generates research problems, methods, and experiment designs grounded in an academic citation graph, refined by collaborating reviewing agents. |
+| [Robin](https://github.com/Future-House/robin) | Python | Apache-2.0 | 🟢 active · 2026-04 | Multi-agent system (built on Aviary/PaperQA) that automates therapeutics discovery by generating hypotheses, proposing experiments, and analyzing experimental data, demonstrated by identifying a novel dry-AMD drug candidate. |
+| [STORM / Co-STORM](https://github.com/stanford-oval/storm) | Python | MIT | 🟡 maintained · 2025-09 | LLM knowledge-curation system that researches a topic via multi-perspective simulated expert conversations and web search to autonomously synthesize a full, Wikipedia-style cited report (Co-STORM adds human-in-the-loop). |
+| [SurveyX](https://github.com/IAAR-Shanghai/SurveyX) | Python | unverified | 🟡 maintained · 2026-01 | Academic survey-automation system that takes a title and keywords and autonomously retrieves literature and generates a structured, cited survey paper (open-source release is offline-only; full service is hosted). |
+| [TableGPT Agent](https://github.com/tablegpt/tablegpt-agent) | Python | Apache-2.0 | 🟡 maintained · 2025-03 | A LangGraph-based pre-built agent for the TableGPT2 model that answers analytical questions and runs code over tabular datasets. |
+| [TaskWeaver](https://github.com/microsoft/TaskWeaver) | Python | MIT | 🔴 dormant · 2026-03 | A code-first agent framework that plans and executes data-analytics tasks via generated Python, with stateful code/plugin memory (repo archived March 2026). |
+| [The AI Scientist](https://github.com/SakanaAI/AI-Scientist) | Python | AI Scientist Source Code License v1.0 (custom, Responsible-AI based) | 🟡 maintained · 2025-12 | Fully automated pipeline that generates ML research ideas, writes and runs experiment code, and drafts complete LaTeX papers with an automated reviewer, in machine-learning domains. |
+| [The AI Scientist-v2](https://github.com/SakanaAI/AI-Scientist-v2) | Python | AI Scientist Source Code License v1.0 (custom, Responsible-AI based) | 🟡 maintained · 2025-12 | Template-free successor to The AI Scientist that uses agentic tree search and an experiment-manager agent to autonomously produce workshop-level ML papers end-to-end. |
+| [The Virtual Lab](https://github.com/zou-group/virtual-lab) | Python | MIT | 🟡 maintained · 2025-12 | Team of LLM agents (AI PI, domain researchers, scientific critic) that hold structured meetings to autonomously design scientific pipelines, demonstrated by designing new SARS-CoV-2 nanobodies. |
+| [Virtual Scientists (VirSci)](https://github.com/InternScience/Virtual-Scientists) | Python | Apache-2.0 | 🟡 maintained · 2025-07 | Multi-agent 'science of science' system (ACL 2025) that simulates teams of scientist agents through team organization and inter/intra-team discussion to autonomously generate and evaluate novel research ideas. |
 
 ## MCP servers (data & stats execution) (48)
 
