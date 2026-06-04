@@ -21,3 +21,6 @@ catalog/external-link-check.json
 .env
 .env.*
 !.env.example
+
+
+stata-skills/
