@@ -1,6 +1,6 @@
 ---
 name: text-classification
-description: LLM-based text classification: codebook, validation, agreement statistics.
+description: "LLM-based text classification: codebook, validation, agreement statistics."
 argument-hint: "[describe your text data and classification task]"
 ---
 

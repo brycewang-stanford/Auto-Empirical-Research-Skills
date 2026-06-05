@@ -1,6 +1,6 @@
 ---
 name: hypothesis-building
-description: Build falsifiable causal hypotheses: DAGs, FPCI, equivalence testing.
+description: "Build falsifiable causal hypotheses: DAGs, FPCI, equivalence testing."
 argument-hint: "[describe your theory or research question]"
 ---
 

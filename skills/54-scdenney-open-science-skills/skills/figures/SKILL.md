@@ -1,6 +1,6 @@
 ---
 name: figures
-description: Design and format publication-quality figures: chart choice, color, scales, legends, captions, reproducibility.
+description: "Design and format publication-quality figures: chart choice, color, scales, legends, captions, reproducibility."
 argument-hint: "[describe the figure you are building, the data, the claim it supports, and the target venue]"
 ---
 

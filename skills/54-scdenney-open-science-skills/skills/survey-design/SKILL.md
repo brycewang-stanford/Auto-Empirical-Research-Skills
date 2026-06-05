@@ -1,6 +1,6 @@
 ---
 name: survey-design
-description: Design survey instruments: questions, scales, flow, social desirability.
+description: "Design survey instruments: questions, scales, flow, social desirability."
 argument-hint: "[describe your survey question or design challenge]"
 ---
 

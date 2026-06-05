@@ -1,6 +1,6 @@
 ---
 name: narrative-building
-description: Draft scientific introductions: argument logic, framing, multi-experiment coherence.
+description: "Draft scientific introductions: argument logic, framing, multi-experiment coherence."
 argument-hint: "[describe your paper topic or introduction challenge]"
 ---
 

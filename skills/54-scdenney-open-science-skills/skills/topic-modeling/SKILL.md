@@ -1,6 +1,6 @@
 ---
 name: topic-modeling
-description: Structural topic modeling: STM spec, topic count, coherence-exclusivity.
+description: "Structural topic modeling: STM spec, topic count, coherence-exclusivity."
 argument-hint: "[describe your corpus and research question]"
 ---
 

@@ -213,7 +213,7 @@ class TestLocalAndCiGates(unittest.TestCase):
             ".github/pull_request_template.md",
             "CONTRIBUTING.md",
             "docs/SKILL_SUBMISSION_GUIDE.md",
-            "README-en.md",
+            "README.md",
         ]
         for rel_path in docs:
             with self.subTest(path=rel_path):

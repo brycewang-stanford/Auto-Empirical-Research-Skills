@@ -1,6 +1,6 @@
 ---
 name: paper-review-lite
-description: Pre-submission audit: argument, numerics, refs, writing, figures, replication.
+description: "Pre-submission audit: argument, numerics, refs, writing, figures, replication."
 argument-hint: "[path to paper or describe manuscript to review]"
 context: fork  # Claude Code: run skill in a forked subagent context (isolated from conversation history). See https://code.claude.com/docs/en/skills#frontmatter-reference
 ---

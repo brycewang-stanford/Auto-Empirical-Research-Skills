@@ -1,6 +1,7 @@
 ---
 name: data-analysis
-description: End-to-end data analysis workflow in R or Python — from exploration through regression to publication-ready tables and figures. Make sure to use this skill whenever the user wants to run any empirical analysis, write analysis code, or produce output from data. Triggers include: "analyze this data", "run a regression", "write R code for this", "write Python code for this", "I have a dataset", "help me with this regression", "run a DiD", "run an RDD", "event study", "IV regression", "fit a model", "produce a table", "make a figure", "explore my data", or any request involving a dataset path or empirical estimation.
+description: >-
+  End-to-end data analysis workflow in R or Python — from exploration through regression to publication-ready tables and figures. Make sure to use this skill whenever the user wants to run any empirical analysis, write analysis code, or produce output from data. Triggers include: "analyze this data", "run a regression", "write R code for this", "write Python code for this", "I have a dataset", "help me with this regression", "run a DiD", "run an RDD", "event study", "IV regression", "fit a model", "produce a table", "make a figure", "explore my data", or any request involving a dataset path or empirical estimation.
 argument-hint: "[dataset path or description of analysis goal]"
 allowed-tools: ["Read", "Grep", "Glob", "Write", "Edit", "Bash", "Task", "AskUserQuestion"]
 ---

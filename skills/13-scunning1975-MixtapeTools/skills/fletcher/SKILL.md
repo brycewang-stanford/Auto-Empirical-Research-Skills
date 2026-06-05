@@ -2,7 +2,7 @@
 name: fletcher
 description: Defamiliarization audit for empirical output. Systematically interrogates every feature of a figure, table, or set of results — not just the main finding. Named for Jason Fletcher, who asked about the spike at t=1 when everyone else was looking at t=2. Use when you have output and are about to interpret or report it.
 allowed-tools: Read, Bash(ls*), Bash(cat*), Glob, Grep
-argument-hint: [path-to-figure, table, or results file] [brief description of what you think the main finding is]
+argument-hint: "[path-to-figure, table, or results file] [brief description of what you think the main finding is]"
 ---
 
 # Fletcher: Own All the Numbers

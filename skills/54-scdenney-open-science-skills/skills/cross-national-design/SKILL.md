@@ -1,6 +1,6 @@
 ---
 name: cross-national-design
-description: Design cross-national survey experiments: power, equivalence, localization.
+description: "Design cross-national survey experiments: power, equivalence, localization."
 argument-hint: "[describe your cross-national study or country selection]"
 ---
 

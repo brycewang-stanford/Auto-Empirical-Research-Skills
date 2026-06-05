@@ -1,6 +1,6 @@
 ---
 name: conjoint-design
-description: Design conjoint experiments: attributes, power, AMCE/AMIE estimation.
+description: "Design conjoint experiments: attributes, power, AMCE/AMIE estimation."
 argument-hint: "[describe your design question or paste attribute table]"
 ---
 

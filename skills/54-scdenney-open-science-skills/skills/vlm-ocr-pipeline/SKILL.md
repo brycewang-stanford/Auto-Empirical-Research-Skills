@@ -1,6 +1,6 @@
 ---
 name: vlm-ocr-pipeline
-description: VLM-based OCR pipeline: model selection, prompts, architecture, evaluation.
+description: "VLM-based OCR pipeline: model selection, prompts, architecture, evaluation."
 argument-hint: "[describe your document corpus, languages, and compute environment]"
 ---
 

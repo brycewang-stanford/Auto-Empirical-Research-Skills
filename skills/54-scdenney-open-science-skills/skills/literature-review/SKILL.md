@@ -1,6 +1,6 @@
 ---
 name: literature-review
-description: Build or audit a literature review: evidence map, gaps, synthesis plan.
+description: "Build or audit a literature review: evidence map, gaps, synthesis plan."
 argument-hint: "[topic, draft literature review, paper list, Zotero export, or claimed contribution]"
 ---
 

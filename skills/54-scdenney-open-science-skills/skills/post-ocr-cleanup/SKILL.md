@@ -1,6 +1,6 @@
 ---
 name: post-ocr-cleanup
-description: Clean post-OCR text: correction, QA, multilingual handling, provenance.
+description: "Clean post-OCR text: correction, QA, multilingual handling, provenance."
 argument-hint: "[describe your OCR output, languages, and error patterns]"
 ---
 

@@ -2,7 +2,7 @@
 name: referee2
 description: Systematic audit and review by Referee 2. Two modes — "deck" reviews slide presentations for rhetoric, visual quality, and compile cleanliness; "code" performs cross-language replication and econometric audit of empirical pipelines. Use when reviewing slides, auditing code, or verifying replication.
 allowed-tools: Bash(pdflatex*), Bash(latexmk*), Bash(python*), Bash(Rscript*), Bash(stata*), Bash(ls*), Bash(wc*), Bash(grep*), Bash(head*), Bash(tail*), Read, Write, Edit, Glob, Grep, Agent
-argument-hint: [mode: deck|code] [path-to-project-or-file]
+argument-hint: "[mode: deck|code] [path-to-project-or-file]"
 ---
 
 # Referee 2: Systematic Audit & Replication Protocol

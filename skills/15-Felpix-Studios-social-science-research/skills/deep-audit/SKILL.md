@@ -1,6 +1,7 @@
 ---
 name: deep-audit
-description: Deep consistency audit of the entire repository — launches 4 parallel specialist agents to find factual errors, code bugs, broken references, count mismatches, and cross-document inconsistencies, then fixes all issues and loops until clean. Make sure to use this skill whenever the user wants a comprehensive repository-wide check — not a targeted review of a single file. Triggers include: "audit", "deep audit", "find inconsistencies", "check everything", "run a full audit", "are there any broken references", "check the whole repo", "something feels off", "run the audit loop", or after making broad changes across multiple files.
+description: >-
+  Deep consistency audit of the entire repository — launches 4 parallel specialist agents to find factual errors, code bugs, broken references, count mismatches, and cross-document inconsistencies, then fixes all issues and loops until clean. Make sure to use this skill whenever the user wants a comprehensive repository-wide check — not a targeted review of a single file. Triggers include: "audit", "deep audit", "find inconsistencies", "check everything", "run a full audit", "are there any broken references", "check the whole repo", "something feels off", "run the audit loop", or after making broad changes across multiple files.
 argument-hint: "(no arguments needed)"
 allowed-tools: ["Read", "Write", "Edit", "Bash", "Glob", "Grep", "Task"]
 ---

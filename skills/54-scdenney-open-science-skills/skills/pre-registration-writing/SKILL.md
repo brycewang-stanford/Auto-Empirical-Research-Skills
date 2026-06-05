@@ -1,6 +1,6 @@
 ---
 name: pre-registration-writing
-description: Write pre-analysis plans: PAP structure, registry, analysis strategy.
+description: "Write pre-analysis plans: PAP structure, registry, analysis strategy."
 argument-hint: "[describe your study or PAP section to draft]"
 ---
 

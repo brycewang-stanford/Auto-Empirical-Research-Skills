@@ -1,6 +1,6 @@
 ---
 name: tables
-description: Design and format publication-quality tables: column order, row grouping, notes, precision, reproducibility.
+description: "Design and format publication-quality tables: column order, row grouping, notes, precision, reproducibility."
 argument-hint: "[describe the table you are building, the model or data, the claim it supports, and the target venue]"
 ---
 
