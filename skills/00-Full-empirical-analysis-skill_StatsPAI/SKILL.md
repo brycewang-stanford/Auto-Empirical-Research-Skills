@@ -76,18 +76,81 @@ triggers:
 
 # StatsPAI: Agent-Native Causal Inference & AER-Style Empirical Workflow
 
-StatsPAI is the agent-native Python package for causal inference and applied econometrics: one `import statspai as sp`, 900+ functions behind a self-describing API, and `CausalResult` objects that export to LaTeX / Word / Excel / BibTeX.
+StatsPAI is a validation-tiered Python package for causal inference and applied econometrics: one `import statspai as sp`, 1,000+ registered functions behind a self-describing API, and mature estimator result objects that commonly export to LaTeX / Word / Excel / BibTeX.
 
-This skill drives StatsPAI through the **canonical pipeline of an applied AER empirical paper**. Each step maps to a section of the published paper and emits a paper-ready artifact (Table 1, event-study figure, Table 2 main results, robustness panel, replication stamp).
+This skill drives StatsPAI through the **canonical pipeline of an applied AER empirical paper**. Each step emits a paper-ready artifact (Table 1, event-study figure, Table 2 main results, robustness panel, replication stamp).
 
 - **Source**: https://github.com/brycewang-stanford/StatsPAI
-- **Install**: `pip install statspai` (>= 1.6)
-- **Paper**: submitted to JOSS (under review)
+- **Install**: `pip install "statspai[fixest,plotting]"` (verified against **statspai 1.16.1**). The bare `pip install statspai` is **not enough** for the default pipeline — see the dependency matrix below.
+- **Paper**: JOSS submission under review; JSS materials in `Paper-JSS/README.md` and `docs/jss_source_audit_dossier.md`
+
+> **Install the right extras or the documented calls will raise `ImportError`.** Several core functions live behind optional dependency groups (verified from `pyproject.toml`):
+>
+> | You use… | Needs extra | Install | Symptom if missing |
+> |---|---|---|---|
+> | `sp.feols` / `sp.fepois` / `sp.feglm` (high-dim FE — the **default** for any `y ~ x \| fe` regression) | `fixest` (pyfixest) | `pip install "statspai[fixest]"` | `ImportError: pyfixest is required …` |
+> | Any figure (`sp.coefplot`, `sp.binscatter`, event-study/RD/SCM plots, `.plot()`) | `plotting` (matplotlib/seaborn) | `pip install "statspai[plotting]"` | `ImportError` on first plot |
+> | `sp.dragonnet` / `sp.tarnet` / `sp.cfrnet` / `sp.cevae` (neural causal) | `neural` (torch) | `pip install "statspai[neural]"` | `ImportError: PyTorch is required …` |
+> | `sp.causal_text.*` (text-as-treatment) | `text` (sentence-transformers) | `pip install "statspai[text]"` | `ImportError` on embed |
+>
+> A one-shot install covering the whole skill: `pip install "statspai[fixest,plotting,neural,text]"`. `sp.regtable` / `sp.collect` / Word+Excel+LaTeX export, `sp.regress`, IV, RD, DID (`callaway_santanna`), matching, DML, meta-learners, causal forest, BCF, TMLE, and the epi stack work on the base install.
+
+## Verified skeleton (copy, then swap in your columns)
+
+This minimal pipeline **runs start-to-finish against statspai 1.16.1** (every call below was executed). It is the golden path — adapt column names / design, keep the call shapes and the unpack-then-save figure idiom. The full playbook (§−1 → §8) expands each step.
+
+```python
+import numpy as np, pandas as pd, statspai as sp
+# df has: wage, training(0/1), worker_id, firm_id, year, first_treat_year, age, edu, tenure, ...
+
+# §1 Table 1 → Word/Excel/LaTeX
+mc = sp.mean_comparison(df, ["age","edu","tenure"], group="training", test="ttest",
+                        title="Table 1. Summary statistics")
+mc.to_word("tables/table1.docx"); mc.to_excel("tables/table1.xlsx")
+
+# §2 Estimand-first plan (freeze BEFORE estimating)
+q = sp.causal_question(treatment="training", outcome="wage", data=df, estimand="ATT",
+                       design="did", time_structure="panel", time="year", id="worker_id",
+                       covariates=["age","edu","tenure"])
+plan = q.identify(); print(plan.summary())
+
+# §3 Identification figure — from a CS/SA result (NOT event_study()); plotters return (fig, ax)
+cs = sp.callaway_santanna(df, y="wage", g="first_treat_year", t="year", i="worker_id", x=["age","edu"])
+fig, ax = sp.enhanced_event_study_plot(cs, shade_pre=True); fig.savefig("figures/fig2a.png", dpi=300)
+
+# §4 Main table — mix sp.regress (no FE) + sp.feols (HDFE, needs statspai[fixest]) in ONE regtable
+M1 = sp.regress("wage ~ training", df, cluster="firm_id")
+M2 = sp.feols("wage ~ training + age + edu + tenure | industry + year", df, vcov={"CRV1":"firm_id"})
+rt = sp.regtable(M1, M2, template="aer", coef_labels={"training":"Job training"},
+                 model_labels=["(1) OLS","(2) FE"], stats=["N","R2","Cluster","FE"],
+                 title="Table 2. Effect of training on wages")
+rt.to_word("tables/table2.docx"); rt.to_excel("tables/table2.xlsx")
+open("tables/table2.tex","w").write(rt.to_latex())
+
+# §5 Heterogeneity — per-row CATE at result.model_info["cate"] (there is NO .cate_estimates)
+ml = sp.metalearner(df, y="wage", treat="training", covariates=["age","edu","tenure"], learner="dr")
+fig, ax = sp.cate_plot(ml, kind="hist"); fig.savefig("figures/fig4.png", dpi=300)
+
+# §7 Robustness — Oster + E-value + honest-DID sensitivity figure
+sp.oster_bounds(data=df, y="wage", treat="training", controls=["age","edu","tenure"], r_max=1.3)
+sp.evalue(estimate=M2.params["training"], ci=tuple(M2.conf_int().loc["training"]), measure="RR")
+fig, ax = sp.sensitivity_plot(sp.honest_did(cs, method="smoothness"),
+                              original_estimate=cs.estimate, original_ci=cs.ci)
+fig.savefig("figures/fig6.png", dpi=300)
+
+# §8 One-file replication bundle (Word/Excel/LaTeX/Markdown from one source)
+c = sp.collect("Replication", template="aer")
+c.add_summary(df, vars=["wage","age","edu","tenure"], stats=["mean","sd","n"], title="Table 1")
+c.add_regression(M1, M2, model_labels=["(1)","(2)"], stats=["N","R2"], title="Table 2")
+for ext in ("docx","xlsx","tex","md"): c.save(f"replication/paper.{ext}")
+```
+
+> Epi (§A) and ML-causal (§B) reuse this exact scaffolding — only the §4 estimator stack changes (TMLE/g-formula/MR for epi; DML/meta-learner/causal-forest for ML), and every estimator still returns a result that drops into `sp.regtable` / `sp.collect`.
 
 ## Why for Agents
 
-1. **Self-describing**: `sp.list_functions()` / `sp.describe_function(name)` / `sp.function_schema(name)` — every public symbol is discoverable without doc lookup.
-2. **Unified result**: every estimator returns `CausalResult` with `.summary()`, `.plot()`, `.diagnostics`, `.to_latex()`, `.to_word()`, `.cite()`.
+1. **Self-describing**: `sp.list_functions()` / `sp.describe_function(name)` / `sp.function_schema(name)` — registered symbols are discoverable without doc lookup.
+2. **Structured results**: mature estimators return result objects with methods such as `.summary()`, `.plot()`, `.diagnostics`, `.to_latex()`, `.to_word()`, `.cite()` when supported.
 3. **One import, full pipeline**: data contract → Table 1 → estimand-first DSL → identification graphs → main table → heterogeneity → mechanisms → robustness → replication package.
 4. **Estimand-first**: `sp.causal_question(...).identify()` forces the "DID vs RD vs IV?" decision *before* estimation, with the identifying assumption written down — the way a referee expects to read it.
 
@@ -151,7 +214,7 @@ A modern AER paper has **5–7 figures** and **3–5 main tables** + an appendix
 | §6 | **Table 4**: mechanisms (mediation / decomposition) | `sp.regtable(total, direct, indirect).to_word/.to_excel` | `tables/table4_mechanisms.{tex,docx,xlsx}` |
 | §7 | **Table A1**: robustness master (one row per check) | `sp.regtable(rob1...robN, panel_labels=[...]).to_word/.to_excel` — or `sp.paper_tables(robustness=[...]).to_docx()` | `tables/tableA1_robustness.{tex,docx,xlsx}` |
 | §7 | **Figure 5**: spec curve | `sp.spec_curve(...).plot()` | `figures/fig5_spec_curve.png` |
-| §7 | **Figure 6**: sensitivity dashboard / Cinelli–Hazlett contour | `sp.sensitivity_dashboard` · `sp.sensitivity_plot` | `figures/fig6_sensitivity.png` |
+| §7 | **Figure 6**: honest-DID sensitivity plot (+ text dashboard) | `sp.sensitivity_plot(sp.honest_did(cs, ...))` for the figure; `print(sp.sensitivity_dashboard(result).summary())` for the Cinelli–Hazlett/Oster/E-value numbers (text, not a figure) | `figures/fig6_sensitivity.png` |
 | §8 | **Replication bundle**: all tables in one Word/Excel/LaTeX file | `sp.collect("Paper").add_summary(...).add_regression(...)...save("paper.{docx,xlsx,tex}")` — or `sp.paper_tables(main=, heterogeneity=, robustness=, placebo=).to_docx/.to_xlsx` | `replication/paper.{docx,xlsx,tex}` |
 
 > Every `CausalResult` and OLS model can be passed straight into `sp.regtable(...)`, `sp.coefplot(...)`, **and `sp.collect()`**. Don't hand-roll LaTeX, and don't render Word/Excel from pandas — the export functions apply book-tab borders, AER-style stars, and the right SE label automatically.
@@ -181,16 +244,17 @@ rt.to_word("table2_qje.docx")
 #   • focal-coefficient only:    sp.regtable(M1, M2, M3, template="qje", keep=["x"])
 
 sp.get_journal_template("aer")                                 # inspect a preset
-# → {'label': 'American Economic Review', 'star_levels': [0.1, 0.05, 0.01],
-#    'se_label': 'Standard errors', 'stats': ['N', 'R-squared'],
-#    'notes_default': [...], 'font_name': 'Times New Roman'}
+# → {'label': 'American Economic Review', 'star_levels': (0.1, 0.05, 0.01),
+#    'se_label': 'Standard errors', 'stats': ('N', 'R-squared'),
+#    'notes_default': ('Standard errors in parentheses.', '*** p<0.01, ** p<0.05, * p<0.10.'),
+#    'font_name': 'Times New Roman'}    # note: tuples, not lists
 ```
 
 **Inline citations in prose** (drop a coefficient straight into a sentence):
 
 ```python
 sp.cite(M3, "training")                  # → "1.239*** (0.153)"
-sp.cite(M3, "training", output="latex")  # → "$1.239^{***}$ ($0.153$)"
+sp.cite(M3, "training", output="latex")  # → "1.239^{***}~(0.153)"  (wrap in $...$ yourself)
 ```
 
 > **Naming gotcha**: `sp.regtable(..., output="docx")` is invalid — the enum is `{"text", "latex", "tex", "html", "markdown", "md", "qmd", "quarto", "word", "excel"}`. Use `output="word"` / `"excel"`, or — simpler — drop `output=` and call `.to_word(filename)` / `.to_excel(filename)` on the result.
@@ -232,7 +296,7 @@ def setup_plot(retina: bool = True) -> None:
     #    savefig.dpi controls .png exports. Set both — they are independent.
     if retina:
         mpl.rcParams["figure.dpi"]  = 144   # 2× default — sharp on Retina/HiDPI
-        mpl.rcParams["savefig.dpi"] = 300   # publication-grade PNG (AER house norm)
+        mpl.rcParams["savefig.dpi"] = 300   # manuscript/export PNG (AER house norm)
         # Jupyter inline retina backend (no-op outside IPython):
         try:
             from IPython import get_ipython
@@ -257,6 +321,21 @@ fig.savefig("figures/_font_smoke_test.png", dpi=300)    # delete after verifying
 ```
 
 If the saved PNG shows Chinese characters cleanly *and* the y-axis tick `-1` is a real minus sign (not a square), the setup is good. Otherwise see troubleshooting below.
+
+### Saving figures — the `(fig, ax)` idiom (READ THIS)
+
+> **Every StatsPAI plotter and every result `.plot()` returns a `(fig, ax)` tuple — NOT a bare Figure.** So `sp.parallel_trends_plot(...).savefig(...)` raises `AttributeError: 'tuple' object has no attribute 'savefig'`. Always unpack, then save the figure:
+>
+> ```python
+> fig, ax = sp.parallel_trends_plot(df, y="wage", time="year", treat="training", treat_time=2015)
+> fig.savefig("figures/fig1.png", dpi=300)
+> ```
+>
+> Two exceptions to memorize:
+> - **`sp.binscatter(...)` returns a 3-tuple** `(fig, ax, binned_df)` — `fig, ax, _ = sp.binscatter(...)`.
+> - **`sp.kaplan_meier(...).plot()` returns a bare `Axes`** (it is a `KMResult`, not a `CausalResult`) — save via `ax = km.plot(); ax.figure.savefig(...)`.
+>
+> This applies uniformly to `coefplot`, `binscatter`, `rdplot`, `rddensity().plot()`, `bacon_plot`, `enhanced_event_study_plot`, `did_summary_plot`/`ggdid`/`group_time_plot`, `synthdid_plot`, `cate_plot`, `cate_group_plot`, `dose_response().plot()`, `sensitivity_plot`, `match().plot()`, `synth().plot()`, and a generic `result.plot()`. The code blocks below all use the unpack-then-save form.
 
 ### Troubleshooting
 
@@ -300,7 +379,9 @@ sp.power("did", n=200, effect_size=0.15, power_target=0.80,
          n_periods=4, n_treated_periods=2)                            # DID: solves MDE / n / power
 sp.power("cluster_rct", cluster_size=50, icc=0.05,
          effect_size=0.2, power_target=0.80)                          # Cluster RCT: solves n_clusters
-sp.pretrends_power(result)                                            # Roth (2022) pre-trends power
+# Roth (2022) pre-trends power is a POST-estimation diagnostic — it needs an estimated
+# event-study result, so run it in §3 once you have `es = sp.event_study(...)`:
+#   sp.pretrends_power(es)
 ```
 
 Persist the `PowerResult` next to `data_contract.json` and `empirical_strategy.md` — a referee will ask whether the design was powered before data collection, not after.
@@ -451,16 +532,16 @@ For DID / event-study designs, the *first* figure of an applied paper is almost 
 
 ```python
 # (a) Raw trends with vertical line at treatment start (DID Figure 1 style)
-sp.parallel_trends_plot(df, y="wage", time="year", treat="training",
-                        treat_time=2015, ci=True,
-                        labels={"treated":"Trained", "control":"Untrained"})\
-  .savefig("figures/fig1a_raw_trends.png", dpi=300)
+fig, ax = sp.parallel_trends_plot(df, y="wage", time="year", treat="training",
+                                  treat_time=2015, ci=True,
+                                  labels={"treated":"Trained", "control":"Untrained"})
+fig.savefig("figures/fig1a_raw_trends.png", dpi=300)
 
 # (b) Treatment rollout heatmap (staggered DID convention; Goodman-Bacon-friendly)
-sp.treatment_rollout_plot(df, time="year", treat="training", id="worker_id",
-                          sort_by="first_treat_year",
-                          title="Figure 1. Treatment timing")\
-  .savefig("figures/fig1b_rollout.png", dpi=300)
+fig, ax = sp.treatment_rollout_plot(df, time="year", treat="training", id="worker_id",
+                                    sort_by="first_treat_year",
+                                    title="Figure 1. Treatment timing")
+fig.savefig("figures/fig1b_rollout.png", dpi=300)
 ```
 
 For matching designs, also produce a **love plot** of standardized differences pre/post matching (Step 3.4).
@@ -555,7 +636,7 @@ proposal   = sp.llm_dag_propose(
     domain="labor economics: training, wages, tenure",
     client=my_llm_client,                          # .complete(prompt) -> str; None = heuristic
 )
-validation = sp.llm_dag_validate(proposal, df, alpha=0.05)
+validation = sp.llm_dag_validate(proposal, df, alpha=0.05)   # (dag, data) positional
 print(validation.edge_evidence)
 
 discovered = sp.llm_dag_constrained(
@@ -564,7 +645,9 @@ discovered = sp.llm_dag_constrained(
     oracle=my_llm_client.suggest_edges,            # optional; falls back to plain PC
     max_iter=3,
 )
-# Pass into Step 4 as:  sp.causal(..., dag=discovered.dag)
+# The result is an LLMConstrainedDAGResult — it has NO `.dag` attribute. Get a DAG with
+# `.to_dag()` (or inspect `.final_edges`). Pass into Step 4 as:
+#   sp.causal(..., dag=discovered.to_dag())
 ```
 
 ## Step 3 — Identification graphics (Section "Identification, graphical evidence")
@@ -575,34 +658,37 @@ AER convention: **the identification figure precedes the regression table**. The
 Pre-period coefficients ≈ 0 (with the −1 reference period normalized to zero) is the visual evidence for parallel trends. Pair the **figure** with a **numerical** pre-trends test so reviewers don't have to eyeball it.
 
 ```python
-# Event-study estimates
+# --- The event-study FIGURE comes from a Callaway–Sant'Anna (or sun_abraham)
+#     result, NOT from sp.event_study(). The figure plotters
+#     (enhanced_event_study_plot / cs.plot() / ggdid / group_time_plot) consume a
+#     CS/SA result; feeding them sp.event_study() output raises KeyError('att').
+#     Use `x=` for covariates (NOT `covariates=` — that kwarg does not exist on CS).
+cs = sp.callaway_santanna(df, y="wage", g="first_treat_year",
+                          t="year", i="worker_id",
+                          x=["age", "edu"])
+
+# Figure 2a — dynamic ATT / event-study coefficient plot. Plotters return (fig, ax).
+fig, ax = sp.enhanced_event_study_plot(
+    cs, shade_pre=True,
+    title="Figure 2a. Event-study coefficients (95% CI; ref. period = −1)")
+fig.savefig("figures/fig2a_event_study.png", dpi=300)
+# (equivalently: `fig, ax = cs.plot()` or `fig, ax = sp.ggdid(cs)` /
+#  `fig, ax = sp.group_time_plot(cs)` — all consume the CS result and return (fig, ax).)
+
+# Numerical pre-trends test (Roth 2022 power) for the table footnote. THIS is what
+# sp.event_study() is for — the coefficient/pre-trend numerics, not the figure.
 es = sp.event_study(df, y="wage", treat_time="first_treat_year",
                     time="year", unit="worker_id",
                     window=(-4, 4), ref_period=-1,
                     covariates=["age", "edu"])
-
-# Figure 2a — event-study coefficient plot
-sp.enhanced_event_study_plot(
-    es, shade_pre=True,
-    title="Figure 2a. Event-study coefficients (95% CI; ref. period = −1)")\
-  .savefig("figures/fig2a_event_study.png", dpi=300)
-
-# Numerical pre-trends test (Roth 2022 power) for the table footnote
 print(sp.pretrends_summary(es))                       # F-stat, p-value, max-PT bound
+# es.model_info["pretrend_test"] holds the same numbers machine-readably.
 
 # Bacon decomposition figure for staggered DID (Figure 2a-bis)
 bd = sp.bacon_decomposition(df, y="wage", treat="training",
                             time="year", id="worker_id")
-sp.bacon_plot(bd, title="Figure 2a-bis. Goodman-Bacon weights")\
-  .savefig("figures/fig2a2_bacon.png", dpi=300)
-
-# CS / SA dynamic effects figure (Figure 2a-ter): the post-period τ_e curve.
-# Use `x=` for covariates (not `covariates=` — that kwarg does not exist).
-cs = sp.callaway_santanna(df, y="wage", g="first_treat_year",
-                          t="year", i="worker_id",
-                          x=["age", "edu"])
-sp.did_summary_plot(cs, title="Figure 2a-ter. Dynamic ATT (Callaway–Sant'Anna)")\
-  .savefig("figures/fig2a3_csdid.png", dpi=300)
+fig, ax = sp.bacon_plot(bd, title="Figure 2a-bis. Goodman-Bacon weights")
+fig.savefig("figures/fig2a2_bacon.png", dpi=300)
 
 # Borusyak–Jaravel–Spiess joint pre-trends test — needs the CS/SA result
 # AND the underlying panel (NOT the event_study() output):
@@ -617,10 +703,10 @@ Rule of thumb: first-stage F ≥ 10 for OLS-style inference; F ≥ 23 for AR-equ
 ```python
 iv = sp.ivreg("wage ~ (training ~ Z1 + Z2) + age + edu", df, cluster="firm_id")
 print(iv.summary())                                    # reports first-stage F (Cragg–Donald / KP)
-sp.binscatter(df, y="training", x="Z1",
-              controls=["age", "edu"],
-              n_bins=20, ci=True)\
-  .savefig("figures/fig_first_stage.png", dpi=300)
+fig, ax, _binned = sp.binscatter(df, y="training", x="Z1",   # binscatter → 3-tuple
+                                 controls=["age", "edu"],
+                                 n_bins=20, ci=True)
+fig.savefig("figures/fig_first_stage.png", dpi=300)
 ```
 
 ### 3.3 RD: McCrary density + canonical RD plot + binscatter
@@ -628,26 +714,26 @@ The signature RD figure is `sp.rdplot` (CCT-style binned scatter with local-poly
 
 ```python
 # Figure 2b — canonical RD plot (binned means + local poly fit on each side)
-sp.rdplot(df, y="y", x="running_var", c=0,
-          p=4, kernel="triangular", binselect="esmv",
-          shade_ci=True, ci_level=0.95)\
-  .savefig("figures/fig2b_rdplot.png", dpi=300)
+fig, ax = sp.rdplot(df, y="y", x="running_var", c=0,
+                    p=4, kernel="triangular", binselect="esmv",
+                    shade_ci=True, ci_level=0.95)
+fig.savefig("figures/fig2b_rdplot.png", dpi=300)
 
-# Figure 2b-bis — McCrary density (manipulation test)
-sp.rddensity(df, x="running_var", c=0).plot()\
-  .savefig("figures/fig2b2_mccrary.png", dpi=300)
+# Figure 2b-bis — McCrary density (manipulation test). .plot() → (fig, ax)
+fig, ax = sp.rddensity(df, x="running_var", c=0).plot()
+fig.savefig("figures/fig2b2_mccrary.png", dpi=300)
 
 # Optional: covariate-adjusted binscatter (continuity in covariates is also testable)
-sp.binscatter(df, y="age", x="running_var", n_bins=40, ci=True)\
-  .savefig("figures/fig2b3_cov_binscatter.png", dpi=300)
+fig, ax, _ = sp.binscatter(df, y="age", x="running_var", n_bins=40, ci=True)
+fig.savefig("figures/fig2b3_cov_binscatter.png", dpi=300)
 ```
 
 ### 3.4 Matching: love plot (standardized differences)
 ```python
 m = sp.match(df, y="wage", treat="training",
              covariates=["age", "edu", "tenure"], method="nearest")
-m.plot()\
- .savefig("figures/fig2c_love_plot.png", dpi=300)      # |std diff| pre vs post; target |Δ|<0.1
+fig, ax = m.plot()                                    # |std diff| pre vs post; target |Δ|<0.1
+fig.savefig("figures/fig2c_love_plot.png", dpi=300)
 ```
 
 ### 3.5 SCM: synthetic-control trajectory + gap plot
@@ -656,11 +742,12 @@ For synthetic-control designs the canonical Figure 2 is the treated-vs-synthetic
 ```python
 sc = sp.synth(df, outcome="y", unit="unit", time="time",
               treated_unit=1, treatment_time=2000)
-sc.plot().savefig("figures/fig2d_synth_trajectory.png", dpi=300)   # treated vs synthetic + gap
+fig, ax = sc.plot()                                   # treated vs synthetic + gap
+fig.savefig("figures/fig2d_synth_trajectory.png", dpi=300)
 sd = sp.sdid(df, outcome="y", unit="unit", time="time",
              treated_unit=1, treatment_time=2000)
-sp.synthdid_plot(sd, title="Figure 2d. Synthetic DID")\
-  .savefig("figures/fig2d2_sdid.png", dpi=300)
+fig, ax = sp.synthdid_plot(sd, title="Figure 2d. Synthetic DID")
+fig.savefig("figures/fig2d2_sdid.png", dpi=300)
 ```
 
 ### 3.6 Generic pre-flight (identification-independent)
@@ -829,11 +916,12 @@ open("tables/table2d_horizons.tex", "w").write(rt.to_latex())
 ### 4.5 Pattern E — IV reporting triplet (first-stage / reduced-form / 2SLS)
 The textbook AER IV table presents the **first stage**, the **reduced form**, and the **2SLS** in three columns so the reader can verify Wald-ratio = RF / FS.
 
+> **Trap:** `sp.ivreg` does **not** absorb `| fe` and does **not** parse `C(fe)` — it **silently drops** a `| industry + year` term (identical β̂ with or without it), so a 2SLS column written that way would not control for the FE the first-stage/reduced-form columns absorb. Keep the IV triplet on the **same low-dim control set** in all three columns; to control for fixed effects in a 2SLS, pre-build dummy columns in pandas and add them explicitly, or partial the FE out first.
+
 ```python
-fs = sp.feols  ("training ~ Z + age + edu | industry + year", df, vcov={"CRV1":"firm_id"})  # 1st stage
-rf = sp.feols  ("wage     ~ Z + age + edu | industry + year", df, vcov={"CRV1":"firm_id"})  # reduced form
-iv = sp.ivreg  ("wage ~ (training ~ Z) + age + edu | industry+year",
-                df, cluster="firm_id")                                              # 2SLS
+fs = sp.feols("training ~ Z + age + edu", df, vcov={"CRV1":"firm_id"})   # 1st stage
+rf = sp.feols("wage     ~ Z + age + edu", df, vcov={"CRV1":"firm_id"})   # reduced form
+iv = sp.ivreg("wage ~ (training ~ Z) + age + edu", df, cluster="firm_id")  # 2SLS (same controls)
 
 rt = sp.regtable(fs, rf, iv,
                  template="aer",
@@ -857,7 +945,7 @@ For DID / IV / RD / SCM mains, the `sp.causal(...)` orchestrator returns a `Caus
 w = sp.causal(df, y="wage", treatment="training",
               id="worker_id", time="year", design="did",
               covariates=["age", "edu", "tenure"],
-              dag=discovered.dag)                  # optional
+              dag=discovered.to_dag())             # optional (LLMConstrainedDAGResult.to_dag())
 print(w.diagnostics)                               # PT verdict + warnings
 print(w.recommendation)                            # which estimator + why
 print(w.result.summary())                          # point estimate + cluster-robust SE + CI
@@ -868,12 +956,12 @@ print(w.robustness_findings)                       # automated robustness batter
 Replace one of the wall-of-numbers tables with a coefplot in the body, push the table to the appendix. Modern AER papers increasingly do this.
 
 ```python
-sp.coefplot(M1, M2, M3, M4, M5,
-            model_names=["(1)","(2)","(3)","(4)","(5)"],
-            variables=["training"],
-            title="Figure 3. β̂ on training across specifications (95% CI)",
-            alpha=0.05)\
-  .savefig("figures/fig3_coefplot.png", dpi=300)
+fig, ax = sp.coefplot(M1, M2, M3, M4, M5,
+                      model_names=["(1)","(2)","(3)","(4)","(5)"],
+                      variables=["training"],
+                      title="Figure 3. β̂ on training across specifications (95% CI)",
+                      alpha=0.05)
+fig.savefig("figures/fig3_coefplot.png", dpi=300)
 ```
 
 ### Reporting checklist for the Table 2 footnote (AER house style)
@@ -946,34 +1034,40 @@ open("tables/table3b_interactions.tex", "w").write(rt.to_latex())
 dr = sp.dose_response(df, y="wage", treat="training_hours",
                       covariates=["age","edu","tenure","firm_size"],
                       n_dose_points=20)
-dr.plot(title="Figure 4a. Dose-response: training hours → wage")\
-  .savefig("figures/fig4a_dose_response.png", dpi=300)
+fig, ax = dr.plot(title="Figure 4a. Dose-response: training hours → wage")
+fig.savefig("figures/fig4a_dose_response.png", dpi=300)
 
 # DID-flavored continuous treatment (de Chaisemartin–D'Haultfœuille):
-sp.continuous_did(df, y="wage", dose="training_hours",
-                  time="year", id="worker_id").plot()\
-  .savefig("figures/fig4a2_continuous_did.png", dpi=300)
+fig, ax = sp.continuous_did(df, y="wage", dose="training_hours",
+                            time="year", id="worker_id").plot()
+fig.savefig("figures/fig4a2_continuous_did.png", dpi=300)
 ```
 
 ### 5.4 Figure 4-bis — CATE distribution (DR-Learner / causal forest)
-The CATE plotters need a result that exposes per-row conditional effects.
-`sp.causal_forest` returns a *summary* result without `.cate_estimates`, so
-for the CATE histogram and grouped bar chart use a meta-learner (or any
-DR-/X-/R-learner) and pass its CATE table to `cate_group_plot`.
+The CATE plotters read per-row conditional effects out of the result's
+`model_info["cate"]` array. **There is no `.cate_estimates` attribute** — the raw
+per-row CATE vector lives at `ml.model_info["cate"]` (an ndarray of length *n*),
+and summary stats at `model_info["cate_mean"] / cate_q25 / cate_q75 / ...`.
+`sp.causal_forest` returns a *summary* result that does not populate
+`model_info["cate"]`, so for the CATE histogram and grouped bar chart use a
+meta-learner (or any DR-/X-/R-learner) and pass its result to the plotters.
 
 ```python
 ml = sp.metalearner(df, y="wage", treat="training",
                     covariates=["age","edu","tenure","firm_size"], learner="dr")
 
-sp.cate_plot(ml, kind="hist",
-             title="Figure 4b. Distribution of conditional ATE")\
-  .savefig("figures/fig4b_cate_hist.png", dpi=300)
+# Raw per-row CATE vector (if you need the numbers, not just the figure):
+cate_i = ml.model_info["cate"]                        # ndarray, length n  (NOT ml.cate_estimates)
+
+fig, ax = sp.cate_plot(ml, kind="hist",
+                       title="Figure 4b. Distribution of conditional ATE")
+fig.savefig("figures/fig4b_cate_hist.png", dpi=300)
 
 # CATE by group bar chart: first compute the group-level table, THEN plot it.
-# `cate_group_plot` takes a DataFrame, not the result object.
+# `cate_group_plot` takes a DataFrame (from cate_by_group), not the result object.
 g = sp.cate_by_group(ml, df, by="skill_quartile", n_groups=4)
-sp.cate_group_plot(g, title="Figure 4c. CATE by skill quartile")\
-  .savefig("figures/fig4c_cate_by_group.png", dpi=300)
+fig, ax = sp.cate_group_plot(g, title="Figure 4c. CATE by skill quartile")
+fig.savefig("figures/fig4c_cate_by_group.png", dpi=300)
 
 # Tabular summary for the appendix
 print(sp.cate_summary(ml))
@@ -991,7 +1085,7 @@ sp.subgroup_analysis(df, formula="wage ~ training + age + edu + tenure",
 For continuous moderators or many subgroups, prefer:
 - `sp.continuous_did(...)` — dose-response under DID
 - `sp.metalearner(..., learner="dr")` + `sp.cate_plot` / `sp.cate_by_group` — DR-Learner CATE (recommended for plotting)
-- `sp.causal_forest(formula="wage ~ training | X", data=df)` — CATE summary only (no per-row `.cate_estimates`)
+- `sp.causal_forest(formula="wage ~ training | X", data=df)` — CATE summary only (does not populate `model_info["cate"]`; use a meta-learner for per-row CATEs)
 
 ## Step 6 — Mechanisms / channels
 
@@ -1134,8 +1228,11 @@ rob = {
                                         df, vcov={"CRV1": "firm_id"}),
     "(6) 2-way cluster":       sp.feols("wage ~ training + age + edu + tenure | industry + year",
                                         df, vcov={"CRV1": "firm_id+year"}),  # 2-way: firm × year
-    "(7) Conley spatial SE":   sp.conley(baseline, df,
-                                          lat="lat", lon="lon", dist_cutoff=100),
+    # sp.conley needs a STATSMODELS-backed result (sp.regress/sp.ivreg) — it raises
+    # KeyError on a pyfixest feols result. Re-fit the spec via sp.regress for this row.
+    "(7) Conley spatial SE":   sp.conley(sp.regress("wage ~ training + age + edu + tenure",
+                                                    df, cluster="firm_id"),
+                                         df, lat="lat", lon="lon", dist_cutoff=100),
     "(8) Log outcome":         sp.feols("log_wage ~ training + age + edu + tenure | industry + year",
                                         df, vcov={"CRV1": "firm_id"}),
     "(9) IHS outcome":         sp.feols("ihs_wage ~ training + age + edu + tenure | industry + year",
@@ -1183,46 +1280,60 @@ sp.paper_tables(main=[M1, M2, M3, M4, M5],
 A single visual summary that an AER referee can parse in 5 seconds: every β̂ and 95% CI on one axis. Confirms the estimate is not knife-edge.
 
 ```python
-sp.coefplot(*rob.values(),
-            model_names=list(rob),
-            variables=["training"],
-            title="Figure 5. β̂ on training across robustness specifications",
-            alpha=0.05)\
-  .savefig("figures/fig5_robustness_forest.png", dpi=300)
+fig, ax = sp.coefplot(*rob.values(),
+                      model_names=list(rob),
+                      variables=["training"],
+                      title="Figure 5. β̂ on training across robustness specifications",
+                      alpha=0.05)
+fig.savefig("figures/fig5_robustness_forest.png", dpi=300)
 ```
 
 ### 7.13 Figure 5-bis — spec curve
 The Simonsohn et al. (2020) specification curve plots β̂ across **every combination** of {controls × subsamples × outcome transforms × SE types}. Useful when you want to head off "what about specification X?" referee letters.
 
 ```python
+# se_types accepts only: 'nonrobust', 'hc1' (alias 'robust'), 'cluster' (needs cluster_var).
+# y_transforms is a DICT {name: callable} — NOT a list of strings.
 sc = sp.spec_curve(df, y="wage", x="training",
                    controls=[["age"], ["age","edu"], ["age","edu","tenure"],
                              ["age","edu","tenure","firm_size"]],
-                   se_types=["robust", "cluster_firm_id", "cluster_firm_id_year"],
-                   y_transforms=["identity", "log", "ihs"],
+                   se_types=["nonrobust", "robust", "cluster"],   # 'cluster' uses cluster_var below
+                   y_transforms={"level": lambda s: s,
+                                 "log":   np.log,
+                                 "ihs":   np.arcsinh},
                    subsets={"all": None,
                             "manuf":  df["industry"].eq("manufacturing"),
                             "no99":   df["wage"] < df["wage"].quantile(0.99)},
                    cluster_var="firm_id")
-sc.plot(title="Figure 5-bis. Specification curve")\
-  .savefig("figures/fig5b_spec_curve.png", dpi=300)
+fig, ax = sc.plot(title="Figure 5-bis. Specification curve")
+fig.savefig("figures/fig5b_spec_curve.png", dpi=300)
 ```
 
-### 7.14 Figure 6 — sensitivity dashboard
-One-page Cinelli–Hazlett + Oster + E-value summary for the §7 closing argument.
+### 7.14 Figure 6 + sensitivity dashboard
+`sp.unified_sensitivity(...)` and `sp.sensitivity_dashboard(...)` both return a
+**text/numeric** `SensitivityDashboard` (Cinelli–Hazlett + Oster + Rosenbaum +
+E-value). It is **not** a figure — it has `.summary()` and numeric attributes
+(`.e_value_point`, `.e_value_ci`, `.oster`, `.rosenbaum`, `.sensemakr`, `.breakdown`),
+**no `.plot()` / `.savefig()` / `.results`**. The sensitivity *figure*
+(`sp.sensitivity_plot`) is a Rambachan–Roth honest-DID plot and consumes the
+DataFrame returned by `sp.honest_did(...)` (columns `M / ci_lower / ci_upper / rejects_zero`).
 
 ```python
-sens = sp.unified_sensitivity(baseline,
-                              r2_treated=0.05, r2_controlled=0.10,
+# (a) Numeric sensitivity dashboard — print the summary, read the attributes.
+dash = sp.unified_sensitivity(baseline, r2_treated=0.05, r2_controlled=0.10,
                               include_oster=True)
-sp.sensitivity_plot(sens.results,
-                    original_estimate=baseline.params["training"],
-                    original_ci=tuple(baseline.conf_int().loc["training"]),
-                    title="Figure 6. Sensitivity to unobserved confounding")\
-  .savefig("figures/fig6_sensitivity.png", dpi=300)
+print(dash.summary())                                 # one-page text dashboard
+print(dash.e_value_point, dash.e_value_ci)            # numeric fields for the §7 prose
+# sp.sensitivity_dashboard(baseline).summary() is the auto-dimensioned variant.
 
-sp.sensitivity_dashboard(baseline)\
-  .savefig("figures/fig6b_sensitivity_dashboard.png", dpi=300)
+# (b) Sensitivity FIGURE (honest-DID PT sensitivity) — needs a CS/SA event-study
+#     result (`cs` from §3.1) and its honest_did() DataFrame.
+sens_df = sp.honest_did(cs, method="smoothness")      # → DataFrame (M, ci_lower, ci_upper, ...)
+fig, ax = sp.sensitivity_plot(sens_df,
+                              original_estimate=cs.estimate,
+                              original_ci=cs.ci,
+                              title="Figure 6. Sensitivity to PT violations (Rambachan–Roth)")
+fig.savefig("figures/fig6_sensitivity.png", dpi=300)
 ```
 
 ### 7.15 One-stop robustness reporter
@@ -1242,7 +1353,8 @@ The agent's job at §8 is to produce a **single artifact a co-author can open in
 result.to_docx("tables/main_result.docx",
                title="Table 2. Main result")          # CausalResult → .docx
 result.to_latex(caption="Main result", label="tab:main")
-result.plot().savefig("figures/main.png", dpi=300)    # publication-quality figure
+fig, ax = result.plot()                               # publication-quality figure → (fig, ax)
+fig.savefig("figures/main.png", dpi=300)
 print(sp.cite(result, "training"))                    # → "1.239*** (0.153)"  ← inline citation
 ```
 
@@ -1310,20 +1422,27 @@ c.save("replication/paper.md")     # GitHub-flavoured Markdown for the README
 Inspect the bundle before saving:
 
 ```python
-print(c)                # → <Collection items=8 kinds=[heading, summary, balance, ...]>
+print(c)                # → <Collection title='...' template='aer' items=8 kinds=['heading','summary','balance',...]>
 print(c.list())         # DataFrame with name / kind / title for every item
 ```
 
 ### 8.5 Reproducibility stamp
+
+> A `CausalResult` (from DID / CS / IV-causal / DML / TMLE / …) exposes `.estimate` (scalar), `.ci` (tuple), `.estimand`, and `.n_obs` — it has **no** `.conf_int()`, and `.data_info`'s key is `"nobs"`, not `"n_obs"`. An `EconometricResults` (regress / feols / ivreg) instead exposes `.params[name]` and `.conf_int().loc[name]` — use that branch for an OLS/FE main result.
+
 ```python
 import json
+ci = result.ci                                    # CausalResult: (lo, hi) tuple
 json.dump({
     "statspai":          sp.__version__,
     "seed":              42,
-    "n_obs":             result.data_info["n_obs"],
+    "n_obs":             int(result.n_obs),
     "estimand":          result.estimand,
-    "estimate":          float(result.params["training"]),
-    "ci95":              list(result.conf_int().loc["training"]),
+    "estimate":          float(result.estimate),
+    "ci95":              [float(ci[0]), float(ci[1])],
+    # Econometric (feols/regress) main result instead:
+    #   "estimate": float(M.params["training"]),
+    #   "ci95":     list(M.conf_int().loc["training"]),
     "pre_registration":  "artifacts/empirical_strategy.md",
     "data_contract":     "artifacts/data_contract.json",
     "sample_log":        "artifacts/sample_construction.json",
@@ -1381,9 +1500,9 @@ For pyfixest-style native output, `sp.etable(*models, ...)` is the alternative; 
 |---|---|---|---|
 | 1a | Raw trends (DID Figure 1) | `sp.parallel_trends_plot(df, y, time, treat, treat_time, ci=True)` | §1 |
 | 1b | Treatment rollout heatmap | `sp.treatment_rollout_plot(df, time, treat, id)` | §1 |
-| 2a | Event-study coefficients | `sp.enhanced_event_study_plot(sp.event_study(...))` | §3 |
+| 2a | Event-study coefficients | `sp.enhanced_event_study_plot(cs)` *(cs = `sp.callaway_santanna(...)`; **not** `event_study()` output)* | §3 |
 | 2a' | Bacon weights | `sp.bacon_plot(sp.bacon_decomposition(...))` | §3 |
-| 2a'' | CS-DID dynamic effects | `sp.did_summary_plot(sp.callaway_santanna(...))` | §3 |
+| 2a'' | CS-DID dynamic effects | `cs.plot()` · `sp.ggdid(cs)` · `sp.group_time_plot(cs)` | §3 |
 | 2b | RD canonical plot | `sp.rdplot(df, y, x, c)` | §3 |
 | 2b' | McCrary density | `sp.rddensity(df, x, c).plot()` | §3 |
 | 2c | Matching love plot | `sp.match(...).plot()` | §3 |
@@ -1394,16 +1513,16 @@ For pyfixest-style native output, `sp.etable(*models, ...)` is the alternative; 
 | 4c | CATE by group bar | `g = sp.cate_by_group(ml, df, by=..., n_groups=4); sp.cate_group_plot(g)` | §5 |
 | 5 | Robustness forest plot | `sp.coefplot(*rob.values(), variables=["x"])` | §7 |
 | 5b | Specification curve | `sp.spec_curve(...).plot()` | §7 |
-| 6 | Sensitivity dashboard | `sp.sensitivity_dashboard(result)` · `sp.sensitivity_plot(...)` | §7 |
+| 6 | Sensitivity (text dashboard + honest-DID figure) | `print(sp.sensitivity_dashboard(result).summary())` · `sp.sensitivity_plot(sp.honest_did(cs, ...))` | §7 |
 | 7 | Final result.plot() | `result.plot()` (estimator-specific) | §8 |
 
-> Every plotting function above accepts `ax=` so panels can be combined with matplotlib subplots, and returns a Figure that supports `.savefig(path, dpi=300)` for publication output.
+> Every plotting function above accepts `ax=` so panels can be combined with matplotlib subplots, and **returns a `(fig, ax)` tuple** — unpack it and call `fig.savefig(path, dpi=300)` for publication output (see "Saving figures — the `(fig, ax)` idiom" above). `sp.binscatter` returns `(fig, ax, binned_df)`; `sp.kaplan_meier(...).plot()` returns a bare `Axes` (use `ax.figure.savefig(...)`).
 
 ---
 
 ## §A. Epidemiology / public health pipeline (Mode A)
 
-> **Convention**: STROBE (observational) / TRIPOD-AI (prediction) reporting. The modern epi gold standard is **target-trial emulation** (Hernán & Robins) — write the protocol of the hypothetical RCT first, then emulate it with observational data using a doubly-robust estimator. Outcomes are commonly **risk differences, risk ratios, hazard ratios, or restricted mean survival time**, not just OLS coefficients. The skill mirrors the AER 8-section flow but swaps the Step-4 estimator stack and adds survival/MR-specific reporting rows.
+> **Convention**: STROBE (observational) / TRIPOD-AI (prediction) reporting. A modern epidemiology reference design is **target-trial emulation** (Hernán & Robins): write the protocol of the hypothetical RCT first, then emulate it with observational data using a doubly-robust estimator. Outcomes are commonly **risk differences, risk ratios, hazard ratios, or restricted mean survival time**, not just OLS coefficients. The skill mirrors the AER 8-section flow but swaps the Step-4 estimator stack and adds survival/MR-specific reporting rows.
 
 Running example: `statin_initiation → 5-yr_MACE` in an EHR cohort (`patient_id / index_date / age / sex / ldl_baseline / comorbidity_index / followup_days / event`). The exposure is time-varying, confounders are time-varying, and competing-risk censoring matters — the canonical setting where naïve OLS / Cox-with-baseline-adjustment is biased.
 
@@ -1412,21 +1531,34 @@ Running example: `statin_initiation → 5-yr_MACE` in an EHR cohort (`patient_id
 ```python
 import statspai as sp
 
-# Eligibility, treatment-strategy, time-zero, follow-up, outcome — written down BEFORE estimation
+# Eligibility, treatment-strategy, time-zero, follow-up, outcome — written down BEFORE estimation.
+# NOTE the two validated enum fields:
+#   • assignment    ∈ {"randomization", "observational emulation"}
+#   • causal_contrast ∈ {"ITT", "per-protocol", "as-treated", "observational-analogue"}
+# (free-text in these two fields raises ValueError). Put the prose description in `notes=`.
 protocol = sp.target_trial.TargetTrialProtocol(
     eligibility           = "adults 40-75, LDL ≥ 130, no prior MI/stroke, no statin in 12mo washout",
     treatment_strategies  = ["initiate statin within 30d of index", "no statin within 30d"],
-    assignment            = "observational; emulate randomization via IPTW + g-formula",
+    assignment            = "observational emulation",       # enum — not free text
     time_zero             = "index_date (first eligible cardiology visit)",
     followup_end          = "first MACE / death / disenrollment / index_date + 5yr",
     outcome               = "first MACE (composite: MI, stroke, cardiovascular death)",
-    causal_contrast       = "per-protocol risk difference at 5 years",
+    causal_contrast       = "per-protocol",                  # enum — not free text
     analysis_plan         = "IPTW-MSM + g-formula + TMLE triplet; report all three with CIs",
     baseline_covariates   = ["age","sex","ldl_baseline","comorbidity_index","smoker"],
     time_varying_covariates = ["ldl_current"],
+    notes                 = "emulate randomization via IPTW + g-formula; 5-yr risk difference",
 )
-cohort = sp.target_trial_emulate(df, protocol=protocol, id="patient_id", time="followup_days",
-                                  treat="statin_initiation", event="mace")
+# Signature: target_trial_emulate(protocol, data, outcome_col, treatment_col,
+#                                 time_zero_filter=None, weights=None) -> TargetTrialResult.
+# Eligibility is applied as `data.query(protocol.eligibility)` UNLESS you pass a
+# `time_zero_filter` callable (which then defines the eligible/time-zero rows and
+# lets `eligibility` stay human-readable prose). Use the callable for non-query-able rules:
+cohort_res = sp.target_trial_emulate(
+    protocol, df, outcome_col="mace", treatment_col="statin_initiation",
+    time_zero_filter=lambda d: d["age"].between(40, 75) & (d["ldl_baseline"] >= 130),
+)
+cohort = df   # downstream estimators run on the eligible analysis frame you constructed
 ```
 
 ### A.1 Table 1 — baseline characteristics by exposure
@@ -1443,13 +1575,17 @@ mc.to_excel("tables/table1_epi.xlsx")
 ### A.2 Identification — DAG, propensity overlap, KM curves
 
 ```python
-# 2.1 DAG (manual or LLM-assisted)
-dag = sp.dag(["age","sex","ldl_baseline","comorbidity_index","statin_initiation","mace"])
-dag.add_edges([("age","ldl_baseline"),("age","statin_initiation"),
-               ("ldl_baseline","statin_initiation"),("statin_initiation","mace"),
-               ("ldl_baseline","mace"),("comorbidity_index","statin_initiation"),
-               ("comorbidity_index","mace")])
-adj = dag.adjustment_set(treatment="statin_initiation", outcome="mace")  # back-door set
+# 2.1 DAG (manual or LLM-assisted). sp.dag(spec) parses an edge STRING
+# ("A -> B; C -> B"); build edges with the string spec or chained .add_edge(parent, child)
+# (singular — there is no .add_edges). Back-door sets come from .adjustment_sets(exposure,
+# outcome) (PLURAL, positional) and return a LIST of valid sets.
+dag = sp.dag(
+    "age -> ldl_baseline; age -> statin_initiation; "
+    "ldl_baseline -> statin_initiation; ldl_baseline -> mace; "
+    "comorbidity_index -> statin_initiation; comorbidity_index -> mace; "
+    "statin_initiation -> mace"
+)
+adj = dag.adjustment_sets("statin_initiation", "mace")    # list of back-door sets, e.g. [{...}]
 
 # 2.2 Propensity-score overlap (positivity check; epi convention before any IPW)
 # Returns a pd.Series of fitted PS — draw mirrored histograms by exposure.
@@ -1463,9 +1599,11 @@ ax.hist(ps[cohort["statin_initiation"]==0], bins=40, alpha=0.5, label="Control")
 ax.set_xlabel("Estimated propensity score"); ax.legend()
 fig.savefig("figures/figA1_ps_overlap.png", dpi=300)
 
-# 2.3 Crude KM curves by exposure (descriptive identification graphic)
+# 2.3 Crude KM curves by exposure (descriptive identification graphic).
+# KMResult.plot() returns a bare Axes (NOT a (fig, ax) tuple) — save via ax.figure.
 km = sp.kaplan_meier(cohort, duration="followup_days", event="mace", group="statin_initiation")
-km.plot().savefig("figures/figA2_km.png", dpi=300)
+ax = km.plot()
+ax.figure.savefig("figures/figA2_km.png", dpi=300)
 ```
 
 ### A.3 Main estimate — IPTW · g-formula · TMLE triplet (the modern epi standard)
@@ -1479,13 +1617,18 @@ iptw = sp.msm(cohort, y="mace", treat="statin_initiation",
               time_varying=["ldl_current","comorbidity_index"],
               baseline=["age","sex"])
 
-# (2) Parametric g-formula (g-computation)
-gcomp = sp.gformula(cohort, y="mace", treat="statin_initiation",
-                    covariates=["age","sex","ldl_baseline","comorbidity_index","smoker"],
-                    time_varying=["ldl_current"],
-                    intervention="always_treat", reference="never_treat")
+# (2) Parametric g-formula (g-computation). `sp.gformula` is a MODULE, not a function.
+# For a point-treatment g-formula use the top-level `sp.g_computation`:
+gcomp = sp.g_computation(cohort, y="mace", treat="statin_initiation",
+                         covariates=["age","sex","ldl_baseline","comorbidity_index","smoker"])
+# For a TIME-VARYING treatment/confounder g-formula (the Robins setting) use the
+# Monte-Carlo g-formula in the module:
+#   sp.gformula.gformula_mc(cohort, treatment_cols=["statin_t1","statin_t2",...],
+#                           confounder_cols=[["ldl_t1"],["ldl_t2"],...],
+#                           outcome_col="mace", strategy=(1,1,1), control_strategy=(0,0,0),
+#                           id_col="patient_id", time_col="month")
 
-# (3) TMLE — doubly robust, the modern gold standard.
+# (3) TMLE -- doubly robust targeted learning estimator.
 # Pass an sklearn-style library list for nuisance learners; statspai stacks them
 # internally via SuperLearner. Keep `outcome_library` and `propensity_library`
 # explicit so the reviewer can see your nuisance choices.
@@ -1498,10 +1641,11 @@ tmle = sp.tmle(cohort, y="mace", treat="statin_initiation",
                covariates=["age","sex","ldl_baseline","comorbidity_index","smoker"],
                outcome_library=sl_lib, propensity_library=sl_lib)
 
-# (3-bis) HAL-TMLE if you want a fully nonparametric variant
+# (3-bis) HAL-TMLE if you want a fully nonparametric variant.
+# `variant=` only accepts "delta" (the default; "projection" is NotImplemented).
 hal = sp.hal_tmle(cohort, y="mace", treat="statin_initiation",
                   covariates=["age","sex","ldl_baseline","comorbidity_index","smoker"],
-                  variant="ate")
+                  variant="delta")
 
 # Convergent-evidence table — risk difference at 5 years
 rt = sp.regtable(iptw, gcomp, tmle, hal,
@@ -1514,45 +1658,66 @@ rt.to_word ("tables/table2_epi.docx"); rt.to_excel("tables/table2_epi.xlsx")
 ### A.4 Survival outcomes — KM / AFT / restricted mean
 
 ```python
-# Restricted mean survival time (RMST) at 5 yr — preferred over hazard ratio when PH fails
-aft = sp.aft("Surv(followup_days, mace) ~ statin_initiation + age + sex + ldl_baseline",
-             cohort, family="weibull")
+import pandas as pd
 
-rt_surv = sp.regtable(aft,
-                      stats=["N","Events","Median survival","RMST (5yr)","HR (PH)"],
-                      title="Table 3. Survival analysis (Weibull AFT)")
-rt_surv.to_word("tables/table3_survival.docx")
+# AFT formula LHS is "duration + event" (NOT R-style Surv(time, event)).
+aft = sp.aft("followup_days + mace ~ statin_initiation + age + sex + ldl_baseline",
+             cohort, family="weibull")
+print(aft.summary())                                  # AFTResult exposes .summary() (text)
+
+# AFTResult does NOT go into sp.regtable (it has no .params) and has no .to_word/.to_latex.
+# Build a coefficient table from its attributes (.beta / .se / .var_names / .n / .n_events):
+import numpy as np
+aft_table = pd.DataFrame({"coef": aft.beta, "se": aft.se}, index=aft.var_names)
+aft_table["z"] = aft_table["coef"] / aft_table["se"]
+aft_table.to_excel("tables/table3_survival.xlsx")     # or .to_latex()
+print(f"N={aft.n}, events={aft.n_events}, family={aft.family}, AIC={aft.aic:.1f}")
+
+# For a CAUSAL survival estimand (risk/RMST contrast under unconfoundedness), use the
+# doubly-robust longitudinal-TMLE survival estimator instead of a raw AFT:
+#   sp.ltmle_survival(cohort, ...)   # returns an LTMLESurvivalResult
 ```
 
 ### A.5 Mendelian randomization (genetic IV — when relevant)
 
 ```python
-# Standard MR triple: IVW → Egger → weighted median, on summary statistics
+import pandas as pd
+
+# Standard MR triple: IVW → Egger → weighted median, on summary statistics.
+# Each mr_* returns a DICT (keys: estimate, se, ci_lower, ci_upper, p_value, ...) —
+# NOT a result object, so it does NOT go into sp.regtable. Assemble a DataFrame instead.
 ivw    = sp.mr_ivw   (beta_exposure, beta_outcome, se_exposure, se_outcome)
-egger  = sp.mr_egger (beta_exposure, beta_outcome, se_exposure, se_outcome)   # tests pleiotropy
+egger  = sp.mr_egger (beta_exposure, beta_outcome, se_exposure, se_outcome)   # 'intercept'(_p) = pleiotropy test
 median = sp.mr_median(beta_exposure, beta_outcome, se_exposure, se_outcome, penalized=True)
 
-rt_mr = sp.regtable(ivw, egger, median,
-                    model_labels=["IVW","MR-Egger","Weighted median"],
-                    title="Table 4. Mendelian randomization — sensitivity stack")
-rt_mr.to_word("tables/table4_mr.docx")
+mr_table = pd.DataFrame(
+    {"IVW": ivw, "MR-Egger": egger, "Weighted median": median}
+).T[["estimate", "se", "ci_lower", "ci_upper", "p_value"]]
+mr_table.to_excel("tables/table4_mr.xlsx")        # or .to_latex() / .to_markdown()
+print(mr_table)
+# Egger intercept ≠ 0 (egger["intercept_p"] < 0.05) flags directional pleiotropy.
 ```
 
 ### A.6 Robustness — E-value, bounds, principal stratification
 
 ```python
-# E-value: minimum strength of unmeasured confounding to explain away the result
-ev = sp.evalue(estimate=tmle.point_estimate, ci=tmle.ci, measure="RR")
+# E-value: minimum strength of unmeasured confounding to explain away the result.
+# CausalResult exposes `.estimate` and `.ci` (there is NO `.point_estimate`).
+ev = sp.evalue(estimate=tmle.estimate, ci=tmle.ci, measure="RR")
 # → "E-value 1.84; CI E-value 1.42" (a confounder must be ~2x associated with both
 #   exposure and outcome to nullify the effect — interpret in your domain)
 
-# Manski / Lee bounds when a covariate is missing-not-at-random
-bds = sp.bounds(cohort, y="mace", treat="statin_initiation", method="manski")
+# Manski / Lee bounds — `sp.bounds` is a MODULE; call the specific estimator:
+bds  = sp.bounds.manski_bounds(cohort, y="mace", treat="statin_initiation")
+# selection bias (truncation-by-death / attrition): sp.bounds.lee_bounds(..., selection="observed")
 
-# Principal stratification (e.g. always-takers / never-takers / compliers)
+# Principal stratification — BOTH `strata` and `instrument` must be BINARY (0/1) columns
+# that already exist in the frame (build them first; they are NOT created for you).
+cohort["high_density_zip"] = (cohort["zip_pharmacy_density"] > 0).astype(int)   # binary instrument
+cohort["adherent"]         = (cohort["adherence_score"] > 0.8).astype(int)      # 0/1 stratum indicator
 ps_strat = sp.principal_strat(cohort, y="mace", treat="statin_initiation",
-                              instrument="zip_pharmacy_density",
-                              strata="compliance_type")
+                              instrument="high_density_zip",
+                              strata="adherent")
 ```
 
 ### A.7 Reporting checklist (epi-specific footer for `notes=`)
@@ -1586,52 +1751,65 @@ import statspai as sp
 from sklearn.model_selection import train_test_split
 train, holdout = train_test_split(df, test_size=0.2, stratify=df["treatment"], random_state=42)
 
-# 0.2 SuperLearner library for nuisance — stacks GBM / RF / Lasso (pass sklearn estimators).
+# 0.2 Nuisance learners. IMPORTANT: `sp.dml` / `sp.metalearner` do NOT accept a
+# `sp.super_learner(...)` object — pass a scikit-learn estimator OBJECT, or (for `dml`
+# only) a string alias from {'gbm','rf','lasso','ridge','linear','xgb','lgbm'}.
 from sklearn.linear_model import LogisticRegression, LassoCV
-from sklearn.ensemble import GradientBoostingRegressor, GradientBoostingClassifier, RandomForestRegressor, RandomForestClassifier
-sl_outcome = sp.super_learner(X=train[X_cols].values, y=train["revenue_30d"].values,
-                              library=[LassoCV(), GradientBoostingRegressor(), RandomForestRegressor()],
-                              n_folds=5, task="regression")
-sl_treat   = sp.super_learner(X=train[X_cols].values, y=train["treatment"].values,
-                              library=[LogisticRegression(max_iter=1000),
-                                       GradientBoostingClassifier(), RandomForestClassifier()],
-                              n_folds=5, task="binary")
+from sklearn.ensemble import (GradientBoostingRegressor, GradientBoostingClassifier,
+                              RandomForestRegressor, RandomForestClassifier)
+g_outcome = GradientBoostingRegressor()       # nuisance E[Y|X]  (a sklearn estimator)
+g_treat   = GradientBoostingClassifier()      # nuisance E[D|X]  (propensity)
+
+# `sp.super_learner` is a separate STANDALONE stacked predictor (it returns a fitted
+# SuperLearner with .predict / .predict_proba) — use it for a reward model in OPE (B.4)
+# or for your own predictions, NOT as the nuisance argument to dml/metalearner.
+sl_reward = sp.super_learner(X=train[X_cols].values, y=train["revenue_30d"].values,
+                             library=[LassoCV(), GradientBoostingRegressor(), RandomForestRegressor()],
+                             n_folds=5, task="regression")
 ```
 
 ### B.1 Estimand & DAG learning (Step 2 + 2.5 in ML key)
 
 ```python
-q = sp.causal_question(treatment="treatment", outcome="revenue_30d",
-                       population="marketed users", estimand="ate")
-plan = q.identify(strategy="ignorability_under_X", X=X_cols)
+# estimand is an UPPERCASE enum: 'ATE'|'ATT'|'ATU'|'LATE'|'CATE'|'ITT'. The strategy
+# is set via design=/estimand= on causal_question; q.identify() takes NO arguments.
+q = sp.causal_question(treatment="treatment", outcome="revenue_30d", data=train,
+                       population="marketed users", estimand="ATE",
+                       design="selection_on_observables", covariates=X_cols)
+plan = q.identify()
 
 # DAG learning (when domain DAG isn't given)
 proposed = sp.llm_dag_propose(variables=X_cols + ["treatment","revenue_30d"],
                               domain="e-commerce uplift")
 constrained = sp.pc_algorithm(train[X_cols + ["treatment","revenue_30d"]],
                               variables=X_cols + ["treatment","revenue_30d"], alpha=0.05)
-validated = sp.llm_dag_validate(dag=proposed, data=train, alpha=0.05)
+validated = sp.llm_dag_validate(proposed, train, alpha=0.05)   # (dag, data) positional
 # Alternative learners: sp.notears(...), sp.causal_discovery(..., method="ges")
 ```
 
 ### B.2 Estimator stack — DML / meta-learner / GRF / neural / Bayesian
 
 ```python
-# (1) DML — Chernozhukov double machine learning
+# (1) DML — Chernozhukov double machine learning.
+# Nuisance kwargs are `model_y` (outcome) and `model_d` (treatment) — NOT ml_g/ml_m.
+# Each takes a sklearn estimator OR a string alias ('gbm'/'rf'/'lasso'/'xgb'/...).
 dml = sp.dml(train, y="revenue_30d", d="treatment", X=X_cols,
              model="plr",                    # plr / irm / iv / pliv
-             ml_g=sl_outcome, ml_m=sl_treat, n_folds=5)
+             model_y=g_outcome, model_d=g_treat, n_folds=5)
 
-# (2) Meta-learners — S / T / X / R / DR
+# (2) Meta-learners — S / T / X / R / DR. outcome_model/propensity_model take sklearn
+# estimator OBJECTS (not strings); omit them for sensible defaults.
 ml_dr = sp.metalearner(train, y="revenue_30d", treat="treatment", covariates=X_cols,
                        learner="dr",         # 's' / 't' / 'x' / 'r' / 'dr'
-                       outcome_model="xgb", propensity_model="xgb")
+                       outcome_model=GradientBoostingRegressor(),
+                       propensity_model=GradientBoostingClassifier())
 
 # (3) Causal forest (GRF / honest splits)
 cf = sp.causal_forest("revenue_30d ~ treatment | " + " + ".join(X_cols),
-                       train, n_estimators=4000, honest=True)
+                       train, n_estimators=2000, honest=True)
 
-# (4) Neural causal — Dragonnet / TARNet / CEVAE
+# (4) Neural causal — Dragonnet / TARNet / CEVAE. REQUIRES torch: pip install statspai[neural].
+# Omit this block (and the neural columns below) if torch is not installed.
 dn   = sp.dragonnet(train, y="revenue_30d", treat="treatment", covariates=X_cols,
                     repr_layers=(200,100), head_layers=(100,))
 tar  = sp.tarnet  (train, y="revenue_30d", treat="treatment", covariates=X_cols)
@@ -1643,7 +1821,8 @@ bcf  = sp.bcf(train, y="revenue_30d", treat="treatment", covariates=X_cols,
 # (6) Panel matrix completion (when units × periods)
 mc   = sp.matrix_completion(panel_df, y="revenue", d="treatment", unit="user_id", time="week")
 
-# Convergent evidence table — same regtable / collect stack
+# Convergent evidence table — same regtable / collect stack. CausalResult AND CausalForest
+# both flow into regtable; drop `dn` if you skipped the neural block.
 rt = sp.regtable(dml, ml_dr, cf, dn, bcf,
                  model_labels=["(1) DML-PLR","(2) DR-Learner","(3) Causal forest",
                                "(4) Dragonnet","(5) BCF"],
@@ -1655,43 +1834,66 @@ rt.to_word ("tables/table2_ml.docx"); rt.to_excel("tables/table2_ml.xlsx")
 ### B.3 CATE distribution & subgroup view (the ML-causal headline)
 
 ```python
-# 3.1 Per-row CATE — DR-learner / X-learner expose .cate_estimates directly
-sp.cate_plot(ml_dr, kind="hist",
-             title="Figure B1. CATE distribution — DR-Learner") \
-  .savefig("figures/figB1_cate_dist.png", dpi=300)
+# 3.1 Per-row CATE. Plotters return (fig, ax). The raw per-row CATE vector lives at
+# ml_dr.model_info["cate"] (an ndarray) — there is NO .cate_estimates attribute.
+fig, ax = sp.cate_plot(ml_dr, kind="hist",
+                       title="Figure B1. CATE distribution — DR-Learner")
+fig.savefig("figures/figB1_cate_dist.png", dpi=300)
 
 # 3.2 CATE by group (skill quartiles, gender, channel, …)
 g = sp.cate_by_group(ml_dr, train, by="customer_value_quartile", n_groups=4)
-sp.cate_group_plot(g, title="Figure B2. CATE by customer-value quartile") \
-  .savefig("figures/figB2_cate_group.png", dpi=300)
+fig, ax = sp.cate_group_plot(g, title="Figure B2. CATE by customer-value quartile")
+fig.savefig("figures/figB2_cate_group.png", dpi=300)
 
-# 3.3 Causal-forest local effect surface
-cf.local_effects().plot(...).savefig("figures/figB3_local.png", dpi=300)
+# 3.3 Causal-forest local effects. CausalForest has no .local_effects(); get the per-row
+# CATE vector with cf.effect(X) (ndarray) and plot it yourself.
+import numpy as np, matplotlib.pyplot as plt
+tau = cf.effect(train[X_cols].values)                # per-row CATE, length n
+fig, ax = plt.subplots(figsize=(7, 4))
+ax.hist(tau, bins=40); ax.set_xlabel("Causal-forest CATE"); ax.set_title("Figure B3. CF local effects")
+fig.savefig("figures/figB3_local.png", dpi=300)
 ```
 
 ### B.4 Policy learning + off-policy evaluation
 
 ```python
-# 4.1 Learn an interpretable policy tree from CATE estimates
-pol_tree = sp.policy_tree(train, y="revenue_30d", d="treatment", X=X_cols, max_depth=3)
-pol_tree.plot().savefig("figures/figB4_policy.png", dpi=300)
+import numpy as np
 
-# 4.2 Safe policy under cost constraint
-safe = sp.offline_safe_policy(holdout, state=X_cols, action="treatment",
+# 4.1 Learn an interpretable policy tree from CATE estimates. The result is dict-like
+# with .plot_tree() (NOT .plot()), .summary(), .to_latex(), .to_excel(). plot_tree → (fig, ax).
+pol_tree = sp.policy_tree(train, y="revenue_30d", d="treatment", X=X_cols, max_depth=3)
+fig, ax = pol_tree.plot_tree()
+fig.savefig("figures/figB4_policy.png", dpi=300)
+
+# 4.2 Safe policy under a cost constraint. `state` and `action` must each be a SINGLE
+# DISCRETE column name (not a list of feature columns). Encode the state into one
+# discrete segment column first if you have many features.
+train = train.assign(segment=train["customer_value_quartile"])      # one discrete state col
+safe = sp.offline_safe_policy(train, state="segment", action="treatment",
                               reward="revenue_30d", cost="offer_cost", cost_threshold=2.50)
 
 # 4.3 Off-policy evaluation on holdout — IPS / DR / SNIPS.
-# sp.ope exposes estimator-level entry points: ips / direct_method / doubly_robust /
-# snips / switch_dr. Each takes (X, actions, rewards, pi_b, pi_e[, reward_model]).
-import numpy as np
-X_test  = holdout[X_cols].values
-A_test  = holdout["treatment"].values
-R_test  = holdout["revenue_30d"].values
-pi_b    = sl_treat.predict_proba(X_test)[:, 1]      # behavior policy: SL on treatment
-pi_e    = pol_tree.predict(X_test)                   # evaluation policy (deterministic)
+# sp.ope exposes ips / direct_method / doubly_robust / snips / switch_dr. CRITICAL shapes:
+#   pi_b, pi_e are (n, K) probability matrices over K actions (one-hot for deterministic);
+#   reward_model is a CALLABLE reward_model(X, a) -> length-n predicted reward.
+from sklearn.ensemble import GradientBoostingClassifier, GradientBoostingRegressor
+g_t = GradientBoostingClassifier().fit(train[X_cols], train["treatment"])
+g_r = GradientBoostingRegressor().fit(
+    np.column_stack([train[X_cols].values, train["treatment"].values]), train["revenue_30d"])
+
+X_test = holdout[X_cols].values
+A_test = holdout["treatment"].to_numpy(int)
+R_test = holdout["revenue_30d"].to_numpy(float)
+p1     = g_t.predict_proba(X_test)[:, 1]
+pi_b   = np.column_stack([1 - p1, p1])                              # (n, 2) behavior policy
+a_e    = (g_r.predict(np.column_stack([X_test, np.ones(len(X_test))]))    # treat-if-uplift>0
+          > g_r.predict(np.column_stack([X_test, np.zeros(len(X_test))]))).astype(int)
+pi_e   = np.column_stack([1 - a_e, a_e]).astype(float)             # (n, 2) one-hot eval policy
+reward_model = lambda X, a: g_r.predict(np.column_stack([X, np.full(len(X), a)]))
 opv = sp.ope.doubly_robust(X_test, A_test, R_test, pi_b=pi_b, pi_e=pi_e,
-                            reward_model=sl_outcome)
+                           reward_model=reward_model)
 print(f"Policy value (DR): {opv.value:.3f} ± {opv.se:.3f}")
+# IPS/SNIPS need no reward model: sp.ope.snips(A_test, R_test, pi_b=pi_b, pi_e=pi_e)
 ```
 
 ### B.5 Uncertainty + fairness + robustness
@@ -1704,23 +1906,27 @@ cp = sp.conformal_causal.conformal_cate(train, y="revenue_30d", treat="treatment
                                          covariates=X_cols, alpha=0.10)   # 90% PI
 
 # 5.2 Subgroup fairness audit — DP / EO gaps across protected attributes.
-# fairness_audit takes scored predictions on the dataset (not the model directly);
-# either materialize predictions into a column or pass `predictor=`.
-holdout = holdout.assign(pred=ml_dr.predict(holdout[X_cols]))
-fair = sp.fairness.fairness_audit(holdout, predictions="pred",
-                                   protected="gender", labels="revenue_30d",
-                                   threshold=0.10)
+# fairness_audit audits a BINARY classifier: BOTH `predictions` and `labels` must be 0/1
+# columns. (A meta-learner result has no .predict — score with your own classifier.)
+holdout = holdout.assign(
+    targeted  = (g_t.predict_proba(holdout[X_cols])[:, 1] > 0.5).astype(int),   # binary decision
+    responded = (holdout["revenue_30d"] > holdout["revenue_30d"].median()).astype(int),  # binary label
+)
+fair = sp.fairness.fairness_audit(holdout, predictions="targeted",
+                                  protected="gender", labels="responded",
+                                  threshold=0.10)
 
-# 5.3 Sensitivity dashboard — ATE robustness to unmeasured confounding
-sd = sp.sensitivity_dashboard(dml, train,
-                              dimensions=["unmeasured_confounding","positivity","model_misspec"])
-sd.plot().savefig("figures/figB5_sensitivity.png", dpi=300)
+# 5.3 Sensitivity dashboard — a TEXT/numeric dashboard (.summary() + numeric attrs),
+# NOT a figure (no .plot()/.savefig()).
+print(sp.sensitivity_dashboard(dml, train).summary())
 
-# 5.4 (Reuse AER §7 robustness) Spec curve over nuisance choices
+# 5.4 (Reuse AER §7 robustness) Spec curve over nuisance/control choices.
+# se_types ∈ {'nonrobust','hc1'/'robust','cluster'}; sc.plot() → (fig, ax).
 sc = sp.spec_curve(train, y="revenue_30d", x="treatment",
-                   controls=[["age"],["age","gender"],X_cols],
-                   se_types=["robust","cluster"])
-sc.plot().savefig("figures/figB6_spec_curve.png", dpi=300)
+                   controls=[X_cols[:1], X_cols[:3], X_cols],
+                   se_types=["nonrobust", "robust"])
+fig, ax = sc.plot()
+fig.savefig("figures/figB6_spec_curve.png", dpi=300)
 ```
 
 ### B.6 Reporting checklist (ML-causal-specific footer)
@@ -1798,7 +2004,7 @@ sp.ebalance(df, y="wage", treat="training", covariates=["age", "edu"])          
 ### Synthetic Control
 ```python
 sp.synth(df, outcome="y", unit="unit", time="time",
-         treated_unit=1, treatment_time=2000)              # ADH SCM (method='augmented' default)
+         treated_unit=1, treatment_time=2000)              # ADH SCM (method='classic' default; 'augmented'/'sdid'/'mc' opt-in)
 sp.sdid(df, outcome="y", unit="unit", time="time",
         treated_unit=1, treatment_time=2000)               # Synthetic DID (Arkhangelsky et al. 2021)
 sp.synth_time_placebo(df, outcome="y", unit="unit", time="time",
@@ -1817,6 +2023,7 @@ sp.aipw(df, y="wage", treat="training", covariates=["age", "edu"])              
 
 ### Neural Causal
 ```python
+# Requires torch: pip install "statspai[neural]"  (tarnet / cfrnet / dragonnet / cevae)
 sp.tarnet(df,    y="wage", treat="training", covariates=["age", "edu"])
 sp.cfrnet(df,    y="wage", treat="training", covariates=["age", "edu"])
 sp.dragonnet(df, y="wage", treat="training", covariates=["age", "edu"])
@@ -1853,13 +2060,13 @@ sp.subgroup_analysis(df, formula="wage ~ training + age + edu",
 sp.oster_bounds(df, y="wage", treat="training",
                 controls=["age", "edu"], r_max=1.3)                  # Oster 2019
 sp.unified_sensitivity(result, r2_treated=0.05, r2_controlled=0.10,
-                       include_oster=True)                            # Cinelli-Hazlett + Oster
-sp.sensitivity_dashboard(result)
+                       include_oster=True).summary()                  # text dashboard (.summary(); no figure)
+sp.sensitivity_dashboard(result).summary()                           # Cinelli-Hazlett + Oster + E-value (text)
 sp.evalue(estimate=..., ci=(..., ...), measure="RR")
-sp.twoway_cluster(result, df, cluster1="firm_id", cluster2="year")    # two-way SE
+sp.twoway_cluster(result, df, cluster1="firm_id", cluster2="year")    # two-way SE (statsmodels results)
 sp.conley(result, df, lat="lat", lon="lon", dist_cutoff=100)          # spatial HAC
 
-fig = result.plot()
+fig, ax = result.plot()                                              # plot() → (fig, ax)
 sp.interactive(fig)                                                   # WYSIWYG editor, 29 academic themes
 ```
 
@@ -1893,7 +2100,7 @@ sp.interactive(fig)                                                   # WYSIWYG 
 | `sp.power_did(..., power_target=...)` | Wrappers don't auto-solve. Use dispatcher: `sp.power('did', ..., power_target=..., n_periods=, n_treated_periods=)` |
 | `sp.power_cluster_rct(n_clusters=..., power_target=...)` | Use dispatcher: `sp.power('cluster_rct', cluster_size=, icc=, effect_size=, power_target=)` |
 | `sp.cate_group_plot(forest, group=...)` | Takes a DataFrame: `g = sp.cate_by_group(ml, df, by=..., n_groups=4); sp.cate_group_plot(g)`. Forest result lacks per-row CATEs — use `sp.metalearner(..., learner='dr')` |
-| `sp.cate_plot(causal_forest_result, ...)` | Same — needs `metalearner` (or any X/DR/R-learner) result that exposes `.cate_estimates` |
+| `sp.cate_plot(causal_forest_result, ...)` | Needs a `metalearner` (or any X/DR/R-learner) result. Per-row CATEs live at `result.model_info["cate"]` (ndarray) — there is **no `.cate_estimates` attribute**. For a causal forest, use `cf.effect(X)` to get the CATE vector |
 | `sp.bjs_pretrend_joint(es)` | Real signature: `(cs_or_sa_result, data, y=, group=, time=, first_treat=, controls=)` — NOT `event_study()` output |
 | `sp.honest_did(ols_result, ...)` | Only accepts CS / SA / `did_multiplegt` / `aggte(..., 'dynamic')` results — pass a `callaway_santanna` object |
 | `sp.sumstats(df, groups={...}, ...)` | No `groups=` kwarg; loop `sp.sumstats(vars=v_panel, ...)` per panel and concat |
@@ -1908,8 +2115,33 @@ sp.interactive(fig)                                                   # WYSIWYG 
 | `sp.regtable(..., keep=[focal_var])` (or `drop=["Intercept"]`) as the *default* for every table | AER convention is to **show every estimated parameter verbatim — controls AND the intercept** so the reader can verify the full spec. `regtable()` does this when you pass NEITHER `keep=` NOR `drop=`. Reserve `drop=["Intercept"]` for when you actively want to suppress the constant; reserve `keep=[focal]` for intentionally focal-only tables (IV first-stage triplet, interaction-form heterogeneity) — each with a comment explaining why |
 | `sp.regress("y ~ x \| firm_id", df, cluster="firm_id")` for FE | **Silently produces wrong numbers** — `sp.regress` is a thin statsmodels OLS wrapper that does NOT parse `\|` as a FE separator; it interprets `x \| firm_id` as a single garbage variable name. Use `sp.feols("y ~ x \| firm_id", df, vcov={"CRV1":"firm_id"})` for any formula containing `\|`. Two-way cluster: `vcov={"CRV1":"firm_id+year"}` |
 | `sp.feols(..., cluster="firm_id")` | feols uses pyfixest convention: `vcov={"CRV1":"firm_id"}` (one-way) or `vcov={"CRV1":"firm_id+year"}` (two-way). The `cluster=` kwarg is for `sp.regress` / `sp.ivreg` (statsmodels) only |
-| `sp.twoway_cluster(feols_result, df, cluster1=, cluster2=)` | `sp.twoway_cluster` consumes statsmodels-backed results only. For feols, pass two-way directly: `sp.feols(..., vcov={"CRV1":"firm_id+year"})` |
+| `sp.twoway_cluster(feols_result, ...)` or `sp.conley(feols_result, ...)` | Both consume **statsmodels-backed** results only (`sp.regress`/`sp.ivreg`); a pyfixest `feols` result raises (`KeyError`). For feols two-way cluster pass `vcov={"CRV1":"firm_id+year"}` directly; for Conley SE on an FE spec, re-fit that spec via `sp.regress(...)` and pass that |
 | Trusting SEs without checking convergence / weak-IV / overlap | Always read `result.summary()` warnings and `result.diagnostics` |
+| `sp.<plot>(...).savefig(path)` (chaining `.savefig` on a plot call) | Plotters return a `(fig, ax)` tuple — unpack: `fig, ax = sp.coefplot(...); fig.savefig(path, dpi=300)`. `sp.binscatter` → `(fig, ax, df)`; `sp.kaplan_meier(...).plot()` → bare `Axes` (use `ax.figure.savefig`) |
+| `sp.enhanced_event_study_plot(sp.event_study(...))` for the event-study figure | `enhanced_event_study_plot` needs a **CS/SA** result (`KeyError: 'att'` otherwise). Build the figure from `cs = sp.callaway_santanna(...)`: `fig, ax = cs.plot()` (or `sp.ggdid(cs)` / `sp.group_time_plot(cs)`). Keep `sp.event_study(...)` for the numerical pre-trends test only |
+| `sp.did_summary_plot(callaway_santanna_result)` | `did_summary_plot` only accepts a `sp.did_summary()` result. For a CS/SA dynamic-effects figure use `cs.plot()` / `sp.ggdid(cs)` / `sp.group_time_plot(cs)` |
+| `sp.spec_curve(..., y_transforms=["log","ihs"])` (list) | `y_transforms` is a **dict** `{name: callable}`, e.g. `{"log": np.log, "ihs": np.arcsinh}`. `se_types` accepts only `'nonrobust'`/`'hc1'`(=`'robust'`)/`'cluster'` |
+| `sp.unified_sensitivity(...).results` / `sp.sensitivity_dashboard(r).plot()`/`.savefig()` | Both return a **text** `SensitivityDashboard` — use `.summary()` and numeric attrs (`.e_value_point`, `.oster`, …); no `.results`/`.plot()`/`.savefig()`. The sensitivity **figure** (`sp.sensitivity_plot`) consumes `sp.honest_did(cs, ...)` output |
+| `sp.gformula(df, ...)` / `sp.bounds(df, ...)` | Both are **modules**, not functions. Point-treatment g-formula → `sp.g_computation(df, y=, treat=, covariates=)` (time-varying → `sp.gformula.gformula_mc(...)`). Bounds → `sp.bounds.manski_bounds(...)` / `sp.bounds.lee_bounds(...)` |
+| `sp.target_trial_emulate(df, protocol=, id=, time=, treat=, event=)` | Real signature: `(protocol, data, outcome_col, treatment_col, time_zero_filter=None, weights=None)`. `eligibility` is applied as `data.query(...)` unless you pass a `time_zero_filter` callable |
+| `TargetTrialProtocol(assignment="...free text...", causal_contrast="...free text...")` | `assignment ∈ {"randomization","observational emulation"}`, `causal_contrast ∈ {"ITT","per-protocol","as-treated","observational-analogue"}` — free text raises `ValueError`. Put prose in `notes=` |
+| `sp.dag(["a","b",...])` / `dag.add_edges([...])` / `dag.adjustment_set(...)` | `sp.dag("a -> b; c -> b")` parses an edge **string**; add edges with chained `.add_edge(parent, child)` (singular); back-door sets via `.adjustment_sets(exposure, outcome)` (**plural**, positional) → list of sets |
+| `sp.aft("Surv(time, event) ~ x", ...)` | AFT formula LHS is `"duration + event"`: `sp.aft("followup_days + mace ~ x", df, family="weibull")` |
+| `sp.hal_tmle(..., variant="ate")` | Only `variant="delta"` is implemented (`"projection"` is NotImplemented) |
+| `sp.principal_strat(..., strata=<3-level>, instrument=<continuous>)` | Both `strata` and `instrument` must be **binary 0/1** columns |
+| `sp.evalue(estimate=result.point_estimate, ...)` | `CausalResult` exposes `.estimate` and `.ci` (no `.point_estimate`). Econometric results use `.params[name]` / `.conf_int().loc[name]` |
+| `sp.dml(..., ml_g=, ml_m=)` or passing a `SuperLearner` as nuisance | dml nuisance kwargs are `model_y=` / `model_d=`, each a sklearn estimator OR alias `'gbm'/'rf'/'lasso'/'xgb'/...`. `metalearner` `outcome_model=`/`propensity_model=` need sklearn **objects** (no string aliases). `sp.super_learner(...)` output is a standalone predictor, not a nuisance arg |
+| `sp.causal_question(..., estimand="ate")` / `q.identify(strategy=, X=)` | `estimand` is UPPERCASE (`'ATE'/'ATT'/'LATE'/...`); set strategy via `design=`/`covariates=` on `causal_question`; `q.identify()` takes **no** arguments |
+| `sp.offline_safe_policy(state=X_cols, ...)` | `state` and `action` must each be a **single discrete column name** — encode multi-feature state into one segment column first |
+| `sp.ope.doubly_robust(X, A, R, pi_b=<1-D>, pi_e=<1-D>, reward_model=<model>)` | `pi_b`/`pi_e` must be `(n, K)` probability matrices (one-hot for deterministic policies); `reward_model` is a **callable** `reward_model(X, a) -> length-n vector`. `ips`/`snips` need no reward model |
+| `sp.fairness.fairness_audit(..., predictions=<continuous>, labels=<continuous>)` | Both `predictions` and `labels` must be **binary 0/1**; it audits a binary classifier. A meta-learner result has no `.predict` |
+| `pol_tree.plot()` / `cf.local_effects()` | `PolicyTreeResult` uses `.plot_tree()` (→ `(fig, ax)`); `CausalForest` has no `.local_effects()` — get per-row CATEs via `cf.effect(X)` |
+| `sp.feols(...)` without installing pyfixest | `sp.feols`/`fepois`/`feglm` need `pip install "statspai[fixest]"`; neural causal needs `[neural]` (torch); plots need `[plotting]` |
+| `sp.ivreg("y ~ (d ~ z) + x \| industry + year", ...)` for FE-IV | **Silently drops the `\| fe`** (identical β̂ with/without it; FE never appear in output). `sp.ivreg` does not absorb `\|` FE or parse `C(fe)`. Keep all IV-triplet columns on the same low-dim controls, or pre-build dummy columns in pandas |
+| `sp.regtable(ivw, egger, median, ...)` for MR results | `mr_ivw`/`mr_egger`/`mr_median` return **dicts** (`estimate/se/ci_lower/ci_upper/p_value/...`), not result objects. Build a `pd.DataFrame({...}).T` and `.to_excel()`/`.to_latex()` it |
+| `sp.regtable(aft, ...)` for a survival AFT | `AFTResult` has no `.params`/`.to_word` — it exposes `.summary()` plus `.beta`/`.se`/`.var_names`/`.n`/`.n_events`/`.aic`. Build a `pd.DataFrame({"coef": aft.beta, "se": aft.se}, index=aft.var_names)`. For a causal survival estimand use `sp.ltmle_survival(...)` |
+| `sp.causal(..., dag=discovered.dag)` | `LLMConstrainedDAGResult` has no `.dag` — use `discovered.to_dag()` (or inspect `.final_edges`) |
+| `result.conf_int()` / `result.data_info["n_obs"]` on a `CausalResult` | `CausalResult` exposes `.estimate` / `.ci` (tuple) / `.n_obs` / `.estimand` (no `.conf_int()`; `data_info` key is `"nobs"`). `.params[name]` + `.conf_int().loc[name]` are for econometric (OLS/feols/ivreg) results |
 
 ---
 

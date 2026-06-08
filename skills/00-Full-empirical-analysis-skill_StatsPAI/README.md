@@ -82,11 +82,17 @@ cp -r StatsPAI_full_data_analysis_skill ~/.claude/skills/StatsPAI_skill
 ln -s "$(pwd)/StatsPAI_full_data_analysis_skill" ~/.claude/skills/StatsPAI_skill
 ```
 
-Then install the Python package itself:
+Then install the Python package itself (verified against **statspai 1.16.1**):
 
 ```bash
-pip install statspai          # >= 1.6.6 (Word/Excel export stack)
+# Recommended — covers the default pipeline (high-dim FE + figures):
+pip install "statspai[fixest,plotting]"
+
+# Full skill (adds neural causal + text-as-treatment):
+pip install "statspai[fixest,plotting,neural,text]"
 ```
+
+> The bare `pip install statspai` does **not** pull `pyfixest` (needed by `sp.feols`, the default for any `y ~ x | fe` regression — it raises `ImportError` without it), matplotlib (any figure), or torch (`dragonnet`/`tarnet`/`cevae`). See the dependency matrix at the top of `SKILL.md`.
 
 ## Activate
 
@@ -172,7 +178,7 @@ hands the `CausalResult` back to you).
   - **3-tier export cookbook** (single table / paper-format multi-panel / full session bundle)
   - **17 standard AER figures** (raw trends, rollout heatmap, event-study, Bacon, CS-DID, RD plot, McCrary, love plot, SCM trajectory, coefplot, dose-response, CATE, robustness forest, spec curve, sensitivity dashboard)
   - **Method Catalog** (classical OLS / `feols` / IV / panel / DID / RD / matching / SCM / ML / neural / text / mediation / robustness)
-  - **Common Mistakes table** (26 anti-patterns with corrections — incl. `fmt="auto"` for mixed-magnitude regtables, auto Control/Treated headers on binary `by=`)
+  - **Common Mistakes table** (65 anti-patterns with corrections — every one verified by running it against statspai 1.16.1; incl. the `(fig, ax)` plot-save idiom, `fmt="auto"` for mixed-magnitude regtables, and the §A/§B signature traps)
 - `README.md` — this file
 
 ---
@@ -262,11 +268,17 @@ cp -r StatsPAI_full_data_analysis_skill ~/.claude/skills/StatsPAI_skill
 ln -s "$(pwd)/StatsPAI_full_data_analysis_skill" ~/.claude/skills/StatsPAI_skill
 ```
 
-再装 Python 包本体：
+再装 Python 包本体（已对照 **statspai 1.16.1** 验证）：
 
 ```bash
-pip install statspai          # >= 1.6.6（含 Word/Excel 导出栈）
+# 推荐 —— 覆盖默认流程（高维固定效应 + 出图）：
+pip install "statspai[fixest,plotting]"
+
+# 完整 skill（再加神经因果 + 文本处理）：
+pip install "statspai[fixest,plotting,neural,text]"
 ```
+
+> 仅 `pip install statspai` **不会**装上 `pyfixest`（`sp.feols` 需要它——任何 `y ~ x | fe` 回归的默认入口，缺失会 `ImportError`）、matplotlib（任何图）、torch（`dragonnet`/`tarnet`/`cevae`）。完整依赖矩阵见 `SKILL.md` 顶部。
 
 ### 激活
 
@@ -309,5 +321,5 @@ Skill 会被自然语言触发词自动激活，例如 *"run a DID analysis"*、
   - **3 档导出 cookbook**（单表 / 论文级多面板 / 整套 session bundle）
   - **17 张标准 AER 图**（原始趋势、rollout 热图、event-study、Bacon、CS-DID、RD plot、McCrary、love plot、SCM 轨迹、coefplot、剂量反应、CATE、robustness 森林图、spec curve、sensitivity 面板）
   - **Method Catalog**（经典 OLS / `feols` / IV / 面板 / DID / RD / 匹配 / SCM / ML / 神经 / 文本 / 中介 / robustness）
-  - **Common Mistakes 反模式表**（24 条带正确写法）
+  - **Common Mistakes 反模式表**（65 条带正确写法，全部对照 statspai 1.16.1 实跑验证；含 `(fig, ax)` 出图保存范式与 §A/§B 签名陷阱）
 - `README.md` — 本文件
