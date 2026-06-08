@@ -82,6 +82,8 @@ If you cannot fit, the paper is an AER (or AEJ) paper, not an AER: Insights pape
 \section{...}              (in-paper appendix only — short)
 ```
 
+AER numbers sections with **Roman numerals** (I., II., III.) and subsections with capital letters (A., B., C.); the introduction is unnumbered. In LaTeX, set `\renewcommand{\thesection}{\Roman{section}}` or use the AEA sample article class, which applies house style automatically.
+
 Move long appendices to a separate Supplemental Appendix file.
 
 ## File Package for ScholarOne
@@ -157,6 +159,16 @@ AER charges a submission fee that scales with AEA membership status and country 
 - [ ] No tracked changes, no comments, no draft watermarks in the PDF
 - [ ] Single self-contained PDF; supplemental appendix as separate file
 - [ ] Corresponding author email and ORCID up to date
+
+## Repository Resources
+
+When working from the AER-skills repository or plugin bundle, load only the
+relevant resource:
+
+- Submission no-go checklist: `docs/desk-rejection-audit.md`
+- Current policy source register: `docs/source-register.md`
+- Replication planning surface: `skills/aer-replication/SKILL.md`
+- Deposit-ready scaffold: `examples/replication-package-skeleton/`
 
 ## After Submission
 

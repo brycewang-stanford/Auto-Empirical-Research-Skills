@@ -27,7 +27,9 @@ Drop-in scripts for an AEA-compliant R pipeline using the modern stack
 
 ## How to Adapt
 
-1. Copy `templates/r/` into your project
+1. Run `python3 scripts/scaffold_project.py r /path/to/project` from the
+   AER-skills repository, or copy the contents of `templates/r/` into your
+   project root
 2. Open the project root in RStudio (so `getwd()` is correct)
 3. `renv::restore()` if you maintain a lockfile
 4. `source("run_all.R")`

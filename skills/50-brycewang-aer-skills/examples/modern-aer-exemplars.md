@@ -22,7 +22,7 @@ draft your own paper against those references.
 |---|---|---|---|---|
 | Cengiz, Dube, Lindner & Zipperer, "The Effect of Minimum Wages on Low-Wage Jobs" | 2019 | QJE | Bunching estimator innovation — defines a new identification approach without abandoning credible identification. Read for how to *introduce a method* in a top-5 setting. | [Harvard Dataverse TJCTC7](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/TJCTC7) |
 | Cengiz, Dube, Lindner & Zentler-Munro, "Seeing Beyond the Trees: ML Estimates of Minimum Wage Impacts" | 2022 | JOLE | Modern ML applied to causal inference. Demonstrates how to integrate ML tooling without overclaiming on identification. | [openICPSR (Dube PI)](https://www.openicpsr.org/openicpsr/search/aea/studies) |
-| Card, Cardoso, Heining & Kline, "Firms and Labor Market Inequality" | 2018 | JOLE | The AKM-models synthesis. Read for how to position a methods-and-evidence review within a top-5. | journal site |
+| Card, Cardoso, Heining & Kline, "Firms and Labor Market Inequality" | 2018 | JOLE | The AKM-models synthesis. Read for how to position a methods-and-evidence review within a top-5. | [Article DOI](https://doi.org/10.1086/694153) |
 | Goldin & Mitchell, "The New Life Cycle of Women's Employment" | 2017 | AEA P&P | Compact, well-documented deposit; shows the openICPSR template at its cleanest. | [openICPSR 113983](https://www.openicpsr.org/openicpsr/project/113983) |
 
 ## Public Economics & Taxation (H)
@@ -135,15 +135,15 @@ The papers your reviewers will expect you to *use*, not just cite.
 |---|---|---|---|---|
 | Callaway & Sant'Anna, "Difference-in-Differences with Multiple Time Periods" | 2021 | J Econometrics | Staggered DiD ATT(g,t) | [psantanna.com](https://psantanna.com/) |
 | Callaway, Goodman-Bacon & Sant'Anna, "Event-Studies with a Continuous Treatment" | 2024 | AEA P&P | Continuous-treatment DiD | [openICPSR 201785](https://www.openicpsr.org/openicpsr/project/201785) |
-| Borusyak, Jaravel & Spiess, "Revisiting Event Study Designs: Robust and Efficient Estimation" | 2024 | RES | Imputation estimator | journal site |
-| Sun & Abraham, "Estimating Dynamic Treatment Effects in Event Studies with Heterogeneous Treatment Effects" | 2021 | J Econometrics | Interaction-weighted ES | journal site |
-| Goodman-Bacon, "Difference-in-Differences with Variation in Treatment Timing" | 2021 | J Econometrics | Bacon decomposition | journal site |
-| Rambachan & Roth, "A More Credible Approach to Parallel Trends" | 2023 | RES | Honest DiD sensitivity | journal site |
+| Borusyak, Jaravel & Spiess, "Revisiting Event Study Designs: Robust and Efficient Estimation" | 2024 | RES | Imputation estimator | [Article DOI](https://doi.org/10.1093/restud/rdae007) |
+| Sun & Abraham, "Estimating Dynamic Treatment Effects in Event Studies with Heterogeneous Treatment Effects" | 2021 | J Econometrics | Interaction-weighted ES | [Article DOI](https://doi.org/10.1016/j.jeconom.2020.09.006) |
+| Goodman-Bacon, "Difference-in-Differences with Variation in Treatment Timing" | 2021 | J Econometrics | Bacon decomposition | [Article DOI](https://doi.org/10.1016/j.jeconom.2021.03.014) |
+| Rambachan & Roth, "A More Credible Approach to Parallel Trends" | 2023 | RES | Honest DiD sensitivity | [Article DOI](https://doi.org/10.1093/restud/rdad018) |
 | Borusyak, Hull & Jaravel, "Quasi-Experimental Shift-Share Research Designs" | 2022 | RES | Modern shift-share | [arxiv 1806.01221](https://arxiv.org/pdf/1806.01221) |
-| Goldsmith-Pinkham, Sorkin & Swift, "Bartik Instruments: What, When, Why, and How" | 2020 | AER | Rotemberg-weight shift-share | journal site |
-| Calonico, Cattaneo & Titiunik, "Robust Nonparametric Confidence Intervals for RD Designs" | 2014 | Econometrica | MSE-optimal RDD | journal site |
-| Cattaneo, Jansson & Ma, "Local Regression Distribution Estimators" | 2020 | J Econometrics | RD density test | journal site |
-| Andrews, Stock & Sun, "Weak Instruments in IV Regression: Theory and Practice" | 2019 | Ann Rev Econ | AR confidence sets | journal site |
+| Goldsmith-Pinkham, Sorkin & Swift, "Bartik Instruments: What, When, Why, and How" | 2020 | AER | Rotemberg-weight shift-share | [Article DOI](https://doi.org/10.1257/aer.20181047) |
+| Calonico, Cattaneo & Titiunik, "Robust Nonparametric Confidence Intervals for RD Designs" | 2014 | Econometrica | MSE-optimal RDD | [Article DOI](https://doi.org/10.3982/ECTA11757) |
+| Cattaneo, Jansson & Ma, "Simple Local Polynomial Density Estimators" | 2020 | JASA | RD density test | [Article DOI](https://doi.org/10.1080/01621459.2019.1635480) |
+| Andrews, Stock & Sun, "Weak Instruments in IV Regression: Theory and Practice" | 2019 | Ann Rev Econ | AR confidence sets | [Article DOI](https://doi.org/10.1146/annurev-economics-080218-025643) |
 
 ---
 

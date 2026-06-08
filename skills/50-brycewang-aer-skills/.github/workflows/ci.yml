@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install R for template parsing
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y r-base
+      - name: Run preflight checks
+        run: make preflight
+      - name: Validate optional-tool coverage
+        run: make validate-strict

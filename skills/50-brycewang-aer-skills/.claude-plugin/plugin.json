@@ -1,14 +1,14 @@
 {
   "name": "aer-skills",
-  "description": "Agent skill stack for the American Economic Review, AER: Insights, and AEJ family. Covers topic selection, modern causal identification (DiD / IV / RDD / SCM / Bartik), referee-anticipating robustness, Keith-Head-style introductions, AER booktabs tables, AEA Data and Code Availability deposits, submission preflight, and R&R rebuttal letters. Includes Stata / R / Python templates and classic-AER-paper exemplars.",
+  "description": "Agent skill stack for the American Economic Review, AER: Insights, and AEJ family. Covers topic selection, modern causal identification (DiD / IV / RDD / SCM / Bartik), referee-anticipating robustness, Keith-Head-style introductions, AER booktabs tables, AEA Data and Code Availability deposits, submission preflight, and R&R rebuttal letters. Includes Stata / R / Python templates, an optional StatsPAI agent-native implementation engine, and classic-AER-paper exemplars.",
   "version": "1.0.0",
   "author": {
     "name": "Bryce Wang",
     "email": "brycew6m@stanford.edu"
   },
   "license": "MIT",
-  "homepage": "https://github.com/brycewang-stanford/AER-skills",
-  "repository": "https://github.com/brycewang-stanford/AER-skills",
+  "homepage": "https://github.com/brycewang-stanford/AER-Skills",
+  "repository": "https://github.com/brycewang-stanford/AER-Skills",
   "keywords": [
     "economics",
     "aer",
@@ -23,6 +23,8 @@
     "replication",
     "openicpsr",
     "academic-writing",
-    "publication"
+    "publication",
+    "statspai",
+    "econometrics"
   ]
 }

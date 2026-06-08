@@ -171,8 +171,12 @@ A common confusion: **identification answers whether X causes Y; mechanism answe
 
 When working from the AER-skills repository or plugin bundle, load only the relevant resource:
 
+- Estimator defaults, package calls, diagnostics, and citations: `docs/methods-reference.md`
 - Staggered DiD implementation: `templates/stata/03_main_did.do`, `templates/r/03_main_did.R`, or `templates/python/main_did.py`
-- Classic design examples: `examples/aer-exemplars.md`
+- Worked empirical examples: `examples/aer-exemplars.md` and `examples/modern-aer-exemplars.md`
+
+Use the methods reference before drafting prose: it fixes the estimand,
+diagnostic, inference method, and citation that the manuscript must report.
 
 ## Handoff
 

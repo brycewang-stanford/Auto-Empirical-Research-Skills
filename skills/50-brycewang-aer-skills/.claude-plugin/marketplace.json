@@ -15,14 +15,14 @@
       "name": "aer-skills",
       "version": "1.0.0",
       "source": "./",
-      "description": "Full nine-skill bundle covering the AER manuscript lifecycle: topic selection, identification, robustness, introduction, tables/figures, replication, submission, rebuttal, and the workflow router. Ships with Stata, R, and Python templates plus replication-package skeleton and classic-paper exemplars.",
+      "description": "Ten-skill bundle covering the AER manuscript lifecycle: topic selection, identification, robustness, introduction, tables/figures, replication, submission, rebuttal, and the workflow router, plus the optional StatsPAI implementation engine. Ships with Stata, R, and Python templates plus replication-package skeleton and classic-paper exemplars.",
       "author": {
         "name": "Bryce Wang",
         "email": "brycew6m@stanford.edu"
       },
       "license": "MIT",
-      "homepage": "https://github.com/brycewang-stanford/AER-skills",
-      "repository": "https://github.com/brycewang-stanford/AER-skills",
+      "homepage": "https://github.com/brycewang-stanford/AER-Skills",
+      "repository": "https://github.com/brycewang-stanford/AER-Skills",
       "keywords": [
         "economics",
         "aer",
@@ -32,7 +32,8 @@
         "regression-discontinuity",
         "synthetic-control",
         "replication",
-        "academic-writing"
+        "academic-writing",
+        "statspai"
       ],
       "category": "academic",
       "skills": [
@@ -44,7 +45,8 @@
         "skills/aer-tables-figures",
         "skills/aer-replication",
         "skills/aer-submission",
-        "skills/aer-rebuttal"
+        "skills/aer-rebuttal",
+        "skills/aer-statspai"
       ]
     }
   ]

@@ -1,0 +1,4 @@
+interface:
+  display_name: "AER StatsPAI Engine"
+  short_description: "Run AER empirics with the StatsPAI engine"
+  default_prompt: "Use $aer-statspai to run this manuscript empirical analysis with the StatsPAI unified engine."

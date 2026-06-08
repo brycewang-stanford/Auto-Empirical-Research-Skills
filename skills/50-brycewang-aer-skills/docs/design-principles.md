@@ -52,4 +52,4 @@ Each skill in this repository solves one slice. `aer-workflow` exists to compose
 
 ## 10. English-First, Globally Usable
 
-All skill content is in English so the agent can apply it regardless of the user's primary language. Chinese-language navigation is provided through `README.zh-CN.md` for discoverability.
+All skill content is in English so the agent can apply it regardless of the user's primary language. The default landing page `README.md` is in Chinese for discoverability, with a full English version at `README.en.md`.
