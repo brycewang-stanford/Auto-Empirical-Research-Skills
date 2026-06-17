@@ -215,6 +215,13 @@ OVERRIDES: dict[str, dict[str, object]] = {
         "sync": "manual vendor snapshot",
         "source_confidence": "high",
     },
+    # --- 2026-06-15 empirical-research expansion ---
+    "66-zheng-siyao-empirical-research-skills": {
+        "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
+        "origin": "vendored upstream snapshot (7 SKILL.md skills) 2026-06-15",
+        "sync": "manual vendor snapshot",
+        "source_confidence": "high",
+    },
 }
 
 

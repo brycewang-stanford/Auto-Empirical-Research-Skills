@@ -1087,6 +1087,40 @@
       "source_confidence": "high",
       "source_url": "https://github.com/tmonk/mcp-stata",
       "sync": "manual vendor snapshot"
+    },
+    {
+      "commercial_use": "unknown",
+      "has_license": false,
+      "has_readme": false,
+      "id": "65-game-theory-paper-writer",
+      "license": "UNKNOWN - check upstream",
+      "path": "skills/65-game-theory-paper-writer",
+      "primary_skill": {
+        "description": "Generate, continue, revise, polish, and stress-test game theory research papers. Use when the user provides a game theory topic, phenomenon, draft, outline, model idea, literature anchor, reviewer comments, or asks for 博弈论论文生成, 选题建模, 文献迁移, 模型修正, 均衡分析, 数值模拟, 论文润色, 改稿打磨, or R&R response work.",
+        "name": "game-theory-paper-writer",
+        "path": "skills/65-game-theory-paper-writer/SKILL.md"
+      },
+      "skill_count": 1,
+      "source_confidence": "low",
+      "source_url": "https://github.com/game/theory-paper-writer",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "commercial_use": "unknown",
+      "has_license": false,
+      "has_readme": false,
+      "id": "66-zheng-siyao-empirical-research-skills",
+      "license": "UNKNOWN - check upstream",
+      "path": "skills/66-zheng-siyao-empirical-research-skills",
+      "primary_skill": {
+        "description": "R语言实证分析优化Skill。优化R代码效率、处理大规模面板数据、加速回归计算（并行化、向量化、向量化）。触发词：R语言优化/R加速/R性能优化/大规模数据处理/R optimization",
+        "name": "R-optimizer",
+        "path": "skills/66-zheng-siyao-empirical-research-skills/R-optimizer/SKILL.md"
+      },
+      "skill_count": 7,
+      "source_confidence": "high",
+      "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
+      "sync": "manual vendor snapshot"
     }
   ],
   "generated_by": "scripts/build-catalog.py",
@@ -17381,6 +17415,132 @@
       "line_count": 35,
       "name": "stata-toolkit",
       "path": "skills/64-tmonk-mcp-stata/skills/stata-toolkit/SKILL.md"
+    },
+    {
+      "collection": "65-game-theory-paper-writer",
+      "description": "Generate, continue, revise, polish, and stress-test game theory research papers. Use when the user provides a game theory topic, phenomenon, draft, outline, model idea, literature anchor, reviewer comments, or asks for 博弈论论文生成, 选题建模, 文献迁移, 模型修正, 均衡分析, 数值模拟, 论文润色, 改稿打磨, or R&R response work.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 65,
+      "name": "game-theory-paper-writer",
+      "path": "skills/65-game-theory-paper-writer/SKILL.md"
+    },
+    {
+      "collection": "66-zheng-siyao-empirical-research-skills",
+      "description": "R语言实证分析优化Skill。优化R代码效率、处理大规模面板数据、加速回归计算（并行化、向量化、向量化）。触发词：R语言优化/R加速/R性能优化/大规模数据处理/R optimization",
+      "frontmatter_fields": [
+        "description",
+        "metadata",
+        "name",
+        "version"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 271,
+      "name": "R-optimizer",
+      "path": "skills/66-zheng-siyao-empirical-research-skills/R-optimizer/SKILL.md"
+    },
+    {
+      "collection": "66-zheng-siyao-empirical-research-skills",
+      "description": "学术引用核查Skill。要求每条引用必须定位到PDF原页，区分直接引用/间接引用，找不到原文则标注\"待核\"。触发词：引用核查/检查引用/citation check/核实文献/引用 fidelity",
+      "frontmatter_fields": [
+        "description",
+        "metadata",
+        "name",
+        "version"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 150,
+      "name": "citation-fidelity",
+      "path": "skills/66-zheng-siyao-empirical-research-skills/citation-fidelity/SKILL.md"
+    },
+    {
+      "collection": "66-zheng-siyao-empirical-research-skills",
+      "description": "调查数据清洗Skill。处理调查数据（CGSS/CHIP/CSS等）时的标准化清洗流程，包括缺失值处理、变量编码统一、数据异常值检测。触发词：数据清洗/调查数据/codebook/数据清洗流程/问卷数据处理",
+      "frontmatter_fields": [
+        "description",
+        "metadata",
+        "name",
+        "version"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 248,
+      "name": "codebook-pass",
+      "path": "skills/66-zheng-siyao-empirical-research-skills/codebook-pass/SKILL.md"
+    },
+    {
+      "collection": "66-zheng-siyao-empirical-research-skills",
+      "description": "双重差分(DID)实证审查Skill。做DID分析前必须检查平行趋势假设、画图可视化、报告违背情况。触发词：DID审查/双重差分检查/平行趋势/DiD reviewer/difference-in-differences",
+      "frontmatter_fields": [
+        "description",
+        "metadata",
+        "name",
+        "version"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 187,
+      "name": "did-reviewer",
+      "path": "skills/66-zheng-siyao-empirical-research-skills/did-reviewer/SKILL.md"
+    },
+    {
+      "collection": "66-zheng-siyao-empirical-research-skills",
+      "description": "经济学顶刊标准审稿Skill。按AER/QJE/Econometrica/JPE顶刊标准审查论文输出（图表+回归表），列出潜在致命缺陷。触发词：顶刊审稿/论文审查/econ reviewer/经济学期刊标准/PR",
+      "frontmatter_fields": [
+        "description",
+        "metadata",
+        "name",
+        "version"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 216,
+      "name": "econ-reviewer",
+      "path": "skills/66-zheng-siyao-empirical-research-skills/econ-reviewer/SKILL.md"
+    },
+    {
+      "collection": "66-zheng-siyao-empirical-research-skills",
+      "description": "苏格拉底诘问式研究选题Skill。通过连续追问帮你厘清研究思路、聚焦研究子领域、明确研究问题(RQ)，识别出未被研究过的新意选题。触发词：帮我选题/研究问题不清晰/想做一个有新意的论文/不断问我问题/厘清思路",
+      "frontmatter_fields": [
+        "description",
+        "metadata",
+        "name",
+        "version"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 124,
+      "name": "grillme",
+      "path": "skills/66-zheng-siyao-empirical-research-skills/grillme/SKILL.md"
+    },
+    {
+      "collection": "66-zheng-siyao-empirical-research-skills",
+      "description": "LaTeX回归表格生成Skill。辅助生成符合AER/QJE等顶刊格式的三线表，包括标准误聚类标注、显著性星标、固定效应标注。触发词：LaTeX表格/回归表/三线表/table制作/latex table",
+      "frontmatter_fields": [
+        "description",
+        "metadata",
+        "name",
+        "version"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 249,
+      "name": "latex-table",
+      "path": "skills/66-zheng-siyao-empirical-research-skills/latex-table/SKILL.md"
     }
   ],
   "summary": {
@@ -17388,7 +17548,7 @@
     "missing_frontmatter": 4,
     "missing_name": 4,
     "oversized_skill_files_over_500_lines": 80,
-    "skill_files": 1072,
-    "top_level_collections": 64
+    "skill_files": 1080,
+    "top_level_collections": 66
   }
 }

@@ -11093,16 +11093,96 @@
       "line_count": 35,
       "name": "stata-toolkit",
       "path": "skills/64-tmonk-mcp-stata/skills/stata-toolkit/SKILL.md"
+    },
+    {
+      "collection": "65-game-theory-paper-writer",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 65,
+      "name": "game-theory-paper-writer",
+      "path": "skills/65-game-theory-paper-writer/SKILL.md"
+    },
+    {
+      "collection": "66-zheng-siyao-empirical-research-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 271,
+      "name": "R-optimizer",
+      "path": "skills/66-zheng-siyao-empirical-research-skills/R-optimizer/SKILL.md"
+    },
+    {
+      "collection": "66-zheng-siyao-empirical-research-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 150,
+      "name": "citation-fidelity",
+      "path": "skills/66-zheng-siyao-empirical-research-skills/citation-fidelity/SKILL.md"
+    },
+    {
+      "collection": "66-zheng-siyao-empirical-research-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 248,
+      "name": "codebook-pass",
+      "path": "skills/66-zheng-siyao-empirical-research-skills/codebook-pass/SKILL.md"
+    },
+    {
+      "collection": "66-zheng-siyao-empirical-research-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 187,
+      "name": "did-reviewer",
+      "path": "skills/66-zheng-siyao-empirical-research-skills/did-reviewer/SKILL.md"
+    },
+    {
+      "collection": "66-zheng-siyao-empirical-research-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 216,
+      "name": "econ-reviewer",
+      "path": "skills/66-zheng-siyao-empirical-research-skills/econ-reviewer/SKILL.md"
+    },
+    {
+      "collection": "66-zheng-siyao-empirical-research-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 124,
+      "name": "grillme",
+      "path": "skills/66-zheng-siyao-empirical-research-skills/grillme/SKILL.md"
+    },
+    {
+      "collection": "66-zheng-siyao-empirical-research-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 249,
+      "name": "latex-table",
+      "path": "skills/66-zheng-siyao-empirical-research-skills/latex-table/SKILL.md"
     }
   ],
   "schema_version": "1.0",
   "summary": {
     "duplicate_skill_names": 78,
-    "exact_case_skill_files": 1072,
+    "exact_case_skill_files": 1080,
     "missing_description": 4,
     "missing_frontmatter": 4,
     "non_exact_case_skill_files": 0,
     "over_500_lines": 80,
-    "skill_like_files": 1072
+    "skill_like_files": 1080
   }
 }

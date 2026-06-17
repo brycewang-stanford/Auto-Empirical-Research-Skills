@@ -959,18 +959,48 @@
       "source_url": "https://github.com/tmonk/mcp-stata",
       "sync": "manual vendor snapshot",
       "vendored_commit": null
+    },
+    {
+      "commercial_use": "unknown",
+      "id": "65-game-theory-paper-writer",
+      "last_aers_review": "2026-05-31",
+      "license": "UNKNOWN - check upstream",
+      "license_file": null,
+      "origin": "vendored upstream",
+      "path": "skills/65-game-theory-paper-writer",
+      "security_review": "SECURITY-SCAN-REPORT.md",
+      "skill_count": 1,
+      "source_confidence": "low",
+      "source_url": "https://github.com/game/theory-paper-writer",
+      "sync": "manual vendor snapshot",
+      "vendored_commit": null
+    },
+    {
+      "commercial_use": "unknown",
+      "id": "66-zheng-siyao-empirical-research-skills",
+      "last_aers_review": "2026-05-31",
+      "license": "UNKNOWN - check upstream",
+      "license_file": null,
+      "origin": "vendored upstream snapshot (7 SKILL.md skills) 2026-06-15",
+      "path": "skills/66-zheng-siyao-empirical-research-skills",
+      "security_review": "SECURITY-SCAN-REPORT.md",
+      "skill_count": 7,
+      "source_confidence": "high",
+      "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
+      "sync": "manual vendor snapshot",
+      "vendored_commit": null
     }
   ],
   "generated_by": "scripts/build-provenance.py",
   "scan_date": "2026-05-31",
   "schema_version": "1.0",
   "summary": {
-    "collections": 64,
+    "collections": 66,
     "commercial_use": {
       "allowed": 35,
       "restricted": 2,
       "share-alike": 5,
-      "unknown": 22
+      "unknown": 24
     },
     "licenses": {
       "AGPL-3.0": 1,
@@ -979,11 +1009,11 @@
       "CC-BY-SA-4.0 (repository default)": 4,
       "MIT": 34,
       "MIT Non-Commercial": 1,
-      "UNKNOWN - check upstream": 22
+      "UNKNOWN - check upstream": 24
     },
     "source_confidence": {
-      "high": 37,
-      "low": 6,
+      "high": 38,
+      "low": 7,
       "medium": 17,
       "unresolved": 4
     }
