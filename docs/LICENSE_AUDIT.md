@@ -6,10 +6,10 @@ Scan date: 2026-05-31.
 
 ## Summary
 
-- Collections audited: 66
-- License buckets: AGPL-3.0=1, Apache-2.0=1, CC-BY-NC-4.0 (non-commercial)=1, CC-BY-SA-4.0 (repository default)=4, MIT=34, MIT Non-Commercial=1, UNKNOWN - check upstream=24
-- Commercial-use buckets: allowed=35, restricted=2, share-alike=5, unknown=24
-- Source-confidence buckets: high=38, low=7, medium=17, unresolved=4
+- Collections audited: 68
+- License buckets: AGPL-3.0=1, Apache-2.0=1, CC-BY-NC-4.0 (non-commercial)=1, CC-BY-SA-4.0 (repository default)=4, MIT=34, MIT Non-Commercial=1, UNKNOWN - check upstream=26
+- Commercial-use buckets: allowed=35, restricted=2, share-alike=5, unknown=26
+- Source-confidence buckets: high=38, low=7, medium=18, unresolved=5
 
 ## Interpretation
 
@@ -87,4 +87,6 @@ Scan date: 2026-05-31.
 | [`63-tondevrel-scientific-agent-skills`](../skills/63-tondevrel-scientific-agent-skills/) | [source](https://github.com/tondevrel/scientific-agent-skills) | high | MIT | allowed | manual vendor snapshot |
 | [`64-tmonk-mcp-stata`](../skills/64-tmonk-mcp-stata/) | [source](https://github.com/tmonk/mcp-stata) | high | AGPL-3.0 | share-alike | manual vendor snapshot |
 | [`65-game-theory-paper-writer`](../skills/65-game-theory-paper-writer/) | [source](https://github.com/game/theory-paper-writer) | low | UNKNOWN - check upstream | unknown | manual vendor snapshot |
+| [`65-zheng-siyao-empirical-research-skills`](../skills/65-zheng-siyao-empirical-research-skills/) | [source](https://github.com/zheng-siyao/ai4socialscience-skills) | medium | UNKNOWN - check upstream | unknown | manual vendor snapshot |
 | [`66-zheng-siyao-empirical-research-skills`](../skills/66-zheng-siyao-empirical-research-skills/) | [source](https://github.com/zheng-siyao/ai4socialscience-skills) | high | UNKNOWN - check upstream | unknown | manual vendor snapshot |
+| [`67-econfin-workflow-toolkit`](../skills/67-econfin-workflow-toolkit/) | UNKNOWN | unresolved | UNKNOWN - check upstream | unknown | manual vendor snapshot |

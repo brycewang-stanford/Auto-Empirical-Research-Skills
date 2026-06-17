@@ -1,0 +1,53 @@
+\begin{table}[htbp]\centering\scriptsize
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{\textbf{Bunching DID Estimation}}
+\label{bunching-did}
+
+\noindent{\justifying{This table reports the robustness check results using the Bunching-DID approach to distinguish between strategic patenting behavior and substantive innovation. The sample comprises Chinese A-share-listed firms from 2003 to 2023. We categorize firms based on their patent structure to identify "bunching" behavior. \textsl{JunkPatents} (Strategic Innovators) serves as the interaction term for firms that "bunch" into low-quality innovation (defined as firms with a non-invention patent ratio greater than 90\%). \textsl{RealInnovation} (Typical Innovators) serves as the interaction term for firms with substantive innovation (defined as firms with a non-invention patent ratio less than 50\%). The dependent variable is \textsl{Institution}. The model tests whether the policy effect differs between firms that manipulate patent counts and those that engage in real innovation. Column (1) controls for firm, year, and city fixed effects. Column (2) further incorporates industry $\times$ year fixed effects to account for time-varying industry-specific shocks. Control variables include \textsl{Size}, \textsl{Balance}, \textsl{ROA}, \textsl{Tobinq}, \textsl{Age}, \textsl{Cash}, \textsl{Indept}, \textsl{Top1}, \textsl{Dual}, \textsl{FinDev}, \textsl{Innov}, \textsl{Open}, and \textsl{Gov}. All regressions include firm, year, and city fixed effects. The robust $t$-statistics clustered by the firm are reported in parentheses. Detailed variable definitions are presented in Table \ref{definition}. ***, **, and * denote the significance at the 1\%, 5\%, and 10\% levels, respectively.\par}}
+\bigskip
+
+\begin{tabularx}{\textwidth}{lYYYYYYYY@{}}
+\toprule
+
+                &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         \\
+\hline\\
+JunkPatents    &  -0.0184         &  -0.0213         \\
+                &  (-0.72)         &  (-0.84)         \\
+RealInnovation &  -0.0600\sym{***}&  -0.0591\sym{**} \\
+                &  (-2.60)         &  (-2.50)         \\
+Size            &  -0.0169         &  -0.0597\sym{*}  \\
+                &  (-0.55)         &  (-1.94)         \\
+Balance         &   0.5556\sym{***}&   0.5575\sym{***}\\
+                &  (14.11)         &  (14.24)         \\
+ROA             &   1.4208\sym{***}&   1.3855\sym{***}\\
+                &   (8.36)         &   (8.23)         \\
+Tobinq          &  -0.2072\sym{***}&  -0.2256\sym{***}\\
+                & (-15.45)         & (-16.11)         \\
+Age             &  -0.1842\sym{***}&  -0.1335\sym{***}\\
+                &  (-4.63)         &  (-3.64)         \\
+Cash            &   0.1362         &   0.0918         \\
+                &   (1.02)         &   (0.65)         \\
+Indept          &  -0.4400         &  -0.3731         \\
+                &  (-1.53)         &  (-1.46)         \\
+Top1            &   3.3605\sym{***}&   3.2417\sym{***}\\
+                &  (11.99)         &  (11.65)         \\
+Dual            &  -0.0093         &  -0.0001         \\
+                &  (-0.36)         &  (-0.00)         \\
+FinDev          &  -0.0234         &  -0.0168         \\
+                &  (-0.47)         &  (-0.33)         \\
+Innov           &   0.3819         &   0.0445         \\
+                &   (0.55)         &   (0.06)         \\
+Open            &   1.2596\sym{*}  &   1.2070\sym{*}  \\
+                &   (1.72)         &   (1.65)         \\
+Gov             &  -0.0404         &  -0.4380         \\
+                &  (-0.07)         &  (-0.79)         \\
+\hline
+Observations    &   13,398         &   13,210         \\
+Firm FE         &      Yes         &      Yes         \\
+Year FE         &      Yes         &      Yes         \\
+City FE         &      Yes         &      Yes         \\
+Ind $\times$ Year FE&       No         &      Yes         \\
+Adjusted $ R^2$ &     0.61         &     0.63         \\
+\bottomrule
+\end{tabularx}
+\end{table}

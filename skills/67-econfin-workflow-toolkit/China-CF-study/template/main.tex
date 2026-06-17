@@ -1,0 +1,1352 @@
+\documentclass[12pt,a4paper]{article}
+\textwidth=6.5in \textheight=8.8in \oddsidemargin=0in
+\evensidemargin=0in \topmargin=0in
+\usepackage[compact]{titlesec}
+\usepackage{indentfirst}
+\usepackage{amsmath}
+\usepackage{tabularx}
+\usepackage{epsfig}
+\usepackage{natbib}
+\usepackage[singlelinecheck=false]{caption}
+\usepackage{rotating}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{ulem}
+\usepackage{amsfonts}
+\usepackage{subcaption}
+\renewcommand{\thesubfigure}{\Alph{subfigure}}
+\usepackage{threeparttable}
+\usepackage[justification=centering]{caption}
+\usepackage{endnotes}
+\usepackage{pdflscape}
+\usepackage{lscape}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage{tabularx}
+\usepackage[title]{appendix}
+\usepackage{appendix}
+\usepackage{ragged2e}
+\usepackage{datetime}
+\usepackage[margin=8pt,font=small,labelfont=bf]{caption}
+\usepackage[colorlinks,
+            linkcolor=blue,
+            urlcolor=blue,
+            anchorcolor=blue,
+            citecolor=blue
+            ]{hyperref}
+\usepackage{authblk}
+\renewcommand*{\Affilfont}{\small\it} 
+\renewcommand\Authands{ and } 
+\newdateformat{mydate}{\monthname[\THEMONTH]{ }\twodigit{\THEDAY}, \THEYEAR}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+\titleformat*{\section}{\large\bfseries}
+\titleformat*{\subsection}{\large\bfseries}
+\titleformat*{\subsubsection}{\normalsize\bfseries}
+\titleformat*{\paragraph}{\normalsize\bfseries}
+\titleformat*{\subparagraph}{\normalsize\bfseries}
+
+
+
+
+\begin{document}
+\begin{titlepage}
+\title{\textbf{Patent Pledgeability and Institutional Ownership: Evidence from China’s Patent Trading Centers}}
+\author[a]{Xiangchen Li}
+\author[b]{Kai Wu\thanks{Corresponding author. Email: wukai8759@cufe.edu.cn.}}
+\author[b]{Yuhao Yan}
+\author[b]{Yue Zhang}
+\affil[a]{China Agricultural University, China}
+\affil[b]{Central University of Finance and Economics, China}
+
+\date{May 2026\thanks{Kai Wu acknowledges the financial support from the National Natural Science Foundation (No. 72103217). All co-authors make equal contributions to the formation of this paper.}}
+
+\maketitle
+\hyphenpenalty=8000
+\tolerance=1000
+
+\begin{abstract}
+We examine how the revitalization of intangible assets alters the boundary between debt and equity governance. Exploiting the staggered establishment of patent trading centers (PTC) as an exogenous shock to asset pledgeability, we document a robust substitution effect: the enhanced liquidity of patent collateral significantly displaces aggregate institutional ownership. We propose a capital linkage mechanism wherein market infrastructure unlocks secured debt capacity and reduces the need for precautionary cash holdings. This shift effectively enables debt-based governance to substitute for active institutional monitoring. The reduction in ownership is primarily driven by the exit of short-term trading capital, facilitating an efficient transition toward a patient capital structure without compromising monitoring quality. Our findings suggest that financial innovation that resolves pledgeability frictions fundamentally reshapes the corporate governance equilibrium for innovation-intensive firms. This structural shift improves financial reporting quality and reduces agency costs, even with lower ownership levels.\\
+\textbf{JEL Classification}: G23, G32, O34 \\
+\textbf{Keywords}: patent pledgeability, institutional ownership, capital structure, corporate governance, asset liquidity \\
+\end{abstract}
+
+\setcounter{page}{0}
+\thispagestyle{empty}
+\end{titlepage}
+
+\renewcommand{\baselinestretch}{2}
+\normalsize \baselineskip=25pt
+\hyphenpenalty=8000
+\tolerance=1000
+
+
+
+
+\section{Introduction}
+The structural transformation of the modern corporation from a repository of physical capital to a nexus of intangible assets presents a fundamental challenge to the design of financial contracts and corporate governance \citep{teece2010technologica,bolton2019optimal}. While intangible assets, particularly patents and intellectual property (IP), have become the primary drivers of enterprise value \citep{gill2024leveraging,castaldi2024are}, the architecture of financial intermediation remains largely tethered to the logic of tangible collateral \citep{pape2024co,beaverstock2023financial,luck2023}. The literature on corporate finance has long established that the redeployability of assets and their liquidation value in a secondary market are primary determinants of debt capacity \citep{dietrich2007asset,flor2013asset} \footnote{\cite{acharya2011leverage} demonstrates that the liquidity of real assets dictates leverage ratios, as creditors require credible collateral to mitigate moral hazard.}. This disconnect creates a pledgeability friction: unlike real estate or machinery, IP is characterized by high information asymmetry, valuation opacity, and, critically, a lack of liquid secondary markets \citep{fischer2014patents,hochberg2018patent,arora2024,ewens2025measuring}. This friction distorts the capital structure of innovation-intensive firms, forcing them to rely heavily on external equity and reshaping the landscape of institutional monitoring \citep{schain2021innovation,brown2009financing}. Consequently, innovation-intensive firms are structurally constrained in accessing secured debt. Denied the disciplinary benefits of debt, these firms must rely on external equity, depending on sophisticated institutional investors to navigate the opacity of intangible assets and mitigate agency costs \citep{mccahery2016behind,boubaker2019does}.
+
+Institutional investors are not merely capital providers; they are pivotal monitors who mitigate the agency costs inherent in opaque, high-growth firms \citep{maznorbalia2023exploring,drobetz2024beyond,cao2025site}. \cite{mcnulty2016ownership} and \cite{mccahery2016behind} argue that institutional ownership is sensitive to the information environment, with investors gravitating toward firms where their monitoring voice can unlock value. In the context of innovation, where R\&D activities are difficult for outsiders to observe, the role of institutions in governance becomes indispensable \citep{aghion2013innovation,luong2017foreign}. They discipline management and ensure that free cash flow, often hoarded by tech firms as a precautionary buffer against liquidity shocks, is not squandered \citep{faulkender2006corporate,harford2014refinancing}. Thus, the prevailing equilibrium for innovative firms has been a low-leverage, high-institutional-ownership structure designed to navigate the opacity of intangible assets \citep{ma2024firm}.
+
+However, this equilibrium is fragile and contingent on the illiquidity of the underlying assets. A burgeoning stream of literature suggests that establishing functional markets for intangible assets can fundamentally alter this financing-governance nexus. The pivotal work by \cite{mann2018creditor} provides causal evidence that strengthening creditors' rights over patents and enhancing their pledgeability significantly expands debt financing. When patents can be valued and liquidated, they are converted from sunk costs into collateral, allowing firms to substitute expensive equity for cheaper secured debt. Similarly, \cite{hochberg2018patent} finds that the depth of the secondary market for patents directly influences venture capital supply, as liquid markets provide lenders with a credible exit option in the event of default. This shift in capital structure raises a critical yet underexplored question regarding the interplay between financial constraints and corporate governance: If the development of market infrastructure increases the pledgeability of patents, enabling secured debt, what happens to the equilibrium level and specialized nature of institutional equity monitoring?
+
+We propose a governance substitution hypothesis rooted in agency dynamics. Secured debt acts as a powerful bonding mechanism; it imposes strict discipline through covenants and collateral maintenance, effectively delegating monitoring duties to creditors (banks). As patent assets can be contractual, the ``hard" constraint of secured debt substitutes for the ``soft" oversight of equity holders. Furthermore, by unlocking asset liquidity, firms can reduce precautionary cash holdings—a primary source of agency conflicts—thereby diminishing the structural need for aggressive shareholder intervention \citep{oswald2008share,favara2021uncertainty}. Thus, the revitalization of assets does not merely relieve financial constraints; it lowers the marginal benefit of institutional monitoring, prompting a rational reallocation of equity capital.
+
+Therefore, the revitalization of intangible assets through market infrastructure does not merely relieve financial constraints; it may also trigger a reallocation of governance responsibilities. By addressing the pledgeability problem, market mechanisms may facilitate a transition from an equity-centric governance model reliant on the vigilance of institutional investors to a debt-centric model disciplined by secured creditors. Understanding this substitution effect is crucial for deciphering how financial innovation shapes the ownership structure of the modern firm.
+
+To provide a formal foundation for our analysis, we develop a dynamic model that reveals the governance consequences of improved patent asset liquidity. While the existing literature \citep{mann2018creditor, hochberg2018patent} has shown that enhancing patent pledgeability can expand debt capacity, it has yet to examine the downstream impact of this financing transition on equity governance. Similarly, although \cite{falato2022rising} studied the mechanism where rising intangible capital leads to decreased debt capacity and increased cash holdings, they do not explore the resulting shifts in institutional ownership. Our analysis fills this gap, elucidating how capital linkages reshape the firm's financing-governance equilibrium. Specifically, by introducing a monitoring efficiency parameter and a debt governance enhancement coefficient, our framework establishes an analytical framework that distinguishes between ownership stock and governance flow. This distinction allows the model to explain not only the rational decline in aggregate institutional ownership but also why such a reduction is paradoxically accompanied by an improvement in overall governance quality. Furthermore, by characterizing the churning dynamics of the investor base, the model provides a theoretical basis for understanding how the construction of financial infrastructure facilitates a transition from trading-driven to value-driven investor structures.
+
+To test this substitution effect empirically, we require a setting where the pledgeability of intangible assets undergoes a distinct, exogenous shift. China provides an ideal laboratory for this analysis. The staggered establishment of local Patent Trading Centers (PTCs) across municipalities functions as a quasi-natural experiment, transforming patents from "sleeping assets" into liquid collateral at different times for different firms. We employ a staggered difference-in-differences framework on Chinese A-share listed companies to isolate the causal impact of this infrastructure shock on corporate ownership structures. Our empirical strategy relies on a saturated model that includes extensive firm- and city-level controls, as well as firm, year, and city fixed effects, to control for unobserved heterogeneity. To address potential endogeneity and selection bias, we implement a multifaceted identification approach comprising instrumental-variable regressions based on distinct regional policy pilots, entropy balancing and kernel matching techniques, and a Double Machine Learning framework designed to capture complex, nonlinear dependencies. We further validate the mechanism through a bunching design that differentiates between substantive innovators and firms engaging in strategic patent accumulation.
+
+Our analysis yields a robust and economically significant finding: the introduction of patent trading infrastructure leads to a distinct reduction in aggregate institutional ownership. This negative association supports a governance substitution effect, whereby the reduction in ownership does not lead to a governance vacuum but rather to a specialized upgrade. Examining the underlying economic channels, we find that the trading centers facilitate a financing transformation where firms significantly increase their leverage, specifically through secured long-term debt, while simultaneously reducing the need for costly precautionary cash buffers. This suggests that as the liquidation value of patents is unlocked, the disciplinary bonding role of secured debt and delegated creditor monitoring effectively replaces the need for active oversight by institutional equity holders. The substitution effect is heterogeneous, being most pronounced among firms with accumulated patent stocks, higher financial distress, or lower asset turnover, highlighting the alleviation of financing frictions. Finally, disaggregating the investor base indicates that the reduction in ownership is driven primarily by the exit of short-term trading capital rather than by patient or strategic investors. Crucially, we document that this transition does not result in a governance vacuum; instead, the substitution of debt for equity monitoring facilitates a net upgrade in oversight quality, evidenced by a significant reduction in accrual earnings management and managerial perks. This indicates an efficient capital structure adjustment, in which firms transition from reliance on volatile equity financing to stable, collateral-based debt financing.
+
+Our study contributes to three strands of financial literature. First, we extend the research on innovation financing and the pledgeability of intangible assets. Recent pivotal studies, such as \cite{hochberg2018patent} and \cite{megginson2025}, have established that strengthening creditor rights and creating secondary markets for patents significantly unlock debt capacity for innovation-intensive firms. We advance this literature by documenting the downstream consequences of this financing relief on corporate ownership. We show that the expansion of debt capacity through patent collateralization is not merely an additive source of funds but a structural force that crowds out equity financing and reshapes the investor base.
+
+Second, we provide a novel theoretical framework that endogenizes corporate monitoring as a function of asset liquidity, bridging the gap between capital structure and endogenous governance. Although existing literature treats debt capacity and institutional oversight as largely independent silos \citep{mann2018creditor}, our model introduces a monitoring efficiency function and a debt-governance enhancement coefficient to examine their interaction. Crucially, we establish an analytical distinction between institutional ownership stock and actual governance flow. This provides a rigorous micro-foundation for our counter-intuitive finding: resolving pledgeability frictions allows for a rational "de-equitization" of the capital structure without creating a governance vacuum. Instead, the substitution of debt discipline for equity monitoring facilitates a ``quality-for-quantity" upgrade, where improved information transparency allows for more specialized and efficient oversight.
+
+Third, we contribute to the literature on corporate governance and institutional monitoring. Scholarship in this domain, including \cite{mccahery2016behind} and \cite{jahnke2019ownership}, emphasizes the role of institutional investors in mitigating agency costs through active voice and monitoring. We introduce a governance-substitution perspective, positing that the disciplinary-bonding role of secured debt serves as a functional substitute for institutional oversight. Our findings suggest that when financial infrastructure mitigates pledgeability frictions, firms efficiently transition from a governance model reliant on institutional blockholders to one disciplined by secured creditors and debt covenants. Furthermore, we enrich this narrative by showing that PTCs improve the corporate information environment by standardizing valuations and clarifying IP boundaries. This structural improvement lowers the marginal cost of monitoring, allowing a leaner but more specialized group of institutional investors to exercise effective oversight, a phenomenon we term governance specialization.
+
+Lastly, we add to the literature linking asset redeployability to capital structure and liquidity management. \cite{campello2013real} demonstrates that the liquidation value of tangible assets determines corporate leverage, whereas \cite{falato2022rising} argues that the rise of intangible capital has historically reduced debt capacity due to low pledgeability. By identifying the establishment of Patent Trading Centers as an exogenous shock to the liquidity of sleeping intangible assets, we provide causal evidence that market infrastructure can reverse this trend, allowing firms to monetize intangibles, reduce precautionary savings, and optimize their capital structure.
+
+The remainder of this paper is organized as follows. Section \ref{sec2} introduces the institutional background of PTC in China. Section \ref{sec3} establishes the theoretical framework and develops the research hypotheses. Section \ref{sec4} describes the data, variable construction, and the rigorous identification strategy. Section \ref{sec5} presents the main empirical results, addresses endogeneity concerns, and explores the underlying economic mechanisms\footnote{A comprehensive battery of robustness checks, including alternative definitions, sampling criteria, and model specifications, is provided in Appendix I in the Online Appendix.}. Section \ref{sec6} concludes the study.
+
+\section{Institutional Background}\label{sec2}
+The evolution of China’s capital markets over the past two decades has been defined by a fundamental structural tension between the country's rapid accumulation of intellectual property and the traditional rigidity of its financial system \citep{chen2024does,yu2025impact}. Since the implementation of the National Intellectual Property Strategy in 2008, China has transitioned from a manufacturing-based economy to an innovation-led powerhouse, consistently leading the world in patent filings \citep{han2025does}. However, a significant dichotomy, often termed the transfer gap, persisted for years: while Chinese firms excelled at generating patents, the commercialization and financialization of these assets remained inefficient. Vast portfolios of intellectual property functioned as sleeping assets, technically registered but economically dormant, failing to generate cash flow or serve as financial leverage for the firms that created them.
+
+For innovation-intensive firms, particularly Small and Medium Enterprises (SMEs) in the technology sector, this posed a significant financing challenge \citep{lee2015access}. These firms typically possess high ratios of intangible assets but lack the tangible collateral, such as real estate or heavy machinery, that commercial banks historically required to underwrite loans \citep{hochberg2018patent}. Consequently, these firms faced a persistent capital shortfall, forcing them to rely on expensive external equity financing or to hoard precautionary cash, incurring significant agency costs and limiting their growth potential \citep{fazzari1988financing,almeida2001financial,couzoff2022effectiveness,zhao2024agency}.
+
+To address this market failure and bridge the gap between the real economy of technological production and the financial economy of capital allocation, the Chinese government initiated the development of specialized market infrastructure known as Local Patent Trading Centers (PTCs). These institutes were not merely bulletin boards for technology transfer; they were designed to serve as sophisticated financial intermediaries. The rollout of PTCs occurred in staggered waves from the early 2000s through the 2020s, often coinciding with intellectual property courts and the designation of National IP Demonstration Cities \citep{zou2024mode,chen2024does}. Prominent examples, such as the China Technology Exchange in Beijing and the Shanghai Intellectual Property Exchange, operate as quasi-public market utilities, established through collaboration between local municipal governments and the China National Intellectual Property Administration (CNIPA).
+
+The primary economic contribution of the PTC infrastructure is to resolve information asymmetry and enhance asset pledgeability. In the absence of a liquid secondary market, a patent’s value is opaque, and its liquidation value in the event of bankruptcy is negligible. Banks, averse to this uncertainty, traditionally rejected intellectual property as collateral \citep{gill2024leveraging}. PTCs address this friction by providing a centralized venue for valuation, transaction, and legal verification. By aggregating transaction data and employing professional appraisal teams, these centers provide credible third-party valuation services that reduce the valuation risk for lenders. Crucially, this mechanism fosters a more transparent information environment by converting idiosyncratic R\&D signals into standardized market data. This institutionalized transparency not only reassures creditors but also reduces the search and information-processing costs for outside equity investors. Furthermore, by creating a functional secondary market for patent trading, PTCs establish a credible liquidation channel. This transforms the patent from a sunk cost into a pledgeable asset.
+
+This institutional innovation has fostered a phenomenon known as the capital linkage. By rendering patents acceptable as collateral, PTCs have unlocked a massive channel of secured debt financing known as patent pledge financing \citep{gill2024leveraging}. This shift has profound implications for corporate governance and ownership structures. As firms gain access to secured long-term debt, they can substitute volatile and expensive external equity with stable, collateral-based long-term debt \citep{myers1984corporate,shyam1999testing}. According to agency theory, the introduction of secured debt entails delegating monitoring to banks and creditors, who impose discipline through covenants and collateral maintenance. This reliable, external debt-based monitoring replaces the governance role of internal equity oversight with a more rigid, contractual discipline \citep{rajan1995covenants,bratton2006bond}. Consequently, listed firms can optimize their ownership structure by delegating monitoring tasks to specialized creditors. Ultimately, the establishment of PTCs represents a critical maturation of China’s financial infrastructure, allowing the market to recognize and price the intrinsic value of innovation.
+
+\section{Theoretical Framework and Hypothesis Development}\label{sec3}
+This paper develops a dynamic model of corporate finance and governance to analyze the impact of enhanced liquidity in the patent secondary market on institutional ownership. Building upon the framework of \cite{falato2022rising}, we introduce a patent tradability parameter to characterize the liquidity of patent assets and endogenize the monitoring function of institutional investors. We further allow the patent trading infrastructure to simultaneously influence monitoring efficiency and debt-governance intensity, establishing an analytical framework that distinguishes between ownership stock and governance flow \footnote{To maintain the flow of the main text, all detailed mathematical derivations and formal proofs for the propositions discussed in this section are relegated to the Online Appendix (Appendix A through H).}. 
+
+\subsection{Production Technology}
+Consider a risk-neutral representative firm. Its production technology combines two types of capital inputs: physical capital ($K_T$, e.g., PP\&E) and intangible capital ($K_N$, represented by patents). The firm’s operating profit function is given by:
+\begin{equation}
+\Pi(K_T, K_N, Z) = Z^{1-\gamma} \Phi(K_T, K_N)^\gamma - ZF_0
+\end{equation}
+where $Z$ is a firm-specific productivity shock following a geometric random walk:
+\begin{equation}
+\log Z' = \log Z + \log \eta', \quad \log \eta \sim N(-\frac{1}{2}\sigma_Z^2, \sigma_Z^2)
+\end{equation}
+$\gamma \in (0,1)$ reflects the curvature of the profit function, characterizing the degree of decreasing returns to scale or the firm's market power. $F_0 > 0$ represents fixed operating costs, assumed to be proportional to the current technical level to maintain the stationarity of the firm's maximization problem.
+
+The capital aggregator $\Phi(K_T, K_N)$ adopts a Constant Elasticity of Substitution (CES) form:
+\begin{equation}
+\Phi(K_T, K_N) = \left[ \theta \left( \frac{K_T}{\theta} \right)^{-\rho} + (1-\theta) \left( \frac{K_N}{1-\theta} \right)^{-\rho} \right]^{-1/\rho}
+\end{equation}
+where $\theta \in (0,1)$ characterizes the degree of reliance on physical capital, and the elasticity of substitution is $1/(1+\rho)$. 
+
+Following \cite{abel1993unified}, the adjustment of both types of capital involves non-convex adjustment costs. Specifically, the evolution equations for capital stocks are:
+\begin{equation}
+K_i' = (1-\delta_i)K_i + I_i, \quad i \in \{T, N\}
+\end{equation}
+where $\delta_i$ is the depreciation rate and $I_i$ is the investment flow. The adjustment cost function is:
+\begin{equation}
+G_i(K_i', K_i) = [K_i' - (1-\delta_i)K_i] + F_i^K K_i \cdot \mathbf{1}_{I_i \neq 0}
+\end{equation}
+where $F_i^K$ is the fixed adjustment cost per unit of capital stock. The introduction of non-convex adjustment costs results in the action-inaction discrete feature of investment. This generates uncertainty in investment opportunities, which in turn motivates precautionary savings and creates space for liquidity management.
+
+\subsection{Financing Frictions}
+We assume the firm finances through three channels: internal funds, debt, and external equity.
+
+\subsubsection{Debt Market Frictions and Patent Tradability}
+Let $B$ denote the firm's outstanding debt and $B'$ denote newly issued debt. Since the firm in our setting does not simultaneously issue debt and hold cash, we use $B$ to represent the firm's liquidity position: $B > 0$ indicates debt, while $B < 0$ indicates cash holdings. More generally, $B$ can be understood as the firm's net debt position.
+
+Extensive literature has demonstrated that physical assets can support more debt \citep{hart1994theory,shleifer1992liquidation,rampini2010collateral,sibilkov2009asset}. This is because the quality and quantity of intangible capital are difficult to verify and are often embedded in the developer’s human capital, making them difficult to transfer, even in part, to a third party. Consequently, intangible capital is rarely utilized as collateral in debt contracts. To characterize this feature, we assume that the firm cannot commit to transferring the technology embedded in its intangible capital to creditors upon default. Following the theoretical framework of \cite{hart1994theory}, we assume that firm output is observable but not verifiable; thus, debt contracts cannot be written based on the realized value of output. Under such circumstances, the only feasible form of debt contract is a risk-free contract collateralized by capital assets.
+
+We extend the model of \cite{falato2022rising} by introducing a patent tradability parameter $\phi \in [0,1]$ to characterize the degree of market liquidity of patent assets in the secondary market. When $\phi = 0$, patents are entirely non-collateralizable, and the model reverts to the original framework of \cite{falato2022rising}. When $\phi > 0$, a portion of the patent value can be utilized for secured financing. The establishment of a Patent Trading Center exogenously improves the parameter $\phi$ by providing the following functions: first, valuation services, which reduce creditors' valuation risk by aggregating transaction data and professional appraisal teams to provide credible third-party valuations; second, a trading platform, which creates a functional secondary market for patent trading and establishes credible liquidation channels; and third, legal verification, which provides legal authentication services to reduce information asymmetry and transaction costs during patent liquidation. Consequently, patents are transformed from sunk costs into pledgeable assets, endowed with a realizable liquidation value.
+
+The borrowing constraint faced by the firm is given by:
+\begin{equation}
+B' \le \bar{B}(K_T', K_N'; \phi) \equiv \frac{(1-\tau)}{1+r} [K_T' + \phi \xi K_N']
+\end{equation}
+where $r$ is the risk-free rate, $\tau$ is the corporate tax rate, and $\xi \in (0,1)$ reflects the baseline collateral discount of intangible assets relative to physical assets, characterizing the inherent disadvantages of patents as collateral (e.g., specificity, rapid depreciation, etc.) even when they are fully tradable ($\phi = 1$). We assume that the collateral value does not depend on the realization of future shocks.
+
+\subsubsection{Equity Market Frictions}
+In the absence of equity market frictions, firms could circumvent debt market frictions by issuing new shares at zero cost. Therefore, to create space for active liquidity management, we assume that equity issuance (denoted as $E$) incurs costs. The parameterized form of equity issuance costs is:
+\begin{equation}
+\Lambda(E, K_T, K_N) = (\varphi_0 + \varphi_1 E)(K_T + K_N) \mathbf{1}_{E>0}
+\end{equation}
+where $\varphi_0$ is the fixed issuance cost proportional to the firm's size (measured by the book value of capital assets $K_T + K_N$), and $\varphi_1$ is the linear cost proportional to the issuance amount. Although these costs are exogenously imposed in this model, they can arise endogenously when external investors face uncertainty regarding the value of the firm's assets-in-place and investment opportunities, as shown by \cite{myers1984corporate}. Consistent with standard practice in the literature, the equity issuance cost in this paper is intended to parsimoniously capture the consequences of underlying informational frictions.
+
+\subsection{Institutional Investor Monitoring Function}
+Based on the corporate model described above, we endogenize the monitoring function of institutional investors. Let $\alpha \in [0,1]$ be the proportion of equity held by institutional investors, and let $m \ge 0$ be their chosen monitoring intensity.
+
+Monitoring activities can reduce the managerial agency costs. We define the firm's agency cost function as:
+\begin{equation}
+A(m, L; \phi) = A_0 \exp(-\beta_m m - \beta_L(\phi)L)
+\end{equation}
+where $A_0 > 0$ is the baseline agency cost, $L \equiv B'/(K_T + K_N)$ is the firm's leverage ratio, and $\beta_m > 0$ and $\beta_L > 0$ characterize the marginal reduction effects of monitoring intensity and leverage on agency costs, respectively.
+
+Departing from the original model, we allow the debt governance coefficient $\beta_L$ to depend on the patent tradability parameter $\phi$, specified as:
+\begin{equation}
+\beta_L(\phi) = \beta_L^0 + \beta_L^\phi \phi
+\end{equation}
+where $\beta_L^0 > 0$ is the baseline debt governance coefficient, reflecting the disciplinary effects of traditional debt covenants (e.g., collateral maintenance requirements, financial ratio restrictions) on agency costs; $\beta_L^\phi > 0$ is the enhancement coefficient of patent trading infrastructure on debt governance effectiveness. The economic intuition behind this specification is that, upon the establishment of a Patent Trading Center ($\phi$ increases), secured debt collateralized by patents exerts a stronger hard constraint. Specifically, the third-party valuation services and transparent transaction data provided by the center enable creditors to more accurately assess collateral value, allowing them to set more targeted and restrictive terms in loan agreements. Simultaneously, credible secondary-market liquidation channels strengthen creditors' bargaining power in default scenarios, making the deterrent effect of debt more significant. Therefore, in an environment with a well-developed patent-trading infrastructure, the same level of leverage can yield a stronger reduction in agency costs.
+
+This functional form encapsulates three key economic implications: First, monitoring and debt are substitutes in their governance functions. A higher leverage ratio can, in itself, lower agency costs ($\partial A / \partial L < 0$). This setting captures the disciplining function of debt, in which creditors impose constraints on management through contractual terms (e.g., collateral maintenance, financial ratio limits, periodic disclosures), restricting managerial discretion and reducing agency costs. Second, introducing debt reduces the marginal utility of monitoring. As leverage $L$ increases, the marginal return on monitoring $|\partial A / \partial m| = \beta_m A(m, L)$ decreases. Intuitively, when management's behavior is already effectively constrained by debt covenants, the marginal value created by additional institutional monitoring diminishes. Third, patent trading infrastructure amplifies the governance effect of debt. As $\phi$ rises, $\beta_L(\phi)$ increases, causing the same level of leverage to generate a more pronounced reduction in agency costs. This means that the Patent Trading Center influences the governance structure not only by increasing the quantity of debt (expanding borrowing constraints) but also by improving the quality of debt (enhancing the governance effectiveness per unit of leverage). Both paths jointly accelerate the transition from equity-based governance to debt-based governance.
+
+We assume the monitoring cost for institutional investors is:
+\begin{equation}
+C(m, \alpha; \phi) = \frac{c_0 m^2}{2 \alpha f(\phi)}
+\end{equation}
+where $c_0 > 0$. $f(\phi)$ is the monitoring efficiency function, satisfying $f(\phi) > 0$, $f'(\phi) > 0$, and $f(0) = 1$. This function characterizes the positive spillover effect of patent trading infrastructure on the monitoring efficiency of institutional investors. This functional form reflects economies of scale in monitoring, where a higher ownership stake leads to lower marginal monitoring costs. This suggests that large shareholders have stronger incentives to invest in monitoring resources because they can internalize a larger proportion of the monitoring benefits. It is important to note that this cost function decreases in $\alpha$ ($\partial C / \partial \alpha < 0$). 
+
+The economic logic for introducing the monitoring efficiency function $f(\phi)$ is as follows: one of the core functions of the Patent Trading Center is to provide standardized valuation services and transparent transaction data. These information infrastructures serve not only creditors but also reduce information asymmetry regarding intangible assets for all market participants, including institutional investors. Specifically, the transaction price data and professional appraisal reports aggregated by the Patent Trading Center provide a more reliable benchmark for corporate innovation asset value, reducing the information-collection costs that institutional investors incur to evaluate the quality of a firm's patent portfolio. Furthermore, the center's legal verification services clarify the boundaries of intellectual property, reducing the uncertainty institutional investors face when assessing a firm's core competitiveness. Consequently, even as institutional ownership $\alpha$ decreases, the governance output per unit of monitoring investment increases due to the improved information environment, allowing lower monitoring resources to achieve comparable or even higher governance outcomes. This setting provides a micro-foundation for the empirical phenomenon of declining ownership but improving governance.
+
+\subsection{Value Maximization Problem}
+\subsubsection{Firm Value Maximization}
+To facilitate the expression of the firm's value maximization problem, we introduce three indicator variables: $v_T^K \in \{0, 1\}$, $v_N^K \in \{0, 1\}$, and $v^E \in \{0, 1\}$, representing the action-inaction states regarding physical capital adjustment, intangible capital adjustment, and equity issuance, respectively. The action-inaction boundary arises from the presence of non-convex adjustment costs and fixed issuance costs. We summarize these three decision states into an element of a Cartesian product: $v \in \{(0,1) \times (0,1) \times (0,1)\} \equiv \mathcal{V}$.
+
+The firm's dividend payout is given by:
+\begin{equation}
+D = \Pi(K_T, K_N, Z) - G_T(K_T', K_T) - G_N(K_N', K_N) + \frac{B'}{1+r} - B - \Lambda(E, K_T, K_N) + E
+\end{equation}
+We assume that the dividend payout satisfies the non-negativity constraint $D \ge 0$.
+
+The firm's problem can be defined in a recursive form as the maximization of equity value:
+\begin{equation}
+W(K_T, K_N, B, Z) = \max_{v, K_T', K_N', B', E} \left\{ D + \frac{1}{1+r} \mathbb{E} [W(K_T', K_N', B', Z')] \right\}
+\end{equation}
+The constraints include:
+\begin{itemize}
+    \item[(a)] Dividend non-negativity constraint: $D \ge 0$ (corresponding to the Lagrangian multiplier $\lambda \ge 0$).
+    \item[(b)] Borrowing constraint: $B' \le \bar{B}(K_T', K_N'; \phi)$ (corresponding to the Lagrangian multiplier $\mu \ge 0$).
+\end{itemize}
+
+Here, $1 + \lambda$ can be interpreted as the shadow value of internal funds. When $\lambda > 0$, the firm faces liquidity constraints, and internal funds are more valuable than external funds. Intuitively, because of equity issuance costs, when internal funds or debt financing are insufficient to meet expenditure needs, the marginal value of internal funds rises. $\mu$ can be understood as the shadow cost of the borrowing constraint, characterizing the marginal contribution of relaxing the borrowing constraint by one unit to the firm's value.
+
+Since the objective function and the constraint set are jointly homogeneous of degree one in $(K_T, K_N, B, K_T', K_N', B', Z)$, we can reduce the dimensionality of the problem through technological scaling. Defining the standardized state variables as $k_T \equiv K_T/Z$, $k_N \equiv K_N/Z$, and $b \equiv B/Z$, the standardized value function $w(k_T, k_N, b) \equiv W(K_T, K_N, B, Z)/Z$ satisfies the equivalent Bellman equation:
+\begin{equation}
+w(k_T, k_N, b) = \max_{v, k_T', k_N', b'} \left\{ d + \frac{1}{1+r} \int w \left( \frac{k_T'}{\eta'}, \frac{k_N'}{\eta'}, \frac{b'}{\eta'} \right) dH(\eta') \right\}
+\end{equation}
+where $H(\cdot)$ is the log-normal distribution function of $\eta$.
+
+\subsubsection{Institutional Investor's Optimization}
+Institutional investors choose the ownership stake $\alpha$ and monitoring intensity $m$ to maximize:
+\begin{equation}
+\max_{\alpha, m} \alpha [V + A_0 - A(m, L; \phi)] - \alpha P - C(m, \alpha; \phi)
+\end{equation}
+where $V$ is the intrinsic value of the firm and $P$ is the equity market price. $\alpha [V + A_0 - A(m, L; \phi)]$ represents the value gain obtained by institutional investors through monitoring by reducing agency costs, specifically, monitoring reduces agency costs from $A_0$ to $A(m, L; \phi)$, and institutional investors share this value increment according to their ownership stake $\alpha$. $\alpha P$ is the cost of purchasing the shares, and $C(m, \alpha; \phi)$ is the monitoring cost.
+
+\subsection{Properties of Optimal Policies}
+
+\subsubsection{Financing and Liquidity Policies}
+We define the marginal value of holding liquid assets ($q^F$) as:
+\begin{equation}
+q^F(\tilde{k}_T', \tilde{k}_N', \tilde{b}') \equiv \frac{1}{1+r} \int w_b \left( \frac{\tilde{k}_T'}{\eta'}, \frac{\tilde{k}_N'}{\eta'}, \frac{\tilde{b}'}{\eta'} \right) dH(\eta')
+\end{equation}
+$q^F$ measures the cost of issuing one additional unit of debt (or reducing one unit of liquid assets). The firm's optimal debt or cash policy satisfies the following efficiency conditions:
+
+(a) When issuing debt ($B' > 0$, the borrowing constraint may be binding):
+\begin{equation}
+1 + \lambda = q^F + \mu
+\end{equation}
+This condition stipulates that the shadow value of internal funds $1 + \lambda$ equals the sum of the financial cost $q^F$ and the shadow cost of the borrowing constraint $\mu$. When the borrowing constraint is binding ($\mu > 0$), the firm is willing to pay an additional liquidity premium to obtain current financing.
+
+(b) When holding cash ($B' < 0$, the borrowing constraint is naturally slack, $\mu = 0$):
+\begin{equation}
+1 + \lambda = q^F
+\end{equation}
+In this case, the marginal cost of saving (forgoing the current value of $1 + \lambda$ units of internal funds) equals the marginal benefit of saving (the expected future value of $q^F$ units).
+
+\subsubsection{Institutional Investor Decision}
+The optimal monitoring intensity $m^*$ of institutional investors is determined by the following first-order condition (FOC):
+\begin{equation}
+\frac{\partial U}{\partial m} = -\alpha \frac{\partial A}{\partial m} - \frac{\partial C}{\partial m} = 0
+\end{equation}
+Since $\frac{\partial A}{\partial m} = -\beta_m A(m, L)$ and $\frac{\partial C}{\partial m} = \frac{c_0 m}{\alpha f(\phi)}$, substituting these into the FOC yields:
+\begin{equation}
+\alpha \beta_m A(m^*, L; \phi) = \frac{c_0 m^*}{\alpha f(\phi)}
+\end{equation}
+Rearranging the terms, we obtain:
+\begin{equation}
+m^* = \frac{\alpha^2 \beta_m A(m^*, L; \phi) f(\phi)}{c_0}
+\end{equation}
+
+\textbf{Lemma 1 (Optimal Monitoring Intensity):} The optimal monitoring intensity balances the marginal benefit and the marginal cost of monitoring. Monitoring intensity is positively correlated with the ownership stake ($\partial m^* / \partial \alpha > 0$), reflecting the stronger monitoring incentives of large shareholders. Compared with the baseline model, the optimal monitoring intensity is also influenced positively by the monitoring efficiency function $f(\phi)$. An increase in $f(\phi)$ reduces the marginal cost per unit of monitoring, leading institutional investors to choose a higher monitoring intensity at the same ownership level. This implies that $\phi$ exerts two opposing effects on $m^*$: on one hand, an increase in $\phi$ leads to a higher leverage ratio $L$, which lowers $A(m, L; \phi)$ and depresses $m^*$ by reducing the marginal benefit of monitoring; on the other hand, an increase in $\phi$ increases $f(\phi)$, which pushes $m^*$ higher by reducing the marginal cost of monitoring. The net direction of the change in $m^*$ depends on the relative strength of these two effects. 
+
+The optimal institutional ownership $\alpha^*$ is determined by the following first-order condition:
+\begin{equation}
+\frac{\partial U}{\partial \alpha} = V + A_0 - A(m, L; \phi) - P - \frac{\partial C}{\partial \alpha} = 0
+\end{equation}
+Since $C(m, \alpha; \phi) = \frac{c_0 m^2}{2 \alpha f(\phi)}$, its partial derivative with respect to $\alpha$ is:
+\begin{equation}
+\frac{\partial C}{\partial \alpha} = -\frac{c_0 m^2}{2 \alpha^2 f(\phi)}
+\end{equation}
+Substituting this into the FOC and rearranging gives:
+\begin{equation}
+V + A_0 - A(m^*, L; \phi) - P = -\frac{c_0(m^*)^2}{2(\alpha^*)^2 f(\phi)}
+\end{equation}
+Defining the valuation premium as $\Delta V \equiv V + A_0 - A(m^*, L) - P$, and substituting the result from Lemma 1 into the equation above, we obtain the equilibrium ownership stake:
+\begin{equation}
+\alpha^* = \frac{\sqrt{-2c_0 \Delta V}}{\beta_m A(m^*, L; \phi) \sqrt{f(\phi)}}
+\end{equation}
+
+\textbf{Lemma 2 (Optimal Ownership Stake):} The equilibrium institutional ownership depends on three factors: (i) the marginal productivity of monitoring, $\beta_m A(m^*, L; \phi)$, located in the denominator; the higher the marginal productivity, the lower the required ownership stake (as significant agency cost reduction can be achieved with less monitoring); (ii) the absolute value of the valuation premium $|\Delta V|$, located in the numerator; the larger the premium, the higher the required ownership stake (to capture sufficient economies of scale to offset valuation losses); (iii) the monitoring efficiency $f(\phi)$, which appears in the denominator in the form of $\sqrt{f(\phi)}$; the higher the monitoring efficiency, the lower the required ownership stake. Intuitively, when the patent trading infrastructure enhances information transparency, institutional investors do not need to maintain a high ownership stake to achieve effective monitoring because the information output per unit of monitoring investment is higher. This channel provides an additional micro-foundation for the rational divestment of institutional investors: it is not that monitoring becomes unimportant, but that monitoring becomes more efficient, allowing for equivalent or superior governance outcomes with fewer resources. The equilibrium ownership of institutional investors is determined by the conditions above. The FOC requires $\Delta V < 0$, meaning that in equilibrium, the equity market price $P$ is higher than the net value of the firm after institutional monitoring $V + A_0 - A(m^*, L; \phi)$. The existence of this valuation premium stems from economies of scale in the monitoring cost function; i.e., institutional investors are willing to pay a premium to obtain lower unit monitoring costs.
+
+To characterize the actual governance output obtained by the firm, we further define the Effective Governance Output as:
+\begin{equation}
+E_G(\phi) \equiv A_0 - A(m^*(\phi), L^*(\phi); \phi)
+\end{equation}
+This indicator measures the total reduction in agency costs achieved through the joint action of monitoring and debt governance in equilibrium. Unlike institutional ownership $\alpha^*$ (the ownership stock), $E_G$ measures the actual governance flow, that is, the total governance effect enjoyed by the firm in the equilibrium state. This implies that a decline in $\alpha^*$ does not necessarily imply a deterioration in governance, as strengthening debt governance and improving monitoring efficiency can fully compensate for, or even exceed, the governance gap caused by the decline in ownership.
+
+\subsection{Comparative Static Analysis}
+Based on the equilibrium characterization above, this section analyzes the impact of establishing a Patent Trading Center ($\phi \uparrow$) on the corporate financing structure and institutional ownership. To ensure the rigor of the comparative static conclusions, we introduce the following parameter assumptions:
+
+\textbf{Assumption 1 (Dominance of the Hard Debt Constraint):} The direct reduction effect of enhanced debt on agency costs is sufficiently large, i.e.:
+\begin{equation}
+\beta_L(\phi) > \frac{\beta_m^2 \alpha^2 A(m^*, L; \phi) f(\phi)}{c_0}
+\end{equation}
+The economic intuition of this assumption is that when a Patent Trading Center is established, the role of debt in reducing agency costs through contractual terms and collateral maintenance requirements is stronger than the indirect effect brought by changes in monitoring intensity. It is worth noting that since $\beta_L(\phi) = \beta_L^0 + \beta_L^\phi \phi$ increases with $\phi$, this condition is more likely to be satisfied as the patent trading infrastructure becomes more refined, reflecting the self-reinforcing characteristic of the hard debt constraint. This assumption is empirically reasonable because creditors' contractual constraints (such as periodic information disclosure and financial ratio limits) are typically more rigid and compulsory than shareholder monitoring.
+
+\textbf{Assumption 2 (Stability of the Valuation Premium):} The sensitivity of the valuation premium $\Delta V$ to patent tradability $\phi$ is limited, i.e.:
+\begin{equation}
+\left| \frac{\partial \Delta V}{\partial \phi} \right| < \frac{|\Delta V| \beta_L(\phi)}{ A(m^*, L; \phi) } \frac{\partial L}{\partial \phi}
+\end{equation}
+This assumption implies that the primary adjustment comes from changes in the marginal output of monitoring rather than violent fluctuations in the valuation premium itself.
+
+\textbf{Assumption 3 (Upper Bound of the Valuation Premium):} The absolute value of the equity valuation premium does not exceed half of the agency cost, i.e.:
+\begin{equation}
+|\Delta V| < \frac{A(m^*, L; \phi)}{2}
+\end{equation}
+The economic intuition of this assumption is that the excess price paid by institutional investors is relatively limited. This assumption is empirically reasonable because if the valuation premium were too large, institutional investors would choose not to hold shares.
+
+Under the parameter assumptions above, we obtain the following propositions:
+
+\textbf{Proposition 1 (Decrease in Institutional Ownership):} When patent tradability $\phi$ increases, the equilibrium institutional ownership stake decreases:
+\begin{equation}
+\frac{\partial \alpha^*}{\partial \phi} < 0
+\end{equation}
+Unlike the baseline model, the direction of change in the optimal monitoring intensity is uncertain:
+\begin{equation}
+\text{sgn} \left( \frac{\partial m^*}{\partial \phi} \right) = \text{sgn} \left[ f'(\phi) - \frac{f(\phi) \beta_L(\phi)}{(1 + \Gamma) \beta_m} \frac{dL}{d\phi} \frac{1}{A(m^*, L; \phi)} c_0 \right]
+\end{equation}
+where $\Gamma \equiv \alpha^2 \beta_m^2 A f(\phi) / c_0 > 0$. When the positive effect of improved monitoring efficiency $f'(\phi)$ is sufficiently large, $m^*$ may rise; when the leverage effect dominates, $m^*$ decreases.
+
+The establishment of the Patent Trading Center leads to rational divestment by institutional investors. The decline in the ownership stake $\alpha^*$ is realized through three complementary channels: First, the increase in the leverage ratio $L$ directly reduces the agency cost $A(m, L; \phi)$, reducing the marginal benefit of monitoring and weakening institutional investors' incentives to hold shares; Second, the increase in the debt governance coefficient $\beta_L(\phi)$ amplifies the governance effectiveness per unit of leverage, accelerating the substitution of equity governance by debt governance; Third, the improvement in monitoring efficiency $f(\phi)$ allows a smaller ownership stake to support effective monitoring, as $\sqrt{f(\phi)}$ appears in the denominator of $\alpha^*$, directly depressing the equilibrium ownership stake. When patents are transformed from dormant assets into pledgeable collateral, debt financing channels open, and creditors begin to assume the monitoring functions originally performed by institutional shareholders. In the face of this transition in governance structure, institutional investors rationally reduce their holdings and hand over monitoring responsibilities to creditors.
+
+\textbf{Proposition 2 (Financing Substitution Channel):} The establishment of a Patent Trading Center expands the firm's debt capacity, leading to an increase in the equilibrium leverage ratio, enhanced governance effectiveness per unit of leverage, and a decrease in the marginal output of equity monitoring:
+\begin{equation}
+\frac{\partial \bar{B}}{\partial \phi} > 0, \frac{\partial L^*}{\partial \phi} > 0, \frac{\partial \beta_L(\phi)}{\partial \phi} = \beta_L^\phi > 0, \frac{\partial [\beta_m A(m^*, L; \phi)]}{\partial \phi} < 0
+\end{equation}
+The Patent Trading Center, by providing valuation services, trading platforms, and legal authentication, transforms patent assets that were previously difficult to liquidate into collateral acceptable to banks, directly expanding the firm's borrowing capacity. Simultaneously, the information-intermediary function of the patent infrastructure enhances the quality of debt governance ($\beta_L^\phi > 0$), imbuing patent-backed debt with a stronger hard-constraint effect. The expansion of debt quantity and the improvement in debt quality jointly constitute a substitution for equity monitoring. The expansion of debt capacity yields governance effects at two levels: First, a higher leverage ratio inherently constrains management. Creditors impose discipline through restrictive covenants (such as maintenance of collateral, financial ratio limits, and periodic information disclosure obligations), restricting managerial discretion. Second, when creditors already effectively constrain managerial behavior, the marginal value generated by additional institutional monitoring diminishes. Intuitively, if bank loan agreements already require the firm to disclose operating information periodically and maintain specific financial indicators, further investment of resources by institutional investors for similar monitoring purposes becomes redundant. The decline in the marginal productivity of monitoring directly reduces the monitoring incentives of institutional investors.
+
+\textbf{Proposition 3 (Asset Revitalization Channel):} The establishment of a Patent Trading Center reduces the firm's precautionary cash holdings, mitigating the agency problem of free cash flow:
+\begin{equation}
+\frac{\partial Cash^*}{\partial \phi} \le 0
+\end{equation}
+Before the center's establishment, patents were dormant assets with extremely low liquidity, forcing firms to hold large amounts of precautionary cash as a buffer. However, management might use abundant cash for overinvestment or managerial perks, leading to agency problems. Therefore, firms with high cash holdings typically require intensive monitoring by institutional investors to prevent value destruction. The establishment of the PTC fundamentally alters this logic. Once patent assets are revitalized, firms gain alternative sources of liquidity, allowing them to meet funding needs through patent-collateralized financing rather than relying on cash reserves.
+
+\textbf{Proposition 4 (Improvement in Governance Quality and Quality-for-Quantity Upgrade):} Despite the decline in the equilibrium ownership stake, the firm's effective governance output increases:
+\begin{equation}
+\frac{\partial \alpha^*}{\partial \phi} < 0, \text{ but } \frac{\partial E_G(\phi)}{\partial \phi} > 0
+\end{equation}
+Traditional views often equate a decline in institutional ownership with governance deterioration. This model demonstrates that in the context of improved asset pledgeability, the two can be decoupled. Specifically, three complementary mechanisms ensure the improvement of governance quality: First, the hard constraint effect of debt---the discipline imposed by creditors through contractual terms has legal force and does not depend on the willingness of individual shareholders ($\beta_L(\phi) L \uparrow$); Second, the improvement in monitoring efficiency---improvements in information infrastructure allow remaining institutional investors to achieve effective monitoring at lower costs ($f(\phi) \uparrow$); Third, the direct enhancement of debt governance effectiveness by the patent trading infrastructure ($\beta_L^\phi > 0$).
+
+\textbf{Corollary 1 (Investor Duration Dynamics and Non-smooth Adjustment):} At the turning point of the Patent Trading Center's establishment (where $\phi$ undergoes a discrete jump), the equilibrium adjustment is not smooth but is accompanied by a churning process in the investor structure. Specifically, the average holding duration of institutional investors decreases in the short term, reflecting the exit of investors under the old equilibrium and the search process for the new equilibrium.
+
+The logic of this corollary is as follows. Prior to the jump in $\phi$, the firm resides in an old equilibrium characterized by high ownership, low leverage, and high cash. The holding duration of institutional investors reflects the relationship-based capital and information advantages accumulated under the previous governance structure. When $\phi$ jumps discretely, the equilibrium conditions undergo a structural shift: the optimal ownership $\alpha^*$ decreases, and the optimal monitoring technology transitions from an ownership-intensive model to a high-precision efficiency model. However, not all incumbent institutional investors can immediately adapt to this new governance paradigm. The model predicts that the adjustment process exhibits heterogeneous selection characteristics: First, short-term trading capital (such as mutual funds, brokerages, and trusts) is most sensitive to changes in the monitoring environment. As debt governance substitutes for the traditional demand for equity monitoring, the information rents and monitoring premiums for these investors dissipate rapidly, leading to their rational exit. The departure of these investors directly reduces the average institutional holding duration. Second, patient capital (such as QFII, insurance funds, and social security funds) and strategic capital (such as banks and corporate entities) have investment motives rooted in long-term asset allocation or commercial relationships; they are less sensitive to marginal changes in the monitoring environment and thus exhibit stickiness, without significantly adjusting their positions in response to changes in $\phi$. Therefore, the decline in Tenure should not be interpreted as a signal of governance deterioration, but rather as a necessary adjustment cost during the transition from the old equilibrium to the new one. This churning process is essentially an optimization of the investor structure: the exit of short-term speculative capital reduces the noise-trading component of stock prices, while retaining patient capital provides a stable shareholder base for long-term value creation.
+
+\section{Data and Research Methodology}\label{sec4}
+\subsection{Data and Sample}
+Our empirical analysis uses a comprehensive dataset of Chinese A-share-listed companies spanning the twenty-year period from 2003 to 2023. This timeframe is strategically selected to encompass the inception and staggered proliferation of local PTC across various municipalities, providing an ideal quasi-natural experimental setting to identify the causal impact of patent asset revitalization on institutional ownership structures.
+
+The primary financial and corporate governance data were obtained from the China Stock Market and Accounting Research (CSMAR) database. CSMAR is widely recognized in the literature as the most reliable source for tracking the dynamics of the Chinese capital market, offering detailed information on shareholding structures, balance sheet items, and operating performance \citep{jiang2015product}. Specifically, our dependent variable, aggregate institutional ownership, is derived from the CSMAR institutional investor file, which aggregates holdings by mutual funds, insurance companies, QFIIs, and other qualified investment entities.
+
+Data on the establishment of city-level Patent Trading Centers, the key independent variable, were manually collected and verified through official government announcements, local intellectual property office websites, and state media reports. We matched this city-level infrastructure data to listed firms based on the city of their registered headquarters. This matching process allows us to capture the local capital-linkage effect, in which regional infrastructure facilitates the monetization of corporate patent assets.
+
+To ensure the robustness and validity of our estimates, we applied standard data-cleaning procedures consistent with prior corporate finance literature, using Chinese data. First, we excluded firms operating in the financial sector (banking, insurance, and diversified financials) because their asset structures, capital requirements, and accounting standards differ fundamentally from those of industrial and commercial firms, rendering standard leverage and liquidity metrics incomparable. Second, we removed firms designated as Special Treatment (ST) or (*ST) by the stock exchanges. These firms are typically in financial distress or facing delisting risks, and their institutional ownership patterns are often driven by speculation or restructuring mandates rather than the fundamental monitoring mechanisms we investigate. Third, we eliminated observations with missing values for key explanatory or control variables.
+
+Finally, to mitigate the potential influence of extreme outliers and statistical noise, all continuous variables were winsorized at the 1st and 99th percentiles. After these rigorous screening processes, our final unbalanced panel consists of 45,966 firm-year observations. This substantial sample size provides sufficient statistical power to examine cross-sectional heterogeneity and to validate the substitution effect between patent collateralization and institutional monitoring.
+
+\subsection{Variable Constructions}
+In this section, we detail the construction of the primary variables used in our empirical analysis. To ensure replicability and for the sake of brevity, a comprehensive summary of all variable definitions, detailed calculation formulas, and their corresponding data sources is provided in Table \ref{definition}.
+
+\subsubsection{Institutional Ownership}
+The dependent variable, \textit{Institution}, serves as a proxy for the presence and influence of sophisticated external shareholders. Following standard practices in the corporate finance literature, we define \textit{Institution} as the ratio of the number of shares held by all institutional investors to the total number of shares outstanding at the end of the fiscal year. This aggregate measure encompasses holdings by mutual funds, insurance companies, social security funds, securities brokers, and other qualified institutional investors.
+
+We focus on institutional ownership because these investors are pivotal in reducing agency costs through active monitoring and governance interventions. Unlike retail investors, institutions possess the resources and incentives to discipline management, mitigating information asymmetry \citep{ward2020motivated}. However, our theoretical framework posits that when patent assets are converted into credible collateral, the monitoring role of secured creditors (e.g., banks) may substitute for that of equity holders. Therefore, fluctuations in \textit{Institution} following the policy shock reflect the capital market’s response to the firm's altered financing and governance structure. This measurement approach is consistent with recent studies examining the determinants of institutional portfolio allocation, which emphasize that institutions are sensitive to firm-level changes in governance mechanisms and asset pledgeability \citep{mccahery2016behind}.
+
+\subsubsection{Local Patent Trading Infrastructure}
+The key explanatory variable is \textit{PTC}, a binary indicator for whether a Patent Trading Center has been established in the city where the firm is headquartered. We construct this variable based on the staggered adoption of patent trading platforms across various Chinese cities from 2003 to 2023. Specifically, \textit{PTC} takes a value of one if the city $c$ where firm $i$ is located has established a patent trading center in or before year $t$, and zero otherwise.
+
+The construction of this variable exploits the quasi-natural experimental setting provided by the gradual rollout of these centers. These institutes function as critical market infrastructure that transforms sleeping intellectual property assets into liquid capital. By providing valuation services, transaction platforms, and legal certainty, PTCs reduce the friction associated with liquidating patent collateral. This enhanced pledgeability is the core economic mechanism connecting the policy to corporate finance outcomes. Literature on innovation financing suggests that the ability to pledge patents significantly relaxes borrowing constraints and alters capital structure decisions \citep{mann2018creditor,hochberg2018patent}. Therefore, the \textit{PTC} variable captures the exogenous shock to the liquidity and collateral value of corporate innovation assets. By utilizing a dummy variable based on city-level implementation, we can employ a difference-in-differences framework to isolate the causal impact of this infrastructure on institutional ownership, distinguishing it from general time trends or firm-specific characteristics \citep{fang2017intellectual}.
+
+\subsection{Empirical Model Specification}
+To empirically investigate the impact of local patent trading infrastructure on corporate ownership structures, specifically testing the hypothesis that the establishment of such institutes fosters a substitution from institutional equity monitoring to collateral-based debt monitoring, we estimate the following multi-dimensional fixed effects model:
+\begin{align}
+\textit{Institution}_{i,c,t} = \alpha + \beta \textit{PTC}_{c,t} + \theta X_{i,c,t} + \mu_i + \delta_t + \gamma_c + \varepsilon_{i,c,t},
+\end{align}
+where the subscripts $i$, $c$, and $t$ denote the firm, city, and year, respectively. The dependent variable, $\text{Institution}_{i,c,t}$, serves as a proxy for the intensity of external monitoring and is defined as the ratio of shares held by institutional investors to the total number of shares outstanding at the end of the fiscal year. Institutional ownership is a critical metric in corporate governance literature, often associated with reduced agency costs and improved information environments \citep{drobetz2024beyond}.
+
+The primary independent variable of interest is $\text{PTC}_{c,t}$, a binary treatment indicator that equals one if the city $c$ where firm $i$ is located has established a patent trading center in or before year $t$, and zero otherwise. The coefficient $\beta$ captures the average treatment effect of the patent trading infrastructure on institutional holdings. A negative and statistically significant $\beta$ would support the capital linkage hypothesis, suggesting that the ability to collateralize patent assets enables firms to secure debt financing, reducing the need for the intensive monitoring typically provided by institutional equity holders \citep{hochberg2018patent}.
+
+To isolate the causal impact of the trading centers from confounding factors, the vector $X_{i,c,t}$ includes a robust set of time-varying firm-level and city-level control variables. Firm-level controls account for characteristics that correlate with institutional demand and monitoring incentives. We control for firm size ($Size$), leverage and financial health ($Cash$), and operating performance ($\text{ROA}$), as institutional investors are known to exhibit preferences for large, liquid, and profitable firms \citep{mccahery2016behind}. We also include Tobin’s Q ($Tobinq$) to control for growth opportunities and valuation, and firm age ($Age$) to account for the lifecycle stage. Corporate governance attributes are controlled via board independence ($Indept$), ownership concentration ($Top1$, $Balance$), and CEO duality ($\text{Dual}$).
+
+Furthermore, to ensure that the estimated effect is not driven by broader regional economic trends, we include city-level macroeconomic controls. $FinDev$ controls for regional financial depth, $Innov$ accounts for the local innovation ecosystem, $Open$ measures exposure to foreign investment, and $Gov$ proxies for the extent of government intervention. Including these controls is vital for distinguishing the specific mechanism of patent asset revitalization from broader financial development \citep{fang2017intellectual}.
+
+The model incorporates a comprehensive fixed-effects structure to account for unobserved heterogeneity \citep{gormley2014common}. $\mu_i$ represents firm fixed effects, capturing time-invariant firm-specific characteristics such as corporate culture or business model. $\delta_t$ denotes year fixed effects to control for macroeconomic shocks and market-wide trends common to all firms. $\gamma_c$ represents city fixed effects, accounting for time-invariant regional factors like geographic location or historical legal infrastructure. To account for potential serial correlation and heteroskedasticity, standard errors are clustered by firm.
+
+\subsection{Descriptive Statistics}
+Table \ref{sum_stat} reports descriptive statistics for the main variables used in our empirical analysis, based on a sample of Chinese A-share-listed firms spanning 2003 to 2023. The final dataset comprises 45,966 firm-year observations. The dependent variable, Institution, representing the ratio of shares held by institutional investors to total shares, has a mean of 0.918 and a standard deviation of 1.036. This relatively high standard deviation, alongside the notable difference between the mean and median (0.603), indicates significant heterogeneity in institutional participation across the sample, with a distribution skewed toward firms with lower institutional coverage. The key independent variable, PTC, is a dummy variable indicating the presence of a local patent trading center. Its mean value of 0.596 implies that roughly 60\% of the firm-year observations correspond to firms located in cities with such infrastructure. This substantial coverage ensures sufficient variation between treated and untreated observations to effectively identify the policy's impact.
+
+Regarding firm-level control variables, the sample exhibits typical characteristics of the Chinese listed sector. The average firm size ($Size$), measured by the natural logarithm of total assets, is 22.062. In terms of financial performance and valuation, the mean Return on Assets ($ROA$) is 0.035 (3.5\%), while the average Tobin’s Q ($Tobinq$) is 1.949, indicating that, on average, the market value of these firms exceeds their replacement costs, reflecting positive growth opportunities. The sample's corporate governance structures are characterized by significant ownership concentration, with the largest shareholder ($Top1$) holding an average of 34.7\% of total shares. Furthermore, the degree of equity balance ($Balance$) averages 0.729, indicating a moderate degree of checks and balances by other large shareholders. Finally, regarding regional characteristics, the mean for Financial Development ($FinDev$) is 1.709, indicating a robust level of financial intermediation in the regions where these firms operate. These summary statistics indicate that the sample comprises a diverse range of firms with varying levels of institutional ownership, asset structures, and exposure to local innovation policies.
+
+\begin{center}
+    (Insert Table \ref{sum_stat} about here)
+\end{center}
+
+\section{Empirical Results}\label{sec5}
+\subsection{Baseline Regression Results}
+Before discussing the baseline estimates, it is crucial to validate the parallel trends assumption underlying our DID strategy. Figure \ref{dynamic} plots the dynamic treatment effects estimated via an event-study specification. The coefficients on the pre-treatment leads (years -3 to -1) are statistically indistinguishable from zero, indicating no systematic differences in institutional ownership trends between treated and control firms prior to the shock. Following the establishment of a PTC, the coefficients become significantly negative and persist, reflecting a sustained structural shift rather than a transitory shock. Table \ref{baseline} presents the baseline regression results examining the impact of establishing local PTC on aggregate institutional ownership. The dependent variable is \textit{Institution}, defined as the ratio of shares held by institutional investors to total shares at year-end. The primary independent variable of interest is \textit{PTC}, a dummy variable indicating whether the firm is located in a city that has established a patent trading center. Across all six columns, which progressively incorporate firm-level controls, city-level controls, and various fixed effect specifications, the coefficient of \textit{PTC} remains negative and statistically significant at the 1\% level. \footnote{We randomly reassign the shock to firms in our sample and repeat the regression 500 times. Figure \ref{placebo} shows the distribution of these 500 simulated coefficients. Our actual estimated coefficient (the solid vertical line) is located far away at the extreme tail of this distribution.}
+
+In Column (1), which controls only for firm and year fixed effects, the coefficient of \textit{PTC} is -0.1552. This negative association persists and stabilizes as we introduce additional controls. Column (6) represents our preferred specification, incorporating a full suite of firm-level characteristics (e.g., \textit{Size}, \textit{Balance}, \textit{ROA}), city-level macroeconomic variables (\textit{FinDev}, \textit{Innov}, \textit{Open}, \textit{Gov}), and city fixed effects to absorb time-invariant regional heterogeneity. In this comprehensive model, the coefficient of \textit{PTC} is -0.1623. Economically, this suggests that establishing a local patent-trading infrastructure substantially reduces institutional shareholdings. Given the sample mean of institutional ownership is 0.918 (as reported in Table 1), a coefficient of roughly -0.16 implies a significant relative decline, supporting the capital linkage hypothesis, in which patent asset revitalization acts as a substitute for equity-based institutional monitoring.
+
+The robust negative relationship supports the theoretical view that patent trading centers unlock the pledgeability of intangible assets. By reducing information asymmetry and transaction costs associated with the liquidation of intellectual property, these centers enable firms to access debt financing secured by patents \citep{mann2018creditor}. As firms substitute equity financing with secured debt, the monitoring role traditionally performed by institutional investors is increasingly assumed by creditors \citep{hochberg2018patent}. Consequently, the need for active institutional oversight diminishes, resulting in a more optimal reduction in institutional ownership stakes. This aligns with recent findings that debt capacity expansion driven by collateralizable assets can crowd out equity financing and alter governance structures \citep{falato2022rising}.
+
+Regarding control variables, the results in Column (6) exhibit signs consistent with standard corporate finance literature. \textit{ROA} displays a positive and highly significant coefficient, indicating that institutional investors prefer to hold shares in profitable firms with strong operating performance \citep{mccahery2016behind}. Conversely, \textit{Tobinq} is negatively associated with institutional ownership. While high valuation ratios often attract investors, they may also signal overvaluation or high growth expectations that conservative institutions avoid due to risk aversion. The ownership concentration variable, \textit{Top1}, is positively correlated with institutional ownership, suggesting that institutions may preferentially invest in firms with strong blockholders who can mitigate agency conflicts.
+
+Among city-level controls, \textit{Innov} (city innovation potential) has a significantly negative coefficient. This suggests that in highly innovative cities, where alternative financing channels for R\&D may be more abundant, the reliance on traditional institutional capital is lower. The stability of the \textit{PTC} coefficient despite the inclusion of these potent local economic indicators, such as financial development (\textit{FinDev}) and government intervention (\textit{Gov}), reinforces the causal interpretation that the decline in institutional ownership is specifically driven by the patent trading infrastructure rather than broader regional economic development or policy shocks.
+
+In summary, the baseline results provide compelling evidence that establishing patent trading institutes fundamentally alters the corporate financing-governance nexus. By transforming sleeping patent assets into active collateral, these centers facilitate a substitution of institutional equity for debt, resulting in a distinct outflow of institutional capital and marking a transition from equity-centric monitoring to debt-based contractual discipline. 
+
+\begin{center}
+    (Insert Table \ref{baseline} about here)
+\end{center}
+
+\subsection{Addressing Endogeneity}
+Establishing a causal link between the establishment of local PTCs and the reduction in aggregate institutional ownership requires rigorous attention to potential endogeneity. While our baseline regressions include a comprehensive set of fixed effects, concerns about omitted-variable bias, reverse causality, and sample selection remain. For instance, cities with robust economic fundamentals might simultaneously establish PTCs and attract specific types of institutional capital. Furthermore, firms might strategically alter their patenting behavior in anticipation of policy benefits. To mitigate these concerns, we employ a three-pronged identification strategy: Instrumental Variable (IV) regression, advanced matching and machine learning techniques, and a Bunching Difference-in-Differences (DID) estimation.
+
+\subsubsection{Instrumental Variable Regression}
+To address potential omitted-variable bias, in which unobserved local economic factors may drive both infrastructure development and institutional investment, we use the Two-Stage Least Squares (2SLS) approach. We introduce three distinct policy shocks as instruments: the designation of the TechFin pilot zone, the selection of the Broadband China demonstration city, and the establishment of intellectual property (IP) courts.
+
+The economic rationale for these instruments relies on the supply-side logic of institutional infrastructure. The TechFin pilot policy and Broadband China strategy represent exogenous shocks to the local technological and digital ecosystem \citep{li2025broadband,zhao2025digital}, which are necessary preconditions for the efficient operation of a patent trading market. Similarly, the establishment of IP courts strengthens the legal enforceability of patent rights, incentivizing the creation of trading platforms \citep{fang2017intellectual}. These instruments satisfy the relevance condition, as they are strong predictors of PTC establishment. Crucially, they also likely satisfy the exclusion restriction: these macro-level policy designations affect firm-level institutional ownership primarily by improving local financial and innovation market infrastructure (i.e., the PTC) rather than by directly dictating the portfolio choices of specific institutional investors.
+
+Table \ref{iv} presents the 2SLS results. Columns (1) through (3) report the first-stage regressions, confirming that all three instruments: \textit{TechFin}, \textit{Broadband}, and \textit{Court}, are positive and highly significant predictors of PTC establishment at the 1\% level. The robust $F$-statistics (ranging from 10.12 to 14.23) exceed conventional thresholds, mitigating concerns about weak instruments. The second-stage results in Columns (4) through (6) show that the predicted PTC variable maintains a negative, statistically significant coefficient across all specifications. Notably, the magnitude of the coefficients in the IV specifications is larger than in the OLS baseline, suggesting that measurement error or negative selection bias in the baseline OLS estimates might have attenuated the true effect size. These findings reinforce the causal interpretation that the availability of patent trading infrastructure leads to a withdrawal of institutional capital.
+
+\begin{center}
+    (Insert Table \ref{iv} about here)
+\end{center}
+
+\subsubsection{Bunching Difference-in-Differences Estimation}
+Finally, we address the potential for strategic patenting or gaming behavior. A critique of innovation-based financing policies is that they may encourage firms to file junk patents solely to qualify for subsidies or collateral eligibility, rather than to engage in substantive innovation. If the observed reduction in institutional ownership were merely a response to firms inflating their patent counts to signal quality (masking poor fundamentals), the policy implications would be vastly different.
+
+To disentangle substantive innovation from strategic behavior, we employ a Bunching DID approach. We categorize firms based on the quality of their patent portfolios. We define Junk Patents (Strategic Innovators) as firms with a non-invention patent ratio exceeding 90\%, reflecting a strategy of prioritizing quantity over quality. Conversely, Real Innovation (Typical Innovators) characterizes firms with a non-invention patent ratio below 50\%. If the PTC mechanism works through the genuine revitalization of valuable assets (the capital linkage), the effect should be concentrated among real innovators. Conversely, if it is driven by opacity or signaling noise, it might appear among strategic bunchers.
+
+Table \ref{bunching-did} reports the results of this estimation. We interact the policy variable with indicators for JunkPatents and RealInnovation. The results serve as a falsification test. The interaction term for JunkPatents is not statistically significant in either column, indicating that firms relying on low-quality patent accumulation do not experience a significant change in institutional ownership. In sharp contrast, the interaction for RealInnovation is negative and significant. This finding is critical for two reasons. First, it rules out the alternative explanation that the results are driven by institutional investors exiting firms that engage in deceptive strategic patenting. Second, it confirms the mechanism of asset revitalization: only firms with substantive, high-quality intellectual property can effectively utilize the trading center to unlock liquidity and collateral value. It is this genuine release of financial constraints and the substitution of equity monitoring with collateral-based debt monitoring that prompts the reallocation of institutional capital.
+
+\begin{center}
+    (Insert Table \ref{bunching-did} about here)
+\end{center}
+
+
+\subsubsection{Matching Techniques}
+Matching techniques, such as Propensity Score Matching (PSM) and Entropy Balancing, serve as a critical robustness check to alleviate endogeneity concerns arising from sample selection bias. The establishment of Patent Trading Centers (PTCs) is not random; cities with robust economic fundamentals or firms with specific characteristics might be more likely to host such infrastructure. By pairing treated firms with control firms that possess statistically identical observable characteristics (e.g., size, ROA, and innovation capacity), matching constructs a valid counterfactual group. This mimics a randomized experiment conditional on observables, ensuring that the observed reduction in institutional ownership is attributable to the policy shock rather than pre-existing differences in firm fundamentals. However, a key limitation is that matching relies on the ``selection on observables" assumption. It cannot account for unobserved heterogeneity—such as private information or managerial talent—that might simultaneously drive policy adoption and investor behavior, necessitating complementary strategies like Instrumental Variables.
+
+Table \ref{ddml} Panel A presents the regression results using three distinct matching specifications: one-to-one nearest neighbor, kernel matching, and entropy balancing. Across all columns, the coefficient for PTC remains negative and statistically significant at the 1\% or 5\% levels, with magnitudes ranging from -0.1352 to -0.1638. This consistency across methods reinforces that the baseline finding is robust to functional form misspecification and selection bias.
+
+To validate the quality of this matching, we refer to the covariate balance tests and the kernel density of propensity scores (Figure \ref{kernel-psm}). The density plots reveal a substantial overlap between the treated and control groups post-matching, satisfying the common support assumption. This indicates that any systematic differences in observable covariates between the groups have been effectively eliminated.
+
+Economically, these results provide compelling evidence for the governance substitution hypothesis. Even when comparing firms with nearly identical financial health and growth opportunities, those with access to patent trading infrastructure exhibit significantly lower institutional ownership. This suggests that the decline is not a signal of firm quality deterioration but a rational capital structure adjustment. As PTCs unlock the collateral value of patents, firms substitute expensive equity financing with secured debt. Institutional investors, recognizing that the "hard constraint" of debt covenants now provides effective discipline, rationally reduce their monitoring stakes, validating the capital linkage mechanism.
+
+
+\begin{center}
+    (Insert Table \ref{ddml} about here)
+\end{center}
+
+\subsubsection{Double Machine Learning}
+To further address concerns regarding functional form misspecification and the potential omission of high-dimensional confounding variables, we employ the Double Machine Learning (DDML) framework proposed by \cite{chernozhukov2018double}. Traditional linear regression models rely on strong parametric assumptions that may fail to capture complex, non-linear interactions between firm-level characteristics and regional economic conditions. If the capital linkage effect is merely an artifact of these unmodeled complexities, standard OLS estimates would be biased. DDML mitigates this issue by employing flexible machine-learning algorithms to estimate nuisance parameters, specifically the conditional expectations of the outcome and the treatment variable given the covariates. By partialling out the variation explained by these controls, DDML provides an unbiased estimate of the treatment effect that is robust to regularization bias \citep{mullainathan2017machine}.
+
+We implement the DDML approach using five distinct algorithms to ensure that our results are not dependent on a specific machine learning method: Lasso, Ridge Regression, Random Forest, LightGBM, and Neural Networks. The results are reported in Panel B of Table \ref{ddml}. Across all five algorithmic specifications, the estimated coefficient for *PTC* remains negative and statistically significant at the 1\% or 5\% levels. For instance, the Random Forest specification yields a coefficient of -0.0657, while the Neural Network model yields a coefficient of -0.0802. The stability of these estimates, even when allowing for highly flexible nonlinear relationships among covariates, strongly reinforces our baseline finding: the establishment of local patent trading infrastructure has a distinct negative effect on aggregate institutional ownership, independent of complex observable confounders.
+
+\begin{center}
+    (Insert Table \ref{ddml} about here)
+\end{center}
+
+\subsection{Exploring Plausible Channels}
+Having established a robust negative causal relationship between the establishment of local Patent Trading Centers (PTCs) and institutional ownership, it is imperative to unpack the economic mechanisms driving this capital linkage. Our theoretical framework suggests that the trading infrastructure transforms the nature of corporate assets, specifically intellectual property (IP), altering the firm's financing constraints and governance needs. We hypothesize that PTCs facilitate a substitution effect in which improved access to secured debt financing displaces the monitoring role traditionally held by institutional equity investors. Additionally, the liquidity provided by the secondary patent market allows firms to revitalize sleeping assets, reducing the need for precautionary cash holdings and enabling a more patient capital structure. In this section, we empirically test these channels.
+
+\subsubsection{Asset Revitalization and Capital Patience Channel}
+The first plausible channel focuses on asset revitalization and the formation of a patient capital structure. Before the emergence of trading centers, patents were often illiquid or sleeping assets. To hedge against liquidity shocks and financing constraints, innovation-intensive firms were compelled to hoard cash, a practice known as precautionary savings. High levels of free cash flow often exacerbate agency problems, necessitating strict oversight by institutional investors to prevent management from engaging in value-destroying investments \citep{harford2014refinancing}.
+
+We argue that the PTC revitalizes these assets by creating a secondary market for monetizing patents, if necessary. This realizable option value reduces the firm's reliance on internal cash buffers. Table \ref{channel1} provides empirical support for this channel. Column (3) reveals a statistically significant negative relationship between PTC establishment and the change in cash equivalents. This indicates that firms reduce their precautionary cash hoarding behavior when their intangible assets become more liquid. \cite{campello2013real} argue that the redeployability of real assets is a key determinant of corporate leverage and liquidity management; our results suggest that PTCs effectively increase the redeployability of intangible assets, leading to similar efficiency gains.
+
+Furthermore, the revitalization of assets facilitates a shift toward patient capital obligations. Column (1) of Table 6 shows a significant increase in Debt Patience ($DebtPatience$), defined as the ratio of relational liabilities (notes, long-term loans, bonds) to total liabilities. This shift signifies a move away from transactional, short-term financing toward stable, long-term relationships with creditors. Interestingly, Column (4) shows a significant decrease in the interest coverage ratio ($IntCoverage$). While a lower coverage ratio often signals distress, in this context, combined with the increased access to long-term debt, it reflects an efficient utilization of debt capacity. Firms are willing to operate with lower coverage margins because the collateral value of their patents provides a safety net, reducing the risk of immediate insolvency.
+
+The reduction in excess cash holding (which lowers the agency cost of free cash flow) combined with the discipline imposed by relational, patient debt creates a governance environment that requires less active intervention from the equity side. Consequently, the establishment of the PTC revitalizes corporate assets, optimizes liquidity management, and fosters a patient capital structure, collectively reducing the need for high levels of institutional ownership.
+
+\begin{center}
+    (Insert Table \ref{channel1} about here)
+\end{center}
+
+\subsubsection{Financing Substitution Channel}
+The financing substitution hypothesis posits that establishing a PTC reduces the friction associated with pledging intangible assets, unlocking debt capacity. Historically, innovative firms with high proportions of intangible assets have faced significant hurdles in securing debt financing due to the opacity and low liquidation value of patents, forcing a reliance on equity financing and the associated monitoring by institutional investors \citep{falato2022rising}. However, the PTC infrastructure reduces information asymmetry and transaction costs, making patents credible collateral for lenders. As banks and creditors accept patents as collateral, they impose their own monitoring mechanisms (e.g., covenants) that serve as a substitute for the governance role of institutional shareholders.
+
+To test this mechanism, we examine the impact of PTC establishment on the scale and structure of corporate debt. The results are presented in Table \ref{channel2}. Column (1) shows that the total leverage ratio ($Lev$) increases significantly following the introduction of a PTC, suggesting an overall expansion of debt capacity. More importantly, the composition of this debt shifts distinctively toward long-term obligations. Column (2) reveals a significant extension in debt maturity ($Maturity$). Furthermore, Column (3) indicates a substantial rise in the absolute volume of long-term loans ($LnLongloan$), and Column (4) confirms that the long-term debt leverage ratio ($LTLeverage$) increases significantly.
+
+These findings align with the pledgeability channel documented in recent literature. \cite{mann2018creditor} demonstrates that stronger creditor rights regarding patent collateral lead to increased debt issuance and innovation. Similarly, \cite{hochberg2018patent} finds that a liquid market for IP assets encourages venture lending by providing lenders with a credible exit option in the event of default. In our context, the PTC serves as the institutional foundation that enhances the liquidation value of patents. As firms substitute costly external equity with secured long-term debt, the marginal benefit of institutional monitoring declines. Institutional investors, recognizing that the bonding role of debt and bank monitoring now sufficiently mitigates agency costs, are incentivized to reallocate their capital. Thus, the reduction in institutional ownership is not a sign of abandonment but rather a rational adjustment to a capital structure in which secured debt has become the primary governance vehicle.
+
+\begin{center}
+    (Insert Table \ref{channel2} about here)
+\end{center}
+
+\subsubsection{Governance Professionalization and Debt Cost Optimization Channel}
+The final mechanism analysis investigates whether the observed de-equitization reflects a governance vacuum or, as our theoretical model suggests, a transition toward a more professionalized governance equilibrium and optimized financing costs. While previous channels established the expansion of debt capacity and asset liquidity, this channel examines the qualitative shift in corporate oversight and the economic incentives driving the substitution effect. Table \ref{channel3} reports these results.
+
+We first examine the impact of PTC establishment on the cost of debt. Column (1) of Table \ref{channel3} reveals a statistically significant reduction in the cost of debt ($Cod$). This finding suggests that by providing standardized valuations and reliable clearing mechanisms, PTC infrastructure alleviates the information risk premium and liquidation uncertainty previously faced by lenders. The reduction in $Cod$ provides the critical economic motive for the financing substitution documented in Section 5.3.2: as secured debt becomes cheaper and more contractible, firms rationally displace expensive institutional equity.
+
+Column (2) explores the dynamics of the institutional investor base by examining holding tenure ($Tenure$). We find a significant decrease in institutions' average tenure following the policy shock. Consistent with the investor churning logic in Corollary 1, this negative coefficient does not signify capital flight, but rather a governance rejuvenation. As patent transparency improves and secured debt assumes a primary role in bonding, passive or relationship-based institutions exit the firm, facilitating a reshuffling toward a more specialized investor structure. 
+
+Crucially, we test whether this structural shift compromises corporate oversight. Columns (3) and (4) provide the smoking gun evidence for a governance upgrade despite lower ownership levels. We document a significant decline in discretionary accruals ($AbsDA$) and managerial perks ($Perks$). The reduction in accrual-based earnings management and agency-related expenses confirms that substituting debt discipline for equity monitoring is efficiency-enhancing.
+
+Collectively, these results validate our governance specialization hypothesis. The establishment of PTCs allows firms to transition toward a leaner but meaner governance model, in which the rigid, contractual discipline of secured debt effectively compensates for the reduction in the quantity of institutional monitoring. This structural optimization ensures superior governance outcomes while reducing the firm's reliance on volatile external equity oversight.
+
+\begin{center}
+    (Insert Table \ref{channel3} about here)
+\end{center}
+
+\subsection{Cross-Sectional Heterogeneity}
+The baseline results establish a robust negative association between the establishment of local patent trading centers (PTC) and institutional ownership, supporting the hypothesis that patent collateralization mechanisms substitute for the monitoring role typically performed by institutional investors. However, this substitution effect is unlikely to be uniform across all firms. The extent to which patent assets can be converted into liquid capital, and the subsequent reaction of institutional investors, depend heavily on firm-specific characteristics such as asset structure, financial health, competitive positioning, and the composition of the investor base.
+
+\subsubsection{Asset Quality and Operating Efficiency}
+The core premise of the capital linkage mechanism is that the PTC facilitates the monetization of sleeping or underutilized patent assets, relaxing financing constraints and reducing the necessity for equity-based monitoring. Consequently, the magnitude of this effect should theoretically hinge on the availability of collateralizable assets and the efficiency with which a firm deploys its existing asset base. Table \ref{heterogeneity1} presents the regression results conditional on patent stock availability and asset turnover.
+
+Columns (1) and (2) divide the sample based on the presence of granted patent stock. While the coefficient for firms with no patent stock (Column 1) is statistically significant, likely reflecting broader regional spillover effects or the anticipated value of future innovation, the economic magnitude of the coefficient for firms possessing patent stock (Column 2) is substantially larger. Although the t-statistic in Column 2 is lower due to the reduced sample size (11,756 observations), the difference between the two groups is statistically significant at the 1\% level, as indicated by the bootstrap Fisher’s permutation test. This finding aligns with the collateral channel literature, which suggests that the ability to pledge patents as collateral is contingent on the existence of tangible intellectual property rights \citep{mann2018creditor}. Firms with an accumulated stock of patents are the direct beneficiaries of the trading infrastructure, which allows them to convert intangible assets into liquidity. This drastic reduction in institutional ownership among patent-holding firms supports the view that when internal assets are woken up, reliance on external equity monitoring declines disproportionately.
+
+Columns (3) and (4) examine the heterogeneity based on Asset Turnover (ATO), a proxy for operating efficiency. The results indicate that the substitution effect is concentrated in firms with low asset turnover. In contrast, the effect for high-asset-turnover firms is statistically indistinguishable from zero. Low asset turnover typically indicates that a firm has a large base of idle or underutilized assets relative to its revenue. These are precisely the firms that suffer most from capital lock-in and stand to gain the most from asset revitalization \citep{campello2013real}. Establishing a PTC provides these low-efficiency firms with a mechanism to leverage their idle intellectual property for debt financing. As credit constraints are alleviated through collateralization rather than operational improvements monitored by shareholders, institutional investors, perceiving a reduced need for their disciplinary oversight, are more likely to exit. Conversely, high-turnover firms are already using their assets efficiently and likely face fewer financing frictions associated with asset dormancy, making the PTC channel less relevant.
+
+\begin{center}
+    (Insert Table \ref{heterogeneity1} about here)
+\end{center}
+
+\subsubsection{Market Risk, Speculation, and Competitive Position}
+We next investigate how the firm's financial risk profile and market position moderate the relationship between PTC establishment and institutional holdings. Table \ref{heterogeneity2} reports the results for subsamples split by financial distress risk (Altman Z-score), share turnover (speculation), and market position (revenue share).
+
+Columns (1) and (2) categorize firms by financial distress risk. The results show that the negative impact of PTC on institutional ownership is nearly twice as strong for firms facing high financial distress compared to their low-distress counterparts. The difference is statistically significant. This finding indicates that patent collateralization serves as a collateral cure for financially constrained firms, allowing them to substitute expensive equity monitoring for secured debt. Financial distress often exacerbates agency conflicts between shareholders and debtholders, typically requiring intensive monitoring by institutional investors to prevent risk-shifting or underinvestment \citep{childs2005interactions,pawlina2010underinvestm,pryshchepa2013can}. However, the introduction of a PTC allows distressed firms to secure financing by using patents as collateral, reducing lenders' exposure to agency costs and enabling secured debt backed by specific assets. This collateral cure reduces the marginal benefit of institutional monitoring. Furthermore, distressed firms often have the most urgent need for liquidity; thus, the activation of the patent collateral channel triggers a more pronounced reconfiguration of their capital structure and governance, leading to a more pronounced institutional exit.
+
+Columns (3) and (4) analyze the impact of stock market speculation, proxied by Share Turnover. The substitution effect is predominantly observed in firms with low share turnover, whereas the effect is marginally significant and economically smaller for high turnover firms. Low share turnover characterizes stocks held by investors with longer horizons or those less prone to speculative trading. In such environments, governance and monitoring are primary value drivers. The introduction of PTC-mediated financing serves as a substitute for this governance mechanism, prompting an adjustment in ownership. Conversely, in high-turnover firms, stock prices are often driven by noise trading and short-term speculation rather than fundamental monitoring \citep{goldstein2013trading}. Consequently, the establishment of a PTC, which fundamentally alters the firm's credit access and asset utilization, has a muted impact on the ownership structure of highly speculative firms where fundamental monitoring was likely weak to begin with.
+
+Finally, Columns (5) and (6) explore the role of industry competitive position. The results indicate that the reduction in institutional ownership is driven by Market Leaders  rather than Followers. Market leaders typically possess high-quality, valuable patent portfolios that are more readily accepted as collateral by lenders \citep{hochberg2018patent}. The capital linkage mechanism requires that patents have realizable market value; market leaders are more likely to hold such assets. For market followers, whose patent portfolios may be smaller or of lower quality, the PTC infrastructure offers fewer opportunities for significant debt financing, resulting in a negligible impact on their institutional ownership structure.
+
+\begin{center}
+    (Insert Table \ref{heterogeneity2} about here)
+\end{center}
+
+\subsubsection{Institutional Investor Heterogeneity}
+Institutional investors are not a monolithic block; they possess varying investment horizons, monitoring incentives, and sensitivities to firm-level changes. To pinpoint which types of capital are displaced by the PTC infrastructure, we disaggregate institutional ownership into three categories: trading capital (mutual funds, brokers, trusts), patient capital (QFIIs, insurance companies, social security funds), and strategic capital (banks, corporate blockholders). The results are presented in Table \ref{heterogeneity3}.
+
+The regression analysis reveals a striking heterogeneity. The negative effect of PTC establishment is almost exclusively driven by the exit of Trading Capital . In contrast, the coefficients for Patient Capital and Strategic Capital are statistically insignificant.
+
+Trading capital, comprising mutual funds and securities brokers, typically represents active, profit-seeking investors who are sensitive to information asymmetry and agency costs. These investors often play a dual role: they trade on information and monitor management to maximize shareholder value \citep{chemmanur2010going}. The establishment of a PTC and the subsequent collateralization of patents provide an alternative mechanism for mitigating agency costs, specifically by serving as a bonding role for secured debt. As banks and other creditors increase their monitoring through collateral covenants \citep{mann2018creditor}, the marginal value of monitoring by active trading institutions declines. Consequently, these investors effectively hand over the baton of monitoring to creditors and reallocate their capital elsewhere. On the other hand, patient capital and Strategic Capital exhibit stickiness. Patient capital investors, such as pension funds and insurers, typically hold large positions for the long term and are less responsive to short-term changes in the financing environment. Their investment mandates are often driven by asset-liability matching or index tracking rather than active governance arbitrage. Similarly, Strategic Capital often involves business relationships or state-linked holdings that are insensitive to the PTC's marginal efficiency gains.
+
+This finding is crucial for interpreting the welfare implications of our study. It suggests that the capital linkage does not trigger a disorderly capital flight. Instead, it facilitates a rational substitution in which short-term, active trading capital, which serves as a substitute for debt-based governance, exits, while long-term, stable capital remains committed. This transition supports the notion that the PTC fosters a more mature capital structure in which patent assets serve as credible commitment devices, reducing reliance on the volatile oversight of trading institutions.
+
+\begin{center}
+    (Insert Table \ref{heterogeneity3} about here)
+\end{center}
+
+\subsection{Strategic Transformation and Resource Allocation}
+In this section, we further explore the real economic consequences of the Capital Linkage mechanism, specifically examining how the revitalization of patent assets influences corporate investment efficiency, financial resilience, and strategic resource allocation. Table \ref{further} presents the results of these deeper inquiries, shedding light on the operational transformation facilitated by the establishment of local PTC.
+
+Column (1) investigates the sensitivity of corporate investment to internal operating cash flow, a classic metric for assessing financing constraints \citep{fazzari1988financing,agca2017investmentca}. The interaction term $PTC \times Cash$ exhibits a significantly negative coefficient. This result indicates that following the establishment of a PTC, firms’ investment decisions become decoupled from their internal cash generation. By transforming patents from dormant intangible assets into pledgeable collateral, the trading infrastructure broadens the contracting space and allows firms to access external debt markets more efficiently. This finding aligns with \cite{campello2016enlarging}, who document that reforms that expand the scope of admissible collateral significantly alleviate capital constraints and boost investment by reducing reliance on internal liquidity.
+
+Column (2) examines the impact on financial resilience, proxied by the Altman Z-score. The regression yields a negative and statistically significant coefficient. While a lower Z-score is traditionally associated with higher distress risk, in this context, it reflects a rational optimization of the capital structure. The reduction in Z-score reflects an intentional increase in financial leverage as firms efficiently utilize their newly unlocked debt capacity, moving toward an optimal trade-off point. Prior to the PTC, innovation-intensive firms often maintained inefficiently high levels of precautionary savings and low leverage due to the illiquidity of their asset base \citep{han2007corporate,lyandres2016cash,favara2021uncertainty}. The asset activation facilitated by the PTC enables these firms to increase their financial leverage safely to fund growth. This shift represents a transition from a defensive, cash-hoarding stance to a more aggressive, leveraged posture, consistent with the efficient utilization of debt capacity described in the trade-off theory of capital structure.
+
+Finally, Column (3) analyzes the strategic investment mix, defined as the ratio of R\&D expenditures to total investment (comprising both R\&D and capital expenditures). The coefficient is negative and significant, suggesting a relative decrease in R\&D intensity in favor of capital expenditures. This shift does not imply a reduction in innovation capability but rather a strategic pivot toward commercialization. The transfer gap in innovation often stems from a lack of financing for the physical assets required to bring technologies to market. By unlocking the collateral value of existing patents, firms can finance the downstream physical infrastructure necessary for production and sales. This supports the view that financial development not only funds patent creation but is also crucial for the industrial application and commercialization of technological outputs \citep{hsu2014financial,santos2024sources_1dgfxe}.
+
+\begin{center}
+    (Insert Table \ref{further} about here)
+\end{center}
+
+\subsection{Summary of Robustness Tests}
+To ensure the reliability of our findings, we conduct an extensive series of robustness checks, the results of which are reported in Appendix I of the Online Appendix. Specifically, we confirm that our results are not sensitive to alternative variable definitions (Appendix I.1), various sampling criteria (Appendix I.2), or different model specifications (Appendix I.3). We also show that the findings remain robust after controlling for concurrent policy shocks (Appendix I.4) and using alternative estimators (Appendix I.5 and I.6). Overall, these tests reinforce the causal interpretation of the governance substitution effect.
+
+\section{Conclusion}\label{sec6}
+This study addresses a fundamental tension in corporate finance: the trade-off between financing constraints and governance mechanisms in the intangible economy. While prior literature establishes that enhancing patent pledgeability unlocks debt capacity \citep{mann2018creditor,hochberg2018patent}, it remains unclear how this financing shift impacts the demand for equity-based monitoring. We bridge this gap by examining whether market infrastructure that revitalizes sleeping assets creates a substitution effect, displacing the need for active oversight by institutional investors \citep{appel2019standing}. This question is critical because the rise of intangible capital has historically constrained debt capacity \citep{falato2022rising}, forcing a reliance on expensive equity. By isolating an exogenous shock to asset liquidity via China's Patent Trading Centers, this research offers novel insights into how solving the pledgeability friction reshapes the boundaries of the firm’s ownership structure.
+
+Our baseline analysis reveals a robust negative relationship between the establishment of local patent trading centers and aggregate institutional ownership. This finding persists across rigorous endogeneity tests, including instrumental-variable regressions, entropy balancing, and double machine learning, and is confirmed by a bunching design that distinguishes substantive from strategic innovators. Mechanism tests support a governance-substitution hypothesis: the infrastructure enables firms to significantly increase secured long-term debt while reducing precautionary cash holdings, facilitating a quality-for-quantity upgrade where debt discipline effectively substitutes for institutional oversight. Cross-sectional analyses indicate that the effect is most pronounced among firms with accumulated patent stocks, those facing financial distress, and those with low asset turnover, highlighting the alleviation of financing frictions. Furthermore, we find the reduction in ownership is driven almost exclusively by the exit of short-term trading capital, while patient and strategic investors remain stable. Rather than signaling a governance vacuum, this selective exit marks a governance rejuvenation, in which the pruning of noisy, speculative capital facilitates a reshuffling of the ownership base toward specialized monitors better aligned with a debt-disciplined capital structure. This suggests an efficient transition toward a patient and optimized capital structure. Crucially, our evidence confirms that this reduction in ownership does not compromise oversight; rather, firms exhibit significantly lower earnings management and managerial perks, validating the superiority of the newly established governance equilibrium.
+
+The implications of this study extend to corporate governance theory and financial market design. First, we demonstrate that the governance role of institutional investors is endogenous to the firm’s asset pledgeability; when sleeping intangible assets are revitalized, the disciplinary mechanisms of secured debt can effectively substitute for expensive equity monitoring. This challenges the assumption that institutional exit necessarily signals deteriorating firm quality, suggesting instead that it can reflect capital structure optimization. Second, the findings highlight the critical role of market infrastructure in resolving financing frictions for innovation-intensive firms. By creating secondary markets for intellectual property, policymakers can unlock debt capacity and reduce the reliance on precautionary cash hoarding without direct fiscal subsidies. Importantly, this balance sheet optimization serves as a powerful internal governance mechanism; by draining the pool of idle liquidity, it effectively curtails managerial discretion over free cash flows and curbs the potential for value-destroying investments, mitigating internal agency conflicts at their source. Finally, the study suggests that financial deepening, which targets asset liquidity, fosters a more mature investor base, encouraging the departure of volatile trading capital while retaining patient, long-term investment.
+
+
+
+
+
+\clearpage
+\normalsize
+\baselineskip=1pt
+\begingroup
+\newif\ifgobblecomma
+\gobblecommafalse
+\edef\FZ{?}
+\edef\KM{,}
+\catcode`?=\active
+\catcode`,=\active
+\def?{\FZ\gobblecommatrue}
+\def,{\ifgobblecomma\gobblecommafalse\else\KM\fi}
+\bibliographystyle{jfe}
+\bibliography{ref}
+
+
+
+
+%%%%% Figure %%%%%%%%
+\clearpage
+ \begin{figure}[ht]
+   \begin{center}
+ \includegraphics[width=0.9\linewidth]{results/parallel.pdf}
+         \caption{\textbf{Dynamic Treatment Effect}}
+  \label{dynamic}
+  \end{center}
+  \end{figure}
+
+\clearpage
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=0.9\linewidth]{results/estimator.pdf}
+  \caption{\textbf{Placebo Test}}
+  \label{placebo}
+  \end{center}
+  \end{figure}
+
+%%%%% Table %%%%%%%%
+\clearpage
+\input{results/sum_stat}
+
+\clearpage
+\input{results/baseline}
+
+\clearpage
+\input{results/iv}
+
+\clearpage
+\input{results/bunching-did}
+
+\clearpage
+\input{results/psm_ddml}
+
+\clearpage
+\input{results/channel1} 
+
+\clearpage
+\input{results/channel2} 
+
+\clearpage
+\input{results/channel3} 
+
+\clearpage
+\input{results/heterogeneity1} 
+
+\clearpage
+\input{results/heterogeneity2} 
+
+\clearpage
+\input{results/heterogeneity3} 
+
+\clearpage
+\input{results/further} 
+
+ 
+
+\clearpage 
+\setcounter{table}{0}
+\setcounter{figure}{0}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\appendix
+
+
+\begin{large}
+\begin{center}
+\bf Patent Pledgeability and Institutional Ownership: Evidence from China’s Patent Trading Centers \\ Online Appendix
+\end{center}
+\end{large}
+
+ \begin{figure}[ht]
+   \begin{center}
+ \includegraphics[width=0.9\linewidth]{results/psm-pre-post.pdf}
+         \caption{\textbf{Kernel Density of Propensity Scores}}
+  \label{kernel-psm}
+  \end{center}
+  \end{figure}
+
+\clearpage
+ \begin{figure}[ht]
+   \begin{center}
+ \includegraphics[width=0.9\linewidth]{results/csdid-figure.pdf}
+         \caption{\textbf{CSDID Event Study}}
+  \label{csdid}
+  \end{center}
+  \end{figure}
+
+\clearpage
+ \begin{figure}[ht]
+   \begin{center}
+ \includegraphics[width=0.8\linewidth]{results/specurve.pdf}
+         \caption{\textbf{Specification Curve}}
+  \label{specurve}
+  \end{center}
+  \end{figure}
+
+\clearpage
+\input{results/variables}
+
+\clearpage
+\input{results/measures}
+
+\clearpage
+\input{results/sampling}   
+
+\clearpage
+\input{results/specification}
+
+\clearpage
+\input{results/addctr}   
+
+\clearpage
+\section*{Appendix: Theoretical Derivations}
+
+\section{Model Setup and Parameter Summary}\label{app:parameters}
+\subsection{Summary of Model Parameters}
+The following table summarizes the key model parameters, their definitions, and their respective ranges or constraints.
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{clc}
+\hline
+\textbf{Symbol} & \multicolumn{1}{c}{\textbf{Definition}} & \textbf{Range/Constraint} \\ \hline
+$K_T$ & Physical capital stock & $K_T > 0$ \\
+$K_N$ & Intangible capital stock (Patents) & $K_N > 0$ \\
+$Z$ & Firm-specific productivity shock & $Z > 0$ \\
+$\gamma$ & Curvature parameter of the profit function & $\gamma \in (0,1)$ \\
+$F_0$ & Fixed operating cost parameter & $F_0 > 0$ \\
+$\theta$ & Share of physical capital in production & $\theta \in (0,1)$ \\
+$\rho$ & CES substitution parameter & $\rho > -1$ \\
+$\delta_i$ & Depreciation rate of capital type $i \in \{T, N\}$ & $\delta_i \in (0,1)$ \\
+$F_i^K$ & Fixed adjustment cost for capital type $i$ & $F_i^K > 0$ \\
+$r$ & Risk-free interest rate & $r > 0$ \\
+$\tau$ & Corporate tax rate & $\tau \in (0,1)$ \\
+$\phi$ & Patent tradability parameter & $\phi \in [0,1]$ \\
+$\xi$ & Baseline collateral discount for intangible assets & $\xi \in (0,1)$ \\
+$\varphi_0, \varphi_1$ & Equity issuance cost parameters & $\varphi_0, \varphi_1 > 0$ \\
+$\alpha$ & Institutional ownership stake & $\alpha \in [0,1]$ \\
+$m$ & Monitoring intensity & $m \ge 0$ \\
+$A_0$ & Baseline agency cost & $A_0 > 0$ \\
+$\beta_m$ & Marginal reduction of monitoring on agency costs & $\beta_m > 0$ \\
+$\beta_L^0$ & Baseline debt governance coefficient & $\beta_L^0 > 0$ \\
+$\beta_L^\phi$ & Enhancement coefficient of PTC on debt governance & $\beta_L^\phi > 0$ \\
+$c_0$ & Monitoring cost parameter & $c_0 > 0$ \\
+$f(\phi)$ & Monitoring efficiency function & $f > 0, f' > 0, f'' \le 0$ \\ \hline
+\end{tabular}
+\end{table}
+
+\section{Derivations of Production Technology and Capital Dynamics}\label{app:B}
+
+\subsection{Properties of the Profit Function}
+\textbf{Proposition B.1:} The profit function $\Pi(K_T, K_N, Z) = Z^{1-\gamma}\Phi(K_T, K_N)^\gamma - ZF_0$ is homogeneous of degree one in $(K_T, K_N, Z)$.
+
+\textit{Proof:}
+For any $\lambda > 0$, consider $\Pi(\lambda K_T, \lambda K_N, \lambda Z)$:
+
+First, the CES capital aggregator $\Phi(K_T, K_N)$ is homogeneous of degree one in $(K_T, K_N)$. Verification is as follows:
+\begin{equation}
+\begin{aligned}
+\Phi(\lambda K_T, \lambda K_N) &= \left[ \theta \left( \frac{\lambda K_T}{\theta} \right)^{-\rho} + (1-\theta) \left( \frac{\lambda K_N}{1-\theta} \right)^{-\rho} \right]^{-1/\rho} \\
+&= \left[ \lambda^{-\rho} \cdot \theta \left( \frac{K_T}{\theta} \right)^{-\rho} + \lambda^{-\rho} \cdot (1-\theta) \left( \frac{K_N}{1-\theta} \right)^{-\rho} \right]^{-1/\rho} \\
+&= (\lambda^{-\rho})^{-1/\rho} \left[ \theta \left( \frac{K_T}{\theta} \right)^{-\rho} + (1-\theta) \left( \frac{K_N}{1-\theta} \right)^{-\rho} \right]^{-1/\rho} \\
+&= \lambda \cdot \Phi(K_T, K_N)
+\end{aligned}
+\end{equation}
+
+Therefore:
+\begin{equation}
+\begin{aligned}
+\Pi(\lambda K_T, \lambda K_N, \lambda Z) &= (\lambda Z)^{1-\gamma} \Phi(\lambda K_T, \lambda K_N)^\gamma - \lambda ZF_0 \\
+&= \lambda^{1-\gamma} Z^{1-\gamma} \cdot \lambda^\gamma \Phi(K_T, K_N)^\gamma - \lambda ZF_0 \\
+&= \lambda Z^{1-\gamma} \Phi(K_T, K_N)^\gamma - \lambda ZF_0 \\
+&= \lambda \left[ Z^{1-\gamma} \Phi(K_T, K_N)^\gamma - ZF_0 \right] \\
+&= \lambda \Pi(K_T, K_N, Z) \quad 
+\end{aligned}
+\end{equation}
+
+\subsection{Log-normal Properties of Productivity Shocks}
+\textbf{Proposition B.2:} If $\log Z' = \log Z + \log \eta'$, where $\log \eta \sim N(-\frac{1}{2}\sigma_Z^2, \sigma_Z^2)$, then $\mathbb{E}[\eta'] = 1$.
+
+\textit{Proof:}
+Let $X = \log \eta \sim N(-\frac{1}{2}\sigma_Z^2, \sigma_Z^2)$, then $\eta' = e^X$.
+From the properties of the moment-generating function of a log-normal distribution:
+\begin{equation}
+\mathbb{E}[e^X] = \exp \left( \mu + \frac{\sigma^2}{2} \right)
+\end{equation}
+Substituting $\mu = -\frac{1}{2}\sigma_Z^2$ and $\sigma^2 = \sigma_Z^2$ into the equation:
+\begin{equation}
+\mathbb{E}[\eta'] = \exp \left( -\frac{1}{2}\sigma_Z^2 + \frac{\sigma_Z^2}{2} \right) = \exp(0) = 1 \quad 
+\end{equation}
+
+This setting ensures the martingale property of the productivity shock, i.e., $\mathbb{E}[Z' | Z] = Z$.
+
+\section{Derivations of the Borrowing Constraint}\label{app:C}
+
+\subsection{Micro-foundations of the Collateral Constraint}
+Based on the framework of \cite{hart1994theory}, when firm output is observable but not verifiable, debt contracts can only be based on the liquidation value of pledgeable assets.
+
+\textbf{Proposition C.1:} Under the patent tradability parameter $\phi$, the firm's borrowing constraint is:
+\begin{equation}
+B' \le \bar{B}(K_T', K_N'; \phi) \equiv \frac{(1-\tau)}{1+r} [K_T' + \phi \xi K_N']
+\end{equation}
+
+\textit{Derivation:}
+\begin{itemize}
+    \item \textbf{Collateral value of physical capital:} Physical assets $K_T'$ can be fully used to repay debt upon default, with a collateral value of $K_T'$.
+    \item \textbf{Collateral value of intangible capital:} Intangible assets face two layers of discounting: (1) Baseline discount $\xi \in (0,1)$, reflecting inherent disadvantages such as asset specificity and rapid depreciation; (2) Tradability discount $(1-\phi)$, reflecting insufficient secondary market liquidity. Thus, the effective collateral value per unit of intangible asset is $\phi \xi K_N'$.
+    \item \textbf{Tax shield effect:} Debt interest is tax-deductible; the effective collateral value must be multiplied by $(1-\tau)$.
+    \item \textbf{Discounting:} The next-period collateral must be discounted to the current period, with a discount factor of $1/(1+r)$.
+\end{itemize}
+
+In summary, the borrowing limit is:
+\begin{equation}
+\bar{B}(K_T', K_N'; \phi) = \frac{(1-\tau)}{1+r} [K_T' + \phi \xi K_N'] \quad 
+\end{equation}
+
+\subsection{Comparative Statics of Patent Tradability}
+\textbf{Proposition C.2:} The partial derivative of the borrowing limit with respect to patent tradability $\phi$ is positive:
+\begin{equation}
+\frac{\partial \bar{B}}{\partial \phi} = \frac{(1-\tau) \xi K_N'}{1+r} > 0
+\end{equation}
+
+\textit{Proof:}
+Direct differentiation of $\bar{B}$ with respect to $\phi$ yields the result. This indicates that establishing a Patent Trading Center ($\phi$ increases) directly expands the firm's debt capacity. 
+
+\section{Solving the Firm's Value Maximization Problem}\label{app:D}
+
+\subsection{Derivation of the Dividend Expression}
+The firm's dividend payout in each period equals the operating cash inflows minus investment expenditures and adjustment costs, plus net financing inflows:
+\begin{equation}
+D = \underbrace{\Pi(K_T, K_N, Z)}_{\text{Operating Profit}} - \underbrace{G_T(K_T', K_T) - G_N(K_N', K_N)}_{\text{Capital Adjustment Costs}} + \underbrace{\frac{B'}{1+r} - B}_{\text{Net Debt Financing}} - \underbrace{\Lambda(E, K_T, K_N) }_{\text{Equity Issuance Costs}}
+\end{equation}
+where $G_i(K_i', K_i) = [K_i' - (1-\delta_i)K_i] + F_i^K K_i \cdot \mathbf{1}_{I_i \neq 0}$, and $\Lambda(E, K_T, K_N) = (\varphi_0 + \varphi_1 E)(K_T + K_N) \mathbf{1}_{E > 0}$.
+
+\subsection{Construction of the Bellman Equation}
+The firm's value maximization problem is:
+\begin{equation}
+W(K_T, K_N, B, Z) = \max_{v, K_T', K_N', B', E} \left\{ D + \frac{1}{1+r} \mathbb{E} [W(K_T', K_N', B', Z')] \right\}
+\end{equation}
+Subject to the following constraints:
+\begin{enumerate}
+    \item Dividend non-negativity constraint: $D \ge 0$ (with corresponding Lagrangian multiplier $\lambda \ge 0$).
+    \item Borrowing constraint: $B' \le \bar{B}(K_T', K_N'; \phi)$ (with corresponding Lagrangian multiplier $\mu \ge 0$).
+\end{enumerate}
+
+\subsection{Homogeneity of Degree One and Standardization}
+\textbf{Proposition D.1:} The value function $W(K_T, K_N, B, Z)$ is homogeneous of degree one in $(K_T, K_N, B, Z)$.
+
+\textit{Proof:}
+Construct standardized variables: $k_T \equiv K_T/Z$, $k_N \equiv K_N/Z$, and $b \equiv B/Z$.
+Define the standardized value function: $w(k_T, k_N, b) \equiv W(K_T, K_N, B, Z)/Z$.
+
+\textbf{Step 1: Verify the homogeneity of the objective function.}
+The dividend $D$ can be written as:
+\begin{equation}
+D = Z \left[ \frac{\Pi(K_T, K_N, Z)}{Z} - \frac{G_T + G_N}{Z} + \frac{B'/(1+r) - B}{Z} - \frac{\Lambda + E}{Z} \right]
+\end{equation}
+Based on the homogeneity of degree one of $\Pi$ and the linear structure of $G_i$ and $\Lambda$, $D/Z$ depends only on the standardized variables.
+
+\textbf{Step 2: Verify the homogeneity of the constraint set.}
+For the borrowing constraint $B' \le \bar{B}(K_T', K_N'; \phi)$, divide both sides by $Z$:
+\begin{equation}
+b' \cdot \eta' \le \frac{(1-\tau)}{1+r} [k_T' \cdot \eta' + \phi \xi k_N' \cdot \eta']
+\end{equation}
+where $\eta' = Z'/Z$. The constraint remains valid under scaling.
+
+\textbf{Step 3: Standardize the Bellman equation.}
+\begin{equation}
+w(k_T, k_N, b) = \max_{v, k_T', k_N', b'} \left\{ d + \frac{1}{1+r} \int w \left( \frac{k_T'}{\eta'}, \frac{k_N'}{\eta'}, \frac{b'}{\eta'} \right) dH(\eta') \right\}
+\end{equation}
+where $H(\cdot)$ is the log-normal distribution function of $\eta'$. 
+
+\subsection{Derivation of First-Order Conditions}
+Set the Lagrangian as:
+\begin{equation}
+\mathcal{L} = D + \frac{1}{1+r} \mathbb{E}[W'] + \lambda D + \mu[\bar{B} - B']
+\end{equation}
+The first-order condition (FOC) with respect to $B'$ is:
+\begin{equation}
+\frac{\partial \mathcal{L}}{\partial B'} = \frac{1+\lambda}{1+r} + \frac{1}{1+r} \mathbb{E} \left[ \frac{\partial W'}{\partial B'} \right] - \mu = 0
+\end{equation}
+
+Defining $q^F$ (the marginal value of liquid assets):
+\begin{equation}
+q^F(k_T', k_N', b') \equiv \frac{1}{1+r} \int w_b \left( \frac{k_T'}{\eta'}, \frac{k_N'}{\eta'}, \frac{b'}{\eta'} \right) dH(\eta')
+\end{equation}
+By the Envelope Theorem, $w_b = -(1+\lambda)$, thus:
+\begin{equation}
+q^F = -\frac{1}{1+r} \mathbb{E}[1 + \lambda']
+\end{equation}
+
+The first-order condition simplifies to:
+\begin{itemize}
+    \item[(a)] \textbf{When issuing debt ($B' > 0$):} $1 + \lambda = q^F + \mu$
+    \item[(b)] \textbf{When holding cash ($B' < 0$, at which time $\mu = 0$):} $1 + \lambda = q^F$
+\end{itemize}
+
+When $\mu > 0$ (the borrowing constraint is binding), the firm is willing to pay an additional liquidity premium to obtain current financing. When holding cash, the marginal cost of saving $(1+\lambda)$ equals the expected marginal benefit of future liquidity $q^F$.
+
+\section{Solving the Institutional Investor's Optimization}\label{app:E}
+
+\subsection{Properties of the Agency Cost Function}
+The agency cost function is set as:
+\begin{equation}
+A(m, L) = A_0 \exp(-\beta_m m - \beta_L(\phi)L)
+\end{equation}
+where the debt governance coefficient is:
+\begin{equation}
+\beta_L(\phi) = \beta_L^0 + \beta_L^\phi \phi
+\end{equation}
+
+\textbf{Proposition E.1:} The agency cost function satisfies the following properties:
+\begin{enumerate}
+    \item $\frac{\partial A}{\partial m} = -\beta_m A(m, L) < 0$ (Monitoring reduces agency costs)
+    \item $\frac{\partial A}{\partial L} = -\beta_L(\phi) A(m, L) < 0$ (Leverage reduces agency costs)
+    \item $\frac{\partial^2 A}{\partial m \partial L} = \beta_m \beta_L(\phi) A(m, L) > 0$ (Monitoring and leverage are substitutes)
+    \item $\frac{\partial \beta_L}{\partial \phi} = \beta_L^\phi > 0$ (Patent tradability enhances the effectiveness of debt governance)
+\end{enumerate}
+
+\textit{Proof:} Obtained directly by taking partial derivatives of $A(m, L)$. 
+
+\subsection{Setup of the Monitoring Cost Function}
+The monitoring cost function is:
+\begin{equation}
+C(m, \alpha) = \frac{c_0 m^2}{2 \alpha f(\phi)}
+\end{equation}
+where $f(\phi)$ is the monitoring efficiency function, satisfying $f > 0, f' > 0, f'' \le 0$.
+
+\textbf{Properties:}
+\begin{enumerate}
+    \item $\frac{\partial C}{\partial m} = \frac{c_0 m}{\alpha f(\phi)} > 0$ (The marginal cost of monitoring is positive)
+    \item $\frac{\partial C}{\partial \alpha} = -\frac{c_0 m^2}{2 \alpha^2 f(\phi)} < 0$ (Economies of scale in ownership)
+    \item $\frac{\partial C}{\partial \phi} = -\frac{c_0 m^2 f'(\phi)}{2 \alpha f(\phi)^2} < 0$ (PTC reduces monitoring costs)
+\end{enumerate}
+
+\subsection{Institutional Investor's Objective Function}
+The institutional investor chooses $(\alpha, m)$ to maximize:
+\begin{equation}
+U(\alpha, m) = \alpha [V + A_0 - A(m, L)] - \alpha P - C(m, \alpha)
+\end{equation}
+where:
+\begin{itemize}
+    \item $\alpha [V + A_0 - A(m, L)]$: Equity value (including monitoring benefits)
+    \item $\alpha P$: Cost of purchasing equity
+    \item $C(m, \alpha)$: Monitoring cost
+\end{itemize}
+
+\subsection{Derivation of Lemma 1: Optimal Monitoring Intensity}
+\textbf{First-order condition (FOC):}
+\begin{equation}
+\frac{\partial U}{\partial m} = -\alpha \frac{\partial A}{\partial m} - \frac{\partial C}{\partial m} = 0
+\end{equation}
+Substituting the partial derivative expressions:
+\begin{equation}
+\alpha \beta_m A(m, L) - \frac{c_0 m}{\alpha f(\phi)} = 0
+\end{equation}
+Rearranging gives:
+\begin{equation}
+m = \frac{\alpha^2 f(\phi) \beta_m A(m, L)}{c_0}
+\end{equation}
+
+\textbf{Solving for $m^*$:}
+Set $m^* = \frac{\alpha^2 f(\phi) \beta_m A(m^*, L)}{c_0}$, and substitute $A(m^*, L) = A_0 \exp(-\beta_m m^* - \beta_L L)$:
+\begin{equation}
+m^* = \frac{\alpha^2 f(\phi) \beta_m A_0 \exp(-\beta_m m^* - \beta_L L)}{c_0}
+\end{equation}
+Taking the logarithm:
+\begin{equation}
+\ln m^* = \ln \left( \frac{\alpha^2 f(\phi) \beta_m A_0}{c_0} \right) - \beta_m m^* - \beta_L L
+\end{equation}
+Let $x = m^*$ and $a = \ln \left( \frac{\alpha^2 f(\phi) \beta_m A_0}{c_0} \right) - \beta_L L$:
+\begin{equation}
+\ln x + \beta_m x = a
+\end{equation}
+This is a transcendental equation that can be solved using the Lambert W function. However, for comparative static analysis, we directly utilize the Implicit Function Theorem.
+
+\textbf{Comparative Statics:}
+Taking the total differential of $m^* = \frac{\alpha^2 f(\phi) \beta_m A(m^*, L)}{c_0}$:
+\begin{equation}
+dm^* = \frac{2 \alpha f(\phi) \beta_m A}{c_0} d\alpha + \frac{\alpha^2 f'(\phi) \beta_m A}{c_0} d\phi + \frac{\alpha^2 f(\phi) \beta_m}{c_0} \frac{\partial A}{\partial m} dm^* + \frac{\alpha^2 f(\phi) \beta_m}{c_0} \frac{\partial A}{\partial L} dL
+\end{equation}
+Substituting $\frac{\partial A}{\partial m} = -\beta_m A$ and $\frac{\partial A}{\partial L} = -\beta_L A$:
+\begin{equation}
+dm^* \left[1 + \frac{\alpha^2 f(\phi) \beta_m^2 A}{c_0}\right] = \frac{2 \alpha f(\phi) \beta_m A}{c_0} d\alpha + \frac{\alpha^2 f'(\phi) \beta_m A}{c_0} d\phi - \frac{\alpha^2 f(\phi) \beta_m \beta_L A}{c_0} dL
+\end{equation}
+Since $m^* = \frac{\alpha^2 f(\phi) \beta_m A}{c_0}$, we have $\frac{\alpha^2 f(\phi) \beta_m^2 A}{c_0} = \beta_m m^*$. Therefore:
+\begin{equation}
+dm^* (1 + \beta_m m^*) = \frac{2 m^*}{\alpha} d\alpha + \frac{m^* f'(\phi)}{f(\phi)} d\phi - \beta_L m^* dL
+\end{equation}
+Thus:
+\begin{itemize}
+    \item $\frac{\partial m^*}{\partial \alpha} = \frac{2 m^* / \alpha}{1 + \beta_m m^*} > 0$ (Monitoring intensity increases with ownership)
+    \item $\frac{\partial m^*}{\partial \phi} = \frac{m^*}{1 + \beta_m m^*} \left[ \frac{f'(\phi)}{f(\phi)} - \beta_L^\phi \frac{\partial L}{\partial \phi} \right]$ (The sign is uncertain)
+    \item $\frac{\partial m^*}{\partial L} = \frac{-\beta_L m^*}{1 + \beta_m m^*} < 0$ (Monitoring intensity decreases with leverage)
+\end{itemize}
+Lemma 1 is proved. 
+
+\subsection{Derivation of Lemma 2: Optimal Ownership Stake}
+\textbf{First-order condition:}
+\begin{equation}
+\frac{\partial U}{\partial \alpha} = V + A_0 - A(m, L) - P - \frac{\partial C}{\partial \alpha} = 0
+\end{equation}
+Substituting $\frac{\partial C}{\partial \alpha} = -\frac{c_0 m^2}{2 \alpha^2 f(\phi)}$:
+\begin{equation}
+V + A_0 - A(m^*, L) - P + \frac{c_0 (m^*)^2}{2 (\alpha^*)^2 f(\phi)} = 0
+\end{equation}
+Defining the valuation premium $\Delta V \equiv V + A_0 - A(m^*, L) - P$, we have:
+\begin{equation}
+\Delta V = -\frac{c_0 (m^*)^2}{2 (\alpha^*)^2 f(\phi)}
+\end{equation}
+Since $c_0 > 0$, in equilibrium it must be that $\Delta V < 0$.
+
+\textbf{Solving for $\alpha^*$:}
+Substituting the result from Lemma 1, $m^* = \frac{(\alpha^*)^2 f(\phi) \beta_m A(m^*, L)}{c_0}$, into the above:
+\begin{equation}
+\Delta V = -\frac{c_0}{2 (\alpha^*)^2 f(\phi)} \cdot \frac{(\alpha^*)^4 f(\phi)^2 \beta_m^2 A^2}{c_0^2} = -\frac{(\alpha^*)^2 f(\phi) \beta_m^2 A^2}{2 c_0}
+\end{equation}
+Rearranging to solve for $(\alpha^*)^2$:
+\begin{equation}
+(\alpha^*)^2 = \frac{-2 c_0 \Delta V}{f(\phi) \beta_m^2 A(m^*, L)^2}
+\end{equation}
+Taking the positive root:
+\begin{equation}
+\alpha^* = \frac{\sqrt{-2 c_0 \Delta V}}{\beta_m A(m^*, L) \sqrt{f(\phi)}} \quad 
+\end{equation}
+Lemma 2 is proved. 
+
+\section{Formal Proofs of Propositions}\label{app:F}
+\subsection{Proof of Proposition 1: Decrease in Institutional Ownership}
+\textbf{Proposition 1:} As $\phi$ increases, $\frac{\partial \alpha^*}{\partial \phi} < 0$.
+
+\textit{Proof:}
+From Lemma 2, we have:
+\begin{equation}
+\alpha^* = \frac{\sqrt{-2c_0 \Delta V}}{\sqrt{f(\phi)} \beta_m A(m^*, L)}
+\end{equation}
+Taking the partial derivative with respect to $\phi$ and applying the chain rule:
+\begin{equation}
+\frac{\partial \alpha^*}{\partial \phi} = \frac{\partial}{\partial \phi} \left[ \frac{\sqrt{-2c_0 \Delta V}}{\sqrt{f(\phi)} \beta_m A} \right]
+\end{equation}
+Let $N = \sqrt{-2c_0 \Delta V}$ and $D = \sqrt{f(\phi)} \beta_m A(m^*, L)$. Then:
+\begin{equation}
+\frac{\partial \alpha^*}{\partial \phi} = \frac{1}{D} \frac{\partial N}{\partial \phi} - \frac{N}{D^2} \frac{\partial D}{\partial \phi}
+\end{equation}
+
+\textbf{Step 1: Calculate $\frac{\partial D}{\partial \phi}$.}
+\begin{equation}
+\frac{\partial D}{\partial \phi} = \frac{f'(\phi)}{2\sqrt{f(\phi)}} \beta_m A + \sqrt{f(\phi)} \beta_m \frac{\partial A}{\partial \phi}
+\end{equation}
+where:
+\begin{equation}
+\frac{\partial A}{\partial \phi} = \frac{\partial A}{\partial m} \frac{\partial m^*}{\partial \phi} + \frac{\partial A}{\partial L} \frac{\partial L}{\partial \phi} + \frac{\partial A}{\partial \beta_L} \frac{\partial \beta_L}{\partial \phi}
+\end{equation}
+From $A = A_0 \exp(-\beta_m m - \beta_L L)$:
+\begin{equation}
+\frac{\partial A}{\partial \beta_L} = -L A
+\end{equation}
+Therefore:
+\begin{equation}
+\frac{\partial A}{\partial \phi} = -\beta_m A \frac{\partial m^*}{\partial \phi} - \beta_L A \frac{\partial L}{\partial \phi} - L A \beta_L^\phi
+\end{equation}
+
+\textbf{Step 2: Apply Assumption 1.}
+Assumption 1 ensures that the direct governance effect of debt dominates:
+\begin{equation}
+\beta_L^\phi L > \left| \frac{\beta_m}{\beta_L} \frac{\partial m^*}{\partial \phi} \right|
+\end{equation}
+This ensures that $\frac{\partial A}{\partial \phi} < 0$, meaning the agency costs decrease.
+
+\textbf{Step 3: Determine the sign of $\frac{\partial D}{\partial \phi}$.}
+Since $f'(\phi) > 0$ and $\frac{\partial A}{\partial \phi} < 0$ (under Assumption 1), the two terms in $\frac{\partial D}{\partial \phi}$ have opposite signs. Under Assumptions 1--3, $\frac{\partial D}{\partial \phi} > 0$, implying the denominator increases.
+
+\textbf{Step 4: Apply Assumption 2 to analyze the numerator.}
+By Assumption 2, $\left| \frac{\partial \Delta V}{\partial \phi} \right|$ is bounded. Combined with $\Delta V < 0$, the change in the numerator $N$ is limited.
+
+\textbf{Step 5: Comprehensive judgment.}
+\begin{equation}
+\frac{\partial \alpha^*}{\partial \phi} \approx -\frac{N}{D^2} \frac{\partial D}{\partial \phi} < 0
+\end{equation}
+The expansion of the denominator $D$ dominates, hence $\alpha^*$ decreases. 
+
+\subsection{Proof of Proposition 2: Financing Substitution Channel}
+\textbf{Proposition 2:} $\frac{\partial \bar{B}}{\partial \phi} > 0, \frac{\partial L^*}{\partial \phi} > 0, \frac{\partial [\beta_m A(m^*, L)]}{\partial \phi} < 0$.
+
+\textit{Proof:}
+\begin{enumerate}
+    \item[(a)] $\frac{\partial \bar{B}}{\partial \phi} = \frac{(1-\tau) \xi K_N'}{1+r} > 0$. This is obtained directly by calculation.
+    \item[(b)] The equilibrium leverage ratio is $L^* = B^* / (K_T + K_N)$. When the borrowing constraint is binding, $L^* = \bar{B} / (K_T + K_N)$, thus:
+    \begin{equation}
+    \frac{\partial L^*}{\partial \phi} = \frac{1}{K_T + K_N} \frac{\partial \bar{B}}{\partial \phi} > 0
+    \end{equation}
+    \item[(c)] The marginal productivity of monitoring is $\beta_m A(m^*, L)$. From Step 2 in Section F.1, under Assumption 1, $\frac{\partial A}{\partial \phi} < 0$. Therefore:
+    \begin{equation}
+    \frac{\partial [\beta_m A(m^*, L)]}{\partial \phi} < 0 \quad 
+    \end{equation}
+\end{enumerate}
+
+\subsection*{F.3\quad Proof of Proposition 3: Asset Revitalization Channel}
+
+\textbf{Proposition 3:} $\dfrac{\partial \text{Cash}^{*}}{\partial\phi}\leq 0$.
+
+\textit{Proof:}
+In the model, the firm holds cash when $B<0$.
+Define $\text{Cash}^{*}\equiv\max\{-B^{*},\,0\}$.
+
+\medskip
+\noindent\textit{Step 1: Characterize the optimal cash policy via the FOC.}\;
+From Section D.4, the first-order condition for the firm's liquidity choice in the
+cash-holding regime ($B'<0$, so the borrowing constraint is slack and $\mu=0$) is
+%
+\begin{equation}\tag{$\star$}
+  1+\lambda \;=\; q^{F},
+\end{equation}
+%
+where $\lambda\geq 0$ is the shadow value of internal funds, and
+%
+\begin{equation}\tag{49}
+  q^{F}\!\bigl(k_{T}',\,k_{N}',\,b'\bigr)
+  \;\equiv\;
+  \frac{1}{1+r}\int w_{b}\!\!\left(
+    \frac{k_{T}'}{\eta'},\,\frac{k_{N}'}{\eta'},\,\frac{b'}{\eta'}\right)
+    dH(\eta').
+\end{equation}
+%
+Because $w_{b}=-(1+\lambda')$ by the Envelope Theorem, $q^{F}$ equals the
+\emph{expected} shadow value of internal funds in the next period, discounted at
+rate $r$.  Cash holdings are optimal when the current marginal value of internal
+funds $(1+\lambda)$ equals the expected future marginal value $(q^{F})$.
+
+\medskip
+\noindent\textit{Step 2: Decompose the precautionary motive.}\;
+The shadow value $\lambda'$ is strictly positive only when the firm faces a
+binding liquidity constraint in the next period---either through the dividend
+non-negativity constraint ($D'\geq 0$) or the borrowing constraint
+($B'\leq\bar{B}$).  We can therefore decompose $q^{F}$ as
+%
+\begin{equation}\tag{81a}
+  q^{F}
+  \;=\;
+  \underbrace{\frac{1}{1+r}}_{\text{time value}}
+  \;+\;
+  \underbrace{\frac{1}{1+r}\int \lambda'\,dH(\eta')}_{\text{precautionary premium }\Pi^{P}},
+\end{equation}
+%
+where the precautionary premium $\Pi^{P}\geq 0$ is the expected future shadow cost
+arising from the possibility of binding constraints.  The firm holds cash if and
+only if $\Pi^{P}>0$; the optimal cash buffer is increasing in $\Pi^{P}$.
+
+\medskip
+\noindent\textit{Step 3: Effect of an increase in $\phi$ on the precautionary premium.}\;
+An increase in patent tradability $\phi$ relaxes the borrowing constraint through
+Proposition C.2:
+%
+\[
+  \frac{\partial\bar{B}}{\partial\phi}
+  \;=\;
+  \frac{(1-\tau)\,\xi\, K_{N}'}{1+r}\;>\;0.
+\]
+%
+For any realization of $\eta'$, the relaxation of $\bar{B}$ operates through two channels:
+%
+\begin{itemize}
+  \item \textit{Direct capacity channel.}\;
+    A higher $\bar{B}$ expands the set of states in which the firm can borrow to
+    meet expenditure needs, reducing the probability that the borrowing constraint
+    binds, i.e.,
+    $\Pr\!\bigl[\mu'>0\,\bigr|\,\phi\bigr]$ decreases.
+  \item \textit{Severity channel.}\;
+    Conditional on a future liquidity shortfall, the larger debt capacity allows
+    the firm to partially close the funding gap via additional borrowing, lowering
+    the realized shadow value $\lambda'$.
+\end{itemize}
+%
+Both channels reduce the integrand $\lambda'$ in the precautionary premium
+$\Pi^{P}$, yielding
+%
+\begin{equation}\tag{81b}
+  \frac{\partial\Pi^{P}}{\partial\phi}
+  \;=\;
+  \frac{1}{1+r}\int\frac{\partial\lambda'}{\partial\phi}\,dH(\eta')
+  \;\leq\; 0.
+\end{equation}
+%
+Since the optimal cash holding is increasing in $\Pi^{P}$, it follows that
+%
+\begin{equation}\tag{81}
+  \frac{\partial\,\text{Cash}^{*}}{\partial\phi}\;\leq\;0.
+\end{equation}
+%
+
+\subsection{Proof of Proposition 4: Improvement in Governance Quality}
+\textbf{Proposition 4:} Under Assumptions 1--3, $\frac{\partial E_G}{\partial \phi} > 0$, where $E_G = A_0 - A(m^*, L)$.
+
+\textit{Proof:}
+The effective governance output is defined as:
+\begin{equation}
+E_G(\phi) = A_0 - A(m^*(\phi), L(\phi); \phi)
+\end{equation}
+Taking the total derivative with respect to $\phi$:
+\begin{equation}
+\frac{d E_G}{d \phi} = -\frac{\partial A}{\partial m} \frac{d m^*}{d \phi} - \frac{\partial A}{\partial L} \frac{d L}{d \phi} - \frac{\partial A}{\partial \beta_L} \frac{\partial \beta_L}{\partial \phi}
+\end{equation}
+Substituting the partial derivatives:
+\begin{equation}
+\frac{d E_G}{d \phi} = \beta_m A \frac{d m^*}{d \phi} + \beta_L A \frac{d L}{d \phi} + L A \beta_L^\phi = A \left[ \beta_m \frac{d m^*}{d \phi} + \beta_L \frac{d L}{d \phi} + \beta_L^\phi L \right]
+\end{equation}
+By Proposition 2, $\frac{d L}{d \phi} > 0$.
+\begin{itemize}
+    \item \textbf{Case 1:} If $\frac{d m^*}{d \phi} \ge 0$, then all three terms are non-negative, and $\frac{d E_G}{d \phi} > 0$.
+    \item \textbf{Case 2:} If $\frac{d m^*}{d \phi} < 0$, we need to verify that the last two terms dominate. By Assumption 1:
+    \begin{equation}
+    \beta_L^\phi L + \beta_L \frac{d L}{d \phi} > \beta_m \left| \frac{d m^*}{d \phi} \right|
+    \end{equation}
+\end{itemize}
+Thus, even if the monitoring intensity $m^*$ decreases ($\frac{d m^*}{d \phi} < 0$), the enhancement of debt governance (including both the increase in $\beta_L$ and leverage $L$) is sufficient to compensate for the decline in monitoring:
+\begin{equation}
+\frac{d E_G}{d \phi} > 0 \quad 
+\end{equation}
+
+\section{Derivation of Corollary 1: Investor Duration Dynamics}\label{app:G}
+
+\textbf{Corollary 1:} At the time of a discrete jump in $\phi$, the average holding duration of institutional investors decreases in the short term.
+
+\textit{Derivation:}
+Assume the institutional investor group can be divided into three categories:
+\begin{itemize}
+    \item \textbf{Trading capital:} $\alpha_T$, sensitive to the monitoring environment.
+    \item \textbf{Patient capital:} $\alpha_P$, with investment motives stemming from long-term allocation.
+    \item \textbf{Strategic capital:} $\alpha_S$, with investment motives stemming from commercial relationships.
+\end{itemize}
+Total institutional ownership is $\alpha = \alpha_T + \alpha_P + \alpha_S$.
+
+\textbf{Response of trading capital:}
+The holding decision of trading investors highly depends on the monitoring rent $R_T = \beta_m A(m^*, L) - c_T$. 
+When $\phi$ jumps:
+\begin{enumerate}
+    \item $L$ rises $\to A(m^*, L)$ falls $\to$ Monitoring rent $R_T$ falls.
+    \item If $R_T < 0$, trading capital chooses to exit.
+\end{enumerate}
+Assume the exit threshold is $\bar{R}_T$. When $\phi$ jumps to $\phi^+$ such that $R_T(\phi^+) < \bar{R}_T$:
+\begin{equation}
+\Delta \alpha_T = \alpha_T(\phi^+) - \alpha_T(\phi^-) < 0
+\end{equation}
+
+\textbf{Stickiness of patient and strategic capital:}
+The investment motives of these two types of investors have low correlation with monitoring rents. Assume the elasticity of their holdings with respect to $\phi$ is $\epsilon_P, \epsilon_S \approx 0$:
+\begin{equation}
+\Delta \alpha_P \approx 0, \quad \Delta \alpha_S \approx 0
+\end{equation}
+
+\textbf{Change in average holding duration:}
+Assume that under the old equilibrium, the average holding periods of each type of investor are $T_T < T_P < T_S$ (where trading-type is the shortest). The weighted average duration is:
+\begin{equation}
+\bar{T} = \frac{\alpha_T T_T + \alpha_P T_P + \alpha_S T_S}{\alpha_T + \alpha_P + \alpha_S}
+\end{equation}
+When $\alpha_T$ decreases ($\Delta \alpha_T < 0$) while $\alpha_P, \alpha_S$ remain unchanged:
+\begin{equation}
+\Delta \bar{T} = \frac{(\alpha_T + \Delta \alpha_T)T_T + \alpha_P T_P + \alpha_S T_S}{\alpha_T + \Delta \alpha_T + \alpha_P + \alpha_S} - \bar{T}
+\end{equation}
+
+The short-term decline in duration stems from the following dynamics:
+\begin{enumerate}
+    \item \textbf{Selection bias of exiters:} The first to exit are marginal investors (the marginal part of the trading capital with the shortest holding periods).
+    \item \textbf{Search for a new equilibrium:} During the period between the breakdown of the old equilibrium and the establishment of the new one, the average holding period of all investors shortens.
+\end{enumerate}
+
+\textbf{Long term:} When the new equilibrium is established, the average duration of the retained investors (mainly patient and strategic types) rises:
+\begin{equation}
+\lim_{t \to \infty} \bar{T}(t) > \bar{T}(0) \quad 
+\end{equation}
+
+\section{Economic Reasonableness of Parameter Assumptions}\label{app:H}
+\subsection{Discussion of Assumption 1}
+\textbf{Assumption 1 (Dominance of the Hard Debt Constraint):}
+\begin{equation}
+\beta_L^\phi L > \frac{\beta_m}{\beta_L} \left| \frac{\partial m^*}{\partial \phi} \right|
+\end{equation}
+\textbf{Economic Reasonableness:}
+\begin{enumerate}
+    \item The legal enforceability of debt contracts is higher than shareholder monitoring.
+    \item Provisions such as collateral maintenance requirements and financial ratio restrictions impose rigid constraints.
+    \item As $\phi$ increases, $\beta_L = \beta_L^0 + \beta_L^\phi \phi$ increases, making this condition easier to satisfy.
+\end{enumerate}
+\textbf{Numerical Calibration:} Set $\beta_L^0 = 0.5, \beta_L^\phi = 0.3, \beta_m = 1, L = 0.4, \phi = 0.5$.
+Then $\beta_L = 0.5 + 0.3 \times 0.5 = 0.65$, and $\beta_L^\phi L = 0.3 \times 0.4 = 0.12$.
+Requirement: $0.12 > \frac{1}{0.65} \left| \frac{\partial m^*}{\partial \phi} \right|$, i.e., $\left| \frac{\partial m^*}{\partial \phi} \right| < 0.078$. This holds within reasonable parameter ranges.
+
+\subsection{Discussion of Assumption 2}
+\textbf{Assumption 2 (Stability of the Valuation Premium):}
+\begin{equation}
+\left| \frac{\partial \Delta V}{\partial \phi} \right| < \frac{|\Delta V| \beta_L \partial L}{A(m^*, L) \partial \phi}
+\end{equation}
+\textbf{Economic Reasonableness:}
+Valuation premium $\Delta V = V + A_0 - A(m^*, L) - P$.
+\begin{enumerate}
+    \item The sensitivity of the firm's intrinsic value $V$ to $\phi$ is limited (mainly determined by production technology).
+    \item Market price $P$ reflects fundamental changes in efficient markets.
+    \item Major adjustments stem from changes in $A(m^*, L)$.
+\end{enumerate}
+
+\subsection{Discussion of Assumption 3}
+\textbf{Assumption 3 (Upper Bound of the Valuation Premium):}
+\begin{equation}
+|\Delta V| < \frac{A(m^*, L)}{2}
+\end{equation}
+\textbf{Economic Reasonableness:}
+If $|\Delta V|$ is too large, it implies that institutional investors pay an excessively high excess price, which is unsustainable in competitive markets. This assumption ensures the existence of an interior solution.
+
+\section{Robustness Checks}\label{app:I}
+To ensure the reliability of our baseline findings on the impact of establishing a local PTC on aggregate institutional ownership, we conduct a battery of robustness tests. These tests address potential concerns regarding variable measurement, sample selection bias, model specification, and confounding by policy shocks. Furthermore, we employ a specification curve analysis to demonstrate the stability of our estimates across various analytical choices.
+
+\subsection{Alternative Variable Definitions}
+In our baseline analysis, we measured institutional ownership as the simple ratio of shares held by institutions to total shares. However, ownership data can exhibit right skewness, which may influence regression estimates. To address this, we re-estimate the baseline model using the natural logarithm of one plus the total institutional shareholding ratio ($LnInstitution$). As reported in Columns (1) and (2) of Table \ref{measures}, the coefficient on $PTC$ remains negative and statistically significant at the 1\% level, confirming that distributional properties of the dependent variable do not drive our results.
+
+Furthermore, the term institutional investor encompasses a heterogeneous group of market participants with varying investment horizons and monitoring incentives \citep{johnson2010institutional}. To ensure our results capture the behavior of market-oriented investors rather than purely passive holders, we employ two alternative measures: $ProfInst$, which aggregates the shareholdings of short-term, trading-oriented institutions (i.e., mutual funds, securities brokers, and trusts) (Columns 3 and 4); and $Fund$, which focuses exclusively on mutual funds (Columns 5 and 6). These investors are typically characterized by higher sensitivity to information asymmetry and agency costs. The results in Table S2 indicate that establishing a PTC significantly reduces holdings by these professional investors. Specifically, the coefficient for $ProfInst$ is -0.0162  and for $Fund$ is -0.0089. This consistency suggests that the reduced need for monitoring, facilitated by patent collateralization, leads active institutional capital to reallocate, validating the capital linkage hypothesis across different definitions of institutional ownership.
+
+\subsection{Alternative Sampling Criteria}
+We further investigate whether our findings are sensitive to specific sample compositions or time periods that might introduce bias. The results of these tests are presented in Table \ref{sampling}.
+
+First, State-Owned Enterprises (SOEs) in China often operate with dual objectives, profit maximization and political stability, and enjoy implicit government guarantees that may decouple their access to financing from their patent assets \citep{jiang2015product}. To ensure our results are driven by market forces rather than state intervention, we exclude SOEs from the sample. As shown in Column (1), the negative effect of $PTC$ on institutional ownership remains significant, indicating that the mechanism is particularly relevant for non-SOEs that rely more heavily on market-based collateral channels.
+
+Second, extreme market volatility can distort institutional trading behaviors. We re-estimate the model excluding years associated with major financial disruptions: the 2008 global financial crisis, the 2015 Chinese stock market crash, and the 2020-2022 COVID-19 pandemic. Column (2) shows that the coefficient remains robust, suggesting the effect is not an artifact of crisis-induced liquidity shocks. In addition, since the PTC specifically targets intellectual property, its impact should be most pronounced in patent-intensive industries. In Column (3), we restrict the sample to high-tech firms by excluding non-high-tech entities. The coefficient magnitude increases to -0.2045, reinforcing the logic that the revitalization of patent assets is the primary channel affecting institutional monitoring incentives.
+
+Finally, to mitigate concerns about mechanical lock-in effects post-IPO, we exclude firms listed for fewer than 3 years. Newly listed firms often have locked-in institutional capital that cannot freely exit. Column (4) confirms that our results persist when focusing on firms with tradable equity, supporting the view that institutions actively reduce their positions as the bonding role of secured debt effectively substitutes for equity-based monitoring.
+
+\subsection{Alternative Model Specifications}
+A pervasive challenge in empirical corporate finance is the presence of unobserved time-varying heterogeneity that may correlate with both the policy shock and the dependent variable \citep{gormley2014common}. While our baseline model controls for firm- and year-specific fixed effects, sector- or region-specific shocks could confound the estimates. For instance, a booming technology sector or a regional economic stimulus plan could simultaneously drive patenting activity and institutional investment flows.
+
+To address this, we augment our baseline model with high-dimensional interactive fixed effects, as reported in Table \ref{specification}. Column (1) introduces Industry $\times$ Year fixed effects to control for time-varying industry trends. Column (2) adds Province $\times$ Year fixed effects to absorb time-varying regional economic shocks. Column (3) includes both sets of high-dimensional fixed effects simultaneously. Across all specifications, the coefficient on $PTC$ remains negative and statistically significant, ranging from -0.1243 to -0.1467. The stability of these estimates implies that the observed reduction in institutional ownership is not driven by omitted-variable bias related to industrial cycles or regional macroeconomic shifts, but rather by the specific micro-level impact of the patent trading infrastructure.
+
+\subsection{Controlling Concurrent Policy Shocks}
+The period of our study coincides with several other significant economic reforms in China that could influence corporate innovation and financing. Failure to control for these concurrent policies could lead to spurious correlations. We explicitly account for four major policy shocks in Table \ref{addctr}.
+
+First, we control for capital market reforms ($Relaxation$), including the registration-based IPO system and price limit relaxations, which altered market liquidity. Second, we account for the patent approval system reform ($PatentReform$), which could directly affect the quality of patent assets \citep{gill2024leveraging}. Third, we consider the TechFin pilot policy ($TechFin$), which encourages the integration of technology and finance. Lastly, we control for the Broadband China strategy ($Broadband$), which improved digital infrastructure and information flow \citep{li2025broadband}.
+
+Column (5) of Table \ref{addctr} presents the results when all these policy variables are included simultaneously. Notably, the coefficient on $PTC$ remains negative and highly significant. While policies such as $TechFin$ and $Broadband$ also show significant effects, the independent explanatory power of PTC establishment remains robust. This finding is crucial as it disentangles the specific contribution of the asset revitalization channel from broader financial deepening or technological infrastructure improvements. It supports the contention that the PTC provides a unique mechanism for converting sleeping patent assets into active collateral, altering the governance equilibrium between firms and institutional investors.
+
+\subsection{Alternative Difference-in-Differences Estimation}
+To address potential biases in staggered adoption designs, we re-examine our findings using the doubly robust estimator proposed by \cite{callaway2021difference}. A key concern with the traditional two-way fixed effects (TWFE) approach is that previously treated units can act as "bad controls," potentially contaminating the estimated treatment effects if they are heterogeneous across cohorts \citep{goodman2021difference}.
+
+As shown in Figure \ref{csdid}, our results remain highly robust when using only "clean" controls (never-treated or not-yet-treated firms). The cohort-specific event study reveals no evidence of pre-treatment trends, and the post-treatment decline in institutional ownership follows a trajectory remarkably consistent with Figure \ref{dynamic}. This consistency confirms that the documented governance substitution effect is not a mechanical artifact of the staggered policy rollout but a fundamental shift in the corporate financing-governance equilibrium.
+
+\subsection{Specification Curve Analysis}
+To address concerns regarding p-hacking and to demonstrate that our results do not rely on a specific, cherry-picked combination of control variables or fixed effects, we conduct a Specification Curve Analysis (SCA) following the methodology of \cite{simonsohn2020specification}. This approach involves estimating the parameter of interest across all theoretically reasonable model specifications and plotting the resulting distribution of coefficients. We consider 72 different specifications based on variations in: (1) control variable sets (Baseline 1, Baseline 2, Additional Controls); (2) fixed effect structures (Firm, Year, Province, City, Industry $\times$ Year, etc.); (3) standard error clustering levels; and (4) sample exclusions (SOEs, Crisis Years, etc.).
+
+Figure \ref{specurve} visualizes the results. The top panel displays the point estimates of the $PTC$ coefficient sorted by magnitude, along with their 95\% and 99\% confidence intervals. The bottom panel indicates the specific model components used for each estimate. The analysis reveals that the vast majority of estimates are negative and statistically significant (indicated by blue dots for $p < 0.01$). Only a negligible fraction of specifications yield non-significant results, and none yield a statistically significant positive coefficient. This comprehensive visualization provides compelling evidence that the negative relationship between the establishment of local patent institutes and aggregate institutional ownership is a structural feature of the data and is robust to a wide array of analytical choices.
+
+\end{document}

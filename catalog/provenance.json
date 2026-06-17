@@ -977,6 +977,21 @@
     },
     {
       "commercial_use": "unknown",
+      "id": "65-zheng-siyao-empirical-research-skills",
+      "last_aers_review": "2026-05-31",
+      "license": "UNKNOWN - check upstream",
+      "license_file": null,
+      "origin": "vendored upstream",
+      "path": "skills/65-zheng-siyao-empirical-research-skills",
+      "security_review": "SECURITY-SCAN-REPORT.md",
+      "skill_count": 7,
+      "source_confidence": "medium",
+      "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
+      "sync": "manual vendor snapshot",
+      "vendored_commit": null
+    },
+    {
+      "commercial_use": "unknown",
       "id": "66-zheng-siyao-empirical-research-skills",
       "last_aers_review": "2026-05-31",
       "license": "UNKNOWN - check upstream",
@@ -989,18 +1004,33 @@
       "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
       "sync": "manual vendor snapshot",
       "vendored_commit": null
+    },
+    {
+      "commercial_use": "unknown",
+      "id": "67-econfin-workflow-toolkit",
+      "last_aers_review": "2026-05-31",
+      "license": "UNKNOWN - check upstream",
+      "license_file": null,
+      "origin": "local curated snapshot (52 skills) 2026-06-17",
+      "path": "skills/67-econfin-workflow-toolkit",
+      "security_review": "SECURITY-SCAN-REPORT.md",
+      "skill_count": 52,
+      "source_confidence": "unresolved",
+      "source_url": null,
+      "sync": "manual vendor snapshot",
+      "vendored_commit": null
     }
   ],
   "generated_by": "scripts/build-provenance.py",
   "scan_date": "2026-05-31",
   "schema_version": "1.0",
   "summary": {
-    "collections": 66,
+    "collections": 68,
     "commercial_use": {
       "allowed": 35,
       "restricted": 2,
       "share-alike": 5,
-      "unknown": 24
+      "unknown": 26
     },
     "licenses": {
       "AGPL-3.0": 1,
@@ -1009,13 +1039,13 @@
       "CC-BY-SA-4.0 (repository default)": 4,
       "MIT": 34,
       "MIT Non-Commercial": 1,
-      "UNKNOWN - check upstream": 24
+      "UNKNOWN - check upstream": 26
     },
     "source_confidence": {
       "high": 38,
       "low": 7,
-      "medium": 17,
-      "unresolved": 4
+      "medium": 18,
+      "unresolved": 5
     }
   }
 }

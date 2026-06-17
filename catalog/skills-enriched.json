@@ -2,54 +2,54 @@
   "generated_by": "scripts/build-catalog-enrich.py",
   "schema_version": 1,
   "summary": {
-    "skills": 1080,
-    "mean_quality_score": 99.3,
-    "with_frontmatter_description": 1076,
-    "body_derived_description": 4,
+    "skills": 1139,
+    "mean_quality_score": 99.2,
+    "with_frontmatter_description": 1134,
+    "body_derived_description": 5,
     "no_description": 0,
-    "tagged": 518
+    "tagged": 555
   },
   "taxonomy": {
     "language": {
-      "latex": 83,
-      "stata": 43,
-      "python": 41,
-      "r": 20
+      "latex": 95,
+      "stata": 47,
+      "python": 45,
+      "r": 21
     },
     "method": {
-      "iv": 24,
-      "rdd": 21,
-      "panel-fe": 16,
-      "staggered-did": 16,
+      "iv": 27,
+      "rdd": 25,
+      "panel-fe": 19,
+      "staggered-did": 17,
       "bayesian": 13,
-      "synthetic-control": 9,
-      "did": 8,
-      "event-study": 8,
-      "matching": 8,
-      "dml": 7,
+      "did": 11,
+      "dml": 10,
+      "event-study": 10,
+      "synthetic-control": 10,
+      "matching": 9,
       "survival": 3
     },
     "stage": {
-      "analysis": 124,
-      "writing": 76,
-      "submission": 72,
-      "literature": 58,
+      "analysis": 138,
+      "writing": 83,
+      "submission": 76,
+      "literature": 59,
       "reproduction": 58,
-      "citation": 46,
-      "tables-figures": 40,
-      "presentation": 37,
+      "citation": 47,
+      "tables-figures": 42,
+      "presentation": 41,
       "ideation": 32,
       "peer-review": 25,
-      "robustness": 23,
-      "de-aigc": 16,
+      "robustness": 24,
+      "de-aigc": 17,
       "data": 12
     },
     "topic": {
-      "econometrics": 67,
-      "scientific-writing": 62,
+      "econometrics": 80,
+      "scientific-writing": 67,
       "reproducibility": 58,
-      "proofreading": 31,
-      "causal-inference": 25
+      "proofreading": 35,
+      "causal-inference": 29
     }
   },
   "skills": [
@@ -20758,6 +20758,133 @@
     },
     {
       "name": "R-optimizer",
+      "path": "skills/65-zheng-siyao-empirical-research-skills/R-optimizer/SKILL.md",
+      "collection": "65-zheng-siyao-empirical-research-skills",
+      "line_count": 271,
+      "description_effective": "R语言实证分析优化Skill。优化R代码效率、处理大规模面板数据、加速回归计算（并行化、向量化、向量化）。触发词：R语言优化/R加速/R性能优化/大规模数据处理/R optimization",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "citation-fidelity",
+      "path": "skills/65-zheng-siyao-empirical-research-skills/citation-fidelity/SKILL.md",
+      "collection": "65-zheng-siyao-empirical-research-skills",
+      "line_count": 150,
+      "description_effective": "学术引用核查Skill。要求每条引用必须定位到PDF原页，区分直接引用/间接引用，找不到原文则标注\"待核\"。触发词：引用核查/检查引用/citation check/核实文献/引用 fidelity",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "codebook-pass",
+      "path": "skills/65-zheng-siyao-empirical-research-skills/codebook-pass/SKILL.md",
+      "collection": "65-zheng-siyao-empirical-research-skills",
+      "line_count": 248,
+      "description_effective": "调查数据清洗Skill。处理调查数据（CGSS/CHIP/CSS等）时的标准化清洗流程，包括缺失值处理、变量编码统一、数据异常值检测。触发词：数据清洗/调查数据/codebook/数据清洗流程/问卷数据处理",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "did-reviewer",
+      "path": "skills/65-zheng-siyao-empirical-research-skills/did-reviewer/SKILL.md",
+      "collection": "65-zheng-siyao-empirical-research-skills",
+      "line_count": 187,
+      "description_effective": "双重差分(DID)实证审查Skill。做DID分析前必须检查平行趋势假设、画图可视化、报告违背情况。触发词：DID审查/双重差分检查/平行趋势/DiD reviewer/difference-in-differences",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "method": [
+          "did"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "econ-reviewer",
+      "path": "skills/65-zheng-siyao-empirical-research-skills/econ-reviewer/SKILL.md",
+      "collection": "65-zheng-siyao-empirical-research-skills",
+      "line_count": 216,
+      "description_effective": "经济学顶刊标准审稿Skill。按AER/QJE/Econometrica/JPE顶刊标准审查论文输出（图表+回归表），列出潜在致命缺陷。触发词：顶刊审稿/论文审查/econ reviewer/经济学期刊标准/PR",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "stage": [
+          "analysis"
+        ],
+        "topic": [
+          "econometrics"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "grillme",
+      "path": "skills/65-zheng-siyao-empirical-research-skills/grillme/SKILL.md",
+      "collection": "65-zheng-siyao-empirical-research-skills",
+      "line_count": 124,
+      "description_effective": "苏格拉底诘问式研究选题Skill。通过连续追问帮你厘清研究思路、聚焦研究子领域、明确研究问题(RQ)，识别出未被研究过的新意选题。触发词：帮我选题/研究问题不清晰/想做一个有新意的论文/不断问我问题/厘清思路",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "latex-table",
+      "path": "skills/65-zheng-siyao-empirical-research-skills/latex-table/SKILL.md",
+      "collection": "65-zheng-siyao-empirical-research-skills",
+      "line_count": 249,
+      "description_effective": "LaTeX回归表格生成Skill。辅助生成符合AER/QJE等顶刊格式的三线表，包括标准误聚类标注、显著性星标、固定效应标注。触发词：LaTeX表格/回归表/三线表/table制作/latex table",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "language": [
+          "latex"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "R-optimizer",
       "path": "skills/66-zheng-siyao-empirical-research-skills/R-optimizer/SKILL.md",
       "collection": "66-zheng-siyao-empirical-research-skills",
       "line_count": 271,
@@ -20881,6 +21008,1138 @@
       "license": "UNKNOWN - check upstream",
       "commercial_use": "unknown",
       "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "China-CF-Study",
+      "path": "skills/67-econfin-workflow-toolkit/China-CF-study/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 875,
+      "description_effective": "根据研究者提供的**研究计划书（Research Proposal）**执行基于中国制度环境的公司金融类实证研究全流程。**启动后第一件事：根据计划书的主题、识别策略、贡献边际与样本范围，从中国-context 英文顶级期刊池（JF/JFE/RFS/JFQA/MS/JCF/JBF/JAR/JAE/TAR/CAR/JIBS/China Economic Review/PBFJ 等 25+ 期刊）中推荐 5 本最匹配的目标期刊（[J1]–[J5]），等待研究者明确选定一本；该期刊决定 main.tex 的 bibliographystyle、Section 骨架、Introduction 风格与表注规范**。然后用 Python 完成数据清洗、描述性统计、基准回归、内生性检验（IV/2SLS、DML）、平行趋势、异质性、机制、稳健性检验与图表绘制。LaTeX 表格和图像严格遵循 template/ 示例格式，研究逻辑与排版严格遵循 rule/ 下的《通用实证研究逻辑与规范总结》与《回归表写作规范总结》。数据集与政策集从 asset/ 中按计划书中的关键词检索。**当计划书预期的实证结果无法实现时（系数不显著、平行趋势不通过、IV 弱工具、机制不成立等），skill 自动切换备选方案直至完成研究项目**。最终交付物：Python 代码 + LaTeX 表格 + 图像（.pdf/.png）。触发条件：研究者提交研究计划书（含 X→Y 假设、识别策略、样本、政策冲击等）。",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "language": [
+          "latex",
+          "python"
+        ],
+        "method": [
+          "dml",
+          "iv"
+        ],
+        "stage": [
+          "writing"
+        ]
+      },
+      "quality_score": 85,
+      "quality_flags": [
+        "very-long-no-references"
+      ],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "Foreign-CF-Study",
+      "path": "skills/67-econfin-workflow-toolkit/Foreign-CF-study/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 1069,
+      "description_effective": "根据研究者提供的**研究计划书（Research Proposal）**执行基于**外国（美国/欧盟/英国/日本/跨国）制度环境**的公司金融类实证研究全流程。**启动后第一件事：根据计划书的主题、识别策略、贡献边际与样本范围，从外国 CF 顶刊池（AER/QJE/JPE/JF/JFE/RFS/JFQA/JAR/JAE/MS/JCF/JBF 等 25+ 期刊）中推荐 5 本最匹配的目标期刊（[J1]–[J5]），等待研究者明确选定一本；该期刊决定 main.tex 的 bibliographystyle、Section 骨架、Introduction 风格与表注规范**。然后用 Python 完成数据清洗、描述性统计、基准回归、内生性检验（IV/2SLS、DML）、平行趋势、异质性、机制、稳健性检验与图表绘制。LaTeX 表格和图像严格遵循 template/ 示例格式，研究逻辑与排版严格遵循 rule/ 下的《通用实证研究逻辑与规范总结》与《回归表写作规范总结》。数据集与政策集从 asset/ 中按计划书中的关键词检索（WRDS / NBER/Fed releases / FRED / 全球宏观库）。**当计划书预期的实证结果无法实现时（系数不显著、平行趋势不通过、IV 弱工具、机制不成立等），skill 自动切换备选方案直至完成研究项目**。最终交付物：Python 代码 + LaTeX 表格 + 图像（.pdf/.png）。触发条件：研究者提交研究计划书（含 X→Y 假设、识别策略、样本、政策冲击等）。",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "language": [
+          "latex",
+          "python"
+        ],
+        "method": [
+          "dml",
+          "iv"
+        ],
+        "stage": [
+          "writing"
+        ]
+      },
+      "quality_score": 85,
+      "quality_flags": [
+        "very-long-no-references"
+      ],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "agent-browser",
+      "path": "skills/67-econfin-workflow-toolkit/agent-browser/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 360,
+      "description_effective": "Browser automation CLI for AI agents. Use when the user needs to interact with websites, including navigating pages, filling forms, clicking buttons, taking screenshots, extracting data, testing web apps, or automating any browser task. Triggers include requests to \"open a website\", \"fill out a form\", \"click a button\", \"take a screenshot\", \"scrape data from a page\", \"test this web app\", \"login to a site\", \"automate browser actions\", or any task requiring programmatic web interaction.",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "arxiv",
+      "path": "skills/67-econfin-workflow-toolkit/arxiv/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 281,
+      "description_effective": "Search and retrieve academic papers from arXiv using their free REST API. No API key needed. Search by keyword, author, category, or ID. Combine with web_extract or the ocr-and-documents skill to read full paper content.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "stage": [
+          "literature"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "chinese-ppt2",
+      "path": "skills/67-econfin-workflow-toolkit/chinese-ppt/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 881,
+      "description_effective": "Upgrade of chinese-ppt for Chinese Beamer decks (xelatex + ctex + fandol, CUFE template). Same 7-section outline and X→M→Y framework, but adds (a) mandatory 1.3 line-spacing + 3pt paragraph spacing, (b) overflow-prevention line budget + balanced split-frame rules, (c) prose rewrites that strip AI-ish \"关键比较/理论映射\" labels and redundant 章节括号注释, (d) stricter CJK-space + middle-dot rules, (e) retrofit workflow for existing chinese-ppt decks, (f) mandatory local linespread reset inside TikZ / table / fixed-geometry frames. Use for \"做中文学术PPT 2 版\"、\"中文 Beamer 改进版\"、\"答辩 PPT chinese-ppt2\"、\"防越界 PPT\"等请求。用户在 Overleaf 编译，只产出 .tex + figures/，不要附加 compile 脚本。",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "language": [
+          "latex"
+        ],
+        "stage": [
+          "presentation"
+        ]
+      },
+      "quality_score": 85,
+      "quality_flags": [
+        "very-long-no-references"
+      ],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "chinese-quote-converter",
+      "path": "skills/67-econfin-workflow-toolkit/chinese-quote-converter/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 32,
+      "description_effective": "Convert English straight quotation marks (\"...\") to Chinese curved quotation marks (\"...\" U+201C/D). Use when processing Chinese text documents, markdown files, or any content that needs proper Chinese typography with directional quotes. Triggers on keywords like \"转换引号\", \"中文引号\", \"英文引号转中文\", \"quote conversion\", \"convert quotes\".",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "Command Development",
+      "path": "skills/67-econfin-workflow-toolkit/command-development/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 836,
+      "description_effective": "This skill should be used when the user asks to \"create a slash command\", \"add a command\", \"write a custom command\", \"define command arguments\", \"use command frontmatter\", \"organize commands\", \"create command with file references\", \"interactive command\", \"use AskUserQuestion in command\", or needs guidance on slash command structure, YAML frontmatter fields, dynamic arguments, bash execution in commands, user interaction patterns, or command development best practices for Claude Code.",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "data-cleaning",
+      "path": "skills/67-econfin-workflow-toolkit/data-cleaning/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 387,
+      "description_effective": "Clean and transform messy data for analysis in Python, R, or Stata",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "language": [
+          "python",
+          "stata"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "data-fetcher",
+      "path": "skills/67-econfin-workflow-toolkit/data-fetcher/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 785,
+      "description_effective": "Fetch economic data from FRED, World Bank, BLS, OECD, and Yahoo Finance",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {},
+      "quality_score": 92,
+      "quality_flags": [
+        "long-no-references"
+      ],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "did-analysis",
+      "path": "skills/67-econfin-workflow-toolkit/did-analysis/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 166,
+      "description_effective": "Econometrics skill for Difference-in-Differences (DID) analysis. Activates when the user asks about: \"difference in differences\", \"DID\", \"DiD\", \"diff-in-diff\", \"parallel trends\", \"treatment group\", \"control group\", \"pre-treatment\", \"post-treatment\", \"policy evaluation\", \"natural experiment\", \"staggered DID\", \"event study regression\", \"two-way fixed effects DID\", \"callaway santanna\", \"sun and abraham\", \"双重差分\", \"倍差法\", \"平行趋势\", \"处理组\", \"对照组\", \"政策评估\", \"事件研究\", \"交错DID\", \"渐进处理\"",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {
+        "method": [
+          "did",
+          "event-study",
+          "panel-fe",
+          "staggered-did"
+        ],
+        "stage": [
+          "analysis"
+        ],
+        "topic": [
+          "econometrics"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "do-agent",
+      "path": "skills/67-econfin-workflow-toolkit/do-agent/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 27,
+      "description_effective": "This skill should be used when the user asks to \"/do-agent\", asks for \"Execute complex tasks using multi-agent architecture with context protection\", or needs the workflow previously provided by the /do-agent slash command.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "docx",
+      "path": "skills/67-econfin-workflow-toolkit/docx/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 590,
+      "description_effective": "Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx files). Triggers include: any mention of 'Word doc', 'word document', '.docx', or requests to produce professional documents with formatting like tables of contents, headings, page numbers, or letterheads. Also use when extracting or reorganizing content from .docx files, inserting or replacing images in documents, performing find-and-replace in Word files, working with tracked changes or comments, or converting content into a polished Word document. If the user asks for a 'report', 'memo', 'letter', 'template', or similar deliverable as a Word or .docx file, use this skill. Do NOT use for PDFs, spreadsheets, Google Docs, or general coding tasks unrelated to document generation.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {},
+      "quality_score": 92,
+      "quality_flags": [
+        "long-no-references"
+      ],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "econfin-idea-finder",
+      "path": "skills/67-econfin-workflow-toolkit/econfin-idea-finder/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 430,
+      "description_effective": "公司金融实证研究的\"漏斗式选题查找器\"。互动开场先后询问 (1) 研究方向、(2) 候选标题数量 N， 再扫描全球文献（已出版英文学术期刊 + SSRN working paper + 全球高校 department seminar 1 年内日程），基于 Edmans (2024) \"1000 Rejections\" 红线生成 N 个候选标题，**通过并行 subagent（Agent 工具）批量生成计划书 + 查新；每个 subagent 必须强制调用 Skill 工具加载 econfin-proposal 与 novelty-check 两个预设 skill 完成各自模块**，**只有当 novelty score >= 9 时（即 JF/JFE/RFS 顶刊层次），subagent 才把 proposal + 查新报告合并的 md 写入 F:\\Dropbox\\CC\\选题大全\\<研究方向短名>\\（以\"简短选题名称-分数\"命名，子文件夹名由 Step 0 从用户输入的研究方向派生）；< 9 分的选题在 subagent 内部直接丢弃，绝不写盘、绝不输出**。当用户说\"找选题\"、\"帮我找选题\"、\"想做 X 方向\"、 \"empirical CF idea search\"、\"批量生成研究计划书\"、\"100 ideas\"、\"econfin-idea-finder\" 时触发。",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "Econfin-Proposal",
+      "path": "skills/67-econfin-workflow-toolkit/econfin-proposal/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 312,
+      "description_effective": "金融经济学实证论文计划书生成器。根据用户提供的研究方向，生成包含标题、假说、数据来源、实证策略、 预期结果表格、稳健性检验、异质性分析、机制检验等12个完整模块的研究计划书。 内置中国微观/宏观数据库（皮皮侠1599个数据集、马克数据377个数据集）和WRDS国际数据库索引， 自动匹配可用数据源。融合Edmans (2024) \"Learnings From 1000 Rejections\"的编辑视角作为质量护栏， 确保选题具有真正的边际贡献而非\"just another determinant of Y\"。 当用户提到以下任何情境时触发：写研究计划书、research proposal、论文开题、选题+计划、 帮我设计一个实证研究、empirical research design、我想研究X对Y的影响怎么做、 帮我找个能发表的选题、generate proposal、写一个可以投稿的研究方案、 研究设计、identification strategy、DID/RDD/IV研究设计。 即使用户只是描述了一个经济金融现象并想知道\"能不能做成论文\"，也应考虑使用此技能。",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {
+        "method": [
+          "rdd"
+        ],
+        "stage": [
+          "analysis"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "figure",
+      "path": "skills/67-econfin-workflow-toolkit/figure/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 681,
+      "description_effective": "Econometrics skill for generating publication-quality figures for top economics journals. Activates when the user asks about: \"econometric figure\", \"publication figure\", \"journal figure\", \"AER figure\", \"QJE figure\", \"event study plot\", \"coefficient plot\", \"coefplot\", \"binned scatter\", \"binscatter\", \"RDD plot\", \"parallel trends plot\", \"kernel density\", \"distribution plot\", \"time series plot\", \"map\", \"figure formatting\", \"academic plot\", \"论文图表\", \"学术图\", \"系数图\", \"事件研究图\", \"散点图\", \"分布图\", \"趋势图\", \"回归可视化\"",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "method": [
+          "event-study",
+          "rdd"
+        ],
+        "stage": [
+          "analysis",
+          "tables-figures"
+        ],
+        "topic": [
+          "econometrics"
+        ]
+      },
+      "quality_score": 92,
+      "quality_flags": [
+        "long-no-references"
+      ],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "fix-chinese",
+      "path": "skills/67-econfin-workflow-toolkit/fix-chinese/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 25,
+      "description_effective": "PROACTIVE SKILL — automatically apply whenever writing, generating, or editing any text that is mainly in Chinese. No user trigger needed. Also use when the user explicitly asks to \"fix Chinese\", \"修改中文\", \"去翻译腔\", \"去AI味\", \"fix Chinese formatting\", or \"review Chinese text\". Eliminates AI-sounding expressions and translation artifacts. Enforces Chinese-English mixed formatting rules (spacing, punctuation, bold formatting).",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "stage": [
+          "de-aigc"
+        ],
+        "topic": [
+          "proofreading"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "frontend-design",
+      "path": "skills/67-econfin-workflow-toolkit/frontend-design/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 42,
+      "description_effective": "Create distinctive, production-grade frontend interfaces with high design quality. Use this skill when the user asks to build web components, pages, artifacts, posters, or applications (examples include websites, landing pages, dashboards, React components, HTML/CSS layouts, or when styling/beautifying any web UI). Generates creative, polished code and UI design that avoids generic AI aesthetics.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "iv-estimation",
+      "path": "skills/67-econfin-workflow-toolkit/iv-estimation/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 174,
+      "description_effective": "Econometrics skill for instrumental variables and treatment effect estimation. Activates when the user asks about: \"instrumental variables\", \"IV estimation\", \"2SLS\", \"two-stage least squares\", \"endogeneity\", \"weak instruments\", \"first stage\", \"Sargan test\", \"overidentification\", \"propensity score matching\", \"PSM\", \"average treatment effect\", \"ATT\", \"LATE\", \"local average treatment effect\", \"endogenous regressor\", \"instrument validity\", \"工具变量\", \"两阶段最小二乘\", \"内生性\", \"弱工具变量\", \"倾向得分匹配\", \"平均处理效应\", \"处理效应\", \"局部平均处理效应\"",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {
+        "method": [
+          "iv",
+          "matching"
+        ],
+        "stage": [
+          "analysis"
+        ],
+        "topic": [
+          "causal-inference",
+          "econometrics"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "journal-digest",
+      "path": "skills/67-econfin-workflow-toolkit/journal-digest/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 201,
+      "description_effective": "经济金融顶刊文献速递与选题建议生成器。通过RSS和网页抓取获取经济学、金融学、会计学顶级期刊的最新论文， 筛选公司金融相关文献，生成中文综述摘要和研究选题建议。 当用户提到\"期刊速递\"、\"文献周报\"、\"论文速递\"、\"最新文献\"、\"journal digest\"、\"paper digest\"、 \"选题建议\"、\"研究选题\"、\"顶刊追踪\"、\"文献追踪\"、\"周报\"时触发此技能。 即使用户只是说\"帮我看看最近有什么新论文\"或\"最近顶刊发了什么\"，也应该触发。",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "markitdown",
+      "path": "skills/67-econfin-workflow-toolkit/markitdown/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 241,
+      "description_effective": "Convert various file formats (PDF, Office documents, images, audio, web content, structured data) to Markdown optimized for LLM processing. Use when converting documents to markdown, extracting text from PDFs/Office files, transcribing audio, performing OCR on images, extracting YouTube transcripts, or processing batches of files. Supports 20+ formats including DOCX, XLSX, PPTX, PDF, HTML, EPUB, CSV, JSON, images with OCR, and audio with transcription.",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "marp-export",
+      "path": "skills/67-econfin-workflow-toolkit/marp-export/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 147,
+      "description_effective": "Export Marp slide markdown files to PDF (default), HTML, PPTX, or PNG. Handles theme loading, Chrome/Chromium detection for PDF export, and batch conversion. Trigger when user says \"export slides\", \"convert marp to pdf\", \"marp export\", \"slides to pdf\", \"slides to html\", \"导出slides\", \"slides转pdf\", \"导出演示文稿\".",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "stage": [
+          "presentation"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "marp-slides-creator",
+      "path": "skills/67-econfin-workflow-toolkit/marp-slides-creator/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 906,
+      "description_effective": "专业Marp演示文稿制作助手。支持完整工作流程：工作空间初始化、内容分析、slides制作、多维度审阅、中文语言规范审阅（中文演示文稿）、PNG转换检查、终稿确定。所有产出物集中管理在项目工作文件夹中。当用户提到\"制作slides\"、\"做PPT\"、\"演示文稿\"、\"Marp\"、\"幻灯片\"、\"presentation\"等关键词时自动启用。Professional Marp presentation assistant with complete workflow: workspace initialization, content analysis, slide creation, multi-dimensional review, Chinese language review (for Chinese presentations), PNG conversion check, and finalization. All outputs organized in project workspace.",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {
+        "stage": [
+          "presentation"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "master-thesis-review",
+      "path": "skills/67-econfin-workflow-toolkit/master-thesis-review/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 144,
+      "description_effective": "Generate master's thesis review reports (硕士论文评阅意见) calibrated to a given score. Outputs academic evaluation and shortcomings/suggestions in Chinese. Trigger when user says \"master thesis review\" / \"硕士论文评阅\" / \"论文评阅\" / \"评阅意见\" / \"thesis review\".",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "md-to-docx",
+      "path": "skills/67-econfin-workflow-toolkit/md-to-docx/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 189,
+      "description_effective": "Convert Markdown files to Word documents (.docx) with proper formatting, Chinese font support (FangSong for all text including headings), black font color, 1.5x line spacing, precise first-line indent (24pt), heading spacing after (1 line), no italic headings, and automatic superscript conversion for citation numbers. Use when converting .md files to .docx, creating Word documents from markdown, or when user mentions Word, DOCX, or document conversion. Requires pandoc.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "ml-causal",
+      "path": "skills/67-econfin-workflow-toolkit/ml-causal/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 484,
+      "description_effective": "Econometrics skill for machine learning methods in causal inference. Activates when the user asks about: \"causal forest\", \"generalized random forest\", \"GRF\", \"double machine learning\", \"DML\", \"debiased machine learning\", \"LASSO for variable selection\", \"post-LASSO\", \"heterogeneous treatment effects\", \"CATE\", \"conditional average treatment effect\", \"BLP analysis\", \"CLAN analysis\", \"causal tree\", \"honest estimation\", \"因果森林\", \"双重机器学习\", \"异质性处理效应\", \"条件平均处理效应\", \"LASSO变量选择\", \"机器学习因果推断\", \"去偏机器学习\"",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {
+        "method": [
+          "dml"
+        ],
+        "stage": [
+          "analysis"
+        ],
+        "topic": [
+          "causal-inference",
+          "econometrics"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "novelty-check",
+      "path": "skills/67-econfin-workflow-toolkit/novelty-check/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 106,
+      "description_effective": "Verify research idea novelty against recent literature. Use when user says \"查新\", \"novelty check\", \"有没有人做过\", \"check novelty\", or wants to verify a research idea is novel before implementing.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "ols-regression",
+      "path": "skills/67-econfin-workflow-toolkit/ols-regression/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 114,
+      "description_effective": "Econometrics skill for OLS regression and linear models. Activates when the user asks about: \"run OLS\", \"linear regression\", \"ordinary least squares\", \"interpret regression results\", \"heteroskedasticity\", \"multicollinearity\", \"regression assumptions\", \"robust standard errors\", \"GLS\", \"WLS\", \"fit a regression model\", \"check regression diagnostics\", \"OLS假设\", \"最小二乘法\", \"线性回归\", \"回归系数\", \"残差检验\", \"异方差\", \"多重共线性\", \"普通最小二乘\", \"稳健标准误\", \"回归诊断\"",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {
+        "stage": [
+          "analysis"
+        ],
+        "topic": [
+          "econometrics"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "panel-data",
+      "path": "skills/67-econfin-workflow-toolkit/panel-data/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 311,
+      "description_effective": "Econometrics skill for panel data models. Activates when the user asks about: \"panel data\", \"fixed effects\", \"random effects\", \"Hausman test\", \"within estimator\", \"between estimator\", \"two-way fixed effects\", \"clustered standard errors panel\", \"FE model\", \"RE model\", \"pooled OLS\", \"unobserved heterogeneity\", \"panel regression\", \"first difference estimator\", \"entity fixed effects\", \"time fixed effects\", \"面板数据\", \"固定效应\", \"随机效应\", \"豪斯曼检验\", \"双向固定效应\", \"面板回归\", \"个体效应\", \"时间效应\", \"一阶差分\"",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {
+        "method": [
+          "did",
+          "panel-fe"
+        ],
+        "stage": [
+          "analysis"
+        ],
+        "topic": [
+          "econometrics"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "paper-pipeline",
+      "path": "skills/67-econfin-workflow-toolkit/paper-pipeline/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 142,
+      "description_effective": "Orchestrate the complete post-first-draft polishing pipeline for an academic LaTeX paper by invoking five existing skills in fixed order: (1) paper-polish, (2) paper-self-revise, (3) paper-style, (4) paper-polish again, (5) reference-verify. Trigger when user says \\\"paper pipeline\\\" / \\\"paper-pipeline\\\" / \\\"论文流水线\\\" / \\\"全流程打磨\\\" / \\\"一条龙打磨\\\" / \\\"初稿打磨\\\" / \\\"full polish pipeline\\\" / \\\"run the whole pipeline\\\", or wants the entire post-draft polishing sequence run on a paper folder. Use this skill whenever the user asks for several paper-finishing steps (polish + revise + style + reference check) on one manuscript in one go, even if they don't name every individual skill.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "language": [
+          "latex"
+        ],
+        "stage": [
+          "writing"
+        ],
+        "topic": [
+          "scientific-writing"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "paper-polish",
+      "path": "skills/67-econfin-workflow-toolkit/paper-polish/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 589,
+      "description_effective": "Proofread and verify academic papers in LaTeX. Runs 19 sequential checks covering titles, consistency, citations, formatting, theoretical tension in motivation, concise results reporting, cross-section repetition, em-dash usage, and auxiliary-text-to-footnote conversion. Trigger when user says \"check paper\" / \"proofread\" / \"paper-checker\" / \"校对\" / \"核查论文\".",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "language": [
+          "latex"
+        ],
+        "topic": [
+          "proofreading"
+        ]
+      },
+      "quality_score": 92,
+      "quality_flags": [
+        "long-no-references"
+      ],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "paper-referee-revise",
+      "path": "skills/67-econfin-workflow-toolkit/paper-referee-revise/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 437,
+      "description_effective": "Revise an academic paper based on journal referee reports. Reads referee comments from review report or annotated manuscript, then directly modifies main.tex one comment at a time with user approval. Generates response letter after revision. Trigger when user says \"referee revise\" / \"paper-referee-revise\" / \"审稿意见修改\" / \"根据审稿人意见修改\" / \"referee report\".",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "language": [
+          "latex"
+        ],
+        "stage": [
+          "submission",
+          "writing"
+        ],
+        "topic": [
+          "scientific-writing"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "paper-self-revise",
+      "path": "skills/67-econfin-workflow-toolkit/paper-self-revise/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 220,
+      "description_effective": "Revise an academic paper based on internal review comments. Reads review report or annotated manuscript, then applies revisions one by one with user approval. Trigger when user says \"self revise\" / \"paper-selfrevise\" / \"内部修改\" / \"根据审稿意见修改\".",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "stage": [
+          "writing"
+        ],
+        "topic": [
+          "scientific-writing"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "paper-style",
+      "path": "skills/67-econfin-workflow-toolkit/paper-style/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 121,
+      "description_effective": "Restructure an academic paper's title and section structure to match a target journal's house style. Asks the user to specify the target journal first, then adjusts main.tex accordingly (title wording and case, section skeleton, heading case, numbering scheme, merging/splitting sections). Trigger when user says \"paper style\" / \"paper-style\" / \"期刊风格\" / \"按目标期刊调整\" / \"调整为XX风格\" / \"JFE风格\" / \"convert to journal style\" / \"restructure for [journal]\", or wants a paper's title/sections reformatted for a specific journal submission.",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {
+        "language": [
+          "latex"
+        ],
+        "stage": [
+          "submission"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "paper-submission",
+      "path": "skills/67-econfin-workflow-toolkit/paper-submission/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 342,
+      "description_effective": "Evaluate a paper's contribution novelty, identify best-fit SSCI journal fields and ABS star rating, and recommend 20 target journals. Trigger when user says \"paper submission\" / \"paper-submission\" / \"投稿评估\" / \"期刊推荐\" / \"target journal\" / \"选刊\".",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "stage": [
+          "submission"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "paper-writer",
+      "path": "skills/67-econfin-workflow-toolkit/paper-writer/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 513,
+      "description_effective": "Automatically write empirical sections of academic papers in LaTeX by reading tables/figures from a PDF. Trigger when user wants to write a paper from empirical results, has tables/figures in PDF, or says \"write paper\" / \"paper-writer\" / \"写论文\".",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {
+        "language": [
+          "latex"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "pdf",
+      "path": "skills/67-econfin-workflow-toolkit/pdf/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 314,
+      "description_effective": "Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple PDFs into one, splitting PDFs apart, rotating pages, adding watermarks, creating new PDFs, filling PDF forms, encrypting/decrypting PDFs, extracting images, and OCR on scanned PDFs to make them searchable. If the user mentions a .pdf file or asks to produce one, use this skill.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "pptx",
+      "path": "skills/67-econfin-workflow-toolkit/pptx/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 232,
+      "description_effective": "Use this skill any time a .pptx file is involved in any way — as input, output, or both. This includes: creating slide decks, pitch decks, or presentations; reading, parsing, or extracting text from any .pptx file (even if the extracted content will be used elsewhere, like in an email or summary); editing, modifying, or updating existing presentations; combining or splitting slide files; working with templates, layouts, speaker notes, or comments. Trigger whenever the user mentions \\\"deck,\\\" \\\"slides,\\\" \\\"presentation,\\\" or references a .pptx filename, regardless of what they plan to do with the content afterward. If a .pptx file needs to be opened, created, or touched, use this skill.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "stage": [
+          "presentation"
+        ],
+        "topic": [
+          "proofreading"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "rdd-analysis",
+      "path": "skills/67-econfin-workflow-toolkit/rdd-analysis/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 212,
+      "description_effective": "Econometrics skill for Regression Discontinuity Design (RDD). Activates when the user asks about: \"regression discontinuity\", \"RDD\", \"RD design\", \"sharp RDD\", \"fuzzy RDD\", \"running variable\", \"forcing variable\", \"cutoff\", \"bandwidth selection\", \"local linear regression\", \"McCrary test\", \"density test\", \"RDROBUST\", \"continuity assumption\", \"donut hole RDD\", \"geographic RDD\", \"断点回归\", \"回归不连续\", \"运行变量\", \"截断值\", \"带宽选择\", \"精确断点\", \"模糊断点\", \"密度检验\", \"局部线性回归\"",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {
+        "method": [
+          "rdd"
+        ],
+        "stage": [
+          "analysis"
+        ],
+        "topic": [
+          "econometrics"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "readability",
+      "path": "skills/67-econfin-workflow-toolkit/readability/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 195,
+      "description_effective": "Correct grammar errors, typos, and improve academic readability in LaTeX, Markdown, or plain-text manuscripts. Scans the document once, then walks through every issue one-by-one asking for approval before applying each fix. Trigger when the user says \"readability\", \"check grammar\", \"fix typos\", \"proofread for grammar\", \"improve readability\", \"polish wording\", \"语言润色\", \"修语法\", or asks you to clean up the prose in a paper/chapter/section without wanting full content restructuring.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "language": [
+          "latex"
+        ],
+        "stage": [
+          "writing"
+        ],
+        "topic": [
+          "proofreading",
+          "scientific-writing"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "referee-report",
+      "path": "skills/67-econfin-workflow-toolkit/referee-report/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 257,
+      "description_effective": "Generate academic referee reports for economics/finance papers, followed by a 150-word letter to the editor with recommendation (Reject / Major Revision) and Kai Wu signature. Two modes (normal / high-level), configurable number of comments; recommendation choice drives evaluation tone (Reject → negative, Major Revision → neutral). Trigger when user says \"referee report\" / \"write referee report\" / \"审稿报告\" / \"写审稿意见\" / \"generate referee report\" / \"review this paper\".",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "stage": [
+          "submission"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "reference-verify",
+      "path": "skills/67-econfin-workflow-toolkit/reference-verify/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 478,
+      "description_effective": "Verify references in an academic paper: check whether each BibTeX entry is real, whether in-text citations match the cited paper's actual content, and produce a structured verification report. Use when user says \\\"验证参考文献\\\", \\\"ref verify\\\", \\\"check references\\\", \\\"核实引用\\\", \\\"引用是否正确\\\", or wants to audit citations in a LaTeX manuscript.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "language": [
+          "latex"
+        ],
+        "stage": [
+          "citation",
+          "writing"
+        ],
+        "topic": [
+          "scientific-writing"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "Significance-Search",
+      "path": "skills/67-econfin-workflow-toolkit/significance-search/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 88,
+      "description_effective": "Parallel control variable combination search via Stata. Exhaustively searches all subsets of optional controls to find the combination that maximises |t| of the independent variable. Activates when user says: \"控制变量搜索\", \"搜控制变量\", \"control variable search\", \"跑控制变量组合\", \"暴力搜索\", \"调控制变量\".",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "language": [
+          "stata"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "skill-creator",
+      "path": "skills/67-econfin-workflow-toolkit/skill-creator/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 485,
+      "description_effective": "Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy.",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "stata",
+      "path": "skills/67-econfin-workflow-toolkit/stata/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 423,
+      "description_effective": "Comprehensive Stata reference for writing correct .do files, data management, econometrics, causal inference, graphics, Mata programming, and 20 community packages (reghdfe, estout, did, rdrobust, etc.). Covers syntax, options, gotchas, and idiomatic patterns. Use this skill whenever the user asks you to write, debug, or explain Stata code.",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {
+        "language": [
+          "stata"
+        ],
+        "method": [
+          "panel-fe",
+          "rdd"
+        ],
+        "stage": [
+          "analysis"
+        ],
+        "topic": [
+          "causal-inference",
+          "econometrics"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "stats",
+      "path": "skills/67-econfin-workflow-toolkit/stats/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 231,
+      "description_effective": "Econometrics skill for descriptive statistics and summary tables. Activates when the user asks about: \"descriptive statistics\", \"summary statistics\", \"summary table\", \"Table 1\", \"balance table\", \"means and standard deviations\", \"correlation matrix\", \"data summary\", \"sample characteristics\", \"variable distributions\", \"描述性统计\", \"描述统计\", \"汇总统计\", \"统计表\", \"均值标准差\", \"平衡性检验\", \"相关矩阵\", \"样本特征\", \"变量分布\"",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "stage": [
+          "analysis"
+        ],
+        "topic": [
+          "econometrics"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "synthetic-control",
+      "path": "skills/67-econfin-workflow-toolkit/synthetic-control/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 430,
+      "description_effective": "Econometrics skill for Synthetic Control Method (SCM). Activates when the user asks about: \"synthetic control\", \"SCM\", \"synthetic counterfactual\", \"donor pool\", \"placebo test\", \"in-space placebo\", \"in-time placebo\", \"MSPE ratio\", \"Abadie Diamond Hainmueller\", \"augmented synthetic control\", \"penalized SCM\", \"synthetic DID\", \"合成控制\", \"合成控制法\", \"捐助池\", \"安慰剂检验\", \"合成反事实\", \"合成DID\", \"政策评估\"",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {
+        "method": [
+          "synthetic-control"
+        ],
+        "stage": [
+          "analysis",
+          "robustness"
+        ],
+        "topic": [
+          "causal-inference",
+          "econometrics"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "table",
+      "path": "skills/67-econfin-workflow-toolkit/table/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 360,
+      "description_effective": "Econometrics skill for creating publication-quality LaTeX regression and summary tables. Activates when the user asks about: \"regression table\", \"LaTeX table\", \"esttab\", \"stargazer\", \"modelsummary\", \"publication table\", \"format results\", \"multi-panel table\", \"journal table\", \"export regression results\", \"table formatting\", \"回归表格\", \"LaTeX表格\", \"结果导出\", \"论文表格\", \"回归结果格式化\", \"多模型表格\"",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "language": [
+          "latex",
+          "r",
+          "stata"
+        ],
+        "stage": [
+          "analysis",
+          "tables-figures"
+        ],
+        "topic": [
+          "econometrics"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "time-series",
+      "path": "skills/67-econfin-workflow-toolkit/time-series/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 265,
+      "description_effective": "Econometrics skill for time series analysis. Activates when the user asks about: \"time series\", \"stationarity\", \"unit root test\", \"ADF test\", \"KPSS test\", \"ARIMA\", \"ARMA\", \"autocorrelation\", \"ACF\", \"PACF\", \"VAR model\", \"VECM\", \"Granger causality\", \"cointegration\", \"impulse response function\", \"forecast\", \"seasonal decomposition\", \"ARCH\", \"GARCH\", \"时间序列\", \"平稳性检验\", \"单位根\", \"自回归\", \"格兰杰因果\", \"协整\", \"脉冲响应\", \"预测\", \"向量自回归\"",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {
+        "stage": [
+          "analysis"
+        ],
+        "topic": [
+          "econometrics"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "ui-ux-pro-max",
+      "path": "skills/67-econfin-workflow-toolkit/ui-ux-pro-max/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 386,
+      "description_effective": "UI/UX design intelligence. 50 styles, 21 palettes, 50 font pairings, 20 charts, 9 stacks (React, Next.js, Vue, Svelte, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui). Actions: plan, build, create, design, implement, review, fix, improve, optimize, enhance, refactor, check UI/UX code. Projects: website, landing page, dashboard, admin panel, e-commerce, SaaS, portfolio, blog, mobile app, .html, .tsx, .vue, .svelte. Elements: button, modal, navbar, sidebar, card, table, form, chart. Styles: glassmorphism, claymorphism, minimalism, brutalism, neumorphism, bento grid, dark mode, responsive, skeuomorphism, flat design. Topics: color palette, accessibility, animation, layout, typography, font pairing, spacing, hover, shadow, gradient. Integrations: shadcn/ui MCP for component search and examples.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "web-access",
+      "path": "skills/67-econfin-workflow-toolkit/web-access/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 246,
+      "description_effective": "在开始联网操作前，先检查 CDP 模式可用性：",
+      "description_source": "derived",
+      "has_references": true,
+      "tags": {},
+      "quality_score": 87,
+      "quality_flags": [
+        "description-derived-from-body",
+        "short-description"
+      ],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "web-research",
+      "path": "skills/67-econfin-workflow-toolkit/web-research/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 77,
+      "description_effective": "Searches multiple web sources, synthesizes findings, and produces cited research reports using delegated subagents. Use when the user asks to research a topic online, search the web, look something up, find current information, compare options, or produce a research report.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "xlsx",
+      "path": "skills/67-econfin-workflow-toolkit/xlsx/SKILL.md",
+      "collection": "67-econfin-workflow-toolkit",
+      "line_count": 292,
+      "description_effective": "Use this skill any time a spreadsheet file is the primary input or output. This means any task where the user wants to: open, read, edit, or fix an existing .xlsx, .xlsm, .csv, or .tsv file (e.g., adding columns, computing formulas, formatting, charting, cleaning messy data); create a new spreadsheet from scratch or from other data sources; or convert between tabular file formats. Trigger especially when the user references a spreadsheet file by name or path — even casually (like \\\"the xlsx in my downloads\\\") — and wants something done to it or produced from it. Also trigger for cleaning or restructuring messy tabular data files (malformed rows, misplaced headers, junk data) into proper spreadsheets. The deliverable must be a spreadsheet file. Do NOT trigger when the primary deliverable is a Word document, HTML report, standalone Python script, database pipeline, or Google Sheets API integration, even if tabular data is involved.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "language": [
+          "python"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
       "sync": "manual vendor snapshot"
     }
   ]

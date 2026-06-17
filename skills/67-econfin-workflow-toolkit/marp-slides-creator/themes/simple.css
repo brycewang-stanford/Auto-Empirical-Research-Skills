@@ -1,0 +1,59 @@
+/* @theme simple */
+
+@import "default";
+
+/* Add "Page" prefix and total page number */
+section::after {
+    content: "pág. " attr(data-marpit-pagination) " / " attr(data-marpit-pagination-total);
+    color: rgba(207, 201, 201, 0.952);
+    
+  }
+  
+section p {
+    margin-bottom: 0.6em;
+    line-height: 1.2em;
+}
+
+section li {
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
+    line-height: 1.2em;
+    font-size:100%;
+    color: rgba(128, 128, 128, 0.959);
+}
+
+h1 {
+    text-align: center;
+    color: darkslateblue;
+    
+}
+
+.columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    justify-content: center !important;
+}
+
+
+/******************* lead *****************************/
+
+/* lead class: first slide in a section. Use h1 as header.
+Use: <!-- _class: lead --> */
+section.lead {
+    background-color: orangered;
+    text-align: center;
+    color: white;
+    padding-top: auto;
+    padding-bottom: auto;
+}
+section.lead h1, section.lead h2, section.lead p, section.lead a {
+    color: white;
+    font-size: 200%
+}
+section.lead footer, section.lead header, section.lead:after {
+    /* hide header, footer and pagination */
+    display: none;
+}
+
+

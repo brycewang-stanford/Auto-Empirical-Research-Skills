@@ -1,0 +1,51 @@
+\begin{table}[htbp]\centering\scriptsize
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{\textbf{Heterogeneity Conditional on Institutional Investor Structure}}
+\label{heterogeneity3}
+
+\noindent{\justifying{This table presents the heterogeneous association between local patent trading infrastructure and institutional ownership conditional on different types of institutional investors for a sample of Chinese A-share listed firms from 2003 to 2023. We classify institutional investors into three categories based on their investment horizons and motivations. The dependent variables are disaggregated into three categories based on investment horizons: \textsl{TradingCapital} in Column (1), comprising mutual funds and brokers; \textsl{PatientCapital} in Column (2), comprising QFIIs and insurance funds; and \textsl{StrategicCapital} in Column (3), comprising banks and non-financial corporate blockholders. The main explanatory variable is \textsl{PTC} (a dummy variable that equals one if the city where the firm is located has established a patent trading center in or before year $t$, and zero otherwise). Control variables include \textsl{Size}, \textsl{Balance}, \textsl{ROA}, \textsl{Tobinq}, \textsl{Age}, \textsl{Cash}, \textsl{Indept}, \textsl{Top1}, \textsl{Dual}, \textsl{FinDev}, \textsl{Innov}, \textsl{Open}, and \textsl{Gov}. All regressions include firm, year, and city fixed effects. The robust $t$-statistics clustered by the firm are reported in parentheses. The detailed variable definitions are presented in Table \ref{definition}. ***, **, and * denote the significance at the 1\%, 5\%, and 10\% levels, respectively.\par}}
+\bigskip
+
+\begin{tabularx}{\textwidth}{lYYYYYYYY@{}}
+\toprule
+
+                &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
+                &\multicolumn{1}{c}{Trading Capital}&\multicolumn{1}{c}{Patient Capital}&\multicolumn{1}{c}{Strategic Capital}\\
+\hline\\
+PTC          &  -0.0129\sym{**} &   0.0000         &  -0.0043         \\
+                &  (-2.38)         &   (0.03)         &  (-0.74)         \\
+Size            &   0.0182\sym{***}&   0.0022\sym{***}&   0.0007         \\
+                &  (10.39)         &   (6.58)         &   (0.43)         \\
+Balance         &   0.0343\sym{***}&   0.0041\sym{***}&   0.0169\sym{***}\\
+                &  (12.40)         &   (6.87)         &   (6.00)         \\
+ROA             &   0.2464\sym{***}&   0.0257\sym{***}&  -0.0098         \\
+                &  (23.65)         &  (13.42)         &  (-1.37)         \\
+Tobinq          &   0.0144\sym{***}&  -0.0001         &  -0.0016\sym{***}\\
+                &  (16.22)         &  (-0.69)         &  (-3.04)         \\
+Age             &   0.0115         &   0.0001         &   0.0295         \\
+                &   (0.91)         &   (0.08)         &   (1.37)         \\
+Cash            &   0.0100         &   0.0021         &   0.0042         \\
+                &   (1.14)         &   (1.26)         &   (0.63)         \\
+Indept          &  -0.0081         &   0.0016         &  -0.0281\sym{**} \\
+                &  (-0.47)         &   (0.46)         &  (-2.20)         \\
+Top1            &   0.0657\sym{***}&   0.0106\sym{***}&   0.0554\sym{***}\\
+                &   (4.91)         &   (4.26)         &   (3.94)         \\
+Dual            &   0.0059\sym{***}&  -0.0004         &  -0.0020         \\
+                &   (3.03)         &  (-0.92)         &  (-1.42)         \\
+FinDev          &   0.0017         &  -0.0010         &  -0.0035         \\
+                &   (0.49)         &  (-1.48)         &  (-0.98)         \\
+Innov           &  -0.1216\sym{**} &  -0.0060         &  -0.0572         \\
+                &  (-2.13)         &  (-0.55)         &  (-0.98)         \\
+Open            &   0.0246         &  -0.0048         &   0.0659         \\
+                &   (0.49)         &  (-0.50)         &   (1.31)         \\
+Gov             &   0.0487         &   0.0199\sym{***}&  -0.0293         \\
+                &   (1.43)         &   (2.76)         &  (-1.19)         \\
+\hline
+Observations    &   45,654         &   45,654         &   45,654         \\
+Firm FE         &      Yes         &      Yes         &      Yes         \\
+Year FE         &      Yes         &      Yes         &      Yes         \\
+City FE         &      Yes         &      Yes         &      Yes         \\
+Adjusted $ R^2$ &     0.41         &     0.29         &     0.69         \\
+\bottomrule
+\end{tabularx}
+\end{table}

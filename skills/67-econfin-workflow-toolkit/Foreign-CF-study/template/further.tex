@@ -1,0 +1,49 @@
+\begin{table}[htbp]\centering\scriptsize
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{\textbf{Further Discussion}}
+\label{further}
+
+\noindent{\justifying{This table presents an advanced further discussion on the firms' strategic transformation and decision-making mechanisms. Column (1) estimates the Investment-Cash Flow Sensitivity by interacting \textsl{PTC} with operating cash flow (\textsl{Cash}). A significant negative interaction term (\textsl{PTC $\times$ Cash}) indicates that firms' investment decisions become less dependent on internal liquidity, reflecting a reduction in financing constraints following asset revitalization. Column (2) examines the impact on Financial Resilience, proxied by the Altman Z-score. The marginal reduction in this score reflects a rational strategic trade-off, where firms actively utilize financial leverage to fuel asset activation. Column (3) investigates the Strategic Investment Mix, measured as the ratio of R\&D expenses to total investment (R\&D plus capital expenditure). The significant decrease in this ratio suggests a strategic reallocation of resources from pure research toward the physical commercialization and industrial application of technological assets, facilitated by improved access to debt financing. All models control for firm, year, and city fixed effects. Controls in Columns (1) and (3) exclude \textsl{ROA}, and Column (2) excludes \textsl{Size} and \textsl{ROA} to avoid mechanical correlation and over-controlling bias. Robust $t$-statistics clustered by the firm are reported in parentheses. Detailed variable definitions are provided in Table \ref{definition}. \sym{***}, \sym{**}, and \sym{*} denote significance at the 1\%, 5\%, and 10\% levels, respectively.\par}}
+\bigskip
+
+\begin{tabularx}{\textwidth}{lYYYYYYYY@{}}
+\toprule
+
+                &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
+                &\multicolumn{1}{c}{Investment}&\multicolumn{1}{c}{Financial Resilience}&\multicolumn{1}{c}{Strategic Investment Mix}\\
+\hline\\
+PTC             &   0.0044         &  -0.2539\sym{***}&  -0.0172\sym{**} \\
+                &   (1.29)         &  (-2.74)         &  (-2.04)         \\
+Cash            &   0.0355\sym{***}&                  &                  \\
+                &   (3.75)         &                  &                  \\
+PTC $\times$ Cash      &  -0.0318\sym{***}&                  &                  \\
+                &  (-2.72)         &                  &                  \\
+Size            &   0.0113\sym{***}&                  &  -0.0258\sym{***}\\
+                &  (10.21)         &                  &  (-6.73)         \\
+Balance         &   0.0043\sym{***}&   0.1874\sym{***}&   0.0015         \\
+                &   (2.81)         &   (3.92)         &   (0.32)         \\
+Tobinq          &   0.0031\sym{***}&  -0.0166         &   0.0014         \\
+                &   (6.76)         &  (-0.92)         &   (0.90)         \\
+Age             &  -0.0053         &  -0.4285\sym{***}&   0.0116         \\
+                &  (-0.71)         &  (-2.85)         &   (1.05)         \\
+Indept          &  -0.0139         &  -0.4529         &  -0.0021         \\
+                &  (-1.20)         &  (-1.22)         &  (-0.06)         \\
+Dual            &   0.0040\sym{***}&   0.0933\sym{*}  &  -0.0035         \\
+                &   (3.12)         &   (1.89)         &  (-0.83)         \\
+FinDev          &   0.0004         &  -0.0334         &  -0.0122\sym{*}  \\
+                &   (0.16)         &  (-0.44)         &  (-1.69)         \\
+Innov           &   0.0137         &  -4.4745\sym{***}&   0.1415         \\
+                &   (0.40)         &  (-3.50)         &   (1.12)         \\
+Open            &  -0.0360         &  -1.7128         &   0.0243         \\
+                &  (-1.02)         &  (-1.52)         &   (0.22)         \\
+Gov             &   0.0200         &   1.3359         &  -0.0784         \\
+                &   (0.77)         &   (1.33)         &  (-0.91)         \\
+\hline
+Observations    &   38,706         &   44,947         &   45,272         \\
+Firm FE         &      Yes         &      Yes         &      Yes         \\
+Year FE         &      Yes         &      Yes         &      Yes         \\
+City FE         &      Yes         &      Yes         &      Yes         \\
+Adjusted $ R^2$ &     0.39         &     0.59         &     0.68         \\
+\bottomrule
+\end{tabularx}
+\end{table}

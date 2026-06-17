@@ -222,6 +222,12 @@ OVERRIDES: dict[str, dict[str, object]] = {
         "sync": "manual vendor snapshot",
         "source_confidence": "high",
     },
+    "67-econfin-workflow-toolkit": {
+        "source_url": None,
+        "origin": "local curated snapshot (52 skills) 2026-06-17",
+        "sync": "manual vendor snapshot",
+        "source_confidence": "unresolved",
+    },
 }
 
 
