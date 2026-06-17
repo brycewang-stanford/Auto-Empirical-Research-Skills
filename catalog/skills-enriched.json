@@ -2,16 +2,16 @@
   "generated_by": "scripts/build-catalog-enrich.py",
   "schema_version": 1,
   "summary": {
-    "skills": 1072,
-    "mean_quality_score": 99.2,
-    "with_frontmatter_description": 1068,
-    "body_derived_description": 4,
+    "skills": 1099,
+    "mean_quality_score": 99.3,
+    "with_frontmatter_description": 1094,
+    "body_derived_description": 5,
     "no_description": 0,
-    "tagged": 514
+    "tagged": 524
   },
   "taxonomy": {
     "language": {
-      "latex": 82,
+      "latex": 84,
       "stata": 43,
       "python": 41,
       "r": 20
@@ -23,32 +23,32 @@
       "staggered-did": 16,
       "bayesian": 13,
       "synthetic-control": 9,
+      "did": 8,
       "event-study": 8,
       "matching": 8,
-      "did": 7,
       "dml": 7,
       "survival": 3
     },
     "stage": {
-      "analysis": 123,
+      "analysis": 125,
       "writing": 76,
       "submission": 72,
-      "literature": 58,
+      "literature": 61,
       "reproduction": 58,
-      "citation": 46,
+      "citation": 47,
       "tables-figures": 40,
-      "presentation": 37,
-      "ideation": 32,
+      "presentation": 39,
+      "ideation": 33,
       "peer-review": 24,
-      "robustness": 23,
-      "de-aigc": 16,
+      "robustness": 24,
+      "de-aigc": 17,
       "data": 12
     },
     "topic": {
-      "econometrics": 66,
+      "econometrics": 67,
       "scientific-writing": 62,
       "reproducibility": 58,
-      "proofreading": 31,
+      "proofreading": 32,
       "causal-inference": 25
     }
   },
@@ -20735,6 +20735,493 @@
       "commercial_use": "share-alike",
       "source_url": "https://github.com/tmonk/mcp-stata",
       "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "R-optimizer",
+      "path": "skills/65-zheng-siyao-empirical-research-skills/R-optimizer/SKILL.md",
+      "collection": "65-zheng-siyao-empirical-research-skills",
+      "line_count": 271,
+      "description_effective": "R语言实证分析优化Skill。优化R代码效率、处理大规模面板数据、加速回归计算（并行化、向量化、向量化）。触发词：R语言优化/R加速/R性能优化/大规模数据处理/R optimization",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "citation-fidelity",
+      "path": "skills/65-zheng-siyao-empirical-research-skills/citation-fidelity/SKILL.md",
+      "collection": "65-zheng-siyao-empirical-research-skills",
+      "line_count": 150,
+      "description_effective": "学术引用核查Skill。要求每条引用必须定位到PDF原页，区分直接引用/间接引用，找不到原文则标注\"待核\"。触发词：引用核查/检查引用/citation check/核实文献/引用 fidelity",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "codebook-pass",
+      "path": "skills/65-zheng-siyao-empirical-research-skills/codebook-pass/SKILL.md",
+      "collection": "65-zheng-siyao-empirical-research-skills",
+      "line_count": 248,
+      "description_effective": "调查数据清洗Skill。处理调查数据（CGSS/CHIP/CSS等）时的标准化清洗流程，包括缺失值处理、变量编码统一、数据异常值检测。触发词：数据清洗/调查数据/codebook/数据清洗流程/问卷数据处理",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "did-reviewer",
+      "path": "skills/65-zheng-siyao-empirical-research-skills/did-reviewer/SKILL.md",
+      "collection": "65-zheng-siyao-empirical-research-skills",
+      "line_count": 187,
+      "description_effective": "双重差分(DID)实证审查Skill。做DID分析前必须检查平行趋势假设、画图可视化、报告违背情况。触发词：DID审查/双重差分检查/平行趋势/DiD reviewer/difference-in-differences",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "method": [
+          "did"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "econ-reviewer",
+      "path": "skills/65-zheng-siyao-empirical-research-skills/econ-reviewer/SKILL.md",
+      "collection": "65-zheng-siyao-empirical-research-skills",
+      "line_count": 216,
+      "description_effective": "经济学顶刊标准审稿Skill。按AER/QJE/Econometrica/JPE顶刊标准审查论文输出（图表+回归表），列出潜在致命缺陷。触发词：顶刊审稿/论文审查/econ reviewer/经济学期刊标准/PR",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "stage": [
+          "analysis"
+        ],
+        "topic": [
+          "econometrics"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "grillme",
+      "path": "skills/65-zheng-siyao-empirical-research-skills/grillme/SKILL.md",
+      "collection": "65-zheng-siyao-empirical-research-skills",
+      "line_count": 124,
+      "description_effective": "苏格拉底诘问式研究选题Skill。通过连续追问帮你厘清研究思路、聚焦研究子领域、明确研究问题(RQ)，识别出未被研究过的新意选题。触发词：帮我选题/研究问题不清晰/想做一个有新意的论文/不断问我问题/厘清思路",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "latex-table",
+      "path": "skills/65-zheng-siyao-empirical-research-skills/latex-table/SKILL.md",
+      "collection": "65-zheng-siyao-empirical-research-skills",
+      "line_count": 249,
+      "description_effective": "LaTeX回归表格生成Skill。辅助生成符合AER/QJE等顶刊格式的三线表，包括标准误聚类标注、显著性星标、固定效应标注。触发词：LaTeX表格/回归表/三线表/table制作/latex table",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "language": [
+          "latex"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "name": "academic-paper-search",
+      "path": "skills/66-research-productivity-skills/academic-paper-search/SKILL.md",
+      "collection": "66-research-productivity-skills",
+      "line_count": 401,
+      "description_effective": "This skill should be used when the user asks to \"search for academic papers\", \"find working papers on SSRN\", \"look up a DOI\", \"download paper PDF\", \"check open access availability\", \"search NBER papers\", \"find arXiv preprints\", or \"search CrossRef\". Provides unified search, metadata retrieval, and PDF download across arXiv, NBER, SSRN, CrossRef, OpenAlex, Unpaywall, and Semantic Scholar. Covers economics, finance, social science, CS/AI, and all academic disciplines.",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {
+        "stage": [
+          "literature"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "MIXED - check individual skill folders",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual curated snapshot"
+    },
+    {
+      "name": "agent-browser",
+      "path": "skills/66-research-productivity-skills/agent-browser/SKILL.md",
+      "collection": "66-research-productivity-skills",
+      "line_count": 360,
+      "description_effective": "Browser automation CLI for AI agents. Use when the user needs to interact with websites, including navigating pages, filling forms, clicking buttons, taking screenshots, extracting data, testing web apps, or automating any browser task. Triggers include requests to \"open a website\", \"fill out a form\", \"click a button\", \"take a screenshot\", \"scrape data from a page\", \"test this web app\", \"login to a site\", \"automate browser actions\", or any task requiring programmatic web interaction.",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "MIXED - check individual skill folders",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual curated snapshot"
+    },
+    {
+      "name": "arxiv",
+      "path": "skills/66-research-productivity-skills/arxiv/SKILL.md",
+      "collection": "66-research-productivity-skills",
+      "line_count": 281,
+      "description_effective": "Search and retrieve academic papers from arXiv using their free REST API. No API key needed. Search by keyword, author, category, or ID. Combine with web_extract or the ocr-and-documents skill to read full paper content.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "stage": [
+          "literature"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "MIXED - check individual skill folders",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual curated snapshot"
+    },
+    {
+      "name": "chinese-quote-converter",
+      "path": "skills/66-research-productivity-skills/chinese-quote-converter/SKILL.md",
+      "collection": "66-research-productivity-skills",
+      "line_count": 32,
+      "description_effective": "Convert English straight quotation marks (\"...\") to Chinese curved quotation marks (\"...\" U+201C/D). Use when processing Chinese text documents, markdown files, or any content that needs proper Chinese typography with directional quotes. Triggers on keywords like \"转换引号\", \"中文引号\", \"英文引号转中文\", \"quote conversion\", \"convert quotes\".",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "MIXED - check individual skill folders",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual curated snapshot"
+    },
+    {
+      "name": "Command Development",
+      "path": "skills/66-research-productivity-skills/command-development/SKILL.md",
+      "collection": "66-research-productivity-skills",
+      "line_count": 836,
+      "description_effective": "This skill should be used when the user asks to \"create a slash command\", \"add a command\", \"write a custom command\", \"define command arguments\", \"use command frontmatter\", \"organize commands\", \"create command with file references\", \"interactive command\", \"use AskUserQuestion in command\", or needs guidance on slash command structure, YAML frontmatter fields, dynamic arguments, bash execution in commands, user interaction patterns, or command development best practices for Claude Code.",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "MIXED - check individual skill folders",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual curated snapshot"
+    },
+    {
+      "name": "do-agent",
+      "path": "skills/66-research-productivity-skills/do-agent/SKILL.md",
+      "collection": "66-research-productivity-skills",
+      "line_count": 27,
+      "description_effective": "This skill should be used when the user asks to \"/do-agent\", asks for \"Execute complex tasks using multi-agent architecture with context protection\", or needs the workflow previously provided by the /do-agent slash command.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "MIXED - check individual skill folders",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual curated snapshot"
+    },
+    {
+      "name": "five-questions",
+      "path": "skills/66-research-productivity-skills/five-questions/SKILL.md",
+      "collection": "66-research-productivity-skills",
+      "line_count": 218,
+      "description_effective": "Deeply analyze any empirical economics PDF using the five-question framework (五问框架): research question, identification strategy, core estimand, robustness logic, and scholarly contribution. Converts the PDF to Markdown, dispatches 5 parallel sub-agents (one per question), then compiles a 2000–3000 Chinese-character report with a transferable methodology checklist. Optimized for empirical economics papers in top journals (AER, QJE, JPE, RFS, RoF, JFE, etc.). Use this skill whenever the user wants to: - systematically analyze an empirical economics paper - apply the 五问框架 (five-question framework) to a paper - extract transferable research design elements from a top-journal paper - understand a paper's identification strategy, estimand, or robustness logic - run /five-questions, /five-q, or /paper-five-q-analysis - \"帮我做五问分析\", \"用五问框架分析这篇论文\", \"analyze this paper with the five-question framework\"",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {
+        "stage": [
+          "analysis",
+          "ideation",
+          "robustness"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "MIXED - check individual skill folders",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual curated snapshot"
+    },
+    {
+      "name": "fix-chinese",
+      "path": "skills/66-research-productivity-skills/fix-chinese/SKILL.md",
+      "collection": "66-research-productivity-skills",
+      "line_count": 25,
+      "description_effective": "PROACTIVE SKILL — automatically apply whenever writing, generating, or editing any text that is mainly in Chinese. No user trigger needed. Also use when the user explicitly asks to \"fix Chinese\", \"修改中文\", \"去翻译腔\", \"去AI味\", \"fix Chinese formatting\", or \"review Chinese text\". Eliminates AI-sounding expressions and translation artifacts. Enforces Chinese-English mixed formatting rules (spacing, punctuation, bold formatting).",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "stage": [
+          "de-aigc"
+        ],
+        "topic": [
+          "proofreading"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "MIXED - check individual skill folders",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual curated snapshot"
+    },
+    {
+      "name": "frontend-design",
+      "path": "skills/66-research-productivity-skills/frontend-design/SKILL.md",
+      "collection": "66-research-productivity-skills",
+      "line_count": 42,
+      "description_effective": "Create distinctive, production-grade frontend interfaces with high design quality. Use this skill when the user asks to build web components, pages, artifacts, posters, or applications (examples include websites, landing pages, dashboards, React components, HTML/CSS layouts, or when styling/beautifying any web UI). Generates creative, polished code and UI design that avoids generic AI aesthetics.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "MIXED - check individual skill folders",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual curated snapshot"
+    },
+    {
+      "name": "literature-survey-generator",
+      "path": "skills/66-research-productivity-skills/literature-survey-generator/SKILL.md",
+      "collection": "66-research-productivity-skills",
+      "line_count": 287,
+      "description_effective": "Generate a complete academic literature survey from scratch using multi-agent orchestration. Searches academic databases (OpenAlex, CrossRef, Unpaywall), downloads PDFs, builds BibTeX, drafts a LaTeX review, compiles it, reviews for quality, and revises based on feedback — all automated. Use this skill whenever the user asks to \"generate a literature review\", \"write a survey paper\", \"review recent papers on [topic]\", \"create a survey of [field]\", \"综述\", \"文献综述\", \"survey papers in top journals\", or wants a multi-agent pipeline to produce a publishable-quality literature review. Also trigger when the user wants to search multiple journals for papers on a topic and synthesize findings into a structured document. Works for any academic field but optimized for economics journals.",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {
+        "language": [
+          "latex"
+        ],
+        "stage": [
+          "citation",
+          "literature"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "MIXED - check individual skill folders",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual curated snapshot"
+    },
+    {
+      "name": "markitdown",
+      "path": "skills/66-research-productivity-skills/markitdown/SKILL.md",
+      "collection": "66-research-productivity-skills",
+      "line_count": 241,
+      "description_effective": "Convert various file formats (PDF, Office documents, images, audio, web content, structured data) to Markdown optimized for LLM processing. Use when converting documents to markdown, extracting text from PDFs/Office files, transcribing audio, performing OCR on images, extracting YouTube transcripts, or processing batches of files. Supports 20+ formats including DOCX, XLSX, PPTX, PDF, HTML, EPUB, CSV, JSON, images with OCR, and audio with transcription.",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "MIXED - check individual skill folders",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual curated snapshot"
+    },
+    {
+      "name": "marp-export",
+      "path": "skills/66-research-productivity-skills/marp-export/SKILL.md",
+      "collection": "66-research-productivity-skills",
+      "line_count": 147,
+      "description_effective": "Export Marp slide markdown files to PDF (default), HTML, PPTX, or PNG. Handles theme loading, Chrome/Chromium detection for PDF export, and batch conversion. Trigger when user says \"export slides\", \"convert marp to pdf\", \"marp export\", \"slides to pdf\", \"slides to html\", \"导出slides\", \"slides转pdf\", \"导出演示文稿\".",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "stage": [
+          "presentation"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "MIXED - check individual skill folders",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual curated snapshot"
+    },
+    {
+      "name": "marp-slides-creator",
+      "path": "skills/66-research-productivity-skills/marp-slides-creator/SKILL.md",
+      "collection": "66-research-productivity-skills",
+      "line_count": 906,
+      "description_effective": "专业Marp演示文稿制作助手。支持完整工作流程：工作空间初始化、内容分析、slides制作、多维度审阅、中文语言规范审阅（中文演示文稿）、PNG转换检查、终稿确定。所有产出物集中管理在项目工作文件夹中。当用户提到\"制作slides\"、\"做PPT\"、\"演示文稿\"、\"Marp\"、\"幻灯片\"、\"presentation\"等关键词时自动启用。Professional Marp presentation assistant with complete workflow: workspace initialization, content analysis, slide creation, multi-dimensional review, Chinese language review (for Chinese presentations), PNG conversion check, and finalization. All outputs organized in project workspace.",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {
+        "stage": [
+          "presentation"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "MIXED - check individual skill folders",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual curated snapshot"
+    },
+    {
+      "name": "md-to-docx",
+      "path": "skills/66-research-productivity-skills/md-to-docx/SKILL.md",
+      "collection": "66-research-productivity-skills",
+      "line_count": 189,
+      "description_effective": "Convert Markdown files to Word documents (.docx) with proper formatting, Chinese font support (FangSong for all text including headings), black font color, 1.5x line spacing, precise first-line indent (24pt), heading spacing after (1 line), no italic headings, and automatic superscript conversion for citation numbers. Use when converting .md files to .docx, creating Word documents from markdown, or when user mentions Word, DOCX, or document conversion. Requires pandoc.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "MIXED - check individual skill folders",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual curated snapshot"
+    },
+    {
+      "name": "nber-working-papers-api",
+      "path": "skills/66-research-productivity-skills/nber-working-papers-api/SKILL.md",
+      "collection": "66-research-productivity-skills",
+      "line_count": 274,
+      "description_effective": "Access NBER working papers and economic research datasets",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "MIXED - check individual skill folders",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual curated snapshot"
+    },
+    {
+      "name": "skill-creator",
+      "path": "skills/66-research-productivity-skills/skill-creator/SKILL.md",
+      "collection": "66-research-productivity-skills",
+      "line_count": 485,
+      "description_effective": "Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy.",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "MIXED - check individual skill folders",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual curated snapshot"
+    },
+    {
+      "name": "ui-ux-pro-max",
+      "path": "skills/66-research-productivity-skills/ui-ux-pro-max/SKILL.md",
+      "collection": "66-research-productivity-skills",
+      "line_count": 386,
+      "description_effective": "UI/UX design intelligence. 50 styles, 21 palettes, 50 font pairings, 20 charts, 9 stacks (React, Next.js, Vue, Svelte, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui). Actions: plan, build, create, design, implement, review, fix, improve, optimize, enhance, refactor, check UI/UX code. Projects: website, landing page, dashboard, admin panel, e-commerce, SaaS, portfolio, blog, mobile app, .html, .tsx, .vue, .svelte. Elements: button, modal, navbar, sidebar, card, table, form, chart. Styles: glassmorphism, claymorphism, minimalism, brutalism, neumorphism, bento grid, dark mode, responsive, skeuomorphism, flat design. Topics: color palette, accessibility, animation, layout, typography, font pairing, spacing, hover, shadow, gradient. Integrations: shadcn/ui MCP for component search and examples.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "MIXED - check individual skill folders",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual curated snapshot"
+    },
+    {
+      "name": "unpaywall-api",
+      "path": "skills/66-research-productivity-skills/unpaywall-api/SKILL.md",
+      "collection": "66-research-productivity-skills",
+      "line_count": 113,
+      "description_effective": "Find free legal full-text versions of scholarly articles via Unpaywall",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "MIXED - check individual skill folders",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual curated snapshot"
+    },
+    {
+      "name": "web-access",
+      "path": "skills/66-research-productivity-skills/web-access/SKILL.md",
+      "collection": "66-research-productivity-skills",
+      "line_count": 246,
+      "description_effective": "在开始联网操作前，先检查 CDP 模式可用性：",
+      "description_source": "derived",
+      "has_references": true,
+      "tags": {},
+      "quality_score": 87,
+      "quality_flags": [
+        "description-derived-from-body",
+        "short-description"
+      ],
+      "license": "MIXED - check individual skill folders",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual curated snapshot"
+    },
+    {
+      "name": "web-research",
+      "path": "skills/66-research-productivity-skills/web-research/SKILL.md",
+      "collection": "66-research-productivity-skills",
+      "line_count": 77,
+      "description_effective": "Searches multiple web sources, synthesizes findings, and produces cited research reports using delegated subagents. Use when the user asks to research a topic online, search the web, look something up, find current information, compare options, or produce a research report.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {},
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "MIXED - check individual skill folders",
+      "commercial_use": "unknown",
+      "source_url": null,
+      "sync": "manual curated snapshot"
     }
   ]
 }

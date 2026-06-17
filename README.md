@@ -39,7 +39,7 @@
 [![Security audit: 52/52 CLEAN](https://img.shields.io/badge/security%20audit-52%2F52%20CLEAN-brightgreen)](SECURITY-SCAN-REPORT.md)
 [![Powered by StatsPAI](https://img.shields.io/badge/powered%20by-StatsPAI-orange)](https://github.com/brycewang-stanford/StatsPAI)
 
-**The empirical-research specialist's agent-skills distribution.** Not a marketing list — **1,072 skills vendored and cataloged** in this repo, wrapped in a **numeric benchmark, an eval harness, a security audit, and CI**, plus a curated map of **23,000+ skills across 119 repositories** in the wider ecosystem.
+**The empirical-research specialist's agent-skills distribution.** Not a marketing list — **1,099 skills vendored and cataloged** in this repo, wrapped in a **numeric benchmark, an eval harness, a security audit, and CI**, plus a curated map of **23,000+ skills across 119 repositories** in the wider ecosystem.
 
 AERS is two things at once: (1) a small set of **first-party flagship skills** that run the full empirical pipeline — data cleaning → identification → estimation → robustness → tables/figures → submission-ready draft — and (2) a **curated, security-aware catalog** of the empirical-research skill ecosystem, organized by research-workflow stage. The differentiator is not the count; it is that the flagship behavior is **verified against known answers**, not asserted.
 
@@ -77,8 +77,8 @@ Numbers in this README are kept honest and disambiguated. "Vendored" means the f
 
 | What it is | Count | Source of truth |
 |---|---:|---|
-| Skills **vendored into this repo** and cataloged | **1,072** | [`catalog/skills.json`](catalog/skills.json) |
-| Vendored **collections** | **64** | [`catalog/skills.json`](catalog/skills.json) |
+| Skills **vendored into this repo** and cataloged | **1,099** | [`catalog/skills.json`](catalog/skills.json) |
+| Vendored **collections** | **66** | [`catalog/skills.json`](catalog/skills.json) |
 | **First-party flagship** full-pipeline skills (StatsPAI DSL + explicit Python/Stata/R) | **4** | [`skills/00*`](skills/) |
 | Numeric **benchmark tasks** with gold values recomputed from data each run | **5** | [`benchmark/`](benchmark/) |
 | Behavioral **eval scenarios / rubric items** | **17 / 95** | [`eval-harness/`](eval-harness/) |
@@ -169,7 +169,7 @@ Public-skill counts are easy to inflate, and recent studies show large skill ind
 | **Numeric benchmark** | Reported numbers that don't match truth recomputed from real data — the naive-DID sign trap, weak-IV without first-stage F, TWFE bias under staggered timing, RDD trend confound, post-treatment bad controls | [`benchmark/`](benchmark/) · 5 tasks |
 | **Eval harness** | Prose-level failures: weak-IV false reassurance, staggered-DID TWFE misuse, fabricated citations, unsafe `curl \| bash` setup, multiple-testing abuse, AER compliance gaps | [`eval-harness/`](eval-harness/) · 17 scenarios / 95 rubric items |
 | **Security audit** | Pipe-to-shell, reverse shells, credential exfiltration, prompt injection across 13 risk categories — 6-phase, 40+ hook scripts reviewed by hand | [`SECURITY-SCAN-REPORT.md`](SECURITY-SCAN-REPORT.md) |
-| **Provenance & license** | Unvendored sources, license risk, hygiene drift across all 1,072 cataloged skills | [`docs/LICENSE_AUDIT.md`](docs/LICENSE_AUDIT.md) · [`docs/SKILL_QUALITY.md`](docs/SKILL_QUALITY.md) |
+| **Provenance & license** | Unvendored sources, license risk, hygiene drift across all 1,099 cataloged skills | [`docs/LICENSE_AUDIT.md`](docs/LICENSE_AUDIT.md) · [`docs/SKILL_QUALITY.md`](docs/SKILL_QUALITY.md) |
 | **CI & compatibility** | Catalog freshness, broken local links, GitHub Actions policy, Python 3.9 **and** 3.12 syntax floor | [`.github/workflows/`](.github/workflows/) · 6 workflows |
 
 ```bash
@@ -221,6 +221,7 @@ Per-stage skill notes (bilingual): [01 Topic & design](docs/01-选题与研究�
 | [luwill/research-skills](https://github.com/luwill/research-skills) | 209 | 3 | Research-proposal generation, medical review writing, paper-to-slides, bilingual |
 | [lishix520/academic-paper-skills](https://github.com/lishix520/academic-paper-skills) | 22 | 2 | Strategist (7-dimension reviewer simulation) + Composer (systematic writing) |
 | [Data-Wise/claude-plugins](https://github.com/Data-Wise/claude-plugins) | - | 17 | Statistical research: arXiv search, DOI lookup, BibTeX, methodology writing, referee response |
+| [Research Productivity Skills](skills/66-research-productivity-skills/) | local | 20 | Practical workflow pack: paper search, OA lookup, literature survey, five-question paper analysis, web/browser automation, Markdown/Word conversion, Marp slides, Chinese typography, UI design, and skill/command authoring |
 
 </details>
 
@@ -339,6 +340,7 @@ Newer vendored additions are tracked in [`catalog/provenance.json`](catalog/prov
 
 The narrative changelog has moved to [**CHANGELOG.md**](CHANGELOG.md). Recent highlights:
 
+- **2026-06** — Added **Research Productivity Skills** (`skills/66`): 20 practical skills for paper discovery, literature synthesis, browser automation, conversion, slides, Chinese cleanup, UI design, and agent-skill authoring.
 - **2026-05** — Vendored **AER-skills** (top-5 economics submission stack, 9 skills) with weekly upstream sync; expanded the numeric benchmark to **5 causal-recovery tasks** and the eval harness to **17 scenarios / 95 rubric items**.
 - **2026-04** — Completed the **52/52 security baseline**; shipped the four full-pipeline flagships (**StatsPAI** + explicit **Python / Stata / R**); launched the original **chinese-de-aigc** skill.
 - **Earlier** — Grew from 43 collections to a curated map of **119 repos / 23,000+ skills**; added bilingual README, academic data MCP servers, and multi-agent systems.

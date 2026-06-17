@@ -5,6 +5,11 @@ This is the project's narrative changelog. `README.md` keeps only a short
 
 ## Unreleased
 
+- Added [`skills/66-research-productivity-skills/`](skills/66-research-productivity-skills/),
+  a neutral 20-skill research productivity pack covering paper discovery,
+  literature synthesis, browser automation, conversion, slides, Chinese cleanup,
+  UI design, and agent-skill authoring. Office-document skills with restrictive
+  redistribution terms are documented but not vendored.
 - Restructured `README.md` / `README-zh.md` to lead with verifiable rigor
   (numbers, the 2-minute `make check` proof, and the trust surface), removed
   duplicated flagship-skill descriptions, consolidated badges, and moved this

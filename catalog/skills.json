@@ -1087,6 +1087,40 @@
       "source_confidence": "high",
       "source_url": "https://github.com/tmonk/mcp-stata",
       "sync": "manual vendor snapshot"
+    },
+    {
+      "commercial_use": "unknown",
+      "has_license": false,
+      "has_readme": false,
+      "id": "65-zheng-siyao-empirical-research-skills",
+      "license": "UNKNOWN - check upstream",
+      "path": "skills/65-zheng-siyao-empirical-research-skills",
+      "primary_skill": {
+        "description": "R语言实证分析优化Skill。优化R代码效率、处理大规模面板数据、加速回归计算（并行化、向量化、向量化）。触发词：R语言优化/R加速/R性能优化/大规模数据处理/R optimization",
+        "name": "R-optimizer",
+        "path": "skills/65-zheng-siyao-empirical-research-skills/R-optimizer/SKILL.md"
+      },
+      "skill_count": 7,
+      "source_confidence": "high",
+      "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
+      "sync": "manual vendor snapshot"
+    },
+    {
+      "commercial_use": "unknown",
+      "has_license": false,
+      "has_readme": true,
+      "id": "66-research-productivity-skills",
+      "license": "MIXED - check individual skill folders",
+      "path": "skills/66-research-productivity-skills",
+      "primary_skill": {
+        "description": "This skill should be used when the user asks to \"search for academic papers\", \"find working papers on SSRN\", \"look up a DOI\", \"download paper PDF\", \"check open access availability\", \"search NBER papers\", \"find arXiv preprints\", or \"search CrossRef\". Provides unified search, metadata retrieval, and PDF download across arXiv, NBER, SSRN, CrossRef, OpenAlex, Unpaywall, and Semantic Scholar. Covers economics, finance, social science, CS/AI, and all academic disciplines.",
+        "name": "academic-paper-search",
+        "path": "skills/66-research-productivity-skills/academic-paper-search/SKILL.md"
+      },
+      "skill_count": 20,
+      "source_confidence": "curated-local",
+      "source_url": null,
+      "sync": "manual curated snapshot"
     }
   ],
   "generated_by": "scripts/build-catalog.py",
@@ -17381,14 +17415,426 @@
       "line_count": 35,
       "name": "stata-toolkit",
       "path": "skills/64-tmonk-mcp-stata/skills/stata-toolkit/SKILL.md"
+    },
+    {
+      "collection": "65-zheng-siyao-empirical-research-skills",
+      "description": "R语言实证分析优化Skill。优化R代码效率、处理大规模面板数据、加速回归计算（并行化、向量化、向量化）。触发词：R语言优化/R加速/R性能优化/大规模数据处理/R optimization",
+      "frontmatter_fields": [
+        "description",
+        "metadata",
+        "name",
+        "version"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 271,
+      "name": "R-optimizer",
+      "path": "skills/65-zheng-siyao-empirical-research-skills/R-optimizer/SKILL.md"
+    },
+    {
+      "collection": "65-zheng-siyao-empirical-research-skills",
+      "description": "学术引用核查Skill。要求每条引用必须定位到PDF原页，区分直接引用/间接引用，找不到原文则标注\"待核\"。触发词：引用核查/检查引用/citation check/核实文献/引用 fidelity",
+      "frontmatter_fields": [
+        "description",
+        "metadata",
+        "name",
+        "version"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 150,
+      "name": "citation-fidelity",
+      "path": "skills/65-zheng-siyao-empirical-research-skills/citation-fidelity/SKILL.md"
+    },
+    {
+      "collection": "65-zheng-siyao-empirical-research-skills",
+      "description": "调查数据清洗Skill。处理调查数据（CGSS/CHIP/CSS等）时的标准化清洗流程，包括缺失值处理、变量编码统一、数据异常值检测。触发词：数据清洗/调查数据/codebook/数据清洗流程/问卷数据处理",
+      "frontmatter_fields": [
+        "description",
+        "metadata",
+        "name",
+        "version"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 248,
+      "name": "codebook-pass",
+      "path": "skills/65-zheng-siyao-empirical-research-skills/codebook-pass/SKILL.md"
+    },
+    {
+      "collection": "65-zheng-siyao-empirical-research-skills",
+      "description": "双重差分(DID)实证审查Skill。做DID分析前必须检查平行趋势假设、画图可视化、报告违背情况。触发词：DID审查/双重差分检查/平行趋势/DiD reviewer/difference-in-differences",
+      "frontmatter_fields": [
+        "description",
+        "metadata",
+        "name",
+        "version"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 187,
+      "name": "did-reviewer",
+      "path": "skills/65-zheng-siyao-empirical-research-skills/did-reviewer/SKILL.md"
+    },
+    {
+      "collection": "65-zheng-siyao-empirical-research-skills",
+      "description": "经济学顶刊标准审稿Skill。按AER/QJE/Econometrica/JPE顶刊标准审查论文输出（图表+回归表），列出潜在致命缺陷。触发词：顶刊审稿/论文审查/econ reviewer/经济学期刊标准/PR",
+      "frontmatter_fields": [
+        "description",
+        "metadata",
+        "name",
+        "version"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 216,
+      "name": "econ-reviewer",
+      "path": "skills/65-zheng-siyao-empirical-research-skills/econ-reviewer/SKILL.md"
+    },
+    {
+      "collection": "65-zheng-siyao-empirical-research-skills",
+      "description": "苏格拉底诘问式研究选题Skill。通过连续追问帮你厘清研究思路、聚焦研究子领域、明确研究问题(RQ)，识别出未被研究过的新意选题。触发词：帮我选题/研究问题不清晰/想做一个有新意的论文/不断问我问题/厘清思路",
+      "frontmatter_fields": [
+        "description",
+        "metadata",
+        "name",
+        "version"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 124,
+      "name": "grillme",
+      "path": "skills/65-zheng-siyao-empirical-research-skills/grillme/SKILL.md"
+    },
+    {
+      "collection": "65-zheng-siyao-empirical-research-skills",
+      "description": "LaTeX回归表格生成Skill。辅助生成符合AER/QJE等顶刊格式的三线表，包括标准误聚类标注、显著性星标、固定效应标注。触发词：LaTeX表格/回归表/三线表/table制作/latex table",
+      "frontmatter_fields": [
+        "description",
+        "metadata",
+        "name",
+        "version"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 249,
+      "name": "latex-table",
+      "path": "skills/65-zheng-siyao-empirical-research-skills/latex-table/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "description": "This skill should be used when the user asks to \"search for academic papers\", \"find working papers on SSRN\", \"look up a DOI\", \"download paper PDF\", \"check open access availability\", \"search NBER papers\", \"find arXiv preprints\", or \"search CrossRef\". Provides unified search, metadata retrieval, and PDF download across arXiv, NBER, SSRN, CrossRef, OpenAlex, Unpaywall, and Semantic Scholar. Covers economics, finance, social science, CS/AI, and all academic disciplines.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 401,
+      "name": "academic-paper-search",
+      "path": "skills/66-research-productivity-skills/academic-paper-search/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "description": "Browser automation CLI for AI agents. Use when the user needs to interact with websites, including navigating pages, filling forms, clicking buttons, taking screenshots, extracting data, testing web apps, or automating any browser task. Triggers include requests to \"open a website\", \"fill out a form\", \"click a button\", \"take a screenshot\", \"scrape data from a page\", \"test this web app\", \"login to a site\", \"automate browser actions\", or any task requiring programmatic web interaction.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 360,
+      "name": "agent-browser",
+      "path": "skills/66-research-productivity-skills/agent-browser/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "description": "Search and retrieve academic papers from arXiv using their free REST API. No API key needed. Search by keyword, author, category, or ID. Combine with web_extract or the ocr-and-documents skill to read full paper content.",
+      "frontmatter_fields": [
+        "author",
+        "description",
+        "license",
+        "metadata",
+        "name",
+        "version"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 281,
+      "name": "arxiv",
+      "path": "skills/66-research-productivity-skills/arxiv/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "description": "Convert English straight quotation marks (\"...\") to Chinese curved quotation marks (\"...\" U+201C/D). Use when processing Chinese text documents, markdown files, or any content that needs proper Chinese typography with directional quotes. Triggers on keywords like \"转换引号\", \"中文引号\", \"英文引号转中文\", \"quote conversion\", \"convert quotes\".",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 32,
+      "name": "chinese-quote-converter",
+      "path": "skills/66-research-productivity-skills/chinese-quote-converter/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "description": "This skill should be used when the user asks to \"create a slash command\", \"add a command\", \"write a custom command\", \"define command arguments\", \"use command frontmatter\", \"organize commands\", \"create command with file references\", \"interactive command\", \"use AskUserQuestion in command\", or needs guidance on slash command structure, YAML frontmatter fields, dynamic arguments, bash execution in commands, user interaction patterns, or command development best practices for Claude Code.",
+      "frontmatter_fields": [
+        "description",
+        "name",
+        "version"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 836,
+      "name": "Command Development",
+      "path": "skills/66-research-productivity-skills/command-development/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "description": "This skill should be used when the user asks to \"/do-agent\", asks for \"Execute complex tasks using multi-agent architecture with context protection\", or needs the workflow previously provided by the /do-agent slash command.",
+      "frontmatter_fields": [
+        "description",
+        "name",
+        "version"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 27,
+      "name": "do-agent",
+      "path": "skills/66-research-productivity-skills/do-agent/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "description": "Deeply analyze any empirical economics PDF using the five-question framework (五问框架): research question, identification strategy, core estimand, robustness logic, and scholarly contribution. Converts the PDF to Markdown, dispatches 5 parallel sub-agents (one per question), then compiles a 2000–3000 Chinese-character report with a transferable methodology checklist. Optimized for empirical economics papers in top journals (AER, QJE, JPE, RFS, RoF, JFE, etc.). Use this skill whenever the user wants to: - systematically analyze an empirical economics paper - apply the 五问框架 (five-question framework) to a paper - extract transferable research design elements from a top-journal paper - understand a paper's identification strategy, estimand, or robustness logic - run /five-questions, /five-q, or /paper-five-q-analysis - \"帮我做五问分析\", \"用五问框架分析这篇论文\", \"analyze this paper with the five-question framework\"",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name",
+        "trigger-phrases"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 218,
+      "name": "five-questions",
+      "path": "skills/66-research-productivity-skills/five-questions/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "description": "PROACTIVE SKILL — automatically apply whenever writing, generating, or editing any text that is mainly in Chinese. No user trigger needed. Also use when the user explicitly asks to \"fix Chinese\", \"修改中文\", \"去翻译腔\", \"去AI味\", \"fix Chinese formatting\", or \"review Chinese text\". Eliminates AI-sounding expressions and translation artifacts. Enforces Chinese-English mixed formatting rules (spacing, punctuation, bold formatting).",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 25,
+      "name": "fix-chinese",
+      "path": "skills/66-research-productivity-skills/fix-chinese/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "description": "Create distinctive, production-grade frontend interfaces with high design quality. Use this skill when the user asks to build web components, pages, artifacts, posters, or applications (examples include websites, landing pages, dashboards, React components, HTML/CSS layouts, or when styling/beautifying any web UI). Generates creative, polished code and UI design that avoids generic AI aesthetics.",
+      "frontmatter_fields": [
+        "description",
+        "license",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 42,
+      "name": "frontend-design",
+      "path": "skills/66-research-productivity-skills/frontend-design/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "description": "Generate a complete academic literature survey from scratch using multi-agent orchestration. Searches academic databases (OpenAlex, CrossRef, Unpaywall), downloads PDFs, builds BibTeX, drafts a LaTeX review, compiles it, reviews for quality, and revises based on feedback — all automated. Use this skill whenever the user asks to \"generate a literature review\", \"write a survey paper\", \"review recent papers on [topic]\", \"create a survey of [field]\", \"综述\", \"文献综述\", \"survey papers in top journals\", or wants a multi-agent pipeline to produce a publishable-quality literature review. Also trigger when the user wants to search multiple journals for papers on a topic and synthesize findings into a structured document. Works for any academic field but optimized for economics journals.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 287,
+      "name": "literature-survey-generator",
+      "path": "skills/66-research-productivity-skills/literature-survey-generator/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "description": "Convert various file formats (PDF, Office documents, images, audio, web content, structured data) to Markdown optimized for LLM processing. Use when converting documents to markdown, extracting text from PDFs/Office files, transcribing audio, performing OCR on images, extracting YouTube transcripts, or processing batches of files. Supports 20+ formats including DOCX, XLSX, PPTX, PDF, HTML, EPUB, CSV, JSON, images with OCR, and audio with transcription.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 241,
+      "name": "markitdown",
+      "path": "skills/66-research-productivity-skills/markitdown/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "description": "Export Marp slide markdown files to PDF (default), HTML, PPTX, or PNG. Handles theme loading, Chrome/Chromium detection for PDF export, and batch conversion. Trigger when user says \"export slides\", \"convert marp to pdf\", \"marp export\", \"slides to pdf\", \"slides to html\", \"导出slides\", \"slides转pdf\", \"导出演示文稿\".",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 147,
+      "name": "marp-export",
+      "path": "skills/66-research-productivity-skills/marp-export/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "description": "专业Marp演示文稿制作助手。支持完整工作流程：工作空间初始化、内容分析、slides制作、多维度审阅、中文语言规范审阅（中文演示文稿）、PNG转换检查、终稿确定。所有产出物集中管理在项目工作文件夹中。当用户提到\"制作slides\"、\"做PPT\"、\"演示文稿\"、\"Marp\"、\"幻灯片\"、\"presentation\"等关键词时自动启用。Professional Marp presentation assistant with complete workflow: workspace initialization, content analysis, slide creation, multi-dimensional review, Chinese language review (for Chinese presentations), PNG conversion check, and finalization. All outputs organized in project workspace.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 906,
+      "name": "marp-slides-creator",
+      "path": "skills/66-research-productivity-skills/marp-slides-creator/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "description": "Convert Markdown files to Word documents (.docx) with proper formatting, Chinese font support (FangSong for all text including headings), black font color, 1.5x line spacing, precise first-line indent (24pt), heading spacing after (1 line), no italic headings, and automatic superscript conversion for citation numbers. Use when converting .md files to .docx, creating Word documents from markdown, or when user mentions Word, DOCX, or document conversion. Requires pandoc.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 189,
+      "name": "md-to-docx",
+      "path": "skills/66-research-productivity-skills/md-to-docx/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "description": "Access NBER working papers and economic research datasets",
+      "frontmatter_fields": [
+        "description",
+        "metadata",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 274,
+      "name": "nber-working-papers-api",
+      "path": "skills/66-research-productivity-skills/nber-working-papers-api/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "description": "Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 485,
+      "name": "skill-creator",
+      "path": "skills/66-research-productivity-skills/skill-creator/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "description": "UI/UX design intelligence. 50 styles, 21 palettes, 50 font pairings, 20 charts, 9 stacks (React, Next.js, Vue, Svelte, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui). Actions: plan, build, create, design, implement, review, fix, improve, optimize, enhance, refactor, check UI/UX code. Projects: website, landing page, dashboard, admin panel, e-commerce, SaaS, portfolio, blog, mobile app, .html, .tsx, .vue, .svelte. Elements: button, modal, navbar, sidebar, card, table, form, chart. Styles: glassmorphism, claymorphism, minimalism, brutalism, neumorphism, bento grid, dark mode, responsive, skeuomorphism, flat design. Topics: color palette, accessibility, animation, layout, typography, font pairing, spacing, hover, shadow, gradient. Integrations: shadcn/ui MCP for component search and examples.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 386,
+      "name": "ui-ux-pro-max",
+      "path": "skills/66-research-productivity-skills/ui-ux-pro-max/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "description": "Find free legal full-text versions of scholarly articles via Unpaywall",
+      "frontmatter_fields": [
+        "description",
+        "metadata",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 113,
+      "name": "unpaywall-api",
+      "path": "skills/66-research-productivity-skills/unpaywall-api/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "description": "",
+      "frontmatter_fields": [
+        "description",
+        "github",
+        "license",
+        "metadata",
+        "name"
+      ],
+      "has_description": false,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 246,
+      "name": "web-access",
+      "path": "skills/66-research-productivity-skills/web-access/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "description": "Searches multiple web sources, synthesizes findings, and produces cited research reports using delegated subagents. Use when the user asks to research a topic online, search the web, look something up, find current information, compare options, or produce a research report.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 77,
+      "name": "web-research",
+      "path": "skills/66-research-productivity-skills/web-research/SKILL.md"
     }
   ],
   "summary": {
-    "missing_description": 4,
+    "missing_description": 5,
     "missing_frontmatter": 4,
     "missing_name": 4,
-    "oversized_skill_files_over_500_lines": 80,
-    "skill_files": 1072,
-    "top_level_collections": 64
+    "oversized_skill_files_over_500_lines": 82,
+    "skill_files": 1099,
+    "top_level_collections": 66
   }
 }

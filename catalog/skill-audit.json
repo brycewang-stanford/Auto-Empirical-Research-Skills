@@ -22,7 +22,8 @@
     ],
     "arxiv": [
       "skills/42-wanshuiyin-ARIS/skills/arxiv/SKILL.md",
-      "skills/42-wanshuiyin-ARIS/skills/skills-codex/arxiv/SKILL.md"
+      "skills/42-wanshuiyin-ARIS/skills/skills-codex/arxiv/SKILL.md",
+      "skills/66-research-productivity-skills/arxiv/SKILL.md"
     ],
     "auto-paper-improvement-loop": [
       "skills/42-wanshuiyin-ARIS/skills/auto-paper-improvement-loop/SKILL.md",
@@ -115,6 +116,10 @@
       "skills/42-wanshuiyin-ARIS/skills/formula-derivation/SKILL.md",
       "skills/42-wanshuiyin-ARIS/skills/skills-codex/formula-derivation/SKILL.md"
     ],
+    "frontend-design": [
+      "skills/33-Galaxy-Dawn-claude-scholar/skills/frontend-design/SKILL.md",
+      "skills/66-research-productivity-skills/frontend-design/SKILL.md"
+    ],
     "general-equilibrium-model-builder": [
       "skills/09-meleantonio-awesome-econ-ai-stuff/_skills/theory/general-equilibrium-model-builder/SKILL.md",
       "skills/31-thalysandratos-claude-code-skills/_skills/theory/general-equilibrium-model-builder/SKILL.md"
@@ -186,6 +191,10 @@
     "monitor-experiment": [
       "skills/42-wanshuiyin-ARIS/skills/monitor-experiment/SKILL.md",
       "skills/42-wanshuiyin-ARIS/skills/skills-codex/monitor-experiment/SKILL.md"
+    ],
+    "nber-working-papers-api": [
+      "skills/43-wentorai-research-plugins/skills/domains/economics/nber-working-papers-api/SKILL.md",
+      "skills/66-research-productivity-skills/nber-working-papers-api/SKILL.md"
     ],
     "new-project": [
       "skills/15-Felpix-Studios-social-science-research/skills/new-project/SKILL.md",
@@ -363,6 +372,14 @@
     "training-check": [
       "skills/42-wanshuiyin-ARIS/skills/skills-codex/training-check/SKILL.md",
       "skills/42-wanshuiyin-ARIS/skills/training-check/SKILL.md"
+    ],
+    "ui-ux-pro-max": [
+      "skills/33-Galaxy-Dawn-claude-scholar/skills/ui-ux-pro-max/SKILL.md",
+      "skills/66-research-productivity-skills/ui-ux-pro-max/SKILL.md"
+    ],
+    "unpaywall-api": [
+      "skills/43-wentorai-research-plugins/skills/literature/fulltext/unpaywall-api/SKILL.md",
+      "skills/66-research-productivity-skills/unpaywall-api/SKILL.md"
     ],
     "validate-bib": [
       "skills/12-pedrohcgs-claude-code-my-workflow/dot-claude/skills/validate-bib/SKILL.md",
@@ -11093,16 +11110,286 @@
       "line_count": 35,
       "name": "stata-toolkit",
       "path": "skills/64-tmonk-mcp-stata/skills/stata-toolkit/SKILL.md"
+    },
+    {
+      "collection": "65-zheng-siyao-empirical-research-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 271,
+      "name": "R-optimizer",
+      "path": "skills/65-zheng-siyao-empirical-research-skills/R-optimizer/SKILL.md"
+    },
+    {
+      "collection": "65-zheng-siyao-empirical-research-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 150,
+      "name": "citation-fidelity",
+      "path": "skills/65-zheng-siyao-empirical-research-skills/citation-fidelity/SKILL.md"
+    },
+    {
+      "collection": "65-zheng-siyao-empirical-research-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 248,
+      "name": "codebook-pass",
+      "path": "skills/65-zheng-siyao-empirical-research-skills/codebook-pass/SKILL.md"
+    },
+    {
+      "collection": "65-zheng-siyao-empirical-research-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 187,
+      "name": "did-reviewer",
+      "path": "skills/65-zheng-siyao-empirical-research-skills/did-reviewer/SKILL.md"
+    },
+    {
+      "collection": "65-zheng-siyao-empirical-research-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 216,
+      "name": "econ-reviewer",
+      "path": "skills/65-zheng-siyao-empirical-research-skills/econ-reviewer/SKILL.md"
+    },
+    {
+      "collection": "65-zheng-siyao-empirical-research-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 124,
+      "name": "grillme",
+      "path": "skills/65-zheng-siyao-empirical-research-skills/grillme/SKILL.md"
+    },
+    {
+      "collection": "65-zheng-siyao-empirical-research-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 249,
+      "name": "latex-table",
+      "path": "skills/65-zheng-siyao-empirical-research-skills/latex-table/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 401,
+      "name": "academic-paper-search",
+      "path": "skills/66-research-productivity-skills/academic-paper-search/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 360,
+      "name": "agent-browser",
+      "path": "skills/66-research-productivity-skills/agent-browser/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 281,
+      "name": "arxiv",
+      "path": "skills/66-research-productivity-skills/arxiv/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 32,
+      "name": "chinese-quote-converter",
+      "path": "skills/66-research-productivity-skills/chinese-quote-converter/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 836,
+      "name": "Command Development",
+      "path": "skills/66-research-productivity-skills/command-development/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 27,
+      "name": "do-agent",
+      "path": "skills/66-research-productivity-skills/do-agent/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 218,
+      "name": "five-questions",
+      "path": "skills/66-research-productivity-skills/five-questions/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 25,
+      "name": "fix-chinese",
+      "path": "skills/66-research-productivity-skills/fix-chinese/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 42,
+      "name": "frontend-design",
+      "path": "skills/66-research-productivity-skills/frontend-design/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 287,
+      "name": "literature-survey-generator",
+      "path": "skills/66-research-productivity-skills/literature-survey-generator/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 241,
+      "name": "markitdown",
+      "path": "skills/66-research-productivity-skills/markitdown/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 147,
+      "name": "marp-export",
+      "path": "skills/66-research-productivity-skills/marp-export/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 906,
+      "name": "marp-slides-creator",
+      "path": "skills/66-research-productivity-skills/marp-slides-creator/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 189,
+      "name": "md-to-docx",
+      "path": "skills/66-research-productivity-skills/md-to-docx/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 274,
+      "name": "nber-working-papers-api",
+      "path": "skills/66-research-productivity-skills/nber-working-papers-api/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 485,
+      "name": "skill-creator",
+      "path": "skills/66-research-productivity-skills/skill-creator/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 386,
+      "name": "ui-ux-pro-max",
+      "path": "skills/66-research-productivity-skills/ui-ux-pro-max/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 113,
+      "name": "unpaywall-api",
+      "path": "skills/66-research-productivity-skills/unpaywall-api/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "exact_case": true,
+      "has_description": false,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 246,
+      "name": "web-access",
+      "path": "skills/66-research-productivity-skills/web-access/SKILL.md"
+    },
+    {
+      "collection": "66-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 77,
+      "name": "web-research",
+      "path": "skills/66-research-productivity-skills/web-research/SKILL.md"
     }
   ],
   "schema_version": "1.0",
   "summary": {
-    "duplicate_skill_names": 78,
-    "exact_case_skill_files": 1072,
-    "missing_description": 4,
+    "duplicate_skill_names": 82,
+    "exact_case_skill_files": 1099,
+    "missing_description": 5,
     "missing_frontmatter": 4,
     "non_exact_case_skill_files": 0,
-    "over_500_lines": 80,
-    "skill_like_files": 1072
+    "over_500_lines": 82,
+    "skill_like_files": 1099
   }
 }
