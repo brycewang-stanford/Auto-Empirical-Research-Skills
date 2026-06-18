@@ -1,0 +1,47 @@
+\begin{table}[htbp]\centering\scriptsize
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{\textbf{Plausible Channel: Patient Capital Structure and Asset Revitalization}}
+\label{channel1}
+
+\noindent{\justifying{This table presents the mechanism analysis regarding the formation of a patient capital structure and the effect of asset revitalization induced by patent trading infrastructure. Column (1) examines debt patience, measured by \textsl{DebtPatience} (the ratio of relational liabilities, defined as the sum of notes payable, long-term loans, bonds payable, and long-term payables, to total liabilities). Column (2) investigates equity patience using \textsl{EquityPatience} (the stability of institutional ownership, calculated as the ratio of the institutional shareholding percentage to its standard deviation over the past three years). Column (3) assesses the revitalization of internal liquidity through \textsl{DeltaCash} (the annual change in cash and cash equivalents divided by total assets), which proxies for the intensity of precautionary savings. Column (4) evaluates the debt security margin via \textsl{IntCoverage} (the interest coverage ratio, calculated as the sum of total profit and interest expenses divided by interest expenses). The main explanatory variable is \textsl{Patent}. Other control variables include \textsl{Size}, \textsl{Balance}, \textsl{Tobinq}, \textsl{Age}, \textsl{Indept}, \textsl{Top1}, \textsl{Dual}, \textsl{FinDev}, \textsl{Innov}, \textsl{Open}, and \textsl{Gov}. All regressions incorporate firm, year, and city fixed effects. Robust $t$-statistics clustered by the firm are reported in parentheses. Detailed variable definitions are provided in Table S1. \sym{***}, \sym{**}, and \sym{*} denote significance at the 1\%, 5\%, and 10\% levels, respectively.\par}}
+\bigskip
+
+\begin{tabularx}{\textwidth}{lYYYYYYYY@{}}
+\toprule
+
+                &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
+                &\multicolumn{1}{c}{DebtPatience}&\multicolumn{1}{c}{EquityPatience}&\multicolumn{1}{c}{DeltaCash}&\multicolumn{1}{c}{IntCoverage}\\
+\hline\\
+PTC             &   0.0175\sym{**} &   0.2857         &  -0.0082\sym{**} &  -6.0420\sym{***}\\
+                &   (2.57)         &   (0.14)         &  (-2.13)         &  (-3.08)         \\
+Size            &   0.0652\sym{***}&  -8.6029\sym{***}&   0.0308\sym{***}&  -7.5991\sym{***}\\
+                &  (22.97)         & (-12.17)         &  (21.39)         &  (-8.66)         \\
+Balance         &  -0.0071\sym{*}  &   7.5402\sym{***}&   0.0000         &  12.7481\sym{***}\\
+                &  (-1.69)         &   (7.50)         &   (0.01)         &   (9.09)         \\
+Tobinq          &  -0.0036\sym{***}&  -1.5928\sym{***}&   0.0077\sym{***}&   2.3474\sym{***}\\
+                &  (-3.50)         &  (-5.30)         &   (9.46)         &   (6.10)         \\
+Age             &  -0.0148\sym{**} &   4.7042         &   0.0034         &   6.2888\sym{***}\\
+                &  (-2.04)         &   (1.13)         &   (0.56)         &   (2.69)         \\
+Indept          &   0.0309         & -15.3886\sym{*}  &  -0.0030         &  -1.6976         \\
+                &   (1.10)         &  (-1.95)         &  (-0.18)         &  (-0.19)         \\
+Top1            &  -0.0135         &  57.8028\sym{***}&  -0.0211\sym{*}  &  79.7884\sym{***}\\
+                &  (-0.66)         &  (11.30)         &  (-1.88)         &  (10.88)         \\
+Dual            &  -0.0041         &  -1.4010\sym{*}  &  -0.0017         &   1.8022         \\
+                &  (-1.32)         &  (-1.72)         &  (-0.87)         &   (1.60)         \\
+FinDev          &  -0.0045         &  -0.5472         &  -0.0072\sym{**} &   0.3670         \\
+                &  (-0.83)         &  (-0.38)         &  (-2.55)         &   (0.21)         \\
+Innov           &  -0.0332         &  29.2786         &  -0.0061         & -47.5803\sym{*}  \\
+                &  (-0.39)         &   (1.18)         &  (-0.13)         &  (-1.66)         \\
+Open            &   0.0384         &   2.8329         &   0.0107         &  16.5788         \\
+                &   (0.46)         &   (0.12)         &   (0.25)         &   (0.61)         \\
+Gov             &   0.0918         & -39.8114\sym{**} &   0.0679\sym{**} &  26.5366         \\
+                &   (1.45)         &  (-2.38)         &   (2.00)         &   (1.32)         \\
+\hline
+Observations    &   45,654         &   45,654         &   38,734         &   45,307         \\
+Firm FE         &      Yes         &      Yes         &      Yes         &      Yes         \\
+Year FE         &      Yes         &      Yes         &      Yes         &      Yes         \\
+City FE         &      Yes         &      Yes         &      Yes         &      Yes         \\
+Adjusted $ R^2$ &     0.56         &     0.21         &     0.02         &     0.33         \\
+\bottomrule
+\end{tabularx}
+\end{table}

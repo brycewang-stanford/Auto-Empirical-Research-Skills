@@ -1,0 +1,58 @@
+\begin{table}[htbp]\centering\scriptsize
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{\textbf{Additional Control Variables}}
+\label{addctr}
+
+\noindent{\justifying{This table reports the robustness check results of the association between local patent trading infrastructure and institutional ownership for a sample of Chinese A-share listed firms from 2003 to 2023, controlling for other concurrent policy shocks. To rule out alternative explanations driven by other major reforms, we include additional difference-in-difference (DID) variables. Column (1) controls for the registration system reform and price limit relaxation (*Relaxation*). Column (2) controls for the patent approval system reform (*PatentReform*). Column (3) controls for the pilot policy of promoting the combination of technology and finance (*TechFin*). Column (4) controls for the ``Broadband China'' strategy (*Broadband*). Column (5) includes all these policy variables simultaneously. The dependent variable is \textsl{Institution}, defined as the ratio of the number of shares held by institutional investors to the total number of shares at the year-end. The main explanatory variable is \textsl{PTC} (a dummy variable that equals one if the city where the firm is located has established a patent trading center in or before year $t$, and zero otherwise). Other control variables are aligned with Table \ref{baseline}. The time subscripts of the control variables and the explained variable are $t$ by default. All regressions include firm, year, and city fixed effects. The robust $t$-statistics clustered by the firm are reported in parentheses. The detailed variable definitions are presented in Table \ref{definition}. ***, **, and * denote the significance at the 1\%, 5\%, and 10\% levels, respectively.\par}}
+\bigskip
+
+\begin{tabularx}{\textwidth}{lYYYYYYYY@{}}
+\toprule
+
+                &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         &\multicolumn{1}{c}{(5)}         \\
+\hline\\
+PTC          &  -0.1614\sym{***}&  -0.1620\sym{***}&  -0.1349\sym{***}&  -0.1523\sym{***}&  -0.1304\sym{***}\\
+                &  (-3.84)         &  (-3.86)         &  (-3.31)         &  (-3.64)         &  (-3.20)         \\
+Age             &  -0.0391         &  -0.0296         &  -0.0259         &  -0.0332         &  -0.0344         \\
+                &  (-0.96)         &  (-0.75)         &  (-0.35)         &  (-0.84)         &  (-0.44)         \\
+Balance         &   0.5913\sym{***}&   0.5791\sym{***}&   0.6097\sym{***}&   0.5797\sym{***}&   0.6188\sym{***}\\
+                &  (23.83)         &  (23.56)         &  (23.51)         &  (23.59)         &  (23.68)         \\
+Indept          &  -0.3669\sym{**} &  -0.3640\sym{**} &  -0.3217\sym{*}  &  -0.3671\sym{**} &  -0.3253\sym{*}  \\
+                &  (-2.23)         &  (-2.21)         &  (-1.85)         &  (-2.23)         &  (-1.87)         \\
+Cash            &   0.0748         &   0.0810         &   0.0871         &   0.0787         &   0.0792         \\
+                &   (1.09)         &   (1.18)         &   (1.22)         &   (1.15)         &   (1.11)         \\
+ROA             &   1.1476\sym{***}&   1.1045\sym{***}&   1.0575\sym{***}&   1.0968\sym{***}&   1.0864\sym{***}\\
+                &  (12.92)         &  (12.44)         &  (11.43)         &  (12.36)         &  (11.76)         \\
+Size            &  -0.0308\sym{*}  &  -0.0253         &  -0.0057         &  -0.0251         &  -0.0096         \\
+                &  (-1.87)         &  (-1.55)         &  (-0.33)         &  (-1.54)         &  (-0.56)         \\
+Tobinq          &  -0.1324\sym{***}&  -0.1305\sym{***}&  -0.1214\sym{***}&  -0.1303\sym{***}&  -0.1228\sym{***}\\
+                & (-16.82)         & (-16.63)         & (-15.18)         & (-16.57)         & (-15.27)         \\
+Top1            &   3.7644\sym{***}&   3.7035\sym{***}&   3.8334\sym{***}&   3.7012\sym{***}&   3.8749\sym{***}\\
+                &  (29.22)         &  (29.15)         &  (28.94)         &  (29.21)         &  (28.94)         \\
+Dual            &   0.0459\sym{***}&   0.0451\sym{***}&   0.0494\sym{***}&   0.0464\sym{***}&   0.0511\sym{***}\\
+                &   (2.80)         &   (2.75)         &   (2.81)         &   (2.83)         &   (2.92)         \\
+FinDev          &   0.0567\sym{**} &   0.0592\sym{**} &   0.0600\sym{**} &   0.0609\sym{**} &   0.0598\sym{**} \\
+                &   (2.03)         &   (2.12)         &   (2.07)         &   (2.18)         &   (2.06)         \\
+Innov           &  -1.8143\sym{***}&  -1.7856\sym{***}&  -1.4051\sym{***}&  -1.7121\sym{***}&  -1.3329\sym{***}\\
+                &  (-3.63)         &  (-3.57)         &  (-2.76)         &  (-3.44)         &  (-2.61)         \\
+Open            &   0.6269         &   0.5655         &   0.3568         &   0.5476         &   0.4025         \\
+                &   (1.45)         &   (1.31)         &   (0.76)         &   (1.27)         &   (0.86)         \\
+Gov             &  -0.1953         &  -0.2164         &  -0.4355         &  -0.2737         &  -0.4175         \\
+                &  (-0.66)         &  (-0.74)         &  (-1.42)         &  (-0.93)         &  (-1.36)         \\
+Relaxation      &   0.1676\sym{***}&                  &                  &                  &   0.1455\sym{***}\\
+                &   (6.39)         &                  &                  &                  &   (5.50)         \\
+PatentReform    &                  &  -0.0122         &                  &                  &  -0.0191         \\
+                &                  &  (-0.69)         &                  &                  &  (-1.05)         \\
+TechFin         &                  &                  &  -0.1618\sym{***}&                  &  -0.1469\sym{***}\\
+                &                  &                  &  (-4.95)         &                  &  (-4.48)         \\
+Broadband       &                  &                  &                  &  -0.0889\sym{***}&  -0.0581\sym{**} \\
+                &                  &                  &                  &  (-3.21)         &  (-2.08)         \\
+\hline
+Observations    &   45,654         &   45,654         &   41,224         &   45,654         &   41,224         \\
+Firm FE         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         \\
+Year FE         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         \\
+City FE         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         \\
+Adjusted $ R^2$ &     0.57         &     0.57         &     0.58         &     0.57         &     0.58         \\
+\bottomrule
+\end{tabularx}
+\end{table}

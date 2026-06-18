@@ -989,18 +989,48 @@
       "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
       "sync": "manual vendor snapshot",
       "vendored_commit": null
+    },
+    {
+      "commercial_use": "unknown",
+      "id": "67-econfin-workflow-toolkit",
+      "last_aers_review": "2026-05-31",
+      "license": "Mixed (per-skill; see folder)",
+      "license_file": null,
+      "origin": "community contribution via PR #22 (econ/finance research workflow toolkit). Proprietary Anthropic office skills (docx/pdf/pptx/xlsx) and general-purpose UI skills (frontend-design, ui-ux-pro-max) removed before vendoring 2026-06-18.",
+      "path": "skills/67-econfin-workflow-toolkit",
+      "security_review": "SECURITY-SCAN-REPORT.md",
+      "skill_count": 46,
+      "source_confidence": "medium",
+      "source_url": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills/pull/22",
+      "sync": "manual vendor snapshot",
+      "vendored_commit": null
+    },
+    {
+      "commercial_use": "unknown",
+      "id": "68-research-productivity-skills",
+      "last_aers_review": "2026-05-31",
+      "license": "Mixed (per-skill; see folder)",
+      "license_file": null,
+      "origin": "community contribution via PR #21 (research productivity skills). Proprietary Anthropic office skills (docx/pdf/pptx/xlsx) and general-purpose UI skills (frontend-design, ui-ux-pro-max) removed before vendoring 2026-06-18.",
+      "path": "skills/68-research-productivity-skills",
+      "security_review": "SECURITY-SCAN-REPORT.md",
+      "skill_count": 18,
+      "source_confidence": "medium",
+      "source_url": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills/pull/21",
+      "sync": "manual vendor snapshot",
+      "vendored_commit": null
     }
   ],
   "generated_by": "scripts/build-provenance.py",
   "scan_date": "2026-05-31",
   "schema_version": "1.0",
   "summary": {
-    "collections": 66,
+    "collections": 68,
     "commercial_use": {
       "allowed": 35,
       "restricted": 2,
       "share-alike": 5,
-      "unknown": 24
+      "unknown": 26
     },
     "licenses": {
       "AGPL-3.0": 1,
@@ -1009,12 +1039,13 @@
       "CC-BY-SA-4.0 (repository default)": 4,
       "MIT": 34,
       "MIT Non-Commercial": 1,
+      "Mixed (per-skill; see folder)": 2,
       "UNKNOWN - check upstream": 24
     },
     "source_confidence": {
       "high": 38,
       "low": 7,
-      "medium": 17,
+      "medium": 19,
       "unresolved": 4
     }
   }

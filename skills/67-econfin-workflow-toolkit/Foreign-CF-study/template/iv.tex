@@ -1,0 +1,56 @@
+\begin{table}[htbp]\centering\scriptsize
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{\textbf{Instrumental Variable Regressions}}
+\label{iv}
+
+\noindent{\justifying{This table presents the results of the instrumental variable regressions using the Two-Stage Least Squares (2SLS) method to address potential endogeneity for a sample of Chinese A-share listed firms from 2003 to 2023. Columns (1) through (3) report the first-stage regression results, where the dependent variable is \textsl{PTC}. Columns (4) through (6) report the second-stage results, where the dependent variable is \textsl{Institution}. Three policy shocks are used as instrumental variables: \textsl{TechFin} (Columns 1 and 4), defined as a dummy variable equal to one if the city is selected as a pilot zone for combining technology and finance; \textsl{Broadband} (Columns 2 and 5), defined as a dummy variable equal to one if the city is selected as a ``Broadband China'' demonstration city; and \textsl{Court} (Columns 3 and 6), defined as a dummy variable equal to one if an intellectual property court or tribunal is established in the city. The main explanatory variable (endogenous variable) is \textsl{PTC} (a dummy variable that equals one if the city where the firm is located has established a patent trading center in or before year $t$). The dependent variable \textsl{Institution} is defined as the ratio of the number of shares held by institutional investors to the total number of shares. Other control variables are aligned with Table \ref{baseline}. All regressions include firm and year fixed effects. The robust $t$-statistics clustered by the firm are reported in parentheses. The Kleibergen-Paap rk Wald F-statistics are reported to test for weak instruments. The detailed variable definitions are presented in Table \ref{definition}. ***, **, and * denote the significance at the 1\%, 5\%, and 10\% levels, respectively.\par}}
+\bigskip
+
+\begin{tabularx}{\textwidth}{lYYYYYYYY@{}}
+\toprule
+
+                &\multicolumn{3}{c}{First Stage}                         &\multicolumn{3}{c}{Second Stage}                        \\\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+                &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}&\multicolumn{1}{c}{(5)}&\multicolumn{1}{c}{(6)}\\
+                &\multicolumn{1}{c}{PTC}&\multicolumn{1}{c}{PTC}&\multicolumn{1}{c}{PTC}&\multicolumn{1}{c}{Institution}&\multicolumn{1}{c}{Institution}&\multicolumn{1}{c}{Institution}\\
+\hline\\
+TechFin         &   0.1399\sym{***}&                  &                  &                  &                  &                  \\
+                &  (12.53)         &                  &                  &                  &                  &                  \\
+Broadband       &                  &   0.0708\sym{***}&                  &                  &                  &                  \\
+                &                  &  (10.12)         &                  &                  &                  &                  \\
+Court           &                  &                  &   0.0644\sym{***}&                  &                  &                  \\
+                &                  &                  &  (14.23)         &                  &                  &                  \\
+PTC          &                  &                  &                  &  -1.2057\sym{***}&  -1.3280\sym{***}&  -1.2035\sym{***}\\
+                &                  &                  &                  &  (-4.89)         &  (-3.37)         &  (-3.41)         \\
+Size            &   0.0079\sym{*}  &   0.0072         &   0.0069         &   0.0047         &  -0.0149         &  -0.0158         \\
+                &   (1.71)         &   (1.61)         &   (1.55)         &   (0.26)         &  (-0.84)         &  (-0.91)         \\
+Balance         &   0.0118\sym{*}  &   0.0102\sym{*}  &   0.0109\sym{*}  &   0.6251\sym{***}&   0.5953\sym{***}&   0.5940\sym{***}\\
+                &   (1.88)         &   (1.70)         &   (1.82)         &  (23.18)         &  (22.81)         &  (23.07)         \\
+ROA             &  -0.0432\sym{*}  &  -0.0376         &  -0.0357         &   1.0024\sym{***}&   1.0340\sym{***}&   1.0393\sym{***}\\
+                &  (-1.69)         &  (-1.53)         &  (-1.45)         &  (10.19)         &  (10.84)         &  (10.98)         \\
+Tobinq          &  -0.0014         &  -0.0015         &  -0.0013         &  -0.1184\sym{***}&  -0.1277\sym{***}&  -0.1276\sym{***}\\
+                &  (-0.91)         &  (-1.00)         &  (-0.85)         & (-14.52)         & (-15.91)         & (-15.96)         \\
+Age             &  -0.0419\sym{***}&  -0.0276\sym{***}&  -0.0265\sym{***}&  -0.0524         &  -0.0547         &  -0.0508         \\
+                &  (-5.09)         &  (-3.53)         &  (-3.53)         &  (-0.91)         &  (-1.63)         &  (-1.51)         \\
+Cash            &  -0.0418\sym{**} &  -0.0407\sym{**} &  -0.0381\sym{**} &   0.0466         &   0.0358         &   0.0412         \\
+                &  (-2.18)         &  (-2.26)         &  (-2.11)         &   (0.60)         &   (0.47)         &   (0.55)         \\
+Indept          &   0.0610         &   0.0591         &   0.0617         &  -0.2811         &  -0.3124\sym{*}  &  -0.3195\sym{*}  \\
+                &   (1.48)         &   (1.53)         &   (1.59)         &  (-1.56)         &  (-1.82)         &  (-1.87)         \\
+Top1            &   0.0443         &   0.0472         &   0.0456         &   3.8878\sym{***}&   3.7671\sym{***}&   3.7616\sym{***}\\
+                &   (1.24)         &   (1.35)         &   (1.31)         &  (27.79)         &  (27.92)         &  (28.13)         \\
+Dual            &  -0.0010         &  -0.0016         &  -0.0018         &   0.0530\sym{***}&   0.0479\sym{***}&   0.0479\sym{***}\\
+                &  (-0.21)         &  (-0.38)         &  (-0.44)         &   (2.92)         &   (2.80)         &   (2.82)         \\
+FinDev          &   0.0886\sym{***}&   0.0843\sym{***}&   0.0847\sym{***}&   0.1440\sym{***}&   0.1464\sym{***}&   0.1356\sym{***}\\
+                &   (7.02)         &   (6.90)         &   (6.94)         &   (3.69)         &   (3.23)         &   (3.02)         \\
+Innov           &   1.9548\sym{***}&   2.1354\sym{***}&   1.9441\sym{***}&   1.0156         &   1.0794         &   0.7990         \\
+                &  (13.10)         &  (13.38)         &  (12.38)         &   (1.50)         &   (1.11)         &   (0.87)         \\
+Open            &  -0.6066\sym{***}&  -0.5583\sym{***}&  -0.5725\sym{***}&  -0.3401         &  -0.1591         &  -0.0872         \\
+                &  (-4.03)         &  (-3.93)         &  (-4.13)         &  (-0.63)         &  (-0.31)         &  (-0.17)         \\
+Gov             &  -1.2981\sym{***}&  -1.5068\sym{***}&  -1.4900\sym{***}&  -1.4665\sym{***}&  -1.6924\sym{**} &  -1.4989\sym{**} \\
+                &  (-9.36)         & (-11.02)         & (-10.93)         &  (-2.85)         &  (-2.46)         &  (-2.32)         \\
+\hline
+Observations    &   41,225         &   45,654         &   45,654         &   41,225         &   45,654         &   45,654         \\
+Firm FE         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         \\
+Year FE         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         \\
+\bottomrule
+\end{tabularx}
+\end{table}

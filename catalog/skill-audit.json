@@ -1,5 +1,9 @@
 {
   "duplicate_names": {
+    "Command Development": [
+      "skills/67-econfin-workflow-toolkit/command-development/SKILL.md",
+      "skills/68-research-productivity-skills/command-development/SKILL.md"
+    ],
     "ablation-planner": [
       "skills/42-wanshuiyin-ARIS/skills/ablation-planner/SKILL.md",
       "skills/42-wanshuiyin-ARIS/skills/skills-codex/ablation-planner/SKILL.md"
@@ -7,6 +11,10 @@
     "academic-paper-writer": [
       "skills/09-meleantonio-awesome-econ-ai-stuff/_skills/writing/academic-paper-writer/SKILL.md",
       "skills/31-thalysandratos-claude-code-skills/_skills/writing/academic-paper-writer/SKILL.md"
+    ],
+    "agent-browser": [
+      "skills/67-econfin-workflow-toolkit/agent-browser/SKILL.md",
+      "skills/68-research-productivity-skills/agent-browser/SKILL.md"
     ],
     "analyze": [
       "skills/16-hsantanna88-clo-author/dot-claude/skills/analyze/SKILL.md",
@@ -22,7 +30,9 @@
     ],
     "arxiv": [
       "skills/42-wanshuiyin-ARIS/skills/arxiv/SKILL.md",
-      "skills/42-wanshuiyin-ARIS/skills/skills-codex/arxiv/SKILL.md"
+      "skills/42-wanshuiyin-ARIS/skills/skills-codex/arxiv/SKILL.md",
+      "skills/67-econfin-workflow-toolkit/arxiv/SKILL.md",
+      "skills/68-research-productivity-skills/arxiv/SKILL.md"
     ],
     "auto-paper-improvement-loop": [
       "skills/42-wanshuiyin-ARIS/skills/auto-paper-improvement-loop/SKILL.md",
@@ -51,6 +61,10 @@
     "causal-inference": [
       "skills/11-James-Traina-compound-science/skills/causal-inference/SKILL.md",
       "skills/23-Learning-Bayesian-Statistics-baygent-skills/causal-inference/SKILL.md"
+    ],
+    "chinese-quote-converter": [
+      "skills/67-econfin-workflow-toolkit/chinese-quote-converter/SKILL.md",
+      "skills/68-research-productivity-skills/chinese-quote-converter/SKILL.md"
     ],
     "citation-management": [
       "skills/04-K-Dense-AI-claude-scientific-writer/citation-management/SKILL.md",
@@ -91,6 +105,10 @@
       "skills/14-luischanci-claude-code-research-starter/dot-claude/skills/devils-advocate/SKILL.md",
       "skills/28-maxwell2732-paper-replicate-agent-demo/dot-claude/skills/devils-advocate/SKILL.md"
     ],
+    "do-agent": [
+      "skills/67-econfin-workflow-toolkit/do-agent/SKILL.md",
+      "skills/68-research-productivity-skills/do-agent/SKILL.md"
+    ],
     "dse-loop": [
       "skills/42-wanshuiyin-ARIS/skills/dse-loop/SKILL.md",
       "skills/42-wanshuiyin-ARIS/skills/skills-codex/dse-loop/SKILL.md"
@@ -110,6 +128,10 @@
     "feishu-notify": [
       "skills/42-wanshuiyin-ARIS/skills/feishu-notify/SKILL.md",
       "skills/42-wanshuiyin-ARIS/skills/skills-codex/feishu-notify/SKILL.md"
+    ],
+    "fix-chinese": [
+      "skills/67-econfin-workflow-toolkit/fix-chinese/SKILL.md",
+      "skills/68-research-productivity-skills/fix-chinese/SKILL.md"
     ],
     "formula-derivation": [
       "skills/42-wanshuiyin-ARIS/skills/formula-derivation/SKILL.md",
@@ -174,6 +196,22 @@
       "skills/36-taoyunudt-literature-review-skill/SKILL.md",
       "skills/54-scdenney-open-science-skills/skills/literature-review/SKILL.md"
     ],
+    "markitdown": [
+      "skills/67-econfin-workflow-toolkit/markitdown/SKILL.md",
+      "skills/68-research-productivity-skills/markitdown/SKILL.md"
+    ],
+    "marp-export": [
+      "skills/67-econfin-workflow-toolkit/marp-export/SKILL.md",
+      "skills/68-research-productivity-skills/marp-export/SKILL.md"
+    ],
+    "marp-slides-creator": [
+      "skills/67-econfin-workflow-toolkit/marp-slides-creator/SKILL.md",
+      "skills/68-research-productivity-skills/marp-slides-creator/SKILL.md"
+    ],
+    "md-to-docx": [
+      "skills/67-econfin-workflow-toolkit/md-to-docx/SKILL.md",
+      "skills/68-research-productivity-skills/md-to-docx/SKILL.md"
+    ],
     "mermaid-diagram": [
       "skills/42-wanshuiyin-ARIS/skills/mermaid-diagram/SKILL.md",
       "skills/42-wanshuiyin-ARIS/skills/skills-codex/mermaid-diagram/SKILL.md"
@@ -187,6 +225,10 @@
       "skills/42-wanshuiyin-ARIS/skills/monitor-experiment/SKILL.md",
       "skills/42-wanshuiyin-ARIS/skills/skills-codex/monitor-experiment/SKILL.md"
     ],
+    "nber-working-papers-api": [
+      "skills/43-wentorai-research-plugins/skills/domains/economics/nber-working-papers-api/SKILL.md",
+      "skills/68-research-productivity-skills/nber-working-papers-api/SKILL.md"
+    ],
     "new-project": [
       "skills/15-Felpix-Studios-social-science-research/skills/new-project/SKILL.md",
       "skills/16-hsantanna88-clo-author/dot-claude/skills/new-project/SKILL.md"
@@ -195,7 +237,8 @@
       "skills/42-wanshuiyin-ARIS/skills/novelty-check/SKILL.md",
       "skills/42-wanshuiyin-ARIS/skills/skills-codex/novelty-check/SKILL.md",
       "skills/42-wanshuiyin-ARIS/skills/skills-codex-claude-review/novelty-check/SKILL.md",
-      "skills/42-wanshuiyin-ARIS/skills/skills-codex-gemini-review/novelty-check/SKILL.md"
+      "skills/42-wanshuiyin-ARIS/skills/skills-codex-gemini-review/novelty-check/SKILL.md",
+      "skills/67-econfin-workflow-toolkit/novelty-check/SKILL.md"
     ],
     "paper-compile": [
       "skills/42-wanshuiyin-ARIS/skills/paper-compile/SKILL.md",
@@ -334,6 +377,10 @@
       "skills/03-K-Dense-AI-claude-scientific-skills/scientific-writing/SKILL.md",
       "skills/04-K-Dense-AI-claude-scientific-writer/scientific-writing/SKILL.md"
     ],
+    "skill-creator": [
+      "skills/67-econfin-workflow-toolkit/skill-creator/SKILL.md",
+      "skills/68-research-productivity-skills/skill-creator/SKILL.md"
+    ],
     "slide-excellence": [
       "skills/12-pedrohcgs-claude-code-my-workflow/dot-claude/skills/slide-excellence/SKILL.md",
       "skills/41-sticerd-eee-sewage-econometrics-check/skills/slide-excellence/SKILL.md"
@@ -341,7 +388,8 @@
     "stata": [
       "skills/14-luischanci-claude-code-research-starter/dot-claude/skills/stata/SKILL.md",
       "skills/32-dylantmoore-stata-skill/plugins/stata/skills/stata/SKILL.md",
-      "skills/64-tmonk-mcp-stata/skills/stata/SKILL.md"
+      "skills/64-tmonk-mcp-stata/skills/stata/SKILL.md",
+      "skills/67-econfin-workflow-toolkit/stata/SKILL.md"
     ],
     "stata-accounting-research": [
       "skills/18-jusi-aalto-stata-accounting-research/SKILL.md",
@@ -364,11 +412,23 @@
       "skills/42-wanshuiyin-ARIS/skills/skills-codex/training-check/SKILL.md",
       "skills/42-wanshuiyin-ARIS/skills/training-check/SKILL.md"
     ],
+    "unpaywall-api": [
+      "skills/43-wentorai-research-plugins/skills/literature/fulltext/unpaywall-api/SKILL.md",
+      "skills/68-research-productivity-skills/unpaywall-api/SKILL.md"
+    ],
     "validate-bib": [
       "skills/12-pedrohcgs-claude-code-my-workflow/dot-claude/skills/validate-bib/SKILL.md",
       "skills/14-luischanci-claude-code-research-starter/dot-claude/skills/validate-bib/SKILL.md",
       "skills/15-Felpix-Studios-social-science-research/skills/validate-bib/SKILL.md",
       "skills/41-sticerd-eee-sewage-econometrics-check/skills/validate-bib/SKILL.md"
+    ],
+    "web-access": [
+      "skills/67-econfin-workflow-toolkit/web-access/SKILL.md",
+      "skills/68-research-productivity-skills/web-access/SKILL.md"
+    ],
+    "web-research": [
+      "skills/67-econfin-workflow-toolkit/web-research/SKILL.md",
+      "skills/68-research-productivity-skills/web-research/SKILL.md"
     ]
   },
   "generated_by": "scripts/build-skill-audit.py",
@@ -11173,16 +11233,656 @@
       "line_count": 249,
       "name": "latex-table",
       "path": "skills/66-zheng-siyao-empirical-research-skills/latex-table/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 875,
+      "name": "China-CF-Study",
+      "path": "skills/67-econfin-workflow-toolkit/China-CF-study/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 1069,
+      "name": "Foreign-CF-Study",
+      "path": "skills/67-econfin-workflow-toolkit/Foreign-CF-study/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 360,
+      "name": "agent-browser",
+      "path": "skills/67-econfin-workflow-toolkit/agent-browser/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 281,
+      "name": "arxiv",
+      "path": "skills/67-econfin-workflow-toolkit/arxiv/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 881,
+      "name": "chinese-ppt2",
+      "path": "skills/67-econfin-workflow-toolkit/chinese-ppt/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 32,
+      "name": "chinese-quote-converter",
+      "path": "skills/67-econfin-workflow-toolkit/chinese-quote-converter/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 836,
+      "name": "Command Development",
+      "path": "skills/67-econfin-workflow-toolkit/command-development/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 387,
+      "name": "data-cleaning",
+      "path": "skills/67-econfin-workflow-toolkit/data-cleaning/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 785,
+      "name": "data-fetcher",
+      "path": "skills/67-econfin-workflow-toolkit/data-fetcher/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 166,
+      "name": "did-analysis",
+      "path": "skills/67-econfin-workflow-toolkit/did-analysis/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 27,
+      "name": "do-agent",
+      "path": "skills/67-econfin-workflow-toolkit/do-agent/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 430,
+      "name": "econfin-idea-finder",
+      "path": "skills/67-econfin-workflow-toolkit/econfin-idea-finder/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 312,
+      "name": "Econfin-Proposal",
+      "path": "skills/67-econfin-workflow-toolkit/econfin-proposal/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 681,
+      "name": "figure",
+      "path": "skills/67-econfin-workflow-toolkit/figure/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 25,
+      "name": "fix-chinese",
+      "path": "skills/67-econfin-workflow-toolkit/fix-chinese/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 174,
+      "name": "iv-estimation",
+      "path": "skills/67-econfin-workflow-toolkit/iv-estimation/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 201,
+      "name": "journal-digest",
+      "path": "skills/67-econfin-workflow-toolkit/journal-digest/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 241,
+      "name": "markitdown",
+      "path": "skills/67-econfin-workflow-toolkit/markitdown/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 147,
+      "name": "marp-export",
+      "path": "skills/67-econfin-workflow-toolkit/marp-export/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 906,
+      "name": "marp-slides-creator",
+      "path": "skills/67-econfin-workflow-toolkit/marp-slides-creator/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 144,
+      "name": "master-thesis-review",
+      "path": "skills/67-econfin-workflow-toolkit/master-thesis-review/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 189,
+      "name": "md-to-docx",
+      "path": "skills/67-econfin-workflow-toolkit/md-to-docx/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 484,
+      "name": "ml-causal",
+      "path": "skills/67-econfin-workflow-toolkit/ml-causal/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 106,
+      "name": "novelty-check",
+      "path": "skills/67-econfin-workflow-toolkit/novelty-check/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 114,
+      "name": "ols-regression",
+      "path": "skills/67-econfin-workflow-toolkit/ols-regression/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 311,
+      "name": "panel-data",
+      "path": "skills/67-econfin-workflow-toolkit/panel-data/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 142,
+      "name": "paper-pipeline",
+      "path": "skills/67-econfin-workflow-toolkit/paper-pipeline/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 589,
+      "name": "paper-polish",
+      "path": "skills/67-econfin-workflow-toolkit/paper-polish/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 437,
+      "name": "paper-referee-revise",
+      "path": "skills/67-econfin-workflow-toolkit/paper-referee-revise/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 220,
+      "name": "paper-self-revise",
+      "path": "skills/67-econfin-workflow-toolkit/paper-self-revise/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 121,
+      "name": "paper-style",
+      "path": "skills/67-econfin-workflow-toolkit/paper-style/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 342,
+      "name": "paper-submission",
+      "path": "skills/67-econfin-workflow-toolkit/paper-submission/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 513,
+      "name": "paper-writer",
+      "path": "skills/67-econfin-workflow-toolkit/paper-writer/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 212,
+      "name": "rdd-analysis",
+      "path": "skills/67-econfin-workflow-toolkit/rdd-analysis/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 195,
+      "name": "readability",
+      "path": "skills/67-econfin-workflow-toolkit/readability/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 257,
+      "name": "referee-report",
+      "path": "skills/67-econfin-workflow-toolkit/referee-report/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 478,
+      "name": "reference-verify",
+      "path": "skills/67-econfin-workflow-toolkit/reference-verify/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 88,
+      "name": "Significance-Search",
+      "path": "skills/67-econfin-workflow-toolkit/significance-search/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 485,
+      "name": "skill-creator",
+      "path": "skills/67-econfin-workflow-toolkit/skill-creator/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 423,
+      "name": "stata",
+      "path": "skills/67-econfin-workflow-toolkit/stata/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 231,
+      "name": "stats",
+      "path": "skills/67-econfin-workflow-toolkit/stats/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 430,
+      "name": "synthetic-control",
+      "path": "skills/67-econfin-workflow-toolkit/synthetic-control/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 360,
+      "name": "table",
+      "path": "skills/67-econfin-workflow-toolkit/table/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 265,
+      "name": "time-series",
+      "path": "skills/67-econfin-workflow-toolkit/time-series/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 244,
+      "name": "web-access",
+      "path": "skills/67-econfin-workflow-toolkit/web-access/SKILL.md"
+    },
+    {
+      "collection": "67-econfin-workflow-toolkit",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 77,
+      "name": "web-research",
+      "path": "skills/67-econfin-workflow-toolkit/web-research/SKILL.md"
+    },
+    {
+      "collection": "68-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 401,
+      "name": "academic-paper-search",
+      "path": "skills/68-research-productivity-skills/academic-paper-search/SKILL.md"
+    },
+    {
+      "collection": "68-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 360,
+      "name": "agent-browser",
+      "path": "skills/68-research-productivity-skills/agent-browser/SKILL.md"
+    },
+    {
+      "collection": "68-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 281,
+      "name": "arxiv",
+      "path": "skills/68-research-productivity-skills/arxiv/SKILL.md"
+    },
+    {
+      "collection": "68-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 32,
+      "name": "chinese-quote-converter",
+      "path": "skills/68-research-productivity-skills/chinese-quote-converter/SKILL.md"
+    },
+    {
+      "collection": "68-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 836,
+      "name": "Command Development",
+      "path": "skills/68-research-productivity-skills/command-development/SKILL.md"
+    },
+    {
+      "collection": "68-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 27,
+      "name": "do-agent",
+      "path": "skills/68-research-productivity-skills/do-agent/SKILL.md"
+    },
+    {
+      "collection": "68-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 218,
+      "name": "five-questions",
+      "path": "skills/68-research-productivity-skills/five-questions/SKILL.md"
+    },
+    {
+      "collection": "68-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 25,
+      "name": "fix-chinese",
+      "path": "skills/68-research-productivity-skills/fix-chinese/SKILL.md"
+    },
+    {
+      "collection": "68-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 287,
+      "name": "literature-survey-generator",
+      "path": "skills/68-research-productivity-skills/literature-survey-generator/SKILL.md"
+    },
+    {
+      "collection": "68-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 241,
+      "name": "markitdown",
+      "path": "skills/68-research-productivity-skills/markitdown/SKILL.md"
+    },
+    {
+      "collection": "68-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 147,
+      "name": "marp-export",
+      "path": "skills/68-research-productivity-skills/marp-export/SKILL.md"
+    },
+    {
+      "collection": "68-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 906,
+      "name": "marp-slides-creator",
+      "path": "skills/68-research-productivity-skills/marp-slides-creator/SKILL.md"
+    },
+    {
+      "collection": "68-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 189,
+      "name": "md-to-docx",
+      "path": "skills/68-research-productivity-skills/md-to-docx/SKILL.md"
+    },
+    {
+      "collection": "68-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 274,
+      "name": "nber-working-papers-api",
+      "path": "skills/68-research-productivity-skills/nber-working-papers-api/SKILL.md"
+    },
+    {
+      "collection": "68-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 485,
+      "name": "skill-creator",
+      "path": "skills/68-research-productivity-skills/skill-creator/SKILL.md"
+    },
+    {
+      "collection": "68-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 113,
+      "name": "unpaywall-api",
+      "path": "skills/68-research-productivity-skills/unpaywall-api/SKILL.md"
+    },
+    {
+      "collection": "68-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 244,
+      "name": "web-access",
+      "path": "skills/68-research-productivity-skills/web-access/SKILL.md"
+    },
+    {
+      "collection": "68-research-productivity-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 77,
+      "name": "web-research",
+      "path": "skills/68-research-productivity-skills/web-research/SKILL.md"
     }
   ],
   "schema_version": "1.0",
   "summary": {
-    "duplicate_skill_names": 78,
-    "exact_case_skill_files": 1080,
+    "duplicate_skill_names": 92,
+    "exact_case_skill_files": 1144,
     "missing_description": 4,
     "missing_frontmatter": 4,
     "non_exact_case_skill_files": 0,
-    "over_500_lines": 80,
-    "skill_like_files": 1080
+    "over_500_lines": 91,
+    "skill_like_files": 1144
   }
 }

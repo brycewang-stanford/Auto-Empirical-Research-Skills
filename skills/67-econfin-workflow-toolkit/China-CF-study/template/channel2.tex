@@ -1,0 +1,51 @@
+\begin{table}[htbp]\centering\scriptsize
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{\textbf{Plausible Channel: Financing Substitution and Debt Structure}}
+\label{channel2}
+
+\noindent{\justifying{This table presents the mechanism analysis regarding the financing substitution channel, focusing on the scale and maturity structure of corporate debt. Column (1) reports the results for the leverage scale, Column (2) reports the results for the debt maturity structure, Column (3) reports the results for the absolute volume of long-term credit, and Column (4) focuses on the long-term debt leverage ratio. The dependent variables are \textsl{Leverage} (the ratio of total liabilities to total assets), \textsl{Maturity} (the ratio of long-term loans to total liabilities), \textsl{LnLongloan} (the natural logarithm of one plus the absolute amount of long-term loans), and \textsl{LTLeverage} (the ratio of long-term loans to total assets). The main explanatory variable is \textsl{PTC} (a dummy variable that equals one if the city where the firm is located has established a patent trading center in or before year $t$, and zero otherwise). Other control variables include \textsl{Size} (natural logarithm of total assets), \textsl{Balance} (degree of equity balance), \textsl{ROA} (the ratio of net income to total assets), \textsl{Tobinq} (the ratio of the market value of assets to the book value of assets), \textsl{Age} (natural logarithm of the firm's age), \textsl{Cash} (net operating cash flow divided by total assets), \textsl{Indept} (the ratio of independent directors), \textsl{Top1} (the shareholding ratio of the largest shareholder), \textsl{Dual} (CEO duality dummy), \textsl{FinDev} (city financial development), \textsl{Innov} (city innovation potential), \textsl{Open} (city openness), and \textsl{Gov} (government intervention). All regressions include firm, year, and city fixed effects. The robust $t$-statistics clustered by the firm are reported in parentheses. The detailed variable definitions are presented in Table \ref{definition}. ***, **, and * denote the significance at the 1\%, 5\%, and 10\% levels, respectively.\par}}
+\bigskip
+
+\begin{tabularx}{\textwidth}{lYYYYYYYY@{}}
+\toprule
+
+                &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
+                &\multicolumn{1}{c}{Lev}&\multicolumn{1}{c}{Maturity}&\multicolumn{1}{c}{LnLongloan}&\multicolumn{1}{c}{LTLeverage}\\
+\hline\\
+PTC             &   0.0162\sym{**} &   0.0124\sym{**} &   0.5699\sym{*}  &   0.0093\sym{***}\\
+                &   (2.39)         &   (2.20)         &   (1.72)         &   (2.86)         \\
+Size            &   0.0855\sym{***}&   0.0397\sym{***}&   4.6564\sym{***}&   0.0279\sym{***}\\
+                &  (29.21)         &  (17.54)         &  (35.93)         &  (20.43)         \\
+Balance         &  -0.0435\sym{***}&  -0.0012         &  -0.8631\sym{***}&  -0.0026         \\
+                &  (-9.41)         &  (-0.35)         &  (-4.28)         &  (-1.35)         \\
+ROA             &  -0.8056\sym{***}&  -0.0528\sym{***}& -10.6660\sym{***}&  -0.0812\sym{***}\\
+                & (-42.00)         &  (-4.19)         & (-12.54)         & (-10.55)         \\
+Tobinq          &   0.0125\sym{***}&  -0.0002         &  -0.0552         &   0.0006         \\
+                &   (9.87)         &  (-0.28)         &  (-1.07)         &   (1.62)         \\
+Age             &   0.0013         &  -0.0118         &  -0.3581         &  -0.0074         \\
+                &   (0.17)         &  (-1.26)         &  (-0.80)         &  (-1.39)         \\
+Cash            &   0.0314\sym{**} &  -0.0814\sym{***}&  -2.4567\sym{***}&  -0.0484\sym{***}\\
+                &   (2.57)         &  (-7.93)         &  (-3.75)         &  (-8.21)         \\
+Indept          &  -0.0090         &   0.0308         &   1.0386         &   0.0177         \\
+                &  (-0.34)         &   (1.39)         &   (0.83)         &   (1.39)         \\
+Top1            &  -0.1426\sym{***}&   0.0280         &  -3.5476\sym{***}&   0.0161         \\
+                &  (-6.50)         &   (1.47)         &  (-3.34)         &   (1.45)         \\
+Dual            &  -0.0046         &  -0.0069\sym{***}&  -0.1860         &  -0.0042\sym{***}\\
+                &  (-1.47)         &  (-3.05)         &  (-1.18)         &  (-3.38)         \\
+FinDev          &  -0.0016         &   0.0021         &   0.1029         &   0.0025         \\
+                &  (-0.30)         &   (0.47)         &   (0.40)         &   (1.03)         \\
+Innov           &   0.1472\sym{*}  &   0.1318\sym{*}  &  11.5931\sym{***}&   0.0777\sym{**} \\
+                &   (1.71)         &   (1.91)         &   (2.77)         &   (2.05)         \\
+Open            &   0.0947         &  -0.0549         &  -3.2687         &  -0.0280         \\
+                &   (1.17)         &  (-0.82)         &  (-0.81)         &  (-0.72)         \\
+Gov             &   0.0518         &  -0.0582         &   0.0085         &  -0.0313         \\
+                &   (0.87)         &  (-1.05)         &   (0.00)         &  (-1.01)         \\
+\hline
+Observations    &   45,654         &   45,654         &   45,654         &   45,654         \\
+Firm FE         &      Yes         &      Yes         &      Yes         &      Yes         \\
+Year FE         &      Yes         &      Yes         &      Yes         &      Yes         \\
+City FE         &      Yes         &      Yes         &      Yes         &      Yes         \\
+Adjusted $ R^2$ &     0.77         &     0.57         &     0.59         &     0.62         \\
+\bottomrule
+\end{tabularx}
+\end{table}

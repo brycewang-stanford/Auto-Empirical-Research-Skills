@@ -1,0 +1,612 @@
+% !TEX program = xelatex
+% ============================================================
+%  Chinese Academic Beamer · CUFE School-of-Finance Style
+%  Overleaf 编译说明：
+%    1. 上传本 .tex + figures/ 整个文件夹
+%    2. Settings → Compiler → XeLaTeX
+%    3. Recompile 两次（让目录页对齐）
+% ============================================================
+\documentclass[10pt,aspectratio=169]{beamer}
+
+% ---- 中文支持（fandol，免系统字体） --------------------------
+\usepackage[UTF8,fontset=fandol]{ctex}
+
+% ---- 主题：空主题 + 自建 CUFE 模板 ---------------------------
+\usetheme{default}
+\useinnertheme{circles}
+
+% ---- 常用宏包 ------------------------------------------------
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,calc}
+
+% ---- 色板（锁定） --------------------------------------------
+\definecolor{cufenavy}{HTML}{1F3A60}   % 深蓝（顶部色带、结构色）
+\definecolor{cufetext}{HTML}{2A2A2A}   % 帧标题 / 正文深色（不用蓝）
+\definecolor{cuferule}{HTML}{7F8FAA}   % 页脚细分隔线
+
+\setbeamercolor{structure}{fg=cufenavy}
+\setbeamercolor{normal text}{fg=cufetext}
+\setbeamercolor{alerted text}{fg=cufenavy}
+\setbeamercolor{title}{fg=cufenavy}
+\setbeamercolor{subtitle}{fg=cufenavy}
+\setbeamercolor{frametitle}{fg=cufetext,bg=}
+\setbeamercolor{item}{fg=cufenavy}
+\setbeamercolor{block title}{fg=white,bg=cufenavy}
+\setbeamercolor{block body}{fg=cufetext,bg=cufenavy!8}
+
+% ---- 背景：顶部深蓝细条 + 右上 Logo（y = -0.70cm 为中心线）------
+\setbeamertemplate{background}{%
+  \begin{tikzpicture}[overlay,remember picture]
+    \fill[cufenavy]
+      (current page.north west) rectangle
+      ([yshift=-0.15cm]current page.north east);
+    \node[anchor=east,inner sep=0pt]
+      at ([xshift=-0.45cm,yshift=-0.70cm]current page.north east)
+      {\includegraphics[height=0.70cm,keepaspectratio]{figures/logo_cufe_small.png}};
+    \draw[cuferule,line width=0.3pt]
+      ([yshift=0.70cm]current page.south west) --
+      ([yshift=0.70cm]current page.south east);
+  \end{tikzpicture}%
+}
+
+% ---- 帧标题：TikZ 绝对定位，中心 y=-0.70cm 与 Logo 对齐 ---------
+\setbeamertemplate{frametitle}{%
+  \begin{tikzpicture}[overlay,remember picture]
+    \node[anchor=north west,inner sep=0pt,
+          text width=\dimexpr\paperwidth-5.0cm\relax,
+          align=left]
+      at ([xshift=0.40cm,yshift=-0.50cm]current page.north west)
+      {\color{cufetext}\bfseries\large\insertframetitle};
+  \end{tikzpicture}%
+  \vspace*{0.55cm}%
+}
+\setbeamerfont{frametitle}{size=\large,series=\bfseries}
+
+% ---- 页脚：章节名（左）+ 页码（右） -----------------------------
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox to \paperwidth{%
+    \hspace*{0.55cm}%
+    \begin{minipage}[b]{\dimexpr\paperwidth-2.8cm\relax}\vspace{0pt}%
+      {\color{cufenavy}\footnotesize\insertsectionhead}%
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[b]{1.8cm}\vspace{0pt}%
+      \raggedleft{\color{cufenavy}\footnotesize%
+        % 只显示当前帧号：\inserttotalframenumber 在 ctex + beamer 下
+        % 偶发返回诡异值（"80" 等），直接放弃 "X / N" 格式更稳
+        \insertframenumber}%
+    \end{minipage}%
+    \hspace*{0.55cm}%
+  }%
+  \vspace{0.20cm}%
+}
+\setbeamertemplate{navigation symbols}{}
+\AtBeginSection[]{}
+
+% ---- 字号与 itemize 样式 ------------------------------------
+\setbeamerfont{title}{size=\LARGE,series=\bfseries}
+\setbeamerfont{subtitle}{size=\large}
+\setbeamerfont{author}{size=\Large}
+\setbeamerfont{institute}{size=\large}
+\setbeamerfont{date}{size=\normalsize}
+\setlength{\leftmargini}{1.4em}
+\setbeamertemplate{itemize item}{\scriptsize\raise1.2pt\hbox{\color{cufenavy}\textbullet}}
+\setbeamertemplate{itemize subitem}{\scriptsize\raise1.2pt\hbox{\color{cufenavy}$\circ$}}
+\setbeamertemplate{itemize subsubitem}{\scriptsize\raise1.2pt\hbox{\color{cufenavy}$-$}}
+
+% ---- 元数据（替换为论文实际信息） ------------------------------
+\title[%
+  [短标题·页脚用]%
+]{%
+  [论文全名 · 可长]%
+}
+\subtitle{}
+\author[%
+  [答辩人]%
+]{%
+  [答辩人]%
+}
+\institute[%
+  [机构短名]%
+]{%
+  [机构全名]~~[年级 / 专业]\\[0.6em]
+  指导教师：[教师 1] 教授~~\textbullet~~[教师 2] 教授%
+}
+\date[%
+  [年份]%
+]{%
+  博士学位论文答辩~~[年份]%
+}
+
+% ============================================================
+\begin{document}
+
+% ============================================================
+% 封面：大 logo + 居中标题（独立背景）
+% ============================================================
+{%
+  \setbeamertemplate{background}{%
+    \begin{tikzpicture}[overlay,remember picture]
+      \fill[cufenavy]
+        (current page.north west) rectangle
+        ([yshift=-0.35cm]current page.north east);
+      \node[anchor=north west,inner sep=0pt]
+        at ([xshift=0.7cm,yshift=-0.85cm]current page.north west)
+        {\includegraphics[width=6.4cm,keepaspectratio]{figures/logo_cufe_full.png}};
+      \draw[cuferule,line width=0.4pt]
+        ([yshift=0.85cm]current page.south west) --
+        ([yshift=0.85cm]current page.south east);
+    \end{tikzpicture}%
+  }
+  \begin{frame}[plain,noframenumbering]
+    \vspace*{3.2cm}
+    \begin{center}
+      {\color{cufenavy}\bfseries\fontsize{24pt}{30pt}\selectfont
+       [主标题第一行]\\[0.3em]
+       [主标题第二行]}\\[0.6em]
+
+      {\color{cufenavy}\itshape\large
+       ——[副标题]}
+
+      \vspace{1.2cm}
+      {\color{cufetext}\Large\bfseries 答辩人：\,[答辩人姓名]}\\[0.5em]
+      {\color{cufetext}\large 指导教师：[教师 1] 教授~~\textbullet~~[教师 2] 教授}\\[0.4em]
+      {\color{cufetext}\normalsize [机构名]~~\textbullet~~[年级 / 专业]}
+    \end{center}
+    \vfill
+    \begin{center}
+      {\color{cufenavy}\normalsize\bfseries 博士学位论文答辩~~\textbullet~~[年份]}
+    \end{center}
+  \end{frame}
+}
+
+% ============================================================
+% 目录：页脚留空
+% ============================================================
+{%
+  \setbeamertemplate{footline}{\vbox to 0.9cm{\vfill}}
+  \begin{frame}[noframenumbering]{目录}
+    \vspace{0.4em}
+    \tableofcontents[hideallsubsections]
+  \end{frame}
+}
+
+% ============================================================
+\section{研究背景与问题}
+% ============================================================
+
+% ---- §1 背景段落帧（按时长扩充 2-8 帧） ------------------------
+
+\begin{frame}{研究背景（一）：[背景主题 1]}
+  [首段：2--3 句话描述研究背景的第一个要点，关键词 \textbf{粗体} 突出。]
+
+  \vspace{0.4em}
+  [次段：2--3 句话描述第二个要点。\textbf{粗体} 突出。]
+
+  \vspace{0.4em}
+  [末段：收束句，\textbf{突出研究锚点}。]
+\end{frame}
+
+\begin{frame}{研究背景（二）：[背景主题 2]}
+  [此处继续用段落文字描述背景。]
+\end{frame}
+
+% ---- 研究问题 -----------------------------------------------
+
+\begin{frame}{研究问题：一个核心问题 + N 条实证线索}
+  \begin{block}{核心问题}
+    [一句话核心研究问题]
+  \end{block}
+
+  \vspace{0.4em}
+  \begin{itemize}
+    \item \textbf{Q1（[属性 1]，第四章）} [问题描述]
+    \item \textbf{Q2（[属性 2]，第五章）} [问题描述]
+    \item \textbf{Q3（[属性 3]，第六章）} [问题描述]
+  \end{itemize}
+\end{frame}
+
+% ---- X → M → Y 框架帧（必填） ---------------------------------
+
+\begin{frame}{研究框架：X → M → Y 的整体识别逻辑}
+\vspace{-0.4em}
+\begin{center}
+\begin{tikzpicture}[
+    xbox/.style={draw, rounded corners, fill=blue!15, draw=blue!60!black,
+                 minimum width=2.8cm, minimum height=1.10cm,
+                 font=\small\bfseries, align=center},
+    mbox/.style={draw, rounded corners, fill=orange!12, draw=orange!70!black,
+                 minimum width=4.4cm, minimum height=0.70cm,
+                 font=\scriptsize, align=center},
+    ybox/.style={draw, rounded corners, fill=green!15, draw=green!55!black,
+                 minimum width=2.6cm, minimum height=5.8cm,
+                 font=\small\bfseries, align=center},
+    arr/.style={-Latex, semithick, gray!70!black}]
+
+  \node[xbox] (X1) at (0, 2.6)  {[X1]\\\scriptsize 第四章 · [变量]};
+  \node[xbox] (X2) at (0, 0)    {[X2]\\\scriptsize 第五章 · [变量]};
+  \node[xbox] (X3) at (0,-2.6)  {[X3]\\\scriptsize 第六章 · [变量]};
+
+  \node[mbox] (M1a) at (5.0, 3.0) {[通道 1a]};
+  \node[mbox] (M1b) at (5.0, 2.2) {[通道 1b]};
+  \node[mbox] (M2a) at (5.0, 0.4) {[通道 2a]};
+  \node[mbox] (M2b) at (5.0,-0.4) {[通道 2b]};
+  \node[mbox] (M3a) at (5.0,-2.2) {[通道 3a]};
+  \node[mbox] (M3b) at (5.0,-3.0) {[通道 3b]};
+
+  \node[ybox] (Y) at (10.2, 0) {[Y 标题]\\[0.5em]
+      \scriptsize [Y 子变量]};
+
+  \foreach \x/\m in {X1/M1a, X1/M1b, X2/M2a, X2/M2b, X3/M3a, X3/M3b}
+    \draw[arr] (\x.east) -- (\m.west);
+  \foreach \m in {M1a, M1b, M2a, M2b, M3a, M3b}
+    \draw[arr] (\m.east) -- (Y.west);
+\end{tikzpicture}
+\end{center}
+\vspace{-0.4em}
+{\footnotesize 样本：[区间] [样本对象]，N = [观测数]。方法：[识别策略]。}
+\end{frame}
+
+% ============================================================
+\section{文献综述与理论基础}
+% ============================================================
+
+\begin{frame}{文献脉络：两条主线 + 一处交叉空白}
+  \textbf{主线 A：[主线 A 主题]}
+  \begin{itemize}
+    \item [派别 1] ([代表文献])：[论点]；
+    \item [派别 2] ([代表文献])：[论点]。
+  \end{itemize}
+
+  \vspace{0.3em}
+  \textbf{主线 B：[主线 B 主题]}
+  \begin{itemize}
+    \item [路径 1] ([代表文献])；
+    \item [路径 2] ([代表文献])。
+  \end{itemize}
+
+  \vspace{0.3em}
+  \textbf{交叉空白：} A $\cap$ B —— "[尚未被系统回答的问题]" —— \textbf{至今无系统回答}。
+\end{frame}
+
+\begin{frame}{理论基础：三视角一页对照}
+  \centering\scriptsize
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{p{1.8cm} p{3.1cm} p{3.1cm} p{3.1cm}}
+    \toprule
+              & \textbf{第四章 · [X1]} & \textbf{第五章 · [X2]} & \textbf{第六章 · [X3]} \\
+    \midrule
+    核心理论 & [理论 1]      & [理论 2]      & [理论 3]      \\
+    代表文献 & [文献 1]      & [文献 2]      & [文献 3]      \\
+    关键机制 & [通道描述 1]  & [通道描述 2]  & [通道描述 3]  \\
+    可检验预期 & [预期 1]    & [预期 2]      & [预期 3]      \\
+    \bottomrule
+  \end{tabular}
+\end{frame}
+
+% ============================================================
+\section{数据与变量}
+% ============================================================
+
+\begin{frame}{数据与样本（一）：样本范围与区间选择}
+  \textbf{研究对象：} [样本对象]；\quad
+  \textbf{观测：} [样本单位]，\textbf{N = [观测数]}，[单位数]。
+
+  \vspace{0.4em}
+  \textbf{为什么是 [时间区间]？}
+  \begin{itemize}
+    \item \textbf{起点：} [起点理由]；
+    \item \textbf{中部政策窗：} [关键政策事件]；
+    \item \textbf{终点：} [终点理由]。
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{变量定义：被解释变量与解释变量}
+  \textbf{被解释变量 $Y$：} [Y 定义]
+
+  \vspace{0.4em}
+  \textbf{核心解释变量 $X$：}
+  \begin{itemize}
+    \item [X1]：[定义]
+    \item [X2]：[定义]
+    \item [X3]：[定义]
+  \end{itemize}
+
+  \vspace{0.3em}
+  \textbf{控制变量：} [类别枚举]
+
+  \vspace{0.3em}
+  \textbf{固定效应：} [企业 FE + 行业$\times$年份 FE]；\textbf{标准误：} 企业层面聚类。
+\end{frame}
+
+\begin{frame}{描述性统计（核心变量 · N = [N]）}
+  \centering\scriptsize
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{lccccccc}
+    \toprule
+    变量 & 均值 & S.D. & 最小值 & Q25 & 中位数 & Q75 & 最大值 \\
+    \midrule
+    [Y 变量]    & [值]  & [值] & [值]  & [值]  & [值]  & [值]  & [值]   \\
+    [X1]        & [值]  & [值] & [值]  & [值]  & [值]  & [值]  & [值]   \\
+    % ... 其余变量 ...
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.4em}
+  \footnotesize 资料来源：论文表 [X]。
+\end{frame}
+
+% ============================================================
+\section{[第四章实证标题]}
+% ============================================================
+
+\begin{frame}{第四章 · 研究设计}
+  \textbf{识别策略：} [DID / OLS / IV / PSM 描述]
+
+  \vspace{0.4em}
+  \textbf{计量模型：}
+  \[
+    Y_{i,t} = \alpha + \beta\,X_{i,t} + \boldsymbol\gamma\mathbf{Z}_{i,t}
+    + \mu_i + \delta_{j\times t} + \varepsilon_{i,t}
+  \]
+
+  \vspace{0.3em}
+  \textbf{关键参数：} $\beta$ —— [解释]。
+\end{frame}
+
+% ---- 基准 讨论 + 表 ---------------------------------------
+
+\begin{frame}{第四章 · 基准结果讨论}
+  \textbf{核心发现：}
+  \begin{itemize}
+    \item \textbf{总体效应。} [X] 系数 $=$ \textbf{[实际系数]$^{***}$}（$t=[t 值]$）；
+    \item \textbf{子样本拆分。} [结果描述]；
+    \item \textbf{控制变量方向。} [方向描述]。
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{第四章 · 基准回归表}
+\centering\scriptsize
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{lcccccc}
+  \toprule
+           & (1) & (2) & (3) & (4) & (5) & (6) \\
+           & [DV]& [DV]& [DV]& [DV]& [DV]& [DV]\\
+  \midrule
+  [X]      & [β]$^{***}$ & [β]$^{***}$ & & & & \\
+           & ([t])       & ([t])       & & & & \\
+  \midrule
+  Controls            & No  & Yes & No  & Yes & No  & Yes \\
+  Firm FE             & Yes & Yes & Yes & Yes & Yes & Yes \\
+  Ind $\times$ Year FE& Yes & Yes & Yes & Yes & Yes & Yes \\
+  $N$                 & [N] & [N] & [N] & [N] & [N] & [N] \\
+  Adj.\ $R^{2}$       & [R²]& [R²]& [R²]& [R²]& [R²]& [R²]\\
+  \bottomrule
+\end{tabular}
+
+\vspace{0.4em}
+\footnotesize 资料来源：论文表 [X]。$t$ 值在括号内；企业层面聚类稳健标准误。
+\end{frame}
+
+% ---- 机制对（每个通道一对帧；按论文 N 通道复制） ----------------
+
+\begin{frame}{第四章 · 机制（通道 A）：讨论}
+  \textbf{[通道 A 名称]：} [传导路径描述]
+
+  \vspace{0.3em}
+  \begin{itemize}
+    \item \textbf{[代理变量 1]：} [描述]；
+    \item \textbf{[代理变量 2]：} [描述]；
+    \item \textbf{[代理变量 3]：} [描述]；
+    \item \textbf{[代理变量 4]：} [描述]。
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{第四章 · 机制（通道 A）：回归表}
+\centering\small
+\begin{tabular}{lcccc}
+  \toprule
+            & (1) & (2) & (3) & (4) \\
+            & [M1]& [M2]& [M3]& [M4] \\
+  \midrule
+  [X]       & [β]$^{***}$ & [β]$^{***}$ & [β]$^{***}$ & [β]$^{**}$ \\
+            & ([t])       & ([t])       & ([t])       & ([t])      \\
+  \midrule
+  Controls / Firm FE / Ind $\times$ Year FE & Yes & Yes & Yes & Yes \\
+  $N$               & [N] & [N] & [N] & [N] \\
+  Adj.\ $R^{2}$     & [R²]& [R²]& [R²]& [R²]\\
+  \bottomrule
+\end{tabular}
+\end{frame}
+
+% ---- 异质性（每个维度 1 帧） ----------------------------------
+
+\begin{frame}{第四章 · 异质性（一）：[维度 1 名称]}
+  \textbf{维度：} [切分方式]；\\
+  \textbf{发现：} [解读]。
+
+  \vspace{0.3em}
+  \centering\small
+  \begin{tabular}{lcc}
+    \toprule
+              & (1) [高 / 组 1] & (2) [低 / 组 2] \\
+    \midrule
+    [X]       & [β]$^{*}$ & [β]        \\
+              & ([t])     & ([t])      \\
+    \midrule
+    Controls / Firm FE / Ind $\times$ Year FE & Yes & Yes \\
+    组间差异 $p$ & \multicolumn{2}{c}{[p 值]} \\
+    $N$        & [N] & [N] \\
+    Adj.\ $R^{2}$ & [R²]& [R²]\\
+    \bottomrule
+  \end{tabular}
+\end{frame}
+
+% ---- 稳健性（视论文酌情 2-4 帧） -------------------------------
+
+\begin{frame}{第四章 · 稳健性：[检验名]}
+  \textbf{设定：} [检验设定]；\\
+  \textbf{结论：} [稳健性结论]。
+  \begin{center}
+    \includegraphics[width=0.62\linewidth,height=0.52\textheight,keepaspectratio]{figures/[图文件名].png}\par
+    \medskip
+    {\footnotesize 资料来源：论文图 [X]。}
+  \end{center}
+\end{frame}
+
+% ---- 进一步分析对（每个分析一对帧；按论文 K 分析复制） ----------
+
+\begin{frame}{第四章 · 进一步分析（一）：[分析 1 名称]}
+  \textbf{设定：} [设定]。
+
+  \vspace{0.3em}
+  \centering\small
+  \begin{tabular}{lcccc}
+    \toprule
+              & (1) & (2) & (3) & (4) \\
+    \midrule
+    [X]       & [β] & [β] & [β] & [β] \\
+              & ([t])& ([t])& ([t])& ([t])\\
+    \midrule
+    Controls / FE & Yes & Yes & Yes & Yes \\
+    Adj.\ $R^{2}$ & [R²]& [R²]& [R²]& [R²]\\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.4em}
+  \textbf{解读：} [含义]。
+\end{frame}
+
+\begin{frame}{第四章 · 本章小结}
+  \begin{itemize}
+    \item \textbf{基线：} [一句话]；
+    \item \textbf{机制：} [一句话]；
+    \item \textbf{异质性：} [一句话]；
+    \item \textbf{进一步分析：} [一句话]；
+    \item \textbf{稳健性：} [一句话]。
+  \end{itemize}
+\end{frame}
+
+% ============================================================
+\section{[第五章实证标题]}
+% ============================================================
+
+% ---- 第五章按照第四章结构复制（研究设计 / 基准讨论 + 表 /
+%      PSM / 机制 N 对 / 异质性 M 帧 / 稳健性 / 进一步分析 K 对 /
+%      本章小结） -----------------------------------------------
+
+\begin{frame}{第五章 · 研究设计}
+  % ... 同第四章结构 ...
+\end{frame}
+
+% ============================================================
+\section{[第六章实证标题]}
+% ============================================================
+
+\begin{frame}{第六章 · 研究设计}
+  % ... 同第四章结构 ...
+\end{frame}
+
+% ============================================================
+\section{三章综合对比与研究结论}
+% ============================================================
+
+\begin{frame}{三章综合对比：机制互补、情境依赖递减}
+\centering\scriptsize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{p{1.9cm} p{3.0cm} p{3.3cm} p{3.3cm}}
+  \toprule
+  对比维度 & 第四章 · [X1] & 第五章 · [X2] & 第六章 · [X3] \\
+  \midrule
+  核心变量   & [变量]  & [变量]  & [变量]  \\
+  识别策略   & [策略]  & [策略]  & [策略]  \\
+  主系数     & [β]     & [β]     & [β]     \\
+  主要机制   & [机制]  & [机制]  & [机制]  \\
+  情境依赖   & [强度]  & [强度]  & [强度]  \\
+  \bottomrule
+\end{tabular}
+
+\vspace{0.5em}
+\textbf{跨章规律：} [一句话总结跨章发现]。
+\end{frame}
+
+\begin{frame}{主要研究结论}
+  \begin{itemize}
+    \item \textbf{F1：} [发现 1]；
+    \item \textbf{F2：} [发现 2]；
+    \item \textbf{F3：} [发现 3]；
+    \item \textbf{F4：} [发现 4]。
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{主要创新点}
+  \begin{enumerate}
+    \item \textbf{视角创新：} [创新 1]；
+    \item \textbf{方法创新：} [创新 2]；
+    \item \textbf{结论创新：} [创新 3]。
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{政策启示与实践建议}
+  \begin{itemize}
+    \item \textbf{对监管部门：} [建议]；
+    \item \textbf{对行业 / 企业：} [建议]；
+    \item \textbf{对学术研究：} [建议]。
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{研究不足与未来展望}
+  \begin{itemize}
+    \item \textbf{样本范围：} [限制与延伸]；
+    \item \textbf{变量构造：} [限制与延伸]；
+    \item \textbf{机制识别：} [限制与延伸]；
+    \item \textbf{外部推广：} [限制与延伸]。
+  \end{itemize}
+\end{frame}
+
+% ============================================================
+% 致谢页：独立背景
+% ============================================================
+{%
+  \setbeamertemplate{background}{%
+    \begin{tikzpicture}[overlay,remember picture]
+      \fill[cufenavy]
+        (current page.north west) rectangle
+        ([yshift=-0.35cm]current page.north east);
+      \node[anchor=north west,inner sep=0pt]
+        at ([xshift=0.7cm,yshift=-0.85cm]current page.north west)
+        {\includegraphics[width=6.4cm,keepaspectratio]{figures/logo_cufe_full.png}};
+      \draw[cuferule,line width=0.4pt]
+        ([yshift=0.85cm]current page.south west) --
+        ([yshift=0.85cm]current page.south east);
+    \end{tikzpicture}%
+  }
+  \begin{frame}[plain,noframenumbering]
+    \vspace*{3.2cm}
+    \begin{center}
+      {\color{cufenavy}\fontsize{36pt}{42pt}\selectfont\bfseries
+       敬请各位老师批评指正！}\par
+      \vspace{1.4em}
+      {\color{cufetext}\Large 衷心感谢答辩委员会与导师团队的悉心指导}\par
+      \vspace{0.6em}
+      {\color{cufetext}\large 感谢师门与同学的长期支持}\par
+      \vspace{1.8em}
+      {\color{cufenavy}\Large\itshape Thank You \& Q\,\&\,A}\par
+    \end{center}
+    \vfill
+    \begin{center}
+      {\color{cufenavy}\normalsize 答辩人：[答辩人姓名]~~\textbullet~~[机构]~~\textbullet~~[年份]}
+    \end{center}
+  \end{frame}
+}
+
+\end{document}

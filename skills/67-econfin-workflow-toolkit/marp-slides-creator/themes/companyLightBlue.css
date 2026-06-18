@@ -1,0 +1,258 @@
+/* @theme companyLightBlue */
+
+@charset "UTF-8";
+@import 'uncover';
+@import 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/github.min.css';
+
+@font-face {
+  font-family: "aliRegular";
+  font-weight: 400;
+  src: url("//at.alicdn.com/wf/webfont/Kbjx2QR2mRB8/Skgx5yYpL6q1.woff2") format("woff2"),
+  url("//at.alicdn.com/wf/webfont/Kbjx2QR2mRB8/AXcCnvbk4CXu.woff") format("woff");
+  font-display: swap;
+}
+
+:root {
+  font-size: 25px;
+  text-align: left;
+  font-family: aliRegular, Arial, Helvetica, sans-serif;
+  position: relative;
+  background: linear-gradient(10deg, #ebf3ff, #fff);
+  color: #3d3d40;
+}
+a, h1, h2, h3 {
+  color: #1673ed;
+}
+h1 {
+	padding: 0;
+	font-size: 68px;
+}
+h2 {
+  text-align: left;
+  margin: 0;
+  font-size: 60px;
+}
+
+h3 {
+  font-size: 36px;
+  text-align: left;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  position: relative;
+  padding-left: 16px;
+}
+
+h3::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 30px;
+  background-color: #1673ed;
+}
+
+h4 {
+  font-size: 30px;
+  text-align: left;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+h5 {
+	color: #595959;
+	padding: 0;
+	margin: 5px 0;
+	font-weight: 400;
+}
+h6 {
+	color: #595959;
+	font-weight: 400;
+	margin: 0 0 10px;
+	text-decoration: underline;
+	font-style: oblique;
+}
+
+header {
+  left: 0;
+  top: 0;
+  padding: 24px 0 0 90px;
+  box-sizing: border-box;
+  text-align: left;
+  font-size: 40px;
+  font-weight: 500;
+  color: #3d3d40;
+  width: 100%;
+  background-image: url("../../../images/company/title_bg_left.png");
+  background-position: 60px bottom;
+  background-size: auto 50%;
+  background-repeat: no-repeat;
+}
+header::after {
+  content: '';
+  width: 300px;
+  height: 32px;
+  vertical-align: top;
+  background-image: url("../../../images/company/title_bg_right.png");
+  background-position: 40px center;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  display: inline-block;
+  margin-left: -280px;
+}
+header::before {
+  content: '';
+  height: 36px;
+  width: 300px;
+  position: absolute;
+  right: 40px;
+  top: 30px;
+  background-image: url("../../../images/company/logo.png");
+  background-position: right top;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+}
+
+/* 表格 */
+table thead {
+  background-color: #1673ed;
+  color: #fff;
+  line-height: 50px;
+}
+table tbody tr {
+  background-color: transparent;
+  color: #595959;
+}
+table tbody tr:nth-of-type(2n) {
+  background-color: rgba(166, 166, 166, 0.1);
+}
+table>tbody>tr:not(:last-child)>td {
+  min-width: 140px; 
+  border-bottom: 1px solid #ddd;
+}
+/* 横向布局 */
+:root.horizontalImages p {
+  display: flex;
+  justify-content: center;
+}
+/* 横向布局 */
+:root.horizontalLayout {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+/* tag样式 */
+:root.gorgeousTag ul{
+  font-size: 23px;
+}
+:root.gorgeousTag ul li {
+  color: #333;
+  line-height: 40px;
+  list-style: none;
+  padding-right: 20px;
+  margin-bottom: 20px;
+}
+:root.gorgeousTag ul li strong {
+  background: linear-gradient(45deg, #4c98ff, #1673ed);
+  border-radius: 15px 0;
+  color: #fff;
+  line-height: 42px;
+  display: inline-block;
+  min-width: 150px;
+  text-align: center;
+  box-shadow: 0 0 4px 3px rgba(0,112,192,0.2);
+  margin-right: 8px;
+}
+/* 内容页 */
+:root.contentPage {
+  background: url("../../../images/company/content_bg.png") no-repeat center, center linear-gradient(10deg, #E4F2FE, #fff);
+  background-size: 100% 100%;
+  padding-left: 80px;
+  padding-right: 80px;
+  position: relative;
+}
+/* 页码 */
+:root.contentPage::after {
+  font-size: 24px;
+  font-weight: bold;
+  background-image: url("../../../images/company/footer_bg.png");
+  background-size: 240% 240%;
+  text-shadow: none;
+  color: #fff;
+  text-align: right;
+}
+:root.contentPage img {
+  margin: 5px;
+  /* box-shadow: 0 0 4px 3px rgba(0,112,192,0.2); */
+}
+
+/* 页尾 */
+:root.contentPage footer {
+	color: #999;
+  bottom: 10px;
+  font-size: 21px;
+  text-align: center;
+}
+:root.contentPage footer a {
+	color: #ccc;
+  transition: all 0.3s;
+}
+:root.contentPage footer a:hover {
+	color: #1673ed;
+  text-decoration: none;
+}
+
+/* 首页 */
+:root.homePage {
+  background-color: #E4F2FE;
+  background-image: url("../../../images/company/home_bg.png");
+  background-size: 100% 100%;
+  padding-left: 160px;
+  padding-top: 130px;
+  justify-content: flex-start;
+  color: #666;
+  font-size: 18px;
+}
+:root.homePage h1 {
+	background-image: -webkit-linear-gradient(45deg, #0069f8, #1673ed);
+	-webkit-background-clip: text; 
+	-webkit-text-fill-color: transparent; 
+	text-shadow: 2px 2px 20px #4c98ff7a;
+  font-size: 100px;
+  margin: 30px 0 10px 0;
+  color: #4c98ff;
+}
+:root.homePage strong {
+  text-align: center;
+	background-image: linear-gradient(170deg, #1673ed, #0069f8, #4c98ff);
+	color: #fff;
+	padding: 0px 30px;
+	line-height: 60px;
+	border-radius: 12px;
+  display: inline-block;
+  box-shadow: 0 0 30px 10px #1673ed3f;
+  font-size: 26px;
+  margin-left: 20px;
+}
+:root.homePage footer {
+	font-size: 22px;
+  text-align: right;
+  color: #b0b0b4;
+}
+
+/* 感谢页 */
+:root.thanksPage {
+  background-color: #E4F2FE;
+  background-image: url("../../../images/company/thanks_bg.png");
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  padding-left: 120px;
+  padding-top: 0;
+  position: relative;
+}
+:root.thanksPage footer {
+	font-size: 22px;
+  text-align: center;
+}

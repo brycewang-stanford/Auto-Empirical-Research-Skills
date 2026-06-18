@@ -1,0 +1,54 @@
+\begin{table}[htbp]\centering\scriptsize
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{\textbf{Heterogeneity Conditional on Asset Quality and Operating Efficiency}}
+\label{heterogeneity1}
+
+\noindent{\justifying{This table presents the heterogeneity analysis results of the association between local patent trading infrastructure and institutional ownership conditional on firm asset quality and operating efficiency for a sample of Chinese A-share listed firms from 2003 to 2023. Columns (1) and (2) report the results for subsamples divided by the availability of \textsl{PatentStock} (No Stock vs. Has Stock), where firms are categorized based on whether they possess any granted patents. Columns (3) and (4) report the results for subsamples split by the annual median value of \textsl{ATO} (Low ATO vs. High ATO), which measures operating efficiency. The dependent variable is \textsl{Institution}, defined as the ratio of shares held by institutional investors to total shares at year-end. The main explanatory variable is \textsl{PTC} (a dummy variable that equals one if the city where the firm is located has established a patent trading center in or before year $t$, and zero otherwise). The set of control variables is consistent with that of the baseline regression. All regressions include firm, year, and city fixed effects. The robust $t$-statistics clustered by the firm are reported in parentheses. The last row reports the empirical $p$-value for the difference in the coefficients of \textsl{PTC} between the two subsamples, obtained from a bootstrap Fisher's permutation test with 500 replications. Detailed variable definitions are presented in Table \ref{definition}. ***, **, and * denote the significance at the 1\%, 5\%, and 10\% levels, respectively.\par}}
+\bigskip
+
+\begin{tabularx}{\textwidth}{lYYYYYYYY@{}}
+\toprule
+
+                &\multicolumn{2}{c}{Patent Stock}     &\multicolumn{2}{c}{Asset Turnover}   \\\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+                &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
+                &\multicolumn{1}{c}{No}&\multicolumn{1}{c}{Yes}&\multicolumn{1}{c}{Low}&\multicolumn{1}{c}{High}\\
+\hline\\
+PTC          &  -0.1541\sym{***}&  -0.8373         &  -0.2406\sym{***}&  -0.0756         \\
+                &  (-3.69)         &  (-1.50)         &  (-3.50)         &  (-1.51)         \\
+Size            &   0.0015         &  -0.1061\sym{***}&  -0.0375\sym{*}  &  -0.0324         \\
+                &   (0.08)         &  (-3.01)         &  (-1.72)         &  (-1.32)         \\
+Balance         &   0.6025\sym{***}&   0.4704\sym{***}&   0.5968\sym{***}&   0.5517\sym{***}\\
+                &  (21.16)         &   (9.74)         &  (21.07)         &  (14.79)         \\
+ROA             &   1.0222\sym{***}&   1.2825\sym{***}&   0.7397\sym{***}&   1.4804\sym{***}\\
+                &   (9.93)         &   (8.21)         &   (7.12)         &  (10.31)         \\
+Tobinq          &  -0.0947\sym{***}&  -0.2237\sym{***}&  -0.1075\sym{***}&  -0.1604\sym{***}\\
+                & (-10.26)         & (-15.73)         & (-11.78)         & (-12.49)         \\
+Age             &   0.0025         &  -0.2557\sym{***}&  -0.0175         &  -0.0349         \\
+                &   (0.06)         &  (-5.22)         &  (-0.38)         &  (-0.56)         \\
+Cash            &   0.0445         &   0.2314         &   0.0921         &   0.0456         \\
+                &   (0.58)         &   (1.59)         &   (0.99)         &   (0.47)         \\
+Indept          &  -0.2486         &  -1.0720\sym{***}&  -0.5058\sym{***}&  -0.2335         \\
+                &  (-1.27)         &  (-3.75)         &  (-2.59)         &  (-0.96)         \\
+Top1            &   3.8606\sym{***}&   3.0068\sym{***}&   3.9865\sym{***}&   3.3186\sym{***}\\
+                &  (27.51)         &   (8.50)         &  (22.63)         &  (19.04)         \\
+Dual            &   0.0489\sym{**} &   0.0141         &   0.0298         &   0.0499\sym{**} \\
+                &   (2.49)         &   (0.53)         &   (1.38)         &   (2.19)         \\
+FinDev          &   0.0916\sym{***}&  -0.0680         &   0.0430         &   0.0832\sym{**} \\
+                &   (2.99)         &  (-1.12)         &   (1.24)         &   (2.05)         \\
+Innov           &  -2.5108\sym{***}&   0.9693         &  -1.7845\sym{***}&  -2.0856\sym{***}\\
+                &  (-4.14)         &   (1.20)         &  (-2.79)         &  (-3.05)         \\
+Open            &   0.1180         &   1.8487\sym{**} &   0.4313         &   0.6893         \\
+                &   (0.25)         &   (2.25)         &   (0.77)         &   (1.07)         \\
+Gov             &  -0.0408         &  -0.9302         &  -0.0283         &  -0.3811         \\
+                &  (-0.12)         &  (-1.47)         &  (-0.08)         &  (-0.83)         \\
+\hline
+Observations    &   33,156         &   11,756         &   22,121         &   22,147         \\
+Firm FE         &      Yes         &      Yes         &      Yes         &      Yes         \\
+Year FE         &      Yes         &      Yes         &      Yes         &      Yes         \\
+City FE         &      Yes         &      Yes         &      Yes         &      Yes         \\
+Adjusted $ R^2$ &     0.57         &     0.62         &     0.58         &     0.59         \\
+\midrule
+p-value for Diff. (High-Low) & \multicolumn{2}{c}{0.000} & \multicolumn{2}{c}{0.002} \\
+\bottomrule
+\end{tabularx}
+\end{table}

@@ -222,6 +222,21 @@ OVERRIDES: dict[str, dict[str, object]] = {
         "sync": "manual vendor snapshot",
         "source_confidence": "high",
     },
+    # --- 2026-06-18 community PR contributions ---
+    "67-econfin-workflow-toolkit": {
+        "source_url": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills/pull/22",
+        "license": "Mixed (per-skill; see folder)",
+        "origin": "community contribution via PR #22 (econ/finance research workflow toolkit). Proprietary Anthropic office skills (docx/pdf/pptx/xlsx) and general-purpose UI skills (frontend-design, ui-ux-pro-max) removed before vendoring 2026-06-18.",
+        "sync": "manual vendor snapshot",
+        "source_confidence": "medium",
+    },
+    "68-research-productivity-skills": {
+        "source_url": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills/pull/21",
+        "license": "Mixed (per-skill; see folder)",
+        "origin": "community contribution via PR #21 (research productivity skills). Proprietary Anthropic office skills (docx/pdf/pptx/xlsx) and general-purpose UI skills (frontend-design, ui-ux-pro-max) removed before vendoring 2026-06-18.",
+        "sync": "manual vendor snapshot",
+        "source_confidence": "medium",
+    },
 }
 
 

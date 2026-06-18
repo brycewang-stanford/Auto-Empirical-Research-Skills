@@ -5,6 +5,17 @@ This is the project's narrative changelog. `README.md` keeps only a short
 
 ## Unreleased
 
+- Added two community-contributed collections (PRs #21/#22), bringing the repo to
+  **1,144 vendored & cataloged skills / 68 collections**:
+  [`67-econfin-workflow-toolkit`](skills/67-econfin-workflow-toolkit/) — an
+  end-to-end econ/finance research workflow (ideation → estimation → writing →
+  submission), and
+  [`68-research-productivity-skills`](skills/68-research-productivity-skills/) —
+  a compact productivity layer (paper discovery, literature synthesis, file
+  conversion, slides, authoring). Both were rebased onto current `main` to drop a
+  duplicate `zheng-siyao` collection, and the proprietary Anthropic office skills
+  (`docx`/`pdf`/`pptx`/`xlsx`) and general-purpose UI skills (`frontend-design`,
+  `ui-ux-pro-max`) were removed before vendoring per repo licensing policy.
 - Restructured `README.md` / `README-zh.md` to lead with verifiable rigor
   (numbers, the 2-minute `make check` proof, and the trust surface), removed
   duplicated flagship-skill descriptions, consolidated badges, and moved this

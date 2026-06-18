@@ -1,0 +1,141 @@
+/* @theme beam */
+/* Author: rnd195 https://github.com/rnd195/ */
+/* beam license - GNU GPLv3 https://github.com/rnd195/my-marp-themes/blob/live/licenses/LICENSE_beam */
+/* License of beamer which inspired this theme - GNU GPLv2 https://github.com/rnd195/my-marp-themes/blob/live/licenses/LICENSE_GPLv2 */
+
+@import "default";
+
+:root {
+  font-family: "CMU Sans Serif", "Segoe UI", Helvetica, sans-serif;
+  --main: #1f38c5;
+  --secondary: #141414;
+}
+
+section {
+  background-color: #ffffff;
+  /* bottom two-coloured bar in base64 svg */
+  background-image:
+    url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMjUwbW0iIGhlaWdodD0iNS4zNTQ2bW0iIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI1MCA1LjM1NDYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0yMC4zNDcgLTkxLjAyOCkiPgo8cmVjdCB4PSIyMC4zNDciIHk9IjkxLjAyOCIgd2lkdGg9IjEyNSIgaGVpZ2h0PSI1LjM1NDYiIGZpbGw9IiMxNDE0MTQiIGZpbGwtcnVsZT0iZXZlbm9kZCIgc3Ryb2tlLXdpZHRoPSIwIi8+CjxwYXRoIGQ9Im0xNDUuMzUgOTMuNzA1di0yLjY3NzNoMTI1djUuMzU0NmgtMTI1eiIgZmlsbD0iIzFmMzhjNSIgc3Ryb2tlLXdpZHRoPSIwIi8+CjwvZz4KPC9zdmc+);
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: 150% 1em;
+  padding: 2em;
+}
+
+header {
+  font-size: 0.6em;
+  /* this text-align is important */
+  text-align: right;
+  /* I don't like this absolute positioning, but it works */
+  position: absolute;
+  top: 96.2%;
+  width: 100%;
+  right: 0;
+  left: -51%;
+  color: white;
+}
+
+footer {
+  font-size: 0.6em;
+  position: absolute;
+  /* this text-align is important */
+  text-align: left;
+  top: 96.2%;
+  width: 100%;
+  right: 0;
+  left: 50.8%;
+  color: white;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #141414;
+}
+
+/* only apply to the first occurrence of h1 */
+h1:nth-of-type(1) {
+  font-family: "CMU Bright", "Segoe UI Semibold";
+  color: #ffffff;
+  background-color: var(--main);
+  border-top: 0.3em solid var(--main);
+  padding: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 1.5em;
+  text-indent: 0.5em;
+}
+
+code {
+  background-color: rgba(100, 100, 100, 0.2);
+}
+
+mark {
+  background-color: #f5db7e;
+}
+
+/* formatting page numbers  */
+section::after {
+  font-size: 0.6em;
+  /* https://github.com/yhatt/marp/issues/263 */
+  content: attr(data-marpit-pagination) " / " attr(data-marpit-pagination-total);
+  position: absolute;
+  text-align: right;
+  top: 96.2%;
+  width: 100%;
+  right: 0;
+  left: -0.5em;
+  color: white;
+}
+
+/* inline math was too large wrt text */
+.katex {
+  font: normal 1.05em KaTeX_Main, "Times New Roman", serif
+}
+
+/* the "center" keyword centers the image - may break, careful */
+/* https://github.com/marp-team/marpit/issues/141#issuecomment-473204518 */
+img[alt~="center"] {
+  display: block;
+  margin: 0 auto;
+}
+
+/* || SECTION CLASS: title */
+/* title page - only to be used as for a single slide */
+/* <!-- _class: title --> */
+section.title>h1 {
+  font-family: "CMU Bright", "Segoe UI Semibold";
+  color: #ffffff;
+  background-color: var(--main);
+  border-radius: 25px;
+  text-align: center;
+  top: 25%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  padding-bottom: 0.2em;
+  height: auto;
+}
+
+/* remake this to be positioned with respect to h1 */
+section.title>p {
+  position: relative;
+  text-align: center;
+  top: 35px;
+}
+
+/* || SECTION CLASS: tinytext */
+/* new class that makes p, ul, and blockquote text smaller */
+/* might be useful for the References slide, use <!-- _class: tinytext --> */
+section.tinytext>p,
+section.tinytext>ul,
+section.tinytext>blockquote {
+  font-size: 0.65em;
+}
