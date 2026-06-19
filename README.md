@@ -39,7 +39,7 @@
 [![Security audit: 52/52 CLEAN](https://img.shields.io/badge/security%20audit-52%2F52%20CLEAN-brightgreen)](SECURITY-SCAN-REPORT.md)
 [![Powered by StatsPAI](https://img.shields.io/badge/powered%20by-StatsPAI-orange)](https://github.com/brycewang-stanford/StatsPAI)
 
-**The empirical-research specialist's agent-skills distribution.** Not a marketing list — **1,144 skills vendored and cataloged** in this repo, wrapped in a **numeric benchmark, an eval harness, a security audit, and CI**, plus a curated map of **23,000+ skills across 119 repositories** in the wider ecosystem.
+**The empirical-research specialist's agent-skills distribution.** Not a marketing list — **1,145 skills vendored and cataloged** in this repo, wrapped in a **numeric benchmark, an eval harness, a security audit, and CI**, plus a curated map of **23,000+ skills across 119 repositories** in the wider ecosystem.
 
 AERS is two things at once: (1) a small set of **first-party flagship skills** that run the full empirical pipeline — data cleaning → identification → estimation → robustness → tables/figures → submission-ready draft — and (2) a **curated, security-aware catalog** of the empirical-research skill ecosystem, organized by research-workflow stage. The differentiator is not the count; it is that the flagship behavior is **verified against known answers**, not asserted.
 
@@ -77,8 +77,8 @@ Numbers in this README are kept honest and disambiguated. "Vendored" means the f
 
 | What it is | Count | Source of truth |
 |---|---:|---|
-| Skills **vendored into this repo** and cataloged | **1,144** | [`catalog/skills.json`](catalog/skills.json) |
-| Vendored **collections** | **68** | [`catalog/skills.json`](catalog/skills.json) |
+| Skills **vendored into this repo** and cataloged | **1,145** | [`catalog/skills.json`](catalog/skills.json) |
+| Vendored **collections** | **69** | [`catalog/skills.json`](catalog/skills.json) · [all 69 at a glance ↓](#all-69-vendored-skill-collections-at-a-glance) |
 | **First-party flagship** full-pipeline skills (StatsPAI DSL + explicit Python/Stata/R) | **4** | [`skills/00*`](skills/) |
 | Numeric **benchmark tasks** with gold values recomputed from data each run | **5** | [`benchmark/`](benchmark/) |
 | Behavioral **eval scenarios / rubric items** | **17 / 95** | [`eval-harness/`](eval-harness/) |
@@ -169,7 +169,7 @@ Public-skill counts are easy to inflate, and recent studies show large skill ind
 | **Numeric benchmark** | Reported numbers that don't match truth recomputed from real data — the naive-DID sign trap, weak-IV without first-stage F, TWFE bias under staggered timing, RDD trend confound, post-treatment bad controls | [`benchmark/`](benchmark/) · 5 tasks |
 | **Eval harness** | Prose-level failures: weak-IV false reassurance, staggered-DID TWFE misuse, fabricated citations, unsafe `curl \| bash` setup, multiple-testing abuse, AER compliance gaps | [`eval-harness/`](eval-harness/) · 17 scenarios / 95 rubric items |
 | **Security audit** | Pipe-to-shell, reverse shells, credential exfiltration, prompt injection across 13 risk categories — 6-phase, 40+ hook scripts reviewed by hand | [`SECURITY-SCAN-REPORT.md`](SECURITY-SCAN-REPORT.md) |
-| **Provenance & license** | Unvendored sources, license risk, hygiene drift across all 1,144 cataloged skills | [`docs/LICENSE_AUDIT.md`](docs/LICENSE_AUDIT.md) · [`docs/SKILL_QUALITY.md`](docs/SKILL_QUALITY.md) |
+| **Provenance & license** | Unvendored sources, license risk, hygiene drift across all 1,145 cataloged skills | [`docs/LICENSE_AUDIT.md`](docs/LICENSE_AUDIT.md) · [`docs/SKILL_QUALITY.md`](docs/SKILL_QUALITY.md) |
 | **CI & compatibility** | Catalog freshness, broken local links, GitHub Actions policy, Python 3.9 **and** 3.12 syntax floor | [`.github/workflows/`](.github/workflows/) · 6 workflows |
 
 ```bash
@@ -183,6 +183,109 @@ The trust surface is **necessary, not sufficient** — regex rubrics don't certi
 ---
 
 ## Browse the landscape
+
+### All 69 vendored skill collections at a glance
+
+> **69 collections · 1,145 skills**, every one vendored into this repo and tracked in [`catalog/skills.json`](catalog/skills.json). Grouped by what they do — click any collection to open its folder. (Source of truth: `make catalog`.)
+
+**🚀 Full-pipeline flagships & orchestrators** — *one call, the whole empirical loop*
+
+| Collection | What it does | Skills |
+|---|---|---:|
+| [`00` · StatsPAI](skills/00-Full-empirical-analysis-skill_StatsPAI/) 🔥 | Agent-native Python **DSL** — one `sp.causal(...)` runs DID/RD/IV/SCM/DML | 1 |
+| [`00.1` · Python](skills/00.1-Full-empirical-analysis-skill_Python/) 📘 | Explicit stack: `pandas` · `statsmodels` · `linearmodels` · `pyfixest` | 1 |
+| [`00.2` · Stata](skills/00.2-Full-empirical-analysis-skill_Stata/) 📊 | `reghdfe` · `ivreg2` · `csdid` · `sdid` · `rdrobust` replication pack | 1 |
+| [`00.3` · R](skills/00.3-Full-empirical-analysis-skill_R/) 📗 | tidyverse · `fixest` · `did` · `HonestDiD`, rendered via Quarto | 1 |
+| [`33` · claude-scholar](skills/33-Galaxy-Dawn-claude-scholar/) | Full research lifecycle: ideation → review → experiments → response | 47 |
+| [`42` · ARIS](skills/42-wanshuiyin-ARIS/) | Autonomous "research-in-sleep" agent, end-to-end | 104 |
+| [`50` · AER-skills](skills/50-brycewang-aer-skills/) 📕 | Top-5 econ submission stack: identification → robustness → R&R | 9 |
+| [`67` · econfin-workflow-toolkit](skills/67-econfin-workflow-toolkit/) | China corporate-finance empirical workflow, proposal → paper | 46 |
+| [`69` · Paper-WorkFlow](skills/69-Paper-WorkFlow/) | Meta-orchestrator chaining the whole social-science pipeline | 1 |
+
+**🎯 Causal inference & econometrics** — *the methodological core of AERS*
+
+| Collection | What it does | Skills |
+|---|---|---:|
+| [`09` · awesome-econ-ai](skills/09-meleantonio-awesome-econ-ai-stuff/) | Python panel-data analysis (`linearmodels`) | 17 |
+| [`10` · causal-inference-mixtape](skills/10-Jill0099-causal-inference-mixtape/) | DID / IV / RDD / SCM templates (Cunningham) | 1 |
+| [`11` · compound-science](skills/11-James-Traina-compound-science/) | Bayesian estimation for quantitative social science | 20 |
+| [`13` · MixtapeTools](skills/13-scunning1975-MixtapeTools/) | Cunningham's causal-inference toolkit & decks | 5 |
+| [`14` · research-starter](skills/14-luischanci-claude-code-research-starter/) | IV / DiD / RDD in R with proper diagnostics | 16 |
+| [`15` · social-science-research](skills/15-Felpix-Studios-social-science-research/) | End-to-end data analysis in R or Python | 12 |
+| [`16` · clo-author](skills/16-hsantanna88-clo-author/) | Multi-agent data analysis (R / Stata / Python) | 10 |
+| [`18` · stata-accounting](skills/18-jusi-aalto-stata-accounting-research/) | Tested Stata patterns from 126 *JAR* papers | 1 |
+| [`20` · python-econ-skill](skills/20-wenddymacro-python-econ-skill/) | DSGE / HANK & quantitative economic computation | 1 |
+| [`23` · baygent](skills/23-Learning-Bayesian-Statistics-baygent-skills/) | PyMC / ArviZ Bayesian workflow with guardrails | 2 |
+| [`26` · scholar](skills/26-Data-Wise-scholar/) | Statistical-algorithm design & documentation | 17 |
+| [`31` · claude-code-skills](skills/31-thalysandratos-claude-code-skills/) | Python panel-data analysis | 13 |
+| [`39` · marginaleffects](skills/39-vincentarelbundock-marginaleffects/) | Predictions, slopes & comparisons (R / Python) | 1 |
+| [`40` · pyfixest](skills/40-py-econometrics-pyfixest/) | Fast fixed-effects estimation in Python | 1 |
+| [`51` · CausalPy](skills/51-pymc-labs-CausalPy/) | Bayesian quasi-experiments (PyMC Labs) | 3 |
+| [`55` · r-skills](skills/55-ab604-claude-code-r-skills/) | Bayesian inference in R with `brms` | 8 |
+| [`61` · research-methods](skills/61-phdemotions-research-methods/) | Confirmatory testing matched to pre-registration | 9 |
+| [`63` · scientific-agent-skills](skills/63-tondevrel-scientific-agent-skills/) | DoWhy identify–estimate–refute framework | 2 |
+| [`64` · mcp-stata](skills/64-tmonk-mcp-stata/) | 20 Stata causal-inference & replication skills | 20 |
+
+**📚 Literature, reading & research design** — *from question to evidence base*
+
+| Collection | What it does | Skills |
+|---|---|---:|
+| [`02` · research-skills](skills/02-luwill-research-skills/) | Medical-imaging reviews, proposals, paper-to-slides | 3 |
+| [`03` · scientific-skills](skills/03-K-Dense-AI-claude-scientific-skills/) | Hypothesis generation + 28 scientific databases | 4 |
+| [`05` · research-superpower](skills/05-kthorn-research-superpower/) | Systematic search, screening & citation traversal | 10 |
+| [`25` · Diverga](skills/25-HosungYou-Diverga/) | Research-question refiner (anti mode-collapse) | 34 |
+| [`34` · research-companion](skills/34-andrehuang-research-companion/) | Brainstorm, evaluate & decide research directions | 1 |
+| [`35` · academic-writing-skills](skills/35-bahayonghang-academic-writing-skills/) | Venue-aware industrial-AI literature research | 5 |
+| [`36` · literature-review-skill](skills/36-taoyunudt-literature-review-skill/) | Full literature-review workflow (Chinese) | 1 |
+| [`52` · slr-prisma](skills/52-keemanxp-slr-prisma/) | Systematic literature review, PRISMA 2020 | 1 |
+| [`53` · thematic-analysis](skills/53-keemanxp-thematic-analysis-skill/) | Braun & Clarke six-phase qualitative TA | 1 |
+| [`59` · openalex-skill](skills/59-shiquda-openalex-skill/) | Query 240M+ scholarly works via OpenAlex | 1 |
+| [`60` · superpapers](skills/60-regisely-superpapers/) | Comprehensive empirical-research support suite | 16 |
+
+**✍️ Writing, editing & de-AIGC** — *draft, polish, and pass AI-detection*
+
+| Collection | What it does | Skills |
+|---|---|---:|
+| [`01` · academic-paper-skills](skills/01-lishix520-academic-paper-skills/) | Outline → manuscript writing + 7-dim reviewer sim | 2 |
+| [`04` · scientific-writer](skills/04-K-Dense-AI-claude-scientific-writer/) | Citation management + scientific writing | 8 |
+| [`06` · stats-paper-writing](skills/06-fuhaoda-stats-paper-writing/) | End-to-end LaTeX statistical-paper writing | 1 |
+| [`22` · christopherkenny-skills](skills/22-christopherkenny-skills/) | APSA style checker for Quarto (`.qmd`) | 11 |
+| [`27` · my_claude_skills](skills/27-dariia-m-my_claude_skills/) | Economics-abstract writing guide | 6 |
+| [`38` · academic-proofreader](skills/38-peternka-academic-proofreader/) | Academic proofreading | 1 |
+| [`44` · humanizer_academic](skills/44-matsuikentaro1-humanizer_academic/) | De-AI medical/academic manuscripts (23 patterns) | 1 |
+| [`45` · deslop](skills/45-stephenturner-skill-deslop/) | Remove AI writing patterns (5-dim scoring) | 1 |
+| [`46` · stop-slop](skills/46-hardikpandya-stop-slop/) | 3-layer AI-tell detection & rewrite | 1 |
+| [`47` · avoid-ai-writing](skills/47-conorbronsdon-avoid-ai-writing/) | Audit → rewrite → re-audit AI-isms (paper trail) | 1 |
+| [`48` · chinese-de-aigc](skills/48-copaper-ai-chinese-de-aigc/) 🇨🇳 | Chinese de-AIGC for CNKI / Wanfang / Turnitin-CN | 1 |
+| [`49` · humanize-chinese](skills/49-voidborne-d-humanize-chinese/) | Detect & humanize AI-generated Chinese text | 1 |
+| [`56` · econ-writing-skill](skills/56-hanlulong-econ-writing-skill/) | Econ writing synthesizing 50+ top guides | 1 |
+| [`58` · econstack](skills/58-charlescoverdale-econstack/) | Policy briefing notes (UK GES / AU Treasury) | 7 |
+| [`65` · game-theory-paper-writer](skills/65-game-theory-paper-writer/) | Generate & stress-test game-theory papers | 1 |
+
+**📑 Citation, replication & peer review** — *make it verifiable and reproducible*
+
+| Collection | What it does | Skills |
+|---|---|---:|
+| [`24` · academic-research-skills](skills/24-Imbad0202-academic-research-skills/) | 5-reviewer multi-perspective paper review | 4 |
+| [`28` · paper-replicate-agent](skills/28-maxwell2732-paper-replicate-agent-demo/) | Paper-replication agent demo | 11 |
+| [`29` · project20XXy](skills/29-quarcs-lab-project20XXy/) | Reproducible manuscript + notebook project | 24 |
+| [`41` · sewage-econometrics-check](skills/41-sticerd-eee-sewage-econometrics-check/) | 10-check replication-package audit | 22 |
+| [`54` · open-science-skills](skills/54-scdenney-open-science-skills/) | Citation parity, DOI & claim-support audit | 24 |
+| [`62` · citation-checker](skills/62-PHY041-claude-skill-citation-checker/) | Verify citations vs CrossRef / S2 / OpenAlex | 1 |
+
+**🛠️ Data, tooling & infrastructure** — *the plumbing under the pipeline*
+
+| Collection | What it does | Skills |
+|---|---|---:|
+| [`07` · AI-Research-SKILLs](skills/07-Orchestra-Research-AI-Research-SKILLs/) | Publication ML figures, LaTeX, citation verify | 3 |
+| [`08` · latex-document-skill](skills/08-ndpvt-web-latex-document-skill/) | Create / compile any LaTeX doc to PDF | 1 |
+| [`12` · claude-code-my-workflow](skills/12-pedrohcgs-claude-code-my-workflow/) | Commit → PR → merge research workflow (Emory) | 22 |
+| [`17` · DAAF](skills/17-DAAF-Contribution-Community-daaf/) | Security-conscious agent framework (32 deny rules) | 35 |
+| [`32` · stata-skill](skills/32-dylantmoore-stata-skill/) | High-performance Stata C/C++ plugins | 3 |
+| [`43` · research-plugins](skills/43-wentorai-research-plugins/) | 478 research plugins: dataviz, domains, infra | 478 |
+| [`57` · edgartools](skills/57-dgunning-edgartools/) | Query & analyze SEC filings | 1 |
+| [`66` · empirical-research-skills](skills/66-zheng-siyao-empirical-research-skills/) | R performance optimization for large panels | 7 |
+| [`68` · research-productivity-skills](skills/68-research-productivity-skills/) | Paper search, SSRN, DOI lookup, downloads | 18 |
 
 ### By research stage
 
@@ -325,7 +428,7 @@ Role separation beats a single agent because the reviewer is independent of the 
 
 The **original 52 skill collections / 2,940+ files** passed a systematic audit — **52/52 CLEAN, zero FLAGGED**: no malicious prompts, viruses, reverse shells, or prompt injection. Every "sensitive" hit verified as one of three legitimate categories: **defensive security rules**, **legitimate academic API calls** (arXiv / CrossRef / PubMed / FRED / World Bank / OECD / BLS), or **standard Claude Code workflow hooks** (all local file ops, zero network IO).
 
-![Skills Security Scan Overview](images/security-scan/security-scan-01-总览.png)
+![Skills Security Scan Overview](images/security-scan/security-scan-01-overview.png)
 
 Six-phase, defense-in-depth: automated grep across **13 risk categories** → 100% manual review of all **6 hook-bearing skills and their 40+ hook scripts** (no `Bash(*)` wildcards anywhere) → three parallel agent content audits → supplemental integrity checks (hidden Unicode, encoding anomalies, HTML injection, network imports).
 

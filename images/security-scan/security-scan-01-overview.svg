@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1600" font-family="'Helvetica Neue', Arial, 'Segoe UI', sans-serif">
+  <rect width="1080" height="1600" fill="#FFFFFF"/>
+
+  <!-- Header band -->
+  <rect x="0" y="0" width="1080" height="200" fill="#059669"/>
+  <text x="540" y="100" text-anchor="middle" font-size="46" font-weight="700" fill="#FFFFFF">Skills Security Scan Overview</text>
+  <text x="540" y="155" text-anchor="middle" font-size="27" fill="#D1FAE5">52 Skills · 2,940+ Files · 13 Risk Dimensions</text>
+
+  <!-- Hero number card -->
+  <rect x="80" y="260" width="920" height="420" rx="16" fill="#ECFDF5" stroke="#10B981" stroke-width="3"/>
+  <text x="540" y="370" text-anchor="middle" font-size="36" font-weight="600" fill="#065F46">SCAN RESULT</text>
+  <text x="540" y="520" text-anchor="middle" font-size="180" font-weight="700" fill="#059669">52 / 52</text>
+  <text x="540" y="610" text-anchor="middle" font-size="48" font-weight="700" fill="#065F46">All CLEAN · Zero FLAGGED</text>
+
+  <!-- Three stat cards -->
+  <g>
+    <rect x="80" y="730" width="290" height="280" rx="12" fill="#F3F4F6"/>
+    <text x="225" y="810" text-anchor="middle" font-size="32" font-weight="600" fill="#6B7280">Threat Signals</text>
+    <text x="225" y="900" text-anchor="middle" font-size="96" font-weight="700" fill="#059669">0</text>
+    <text x="225" y="968" text-anchor="middle" font-size="23" fill="#6B7280">Malicious prompt / virus</text>
+  </g>
+
+  <g>
+    <rect x="395" y="730" width="290" height="280" rx="12" fill="#F3F4F6"/>
+    <text x="540" y="810" text-anchor="middle" font-size="32" font-weight="600" fill="#6B7280">Risk Dimensions</text>
+    <text x="540" y="900" text-anchor="middle" font-size="96" font-weight="700" fill="#059669">13</text>
+    <text x="540" y="968" text-anchor="middle" font-size="23" fill="#6B7280">Automated pattern scan</text>
+  </g>
+
+  <g>
+    <rect x="710" y="730" width="290" height="280" rx="12" fill="#F3F4F6"/>
+    <text x="855" y="810" text-anchor="middle" font-size="32" font-weight="600" fill="#6B7280">Hook Review</text>
+    <text x="855" y="900" text-anchor="middle" font-size="96" font-weight="700" fill="#059669">40+</text>
+    <text x="855" y="968" text-anchor="middle" font-size="23" fill="#6B7280">100% manually verified</text>
+  </g>
+
+  <!-- Three-class breakdown -->
+  <text x="540" y="1100" text-anchor="middle" font-size="36" font-weight="600" fill="#111827">All Sensitive Hits Are Legitimate Content</text>
+
+  <g>
+    <rect x="80" y="1140" width="920" height="100" rx="12" fill="#FFFFFF" stroke="#10B981" stroke-width="2"/>
+    <circle cx="140" cy="1190" r="22" fill="#10B981"/>
+    <text x="140" y="1199" text-anchor="middle" font-size="28" font-weight="700" fill="#FFFFFF">1</text>
+    <text x="180" y="1180" font-size="30" font-weight="600" fill="#111827">Defensive Security Rules</text>
+    <text x="180" y="1218" font-size="24" fill="#6B7280">deny rules · bash-safety hooks · credential detectors</text>
+  </g>
+
+  <g>
+    <rect x="80" y="1260" width="920" height="100" rx="12" fill="#FFFFFF" stroke="#10B981" stroke-width="2"/>
+    <circle cx="140" cy="1310" r="22" fill="#10B981"/>
+    <text x="140" y="1319" text-anchor="middle" font-size="28" font-weight="700" fill="#FFFFFF">2</text>
+    <text x="180" y="1300" font-size="30" font-weight="600" fill="#111827">Legitimate Academic API Calls</text>
+    <text x="180" y="1338" font-size="24" fill="#6B7280">arXiv · CrossRef · PubMed · FRED · World Bank</text>
+  </g>
+
+  <g>
+    <rect x="80" y="1380" width="920" height="100" rx="12" fill="#FFFFFF" stroke="#10B981" stroke-width="2"/>
+    <circle cx="140" cy="1430" r="22" fill="#10B981"/>
+    <text x="140" y="1439" text-anchor="middle" font-size="28" font-weight="700" fill="#FFFFFF">3</text>
+    <text x="180" y="1420" font-size="30" font-weight="600" fill="#111827">Standard Claude Code Workflow Hooks</text>
+    <text x="180" y="1458" font-size="24" fill="#6B7280">Local file ops · Zero network IO</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="540" y="1560" text-anchor="middle" font-size="22" fill="#9CA3AF">Source: SECURITY-SCAN-REPORT.md · Scan date 2026-04-28</text>
+</svg>
