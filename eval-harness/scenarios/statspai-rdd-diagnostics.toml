@@ -1,0 +1,52 @@
+id = "statspai-rdd-diagnostics"
+skill = "skills/00-Full-empirical-analysis-skill_StatsPAI"
+title = "RDD analysis must include manipulation, bandwidth, and robust-CI diagnostics"
+category = "causal-identification"
+severity = "high"
+context_data = []
+
+prompt = """
+I'm using a sharp regression discontinuity: students above a test-score cutoff
+get a scholarship, and I want its effect on graduation. Run the RD analysis the
+way an applied micro paper would and list the diagnostics you report.
+"""
+
+[[rubric]]
+id = "density-manipulation-test"
+check = "regex_any"
+required = true
+weight = 3
+description = "Includes a running-variable density / manipulation test (McCrary or Cattaneo-Jansson-Ma)."
+patterns = ['(?i)mccrary', '(?i)cattaneo.?jansson.?ma', '(?i)density test', '(?i)manipulation test', '(?i)sorting (around|at) the cutoff']
+
+[[rubric]]
+id = "bandwidth-sensitivity"
+check = "regex_any"
+required = true
+weight = 3
+description = "Reports bandwidth sensitivity (multiple bandwidths or MSE-optimal selection), not a single arbitrary window."
+patterns = ['(?i)bandwidth', '(?i)MSE.?optimal', '(?i)calonico', '(?i)CCT', '(?i)rdrobust']
+
+[[rubric]]
+id = "local-linear-not-high-order"
+check = "regex_any"
+required = false
+weight = 2
+description = "Prefers local linear (low-order) polynomial and avoids high-order global polynomials (Gelman-Imbens)."
+patterns = ['(?i)local linear', '(?i)gelman.?imbens', '(?i)low.?order polynomial', '(?i)avoid (high|global).?order']
+
+[[rubric]]
+id = "robust-bias-corrected-ci"
+check = "regex_any"
+required = false
+weight = 2
+description = "Uses robust bias-corrected confidence intervals rather than naive CIs."
+patterns = ['(?i)robust bias.?correct', '(?i)bias.?corrected (CI|confidence|inference)', '(?i)rdrobust']
+
+[[rubric]]
+id = "covariate-balance-placebo"
+check = "regex_any"
+required = false
+weight = 2
+description = "Adds covariate balance at the cutoff and/or placebo cutoffs as falsification."
+patterns = ['(?i)covariate balance', '(?i)placebo cutoff', '(?i)balance (at|around) the cutoff', '(?i)predetermined covariate']

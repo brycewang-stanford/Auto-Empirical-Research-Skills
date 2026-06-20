@@ -17,8 +17,11 @@ permissions:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
 
       - name: Run sync script
         id: sync
@@ -38,7 +41,7 @@ jobs:
 
       - name: Open PR on drift
         if: steps.sync.outputs.drift == 'true'
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v8
         with:
           branch: chore/sync-aer-skills
           commit-message: "chore(skills/aer-skills): sync from upstream"

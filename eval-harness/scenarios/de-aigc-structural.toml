@@ -1,0 +1,75 @@
+id = "de-aigc-structural"
+skill = "skills/48-copaper-ai-chinese-de-aigc"
+title = "Chinese de-AIGC rewrite must reduce AI-pattern markers without changing facts"
+category = "writing-style"
+severity = "medium"
+context_data = []
+
+prompt = """
+请对下面这段带有明显 AI 写作痕迹的中文学术段落做结构性降 AIGC 改写，
+不得改动任何数据、结论与事实，并在末尾给出修改说明。
+
+原文：众所周知，数字经济的发展对区域经济增长具有显而易见的推动作用。
+首先，数字技术能够提升生产效率；其次，数字平台能够降低交易成本；
+此外，数字基础设施能够促进要素流动。因此，毋庸置疑，大力发展数字经济
+必然导致区域经济的全面提升。综上所述，本文认为数字经济是区域发展的
+关键引擎。
+"""
+
+# Absence-checks operate on the rewritten BODY only, not the change-summary
+# section (which legitimately quotes the phrases it removed). `section` captures
+# everything before a `---` rule or a 修改说明 heading; if neither is present it
+# falls back to the whole document.
+[[rubric]]
+id = "reduce-cliche-idioms"
+check = "regex_count_max"
+section = '(?s)^(.*?)(?:-{3,}|修改说明|改动说明|修改总结|改写说明)'
+pattern = '众所周知|显而易见|毋庸置疑|不可否认|综上所述|不言而喻'
+target = 1
+required = true
+weight = 4
+description = "Cliche four-character openers are largely removed from the rewrite (at most one remains)."
+
+[[rubric]]
+id = "reduce-mechanical-connectors"
+check = "regex_count_max"
+section = '(?s)^(.*?)(?:-{3,}|修改说明|改动说明|修改总结|改写说明)'
+pattern = '首先|其次|此外|因此|然而|而且|并且'
+per_chars = 60
+target = 1
+required = false
+weight = 3
+description = "Mechanical enumeration connectors are thinned out in the rewrite (roughly <= 1 per 60 characters)."
+
+[[rubric]]
+id = "downgrade-absolute-claims"
+check = "regex_none"
+section = '(?s)^(.*?)(?:-{3,}|修改说明|改动说明|修改总结|改写说明)'
+required = true
+weight = 3
+description = "Removes absolute causal language ('必然导致' / '必然...提升') from the rewrite in favor of conditional phrasing."
+patterns = ['必然导致', '必然.{0,4}提升', '一定会导致']
+
+[[rubric]]
+id = "change-summary-present"
+check = "regex_any"
+required = true
+weight = 2
+description = "Ends with a change summary explaining what was modified and why."
+patterns = ['修改说明', '改动说明', '修改总结', '改写说明']
+
+[[rubric]]
+id = "facts-preserved"
+check = "regex_all"
+required = true
+weight = 3
+description = "Keeps the core factual nouns (digital economy / regional economic growth) intact."
+patterns = ['数字经济', '区域']
+
+[[rubric]]
+id = "meaning-and-fluency"
+check = "manual"
+required = false
+weight = 2
+description = "Rewrite preserves the original meaning, stays fluent academic Chinese, and does not fabricate new claims or numbers."
+guidance = "Pass if a fluent reader agrees meaning is preserved and no new factual claims/numbers were invented."

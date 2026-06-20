@@ -1,0 +1,66 @@
+id = "statspai-staggered-did"
+skill = "skills/00-Full-empirical-analysis-skill_StatsPAI"
+title = "Staggered DiD must not headline a naive TWFE coefficient"
+category = "causal-identification"
+severity = "critical"
+context_data = []
+
+prompt = """
+I have panel data on counties from 2000-2015. A minimum-wage policy was adopted
+by different counties in different years (some in 2005, some in 2009, some in
+2012; a set of counties never adopt it). I want to estimate the effect of the
+policy on county employment. Set up and run the analysis the way an AER paper
+would, and tell me which estimator you use and why.
+"""
+
+# Rubric. Items marked required=true gate the scenario. Econometric-correctness
+# items that can't be settled by string matching are check="manual".
+
+[[rubric]]
+id = "recognizes-staggered"
+check = "regex_any"
+required = true
+weight = 3
+description = "Recognizes that adoption timing is staggered (treatment turns on in different years)."
+patterns = ['(?i)stagger', '(?i)different (adoption|treatment) (year|timing)', '(?i)variation in (adoption|treatment) timing']
+
+[[rubric]]
+id = "no-naive-twfe-headline"
+check = "regex_none"
+required = true
+weight = 4
+description = "Does NOT present a single two-way fixed-effects (TWFE) coefficient as the headline causal estimate without a heterogeneity-robust check."
+# Forbidden: language that endorses plain TWFE as the answer for staggered data.
+patterns = ['(?i)just use (a )?two-way fixed effects', '(?i)TWFE is (fine|sufficient|appropriate) here', '(?i)headline (estimate|result) (is|from) (the )?TWFE']
+
+[[rubric]]
+id = "recommends-robust-estimator"
+check = "regex_any"
+required = true
+weight = 4
+description = "Uses or recommends a heterogeneity-robust staggered-DiD estimator (Callaway-Sant'Anna, Sun-Abraham, Borusyak et al. imputation, or de Chaisemartin-D'Haultfoeuille)."
+patterns = ['(?i)callaway', "(?i)sant'?anna", '(?i)sun.{0,3}abraham', '(?i)borusyak', '(?i)de ?chaisemartin', "(?i)d'?haultfoeuille", '(?i)callaway_santanna']
+
+[[rubric]]
+id = "bacon-decomposition"
+check = "regex_any"
+required = false
+weight = 2
+description = "Mentions Goodman-Bacon decomposition to diagnose the weight from forbidden already-treated comparisons."
+patterns = ['(?i)goodman.?bacon', '(?i)bacon decomp', '(?i)forbidden comparison']
+
+[[rubric]]
+id = "event-study-pretrends"
+check = "regex_any"
+required = false
+weight = 2
+description = "Plans an event-study / pre-trends check (leads and lags, formal joint pre-period test) rather than asserting parallel trends."
+patterns = ['(?i)event.?study', '(?i)pre.?trend', '(?i)parallel trends? (test|assumption)', '(?i)leads and lags']
+
+[[rubric]]
+id = "estimating-equation-and-assumption"
+check = "manual"
+required = false
+weight = 2
+description = "Writes out an estimating equation and states the identifying assumption explicitly (not just code)."
+guidance = "Pass if the answer states a written estimating equation AND names the identifying assumption (parallel trends / no anticipation). Fail if it only dumps code."

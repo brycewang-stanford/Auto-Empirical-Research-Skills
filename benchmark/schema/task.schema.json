@@ -1,0 +1,151 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills/benchmark/schema/task.schema.json",
+  "title": "AERS benchmark task",
+  "description": "Schema for a benchmark task authored as TOML in benchmark/tasks/<id>.toml. benchmark/check_benchmark.py is the authoritative validator; this JSON Schema documents the parsed shape for editors and review.",
+  "type": "object",
+  "required": ["id", "title", "data", "reference_candidate", "gold"],
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Stable benchmark id. It must equal the TOML file stem.",
+      "enum": ["bad-control-recovery", "card-iv-recovery", "did-staggered-recovery", "lalonde-recovery", "rdd-recovery"]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "data": {
+      "type": "string",
+      "description": "Repo-relative path to the dataset used by the task. Absolute paths and paths escaping the repo are rejected."
+    },
+    "reference_candidate": {
+      "type": "string",
+      "description": "Single directory name under benchmark/candidates/ containing the reference results.json.",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+    },
+    "description": {
+      "type": "string"
+    },
+    "treatment": {
+      "type": "string"
+    },
+    "outcome": {
+      "type": "string"
+    },
+    "experimental_att": {
+      "type": "number"
+    },
+    "experimental_tol": {
+      "type": "number"
+    },
+    "true_att_by_construction": {
+      "type": "number"
+    },
+    "true_tau_by_construction": {
+      "type": "number"
+    },
+    "true_total_by_construction": {
+      "type": "number"
+    },
+    "direct_effect_by_construction": {
+      "type": "number"
+    },
+    "gold": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/gold"
+      }
+    }
+  },
+  "definitions": {
+    "gold": {
+      "type": "object",
+      "required": ["id", "description", "check", "required", "weight"],
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "required": {
+          "type": "boolean",
+          "description": "If true, failing this gold fails the benchmark under --strict."
+        },
+        "weight": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "check": {
+          "type": "string",
+          "enum": [
+            "adjusted_recovery",
+            "biased_away",
+            "closer_to_truth",
+            "cross_check",
+            "first_stage_min",
+            "imbalance_count",
+            "iv_gt_ols",
+            "naive_sign",
+            "near_benchmark",
+            "recovers_truth",
+            "value_near"
+          ]
+        },
+        "field": {
+          "type": "string"
+        },
+        "truth_key": {
+          "type": "string"
+        },
+        "near_field": {
+          "type": "string"
+        },
+        "far_field": {
+          "type": "string"
+        },
+        "expected": {
+          "type": "number"
+        },
+        "expected_sign": {
+          "type": "string",
+          "enum": ["negative", "positive"]
+        },
+        "tol": {
+          "type": "number"
+        },
+        "f_tol": {
+          "type": "number"
+        },
+        "naive_tol": {
+          "type": "number"
+        },
+        "smd_tol": {
+          "type": "number"
+        },
+        "min_f": {
+          "type": "number"
+        },
+        "min_gap": {
+          "type": "number"
+        },
+        "min_swing": {
+          "type": "number"
+        },
+        "min_covariates": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "smd_threshold": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}

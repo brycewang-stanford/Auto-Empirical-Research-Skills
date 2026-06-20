@@ -1,0 +1,20 @@
+{
+  "version": "3.2.7",
+  "invocation_type": "slash-command",
+  "argument_hint": "[graph_name]",
+  "allowed_tools": [
+    "mcp__mcp-stata__stata_manage_graphs"
+  ],
+  "supported_agents": [
+    "claude",
+    "codex",
+    "gemini",
+    "cursor",
+    "windsurf",
+    "vscode"
+  ],
+  "trigger_text": "List, export, and review Stata graphs from the current session.",
+  "display_name": "Stata Graph",
+  "short_description": "Export and review graphs from the active Stata session.",
+  "default_prompt": "Use the stata-graph skill to export and inspect graphs from the active Stata session."
+}

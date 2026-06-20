@@ -1,0 +1,20 @@
+{
+  "version": "3.2.7",
+  "invocation_type": "context-skill",
+  "allowed_tools": [],
+  "supported_agents": [
+    "claude",
+    "codex",
+    "gemini",
+    "cursor",
+    "windsurf",
+    "vscode"
+  ],
+  "trigger_text": "Design, run, and critique causal inference workflows in Stata. Use when the user is working on identification, treatment effects, DiD, IV, event studies, RD, or assumption-sensitive empirical claims.",
+  "references": [
+    "references/designs.md"
+  ],
+  "display_name": "Stata Causal Inference",
+  "short_description": "Support causal inference workflows and assumption checks in Stata.",
+  "default_prompt": "Use the stata-causal-inference skill to guide a causal inference workflow and check design-specific assumptions."
+}

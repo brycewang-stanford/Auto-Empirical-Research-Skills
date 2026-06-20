@@ -1,0 +1,20 @@
+{
+  "version": "3.2.7",
+  "invocation_type": "slash-command",
+  "argument_hint": "",
+  "allowed_tools": [
+    "mcp__mcp-stata__stata_manage_session"
+  ],
+  "supported_agents": [
+    "claude",
+    "codex",
+    "gemini",
+    "cursor",
+    "windsurf",
+    "vscode"
+  ],
+  "trigger_text": "Show mcp-stata identity, connected tools, and status. Entry point for mcp-stata, an agentic toolkit for Stata.",
+  "display_name": "Stata",
+  "short_description": "Verify the Stata toolkit connection and show available tools.",
+  "default_prompt": "Use the stata skill to verify the mcp-stata connection and summarize the available tools."
+}

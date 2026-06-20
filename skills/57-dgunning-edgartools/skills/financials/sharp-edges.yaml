@@ -1,0 +1,87 @@
+# Sharp Edges - Production gotchas for Financial Analysis
+
+sharp_edges:
+  - id: detailed-view-for-single-metric
+    summary: Don't use detailed statement view when you need one metric
+    severity: medium
+    solution: |
+      revenue = financials.get_revenue()         # Single value
+      income = financials.income_statement()     # Full table
+    detection_pattern: 'income_statement\(.*detailed.*\).*get|balance_sheet.*\[.*Revenue'
+
+  - id: period-offset-confusion
+    summary: period_offset=0 is current, not prior year
+    severity: medium
+    solution: |
+      this_year = financials.get_revenue()                   # period_offset=0
+      last_year = financials.get_revenue(period_offset=1)
+      two_years_ago = financials.get_revenue(period_offset=2)
+
+  - id: quarterly-vs-annual-mix
+    summary: Don't mix quarterly and annual financials
+    severity: high
+    solution: |
+      annual = company.get_financials()              # 10-K (full year)
+      quarterly = company.get_quarterly_financials() # 10-Q (quarter)
+      # Compare same period types only
+
+  - id: none-return-values
+    summary: Quick getters can return None if data missing
+    severity: medium
+    solution: |
+      revenue = financials.get_revenue()
+      net_income = financials.get_net_income()
+      if revenue and net_income:
+          margin = net_income / revenue
+    detection_pattern: 'get_revenue\(\)\s*/|get_net_income\(\)\s*/'
+
+  - id: get-facts-instead-of-financials
+    summary: Use get_financials() not get_facts() for standard financial data
+    severity: high
+    solution: |
+      # WRONG: manual iteration over facts
+      facts = company.get_facts()
+      income = facts.income_statement(periods=3, annual=True)
+
+      # RIGHT: direct financials access
+      financials = company.get_financials()
+      income = financials.income_statement()        # Already 3 years
+      revenue = financials.get_revenue()             # Single value
+    detection_pattern: 'get_facts\(\).*income_statement|get_facts\(\).*get_revenue'
+
+  - id: dataframe-indexing-on-statements
+    summary: Do NOT use .iloc[] or .get() on statement objects — use get_X() methods instead
+    severity: high
+    solution: |
+      # WRONG: DataFrame-style indexing on statements
+      income = financials.income_statement()
+      income.iloc[0].get("Revenue")      # Wrong — unreliable column names
+
+      # RIGHT: Use quick getters for specific values
+      financials.get_revenue()            # Revenue
+      financials.get_net_income()         # Net income
+      financials.get_total_assets()       # Total assets
+
+      # RIGHT: Print full statements for display
+      print(financials.income_statement())
+      print(financials.balance_sheet())
+    detection_pattern: '\.iloc\[.*\]\.get|statement\(\)\[|balance_sheet\(\)\['
+
+  - id: include-dimensions-vs-view
+    summary: Use view= instead of include_dimensions= for dimensional control
+    severity: low
+    solution: |
+      # PREFERRED: view parameter (works on single and stitched statements)
+      income = financials.income_statement(view="detailed")
+      income = multi_financials.income_statement(view="detailed")
+
+      # LEGACY: include_dimensions boolean (still works but less expressive)
+      income = financials.income_statement(include_dimensions=True)
+    detection_pattern: 'include_dimensions\s*=\s*True'
+
+  - id: value-scale-assumptions
+    summary: Financial values are in actual dollars, not thousands/millions
+    severity: low
+    solution: |
+      revenue = financials.get_revenue()  # Already in dollars
+      print(f"${revenue/1e9:.1f}B")       # Format for display

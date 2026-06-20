@@ -1,0 +1,275 @@
+通用语言规则（适用于以下所有 prompt）
+All output must be written in American English. Spelling: behavior, analyze, modeling, organization, center, favor, program, labor. Vocabulary: toward (not towards), while (not whilst). Apply this rule to every section without exception.
+
+通用引用比例规则
+- Literature Review: ~50% \cite{} (前引) and ~50% \citep{} (后引).
+- All other sections: ~30% \cite{} and ~70% \citep{}.
+
+通用参考文献规则
+- 全文 ref.bib 至少 50 篇不同的参考文献，分摊到引用密集的章节（Introduction motivation/contributions、Literature Review、Hypothesis Development、Variable Construction、Empirical Model）。
+- 其中至少 15 篇为 2023-2026 年发表于国际顶刊（金融：JF/JFE/RFS/JFQA；经济：AER/QJE/JPE/Econometrica/REStud/REStat/AEJ；会计：JAE/JAR/TAR/RAST/CAR；管理：Management Science/SMJ/Organization Science），并向目标期刊所在领域倾斜。
+- 绝不为凑数而伪造文献：需要近期文献时用 WebSearch/WebFetch 查找真实可核验的论文（作者、标题、期刊、年份、DOI 均正确）；若认真检索后仍不足 15 篇，向用户说明缺口，不要编造。
+
+通用文件结构规则
+所有正文章节（Introduction, Literature Review, Hypothesis Development, Theoretical Framework, Data and Methodology, Empirical Results, Conclusion, etc.）都直接写入同一个 main.tex 文件。不要为单独章节生成单独的 .tex 文件。main.tex 中的 \input{} 仅用于 results/ 目录下的表格和图像文件。
+
+标题
+Please propose 10 titles for this manuscript following XX style
+
+Which one is the best title, provide reasons
+
+
+
+摘要 JEL Keywords	
+Suppose you are a well-known finance professor. Please think step by step and use 130 English words to write the abstract for me. 
+
+Give three JEL codes for this paper
+Give five keywords for this paper in one line separated by comma, do not use capital letter.
+
+
+
+
+
+
+
+
+制订章节目录 prompt
+Draft a paper outline based on the contents in the attachment, with headings detailed down to second-level headings (use third-level headings only when necessary). Do not use colons in the headings. Output the headings in LaTeX format.
+
+
+
+
+
+
+
+
+
+引言prompt
+
+这篇论文是否哪个领域的SSCI期刊？
+
+准备工作：
+How to target this paper to Journal of Financial Economics when motivating the research topic of the attached paper？
+
+开始
+
+Please use 800 English words to motivate this study. Cite relevant and important literature published from 2010-2026. All responses must be based on academic facts. Avoid generating fabricated literature / data / conclusions. All viewpoints and content must be annotated with supporting evidence. List the reference with DOL link in APA format at the end. Do not talk about empirical findings, contributions nor the unique research setting. We target this manuscript to Journal of Financial Economics. 
+
+Summarize the empirical strategy we use in this study. Summarize what we examine and what we find in the empirical results. Do not cite papers. Do not use bullet points. Finish this part using 370 English words
+
+Demonstrate three main strands of literature that this paper contributes to. Cite relevant and important literature published from 2010-2026. All responses must be based on academic facts. Avoid generating fabricated literature / data / conclusions. All viewpoints and content must be annotated with supporting evidence. List the reference with DOL link in APA format at the end. We target this manuscript to Journal of Financial Economics.
+
+Use 70 English words to write a roadmap paragraph for the paper. The remainder of the paper proceeds as follows. Section 2..
+
+
+
+
+
+
+
+Why China （为什么用中国数据做？）prompt
+Use 150 English words to write a paragraph showing that China data is an ideal setting to do this study with most important reasons. 
+
+
+
+
+
+Why International （为什么用国际数据做？）prompt
+Use 150 English words to write a paragraph showing that International data is an ideal setting to do this study with most important reasons. 
+
+
+
+
+
+
+
+
+制度背景 prompt
+Use 600 English words to write for the section. Do not cite literature.
+
+
+
+
+文献回顾 prompt
+Use 700 American English words to review the related literature based on our findings, especially work published from 2010-2026. Divide the section into subsections.
+
+Citation balance for the Literature Review: use approximately a 50/50 mix of \cite{} (前引, author-as-subject) and \citep{} (后引, parenthetical). Roughly half the citations should appear as the grammatical subject of a sentence ("\cite{baker2003} document that..."), and roughly half should appear in parentheses ("...consistent with prior work \citep{diether2002}"). After drafting, count both forms and rebalance toward 50/50.
+
+Cite relevant and important literature published from 2010-2026. All responses must be based on academic facts. Avoid fabricated literature / data / conclusions. All viewpoints must be annotated with supporting evidence. List references with DOI link in APA format at the end.
+
+
+
+
+假说构建  prompt
+
+Formulate the first hypothesis H1 for this study based on the baseline regression results. Use 500 English words to provide reasonable argument for the hypothesis H1. The argument should incorporate the mechanisms documented in this study but should not mention the findings explicitly. Cite relevant and important literature published from 2010-2026. All responses must be based on academic facts. Avoid generating fabricated literature / data / conclusions. All viewpoints and content must be annotated with supporting evidence. List the reference with DOL link in APA format at the end. 先说理，后提出假说。阐述完理由后，加上一句，The first hypothsis... 
+
+Formulate two other hypotheses H2 and H3 for this study that can summarize all cross-sectional heterogeneity (but you must act as if you do not know the empircal findiings). Use 700 English words to provide reasonable arguments for the hypotheses. Cite relevant and important literature published from 2010-2026. All responses must be based on academic facts. Avoid generating fabricated literature / data / conclusions. All viewpoints and content must be annotated with supporting evidence. List the reference with DOL link in APA format at the end. 先说理，后提出假说。阐述完理由后，加上一句，The second hypothsis... or the final hypothesis.
+
+
+
+
+
+
+
+理论模型 Prompt
+Please describe in detail the setup of a theoretical model to support my empirical findings. Include the model's assumptions, variable definitions, and functional forms. The model should provide a unified explanatory framework for the empirical results. Use LaTeX format for mathematical formulas and provide detailed explanations in English. The model setup should be comprehensive and lay the groundwork for subsequent theorems and proofs. Do not use bullet points. Instead, present the information in a flowing, academic style suitable for a theoretical paper section.
+
+Based on the theoretical model setup previously described, please propose 1-2 key theorems that articulate the main conclusions of the model. These theorems should correspond to and explain the empirical findings. Then, provide detailed mathematical proofs for these theorems. The proof process should be logically rigorous with clear steps. Use LaTeX format for all mathematical content, including theorems and proofs. Provide necessary explanations in English throughout.
+
+After presenting the theorems and proofs, discuss the implications and limitations of this theoretical model. Explain how the model provides a theoretical foundation for the empirical findings, and suggest potential directions for model extensions.
+
+
+
+
+
+
+数据与样本构建 prompt
+
+Upload the whole paper and Stata do file.
+Use 300 English words to write a paragraph. Describe the above relevant data source in detail.
+
+Sample:
+Upload the whole paper and Stata do file.
+Use 200 English words to write a paragraph. Describe the sample construction procedure. Talk about the final sample size
+
+
+
+
+
+
+变量构建 prompt
+Use 600 American English words to write the section \section{Variable Construction}. This section covers ONLY the dependent variable(s) and the core independent variable. DO NOT describe control variables here — control variables belong to the Empirical Model section.
+
+Use \subsection{} blocks whose titles reflect the actual indicator content drawn from the variable definition table (e.g., \subsection{Measuring Corporate Innovation}, \subsection{Investor Disagreement}, \subsection{ESG Disclosure Quality}). DO NOT use generic placeholder titles like "Dependent Variable" or "Independent Variable" — read the variable definition table first, then name the subsections after what each measure actually captures.
+
+For each variable, explain its economic meaning, describe how it is measured (formulas, sources, transformations), and cite the original paper that proposed the measure. Cite relevant and important literature published from 2010-2026. All responses must be based on academic facts. Avoid fabricated literature / data / conclusions. List references with DOI link in APA format at the end.
+
+
+
+
+
+
+Empirical Model prompt
+Produce the econometric model in LaTeX format (use $X$ to express the vector of all control variables, use Greek letters for various fixed effects). Use 500 American English words to describe the empirical model.
+
+Beyond the equation itself, this section MUST also describe the CONTROL VARIABLES (controls live here, not in Variable Construction). After presenting the equation, devote a paragraph or two to: list each control included in $X$, briefly justify its inclusion, describe its measurement, and cite supporting prior literature. Reference the variable definition table for precise definitions.
+
+Also describe the dependent variable, core independent variable, fixed effects, and the rationale for the model specification (including standard error clustering). Do not use bullet points. Cite relevant and important literature published from 2010-2026. All responses must be based on academic facts. Avoid fabricated literature / data / conclusions. List references with DOI link in APA format at the end.
+
+
+
+
+
+
+描述图片 prompt
+Please suggest 2 or 3 figures that can be shown in this paper as descriptive results.
+
+Could you show the Stata code for drawing these figures?
+
+
+
+
+描述统计 prompt
+Use 350 English words to write a paragraph for the descriptive statistics. Choose the most important variables rather than listing all variables. When you are describing the summary statistics, you need to report mean or other statistics when you see fit. 
+
+Use 50 English words to describe the correlation matrix.
+
+
+
+
+
+Baseline Regression prompt
+Use 650 English words to write for the section XX. Cite relevant and important literature published from 2010-2026. All responses must be based on academic facts. Avoid generating fabricated literature / data / conclusions. All viewpoints and content must be annotated with supporting evidence. List the reference with DOL link in APA format at the end.
+
+
+
+
+
+
+
+
+Endogeneity prompt
+
+Use 800 English words to write for the section XX. Cite relevant and important literature published from 2010-2026. All responses must be based on academic facts. Avoid generating fabricated literature / data / conclusions. All viewpoints and content must be annotated with supporting evidence. List the reference with DOL link in APA format at the end.
+
+
+
+
+
+
+
+
+
+Robustness checks prompt
+全部稳健性一次性写完，字数根据实际情况增减
+
+Use 1000 English words to write for the section XX. Cite relevant and important literature published from 2010-2026. All responses must be based on academic facts. Avoid generating fabricated literature / data / conclusions. All viewpoints and content must be annotated with supporting evidence. List the reference with DOL link in APA format at the end.
+
+
+
+
+
+
+
+
+
+Cross-sectional heterogeneity prompt
+（每个异质性维度 500 词，总词数 = 500 × 维度数）
+Use 500 English words per heterogeneity dimension to write for the section XX. Cite relevant and important literature published from 2010-2026. All responses must be based on academic facts. Avoid generating fabricated literature / data / conclusions. All viewpoints and content must be annotated with supporting evidence. List the reference with DOL link in APA format at the end.
+
+
+
+
+
+
+
+Mechanism prompt
+（每个机制 600 词，总词数 = 600 × 机制数）
+Use 600 English words per mechanism to write for the section XX. Cite relevant and important literature published from 2010-2026. All responses must be based on academic facts. Avoid generating fabricated literature / data / conclusions. All viewpoints and content must be annotated with supporting evidence. List the reference with DOL link in APA format at the end.
+
+
+
+
+
+
+
+
+Alternative explanation prompt
+Use 750 English words to write for the section XX. Cite relevant and important literature published from 2010-2026. All responses must be based on academic facts. Avoid generating fabricated literature / data / conclusions. All viewpoints and content must be annotated with supporting evidence. List the reference with DOL link in APA format at the end.
+
+
+
+
+
+
+Further Analysis Prompt
+Use 650 English words to write for the section XX. Cite relevant and important literature published from 2010-2026. All responses must be based on academic facts. Avoid generating fabricated literature / data / conclusions. All viewpoints and content must be annotated with supporting evidence. List the reference with DOL link in APA format at the end.
+
+
+
+
+
+
+
+Conclusion prompt
+Use 350 English words to write for the section XX.
+
+
+
+
+
+
+
+
+Cover Letter and Highlights
+需上传论文pdf
+Suppose you are a well-known finance professor. Please draft a cover letter of 380 English words for my manuscript. Do not use bullet points.
+Target Journal: 填入期刊名称
+Attach signature as follows:
+Kai Wu, PhD
+Associate Professor of Finance
+Central University of Finance and Economics
+P. R. China
+
+Suppose you are a well-known finance professor. Please write 4 highlights, each with less than 150 characters including spaces. Do not report the number of letters. 

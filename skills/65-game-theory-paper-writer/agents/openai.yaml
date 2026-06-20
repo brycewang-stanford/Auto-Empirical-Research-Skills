@@ -1,0 +1,4 @@
+interface:
+  display_name: "Game Theory Paper Writer"
+  short_description: "Draft and refine rigorous game theory papers"
+  default_prompt: "Use $game-theory-paper-writer to turn my game theory topic into a rigorous paper outline and draft."

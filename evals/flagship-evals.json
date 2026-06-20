@@ -1,0 +1,214 @@
+{
+  "schema_version": "1.0",
+  "description": "Regression prompts for flagship AERS skills. These are not model-specific scores; they define expected artifacts and review checks for repeatable human or agent evaluation.",
+  "evals": [
+    {
+      "id": "statspai-card-iv-pipeline",
+      "title": "StatsPAI Card IV Pipeline",
+      "category": "empirical_pipeline",
+      "skill_path": "skills/00-Full-empirical-analysis-skill_StatsPAI/SKILL.md",
+      "prompt": "Using the Card returns-to-schooling example, run an end-to-end IV empirical pipeline with StatsPAI-style APIs. Produce a data contract, sample construction note, first-stage diagnostics, weak-IV assessment, main 2SLS estimate, robustness table, and a short interpretation suitable for an applied economics appendix.",
+      "expected_artifacts": [
+        "data_contract.json",
+        "sample_construction.md",
+        "first_stage_diagnostics.md",
+        "table_main_iv.tex",
+        "robustness_table.tex",
+        "interpretation.md"
+      ],
+      "checks": [
+        "States the endogenous regressor, instrument, outcome, and identifying variation before estimating.",
+        "Reports first-stage strength and weak-IV risk rather than only second-stage coefficients.",
+        "Separates descriptive sample facts from causal interpretation.",
+        "Flags limitations of the instrument and external validity."
+      ],
+      "failure_modes": [
+        "Treats OLS and IV estimates as interchangeable.",
+        "Omits first-stage or weak-IV diagnostics.",
+        "Claims causal identification without stating exclusion or relevance assumptions."
+      ],
+      "tags": ["StatsPAI", "IV", "causal_inference", "replication"]
+    },
+    {
+      "id": "python-lalonde-observational-pipeline",
+      "title": "Python LaLonde Observational Pipeline",
+      "category": "empirical_pipeline",
+      "skill_path": "skills/00.1-Full-empirical-analysis-skill_Python/SKILL.md",
+      "prompt": "Build a transparent Python pipeline for the LaLonde training-data example using pandas, statsmodels or linearmodels, and common plotting libraries. Include cleaning, Table 1 balance, propensity-score overlap diagnostics, ATT estimates under at least two specifications, and a robustness appendix.",
+      "expected_artifacts": [
+        "analysis.py",
+        "table1_balance.tex",
+        "overlap_plot.png",
+        "table2_att.tex",
+        "robustness_appendix.md"
+      ],
+      "checks": [
+        "Uses explicit library calls instead of hiding the workflow behind an unexplained DSL.",
+        "Reports covariate balance before and after adjustment.",
+        "Explains estimand differences across OLS, matching, weighting, or doubly robust specifications.",
+        "Keeps generated tables reproducible from the script."
+      ],
+      "failure_modes": [
+        "Uses treatment prediction accuracy as the causal estimand.",
+        "Ignores overlap and balance diagnostics.",
+        "Mixes train/test language into an observational causal design without justification."
+      ],
+      "tags": ["Python", "LaLonde", "matching", "observational_study"]
+    },
+    {
+      "id": "stata-lalonde-replication-do",
+      "title": "Stata LaLonde Replication .do File",
+      "category": "empirical_pipeline",
+      "skill_path": "skills/00.2-Full-empirical-analysis-skill_Stata/SKILL.md",
+      "prompt": "Write a Stata .do replication workflow for the LaLonde training-data example. The file should install or check required community packages, import data, generate balance tables, run baseline and adjusted treatment-effect specifications, export publication-style tables, and create a concise log of assumptions and diagnostics.",
+      "expected_artifacts": [
+        "lalonde_replication.do",
+        "lalonde_replication.log",
+        "table1_balance.tex",
+        "table2_main.tex",
+        "diagnostics.md"
+      ],
+      "checks": [
+        "Includes deterministic setup, package checks, paths, and logging.",
+        "Uses Stata idioms for balance, fixed effects, robust inference, and exports.",
+        "Documents which estimand each command is targeting.",
+        "Keeps output paths separate from source data."
+      ],
+      "failure_modes": [
+        "Writes pseudo-Stata that would not run.",
+        "Omits log capture or reproducibility setup.",
+        "Exports only screenshots or manual tables."
+      ],
+      "tags": ["Stata", "LaLonde", "do_file", "replication"]
+    },
+    {
+      "id": "r-lalonde-quarto-report",
+      "title": "R LaLonde Quarto Report",
+      "category": "empirical_pipeline",
+      "skill_path": "skills/00.3-Full-empirical-analysis-skill_R/SKILL.md",
+      "prompt": "Create an R + Quarto empirical report for the LaLonde training-data example. Use tidyverse-style cleaning, MatchIt or WeightIt diagnostics, fixest or equivalent estimators, modelsummary tables, and publication-ready figures. The report should render to HTML and include a reproducibility appendix.",
+      "expected_artifacts": [
+        "lalonde_report.qmd",
+        "table1_balance.tex",
+        "table2_main.tex",
+        "overlap_plot.png",
+        "session_info.txt"
+      ],
+      "checks": [
+        "Uses Quarto structure for narrative, code, tables, figures, and appendix.",
+        "Shows balance and overlap before presenting treatment effects.",
+        "Reports package versions or session information.",
+        "Keeps code chunks reproducible and non-interactive."
+      ],
+      "failure_modes": [
+        "Produces prose without runnable R chunks.",
+        "Omits balance diagnostics.",
+        "Relies on manual table editing outside the report."
+      ],
+      "tags": ["R", "Quarto", "LaLonde", "reproducible_report"]
+    },
+    {
+      "id": "aer-identification-staggered-did-audit",
+      "title": "AER Staggered DID Identification Audit",
+      "category": "identification_review",
+      "skill_path": "skills/50-brycewang-aer-skills/skills/aer-identification/SKILL.md",
+      "prompt": "Audit a draft paper that estimates a staggered-adoption difference-in-differences model with heterogeneous treatment effects and only a short pre-period. Produce an estimand-first diagnosis, threat matrix, required diagnostics, preferred modern DID estimators, and referee-facing language for why the design is or is not credible.",
+      "expected_artifacts": [
+        "estimand_diagnosis.md",
+        "identification_threat_matrix.md",
+        "required_diagnostics.md",
+        "recommended_estimators.md",
+        "referee_response_language.md"
+      ],
+      "checks": [
+        "Separates the target estimand from the estimator.",
+        "Flags TWFE contamination risks under staggered adoption and heterogeneous effects.",
+        "Specifies concrete diagnostics rather than generic robustness claims.",
+        "States what evidence would make the design non-credible."
+      ],
+      "failure_modes": [
+        "Recommends TWFE as sufficient without qualification.",
+        "Treats event-study pre-trends as definitive proof.",
+        "Adds robustness checks without addressing the estimand."
+      ],
+      "tags": ["AER", "DID", "identification", "review"]
+    },
+    {
+      "id": "aer-submission-preflight",
+      "title": "AER Submission Preflight",
+      "category": "submission",
+      "skill_path": "skills/50-brycewang-aer-skills/skills/aer-submission/SKILL.md",
+      "prompt": "Run a pre-submission audit for an AER or AEJ empirical paper. Check abstract length, contribution framing, disclosure statements, data and code availability, replication package readiness, cover letter fit, and likely desk-rejection risks. Return a prioritized action list.",
+      "expected_artifacts": [
+        "submission_checklist.md",
+        "abstract_100_word_check.md",
+        "desk_rejection_risks.md",
+        "cover_letter_notes.md",
+        "final_action_list.md"
+      ],
+      "checks": [
+        "Uses concrete AER or AEJ constraints instead of generic journal advice.",
+        "Checks replication and disclosure obligations explicitly.",
+        "Prioritizes blocking issues above polish.",
+        "Keeps the recommendation tied to the manuscript's contribution and design."
+      ],
+      "failure_modes": [
+        "Gives generic style edits while missing submission constraints.",
+        "Ignores data availability and author disclosure requirements.",
+        "Fails to distinguish AER from AEJ or AER: Insights routing."
+      ],
+      "tags": ["AER", "submission", "preflight", "journal"]
+    },
+    {
+      "id": "aer-replication-package-audit",
+      "title": "AER Replication Package Audit",
+      "category": "replication",
+      "skill_path": "skills/50-brycewang-aer-skills/skills/aer-replication/SKILL.md",
+      "prompt": "Audit a replication package for an accepted applied economics paper before AEA Data Editor review. Check README completeness, master script execution order, environment capture, raw versus derived data separation, restricted-data handling, random seeds, expected runtime, and table/figure reproduction mapping.",
+      "expected_artifacts": [
+        "replication_readme_review.md",
+        "file_manifest.csv",
+        "execution_order.md",
+        "restricted_data_notes.md",
+        "reproduction_mapping.md"
+      ],
+      "checks": [
+        "Maps each paper table and figure to exact scripts and output files.",
+        "Distinguishes public, restricted, raw, intermediate, and final artifacts.",
+        "Captures runtime, software versions, seeds, and operating-system assumptions.",
+        "Flags any steps that require human judgment or unavailable data."
+      ],
+      "failure_modes": [
+        "Treats a code dump as a replication package.",
+        "Omits data-use restrictions or access instructions.",
+        "Does not define a single master execution path."
+      ],
+      "tags": ["AER", "replication", "AEA", "data_code"]
+    },
+    {
+      "id": "chinese-de-aigc-academic-rewrite",
+      "title": "Chinese Academic De-AIGC Rewrite",
+      "category": "writing",
+      "skill_path": "skills/48-copaper-ai-chinese-de-aigc/SKILL.md",
+      "prompt": "Rewrite a Chinese empirical-paper abstract and introduction paragraph to reduce formulaic AI-writing signals while preserving claims, variable definitions, identifying assumptions, and empirical results. Provide a before/after diagnostic table and a short note on what was changed.",
+      "expected_artifacts": [
+        "rewritten_text.md",
+        "diagnostic_table.md",
+        "change_notes.md",
+        "preservation_check.md"
+      ],
+      "checks": [
+        "Preserves empirical claims, coefficients, sample, and caveats.",
+        "Reduces repetitive transitions, slogan-like phrasing, and symmetric paragraph rhythm.",
+        "Keeps an academic register rather than converting to casual prose.",
+        "Separates stylistic edits from substantive changes."
+      ],
+      "failure_modes": [
+        "Changes empirical claims or identification assumptions.",
+        "Over-humanizes into colloquial or promotional writing.",
+        "Only swaps synonyms while leaving the same sentence rhythm."
+      ],
+      "tags": ["Chinese", "writing", "de_AIGC", "academic_style"]
+    }
+  ]
+}

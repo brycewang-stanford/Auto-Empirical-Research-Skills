@@ -14,7 +14,7 @@ description: >
   priors, or presenting stats to non-technical audiences.
 license: MIT
 metadata:
-  author: [Alexandre Andorra](https://alexandorra.github.io/)
+  author: "[Alexandre Andorra](https://alexandorra.github.io/)"
   version: "1.2"
 ---
 

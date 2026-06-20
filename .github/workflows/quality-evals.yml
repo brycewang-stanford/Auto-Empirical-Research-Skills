@@ -1,0 +1,61 @@
+name: Quality (evals + benchmark + tests)
+
+# Complements validate-catalog.yml (which checks catalog freshness). This job
+# enforces the eval/benchmark/test layer. All steps are stdlib-only; no pip.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.12"]
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Catalog enrichment freshness
+        run: python3 scripts/build-catalog-enrich.py --check
+
+      - name: Python tooling compatibility
+        run: make python-compat
+
+      - name: Lint eval-harness scenarios
+        run: >-
+          python3 eval-harness/run_evals.py
+          --min-scenarios 17
+          --min-auto-checks 80
+          --expect-categories causal-identification,reproducibility,citation-hygiene,runtime-safety,research-integrity,writing-compliance,writing-style
+
+      - name: Unit tests (stdlib unittest)
+        run: python3 -m unittest discover -s tests -p "test_*.py"
+
+      - name: Benchmark (reference pipeline + strict grading)
+        run: |
+          python3 benchmark/check_benchmark.py --lint
+          python3 benchmark/reference_pipeline.py --check
+          python3 benchmark/check_benchmark.py --strict --fail-on-partial --fail-on-orphan-results
+
+      - name: Grade example candidates (smoke)
+        run: >-
+          python3 eval-harness/run_evals.py
+          --grade eval-harness/candidates/_example
+          --expect-graded 8
+          --expect-fail-required statspai-weak-iv
+          --expect-graded-categories causal-identification,reproducibility,citation-hygiene,runtime-safety,research-integrity
+          --fail-on-orphans
+          --fail-on-partial
+          --no-write

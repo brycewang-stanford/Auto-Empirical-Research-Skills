@@ -15,8 +15,12 @@ __pycache__/
 .mypy_cache/
 .venv/
 venv/
+catalog/external-link-check.json
 
 # Local secrets
 .env
 .env.*
 !.env.example
+
+
+stata-skills/

@@ -1,0 +1,222 @@
+/* @theme academic-lightblue */
+
+@import 'default';
+
+:root {
+  --color-background: #f7fafe;
+  --color-foreground: #2d3748;
+  --color-highlight: #2c5282;
+  --color-highlight-dark: #1a365d;
+  --color-accent: #4299e1;
+  --color-accent-light: rgba(66, 153, 225, 0.10);
+  --color-accent-lighter: rgba(66, 153, 225, 0.05);
+}
+
+section {
+  background-color: var(--color-background);
+  font-family: "Helvetica Neue", "Helvetica", "Arial", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  color: var(--color-foreground);
+  padding: 40px 50px;
+}
+
+/* 页码格式：当前页/总页数 */
+section::after {
+  font-weight: 500;
+  color: #5a7fa8;
+  content: attr(data-marpit-pagination) ' / ' attr(data-marpit-pagination-total);
+}
+
+/* 标题样式 */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Helvetica Neue", "Helvetica", "Arial", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  color: var(--color-highlight);
+}
+
+h1 {
+  color: var(--color-highlight-dark);
+  font-size: 1.8em;
+  border-bottom: 3px solid var(--color-accent);
+  padding-bottom: 0.3em;
+  margin-bottom: 0.8em;
+}
+
+h2 {
+  font-size: 1.4em;
+  margin-bottom: 0.6em;
+}
+
+/* 标题页样式 */
+section.lead {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 60px;
+}
+
+section.lead h1 {
+  color: var(--color-highlight-dark);
+  font-size: 2.2em;
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0.5em;
+}
+
+section.lead h2 {
+  color: var(--color-highlight);
+  font-size: 1.3em;
+  font-weight: 400;
+}
+
+section.lead p {
+  color: #5a7fa8;
+  font-size: 0.95em;
+  margin: 0.3em 0;
+}
+
+/* 强调文字 */
+strong {
+  color: var(--color-highlight);
+}
+
+em {
+  color: #2b6cb0;
+}
+
+/* 引用块 */
+blockquote {
+  color: #2b6cb0;
+  border-left: 4px solid var(--color-accent);
+  padding: 0.8em 1.2em;
+  margin: 1em 0;
+  background-color: var(--color-accent-lighter);
+  border-radius: 0 6px 6px 0;
+}
+
+blockquote p {
+  color: #2b6cb0;
+  margin: 0;
+}
+
+/* 代码样式 */
+code {
+  background-color: var(--color-accent-light);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-family: "SF Mono", "Monaco", "Menlo", "Source Code Pro", monospace;
+  font-size: 0.9em;
+}
+
+pre {
+  background-color: var(--color-accent-lighter);
+  border-radius: 6px;
+  padding: 1em;
+  border-left: 4px solid var(--color-accent);
+}
+
+pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+/* 列表样式 */
+ul, ol {
+  margin-left: 1.2em;
+}
+
+li {
+  margin-bottom: 0.4em;
+  line-height: 1.5;
+}
+
+ul ul, ol ol, ul ol, ol ul {
+  font-size: 0.92em;
+  margin-top: 0.3em;
+}
+
+/* 表格样式 */
+table {
+  font-size: 0.88em;
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+}
+
+th {
+  background-color: var(--color-accent-light);
+  color: var(--color-highlight);
+  font-weight: 600;
+  padding: 0.6em 0.8em;
+  border: 1px solid #c3d9e8;
+}
+
+td {
+  padding: 0.5em 0.8em;
+  border: 1px solid #d4e5f0;
+}
+
+tr:nth-child(even) {
+  background-color: rgba(66, 153, 225, 0.04);
+}
+
+/* 链接样式 */
+a {
+  color: #2b6cb0;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* 页眉页脚 */
+header {
+  color: #5a7fa8;
+  font-size: 0.75em;
+  font-weight: 500;
+  left: 50px;
+  right: 50px;
+}
+
+footer {
+  color: #5a7fa8;
+  font-size: 0.7em;
+  left: 50px;
+  right: 50px;
+}
+
+/* 图片居中 */
+img[alt~="center"] {
+  display: block;
+  margin: 0 auto;
+}
+
+/* 分隔线 */
+hr {
+  border: none;
+  border-top: 2px solid var(--color-accent-light);
+  margin: 1.5em 0;
+}
+
+/* 小字体页面（用于参考文献等） */
+section.small {
+  font-size: 0.85em;
+}
+
+section.small h1, section.small h2 {
+  font-size: 1.3em;
+}
+
+/* 结束页样式 */
+section.end {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+section.end h1 {
+  border-bottom: none;
+  font-size: 2.5em;
+  margin-bottom: 1em;
+}

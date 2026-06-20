@@ -1,0 +1,54 @@
+\begin{table}[htbp]\centering\scriptsize
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{\textbf{Heterogeneity Conditional on Market Risk and Competitive Position}}
+\label{heterogeneity2}
+
+\noindent{\justifying{This table presents the heterogeneous association between local patent trading infrastructure and institutional ownership conditional on corporate market risk and competitive position for a sample of Chinese A-share listed firms from 2003 to 2023. Firms are divided into subsamples based on the annual median values of Financial Distress (measured by \textsl{Z-score}), Share Turnover (measured by \textsl{Turnover}), and Market Position (measured by \textsl{MarketShare}). Specifically,\textsl{Z-score} proxies for financial risk based on liquidity and solvency; \textsl{Turnover} proxies for market speculation; and \textsl{MarketShare} is defined as firm revenue relative to total industry revenue. The dependent variable is \textsl{Institution}, defined as the ratio of shares held by institutional investors to total shares at year-end. The main explanatory variable is \textsl{PTC} (a dummy variable that equals one if the city where the firm is located has established a patent trading center in or before year $t$, and zero otherwise). The set of control variables is consistent with that of the baseline regression. All regressions include firm, year, and city fixed effects. The robust $t$-statistics clustered by the firm are reported in parentheses. The last row reports the empirical $p$-value for the difference in the coefficients of \textsl{PTC} between the high and low groups, computed via a bootstrap Fisher permutation test with 500 replications. Detailed variable definitions are presented in Table \ref{definition}. ***, **, and * denote the significance at the 1\%, 5\%, and 10\% levels, respectively.\par}}
+\bigskip
+
+\begin{tabularx}{\textwidth}{lYYYYYYYY@{}}
+\toprule
+
+                &\multicolumn{2}{c}{Financial Distress}&\multicolumn{2}{c}{Share Turnover}   &\multicolumn{2}{c}{Market Position}  \\\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+                &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}&\multicolumn{1}{c}{(5)}&\multicolumn{1}{c}{(6)}\\
+                &\multicolumn{1}{c}{Low}&\multicolumn{1}{c}{High}&\multicolumn{1}{c}{Low}&\multicolumn{1}{c}{High}&\multicolumn{1}{c}{Followers}&\multicolumn{1}{c}{Leaders}\\
+\hline\\
+PTC          &  -0.1089\sym{*}  &  -0.2074\sym{***}&  -0.1914\sym{***}&  -0.0656\sym{*}  &  -0.0738         &  -0.1572\sym{***}\\
+                &  (-1.79)         &  (-3.86)         &  (-3.21)         &  (-1.69)         &  (-1.13)         &  (-3.06)         \\
+Size            &  -0.0129         &   0.0109         &   0.0326\sym{*}  &   0.0366\sym{*}  &  -0.0885\sym{***}&   0.0367         \\
+                &  (-0.45)         &   (0.54)         &   (1.69)         &   (1.84)         &  (-4.05)         &   (1.38)         \\
+Balance         &   0.5338\sym{***}&   0.6145\sym{***}&   0.5401\sym{***}&   0.6323\sym{***}&   0.4831\sym{***}&   0.6787\sym{***}\\
+                &  (12.96)         &  (21.59)         &  (17.42)         &  (20.74)         &  (17.29)         &  (17.36)         \\
+ROA             &   2.0855\sym{***}&   0.5557\sym{***}&   1.1940\sym{***}&   0.6740\sym{***}&   0.8002\sym{***}&   1.8517\sym{***}\\
+                &  (11.79)         &   (6.12)         &   (8.51)         &   (7.62)         &   (9.34)         &  (11.01)         \\
+Tobinq          &  -0.1951\sym{***}&  -0.0492\sym{***}&  -0.0845\sym{***}&  -0.0779\sym{***}&  -0.1377\sym{***}&  -0.1673\sym{***}\\
+                & (-17.40)         &  (-5.20)         &  (-9.31)         &  (-9.50)         & (-16.34)         & (-10.87)         \\
+Age             &  -0.1060\sym{*}  &   0.0466         &  -0.0198         &   0.1007         &  -0.0958\sym{***}&  -0.0055         \\
+                &  (-1.72)         &   (1.36)         &  (-0.43)         &   (1.14)         &  (-2.61)         &  (-0.10)         \\
+Cash            &   0.0570         &  -0.0831         &   0.1381         &  -0.0562         &   0.0900         &   0.1204         \\
+                &   (0.56)         &  (-0.95)         &   (1.53)         &  (-0.72)         &   (1.20)         &   (1.14)         \\
+Indept          &  -0.1585         &  -0.3543\sym{*}  &  -0.4144\sym{**} &  -0.2979\sym{*}  &  -0.4687\sym{***}&  -0.3201         \\
+                &  (-0.59)         &  (-1.86)         &  (-2.03)         &  (-1.77)         &  (-2.90)         &  (-1.25)         \\
+Top1            &   3.2670\sym{***}&   4.0525\sym{***}&   3.2305\sym{***}&   4.4598\sym{***}&   3.2619\sym{***}&   4.0514\sym{***}\\
+                &  (16.18)         &  (25.49)         &  (21.42)         &  (24.49)         &  (18.89)         &  (23.53)         \\
+Dual            &   0.0567\sym{**} &   0.0170         &   0.0438\sym{**} &   0.0426\sym{**} &   0.0274         &   0.0837\sym{***}\\
+                &   (2.52)         &   (0.80)         &   (2.13)         &   (2.18)         &   (1.41)         &   (3.20)         \\
+FinDev          &   0.0719\sym{*}  &   0.0609\sym{*}  &   0.1136\sym{***}&   0.0117         &   0.0010         &   0.0710\sym{*}  \\
+                &   (1.83)         &   (1.65)         &   (3.13)         &   (0.39)         &   (0.03)         &   (1.69)         \\
+Innov           &  -0.9878         &  -2.1865\sym{***}&  -2.9270\sym{***}&  -0.9302\sym{*}  &  -0.7619         &  -2.7478\sym{***}\\
+                &  (-1.55)         &  (-3.43)         &  (-4.39)         &  (-1.78)         &  (-1.57)         &  (-3.15)         \\
+Open            &   0.4245         &   0.6137         &  -0.0401         &   0.8219         &   0.9810\sym{**} &   0.1758         \\
+                &   (0.66)         &   (1.19)         &  (-0.08)         &   (1.61)         &   (1.98)         &   (0.27)         \\
+Gov             &  -0.6802         &   0.0730         &  -0.4857         &  -0.2969         &  -0.4504         &  -0.1028         \\
+                &  (-1.42)         &   (0.21)         &  (-1.33)         &  (-0.90)         &  (-1.33)         &  (-0.22)         \\
+\hline
+Observations    &   22,462         &   22,219         &   22,163         &   22,142         &   22,387         &   22,521         \\
+Firm FE         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         \\
+Year FE         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         \\
+City FE         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         \\
+Adjusted $ R^2$ &     0.61         &     0.57         &     0.56         &     0.72         &     0.61         &     0.56         \\
+\midrule
+p-value for Diff. (High-Low) & \multicolumn{2}{c}{0.038} & \multicolumn{2}{c}{0.020} & \multicolumn{2}{c}{0.042} \\
+\bottomrule
+\end{tabularx}
+\end{table}

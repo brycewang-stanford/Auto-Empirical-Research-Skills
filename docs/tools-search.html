@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AERS Tools Search</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f7f7f4; --panel: #ffffff; --ink: #1f2933; --muted: #5f6b7a;
+      --line: #d8d8d0; --accent: #0f766e; --warn: #9a3412; --good: #15803d;
+      --chip: #eef2f1; --radius: 8px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111312; --panel: #181b1a; --ink: #edf2f0; --muted: #aab6b1;
+        --line: #343a38; --accent: #5eead4; --warn: #fdba74; --good: #86efac;
+        --chip: #20302c;
+      }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 15px/1.45 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; background: var(--bg); color: var(--ink); }
+    header, main { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+    header { padding: 28px 0 18px; border-bottom: 1px solid var(--line); }
+    h1 { margin: 0 0 6px; font-size: clamp(26px, 5vw, 42px); line-height: 1.05; }
+    p { margin: 0; color: var(--muted); }
+    .switch { margin: 8px 0 0; }
+    .controls { display: grid; grid-template-columns: minmax(220px, 2fr) repeat(5, 1fr); gap: 10px; margin: 18px 0 10px; }
+    input, select { width: 100%; min-height: 40px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); color: var(--ink); padding: 0 12px; font: inherit; }
+    .stats { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0 16px; color: var(--muted); }
+    .stat { border: 1px solid var(--line); border-radius: var(--radius); padding: 6px 10px; background: var(--panel); }
+    .reset { cursor: pointer; }
+    .results { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 12px; padding-bottom: 36px; }
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; display: flex; flex-direction: column; }
+    .card h2 { margin: 0 0 8px; font-size: 16px; line-height: 1.25; }
+    .desc { color: var(--muted); font-size: 13.5px; flex: 1; }
+    .meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 4px; }
+    .chip { border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; color: var(--muted); font-size: 12px; background: var(--chip); }
+    .chip.tag { cursor: pointer; }
+    .chip.tag:hover { border-color: var(--accent); color: var(--accent); }
+    .chip.cat { border-color: var(--accent); color: var(--accent); }
+    .chip.active { color: var(--good); }
+    .chip.maint { color: var(--good); }
+    .chip.dormant { color: var(--warn); }
+    .chip.restricted { color: var(--warn); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    @media (max-width: 860px) { .controls { grid-template-columns: 1fr 1fr; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>AERS Tools Search</h1>
+    <p>Search the curated catalog of automated empirical-research &amp; causal-inference <strong>tools</strong> — libraries, MCP servers, causal-discovery packages, research agents, and benchmark datasets — by text, category, language, subcategory, maintenance, and license.</p>
+    <p class="switch">Looking for agent <em>skills</em> instead? → <a href="search.html">AERS Skill Search</a> · Full table: <a href="../tools/CATALOG.md">tools/CATALOG.md</a> · Source: <a href="../tools/tools.json">tools.json</a></p>
+  </header>
+  <main>
+    <section class="controls" aria-label="Search controls">
+      <input id="query" type="search" placeholder="Search DiD, spatial, FRED, RD-Agent, metafor, synthdid…" autofocus>
+      <select id="category"><option value="">All categories</option></select>
+      <select id="language"><option value="">All languages</option></select>
+      <select id="subcategory"><option value="">All subcategories</option></select>
+      <select id="maintained"><option value="">All maintenance</option></select>
+      <select id="license"><option value="">All license classes</option></select>
+    </section>
+    <section id="stats" class="stats" aria-live="polite"></section>
+    <section id="results" class="results"></section>
+  </main>
+  <script>
+    const state = { tools: [] };
+    const el = id => document.getElementById(id);
+    const text = v => (v || "").toString();
+    const subsOf = t => t.subcategory || [];
+    const langsOf = t => t.languages || [];
+
+    function licenseClass(lic) {
+      lic = text(lic);
+      if (lic === "unverified" || lic === "NOASSERTION") return "unverified/unmapped";
+      if (lic === "proprietary" || /Commons Clause|Responsible-AI|Scientist Source|custom/.test(lic)) return "proprietary/non-OSI";
+      if (/^(GPL|AGPL|LGPL)/.test(lic) || /CeCILL/.test(lic)) return "copyleft";
+      return "permissive";
+    }
+
+    async function load() {
+      const data = await fetch("../tools/tools.json").then(r => r.json());
+      state.tools = data.tools || [];
+      hydrate();
+      render();
+    }
+
+    function unique(getter) {
+      return [...new Set(state.tools.flatMap(getter).filter(Boolean))].sort((a, b) => a.localeCompare(b));
+    }
+
+    function hydrate() {
+      for (const v of unique(t => [t.category])) el("category").append(new Option(v, v));
+      for (const v of unique(t => langsOf(t))) el("language").append(new Option(v, v));
+      for (const v of unique(t => subsOf(t))) el("subcategory").append(new Option(v, v));
+      for (const v of ["active", "maintained", "dormant"]) el("maintained").append(new Option(v, v));
+      for (const v of unique(t => [licenseClass(t.license)])) el("license").append(new Option(v, v));
+      for (const id of ["query", "category", "language", "subcategory", "maintained", "license"]) {
+        el(id).addEventListener("input", render);
+      }
+    }
+
+    function matches(t) {
+      const q = el("query").value.trim().toLowerCase();
+      const haystack = [t.name, t.description, t.owner_repo, t.category, t.license,
+        ...subsOf(t), ...langsOf(t)].map(text).join(" ").toLowerCase();
+      return (!q || haystack.includes(q))
+        && (!el("category").value || t.category === el("category").value)
+        && (!el("language").value || langsOf(t).includes(el("language").value))
+        && (!el("subcategory").value || subsOf(t).includes(el("subcategory").value))
+        && (!el("maintained").value || t.maintained === el("maintained").value)
+        && (!el("license").value || licenseClass(t.license) === el("license").value);
+    }
+
+    const maintRank = { active: 0, maintained: 1, dormant: 2 };
+    function render() {
+      const filtered = state.tools.filter(matches).sort((a, b) =>
+        (maintRank[a.maintained] ?? 3) - (maintRank[b.maintained] ?? 3)
+        || (b.stars_approx || 0) - (a.stars_approx || 0)
+        || a.name.localeCompare(b.name));
+      el("stats").innerHTML = [
+        `${filtered.length} of ${state.tools.length} tools`,
+        `${new Set(filtered.map(t => t.category)).size} categories`,
+        `<span class="reset" onclick="resetFilters()">↺ reset filters</span>`
+      ].map(i => `<span class="stat">${i}</span>`).join("");
+      el("results").innerHTML = filtered.slice(0, 400).map(card).join("");
+    }
+
+    function setFacet(facet, value) {
+      const ok = { category: 1, language: 1, subcategory: 1, maintained: 1 };
+      if (ok[facet]) { el(facet).value = value; render(); }
+    }
+    window.setFacet = setFacet;
+    window.resetFilters = () => {
+      for (const id of ["query", "category", "language", "subcategory", "maintained", "license"]) el(id).value = "";
+      render();
+    };
+
+    function tagChips(t) {
+      const chips = [`<span class="chip tag cat" onclick="setFacet('category','${t.category}')">${esc(t.category)}</span>`];
+      for (const s of subsOf(t)) chips.push(`<span class="chip tag" onclick="setFacet('subcategory','${esc(s)}')">${esc(s)}</span>`);
+      for (const lg of langsOf(t)) chips.push(`<span class="chip tag" onclick="setFacet('language','${esc(lg)}')">${esc(lg)}</span>`);
+      return chips.join("");
+    }
+
+    function card(t) {
+      const mclass = t.maintained === "active" ? "active" : t.maintained === "dormant" ? "dormant" : "maint";
+      const dot = t.maintained === "active" ? "🟢" : t.maintained === "dormant" ? "🔴" : "🟡";
+      const lc = licenseClass(t.license);
+      const lclass = (lc === "unverified/unmapped" || lc === "proprietary/non-OSI") ? " restricted" : "";
+      const stars = t.stars_approx ? `<span class="chip">★ ${t.stars_approx.toLocaleString()}</span>` : "";
+      const act = t.last_activity ? ` · ${esc(t.last_activity)}` : "";
+      return `<article class="card">
+        <h2><a href="${esc(t.url)}"><code>${esc(t.name)}</code></a></h2>
+        <p class="desc">${esc(t.description || "No description.")}</p>
+        <div class="meta">${tagChips(t)}</div>
+        <div class="meta">
+          <span class="chip ${mclass}">${dot} ${esc(t.maintained || "?")}${act}</span>
+          <span class="chip${lclass}">${esc(t.license)}</span>
+          ${stars}
+          <span class="chip">${esc(t.owner_repo || "source")}</span>
+        </div>
+      </article>`;
+    }
+
+    function esc(v) {
+      return text(v).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[c]));
+    }
+
+    load().catch(err => {
+      el("results").innerHTML = `<article class="card"><h2>Could not load tools catalog</h2><p>${esc(err.message)}. Serve the repo locally with <code>python3 -m http.server</code> (then open <code>docs/tools-search.html</code>) or view via GitHub Pages — browsers block <code>file://</code> fetches.</p></article>`;
+    });
+  </script>
+</body>
+</html>

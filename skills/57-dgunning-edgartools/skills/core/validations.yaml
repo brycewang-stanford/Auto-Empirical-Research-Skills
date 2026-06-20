@@ -1,0 +1,70 @@
+# Validations - Automated code quality checks
+
+validations:
+  # Required patterns
+  - id: uses-find-for-accession
+    pattern: 'find\s*\(["\'][0-9]{10}-[0-9]{2}-[0-9]{6}["\']\)'
+    required_when: "accession.*number"
+    example: 'find("0001193125-24-276418")'
+
+  - id: uses-find-for-identifier
+    pattern: 'find\s*\('
+    required_when: "lookup|find.*by.*ticker|find.*by.*cik"
+
+  - id: uses-filing-search
+    pattern: '\.search\s*\(["\']'
+    required_when: "search.*filing|find.*mentions"
+    example: 'filing.search("artificial intelligence")'
+
+  - id: uses-get-financials
+    pattern: 'get_financials\s*\(\)'
+    required_when: "revenue|net.?income|balance.?sheet|financial"
+
+  - id: uses-head-or-limit
+    pattern: '\.head\s*\(|\.latest\s*\(|\[\s*:\s*\d+\s*\]|\[\s*0\s*\]'
+    required_when: "for.*in.*filings|iterate"
+
+  - id: uses-form-filter
+    pattern: 'form\s*=\s*["\']'
+    required_when: "get_filings"
+    example: 'company.get_filings(form="10-K")'
+
+  # Forbidden patterns
+  - id: no-manual-filing-construction
+    pattern: 'Filing\s*\(\s*cik|Filing\s*\(\s*accession'
+    forbidden: true
+    fix: "find('accession_number')"
+
+  - id: no-manual-regex-search
+    pattern: 'doc(ument)?\.text\s*\(\s*\).*re\.|re\.(search|findall).*doc'
+    forbidden: true
+    fix: "filing.search('term')"
+
+  - id: no-unbounded-iteration
+    pattern: 'for\s+\w+\s+in\s+\w+\.get_filings\s*\(\s*\)\s*:'
+    forbidden: true
+    fix: "for f in company.get_filings(form='10-K').head(10):"
+
+  - id: no-xbrl-for-simple-metrics
+    pattern: '\.xbrl\s*\(\s*\)\.statements\.'
+    forbidden: true
+    severity: warning
+    fix: "financials.get_revenue()"
+
+  - id: no-repr-for-llm
+    pattern: 'repr\s*\(\s*(filing|company|filings|xbrl)'
+    forbidden: true
+    fix: "str(object) or object.to_context()"
+
+  # Best practices
+  - id: recommends-str-output
+    pattern: 'str\s*\(\s*(filing|company|filings)'
+    recommended_when: "show|display|print"
+
+  - id: recommends-to-context
+    pattern: '\.to_context\s*\(\s*\)'
+    recommended_when: "capabilities|methods|available"
+
+  - id: recommends-facts-for-history
+    pattern: 'get_facts\s*\(\s*\).*periods'
+    recommended_when: "4.*year|historical|trend"

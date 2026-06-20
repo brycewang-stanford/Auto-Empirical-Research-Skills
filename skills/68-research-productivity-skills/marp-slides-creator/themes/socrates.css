@@ -1,0 +1,78 @@
+/* @theme socrates */
+
+/*
+  ============================================
+    Created by Paulo Cunha
+    version: 1.0
+    last update: 30.dez.2021
+  ============================================       
+*/
+
+/* Importing COLOR SCHEMA */
+
+@import "default";
+@import "schema";
+@import "structure";
+
+/* Font Credit: htts://https://www.cdnfonts.com/ */
+@import url('https://fonts.cdnfonts.com/css/lato');
+
+/***************** COMMON STRUCTURE **********************/
+
+:root {
+  font-family: "Lato";
+  font-weight: initial;
+  --cool-list-color       : rgb(168, 12, 85);
+
+}
+
+/* ------------------- TITLEPAGE -----------------------------*/
+section.titlepage {
+  --title-color       : #1d395a;
+} 
+
+section.titlepage .title {
+  border-bottom: 0px solid var(--border-color);
+}
+
+section.titlepage .subtitle {
+  font-weight: 300;
+}
+
+section.titlepage .author,
+section.titlepage .date,
+section.titlepage .organization {
+  text-align: left;
+}
+section.titlepage h1 {
+  border-bottom: 0px solid var(--border-color);
+}
+
+section.titlepage h2 {
+  font-weight: 300;
+}
+
+section.titlepage h3,
+section.titlepage h4,
+section.titlepage h5 {
+  text-align: right; 
+}
+
+/* -------------------- TRANSITION ---------------------------------*/
+section.transition {
+  --transitionpage-color      : #6750a4;
+}
+
+/* ------------------- CITE -----------------------------*/
+section.cite {
+  --background-color    : #49454f;
+  --strong-color        : rgb(182, 112, 27);
+}
+
+section.cite p {
+  color: #fffbfe;
+}
+
+section.cite strong {
+  color: #f87ca1;
+}

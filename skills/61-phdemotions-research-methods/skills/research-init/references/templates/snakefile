@@ -1,0 +1,88 @@
+# Snakefile — Pipeline definition for {{PROJECT_NAME}}
+#
+# This file defines the reproducible analysis pipeline using Snakemake.
+# Each rule is a step in the analysis — from raw data to final manuscript.
+# Snakemake tracks file dependencies and skips steps whose inputs haven't changed.
+#
+# Run the full pipeline:      snakemake --cores 1
+# Visualize the pipeline:     snakemake --dag | dot -Tpng > dag.png
+# Dry run (show what would execute): snakemake -n
+#
+# Learn more: https://snakemake.readthedocs.io/
+
+# ── Configuration ────────────────────────────────────────────────────
+
+configfile: "config/config.yaml"  # Optional: project-level config
+
+
+# ── Default target: build everything ─────────────────────────────────
+
+rule all:
+    input:
+        # Uncomment as you build out the pipeline:
+        # "data/processed/clean_data.parquet",
+        # "output/tables/table1.html",
+        # "output/figures/main_results.png",
+        # "reports/manuscript.html",
+        "output/pipeline_ready.txt"
+
+
+# ── Stage 1: Validate raw data ──────────────────────────────────────
+
+# rule validate:
+#     input: "data/raw/YOUR_FILE.csv"
+#     output: "output/results/validation_report.html"
+#     script: "python/01_validate.py"
+
+
+# ── Stage 2: Clean data ─────────────────────────────────────────────
+
+# rule clean:
+#     input:
+#         data="data/raw/YOUR_FILE.csv",
+#         validation="output/results/validation_report.html"
+#     output: "data/processed/clean_data.parquet"
+#     script: "python/02_clean.py"
+
+
+# ── Stage 3: EDA ────────────────────────────────────────────────────
+
+# rule eda:
+#     input: "data/processed/clean_data.parquet"
+#     output:
+#         table1="output/tables/table1.html",
+#         correlations="output/figures/correlations.png"
+#     script: "python/03_eda.py"
+
+
+# ── Stage 4: Confirmatory analysis ──────────────────────────────────
+
+# rule analyze:
+#     input: "data/processed/clean_data.parquet"
+#     output: "output/results/models.pkl"
+#     script: "python/04_analyze.py"
+
+
+# ── Stage 5: Figures ─────────────────────────────────────────────────
+
+# rule figures:
+#     input: "output/results/models.pkl"
+#     output: "output/figures/main_results.png"
+#     script: "python/06_visualize.py"
+
+
+# ── Stage 6: Manuscript ──────────────────────────────────────────────
+
+# rule manuscript:
+#     input:
+#         data="data/processed/clean_data.parquet",
+#         models="output/results/models.pkl"
+#     output: "reports/manuscript.html"
+#     shell: "quarto render reports/manuscript.qmd"
+
+
+# ── Placeholder — remove when adding real rules ──────────────────────
+
+rule placeholder:
+    output: "output/pipeline_ready.txt"
+    shell: "echo 'Pipeline scaffolded. Add your analysis rules above.' > {output}"

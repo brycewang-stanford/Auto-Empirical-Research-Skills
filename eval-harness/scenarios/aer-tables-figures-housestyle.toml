@@ -1,0 +1,64 @@
+id = "aer-tables-figures-housestyle"
+skill = "skills/50-brycewang-aer-skills/skills/aer-tables-figures"
+title = "Regression table + figure must follow AER house style"
+category = "writing-compliance"
+severity = "medium"
+context_data = []
+
+prompt = """
+Format my main regression table (5 columns, progressive specifications) and an
+event-study figure to AER house style. Tell me the exact conventions to apply
+and which tool to generate them with.
+"""
+
+[[rubric]]
+id = "booktabs-no-vertical-rules"
+check = "regex_any"
+required = true
+weight = 3
+description = "Uses booktabs horizontal rules and removes vertical rules."
+patterns = ['(?i)booktabs', '(?i)no vertical rule', '(?i)horizontal rules only']
+
+[[rubric]]
+id = "stars-convention"
+check = "regex_any"
+required = true
+weight = 3
+description = "Uses the AER significance-star convention (*** p<0.01, ** p<0.05, * p<0.1)."
+patterns = [
+  '\*\*\*\s*p\s*<\s*0?\.01',
+  '(?i)\*\*\* ?p<0\.01.{0,12}\*\* ?p<0\.05',
+  '(?i)star\(\* 0\.10 \*\* 0\.05 \*\*\* 0\.01\)',
+]
+
+[[rubric]]
+id = "se-in-parentheses"
+check = "regex_any"
+required = true
+weight = 2
+description = "Reports standard errors in parentheses below coefficients, with the clustering stated."
+patterns = ['(?i)standard errors? in parenthes', '(?i)SE.{0,6}in parenthes', '(?i)parenthes.{0,20}below', '(?i)cluster']
+
+[[rubric]]
+id = "figure-notes"
+check = "regex_any"
+required = false
+weight = 2
+description = "Specifies a figure-notes block (estimator/method, reference category, CI type, N)."
+patterns = ['(?i)figure notes?', '(?i)tablenotes', '(?i)figurenotes', '(?i)reference (category|period)', '(?i)confidence interval']
+
+[[rubric]]
+id = "use-a-table-tool"
+check = "regex_any"
+required = false
+weight = 2
+description = "Generates tables with a standard tool (esttab/estout, modelsummary/etable, or sp.regtable) rather than hand-rolled LaTeX."
+patterns = ['(?i)esttab', '(?i)estout', '(?i)modelsummary', '(?i)etable', '(?i)sp\.regtable']
+
+[[rubric]]
+id = "one-claim-per-exhibit"
+check = "manual"
+required = false
+weight = 1
+description = "Advises one claim per exhibit and progressive columns (simple to rich), not an overloaded table/figure."
+guidance = "Pass if the answer keeps columns progressive and avoids overloading a single exhibit."

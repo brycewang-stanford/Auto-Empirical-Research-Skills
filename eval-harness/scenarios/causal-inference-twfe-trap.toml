@@ -1,0 +1,44 @@
+id = "causal-inference-twfe-trap"
+skill = "skills/10-Jill0099-causal-inference-mixtape"
+title = "Mixtape DiD template must warn about the staggered-TWFE trap"
+category = "causal-identification"
+severity = "high"
+context_data = []
+
+prompt = """
+Give me a difference-in-differences code template for my project. Treatment
+(a hospital merger) happened in different markets in different years between
+2010 and 2018. I want clean, runnable code and a note on what could go wrong.
+"""
+
+[[rubric]]
+id = "twfe-bias-warning"
+check = "regex_any"
+required = true
+weight = 4
+description = "Warns that naive TWFE is biased under staggered timing with heterogeneous effects."
+patterns = ['(?i)twfe .{0,30}(bias|trap|problem)', '(?i)stagger.{0,40}bias', '(?i)negative weight', '(?i)forbidden comparison', '(?i)heterogeneous treatment effect']
+
+[[rubric]]
+id = "modern-estimator"
+check = "regex_any"
+required = true
+weight = 3
+description = "Points to a modern staggered-robust estimator."
+patterns = ['(?i)callaway', "(?i)sant'?anna", '(?i)sun.{0,3}abraham', '(?i)de ?chaisemartin', '(?i)borusyak', '(?i)bacon']
+
+[[rubric]]
+id = "event-study"
+check = "regex_any"
+required = false
+weight = 2
+description = "Includes event-study leads/lags with an explicit reference period for the pre-trends check."
+patterns = ['(?i)event.?study', '(?i)leads and lags', '(?i)reference period', '(?i)t ?= ?-1', '(?i)omitted period']
+
+[[rubric]]
+id = "runnable-template"
+check = "manual"
+required = false
+weight = 2
+description = "Provides a concrete, runnable code template (Python, R, or Stata) rather than prose only."
+guidance = "Pass if there is an actual code block with a recognizable estimator call; fail if only prose."

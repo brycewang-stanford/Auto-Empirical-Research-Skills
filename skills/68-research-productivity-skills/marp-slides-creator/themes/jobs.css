@@ -1,0 +1,277 @@
+/* @theme jobs */
+
+/*
+  ============================================
+    Created by Paulo Cunha
+    version: 1.0
+    last update: 08.fev.2023
+  ============================================       
+*/
+
+/* Importing COLOR SCHEMA */
+
+@import "default";
+@import "schema";
+@import "structure";
+
+
+/* --------------------- FONTS ------------------------- */
+
+/* Ultra Light */
+@font-face {
+  font-family: "San Francisco";
+  font-weight: 100;
+  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-ultralight-webfont.woff2");
+}
+
+/* Thin */
+@font-face {
+  font-family: "San Francisco 200";
+  font-weight: 200;
+  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-thin-webfont.woff2");
+}
+
+/* Regular */
+@font-face {
+  font-family: "San Francisco 400";
+  font-weight: 400;
+  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff2");
+}
+
+/* Bold */
+@font-face {
+  font-family: "San Francisco bold";
+  font-weight: bold;
+  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.woff2");
+}
+
+/* Bold */
+@font-face {
+  font-family: "Minion Pro";
+  /* font-weight: bold; */
+  src: url("https://fonts.cdnfonts.com/css/minion-pro");
+}
+
+
+
+/***************** COMMON STRUCTURE **********************/
+
+:root {
+  /* font-family: Cochin, Georgia; */
+  /* font-family: 'Times New Roman', Times, serif; */
+  /* font-family: "Fira Sans Light"; */
+  
+  font-family: 'Tahoma'; 
+  font-family: 'Open Sans';
+  font-family: 'Segoe UI'; 
+
+  font-weight: initial;
+  
+  /* -- Bodytext FONT color */
+  color: #494545;
+
+  /* -- Slides BACKGROUND color */
+  background-color            : white;
+
+  /* -- BOLD font color */
+  --bold-color                : rgb(105, 120, 151);
+  --bold-color                : rgb(71, 111, 184);
+  --bold-color                : rgb(71, 107, 184);
+
+  --italic-color              : rgb(96, 89, 89);
+
+  --italic-background-color   : rgba(142, 145, 146, 0.172);
+
+  /* --background-color          : #fdf6e3; */
+  --list-item-color           : rgb(255, 212, 95);
+
+  --after-color               : rgb(201, 198, 198);
+
+  --table-font-color          : black;
+
+  --table-header-color        : rgb(128, 137, 146);
+
+  --border-color              : #014385;
+
+  --main-color                : rgb(207, 77, 17);
+
+  --darker-color              : #246;
+
+  --lighter-color             : #080a0a;
+
+  --extra-back-color          : rgb(71, 69, 69);
+
+  --letter-spacing            : 0.125px;
+
+  --cool-list-color           : rgb(135, 157, 179);
+
+  --author-align              : right;
+}
+
+/* ------------------- ROOT -----------------------------*/
+
+:root h1 {
+  
+  font-family: 'San Francisco', sans-serif;
+  
+  /* --border-color              : rgb(209, 161, 29); */
+  border-bottom: 1px solid rgb(29, 107, 209) !important;
+  
+  color: #2b2c2e;
+
+  font-weight: 600;
+
+  padding-top: 10pt;
+  padding-left: 60pt;
+
+  margin-left: -60pt;
+  margin-right: -60pt;
+
+  letter-spacing: -0.5px;
+}
+
+
+:root h1 strong {
+
+  color: rgb(255, 52, 52);
+}
+
+
+:root h1 {
+  font-family: 'San Francisco 400';
+}
+
+
+:root p {
+
+  font-size: 34px;
+  font-family: 'San Francisco 400';
+  letter-spacing: -0.5px;
+}
+
+
+:root li {
+
+  font-family: 'San Francisco';
+  letter-spacing: -0.3px;
+}
+
+
+/* ------------------- TITLEPAGE -----------------------------*/
+
+/* Titlepage made with <titlepage> */
+
+section.titlepage .title strong {
+  color: rgb(255, 52, 52);
+}
+
+
+section.titlepage .title {
+
+  font-family: 'San Francisco 400';
+
+  /* border-bottom: 1px solid rgb(179, 176, 176); */
+  border-bottom: 1px solid rgb(29, 107, 209) !important;
+  letter-spacing: -0.3px;
+}
+
+
+section.titlepage .subtitle {
+  font-weight: 300;
+}
+
+
+section.titlepage .author,
+section.titlepage .date,
+section.titlepage .organization {
+  text-align: left;
+}
+
+
+/* Titlepage made with # */
+section.titlepage h1 {
+
+  font-family: 'San Francisco 400';
+
+  border-bottom: 1px solid rgb(29, 107, 209) !important;
+  letter-spacing: -0.3px;
+ 
+  padding-top: 0pt;
+  padding-left: 0pt;
+
+  margin-left: 0pt;
+  margin-right: 0pt;
+}
+
+
+section.titlepage h2 {
+  font-weight: 300;
+}
+
+section.titlepage h3,
+section.titlepage h4,
+section.titlepage h5 {
+  text-align: right;
+}
+
+/* -------------------- TRANSITION ---------------------------------*/
+
+section.transition {
+
+  --transitionpage-color: rgb(23, 148, 197);
+  --transitionpage-color: rgb(129, 127, 127);
+  --transitionpage-color: rgb(155, 153, 153);
+  
+
+  /* font-weight: bold;
+  font-family: serif, sans-serif, "Libre Baskerville", serif;
+  font-family: 'Open Sans';
+  font-family: 'Segoe UI';   */
+
+  font-family: 'San Francisco bold' !important;
+  font-family: 'Segoe UI' !important; 
+
+  font-size: 200%;
+  /* text-shadow: 4px 4px 0 rgb(77, 61, 61); */
+}
+
+/* -------------------- TRANSITION 2---------------------------------*/
+
+section.transition2 {
+
+  background-color: rgb(8, 74, 100);
+
+
+  font-weight: bold;
+
+  /* font-family: serif, sans-serif, "Libre Baskerville", serif;
+  font-family: 'Open Sans';
+  font-family: 'Segoe UI';  */
+  
+  font-family: 'San Francisco bold' !important;
+
+  font-size: 200%;
+  /* text-shadow: 4px 4px 0 rgb(77, 61, 61); */
+}
+
+/* ------------------- CITE -----------------------------*/
+
+section.cite p {
+  
+  color: #fffbfe;
+
+  font-size: 48px;
+  /* font-family: "Libre Baskerville", serif;  */
+  font-family: 'Minion Pro' !important;
+
+  /* font-style: italic; */
+  line-height: 120%;
+}
+
+section.cite {
+
+  --background-color: rgb(32, 62, 77);
+  --strong-color:     #3396a3 ;
+}
+
+

@@ -1,0 +1,20 @@
+{
+  "version": "3.2.7",
+  "invocation_type": "slash-command",
+  "argument_hint": "[variable]",
+  "allowed_tools": [
+    "mcp__mcp-stata__stata_inspect_data"
+  ],
+  "supported_agents": [
+    "claude",
+    "codex",
+    "gemini",
+    "cursor",
+    "windsurf",
+    "vscode"
+  ],
+  "trigger_text": "Describe and summarize the current dataset in memory. Optionally inspect a specific variable with codebook.",
+  "display_name": "Stata Inspect",
+  "short_description": "Describe the active dataset or inspect a specific variable.",
+  "default_prompt": "Use the stata-inspect skill to describe the current dataset or inspect a specific variable."
+}

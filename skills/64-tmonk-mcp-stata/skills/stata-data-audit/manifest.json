@@ -1,0 +1,20 @@
+{
+  "version": "3.2.7",
+  "invocation_type": "context-skill",
+  "allowed_tools": [],
+  "supported_agents": [
+    "claude",
+    "codex",
+    "gemini",
+    "cursor",
+    "windsurf",
+    "vscode"
+  ],
+  "trigger_text": "Audit datasets for structure, missingness, labeling, suspicious values, duplicate identifiers, and documentation readiness. Use when a researcher asks for data QA, codebook review, sanity checks, or pre-analysis cleanup guidance.",
+  "references": [
+    "references/checklist.md"
+  ],
+  "display_name": "Stata Data Audit",
+  "short_description": "Run a structured quality audit on the active dataset.",
+  "default_prompt": "Use the stata-data-audit skill to audit the active dataset and report concrete data quality risks."
+}

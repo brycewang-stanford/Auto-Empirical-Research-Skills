@@ -1,0 +1,32 @@
+name: Check external links
+
+on:
+  schedule:
+    - cron: "0 7 * * 1"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Check maintained-doc external links
+        run: make external-links
+
+      - name: Upload link-check report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: external-link-check
+          path: catalog/external-link-check.json

@@ -1,0 +1,115 @@
+id: edgartools-xbrl
+name: EdgarTools XBRL
+version: "1.1"
+
+# See also: sharp-edges.yaml for production gotchas
+
+identity: XBRL specialist. Low-level access to facts, concepts, and taxonomy. Use Financials skill for simpler needs.
+
+patterns:
+  - name: Get XBRL Object
+    when: Need low-level XBRL access
+    code: |
+      xbrl = company.get_filings(form="10-K")[0].xbrl()  # Returns XBRL or None
+
+      xbrl.entity_name                  # Company name
+      xbrl.fiscal_year                  # e.g., 2024
+      xbrl.fiscal_period                # FY, Q1, Q2, Q3, Q4
+
+  - name: Statements
+    when: Get financial statements from XBRL
+    code: |
+      xbrl.statements.income_statement()
+      xbrl.statements.balance_sheet()
+      xbrl.statements.cash_flow_statement()
+
+      xbrl.statements.names             # ['IncomeStatement', 'BalanceSheet', ...]
+
+  - name: Facts Access
+    when: Query individual facts or search concepts
+    code: |
+      facts = xbrl.facts
+
+      facts.get_facts_by_concept("Revenue")           # Pattern match
+      facts.get_facts_by_concept("Assets", exact=True) # Exact match
+      facts.get_facts_with_dimensions()               # Segment breakdowns
+      facts.get_facts_by_fiscal_period(2024, "FY")    # Specific period
+
+  - name: Multi-Period Stitched Statements
+    when: Compare statements across multiple filings
+    code: |
+      from edgar.xbrl import XBRLS
+      filings = company.get_filings(form="10-K").head(3)
+      xbrls = XBRLS.from_filings(filings)
+
+      income = xbrls.statements.income_statement()                 # standard view
+      income = xbrls.statements.income_statement(view="detailed")  # with dimensional breakdowns
+      df = income.to_dataframe()
+
+  - name: Concept History
+    when: Track a value over time
+    code: |
+      history = xbrl.facts.facts_history("Revenue")  # DataFrame: period_end, value
+
+  - name: Raw Fact Details
+    when: Need fact metadata (units, decimals, context)
+    code: |
+      all_facts = xbrl.facts.get_facts()  # List of enriched dicts
+      # Each fact: concept, value, unit, decimals, period_start, period_end,
+      # dimensions (if any), context_ref
+
+  - name: Calculation Linkbase as DataFrame
+    when: Need per-filer concept hierarchy, extension → us-gaap mapping, or signed weights
+    code: |
+      calc = xbrl.calculation_linkbase()
+      # Columns: concept, concept_taxonomy, parent_concept, parent_taxonomy,
+      #          weight, role_uri, role_short, menucat, is_abstract, label
+      # weight is SIGNED (+1.0 / -1.0) — do not flatten
+
+      # Find extensions that roll up to a us-gaap parent
+      extensions = calc[
+          (calc.concept_taxonomy.isin(['jpm', 'tsla', 'met']) == False) &
+          (~calc.concept_taxonomy.isin(['us-gaap', 'dei', 'srt']))
+      ]
+
+      # Children of a specific parent — e.g., bank revenue components
+      noninterest = calc[calc.parent_concept == 'NoninterestIncome']
+
+      # Filter to face statements only (S=Statement, D=Details, N=Notes, ...)
+      face = calc[calc.menucat == 'S']
+
+  - name: Extension Facts Dropped From a Statement
+    when: A filer has extension concepts in the calc linkbase that are missing from render() output
+    code: |
+      stmt = xbrl.statements.cash_flow_statement()
+
+      # Structural — just the metadata
+      for arc in stmt.extension_arcs():
+          print(f"{arc.concept_taxonomy}:{arc.concept} "
+                f"-> {arc.parent_concept} w={arc.weight:+.1f}")
+
+      # With instance values — one ExtensionArc per (concept, context)
+      for arc in stmt.extension_arcs(include_values=True):
+          print(arc.concept, arc.period_key, arc.value)
+
+      # Note: calling extension_arcs() does NOT change render() output.
+      # It's an opt-in additive view on top of the existing statement.
+
+when_to_use:
+  appropriate:
+    - Segment/dimensional breakdowns
+    - Company-specific concept names
+    - Full fact metadata (units, decimals)
+    - Concepts not in Financials API
+    - Per-filer concept hierarchy (extension → us-gaap parent mapping)
+    - Signed calculation weights for rollup math
+    - Extension concepts dropped from rendered statements
+  inappropriate:
+    - Simple metrics (revenue, net income) → use get_financials()
+    - Report sections → use reports skill
+
+avoid:
+  - pattern: "xbrl.statements.balance_sheet()"
+    when: Just need total assets
+    fix: "company.get_financials().get_total_assets()"
+    why: Financials API is simpler for common metrics

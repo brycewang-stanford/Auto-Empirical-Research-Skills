@@ -1,0 +1,51 @@
+\begin{table}[htbp]\centering\scriptsize
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{\textbf{Model Specification}}
+\label{specification}
+
+\noindent{\justifying{This table reports the robustness check results using high-dimensional interactive fixed effects for a sample of Chinese A-share listed firms from 2003 to 2023. The dependent variable is \textsl{Institution}, defined as the ratio of the number of shares held by institutional investors to the total number of shares at the year-end. The main explanatory variable is \textsl{PTC} (a dummy variable that equals one if the city where the firm is located has established a patent trading center in or before year $t$, and zero otherwise). Control variables include \textsl{Size} (natural logarithm of total assets), \textsl{Balance} (degree of equity balance, calculated as the sum of shareholdings of the 2nd to 10th largest shareholders divided by the shareholding of the largest shareholder), \textsl{ROA} (the ratio of net income to total assets), \textsl{Tobinq} (the ratio of the market value of assets to the book value of assets), \textsl{Age} (natural logarithm of the number of years since the firm's establishment), \textsl{Cash} (net cash flow from operating activities divided by total assets), \textsl{Indept} (the ratio of the number of independent directors to total board members), \textsl{Top1} (the shareholding ratio of the biggest shareholder), \textsl{Dual} (a dummy variable that equals one if the same individual concurrently holds the positions of chairman and general manager and zero otherwise), \textsl{FinDev} (city financial development, measured as the ratio of the balance of loans of financial institutions to regional GDP), \textsl{Innov} (city innovation potential, measured as the ratio of science and technology expenditure to local general budget expenditure), \textsl{Open} (city openness, measured as the ratio of actually utilized Foreign Direct Investment (FDI) to regional GDP), and \textsl{Gov} (government intervention, measured as the ratio of local general budget expenditure to regional GDP). All regressions include firm, year, and city fixed effects. Column (1) further controls for industry $\times$ year fixed effects. Column (2) further controls for province $\times$ year fixed effects. Column (3) simultaneously controls for both industry $\times$ year and province $\times$ year fixed effects. The robust $t$-statistics clustered by the firm are reported in parentheses. ***, **, and * denote the significance at the 1\%, 5\%, and 10\% levels, respectively.\par}}
+\bigskip
+
+\begin{tabularx}{\textwidth}{lYYYYYYYY@{}}
+\toprule
+
+                &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         \\
+\hline\\
+PTC          &  -0.1467\sym{***}&  -0.1260\sym{**} &  -0.1243\sym{**} \\
+                &  (-3.44)         &  (-2.18)         &  (-2.25)         \\
+Size            &  -0.0518\sym{***}&  -0.0314\sym{*}  &  -0.0599\sym{***}\\
+                &  (-3.06)         &  (-1.95)         &  (-3.60)         \\
+Balance         &   0.5939\sym{***}&   0.5809\sym{***}&   0.5949\sym{***}\\
+                &  (24.26)         &  (23.59)         &  (24.40)         \\
+ROA             &   0.9733\sym{***}&   1.0843\sym{***}&   0.9656\sym{***}\\
+                &  (11.03)         &  (12.28)         &  (11.03)         \\
+Tobinq          &  -0.1528\sym{***}&  -0.1338\sym{***}&  -0.1559\sym{***}\\
+                & (-19.01)         & (-17.09)         & (-19.35)         \\
+Age             &  -0.0267         &  -0.0933\sym{***}&  -0.0896\sym{***}\\
+                &  (-0.90)         &  (-2.88)         &  (-2.92)         \\
+Cash            &   0.0374         &   0.0573         &   0.0199         \\
+                &   (0.54)         &   (0.83)         &   (0.29)         \\
+Indept          &  -0.3450\sym{**} &  -0.4110\sym{**} &  -0.4115\sym{***}\\
+                &  (-2.16)         &  (-2.54)         &  (-2.61)         \\
+Top1            &   3.8145\sym{***}&   3.7251\sym{***}&   3.8390\sym{***}\\
+                &  (28.89)         &  (29.53)         &  (29.56)         \\
+Dual            &   0.0390\sym{**} &   0.0464\sym{***}&   0.0393\sym{**} \\
+                &   (2.44)         &   (2.81)         &   (2.44)         \\
+FinDev          &   0.0624\sym{**} &  -0.0217         &  -0.0443         \\
+                &   (2.33)         &  (-0.49)         &  (-1.00)         \\
+Innov           &  -2.0371\sym{***}&  -1.2859\sym{*}  &  -1.5232\sym{**} \\
+                &  (-4.01)         &  (-1.83)         &  (-2.21)         \\
+Open            &   0.7072\sym{*}  &  -0.3219         &   0.2812         \\
+                &   (1.69)         &  (-0.42)         &   (0.41)         \\
+Gov             &  -0.3219         &   0.4176         &   0.2527         \\
+                &  (-1.11)         &   (0.92)         &   (0.58)         \\
+\hline
+Observations    &   45,552         &   45,654         &   45,552         \\
+Firm FE         &      Yes         &      Yes         &      Yes         \\
+Year FE         &      Yes         &      Yes         &      Yes         \\
+Ind $\times$ Year FE&      Yes         &       No         &      Yes         \\
+Prov $\times$ Year FE&       No         &      Yes         &      Yes         \\
+Adjusted $ R^2$ &     0.59         &     0.58         &     0.60         \\
+\bottomrule
+\end{tabularx}
+\end{table}

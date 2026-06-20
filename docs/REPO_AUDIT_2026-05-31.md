@@ -8,7 +8,7 @@ This audit was run from the local workspace after fast-forwarding `main` to `ori
 |---|---:|
 | Top-level `skills/` directories | 54 |
 | Top-level collections with exact-case `SKILL.md` files | 50 |
-| `SKILL.md` files under `skills/` | 969 |
+| Exact-case `SKILL.md` files under `skills/` | 977 |
 | Total tracked files | 3260 |
 | Total workspace size | 116 MB |
 | Markdown workflow docs under `docs/` | 10 |
@@ -41,11 +41,19 @@ This audit was run from the local workspace after fast-forwarding `main` to `ori
 - Added project governance files: `SECURITY.md`, `CODE_OF_CONDUCT.md`, `CITATION.cff`.
 - Added `docs/QUALITY_GATE.md` and `docs/COMPETITIVE_LANDSCAPE.md`.
 - Fixed stale README/README-zh local skill links.
+- Added `scripts/build-provenance.py`, `catalog/provenance.json`, and `docs/LICENSE_AUDIT.md`.
+- Added `scripts/build-skill-audit.py`, `catalog/skill-audit.json`, and `docs/SKILL_AUDIT.md`.
+- Added static search page, install guide, skill submission guide, flagship demos, release process, changelog, and scheduled external-link workflow.
+- Added `evals/flagship-evals.json`, `scripts/build-evals.py`, and generated `docs/EVALS.md` for flagship skill regression prompts.
+- Updated CI to run the full `make validate` quality gate instead of a partial catalog-only check.
+- Added Dependabot, OpenSSF Scorecard, workflow policy validation, and maintainer/agent coordination docs.
+- Removed the unused root `test-skill/` placeholder.
+- Normalized lowercase `skill.md` files to exact-case `SKILL.md`.
 
 ## Recommended Next Steps
 
-1. Add provenance metadata for each top-level collection: upstream URL, license, vendored commit, sync mode, review date.
-2. Add a lightweight static search UI over `catalog/skills.json`.
-3. Split first-party long `SKILL.md` files into lean spines plus `references/` files.
-4. Add a link checker for external URLs on a scheduled workflow, separate from PR CI to avoid network flakes.
-5. Add five "golden workflow" demos that show exactly which skills to use for common empirical-research jobs.
+1. Add exact vendored commit SHAs where upstream snapshots are known.
+2. Split first-party long `SKILL.md` files into lean spines plus `references/` files.
+3. Add screenshots or rendered previews to flagship demo pages.
+4. Convert the flagship eval prompts into executable scorecards.
+5. Build a public benchmark for empirical-research agent workflows.

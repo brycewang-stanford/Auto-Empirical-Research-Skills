@@ -1,0 +1,51 @@
+\begin{table}[htbp]\centering\scriptsize
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{\textbf{Local Patent Trading Infrastructure and Institutional Ownership}}
+\label{baseline}
+
+\noindent{\justifying{This table presents the association between local patent trading infrastructure and institutional ownership for a sample of Chinese A-share listed firms from 2003 to 2023. The dependent variable is \textsl{Institution}, defined as the ratio of shares held by institutional investors to total shares at year-end. The main explanatory variable is \textsl{PTC} (a dummy variable that equals one if the city where the firm is located has established a patent trading center in or before year $t$, and zero otherwise). Other control variables include \textsl{Size} (natural logarithm of total assets), \textsl{Balance} (degree of equity balance, calculated as the sum of shareholdings of the 2nd to 10th largest shareholders divided by the shareholding of the largest shareholder), \textsl{ROA} (the ratio of net income to total assets), \textsl{Tobinq} (the ratio of the market value of assets to the book value of assets), \textsl{Age} (natural logarithm of the number of years since the firm's establishment), \textsl{Cash} (net cash flow from operating activities divided by total assets), \textsl{Indept} (the ratio of the number of independent directors to total board members), \textsl{Top1} (the shareholding ratio of the biggest shareholder), \textsl{Dual} (a dummy variable that equals one if the same individual concurrently holds the positions of chairman and general manager and zero otherwise), \textsl{FinDev} (city financial development, measured as the ratio of the balance of loans of financial institutions to regional GDP), \textsl{Innov} (city innovation potential, measured as the ratio of science and technology expenditure to local general budget expenditure), \textsl{Open} (city openness, measured as the ratio of actually utilized Foreign Direct Investment (FDI) to regional GDP), and \textsl{Gov} (government intervention, measured as the ratio of local general budget expenditure to regional GDP). All regressions include firm and year fixed effects. Province and City fixed effects are included as indicated in the table. The robust $t$-statistics clustered by the firm are reported in parentheses. The detailed variable definitions are presented in Table \ref{definition}. ***, **, and * denote the significance at the 1\%, 5\%, and 10\% levels, respectively.\par}}
+\bigskip
+
+\begin{tabularx}{\textwidth}{lYYYYYYYY@{}}
+\toprule
+
+                &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         &\multicolumn{1}{c}{(5)}         &\multicolumn{1}{c}{(6)}         \\
+\hline\\
+PTC          &  -0.1552\sym{***}&  -0.1795\sym{***}&  -0.1911\sym{***}&  -0.1288\sym{***}&  -0.1545\sym{***}&  -0.1623\sym{***}\\
+                &  (-3.97)         &  (-4.54)         &  (-4.42)         &  (-3.22)         &  (-3.92)         &  (-3.87)         \\
+Size            &  -0.0252         &  -0.0267\sym{*}  &  -0.0267         &  -0.0239         &  -0.0251         &  -0.0254         \\
+                &  (-1.55)         &  (-1.65)         &  (-1.63)         &  (-1.47)         &  (-1.56)         &  (-1.55)         \\
+Balance         &   0.5837\sym{***}&   0.5847\sym{***}&   0.5804\sym{***}&   0.5827\sym{***}&   0.5838\sym{***}&   0.5792\sym{***}\\
+                &  (23.97)         &  (24.02)         &  (23.58)         &  (23.97)         &  (24.00)         &  (23.56)         \\
+ROA             &   1.0904\sym{***}&   1.0978\sym{***}&   1.1052\sym{***}&   1.0851\sym{***}&   1.0930\sym{***}&   1.1043\sym{***}\\
+                &  (12.36)         &  (12.39)         &  (12.43)         &  (12.33)         &  (12.36)         &  (12.43)         \\
+Tobinq          &  -0.1266\sym{***}&  -0.1280\sym{***}&  -0.1311\sym{***}&  -0.1261\sym{***}&  -0.1274\sym{***}&  -0.1305\sym{***}\\
+                & (-16.29)         & (-16.41)         & (-16.69)         & (-16.24)         & (-16.35)         & (-16.63)         \\
+Age             &  -0.0155         &  -0.0274         &  -0.0272         &  -0.0176         &  -0.0288         &  -0.0292         \\
+                &  (-0.41)         &  (-0.68)         &  (-0.68)         &  (-0.47)         &  (-0.72)         &  (-0.74)         \\
+Cash            &   0.0874         &   0.0896         &   0.0839         &   0.0875         &   0.0883         &   0.0813         \\
+                &   (1.26)         &   (1.30)         &   (1.22)         &   (1.26)         &   (1.28)         &   (1.18)         \\
+Indept          &  -0.3600\sym{**} &  -0.3413\sym{**} &  -0.3481\sym{**} &  -0.3810\sym{**} &  -0.3619\sym{**} &  -0.3643\sym{**} \\
+                &  (-2.20)         &  (-2.09)         &  (-2.11)         &  (-2.32)         &  (-2.21)         &  (-2.21)         \\
+Top1            &   3.7117\sym{***}&   3.7192\sym{***}&   3.7052\sym{***}&   3.7141\sym{***}&   3.7194\sym{***}&   3.7046\sym{***}\\
+                &  (29.49)         &  (29.60)         &  (29.12)         &  (29.61)         &  (29.65)         &  (29.15)         \\
+Dual            &   0.0493\sym{***}&   0.0487\sym{***}&   0.0462\sym{***}&   0.0485\sym{***}&   0.0478\sym{***}&   0.0451\sym{***}\\
+                &   (3.00)         &   (2.98)         &   (2.82)         &   (2.95)         &   (2.92)         &   (2.75)         \\
+FinDev          &                  &                  &                  &   0.0426\sym{*}  &   0.0451\sym{*}  &   0.0594\sym{**} \\
+                &                  &                  &                  &   (1.65)         &   (1.74)         &   (2.12)         \\
+Innov           &                  &                  &                  &  -1.6209\sym{***}&  -1.6918\sym{***}&  -1.8129\sym{***}\\
+                &                  &                  &                  &  (-3.31)         &  (-3.39)         &  (-3.63)         \\
+Open            &                  &                  &                  &   0.5335         &   0.5040         &   0.5653         \\
+                &                  &                  &                  &   (1.24)         &   (1.17)         &   (1.31)         \\
+Gov             &                  &                  &                  &   0.1707         &   0.0050         &  -0.2241         \\
+                &                  &                  &                  &   (0.60)         &   (0.02)         &  (-0.76)         \\
+\hline
+Obs             &   45,654         &   45,654         &   45,654         &   45,654         &   45,654         &   45,654         \\
+Firm FE         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         \\
+Year FE         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         \\
+Province FE     &       No         &      Yes         &       No         &       No         &      Yes         &       No         \\
+City FE         &       No         &       No         &      Yes         &       No         &       No         &      Yes         \\
+Adjusted $ R^2$ &     0.57         &     0.57         &     0.57         &     0.57         &     0.57         &     0.57         \\
+\bottomrule
+\end{tabularx}
+\end{table}

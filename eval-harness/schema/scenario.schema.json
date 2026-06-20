@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills/eval-harness/schema/scenario.schema.json",
+  "title": "AERS eval scenario",
+  "description": "Schema for a single eval scenario. Files are authored as TOML in eval-harness/scenarios/<id>.toml; this JSON Schema documents the parsed shape and is enforced by eval-harness/run_evals.py validate_scenario().",
+  "type": "object",
+  "required": ["id", "skill", "title", "category", "severity", "prompt", "rubric"],
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Stable id; MUST equal the file stem so candidate outputs can be looked up as <id>.md.",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "skill": {
+      "type": "string",
+      "description": "Repo-relative path to an existing skill directory under test, e.g. skills/00-Full-empirical-analysis-skill_StatsPAI. Absolute paths and paths escaping the repo are rejected."
+    },
+    "title": {"type": "string"},
+    "category": {
+      "type": "string",
+      "description": "Free-form grouping, e.g. causal-identification, reproducibility, citation-hygiene, runtime-safety, writing-compliance, writing-style."
+    },
+    "severity": {"type": "string", "enum": ["critical", "high", "medium", "low"]},
+    "prompt": {
+      "type": "string",
+      "description": "The user request handed to an agent that has the skill loaded. This is what produces the candidate output."
+    },
+    "context_data": {
+      "type": "array",
+      "description": "Optional repo-relative fixture data paths the scenario depends on; each path must exist and stay inside the repo.",
+      "items": {"type": "string"}
+    },
+    "rubric": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/definitions/rubricItem"}
+    }
+  },
+  "definitions": {
+    "rubricItem": {
+      "type": "object",
+      "required": ["id", "check", "description"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+        "description": {"type": "string"},
+        "required": {
+          "type": "boolean",
+          "description": "If true, failing this item fails the whole scenario (gating)."
+        },
+        "weight": {"type": "number", "minimum": 0, "default": 1},
+        "check": {
+          "type": "string",
+          "enum": [
+            "regex_any", "regex_all", "regex_none", "regex_count_max",
+            "word_count_max", "word_count_min", "numeric_tolerance",
+            "numeric_sign", "manual"
+          ]
+        },
+        "section": {
+          "type": "string",
+          "description": "Optional regex (group 1 captured) to scope the check to part of the candidate, e.g. an abstract."
+        },
+        "pattern": {"type": "string"},
+        "patterns": {"type": "array", "items": {"type": "string"}},
+        "target": {"type": "number", "description": "Threshold for word/count checks."},
+        "per_chars": {"type": "number", "description": "For regex_count_max: normalize target per N characters."},
+        "unit": {"type": "string", "enum": ["words", "chars", "cjk"], "default": "words"},
+        "extract": {"type": "string", "description": "For numeric checks: regex with group 1 = the number."},
+        "expected": {"type": "number"},
+        "tol": {"type": "number"},
+        "sign": {"type": "string", "enum": ["positive", "negative", "zero"]},
+        "guidance": {"type": "string", "description": "For manual checks: instruction to the judge."}
+      }
+    }
+  }
+}

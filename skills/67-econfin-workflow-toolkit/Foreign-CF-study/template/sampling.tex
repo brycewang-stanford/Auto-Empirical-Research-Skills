@@ -1,0 +1,51 @@
+\begin{table}[htbp]\centering\scriptsize
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{\textbf{Alternative Sampling Criteria}}
+\label{sampling}
+
+\noindent{\justifying{This table reports the robustness check results of the association between local patent trading infrastructure and institutional ownership for a sample of Chinese A-share listed firms from 2003 to 2023 using alternative sampling criteria. To examine the effect on market-oriented entities, state-owned enterprises (SOEs) are excluded in Column (1). Due to the impact of extreme market events (the 2008 financial crisis, the 2015 stock market crash, and the COVID-19 pandemic), samples in 2008, 2015, and 2020-2022 are excluded in Column (2). Column (3) excludes non-high-tech firms to focus on innovation-intensive industries. High-tech firms are identified based on the CSRC (2012) industry classification, including sectors such as Pharmaceuticals (C27), Specialized/Transport Equipment (C35-C37), Electronics and Computing (C38-C40), and IT Services (Category I). Results remain robust within this innovation-active subsample. Column (4) excludes firms listed for less than three years to avoid the mechanical impact of IPO lock-up periods. The dependent variable is \textsl{Institution}, defined as the ratio of the number of shares held by institutional investors to the total number of shares at the year-end. The main explanatory variable is \textsl{PTC} (a dummy variable that equals one if the city where the firm is located has established a patent trading center in or before year $t$, and zero otherwise). Other control variables are aligned with Table \ref{baseline}. All regressions include firm, year, and city fixed effects. The robust $t$-statistics clustered by the firm are reported in parentheses. The detailed variable definitions are presented in Table \ref{definition}. ***, **, and * denote the significance at the 1\%, 5\%, and 10\% levels, respectively.\par}}
+\bigskip
+
+\begin{tabularx}{\textwidth}{lYYYYYYYY@{}}
+\toprule
+
+                &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
+                &\multicolumn{1}{c}{Excluding SOEs}&\multicolumn{1}{c}{Excluding Crisis Years}&\multicolumn{1}{c}{Excluding Non-High-Tech}&\multicolumn{1}{c}{Excluding Lock-up Period}\\
+\hline\\
+PTC          &  -0.1610\sym{**} &  -0.1661\sym{***}&  -0.2045\sym{***}&  -0.1915\sym{***}\\
+                &  (-2.51)         &  (-3.87)         &  (-2.75)         &  (-4.21)         \\
+Size            &  -0.0987\sym{***}&  -0.0067         &  -0.0867\sym{***}&   0.0878\sym{***}\\
+                &  (-4.88)         &  (-0.36)         &  (-3.23)         &   (5.49)         \\
+Balance         &   0.4859\sym{***}&   0.6063\sym{***}&   0.4685\sym{***}&   0.5016\sym{***}\\
+                &  (15.97)         &  (21.47)         &  (13.02)         &  (21.92)         \\
+ROA             &   1.0790\sym{***}&   1.0603\sym{***}&   1.0092\sym{***}&   0.5231\sym{***}\\
+                &  (10.94)         &   (9.42)         &   (8.67)         &   (7.05)         \\
+Tobinq          &  -0.1587\sym{***}&  -0.1301\sym{***}&  -0.1642\sym{***}&  -0.0129\sym{**} \\
+                & (-16.72)         & (-13.40)         & (-16.08)         &  (-2.24)         \\
+Age             &  -0.0289         &   0.0215         &  -0.1171\sym{***}&   0.1047\sym{**} \\
+                &  (-0.49)         &   (0.54)         &  (-2.59)         &   (2.28)         \\
+Cash            &   0.0083         &   0.1142         &   0.1575         &   0.0294         \\
+                &   (0.10)         &   (1.35)         &   (1.48)         &   (0.46)         \\
+Indept          &  -0.4531\sym{**} &  -0.3015         &  -0.0518         &  -0.2801\sym{*}  \\
+                &  (-2.21)         &  (-1.56)         &  (-0.23)         &  (-1.88)         \\
+Top1            &   3.7278\sym{***}&   3.8833\sym{***}&   3.1409\sym{***}&   3.2427\sym{***}\\
+                &  (18.78)         &  (26.65)         &  (12.92)         &  (24.86)         \\
+Dual            &   0.0448\sym{**} &   0.0568\sym{***}&   0.0307         &   0.0280\sym{*}  \\
+                &   (2.47)         &   (2.87)         &   (1.29)         &   (1.79)         \\
+FinDev          &   0.0399         &   0.0676\sym{**} &   0.0091         &   0.0569\sym{**} \\
+                &   (1.10)         &   (2.20)         &   (0.20)         &   (2.07)         \\
+Innov           &  -0.4089         &  -2.4418\sym{***}&  -0.2610         &  -1.8068\sym{***}\\
+                &  (-0.74)         &  (-4.29)         &  (-0.43)         &  (-3.73)         \\
+Open            &   0.1705         &   0.2729         &   0.1323         &  -0.0009         \\
+                &   (0.30)         &   (0.58)         &   (0.23)         &  (-0.00)         \\
+Gov             &  -0.8881\sym{**} &  -0.1535         &  -0.5587         &  -0.1024         \\
+                &  (-2.37)         &  (-0.45)         &  (-1.21)         &  (-0.44)         \\
+\hline
+Observations    &   27,394         &   29,968         &   18,710         &   36,008         \\
+Firm FE         &      Yes         &      Yes         &      Yes         &      Yes         \\
+Year FE         &      Yes         &      Yes         &      Yes         &      Yes         \\
+City FE         &      Yes         &      Yes         &      Yes         &      Yes         \\
+Adjusted $ R^2$ &     0.57         &     0.56         &     0.61         &     0.62         \\
+\bottomrule
+\end{tabularx}
+\end{table}

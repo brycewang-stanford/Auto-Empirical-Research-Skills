@@ -1,0 +1,68 @@
+\begin{table}[htbp]\centering\scriptsize
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{\textbf{Matching Techniques and Double Machine Learning}}
+\label{ddml}
+
+\noindent{\justifying{This table reports the robustness check results of the association between local patent trading infrastructure and institutional ownership. Panel A reports the results based on different matching techniques to mitigate potential sample selection bias. Column (1) uses the one-to-one nearest neighborhood matching technique with no replacement to obtain the matched sample. Column (2) uses the kernel matching method. Column (3) employs the entropy balancing matching (EBM) method to reweight the control group. Panel B reports the results obtained using Double Machine Learning (DDML) to control for high-dimensional confounding factors and functional-form misspecification. Columns (1)-(5) correspond to Lasso, Ridge, Random Forest, LightGBM, and Neural Network algorithms. The dependent variable is \textsl{Institution}, defined as the ratio of shares held by institutional investors to total shares at year-end. The main explanatory variable is \textsl{PTC} (a dummy variable that equals one if the city where the firm is located has established a patent trading center in or before year $t$, and zero otherwise). Control variables include \textsl{Size}, \textsl{Balance}, \textsl{ROA}, \textsl{Tobinq}, \textsl{Age}, \textsl{Cash}, \textsl{Indept}, \textsl{Top1}, \textsl{Dual}, \textsl{FinDev}, \textsl{Innov}, \textsl{Open}, and \textsl{Gov}. In Panel B, controls are partialled out via machine learning. Regressions in Panel A include firm, year, and city fixed effects. Regressions in Panel B control for firm and year fixed effects using the Frisch-Waugh-Lovell (FWL) theorem. The robust $t$-statistics clustered by the firm are reported in parentheses. Detailed variable definitions are presented in Table \ref{definition}. ***, **, and * denote the significance at the 1\%, 5\%, and 10\% levels, respectively.\par}}
+\bigskip
+
+\begin{tabularx}{\textwidth}{lYYYYY@{}}
+\toprule
+\multicolumn{4}{l}{\textbf{Panel A: Propensity Score Matching}} \\
+\midrule
+                &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         \\
+                &    1:1 Matching         &Kernel Matching         &   Entropy Balancing Matching         \\
+\midrule
+PTC          &  -0.1352\sym{**} &  -0.1514\sym{***}&  -0.1638\sym{***}\\
+                &  (-2.01)         &  (-2.64)         &  (-3.62)         \\
+Size            &  -0.0350         &  -0.0292         &  -0.0387\sym{**} \\
+                &  (-1.31)         &  (-1.16)         &  (-2.05)         \\
+Balance         &   0.5510\sym{***}&   0.5563\sym{***}&   0.5728\sym{***}\\
+                &  (14.91)         &  (16.28)         &  (20.69)         \\
+ROA             &   1.1707\sym{***}&   1.0562\sym{***}&   1.1002\sym{***}\\
+                &   (8.03)         &   (7.96)         &  (10.41)         \\
+Tobinq          &  -0.1477\sym{***}&  -0.1392\sym{***}&  -0.1390\sym{***}\\
+                & (-11.20)         & (-12.54)         & (-15.90)         \\
+Age             &  -0.0728         &  -0.0537         &  -0.0373         \\
+                &  (-0.85)         &  (-1.28)         &  (-0.95)         \\
+Cash            &   0.1021         &   0.0752         &   0.0557         \\
+                &   (0.95)         &   (0.78)         &   (0.64)         \\
+Indept          &  -0.7177\sym{***}&  -0.5231\sym{**} &  -0.5204\sym{***}\\
+                &  (-3.41)         &  (-2.50)         &  (-2.97)         \\
+Top1            &   3.7316\sym{***}&   3.7286\sym{***}&   3.7081\sym{***}\\
+                &  (19.01)         &  (18.63)         &  (24.70)         \\
+Dual            &   0.0653\sym{**} &   0.0564\sym{*}  &   0.0594\sym{**} \\
+                &   (2.27)         &   (1.92)         &   (2.39)         \\
+FinDev          &   0.0226         &   0.0504         &   0.0421         \\
+                &   (0.60)         &   (1.42)         &   (1.31)         \\
+Innov           &  -1.3825         &  -1.0754\sym{*}  &  -1.2873\sym{**} \\
+                &  (-1.49)         &  (-1.65)         &  (-2.32)         \\
+Open            &   0.2414         &   0.5412         &   0.5994         \\
+                &   (0.40)         &   (1.03)         &   (1.24)         \\
+Gov             &  -0.8752\sym{*}  &  -1.0820\sym{**} &  -0.5190         \\
+                &  (-1.86)         &  (-2.49)         &  (-1.59)         \\
+\hline
+Observations    &   15,916         &   45,506         &   45,654         \\
+Firm FE         &      Yes         &      Yes         &      Yes         \\
+Year FE         &      Yes         &      Yes         &      Yes         \\
+City FE         &       Yes           &     Yes             &      Yes            \\
+Adjusted $ R^2$ &     0.59         &     0.58         &     0.57         \\
+\end{tabularx}
+
+\begin{tabularx}{\textwidth}{lYYYYYYY@{}}
+\toprule
+\multicolumn{6}{l}{\textbf{Panel B: Double Machine Learning (DDML)}} \\
+\midrule
+                &\multicolumn{1}{c}{(1)} &\multicolumn{1}{c}{(2)} &\multicolumn{1}{c}{(3)} &\multicolumn{1}{c}{(4)} &\multicolumn{1}{c}{(5)} \\
+                &    Lasso         &    Ridge         & Random Forest    &   LightGBM       &   Neural Net     \\
+\midrule
+PTC          & -0.1302\sym{***} & -0.1294\sym{***} & -0.0657\sym{**}  & -0.0457\sym{*}   & -0.0802\sym{***} \\
+                & (-5.72)          & (-5.69)          & (-2.57)          & (-1.82)          & (-3.28)          \\
+\midrule
+Observations    &   45,654         &   45,654         &   45,654         &   45,654         &   45,654         \\
+Controls        &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         \\
+Firm FE         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         \\
+Year FE         &      Yes         &      Yes         &      Yes         &      Yes         &      Yes         \\
+\bottomrule
+\end{tabularx}
+\end{table}

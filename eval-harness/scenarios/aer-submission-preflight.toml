@@ -1,0 +1,71 @@
+id = "aer-submission-preflight"
+skill = "skills/50-brycewang-aer-skills/skills/aer-submission"
+title = "Submission preflight must catch AER house-style compliance issues"
+category = "writing-compliance"
+severity = "high"
+context_data = []
+
+prompt = """
+Run a pre-submission compliance check for an AER manuscript. Here is the state
+of my paper: abstract is 140 words; the first section is titled "1.
+Introduction"; my tables use vertical rules and full grid lines; figures are
+exported as PNG; I have not written a disclosure statement; I used an AI tool to
+draft part of the literature review. Tell me exactly what to fix before
+uploading to ScholarOne.
+"""
+
+[[rubric]]
+id = "abstract-over-limit"
+check = "regex_any"
+required = true
+weight = 3
+description = "Flags the 140-word abstract as over the 100-word limit and requires compression."
+patterns = ['(?i)100.?word', '(?i)abstract .{0,30}(too long|over|exceed|trim|cut|compress)', '(?i)40 words over']
+
+[[rubric]]
+id = "no-introduction-heading"
+check = "regex_any"
+required = true
+weight = 3
+description = "Flags that AER format has no 'Introduction' section heading; intro text starts after the abstract."
+patterns = ['(?i)no .{0,12}introduction (heading|section|title)', '(?i)remove the .{0,12}introduction (heading|label)', '(?i)should not (have|use) (an? )?introduction heading']
+
+[[rubric]]
+id = "booktabs-no-vertical-rules"
+check = "regex_any"
+required = true
+weight = 3
+description = "Requires booktabs-style tables and removal of vertical/grid rules."
+patterns = ['(?i)booktabs', '(?i)no vertical rule', '(?i)remove .{0,12}(vertical|grid) (rule|line)', '(?i)horizontal rules only']
+
+[[rubric]]
+id = "vector-figures"
+check = "regex_any"
+required = true
+weight = 2
+description = "Requires vector figure formats (PDF/EPS) instead of PNG/JPG."
+patterns = ['(?i)vector', '(?i)\bPDF\b', '(?i)\bEPS\b', '(?i)not (a )?(png|jpg|jpeg)']
+
+[[rubric]]
+id = "disclosure-statement"
+check = "regex_any"
+required = true
+weight = 2
+description = "Requires a Disclosure Statement (one per author, or explicit 'nothing to disclose')."
+patterns = ['(?i)disclosure statement', '(?i)nothing to disclose', '(?i)disclosure .{0,20}(required|per (co)?author)']
+
+[[rubric]]
+id = "ai-usage-disclosure"
+check = "regex_any"
+required = false
+weight = 2
+description = "Flags that AI assistance must be disclosed per AER policy."
+patterns = ['(?i)AI .{0,20}disclos', '(?i)disclose .{0,20}(AI|artificial intelligence|LLM|tool)', '(?i)AI usage']
+
+[[rubric]]
+id = "no-missed-issues"
+check = "manual"
+required = false
+weight = 2
+description = "Catches all six stated problems without inventing nonexistent ones."
+guidance = "Pass only if the answer addresses all six issues in the prompt (abstract, heading, rules, PNG, disclosure, AI) and does not fabricate additional fake violations."

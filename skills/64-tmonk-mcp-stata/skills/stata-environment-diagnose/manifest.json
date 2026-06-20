@@ -1,0 +1,23 @@
+{
+  "version": "3.2.7",
+  "invocation_type": "context-skill",
+  "allowed_tools": [],
+  "supported_agents": [
+    "claude",
+    "codex",
+    "gemini",
+    "cursor",
+    "windsurf",
+    "vscode"
+  ],
+  "trigger_text": "Diagnose local Stata, MCP, package, startup, graph-export, and permissions issues. Use when setup is failing, Stata is not discovered, packages are missing, logs are truncated, or a managed machine behaves differently from a normal workstation.",
+  "references": [
+    "references/troubleshooting.md"
+  ],
+  "scripts": [
+    "scripts/report_environment.py"
+  ],
+  "display_name": "Stata Environment Diagnose",
+  "short_description": "Diagnose setup, package, and environment failures around mcp-stata.",
+  "default_prompt": "Use the stata-environment-diagnose skill to diagnose environment, package, and setup problems around mcp-stata."
+}

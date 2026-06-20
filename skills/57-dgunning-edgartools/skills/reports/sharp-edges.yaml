@@ -1,0 +1,123 @@
+# Sharp Edges - Production gotchas for Reports (10-K/10-Q/8-K)
+
+sharp_edges:
+  - id: document-vs-obj
+    summary: Use filing.obj() for sections, not filing.document()
+    severity: high
+    solution: |
+      tenk = filing.obj()
+      risk_factors = tenk.risk_factors       # Convenience property
+      risk_factors = tenk['Item 1A']         # By item key
+    detection_pattern: 'document\(\)\.text.*Item|filing\.document\(\).*search'
+
+  - id: item-key-format
+    summary: Use correct item key format for each report type
+    severity: medium
+    solution: |
+      # 10-K/10-Q: "Item 1", "Item 1A", "Item 7"
+      tenk['Item 1A']      # Risk Factors
+
+      # 8-K: "Item 1.01", "Item 5.02"
+      eightk['Item 5.02']  # Personnel Changes
+
+      print(tenk.items)    # Check available items
+
+  - id: item-may-be-none
+    summary: Not all items exist in every filing
+    severity: medium
+    solution: |
+      risk_factors = tenk.risk_factors
+      if risk_factors:
+          print(risk_factors.text[:1000])
+
+      if 'Item 1A' in tenk.items:
+          risk = tenk['Item 1A']
+
+  - id: text-vs-html
+    summary: Item.text is plain text, tables lose structure
+    severity: low
+    solution: |
+      plain = item.text                     # Plain text
+      # For tabular data, use financials skill (XBRL structured)
+
+  - id: forty-f-not-item-numbers
+    summary: 40-F uses NI 51-102 section names, not US Item numbers
+    severity: high
+    solution: |
+      # WRONG: forty_f['Item 1'] → None (40-F has no US Item numbers)
+      # RIGHT: Use section names or convenience properties
+      forty_f.risk_factors                   # Convenience property
+      forty_f['Risk Factors']                # Exact name
+      forty_f['business']                    # Fuzzy keyword match
+
+      # Check what sections exist
+      print(forty_f.items)  # ['Corporate Structure', 'Risk Factors', ...]
+
+  - id: forty-f-sections-may-be-absent
+    summary: Not all NI 51-102 sections appear in every 40-F filing
+    severity: medium
+    solution: |
+      # Some sections vary by company — always check for None
+      cap = forty_f.capital_structure
+      if cap:
+          print(cap[:500])
+      else:
+          print("No capital structure section in this AIF")
+
+  - id: auditor-may-be-none
+    summary: auditor is None on 10-Q and filings without XBRL DEI data
+    severity: medium
+    solution: |
+      if tenk.auditor:
+          print(tenk.auditor.name, tenk.auditor.firm_id)
+
+  - id: subsidiaries-only-tenk
+    summary: subsidiaries is TenK only; None if no EX-21 exhibit
+    severity: medium
+    solution: |
+      subs = tenk.subsidiaries   # SubsidiaryList or None
+      if subs:
+          df = subs.to_dataframe()
+
+  - id: deal-none-for-atm
+    summary: Deal price/shares are None for ATM offerings (price is "at-the-market")
+    severity: high
+    solution: |
+      deal = prospectus.deal
+      if deal.is_atm:
+          # price and shares are None — use gross_proceeds from cover page
+          print(deal.gross_proceeds)  # May still be available
+      else:
+          print(f"${deal.price} x {deal.shares:,}")
+
+  - id: deal-424b2-different
+    summary: 424B2 structured notes have different content than equity 424B5
+    severity: medium
+    solution: |
+      deal = prospectus.deal
+      if deal.offering_type.value == "structured_note":
+          # Most equity fields (shares, dilution) will be None
+          # Use prospectus.structured_note_terms instead
+          terms = prospectus.structured_note_terms
+          if terms:
+              print(terms.underlying, terms.maturity_date)
+
+  - id: deal-dilution-equity-only
+    summary: Dilution data only populated for equity offerings, not debt/notes
+    severity: medium
+    solution: |
+      if deal.dilution_per_share is not None:
+          print(f"Dilution: ${deal.dilution_per_share}/share")
+      # None for debt offerings, structured notes, ATMs without dilution table
+
+  - id: eightk-items-different
+    summary: 8-K items indicate events, detail often in exhibits
+    severity: low
+    solution: |
+      eightk = filing.obj()
+      print(eightk.items)  # ['Item 2.02', ...]
+
+      # Check exhibits for full press release
+      for attachment in filing.attachments:
+          if 'press release' in attachment.description.lower():
+              print(attachment)

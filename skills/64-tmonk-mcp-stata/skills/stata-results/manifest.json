@@ -1,0 +1,20 @@
+{
+  "version": "3.2.7",
+  "invocation_type": "slash-command",
+  "argument_hint": "",
+  "allowed_tools": [
+    "mcp__mcp-stata__stata_get_results"
+  ],
+  "supported_agents": [
+    "claude",
+    "codex",
+    "gemini",
+    "cursor",
+    "windsurf",
+    "vscode"
+  ],
+  "trigger_text": "Fetch and display stored r(), e(), and s() results from the last Stata command.",
+  "display_name": "Stata Results",
+  "short_description": "Show stored Stata results from the most recent command.",
+  "default_prompt": "Use the stata-results skill to fetch and summarize stored Stata results."
+}

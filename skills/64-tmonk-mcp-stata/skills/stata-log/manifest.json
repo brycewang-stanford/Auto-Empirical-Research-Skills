@@ -1,0 +1,20 @@
+{
+  "version": "3.2.7",
+  "invocation_type": "slash-command",
+  "argument_hint": "<path or task_id> [search_term]",
+  "allowed_tools": [
+    "mcp__mcp-stata__stata_read_log"
+  ],
+  "supported_agents": [
+    "claude",
+    "codex",
+    "gemini",
+    "cursor",
+    "windsurf",
+    "vscode"
+  ],
+  "trigger_text": "Tail, read, or search a Stata log file from a previous command or background task.",
+  "display_name": "Stata Log",
+  "short_description": "Read or search a Stata log from a prior command or task.",
+  "default_prompt": "Use the stata-log skill to inspect a log file or background task output."
+}

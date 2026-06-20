@@ -1,0 +1,9 @@
+{
+  "task": "card-iv-recovery",
+  "method": "OLS vs 2SLS (nearc4 instrument), manual two-stage",
+  "n": 3010,
+  "ols_return": 0.0747,
+  "iv_return": 0.1315,
+  "first_stage_coef": 0.3199,
+  "first_stage_F": 13.26
+}

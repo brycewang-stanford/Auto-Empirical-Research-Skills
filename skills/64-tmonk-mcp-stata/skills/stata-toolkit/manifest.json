@@ -1,0 +1,22 @@
+{
+  "version": "3.2.7",
+  "invocation_type": "context-skill",
+  "allowed_tools": [],
+  "supported_agents": [
+    "claude",
+    "codex",
+    "gemini",
+    "cursor",
+    "windsurf",
+    "vscode"
+  ],
+  "trigger_text": "Activate when users mention Stata commands, .do files, regressions, econometrics, stored results, graphs, dataset inspection, replication, or Stata errors. Route the task through mcp-stata tools and the specialized research skills instead of treating it as plain text coding.",
+  "references": [
+    "references/tool-reference.md",
+    "references/research-workflows.md",
+    "references/error-handling.md"
+  ],
+  "display_name": "Stata Toolkit",
+  "short_description": "Dispatch Stata work to the right mcp-stata tools and research skills.",
+  "default_prompt": "Use the stata-toolkit skill to route the user's Stata task through the appropriate tools and specialist skills."
+}

@@ -1,0 +1,62 @@
+# Sharp Edges - Production gotchas for XBRL Analysis
+
+sharp_edges:
+  - id: use-financials-first
+    summary: Use Financials skill for common metrics, not raw XBRL
+    severity: high
+    solution: |
+      # SIMPLE - for common metrics
+      revenue = company.get_financials().get_revenue()
+
+      # XBRL - only for raw facts, segments, concept research
+      xbrl = filing.xbrl()
+      facts = xbrl.facts.get_facts_by_concept("Revenue")
+    detection_pattern: 'xbrl.*get_facts.*Revenue|xbrl.*balance_sheet.*Assets'
+
+  - id: xbrl-can-be-none
+    summary: filing.xbrl() returns None if no XBRL data
+    severity: high
+    solution: |
+      xbrl = filing.xbrl()
+      if xbrl:
+          print(xbrl.entity_name)
+      else:
+          print("No XBRL data")
+    detection_pattern: 'filing\.xbrl\(\)\.(?!.*if)'
+
+  - id: concept-name-variance
+    summary: XBRL concept names vary by company
+    severity: high
+    solution: |
+      # Pattern match (recommended)
+      facts = xbrl.facts.get_facts_by_concept("Revenue")
+
+      # Exact match
+      facts = xbrl.facts.get_facts_by_concept("Revenues", exact=True)
+
+      # Or use Financials API which normalizes
+      revenue = company.get_financials().get_revenue()
+
+  - id: dimensional-facts-complexity
+    summary: Segment breakdowns return multiple values per period
+    severity: medium
+    solution: |
+      segment_facts = xbrl.facts.get_facts_with_dimensions()    # Detail
+      totals_only = [f for f in facts if not f.get('dimensions')]  # Filter
+
+  - id: period-vs-instant
+    summary: Income items are duration, balance sheet items are instant
+    severity: medium
+    solution: |
+      for fact in facts:
+          if 'period_start' in fact:  # Duration (income, cash flow)
+              print(f"{fact['period_start']} to {fact['period_end']}")
+          else:                        # Instant (balance sheet)
+              print(f"As of {fact['period_end']}")
+
+  - id: units-and-decimals
+    summary: Check units and decimals for correct scale
+    severity: low
+    solution: |
+      for fact in xbrl.facts.get_facts():
+          print(f"Value: {fact['value']}, Unit: {fact['unit']}")

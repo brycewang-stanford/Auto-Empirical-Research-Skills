@@ -1,0 +1,58 @@
+id = "aer-abstract-100words"
+skill = "skills/50-brycewang-aer-skills/skills/aer-introduction"
+title = "AER abstract must be compressed to the mandatory 100-word limit"
+category = "writing-compliance"
+severity = "high"
+context_data = []
+
+prompt = """
+Compress the following draft abstract to AER's mandatory limit. Keep the main
+result with its magnitude and sign. Return ONLY the final abstract.
+
+Draft: "In this paper, we undertake a comprehensive and detailed investigation
+into the relationship between access to early childhood education programs and
+a wide range of long-run labor market outcomes. Using a large administrative
+dataset and a regression discontinuity design that exploits an age-based
+enrollment cutoff, we estimate the causal effect of program participation. We
+find that participation increases adult earnings by approximately 12 percent on
+average, and that the effects are substantially larger for children from
+disadvantaged backgrounds. These findings have potentially important
+implications for the design of public policy regarding early childhood
+education and for ongoing debates about how best to reduce inequality."
+"""
+
+# The abstract section is captured if the output labels it; otherwise the whole
+# output is treated as the abstract.
+[[rubric]]
+id = "abstract-le-100-words"
+check = "word_count_max"
+section = '(?is)abstract[:\s]*\n?(.+)'
+target = 100
+unit = "words"
+required = true
+weight = 5
+description = "Final abstract is at most 100 words (AER returns longer abstracts without review)."
+
+[[rubric]]
+id = "keeps-magnitude"
+check = "regex_any"
+required = true
+weight = 3
+description = "Preserves the headline magnitude and sign of the main result (the ~12% earnings increase)."
+patterns = ['12\s?(percent|%)', 'increase[sd]? .{0,20}(earnings|wages)']
+
+[[rubric]]
+id = "drops-filler"
+check = "regex_none"
+required = false
+weight = 2
+description = "Removes vacuous filler openings characteristic of bloated abstracts."
+patterns = ['(?i)in this paper, we undertake', '(?i)comprehensive and detailed investigation', '(?i)a wide range of']
+
+[[rubric]]
+id = "names-identification"
+check = "regex_any"
+required = false
+weight = 2
+description = "Still names the identification strategy (regression discontinuity / enrollment cutoff) in the compressed abstract."
+patterns = ['(?i)regression discontinuity', '(?i)\bRD\b', '(?i)cutoff', '(?i)discontinuity']

@@ -1,0 +1,53 @@
+id = "statspai-clustered-inference"
+skill = "skills/00-Full-empirical-analysis-skill_StatsPAI"
+title = "Few-cluster DiD inference must cluster at the treatment level and correct for few clusters"
+category = "causal-identification"
+severity = "high"
+context_data = []
+
+prompt = """
+I run a state-level difference-in-differences: a policy was adopted by 6 states,
+with 44 states as controls, estimated on individual-level microdata. I clustered
+the standard errors at the individual level and almost everything is highly
+significant. Is my inference right?
+"""
+
+[[rubric]]
+id = "cluster-at-treatment-level"
+check = "regex_any"
+required = true
+weight = 4
+description = "Says to cluster at the level of treatment assignment (state), not the individual level."
+patterns = ['(?i)cluster (at|on|by) (the )?(state|treatment|assignment|policy)', '(?i)level of (treatment )?(assignment|variation)', '(?i)cluster.{0,25}(state|treatment) level', '(?i)individual.?level cluster(ing)? is (wrong|incorrect|too low|not)', '(?i)should cluster (by|at|on) state']
+
+[[rubric]]
+id = "few-clusters-problem"
+check = "regex_any"
+required = true
+weight = 4
+description = "Flags that with ~6 treated / few clusters the usual cluster-robust asymptotics are unreliable."
+patterns = ['(?i)few clusters', '(?i)small number of clusters', '(?i)number of (treated )?clusters', '(?i)6 (treated )?(states|clusters)', '(?i)too few (treated )?(states|clusters)', '(?i)finite.?sample', '(?i)downward.?biased (cluster )?(SE|standard error)']
+
+[[rubric]]
+id = "wild-bootstrap-or-cr2"
+check = "regex_any"
+required = true
+weight = 3
+description = "Recommends a few-clusters-robust correction (wild cluster bootstrap, CR2/CR3, effective-DoF, or randomization inference)."
+patterns = ['(?i)wild (cluster )?bootstrap', '(?i)cameron.?gelbach.?miller', '(?i)\bCR2\b', '(?i)\bCR3\b', '(?i)bias.?reduced', '(?i)effective (degrees of freedom|number of clusters)', '(?i)satterthwaite', '(?i)randomization inference', '(?i)permutation (test|inference)']
+
+[[rubric]]
+id = "not-default-reliable"
+check = "regex_none"
+required = true
+weight = 3
+description = "Does NOT reassure that individual-level clustering or default robust SEs give reliable significance here."
+patterns = ['(?i)individual.?level cluster(ing)? is (fine|ok|correct|sufficient|appropriate)', '(?i)(default )?(robust|heteroskedasticity.?robust) (SE|standard error)s? (are|is) (fine|enough|correct|reliable) here', '(?i)no clustering needed', '(?i)significance is reliable', '(?i)your inference is (fine|correct|right)']
+
+[[rubric]]
+id = "power-caveat"
+check = "manual"
+required = false
+weight = 2
+description = "Notes that with so few treated clusters even correct inference has limited power, and frames conclusions accordingly."
+guidance = "Pass if the answer warns that 6 treated clusters fundamentally limits power and precision, so wide intervals or inconclusive results are expected rather than a flaw to be engineered away."

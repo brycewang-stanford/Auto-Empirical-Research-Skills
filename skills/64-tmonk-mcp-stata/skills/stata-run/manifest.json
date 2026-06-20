@@ -1,0 +1,21 @@
+{
+  "version": "3.2.7",
+  "invocation_type": "slash-command",
+  "argument_hint": "<code or /path/to/file.do>",
+  "allowed_tools": [
+    "mcp__mcp-stata__stata_run",
+    "mcp__mcp-stata__stata_read_log"
+  ],
+  "supported_agents": [
+    "claude",
+    "codex",
+    "gemini",
+    "cursor",
+    "windsurf",
+    "vscode"
+  ],
+  "trigger_text": "Run arbitrary Stata code or a .do file and display the result.",
+  "display_name": "Stata Run",
+  "short_description": "Execute Stata code or a do-file and show the result.",
+  "default_prompt": "Use the stata-run skill to execute Stata code or a do-file and summarize the result."
+}

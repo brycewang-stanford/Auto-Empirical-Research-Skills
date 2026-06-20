@@ -1,0 +1,20 @@
+{
+  "version": "3.2.7",
+  "invocation_type": "context-skill",
+  "allowed_tools": [],
+  "supported_agents": [
+    "claude",
+    "codex",
+    "gemini",
+    "cursor",
+    "windsurf",
+    "vscode"
+  ],
+  "trigger_text": "Track dataset lineage, transformation steps, merge logic, and reproducibility risks in Stata workflows. Use when the user needs to explain where data came from, how it changed, or why a pipeline can be trusted.",
+  "references": [
+    "references/lineage.md"
+  ],
+  "display_name": "Stata Data Provenance",
+  "short_description": "Trace dataset lineage and reproducibility risks in Stata pipelines.",
+  "default_prompt": "Use the stata-data-provenance skill to explain dataset lineage and identify reproducibility risks."
+}

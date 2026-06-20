@@ -1,0 +1,530 @@
+---
+name: longlist
+description: Brainstorm a longlist of benefits and costs for a project. Outputs two clean tables (benefits and costs), each with materiality (H/M/L), a cash flow tag (cash in / cash out / non-cash), a quantification method, and a monetisation method. Supports HMT Green Book, EU Better Regulation Guidelines, World Bank, Asian Development Bank, and the Victorian Treasury High Value High Risk (HVHR) framework.
+allowed-tools:
+  - Bash
+  - Read
+  - Write
+  - Glob
+  - AskUserQuestion
+  - Skill
+---
+
+**Only stop to ask the user when:** the project description, counterfactual, or sponsor is missing.
+**Never stop to ask about:** sector detection, lens choice, formatting, table layout, output filename, or which methods to use. Pick sensible defaults and keep moving.
+
+<!-- preamble: update check -->
+Before starting, run this silently. If it outputs UPDATE_AVAILABLE, tell the user:
+"A new version of econstack is available. Run `cd ~/.claude/skills/econstack && git pull` to update."
+Then continue with the skill normally.
+
+```bash
+~/.claude/skills/econstack/bin/econstack-update-check 2>/dev/null || true
+```
+
+<!-- preamble: project learnings -->
+After the update check, run this silently to load prior learnings for this project:
+
+```bash
+eval "$(~/.claude/skills/econstack/bin/econstack-slug)"
+~/.claude/skills/econstack/bin/econstack-learnings-read --limit 3 2>/dev/null || true
+```
+
+If learnings are found, apply them. When a prior learning influences a decision, note: "Prior learning applied: [key]".
+
+**Capturing new learnings:** After completing this skill, log new insights via:
+
+```bash
+~/.claude/skills/econstack/bin/econstack-learnings-log '{"skill":"...","type":"...","key":"...","insight":"...","confidence":N,"source":"observed|user-stated|inferred"}'
+```
+
+Types: `framework` (preferred appraisal framework), `parameter` (custom overrides), `data-source` (preferred data), `output` (past report references), `operational` (tool/env quirks), `preference` (formatting/style). Confidence: 9-10 observed/stated, 6-8 strong inference, 4-5 weak. User-stated never decays; observed/inferred lose 1 point per 30 days. All data stored locally. Nothing transmitted.
+
+<!-- preamble: parameter database check -->
+After the update check, verify the parameter database is available and check staleness:
+
+```bash
+PARAMS_DIR="$HOME/econstack-data/parameters"
+if [ -d "$PARAMS_DIR" ]; then
+  PARAM_COUNT=$(find "$PARAMS_DIR" -name "*.json" 2>/dev/null | wc -l | tr -d ' ')
+  echo "PARAMS: $PARAM_COUNT files loaded from $PARAMS_DIR"
+
+  # Check for stale files (last_verified > 2 years ago)
+  STALE=$(find "$PARAMS_DIR" -name "*.json" -mtime +730 2>/dev/null | wc -l | tr -d ' ')
+  if [ "$STALE" -gt 0 ]; then
+    echo "PARAMS_WARNING: $STALE file(s) not updated in 2+ years. Run: cd ~/econstack-data && git pull"
+  fi
+else
+  echo "PARAMS: not found. Using built-in defaults. For full parameter support: git clone https://github.com/charlescoverdale/econstack-data.git ~/econstack-data"
+fi
+```
+
+If PARAMS_WARNING appears, tell the user which parameter files may be stale and recommend updating. Continue with the skill normally using whatever parameters are available.
+
+<!-- preamble: safety hooks -->
+
+**Safety rules for this skill:**
+
+1. **Parameter database is read-only.** Never write to, modify, or delete files in `~/econstack-data/parameters/`. These are shared, versioned parameters maintained separately. If a parameter needs updating, tell the user to update the econstack-data repo.
+
+2. **Confirm before overwriting.** Before writing an output file, check if a file with the same name already exists. If it does, ask the user: "A file named [filename] already exists. Overwrite it, or save with a new name?" Do not silently overwrite.
+
+<!-- preamble: completion status -->
+**At the end of every skill run, report one of these statuses:**
+
+- **DONE**: Analysis complete, output generated, all sections finished.
+- **DONE_WITH_CONCERNS**: Output generated but with caveats (e.g., data gaps, assumptions that need review, sections below expected depth).
+- **BLOCKED**: Cannot proceed (e.g., missing critical input, parameter database unavailable, framework not supported).
+- **NEEDS_CONTEXT**: Need more information from the user before continuing.
+
+Format: `STATUS: [status] | [one-line reason]`
+
+# /longlist: Benefits and Costs Longlist
+
+The pre-CBA brainstorming skill. Produces a single clean longlist of benefits and costs for a project, with materiality (H/M/L), how to quantify each item, and how to monetise it. Designed to hand straight off to any downstream CBA or business case workflow.
+
+The output is two tables. That is the whole skill.
+
+## Arguments
+
+```
+/longlist [project description] [options]
+```
+
+**Examples:**
+```
+/longlist "New secondary school in Leeds"
+/longlist "Climate adaptation via city greening, Milan"
+/longlist "Mandatory climate disclosure for large EU firms" --framework eu-brg
+/longlist "Victorian level crossing removal" --framework au-vic
+/longlist "Rural water supply project, Indonesia" --framework adb
+/longlist "Urban transport upgrade, Nairobi" --framework wb
+/longlist "Rural broadband rollout" --benefits-only
+```
+
+**Options:**
+- `--framework <name>` : `uk-gb` (default), `eu-brg`, `wb`, `adb`, or `au-vic`. Auto-detected from context if not set.
+- `--sponsor <type>` : `government` (default), `private`, `blended`, `philanthropic`. Drives the Cash flow column. Anchors what counts as cash on whose books. See Step 1.
+- `--section <name>` : Emit only one sub-component. Options: `full` (default), `benefits` (benefits table only), `costs` (costs table only), `summary` (cash flow summary only). Combinable with commas.
+- `--benefits-only` / `--costs-only` : Legacy aliases. Equivalent to `--section benefits` and `--section costs`.
+- `--format <type>` : Output format(s). Options: `markdown` (default, always generated), `xlsx`, `word`, `pptx`, `pdf`, or `all`. Comma-separate for multiple.
+- `--client "Name"` : Add "Prepared for" metadata to the output.
+
+## Supported frameworks
+
+| Flag | Framework | Use when |
+|------|-----------|----------|
+| `uk-gb` | UK HM Treasury Green Book (2022, with Wellbeing supplementary 2021) | Default. Public investment, infrastructure, programmes, place-based interventions. Categories: cash-releasing, non-cash quantifiable, qualitative, distributional, wellbeing, carbon. |
+| `eu-brg` | EU Better Regulation Guidelines (2021, SWD(2021) 305) | Regulations and EU-level interventions. Categories: economic, social, environmental, fundamental rights, SMEs, competitiveness. Compliance costs via Standard Cost Model. Companion methodology in the Better Regulation Toolbox. |
+| `wb` | World Bank Economic Analysis of Investment Operations (OP 10.04; 2023 Technical Note) | World Bank-financed projects in low and middle income countries. Economic rate of return (ERR), economic NPV at country-specific discount rate, distributional incidence, poverty impact, incremental approach. Standard shadow pricing for tradables, non-tradables, labour. |
+| `adb` | Asian Development Bank Guidelines for the Economic Analysis of Projects (2017 revision) | ADB-financed projects in Asia and the Pacific. Economic internal rate of return (EIRR), 9% hurdle rate (reducible to 6% for climate, health, education), poverty and distributional analysis, willingness-to-pay for non-traded outputs. |
+| `au-vic` | Victorian Treasury High Value High Risk (HVHR) framework | Victorian Government projects above the HVHR threshold (typically AUD 100m capital, or otherwise designated high risk). Six-gate assurance process. Benefits expressed against an Investment Logic Map (ILM) and a Benefit Management Plan with named owners, KPIs, baselines, targets, and realisation timeframes. Disbenefits captured explicitly. ATAP M1 applies for transport sub-cases. |
+
+**Auto-detection rules:**
+- Mentions of "HVHR", "Investment Logic Map", "ILM", "Victorian Government", "Victoria", "Melbourne", "Geelong", or AUD with Victorian context -> `au-vic`
+- Mentions of "ADB", "Asian Development Bank", or Asian DMC context (Pakistan, Bangladesh, Indonesia, Philippines, Vietnam, Nepal, Sri Lanka, Pacific Islands) with project finance framing -> `adb`
+- Mentions of "World Bank", "IBRD", "IDA", "IFC project", or Africa / Latin America public investment context -> `wb`
+- Mentions of "regulation", "RIA", "compliance cost", "directive", "EU", "EUR", "Member State", "SMEs", "Brussels", "EC", "ESMA" -> `eu-brg`
+- Everything else -> `uk-gb`
+
+## Instructions
+
+### Step 1: Get project description, counterfactual, and sponsor
+
+Ask the user in ONE `AskUserQuestion` batch. If the project description was given on the command line, only ask for the remaining items.
+
+**Required questions:**
+1. Project description (free text, 2-3 sentences). What is it, where, what is it trying to achieve.
+2. Counterfactual (free text). What happens if the project does NOT go ahead? This must be *dynamic*: what evolves over time without intervention (deterioration, demand growth, committed policies in the pipeline).
+3. Sponsor (multiple choice, default = Government / municipality). Who is the named funder whose books we are tracking for cash flow? Options:
+   - Government / municipality (default)
+   - Private investor (equity or debt)
+   - Blended (government + private + grants)
+   - Philanthropic / grant-funded
+
+The sponsor anchors the Cash flow column. An item is **cash in** when real money moves onto the sponsor's books, **cash out** when real money moves off, and **non-cash** when the social value has no money attached to the sponsor. Same item can be cash to a municipality and non-cash to a private investor, so the sponsor choice matters.
+
+If `--sponsor` was passed on the command line, skip the sponsor question. Default is government.
+
+Do NOT ask sector, scale, type, lens, materiality thresholds, or anything else. Detect them from the description.
+
+If project description or counterfactual is missing or vague, ask once more for clarification, then proceed with best guess.
+
+### Step 2: Brainstorm internally (do NOT narrate to the user)
+
+Silently walk through these lenses to surface candidates. Do not show the working. The output is the table, not the brainstorm.
+
+1. **Stakeholders**: who is the direct beneficiary, who is indirectly affected (supply chain, neighbours, community, government, future generations, environment), who loses?
+2. **Causal chain (compressed ToC)**: inputs -> activities -> outputs -> outcomes -> impacts. Benefits sit mostly at outcomes/impacts. Costs sit mostly at inputs/activities.
+3. **Framework taxonomy**: walk through every category for the chosen framework (see below). This catches benefits invisible through stakeholder mapping alone.
+4. **Sector trap check**: for the detected sector, what is commonly missed and what is commonly double-counted?
+
+**For `uk-gb`, the categories are:**
+- Cash-releasing benefits (direct budget savings)
+- Non-cash quantifiable (outputs delivered, harms avoided)
+- Non-cash qualitative (quality, safety, satisfaction)
+- Distributional (impacts on low-income, protected characteristics, regions)
+- Wellbeing (WELLBY)
+- Carbon and environmental (split into operational vs embodied)
+
+**For `eu-brg`, the categories are:**
+- Economic impacts (GDP, productivity, innovation, competitiveness)
+- Business impacts including SMEs (compliance costs via SCM)
+- Consumer impacts (prices, choice, safety, information)
+- Social impacts (employment, equality, health, social inclusion)
+- Environmental impacts (climate, biodiversity, resources)
+- Fundamental rights and territorial impacts
+
+**For `wb` (World Bank), the categories are:**
+- Incremental project benefits (with-project minus without-project, consistent with the counterfactual)
+- Direct economic benefits to intended beneficiaries (user time savings, yield uplift, avoided cost, improved health outcomes)
+- Distributional incidence by income decile and poverty headcount impact
+- Environmental externalities (local and global, with carbon at shadow price)
+- Fiscal effects (changes to government revenue and spending, relevant to sustainability)
+- Willingness-to-pay for non-marketed outputs
+- Risk and sensitivity (since Bank guidance emphasises scenario testing over optimism bias uplift)
+
+**For `adb` (Asian Development Bank), the categories are:**
+- Economic benefits quantified against the without-project counterfactual using shadow prices for tradables and non-tradables
+- Willingness-to-pay for incremental output, with consumer surplus where demand curves can be estimated
+- Resource cost savings (avoided imports, avoided electricity generation, avoided user cost)
+- Poverty impact, distributional analysis, and gender-disaggregated benefits where material
+- Climate co-benefits and carbon priced at the ADB shadow carbon price
+- Labour benefits valued at shadow wage rates (urban and rural skilled / unskilled)
+- Sensitivity and switching values (ADB requires switching values on headline variables)
+
+**For `au-vic` (HVHR), the categories follow the Investment Logic Map and Benefit Management Plan structure:**
+- Strategic benefits (alignment with the ILM problem-benefit logic, government priorities)
+- Service delivery benefits (improved access, quality, reliability for end users)
+- Cost savings (cash-releasing or avoided cost across the asset life)
+- Revenue generation (new or expanded revenue streams)
+- Risk reduction (avoided losses, resilience, regulatory compliance, safety)
+- Asset condition and lifecycle benefits (extended useful life, deferred renewal)
+- Wider economic benefits (per ATAP M1 for transport; agglomeration, productivity, labour supply)
+- Environmental benefits (carbon at the Australian shadow price, biodiversity, water)
+- Distributional impacts (regional Victoria, equity groups, Aboriginal Victorians)
+- **Disbenefits** (HVHR requires negative impacts to be captured explicitly alongside benefits)
+
+Each HVHR benefit MUST have: a named **owner**, a measurable **KPI**, a **baseline**, a **target**, a **measurement method**, and a **realisation timeframe**. The longlist captures the KPI and measurement method in the quantification column. The owner, baseline, target, and timeframe are added downstream in the CBA or business case.
+
+Target longlist size: **8-15 benefits and 5-10 costs**. Do not pad. Do not produce 30 items.
+
+### Step 3: Apply filters before tabulating
+
+Drop or downgrade items that violate any of these rules. If something is dropped, list it once in the "Excluded" section below the table with a one-line reason. Do not put excluded items in the main table.
+
+**Always exclude:**
+- **Sunk costs.** Resources already committed that cannot be recovered. Green Book 2022 §5.17.
+- **Transfers** (in social CBA). Tax revenue on new earnings, council tax from new residents, welfare payments — these move money between parties without creating real resources. Note them as fiscal effects, not social benefits.
+
+**Always flag and downgrade (move to Excluded with reason):**
+- **Construction employment** when capital cost is already on the cost side. The labour is paid for inside the capex line. Only include if there is genuine local labour market slack and the user explicitly asks.
+- **Land value uplift** when journey time savings (or any direct accessibility benefit) is already counted. Land values capitalise the same effect.
+- **Tax receipts on earnings** when gross individual earnings are already on the benefits side.
+
+### Step 4: Build the two tables
+
+Each table has seven columns. Use H/M/L for materiality based on expected share of total NPV (H = top 3-5 items / >20% each; M = 5-20%; L = <5%).
+
+For the **Cash flow** column, tag each item from the sponsor's perspective (set in Step 1):
+
+- **Cash in** : real money moves onto the sponsor's books. Examples: user fees, ticket sales, grant receipts, avoided opex the sponsor would otherwise pay, avoided capex the sponsor would otherwise fund, lease or rental income.
+- **Cash out** : real money moves off the sponsor's books. Examples: construction capex, operating expenditure, irrigation water bills, debt interest, maintenance, contractor payments.
+- **Non-cash** : social value with no money attached to the sponsor. Examples: heat deaths avoided, WELLBYs, biodiversity net gain, air quality improvements, carbon sequestration (unless the sponsor can actually sell credits).
+
+Rules for tagging:
+- **Avoided municipal costs** (e.g. avoided stormwater grey infrastructure) are **Cash in** when the sponsor is the municipality: the sponsor would otherwise have paid them.
+- **Avoided healthcare costs** are **Cash in** when the sponsor is the healthcare system (NHS, SSN, Medicare) and **Non-cash** when the sponsor is a local municipality or a private investor.
+- **Carbon sequestration** is **Non-cash** by default. Mark it **Cash in** only if the sponsor can actually monetise the carbon (registered offset credits in a functioning market).
+- **Property value uplift** is **Non-cash** to a public sponsor (it accrues to private landowners), and already flagged as a likely double-count anyway.
+- **Construction capex and annual O&M** are always **Cash out**.
+- **Embodied construction carbon** is **Non-cash** (social cost, no money to anyone).
+- **Transfers** go to Excluded (as today). They are neither cash flow nor social value.
+
+If the sponsor is `blended`, tag the item from the perspective of whoever bears or receives the dominant share.
+
+For the **quantification method**, write a short concrete approach: how to measure the item in physical units. Examples: "tCO2e sequestered per ha × ha planted × decay curve", "heat-related deaths avoided estimated from EuroHEAT exposure-response × heat days × population in catchment", "compliance hours per business × number of affected businesses × frequency".
+
+For the **monetisation method**, write the route from physical units to money: a published unit value, an analytical approach, or "qualitative only - narrative treatment". Cite the specific source. Examples: "DESNZ shadow carbon price (Italy: EU ETS price as proxy)", "Italian VSL ~ EUR 1.6m per fatality avoided", "Standard Cost Model: hours × median wage × frequency".
+
+If no method exists for an item, write "Qualitative only - narrative treatment" in the monetisation column. Do not leave blank.
+
+### Step 5: Write the output
+
+Save `longlist-[slug]-[YYYY-MM-DD].md` with this exact structure. Nothing more, nothing less.
+
+```markdown
+# Longlist: [Project Name]
+
+**Framework**: [uk-gb | eu-brg | au-vic] · **Sponsor**: [government | private | blended | philanthropic] · **Date**: [YYYY-MM-DD]
+**Project**: [1-2 sentence project description]
+**Counterfactual**: [1-2 sentence dynamic baseline]
+
+## Benefits
+
+Table 1: Benefits longlist.
+
+| # | Benefit | Description | Materiality | Cash flow | Quantification method | Monetisation method |
+|---|---------|-------------|:-----------:|:---------:|----------------------|---------------------|
+| 1 | [name] | [one sentence] | H | Cash in / Non-cash | [physical-unit method] | [unit value or approach with source] |
+| 2 | ... | ... | M | ... | ... | ... |
+| ... | | | | | | |
+
+Source: Authors' analysis using [framework name].
+
+## Costs
+
+Table 2: Costs longlist.
+
+| # | Cost | Description | Materiality | Cash flow | Quantification method | Monetisation method |
+|---|------|-------------|:-----------:|:---------:|----------------------|---------------------|
+| 1 | [name] | [one sentence] | H | Cash out / Non-cash | ... | ... |
+| ... | | | | | | |
+
+Source: Authors' analysis.
+
+## Excluded
+
+- **[Item name]**: [reason — sunk cost / double-counts row N / transfer / etc.]
+- ... (omit this section entirely if no exclusions)
+
+## Cash flow summary
+
+| Side | Cash items (count) | Non-cash items (count) | Note |
+|------|:------------------:|:----------------------:|------|
+| Benefits | [n_cash_in] | [n_non_cash_benefits] | [one line, e.g. "Most benefits are non-cash social value; requires public or philanthropic funding"] |
+| Costs | [n_cash_out] | [n_non_cash_costs] | [one line, e.g. "All costs are cash out from the sponsor"] |
+
+## Next step
+
+Hand this to a downstream CBA or business case workflow to monetise and compute both economic and financial NPV.
+
+<!-- KEY NUMBERS
+type: longlist
+project: [name]
+framework: [framework]
+sponsor: [sponsor]
+n_benefits: [count]
+n_costs: [count]
+n_h_benefits: [count]
+n_h_costs: [count]
+n_cash_in_benefits: [count]
+n_non_cash_benefits: [count]
+n_cash_out_costs: [count]
+n_non_cash_costs: [count]
+date: [YYYY-MM-DD]
+-->
+```
+
+That is the entire output. No methodology section. No shortlist section. No detail tables. No JSON companion.
+
+**Sub-component selection** (via `--section`): if the user wants only part of the output, emit only those parts. In all modes include the header block.
+
+- `full` (default): header + both tables + Excluded + Cash flow summary + next step
+- `benefits`: header + benefits table only
+- `costs`: header + costs table only
+- `summary`: header + cash flow summary only
+- `benefits,costs`: both tables without summary / excluded / next step
+
+Always include the KEY NUMBERS comment at the bottom.
+
+**Format-specific output structure** (only produce formats explicitly requested; see dispatcher below):
+- **Markdown (.md)**: `longlist-[slug]-[date].md` with the structure shown above.
+- **Excel (.xlsx)**: invoke the `xlsx` skill. Two sheets: `Benefits` and `Costs`, seven columns each. Conditional formatting on the materiality column (green H, amber M, grey L) and on the Cash flow column (green "Cash in", red "Cash out", grey "Non-cash"). Save as `longlist-[slug]-[date].xlsx`.
+- **Word (.docx)**: invoke the `docx` skill. One document: header block, benefits table, costs table, excluded list, cash flow summary. Save as `longlist-[slug]-[date].docx`.
+- **PowerPoint (.pptx)**: invoke the `pptx` skill. Four slides: title / counterfactual, benefits table, costs table, cash flow summary. Action titles. Save as `longlist-[slug]-[date].pptx`.
+- **PDF**: render markdown through the econstack Quarto template. Save as `longlist-[slug]-[date].pdf`.
+
+## Output formats
+
+The user requests format(s) via `--format`. Default: `md`. Comma-separated lists are allowed (e.g. `--format md,pdf`); `all` expands to every supported format.
+
+For each format **explicitly requested**, produce that file and only that file:
+
+- `md`: write the markdown inline (only when `md` is in the requested set).
+- `docx`: invoke the `docx` skill with the rendered content.
+- `pdf`: render via the econstack Quarto template (or invoke the `pdf` skill if no template exists for this skill).
+- `xlsx`: invoke the `xlsx` skill with the structured tables.
+- `pptx`: invoke the `pptx` skill with the briefing as a deck.
+
+**Do NOT produce formats that were not requested.** This is the v0.4 fix for the multi-format leak that previously caused `--format pdf` to also write `.md` and `.docx` files alongside the PDF. Any intermediate files needed during rendering must go to a temp directory and be cleaned up before the skill returns.
+
+When you finish, the file listing in your "Saved:" message must contain exactly the files the user asked for, no extras.
+
+
+Tell the user:
+```
+Longlist complete. [N] benefits, [M] costs.
+
+Saved: longlist-[slug]-[date].md
+[Other formats listed only if generated]
+```
+
+## Citation discipline
+
+Every numerical claim in the output must be followed by an inline citation in the form `[SOURCE_CODE, vintage]`. `SOURCE_CODE` is a short tag (e.g. `ONS_PSF`, `OBR_EFO`, `BoE_MPR`, `Fed_FOMC`, `ECB_EB`, `RBA_SoMP`, `IMF_WEO`, `OECD_EO`, `Eurostat`, `BLS`, `BEA`, `FRED`, `ABS`, `Comtrade`) matching an entry in the References footer. `vintage` is the publication date of the source data (e.g. `Mar 2026`, `Q4 2025`, `Jan 2026`).
+
+**Examples:**
+
+> CPI was 3.4% YoY in March 2026 [ONS_CPI, Mar 2026].
+
+> The OBR forecasts borrowing falling to 1.6% of GDP by 2028-29 [OBR_EFO, Mar 2026].
+
+> Industry concentration is moderate: HHI is 1,820 across the top 8 firms [Companies_House, Q4 2025].
+
+**Numbers that cannot be sourced to a primary publication must NOT appear in the output.** No exceptions: do not estimate, infer from training data, interpolate, or recall from memory. If a needed number isn't in fetched data, state it explicitly:
+
+> [Source] has not yet published this measure for [period].
+
+**Self-check before output**: scan the draft for every number. If any number lacks an inline citation, either add the citation or remove the number. Citation density should be roughly even across sections; a section with no citations is a red flag that the section was generated rather than sourced.
+
+
+## Factuality
+
+When citing parameter values (carbon prices, QALY values, VTTS, optimism bias percentages, distributional weights), use values from `~/econstack-data/parameters/` rather than recall. The parameter database is the source of truth and is dated. If a parameter is not in the database, state that and use a built-in default with an explicit "fallback" annotation. Do not invent or interpolate parameter values from memory.
+
+Common gotchas: HMT Green Book STPR is currently 3.5% with a declining schedule for long horizons (Annex 6); DESNZ shadow carbon price varies by year and is published annually; QALY GBP 70k is the Green Book wellbeing supplement value, not the NICE HTA threshold (GBP 20k to 30k). Cite which is which.
+
+## Out of scope (unless explicitly requested)
+
+A longlist is a brainstorm, not a CBA. Do NOT:
+
+- Recommend which benefits or costs to pursue. That is a downstream judgement.
+- Compute NPV, BCR, or rank-order options.
+- Apply optimism bias or sensitivity analysis here. Those belong in CBA.
+- Pre-quantify items as "M" or "L" without explaining the materiality reasoning in one line.
+- Skip items because they are likely to be small. Materiality is L, not zero.
+
+If the user asks for any of the above, route to `/cba` or `/business-case` (downstream CBA / business-case skills) rather than expanding longlist scope.
+
+## Method library (for filling in the quantification + monetisation + cash flow columns)
+
+This is a lookup the skill uses internally. Do not show it to the user. Pick the closest match for each item; if nothing fits, fall back to "primary research" or "qualitative only". The Cash flow column assumes a government sponsor. Adjust for other sponsors per Step 4 rules (e.g. avoided NHS costs are Cash in to the NHS as sponsor but Non-cash to a municipality).
+
+### UK Green Book defaults (`uk-gb`)
+
+| Item type | Quantification | Monetisation | Cash flow (gov sponsor) |
+|-----------|----------------|--------------|:-----------------------:|
+| Travel time savings | Minutes saved × annual trips | DfT TAG values per minute by purpose. [TAG Data Book](https://www.gov.uk/government/publications/tag-data-book). | Non-cash |
+| Accidents avoided | Casualties avoided by severity | TAG A4.1 casualty unit costs | Non-cash |
+| Carbon (operational) | tCO2e by year | DESNZ shadow carbon price | Non-cash |
+| Carbon (embodied) | RICS Whole Life Carbon × capex | DESNZ shadow carbon price | Non-cash |
+| QALYs | Cohort × per-person QALY gain | GBP 70k/QALY (Green Book wellbeing supp.); cite NICE GBP 20-30k for HTA | Non-cash |
+| Avoided NHS admissions | Admissions avoided | NHS Reference Costs (HRG) | Cash in (NHS) or Non-cash (other sponsor) |
+| Wellbeing | WELLBYs gained | GBP 13k per WELLBY | Non-cash |
+| Earnings uplift | Cohort × wage premium × deadweight discount | DfE returns to qualifications | Non-cash |
+| Avoided welfare spend | Person-years unemployed avoided | GMCA Unit Cost Database | Cash in (central government) |
+| Land value uplift | Hectares × uplift factor | MHCLG Land Value Estimates (only if not double-counting) | Non-cash to public sponsor |
+| Air quality | tonnes of pollutant reduced | Defra air quality damage costs | Non-cash |
+| Flood risk reduction | Properties protected × probability | EA Flood Damage Costs | Non-cash (unless sponsor owns protected assets) |
+| Biodiversity | BNG units | Natural England BNG metric, Defra ENCA | Non-cash (unless credits are sold) |
+| Recreation / amenity | Visits, hectares | Defra ENCA values, or hedonic pricing | Non-cash (unless fees charged) |
+| User fees / charges / tickets | Users × tariff | Market tariff schedule | Cash in |
+| Grant receipts | Award amount × draw-down profile | Grant agreement | Cash in |
+| Construction (capital) | GIA × £/sqm or BoQ | BCIS, SPON's | Cash out |
+| Operating and maintenance | Annual estimate | 2-5% of capex (BCIS FM benchmarks) | Cash out |
+| Optimism bias | % uplift on capex | HMT Supplementary Green Book Table 1 | Cash out |
+
+### EU Better Regulation defaults (`eu-brg`)
+
+| Item type | Quantification | Monetisation | Cash flow (gov sponsor) |
+|-----------|----------------|--------------|:-----------------------:|
+| Compliance cost (business) | Affected firms × hours × frequency | Standard Cost Model: hours × median EU/national wage | Non-cash to government; cash out to regulated firms |
+| Familiarisation cost | One-off hours per firm × firms | SCM, one-off | Non-cash to government |
+| Direct business benefits | Cost or time saved per firm | SCM applied to savings side | Non-cash to government |
+| Consumer benefit (prices) | Price change × market size | Price elasticity × price × volume | Non-cash |
+| Consumer benefit (info, choice) | Affected consumers | Stated preference WTP, or "qualitative only" | Non-cash |
+| Safety / fatalities avoided | Fatalities avoided | EU Reference VSL (~ EUR 3.6m, EC 2021); national VSL where available | Non-cash |
+| Carbon (operational) | tCO2e | EU ETS price, or EC Better Regulation shadow carbon price | Non-cash |
+| Air quality | Pollutant tonnes reduced | EEA / NEEDS damage cost values | Non-cash |
+| SME impact | Number of SMEs affected, costs | SCM with separate SME cost share | Non-cash to government |
+| Fundamental rights | Affected rights and groups | Qualitative only - narrative treatment | Non-cash |
+| Environmental (biodiversity, water) | Affected hectares / volumes | EC Natural Capital Accounting where available, otherwise qualitative | Non-cash |
+| Compliance and enforcement (public sector) | FTEs × annual cost | Eurostat labour costs | Cash out |
+| EU grant / structural funds inflow | Award × draw-down profile | Grant agreement (e.g. NextGenerationEU, ERDF, LIFE) | Cash in |
+
+### World Bank defaults (`wb`)
+
+| Item type | Quantification | Monetisation | Cash flow (gov sponsor) |
+|-----------|----------------|--------------|:-----------------------:|
+| Travel time savings (transport) | Hours saved × users × trips per year | Shadow wage rate (typically 30-50% of market wage for non-working time in low-income contexts); or local VOT study | Non-cash |
+| Yield uplift (agriculture) | Δ yield (t/ha) × area × farmgate price | FAO price database or country MAFF farmgate prices | Cash in (to farmers, or farmer-owned cooperatives) |
+| Reduced water fetching time | Hours saved × affected population | Shadow wage for women / children (often 0.5x adult wage) | Non-cash |
+| Health outcomes (DALYs / reduced morbidity) | DALYs avoided | GDP per capita × DALYs × 1.0-3.0 GDP multiplier (WHO CHOICE), or country-specific cost-per-DALY | Non-cash |
+| Education (additional years of schooling) | Δ years × cohort × Mincer return | Mincerian earnings function, country-specific coefficient | Non-cash (unless cost-of-schooling avoided) |
+| Electrification (grid or off-grid) | kWh delivered × consumers | Willingness-to-pay studies, or cost of next-best alternative (kerosene, diesel) | Cash in if tariff revenue; else Non-cash |
+| Avoided emissions | tCO2e | World Bank shadow carbon price (USD 40-80/t, rising to USD 50-100 by 2030) | Non-cash |
+| Avoided environmental damage | Physical units × damage cost | World Bank Environmental Economics values, or benefit transfer from peer studies | Non-cash |
+| Operational and maintenance costs | Annual by project type | Country-specific unit costs, or %-of-capex benchmarks | Cash out |
+| Capital costs | BoQ × unit rates | Country construction cost databases, or regional comparables | Cash out |
+
+### ADB defaults (`adb`)
+
+| Item type | Quantification | Monetisation | Cash flow (gov sponsor) |
+|-----------|----------------|--------------|:-----------------------:|
+| Transport: travel time savings | Hours saved × users × trips per year | ADB shadow wage rate by country and skill level | Non-cash |
+| Transport: VOC savings | Vehicle-km by type | ADB Transport Appraisal Note VOC formulae, or HDM-4 output | Non-cash |
+| Irrigation yield uplift | Δ yield (t/ha) × area × farmgate price | ADB Economic Analysis reference values; FAO prices adjusted for distortions | Cash in (farmers) |
+| Power generation | kWh produced × net | Willingness-to-pay; or avoided cost of next-best plant; or tariff revenue | Cash in (if tariff revenue retained by sponsor) |
+| Water supply | m³ delivered × consumers | Willingness-to-pay studies (ADB Compendium); or avoided cost of private water vendors | Cash in (if tariff revenue); else Non-cash |
+| Health: DALYs avoided | Cohort × per-person DALY gain | 1-3x GDP per capita per DALY, country-specific | Non-cash |
+| Education: wage premium | Graduates × wage premium × deadweight discount | Country-specific Mincerian returns | Non-cash |
+| Carbon benefits | tCO2e | ADB shadow carbon price (USD 36.30/t from 2017, rising) | Non-cash |
+| Gender-specific benefits | Women / girls affected × benefit per person | Same as above, disaggregated and reported separately | Non-cash |
+| Capital costs | BoQ × country construction rates | ADB country construction cost benchmarks, Rawlinsons (regional) | Cash out |
+| Operating and maintenance | Whole-of-life annual estimate | Country-specific benchmarks; typically 2-5% of capex per year | Cash out |
+| Sensitivity and switching values | Required by ADB for all major variables | ADB guidelines specify +/-20% scenarios and switching value computation | n/a |
+
+### Victoria HVHR defaults (`au-vic`)
+
+For HVHR projects, every benefit needs a KPI and a measurement method. The "quantification" column captures the KPI; the "monetisation" column cites the unit value or pricing source.
+
+| Item type | Quantification (KPI) | Monetisation | Cash flow (gov sponsor) |
+|-----------|----------------------|--------------|:-----------------------:|
+| Travel time savings (transport) | Vehicle-hours saved by mode and purpose | ATAP PV5 unit values per hour by purpose | Non-cash |
+| Vehicle operating cost savings | Vehicle-km by vehicle type | ATAP PV5 VOC formulae | Non-cash (users save; not sponsor) |
+| Road safety improvements | Crashes avoided by severity (fatal / serious / minor) | BITRE crash unit costs; or AUD ~5.4m per fatality (OBPR 2024) | Non-cash |
+| Carbon (operational) | tCO2e by year | Australian shadow carbon price | Non-cash |
+| Carbon (embodied) | RICS WLCA × capex intensity | Same shadow carbon price as operational | Non-cash |
+| Health and wellbeing | QALYs / DALYs gained | AUD 250k/QALY (PBAC reference) | Non-cash |
+| Reliability improvements | Standard deviation of journey time × trips | ATAP PV5 reliability ratio | Non-cash |
+| Accessibility (jobs / services within X minutes) | Population catchment increase | Hedonic property values, or qualitative | Non-cash |
+| Agglomeration / WEBs | Effective density × elasticity | ATAP M1 WEBs methodology (supplementary only) | Non-cash |
+| Service delivery (health, education, justice) | Patient visits, student-years, case throughput | Vic Department service unit costs | Non-cash (unless fees charged) |
+| Asset condition uplift | Asset condition score improvement; renewal years deferred | Avoided renewal capex, discounted to PV | Cash in (avoided future capex by the same sponsor) |
+| Risk reduction | Probability × consequence reduction | Expected value of avoided loss | Cash in if avoided payout is on sponsor's books; else Non-cash |
+| Indigenous and equity outcomes | Specific KPI (e.g. Aboriginal Victorians employed) | Often qualitative; supplement with distributional weights | Non-cash |
+| **Disbenefits** (HVHR requires explicit capture) | KPI describing the harm | Same source as the analogous benefit; or qualitative | Non-cash (use Cash out only if a real sponsor payout) |
+| User fares / tolls / fees | Users × tariff | Published tariff schedule | Cash in |
+| Commonwealth grant receipts | Award × draw-down profile | Federal funding agreement | Cash in |
+| Construction (capital) | Bill of quantities × Rawlinsons / Cordell rates | Rawlinsons Australian Construction Handbook; Cordell | Cash out |
+| Operating and maintenance | Annual cost estimate | Whole-of-life model; typically 1.5-3% of capex per year | Cash out |
+| Optimism bias / risk contingency | P50 / P90 contingency | Vic DTF Investment Lifecycle Guidelines risk allowance | Cash out |
+| Probity, gateway and assurance costs | Six-gate gateway review fees, probity advisor fees | Bottom-up estimate | Cash out |
+
+### Universal fallbacks
+
+- **No published unit value**: state "Primary research: [survey | interviews | Delphi panel | revealed preference]" with rough sample/scope.
+- **No quantification possible**: "Qualitative only - narrative treatment".
+- **Construction employment**: do NOT include unless slack exists; even then, flag and put in Excluded.
+- **Tax receipts on new earnings**: Excluded (transfer).
+
+## Important rules
+
+- **Counterfactual is mandatory.** If the user does not give one, ask once. If still missing, refuse to produce a longlist - the comparison has no meaning without it.
+- **Sponsor is mandatory for the Cash flow column.** Default is government. A non-government sponsor (private investor, blended, philanthropic) changes the tagging significantly for items like avoided public expenditure, user fees, and grant receipts. If the sponsor is genuinely unclear, default to government and note the assumption in the header.
+- **Cash flow ≠ materiality.** A Cash in item is not automatically more important than a Non-cash item. A park project is dominated by Non-cash benefits that still make it worth doing. Cash flow is a separate lens for financial viability, not a ranking.
+- **Every row must have a Cash flow tag.** No blank cells. If unsure, default to Non-cash and explain the tagging in a footnote. Transfers still go to Excluded.
+- **The brainstorm is internal.** Do not show stakeholder lists, ToC steps, or lens-by-lens working in the output. The user wanted a table. Give them a table.
+- **Maximum three interactive questions.** Project description, counterfactual, and sponsor. That is it. Do not pepper the user with sector / scale / lens / materiality questions.
+- **Materiality is a judgement call.** H = top 3-5 items, expected to dominate NPV. M = meaningful but not headline. L = small or speculative.
+- **Quantification ≠ monetisation.** Quantification gives you physical units (tonnes, lives, hours). Monetisation converts to money. Both columns are required for every row.
+- **Drop, do not bury.** Items that fail filters go to the Excluded section, not into the main table greyed out. Keep the main table clean.
+- **No sunk costs. No transfers in social CBA. No double counts.** See the filter rules in Step 3.
+- **Do not narrate the methodology.** No "Methodology" section. No "Lenses applied" footer. No shortlist recommendation. The next-step line is the only metadata that survives.
+- **Em dashes**: never use em dashes in any output. Use commas, colons, parentheses, or "and".
+
+## Integration with other skills
+
+- The two tables are designed to hand off directly to any downstream CBA, business case, or RIA workflow. The **Cash flow** column supports both an Economic NPV (all items at shadow prices) and a Financial NPV (cash items only, at the sponsor's cost of capital).
+- `/econ-audit` can audit a longlist for double counting, transfer inclusion, and filter compliance.

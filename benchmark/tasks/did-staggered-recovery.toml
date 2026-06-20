@@ -1,0 +1,67 @@
+id = "did-staggered-recovery"
+title = "Staggered DiD recovery: does the pipeline avoid the TWFE trap and recover the true ATT?"
+data = "benchmark/data/sim-staggered-did.csv"
+reference_candidate = "reference-did"
+
+description = """
+A simulated staggered-adoption panel (60 units x 10 periods, two treated cohorts
+plus a never-treated group) with HETEROGENEOUS, DYNAMIC treatment effects. The data
+is noiseless and additive, so the true average treatment effect on the treated is
+known by construction and is recomputed by the checker as mean(y - y0) over the
+treated unit-periods (y0, the untreated potential outcome, ships as a column the
+estimators never read).
+
+This is the canonical modern-DiD lesson (Goodman-Bacon 2021; de Chaisemartin &
+D'Haultfoeuille 2020; Callaway & Sant'Anna 2021): a single-coefficient two-way
+fixed-effects (TWFE) regression is a contaminated weighted average under staggered
+timing with dynamic effects and is BIASED for the true ATT, while a group-time
+estimator that only uses not-yet-treated / never-treated units as controls
+RECOVERS it.
+
+A pipeline that handles this correctly must: (1) report the naive TWFE estimate
+and recognize it is biased (here it is biased to ~half the truth), and (2) report
+a staggered-robust estimate that recovers the true ATT. Data-derived golds are
+recomputed from the dataset by the checker, so a candidate cannot pass by
+fabricating numbers.
+"""
+
+# Construction constant (informational; the checker recomputes true_att from y0).
+true_att_by_construction = 2.9091
+
+[[gold]]
+id = "robust-recovers-true-att"
+required = true
+weight = 4
+description = "A staggered-robust (Callaway-Sant'Anna-style) estimate recovers the true ATT recomputed from the data."
+check = "recovers_truth"
+field = "cs_att"
+truth_key = "true_att"
+tol = 0.15
+
+[[gold]]
+id = "twfe-is-biased"
+required = true
+weight = 3
+description = "Reports the naive single-coefficient TWFE estimate and it is far from the true ATT (surfaces the staggered-TWFE bias rather than hiding it)."
+check = "biased_away"
+field = "twfe_att"
+truth_key = "true_att"
+min_gap = 0.5
+
+[[gold]]
+id = "robust-beats-twfe"
+required = false
+weight = 2
+description = "The robust estimate is closer to the true ATT than the naive TWFE estimate is (informational)."
+check = "closer_to_truth"
+near_field = "cs_att"
+far_field = "twfe_att"
+truth_key = "true_att"
+
+[[gold]]
+id = "honest-reported-numbers"
+required = true
+weight = 3
+description = "The candidate's reported TWFE and robust estimates match what the checker recomputes by running both estimators on the data (no fabricated numbers)."
+check = "cross_check"
+tol = 0.02

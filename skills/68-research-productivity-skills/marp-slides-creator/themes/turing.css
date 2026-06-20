@@ -1,0 +1,261 @@
+/* @theme turing */
+
+/*
+  ============================================
+    Created by Paulo Cunha
+    version: 1.0
+    last update: 22.jun.2023
+  ============================================       
+*/
+
+/* Importing COLOR SCHEMA */
+
+@import "default";
+@import "schema";
+@import "structure";
+
+/* Importing Font */
+/* Font Credit: htts://https://www.cdnfonts.com/ */
+@import url('https://fonts.cdnfonts.com/css/fira-sans?styles=20119');
+@import url('https://fonts.cdnfonts.com/css/open-sans');
+@import url('https://fonts.cdnfonts.com/css/segoe-pro');
+
+/* ------------------- ROOT -----------------------------*/
+
+:root {
+  /* font-family: Cochin, Georgia; */
+  /* font-family: 'Times New Roman', Times, serif; */
+  /* font-family: "Fira Sans Light"; */
+  
+  /* font-family: 'Open Sans Light'; */
+  /* font-family: 'Segoe UI';  */
+  font-family: 'Segoe Pro Display', sans-serif;
+  
+  font-weight: initial;
+  
+  /* -- Bodytext FONT color */
+  color: #494545;
+
+  /* --background-color          : #fdf6e3; */
+  background-color            : white;
+
+  /* -- BOLD font color */
+  --bold-color                : rgb(71, 107, 184);
+
+  --italic-color              : rgb(96, 89, 89);
+  --italic-background-color   : rgba(52, 170, 209, 0.172);
+
+  --list-item-color           : rgb(255, 212, 95);
+
+  --after-color               : rgb(201, 198, 198);
+
+
+  --table-header-color        : rgb(74, 96, 117);
+  --border-color              : #014385;
+
+  --main-color                : rgb(207, 77, 17);
+
+  --darker-color              : #246;
+
+  --lighter-color             : #080a0a;
+
+  --extra-back-color          : rgb(71, 69, 69);
+
+  --cool-list-color           : rgb(0, 102, 255);
+
+}
+
+
+:root p {
+  
+  font-size: 32px;
+  /* font-family: "Fira Sans Light";
+  font-family: 'Segoe UI';  */
+  font-family: 'Open Sans';
+
+  letter-spacing: -0.8px;
+  
+}
+
+:root ul, ol{
+  font-size: 27px;
+  /* font-family: 'Segoe UI'; 
+  font-family: 'Open Sans'; */
+  font-family: "Fira Sans Light";
+
+  letter-spacing: -0.5px;
+}
+
+:root h1 {
+  
+  /* background-color: #1098db2d; */
+  
+  --border-color: rgb(94, 128, 173);
+  --border-color: rgb(22, 112, 230);
+  
+  color: #2b2c2e;
+
+  font-weight: 600;
+
+  padding-top: 10pt;
+  padding-left: 20pt;
+
+  margin-left: -20pt;
+  /* margin-right: -60pt; */
+
+  letter-spacing: -0.5px;
+
+}
+
+:root h1 strong {
+  color: rgb(255, 52, 52);
+}
+
+/* ------------------- TITLEPAGE -----------------------------*/
+
+/* Titlepage made with <titlepage> */
+
+section.titlepage .title {
+  /* border-bottom: 1px solid rgb(179, 176, 176); */
+  border-bottom: 1px solid rgb(29, 107, 209);
+  letter-spacing: -0.6px;
+}
+
+section.titlepage .title strong {
+  color: rgb(255, 52, 52);
+}
+
+section.titlepage .subtitle {
+  font-weight: 300;
+}
+
+section.titlepage .author,
+section.titlepage .date,
+section.titlepage .organization {
+  text-align: left;
+}
+
+
+/* Titlepage made with # */
+section.titlepage h1 {
+
+  border-bottom: 1px solid rgb(29, 107, 209);
+
+  /* color: #3878b8; */
+  /* background-color: initial; */
+ 
+  padding-top: 0pt;
+  padding-left: 0pt;
+
+  margin-left: 0pt;
+  margin-right: 0pt;
+
+  letter-spacing: -0.6px;
+
+}
+
+section.titlepage h2 {
+  font-weight: 300;
+}
+
+
+
+/* -------------------- TRANSITION ---------------------------------*/
+section.transition {
+
+  background-color: rgb(255, 82, 2) !important;    
+  font-weight: 500;
+  /* font-size: 200%; */
+  /* text-shadow: 0px 2px 0 rgb(34, 49, 65); */
+
+}
+
+section.transition strong {
+
+  font-weight: 900;
+  color: rgb(10, 100, 235);
+  color: rgb(172, 255, 7);
+
+}
+
+section.transition em {
+
+  color: rgb(230, 226, 226);
+  background-color: rgba(201, 199, 197, 0.493) !important;
+  /* text-shadow: 1px 0px 0 rgb(8, 8, 8); */
+  
+
+}
+
+/* -------------------- TRANSITION2 ---------------------------------*/
+section.transition {
+
+  --transitionpage-color: #417dad;
+  --transitionpage-color: #4594b9;
+  
+  color: white;
+  font-weight: 700;
+  /* font-size: 200%; */
+
+  /* text-shadow: 0px 2px 0 rgb(22, 24, 26); */
+}
+
+section.transition2 strong {
+
+  color: rgb(238, 234, 5);
+  font-weight: 700;
+}
+
+section.transition2 em {
+  
+  color: rgb(255, 255, 255);
+  font-weight: 700;
+  /* background-color: initial; */
+  background-color: rgba(207, 207, 206, 0.397) !important;
+  /* text-shadow: 1px 0px 0 rgb(34, 49, 65); */
+
+
+}
+
+/* ------------------------- CITE ----------------------------------*/
+
+section.cite {
+  
+  --background-color: rgb(121, 127, 133);
+  --strong-color:     #d9ff01;
+}
+
+section.cite strong{
+
+  font-weight: 100;
+}
+
+section.cite p {
+  
+  color: #ebf7e8e8;
+
+  font-size: 46px;
+  font-family: "Libre Baskerville", serif; 
+  /* font-style: italic; */
+  line-height: 116%;
+
+}
+
+/* -------------------- BIBLIO -------------------------------*/
+
+section.biblio {
+
+  /* font-family: "Fira Sans", serif;  */
+
+   
+  --text-color              : rgb(253, 252, 252);
+  --biblio-background-color : rgb(0, 0, 0);
+  --border-color            : darkorange;
+  --bold-color              : orange;
+}
+
+section.biblio p {
+
+  font-family: "Fira Sans", serif; 
+
+}

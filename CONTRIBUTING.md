@@ -12,7 +12,7 @@ We welcome contributions! Here's how you can help.
 
 ```bash
 make catalog
-make validate
+make check
 ```
 
 4. Submit a Pull Request
@@ -28,7 +28,9 @@ Each Skill entry should include:
 - **License**: Upstream license and any restrictions
 - **Local path**: Where the vendored skill lives under `skills/`
 
-The generated files [`catalog/skills.json`](catalog/skills.json) and [`docs/SKILL_CATALOG.md`](docs/SKILL_CATALOG.md) are rebuilt by `make catalog`; do not edit them manually.
+The generated files [`catalog/skills.json`](catalog/skills.json), [`docs/SKILL_CATALOG.md`](docs/SKILL_CATALOG.md), and [`docs/EVALS.md`](docs/EVALS.md) are rebuilt by `make catalog`; do not edit them manually.
+
+If the contribution adds a new first-party flagship skill or changes a recommended flagship workflow, update [`evals/flagship-evals.json`](evals/flagship-evals.json) so reviewers have a regression prompt for the expected behavior.
 
 ### Fix Errors
 
@@ -46,7 +48,7 @@ This is not a quality judgment — such tools may be excellent. If a tool later 
 
 ## Quality Gate
 
-All pull requests should pass `make validate`. The check verifies required project files, local Markdown links, `SKILL.md` frontmatter, and generated catalog freshness. See [`docs/QUALITY_GATE.md`](docs/QUALITY_GATE.md) for details.
+All pull requests should pass `make check`. The full gate verifies required project files, local Markdown links, `SKILL.md` frontmatter, generated catalog/provenance/audit freshness, flagship eval docs, unit tests, eval-harness coverage, and numeric benchmark recovery. See [`docs/QUALITY_GATE.md`](docs/QUALITY_GATE.md) for details.
 
 ## Especially Welcome
 

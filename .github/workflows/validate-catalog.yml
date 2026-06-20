@@ -13,15 +13,15 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
-      - name: Validate repository structure
-        run: python3 scripts/validate-repo.py
-
-      - name: Check generated catalog
-        run: python3 scripts/build-catalog.py --check
+      - name: Validate repository structure and generated artifacts
+        run: make validate

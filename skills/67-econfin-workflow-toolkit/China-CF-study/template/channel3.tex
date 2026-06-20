@@ -1,0 +1,51 @@
+\begin{table}[htbp]\centering\scriptsize
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{\textbf{Plausible Channel: Professionalization of Corporate Governance and Debt Cost Optimization}}
+\label{channel3}
+
+\noindent{\justifying{This table presents the mechanism analysis regarding the professionalization of corporate governance and the optimization of debt financing costs. Column (1) reports the results for the cost of debt financing, Column (2) reports the results for the institutional investor holding tenure, Column (3) examines the accounting information quality, and Column (4) focuses on the managerial perks. The dependent variables are \textsl{Cod} (the cost of debt, measured as the ratio of financial expenses to total liabilities), \textsl{Tenure} (the average number of consecutive years that institutional investors in the top ten list have held the firm's shares), \textsl{Abs\_DA} (the absolute value of discretionary accruals estimated using the Modified Jones Model), and \textsl{Perks} (the ratio of management expenses, excluding executive compensation, to total operating revenue). The main explanatory variable is \textsl{PTC} (a dummy variable that equals one if the city where the firm is located has established a patent trading center in or before year $t$, and zero otherwise). Other control variables include \textsl{Size} (natural logarithm of total assets), \textsl{Balance} (degree of equity balance), \textsl{ROA} (the ratio of net income to total assets), \textsl{Tobinq} (the ratio of the market value of assets to the book value of assets), \textsl{Age} (natural logarithm of the firm's age), \textsl{Cash} (net operating cash flow divided by total assets), \textsl{Indept} (the ratio of independent directors), \textsl{Top1} (the shareholding ratio of the largest shareholder), \textsl{Dual} (CEO duality dummy), \textsl{FinDev} (city financial development), \textsl{Innov} (city innovation potential), \textsl{Open} (city openness), and \textsl{Gov} (government intervention). All regressions include firm, year, and city fixed effects. The robust $t$-statistics clustered by the firm are reported in parentheses. The detailed variable definitions are presented in Table \ref{definition}. ***, **, and * denote the significance at the 1\%, 5\%, and 10\% levels, respectively.\par}}
+\bigskip
+
+\begin{tabularx}{\textwidth}{lYYYYYYYY@{}}
+\toprule
+
+                &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
+                &\multicolumn{1}{c}{Cod}&\multicolumn{1}{c}{Tenure}&\multicolumn{1}{c}{AbsDA}&\multicolumn{1}{c}{Perks}\\
+\hline\\
+PTC&  -0.0103\sym{**} &  -0.0897\sym{*}  &  -0.0045\sym{*}  &  -0.0043\sym{*}  \\
+                &  (-2.39)         &  (-1.79)         &  (-1.82)         &  (-1.73)         \\
+SIZE            &  -0.0541\sym{***}&  -0.3335\sym{***}&  -0.0004         &  -0.0168\sym{***}\\
+                & (-26.89)         & (-13.09)         &  (-0.42)         & (-15.89)         \\
+BALANCE         &   0.0289\sym{***}&  -0.2374\sym{***}&   0.0040\sym{***}&   0.0039\sym{**} \\
+                &  (10.29)         &  (-5.58)         &   (2.81)         &   (2.50)         \\
+ROA             &   0.1011\sym{***}&  -1.5152\sym{***}&  -0.1418\sym{***}&  -0.2579\sym{***}\\
+                &   (7.63)         &  (-9.18)         & (-12.52)         & (-27.08)         \\
+TobinQ1         &  -0.0039\sym{***}&  -0.0825\sym{***}&   0.0046\sym{***}&   0.0027\sym{***}\\
+                &  (-4.24)         &  (-7.26)         &   (9.76)         &   (5.86)         \\
+AGE2            &  -0.0093\sym{**} &  -0.0120         &   0.0028         &   0.0052         \\
+                &  (-2.15)         &  (-0.10)         &   (1.22)         &   (1.49)         \\
+CFO1            &   0.0475\sym{***}&  -0.0481         &  -0.0223\sym{**} &  -0.0268\sym{***}\\
+                &   (5.83)         &  (-0.43)         &  (-2.32)         &  (-4.75)         \\
+INDBOARD        &   0.0075         &  -0.3458         &   0.0005         &   0.0059         \\
+                &   (0.44)         &  (-1.34)         &   (0.06)         &   (0.63)         \\
+TOP1            &   0.1080\sym{***}&  -0.0411         &   0.0117         &   0.0003         \\
+                &   (7.99)         &  (-0.21)         &   (1.64)         &   (0.04)         \\
+DUAL            &   0.0013         &   0.0306         &  -0.0003         &  -0.0009         \\
+                &   (0.61)         &   (1.02)         &  (-0.27)         &  (-0.75)         \\
+FinDev     &  -0.0016         &   0.0381         &  -0.0021         &  -0.0028         \\
+                &  (-0.46)         &   (0.73)         &  (-1.32)         &  (-1.39)         \\
+Innov      &  -0.2078\sym{***}&   2.7057\sym{***}&   0.0161         &  -0.1116\sym{***}\\
+                &  (-3.51)         &   (3.09)         &   (0.58)         &  (-3.80)         \\
+Open       &  -0.0461         &  -1.3984\sym{*}  &   0.0244         &   0.0111         \\
+                &  (-0.91)         &  (-1.71)         &   (0.93)         &   (0.38)         \\
+Gov        &  -0.0014         &   0.4153         &   0.0263         &  -0.0075         \\
+                &  (-0.03)         &   (0.71)         &   (1.40)         &  (-0.35)         \\
+\hline
+Observations    &   44,875         &   44,671         &   37,093         &   42,999         \\
+Firm FE         &      Yes         &      Yes         &      Yes         &      Yes         \\
+Year FE         &      Yes         &      Yes         &      Yes         &      Yes         \\
+City FE         &      Yes         &      Yes         &      Yes         &      Yes         \\
+Adjusted $ R^2$ &     0.59         &     0.61         &     0.15         &     0.65         \\
+\bottomrule
+\end{tabularx}
+\end{table}

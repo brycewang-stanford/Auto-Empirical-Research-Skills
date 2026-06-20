@@ -1,0 +1,47 @@
+# ── Data files (tracked via OSF/Dataverse, not git) ──────────────────
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# ── Generated output (reproducible from pipeline) ───────────────────
+output/figures/*
+!output/figures/.gitkeep
+output/tables/*
+!output/tables/.gitkeep
+output/results/*
+!output/results/.gitkeep
+output/session-info.txt
+
+# ── R ────────────────────────────────────────────────────────────────
+.Rhistory
+.RData
+.Rproj.user/
+_targets/
+*.Rproj
+
+# ── Python ───────────────────────────────────────────────────────────
+__pycache__/
+*.pyc
+.venv/
+.snakemake/
+
+# ── Environment / Secrets ────────────────────────────────────────────
+.env
+.env.local
+credentials.json
+
+# ── OS ───────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── IDE ──────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+
+# ── Quarto ───────────────────────────────────────────────────────────
+reports/*_files/
+reports/*.html
+reports/*.pdf
+!reports/_quarto.yml
+!reports/*.qmd

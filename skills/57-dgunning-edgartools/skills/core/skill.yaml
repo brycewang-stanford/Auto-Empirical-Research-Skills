@@ -1,0 +1,192 @@
+id: edgartools-core
+name: EdgarTools
+version: "1.1"
+
+# 4-File Skill Architecture (see also):
+#   sharp-edges.yaml   - Production gotchas and anti-patterns
+#   validations.yaml   - Automated code quality checks
+#   collaboration.yaml - Handoffs and skill teamwork
+
+identity: Practical SEC analyst. Use str() to browse data, to_context() to discover actions. Avoid fetching thousands when ten suffice.
+
+imports: from edgar import Company, Fund, find_funds, get_filings, get_current_filings, find
+
+setup: |
+  # SEC requires identification for API access (check EDGAR_IDENTITY env var first)
+  from edgar import set_identity
+  set_identity("Your Name your@email.com")
+
+patterns:
+  - name: Universal Lookup
+    when: User provides an identifier (ticker, CIK, accession number, company name)
+    code: |
+      find("AAPL")                    # Ticker → Company
+      find(320193)                    # CIK → Entity
+      find("0000320193-25-000079")    # Accession number → Filing
+      find("Apple")                   # Company name → CompanySearchResults
+    note: |
+      ALWAYS use find() as the entry point for any identifier.
+      Never manually construct Filing objects - find() handles all lookups.
+
+
+  - name: Company-First Lookup
+    when: User asks about a specific company
+    code: |
+      company = Company("AAPL")           # Ticker or CIK
+      filings = company.get_filings(form="10-K")
+      filing = filings[0]                 # Select by index
+
+  - name: Working with a Filing
+    when: After selecting a filing
+    code: |
+      report = filing.obj()               # TenK, TenQ, EightK, etc.
+      report.reports                      # XBRL viewer pages (statements, notes, details)
+      report.notes                        # Notes to financial statements (10-K/10-Q)
+      report.notes['Debt']               # Single note by title
+      report.notes.search('revenue')     # Fuzzy search → ranked list
+      xbrl = filing.xbrl()                # XBRL data (or None)
+      doc = filing.document()             # Primary document text
+      attachments = filing.attachments    # All exhibits
+
+  - name: Search Filing Content
+    when: Find text/topics within a filing
+    code: |
+      results = filing.search("executive compensation")  # BM25 ranked matches
+      for match in results[:5]:
+          print(match.score, str(match)[:200])
+    note: |
+      ALWAYS use filing.search() for content search - returns ranked results.
+      Never use doc.text() + regex - filing.search() is faster and ranked.
+      filing.search() searches content; filing.docs.search() searches API docs.
+
+  - name: Filing Discovery
+    when: Search filings across companies (market-wide)
+    code: |
+      # get_filings() defaults to current quarter - specify year/quarter for historical
+      filings = get_filings(form="8-K", year=2024, quarter=4)
+      filings = get_filings(form="8-K", year=2024, quarter=4, filing_date="2024-12-16")  # single date
+      filings = get_filings(form="10-K", year=2024, quarter=1, filing_date="2024-01-15:2024-01-31")  # date range
+
+      # Browse results (str shows 50 per page)
+      filing = filings[4]                 # By index
+      filing = filings.latest()           # Most recent
+      page2 = filings.next()              # Paginate if >50
+    examples: |
+      get_filings(form="13F-HR", year=2024, quarter=3)   # Institutional holdings
+      get_filings(form="SC 13D", year=2024, quarter=4)   # Activist stakes (5%+)
+      get_filings(form="4", year=2024, quarter=4)        # Insider trading
+
+  - name: Current Filings
+    when: Monitor recent filing activity (last ~24 hours)
+    code: |
+      filings = get_current_filings()                    # All recent filings (RSS feed)
+      filings = get_current_filings().filter(form="8-K") # Filter by form
+
+  - name: Fund Lookup
+    when: Mutual fund or ETF lookup
+    code: |
+      from edgar import Fund, find_funds
+      fund = Fund("VFINX")
+      fund.get_portfolio()
+    note: Use Fund() for fund tickers, Company() for operating companies.
+
+  - name: Error Recovery Chain
+    when: A lookup or data extraction fails
+    code: |
+      from edgar import Company, find
+      # Progressive fallback for company lookup:
+      company = Company("AAPL")              # 1. Ticker (fastest)
+      company = Company(320193)              # 2. CIK (always works if valid)
+      results = find("Apple Inc")            # 3. Name search (fuzzy)
+      company = results[0]
+
+      # If financials fail, fall back:
+      financials = company.get_financials()  # 1. Structured XBRL
+      if not financials:
+          facts = company.get_facts()        # 2. Entity facts (broader)
+    note: |
+      MCP error_code maps to recovery action:
+      COMPANY_NOT_FOUND → try CIK or find()
+      NO_FACTS_DATA → use filing.obj() instead
+      NO_XBRL_DATA → use filing.document() for text
+      RATE_LIMIT → wait 10+ minutes, never retry immediately
+
+  - name: Financial Statements
+    when: User asks about revenue, balance sheet, cash flow, metrics
+    code: |
+      # PREFERRED: get_financials() for up to 3 years of data
+      financials = company.get_financials()              # Annual (from latest 10-K)
+      quarterly = company.get_quarterly_financials()     # Quarterly (from latest 10-Q)
+      revenue = financials.get_revenue()                 # Current revenue
+      net_income = financials.get_net_income()           # Current net income
+      margin = net_income / revenue                      # Example calculation
+      income = financials.income_statement()             # 3-year income table
+      balance = financials.balance_sheet()               # 2-year balance table
+      cashflow = financials.cashflow_statement()         # 3-year cash flow table
+
+      # ONLY for 4+ year history (slower, more data):
+      facts = company.get_facts()
+      income = facts.income_statement(periods=5, annual=True)
+    note: |
+      ALWAYS start with get_financials() - it covers 95% of use cases.
+      Only use get_facts() when you need 4+ years of history.
+      For multi-company comparison: loop get_financials(), don't build manual DataFrames.
+
+  - name: Output Methods
+    when: Displaying EdgarTools objects
+    code: |
+      # str() = "What's IN here?" (browse/select)
+      str(filings)      # Indexed list of 50 filings
+      str(filing)       # Filing(company='Apple Inc.', form='10-K', ...)
+      str(company)      # "Apple Inc. [AAPL] CIK:320193"
+      str(financials)   # "Financials(Apple Inc. 10-K FY2025 • 1,131 facts)"
+
+      # to_context() = "What can I DO?" (learn capabilities)
+      filings.to_context()     # .filter(), .latest(), [index]
+      filing.to_context()      # .obj(), .xbrl(), .document()
+      financials.to_context()  # Available statements and metrics
+    note: Never use repr() for LLMs - too many tokens.
+
+  - name: API Discovery
+    when: Don't know what methods/properties are available
+    code: |
+      # .docs = full API guide for any object
+      company.docs                       # Company API reference
+      filing.docs                        # Filing API reference
+      xbrl.docs                          # XBRL API reference
+
+      # .docs.search() = find specific functionality
+      company.docs.search("get_filings") # How to get filings
+      filing.docs.search("xbrl")         # How to access XBRL
+      filings.docs.search("filter")      # How to filter results
+    note: filing.search("keyword") searches content; filing.docs.search("keyword") searches API docs.
+
+  - name: Iterating Over Filings
+    when: Processing multiple filings in a loop
+    code: |
+      for filing in filings:
+          form4 = filing.obj()             
+          process(form4)
+
+      # For coding batch jobs consider - use local storage to avoid network calls
+      from edgar.storage import use_local_storage, download_edgar_data
+      use_local_storage("/path/to/storage")  # Enable local caching
+      for filing in filings:
+          data = filing.obj()               # Cached after first download
+
+avoid:
+  - pattern: "for f in company.get_filings(): process(f)"
+    fix: "for f in company.get_filings(form='10-K').head(10): process(f)"
+    why: get_filings() can return 500+ results; each .obj() is a network call
+
+handoffs:
+  - to: financials
+    when: Deep financial analysis, multi-period comparison, ratios
+  - to: reports
+    when: Report sections (MD&A, risk factors, Item 1-8), TenK/TenQ/EightK/FortyF objects, auditor info, subsidiaries
+  - to: holdings
+    when: 13F filings, portfolio analysis, institutional holdings
+  - to: ownership
+    when: Form 4 insider transactions, Form 3/5, executive trades
+  - to: xbrl
+    when: Low-level XBRL (facts, concepts, taxonomy, dimensions)

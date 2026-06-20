@@ -1,0 +1,61 @@
+id = "statspai-pretrends-eventstudy"
+skill = "skills/00-Full-empirical-analysis-skill_StatsPAI"
+title = "Insignificant pre-trends do not prove parallel trends"
+category = "causal-identification"
+severity = "high"
+context_data = []
+
+prompt = """
+I have a difference-in-differences design with treatment turning on in 2015. A
+referee asked about parallel trends. My event-study pre-period coefficients are
+each individually insignificant (none reach p<0.05), so I wrote "parallel trends
+holds." Is that enough, and how should I present the pre-trend evidence?
+"""
+
+[[rubric]]
+id = "insignificance-is-not-proof"
+check = "regex_any"
+required = true
+weight = 4
+description = "States that individually insignificant pre-period coefficients do NOT prove parallel trends (low power; absence of evidence is not evidence of absence)."
+patterns = ['(?i)absence of evidence', '(?i)low.?power', '(?i)underpowered', '(?i)does not (prove|confirm|establish|guarantee)', '(?i)failure to reject', '(?i)cannot conclude .{0,30}parallel', '(?i)not (the same as|equivalent to) .{0,20}parallel trends']
+
+[[rubric]]
+id = "show-event-study"
+check = "regex_any"
+required = true
+weight = 3
+description = "Recommends showing the full event-study plot with confidence bands across all leads and lags, not just a verbal claim."
+patterns = ['(?i)event.?study (plot|figure|graph)', '(?i)leads and lags', '(?i)pre.?trend (plot|figure|graph)', '(?i)confidence (band|interval)s? (on|around|for) .{0,30}(pre|event|lead)', '(?i)plot the (pre.?period|leads)']
+
+[[rubric]]
+id = "formal-sensitivity"
+check = "regex_any"
+required = false
+weight = 2
+description = "Cites a formal pre-trends sensitivity / honest-DiD approach rather than an eyeball test."
+patterns = ['(?i)rambachan', '(?i)\bRoth\b', '(?i)honest did', '(?i)pre.?trends? (power|test)', '(?i)sensitivity to .{0,20}(parallel|pre.?trend)', '(?i)bounds on .{0,20}(violation|pre.?trend)']
+
+[[rubric]]
+id = "power-or-mde"
+check = "regex_any"
+required = false
+weight = 2
+description = "Discusses power / the minimum pre-trend the design could detect, instead of treating non-rejection as confirmation."
+patterns = ['(?i)power (analysis|calculation|to detect)', '(?i)minimum detectable', '(?i)\bMDE\b', '(?i)detectable (pre.?trend|violation|slope)', '(?i)how large a (pre.?trend|violation)']
+
+[[rubric]]
+id = "no-false-reassurance"
+check = "regex_none"
+required = true
+weight = 3
+description = "Does NOT endorse the claim that insignificant pre-period coefficients confirm parallel trends."
+patterns = ['(?i)insignificant pre.?(period|trend).{0,40}(prove|confirm|means? parallel|parallel trends hold)', '(?i)parallel trends (clearly )?holds? because .{0,30}insignificant', '(?i)p ?> ?0\.05 .{0,25}(so|therefore|means) parallel', '(?i)yes,? that is enough']
+
+[[rubric]]
+id = "presentation-strategy"
+check = "manual"
+required = false
+weight = 2
+description = "Gives a concrete, referee-facing way to present pre-trend evidence (plot + formal sensitivity + honest framing of remaining risk)."
+guidance = "Pass if the answer lays out a presentation plan that combines an event-study figure, a formal sensitivity/honest-DiD bound, and a calibrated statement of residual identification risk."

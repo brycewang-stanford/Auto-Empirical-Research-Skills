@@ -1,0 +1,283 @@
+id: edgartools-content
+name: EdgarTools Content Creator
+version: "1.0"
+
+identity: Documentation content producer. Execute edgartools code, capture rich terminal output as images, optimize for web, and write compelling articles that follow the project's documentation standards.
+
+imports: from edgar import Company, get_filings, get_current_filings, find
+
+patterns:
+  - name: Capture Rich Output
+    when: Need a screenshot of an edgartools object for documentation
+    code: |
+      python scripts/snapshot_rich.py \
+        "from edgar import Company; Company('AAPL')" \
+        -o docs/images/company-aapl.webp \
+        --width 120 --title "Company Card"
+    note: |
+      Always output WebP format. Store images in docs/images/.
+      Name files: {topic}-{description}.webp (e.g., thirteenf-holdings.webp, company-card.webp).
+      The script handles the full pipeline: execute Python -> Rich console -> SVG -> WebP.
+      Use --width to control console width (default 120). Narrower widths (80-100) for simple objects, wider (120-140) for tables.
+      IMPORTANT: Always pass --title "Something" -- the SVG export crashes if title is None.
+
+      The script requires cairosvg with the native cairo C library installed.
+      If WebP conversion fails (e.g., "no library called cairo was found"), use the
+      Inkscape fallback described in the "Inkscape Fallback" pattern below.
+
+  - name: Multi-Statement Capture
+    when: Need to show a sequence of operations or a derived result
+    code: |
+      python scripts/snapshot_rich.py \
+        "from edgar import Company; c = Company('MSFT'); c.get_filings(form='10-K').head(5)" \
+        -o docs/images/filings-msft-10k.webp \
+        --width 120
+    note: |
+      Separate statements with semicolons.
+      The last expression's result is auto-printed via Rich.
+      For complex multi-step code, use --script with a .py file instead.
+
+  - name: Script-Based Capture
+    when: Code is too complex for a one-liner or needs imports/setup
+    code: |
+      python scripts/snapshot_rich.py \
+        --script scripts/demo_example.py \
+        -o docs/images/example-output.webp \
+        --width 120
+    note: |
+      Write a short .py script that prints/displays the result.
+      The script's Rich console output is captured automatically.
+      Keep scripts minimal -- just enough to produce the screenshot.
+      Store throwaway scripts in scripts/manual/ or use a temp file.
+
+  - name: Inkscape Fallback
+    when: snapshot_rich.py fails to produce WebP because the native cairo library is missing
+    code: |
+      python -c "
+      import sys, subprocess, tempfile
+      from pathlib import Path
+      from PIL import Image
+      sys.path.insert(0, '.')
+      from scripts.snapshot_rich import capture_expression
+
+      INKSCAPE = '/Applications/Inkscape.app/Contents/MacOS/inkscape'
+      expression = \"from edgar import Company; Company('AAPL')\"
+      output_path = 'docs/images/company-aapl.webp'
+      width = 120
+      title = 'Company Card'
+
+      svg = capture_expression(expression, width=width, title=title)
+      with tempfile.NamedTemporaryFile(suffix='.svg', mode='w', delete=False) as f:
+          f.write(svg)
+          svg_path = f.name
+      png_path = svg_path.replace('.svg', '.png')
+      subprocess.run([INKSCAPE, svg_path, '--export-filename', png_path,
+                      '--export-width', '1200'], capture_output=True)
+      Path(output_path).parent.mkdir(parents=True, exist_ok=True)
+      img = Image.open(png_path)
+      img.save(output_path, 'WEBP', quality=85)
+      size_kb = Path(output_path).stat().st_size / 1024
+      print(f'Saved: {output_path} ({size_kb:.1f} KB)')
+      Path(svg_path).unlink(missing_ok=True)
+      Path(png_path).unlink(missing_ok=True)
+      "
+    note: |
+      Use this when snapshot_rich.py prints "no library called cairo was found" or
+      "cairosvg not installed". This happens when the cairosvg Python package is installed
+      but the native cairo C library is not (common on macOS without Homebrew).
+
+      The fallback pipeline: capture_expression() -> SVG -> Inkscape -> PNG -> Pillow -> WebP.
+
+      Requires:
+        - Inkscape installed at /Applications/Inkscape.app (macOS) or on PATH (Linux)
+        - Pillow: pip install Pillow
+
+      Adjust INKSCAPE path for your platform:
+        - macOS: /Applications/Inkscape.app/Contents/MacOS/inkscape
+        - Linux: /usr/bin/inkscape
+        - Windows: C:\Program Files\Inkscape\bin\inkscape.exe
+
+      Adjust --export-width to control image resolution (1200 for standard, 1400 for wide tables).
+
+      If neither cairosvg nor Inkscape is available, install cairo via your package manager:
+        - macOS: brew install cairo
+        - Ubuntu/Debian: apt install libcairo2-dev
+        - Then snapshot_rich.py will work directly.
+
+  - name: Optimize Existing Images
+    when: Have PNG screenshots that need web optimization
+    code: |
+      python scripts/convert_png_to_webp.py \
+        docs/images/example.png \
+        --quality 85
+    note: |
+      Converts PNG to WebP at quality 85 (default). Typical 50-80% size reduction.
+      For batch conversion: python scripts/convert_png_to_webp.py docs/images/*.png
+
+  - name: Data Object Guide Article
+    when: Writing the definitive page for a filing type's data class
+    code: |
+      ---
+      description: Parse SEC {form type} filings with Python. {One sentence about what you learn} using edgartools.
+      ---
+
+      # {Form Type}: {Action Phrase} with Python
+
+      {One paragraph: what this filing type is, who files it, why it matters. Mention EdgarTools and Python in the first two sentences.}
+
+      ```python
+      from edgar import Company
+      company = Company("{TICKER}")
+      filing = company.get_filings(form="{FORM}").latest()
+      report = filing.obj()
+      report
+      ```
+
+      ![{Descriptive alt text} parsed with Python edgartools](images/{topic}-{description}.webp)
+
+      ## {Action Verb} the {Main Data}
+
+      {2-3 sentences explaining what you see and why it matters.}
+
+      ```python
+      {2-4 lines showing the core capability}
+      ```
+
+      ## {Second Capability}
+
+      ...
+
+      ## Quick Reference
+
+      | Property | Type | Description |
+      |----------|------|-------------|
+      | `property` | `type` | What it returns |
+
+      ## Related
+
+      - [Related guide](path/to/guide.md)
+    note: |
+      Follow docs-internal/docs-guidelines.md strictly.
+      Lead with hero code + image. Push reference tables to the bottom.
+      Sections named after actions ("Access Holdings Data") not objects ("Holdings Data").
+      No emojis in prose -- use Unicode symbols per docs-internal/design-language.md.
+
+  - name: User Guide Article
+    when: Writing a task-oriented walkthrough for a topic
+    code: |
+      ---
+      description: {Under 160 chars. Include primary keyword and "Python".}
+      ---
+
+      # {Topic}: {Task Phrase} with Python
+
+      {Intro paragraph: what this is, why it matters. Mention EdgarTools and Python.}
+
+      ## {First Task}
+
+      {Brief context sentence.}
+
+      ```python
+      {Runnable code example}
+      ```
+
+      ![{Alt text with keywords}](images/{topic}-{description}.webp)
+
+      ## {Second Task}
+
+      ...
+
+      ## Common Patterns
+
+      {Short recipes, 3-5 lines each.}
+    note: |
+      Every code example must be copy-paste runnable.
+      Use real tickers -- diversify beyond AAPL (use MSFT, BRK.A, JPM, NVDA, etc.).
+      Show output as screenshots (preferred) or plaintext code blocks.
+
+  - name: Content Production Workflow
+    when: Creating a complete documentation page from scratch
+    code: |
+      # Step 1: Decide what to demonstrate
+      # Identify the object, feature, or workflow to document.
+
+      # Step 2: Write and test the code
+      # Run the code interactively to verify it works and produces good output.
+
+      # Step 3: Capture screenshots
+      python scripts/snapshot_rich.py "from edgar import Company; Company('NVDA')" \
+        -o docs/images/company-nvda.webp --width 120
+
+      # Step 4: Write the article
+      # Follow the Data Object Guide or User Guide template above.
+      # Embed images with: ![alt text](images/filename.webp)
+
+      # Step 5: Verify
+      # - All code examples are runnable
+      # - Images render correctly
+      # - Cross-references use correct relative paths
+      # - YAML frontmatter has description
+      # - Page referenced in mkdocs.yml nav
+    note: |
+      Always capture screenshots BEFORE writing the article.
+      This lets you write naturally around the actual output rather than guessing.
+      Test with `mkdocs serve` if available to verify rendering.
+
+  - name: Image Alt Text
+    when: Writing alt text for embedded screenshots
+    code: |
+      # Good alt text: descriptive, includes keywords
+      ![13F holdings report parsed with Python edgartools](images/thirteenf-holdings.webp)
+      ![Apple 10-K annual report sections in edgartools](images/tenk-apple-sections.webp)
+
+      # Bad alt text: vague, no keywords
+      ![Holdings table](images/holdings.webp)
+      ![Report](images/report.webp)
+    note: |
+      Alt text is used by Google Image Search and screen readers.
+      Include: what the image shows + "Python" or "edgartools" keyword.
+
+avoid:
+  - pattern: "![screenshot](images/example.png)"
+    when: Embedding images in documentation
+    fix: "![descriptive alt text with keywords](images/example.webp)"
+    why: WebP is smaller and preferred. Alt text must be descriptive for SEO and accessibility.
+
+  - pattern: "Writing code examples with fake data"
+    when: Creating documentation
+    fix: "Use real tickers (AAPL, MSFT, BRK.A, JPM, NVDA) and real forms"
+    why: Examples must be copy-paste runnable. Fake data breaks trust and can't be verified.
+
+  - pattern: "Leading a page with a property/method reference table"
+    when: Writing data object guides
+    fix: "Lead with hero code + screenshot. Push reference tables to the bottom."
+    why: Users open the page to answer 'what can I do?' not to read a property catalog.
+
+  - pattern: "Using emojis in documentation prose"
+    when: Writing any documentation content
+    fix: "Use Unicode symbols: arrows (->), bullets, checkmarks, dashes"
+    why: Emojis render inconsistently. Unicode symbols are more professional.
+
+  - pattern: "Capturing output without testing the code first"
+    when: Producing screenshots for articles
+    fix: "Run the code interactively first, then capture with snapshot_rich.py"
+    why: Stale or broken screenshots erode trust. Always verify before capturing.
+
+  - pattern: "python scripts/snapshot_rich.py '...' -o output.png"
+    when: Capturing terminal screenshots
+    fix: "python scripts/snapshot_rich.py '...' -o output.webp"
+    why: Always output WebP. PNG is only a fallback if WebP tooling is unavailable.
+
+handoffs:
+  - to: core
+    when: Need to look up edgartools API patterns for code examples
+  - to: financials
+    when: Writing content about financial statements or metrics
+  - to: reports
+    when: Writing content about 10-K, 10-Q, or 8-K report objects
+  - to: holdings
+    when: Writing content about 13F institutional holdings
+  - to: ownership
+    when: Writing content about Form 4 insider transactions
+  - to: xbrl
+    when: Writing content about XBRL data, facts, or taxonomy

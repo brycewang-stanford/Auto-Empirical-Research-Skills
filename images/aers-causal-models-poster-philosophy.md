@@ -1,0 +1,11 @@
+# Identification Atlas
+
+Identification Atlas treats empirical research as a constructed cartography of counterfactuals. Space is organized like a scientific wall map: a central engine, orbiting method families, calibrated reference marks, and quiet traces of DAGs, formulas, and robustness diagnostics. The final work should feel meticulously crafted, as though every line, tick, and method label was placed after many rounds of refinement by someone at the top of the field.
+
+The aesthetic combines institutional rigor with computational warmth. The palette avoids single-hue monotony by balancing ink, ivory, teal, vermilion, amber, blue, and sage; each color carries a methodological family rather than decoration. Material texture is subtle, like archival paper under a modern plotting system. The result should look painstakingly calibrated, with master-level execution visible in the spacing and hierarchy.
+
+Scale and rhythm communicate automation. The center has the mass of an engine; surrounding modules behave like instruments connected to it. Repeated chips, arcs, and measurement marks create the sense of a full empirical pipeline without requiring paragraphs of explanation. Text is sparse and functional, integrated as labels in the diagram rather than prose. The piece must appear labored over with care, precise enough for a research lab and polished enough for a public repository.
+
+Composition is balanced around defensible causal identification: quasi-experiments, observational adjustment, machine-learning causal tools, and robustness/output form four stable quadrants. The design’s quiet conceptual reference is the estimand-first decision process: before a model is run, the causal question is routed, diagnosed, stress-tested, and turned into publishable evidence. This reference should be discoverable to empirical researchers while still reading as a refined abstract system to everyone else.
+
+The bilingual versions should share the same visual structure so they feel like two editions of one artifact, not two unrelated graphics. Typography should have clinical authority, with serif contrast for titles, humanist sans for labels, and monospaced code fragments for the agent-native workflow. The final PNGs should look like the product of deep expertise and countless hours of craft, even though they are generated reproducibly.

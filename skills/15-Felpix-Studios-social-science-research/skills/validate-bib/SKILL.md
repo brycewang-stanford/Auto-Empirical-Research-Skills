@@ -1,6 +1,7 @@
 ---
 name: validate-bib
-description: Validate bibliography entries against citations in all source files. Find missing entries and unused references. Make sure to use this skill whenever the user has any concern about bibliography completeness or citation keys. Triggers include: "validate my bib", "check my citations", "find missing references", "I'm getting undefined citation errors", "are all my citations in the bib file", "check for unused references", "my bibliography is broken", "missing bib entries", "citation not found", or after adding new references from a lit review or before submission.
+description: >-
+  Validate bibliography entries against citations in all source files. Find missing entries and unused references. Make sure to use this skill whenever the user has any concern about bibliography completeness or citation keys. Triggers include: "validate my bib", "check my citations", "find missing references", "I'm getting undefined citation errors", "are all my citations in the bib file", "check for unused references", "my bibliography is broken", "missing bib entries", "citation not found", or after adding new references from a lit review or before submission.
 argument-hint: "[bib file path, or leave blank to auto-detect]"
 allowed-tools: ["Read", "Grep", "Glob"]
 ---

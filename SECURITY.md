@@ -32,3 +32,9 @@ We aim to triage credible reports within 7 days. High-risk findings may result i
 - Review hooks and scripts before enabling them in an agent runtime.
 - Do not run vendored code with secrets in the environment unless the skill explicitly needs them and you trust the source.
 - Re-run `make validate` after local edits.
+
+## Automated Security Checks
+
+- Dependabot monitors GitHub Actions updates through `.github/dependabot.yml`.
+- OpenSSF Scorecard runs weekly and on pushes to `main`, with SARIF uploaded to GitHub code scanning.
+- `make validate` includes a workflow policy check for explicit permissions, non-persistent checkout credentials, no `pull_request_target`, and no downloaded-script pipe-to-shell patterns.

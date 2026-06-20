@@ -1,0 +1,246 @@
+/* @theme companySZ */
+
+@charset "UTF-8";
+@import 'uncover';
+@import url('https://fonts.googleapis.com/css?family=Lato:400,900|Roboto+Mono:400,700&display=swap');
+@import 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/github.min.css';
+
+@font-face {
+  font-family: "aliRegular";
+  font-weight: 400;
+  src: url("//at.alicdn.com/wf/webfont/Kbjx2QR2mRB8/Skgx5yYpL6q1.woff2") format("woff2"),
+  url("//at.alicdn.com/wf/webfont/Kbjx2QR2mRB8/AXcCnvbk4CXu.woff") format("woff");
+  font-display: swap;
+}
+
+:root {
+  font-size: 25px;
+  padding: 50px;
+  text-align: left;
+  font-family: aliRegular, Arial, Helvetica, sans-serif;
+  position: relative;
+  background: linear-gradient(10deg, #E4F2FE, #fff);
+}
+a, h2, h3 {
+  color: #057AE4;
+}
+h1 {
+	padding: 0;
+	color: #fff;
+	font-size: 68px;
+	background-image:-webkit-linear-gradient(top, #fff, #C7D9FB); 
+	-webkit-background-clip: text; 
+	-webkit-text-fill-color: transparent; 
+	text-shadow: 2px 2px 20px #0000000d;
+}
+
+h2 {
+  text-align: left;
+  margin: 0;
+  font-size: 60px;
+}
+
+h3 {
+  font-size: 36px;
+  text-align: left;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  position: relative;
+  padding-left: 16px;
+}
+
+h3::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 30px;
+  background-color: #057AE4;
+}
+
+h4 {
+  font-size: 30px;
+  text-align: left;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+h5 {
+	color: #595959;
+	padding: 0;
+	margin: 5px 0;
+	font-weight: 400;
+}
+h6 {
+	color: #595959;
+	font-weight: 400;
+	margin: 0 0 10px;
+	text-decoration: underline;
+	font-style: oblique;
+}
+
+header {
+  text-align: left;
+  color: #057AE4;
+  font-size: 32px;
+  font-weight: 500;
+  width: 100%;
+}
+header::after {
+  content: '';
+  height: 50px;
+  width: 280px;
+  position: absolute;
+  right: 40px;
+  top: 20px;
+  background-image: url("../../../images/companySZ/logo.png");
+  background-position: right top;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+}
+
+/* 表格 */
+table thead {
+  background-color: #057AE4;
+  color: #fff;
+  line-height: 50px;
+}
+table tbody tr {
+  background-color: transparent;
+  color: #595959;
+}
+table tbody tr:nth-of-type(2n) {
+  background-color: rgba(166, 166, 166, 0.1);
+}
+table>tbody>tr:not(:last-child)>td {
+  min-width: 140px; 
+  border-bottom: 1px solid #ddd;
+}
+/* 横向布局 */
+:root.horizontalImages p {
+  display: flex;
+  justify-content: center;
+}
+/* 横向布局 */
+:root.horizontalLayout {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+/* tag样式 */
+:root.gorgeousTag ul{
+  font-size: 23px;
+}
+:root.gorgeousTag ul li {
+  color: #333;
+  line-height: 40px;
+  list-style: none;
+  padding-right: 20px;
+  margin-bottom: 20px;
+}
+:root.gorgeousTag ul li strong {
+  background: linear-gradient(45deg, #3F9FF6, #057AE4);
+  border-radius: 15px 0;
+  color: #fff;
+  line-height: 42px;
+  display: inline-block;
+  min-width: 150px;
+  text-align: center;
+  box-shadow: 0 0 4px 3px rgba(0,112,192,0.2);
+  margin-right: 8px;
+}
+/* 内容页 */
+:root.contentPage {
+  background: url("../../../images/companySZ/bg.png") no-repeat center, center linear-gradient(10deg, #E4F2FE, #fff);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding-left: 80px;
+  padding-right: 80px;
+  position: relative;
+}
+/* 页头 */
+:root.contentPage header {
+  width: 100%;
+  left: 0;
+  top: 0;
+  padding: 24px 0 0 90px;
+  box-sizing: border-box;
+  font-size: 40px;
+  color: #404040;
+  font-weight: 500;
+}
+/* 页码 */
+:root.contentPage::after {
+  font-size: 24px;
+  font-weight: bold;
+  background: linear-gradient(-45deg, #057AE4 44%, #0BD0D9 44%, #10CF9B 48%, transparent 48%);
+  /* background: none; */
+  text-shadow: none;
+  color: #fff;
+  padding: 30px 15px 15px 30px;
+  text-align: right;
+}
+:root.contentPage img {
+  margin: 5px;
+  /* box-shadow: 0 0 4px 3px rgba(0,112,192,0.2); */
+}
+
+/* 页尾 */
+:root.contentPage footer {
+	color: #999;
+  bottom: 2px;
+  font-size: 21px;
+  text-align: center;
+}
+:root.contentPage footer a {
+	color: #ccc;
+  transition: all 0.3s;
+}
+:root.contentPage footer a:hover {
+	color: #057AE4;
+  text-decoration: none;
+}
+
+/* 首页 */
+:root.homePage {
+	text-align: center;
+	padding-top: 70px;
+  background-color: #E4F2FE;
+  background-image: url("../../../images/companySZ/cover_bg.png");
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+:root.homePage h4 {
+	position: absolute;
+	left: 50%;
+	top: 63%;
+	transform: translateX(-50%);
+	background: #0BD0D9;
+	color: #fff;
+	padding: 0px 40px;
+	line-height: 70px;
+	border-radius: 40px;
+}
+
+/* 感谢页 */
+:root.thanksPage {
+  background-color: #E4F2FE;
+  background-image: url("../../../images/companySZ/thank_bg.png");
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  padding-left: 120px;
+  position: relative;
+}
+
+:root.thanksPage header::after {
+	right: 100px;
+  top: 0px;
+}
+:root.thanksPage footer {
+	font-size: 22px;
+  text-align: center;
+}

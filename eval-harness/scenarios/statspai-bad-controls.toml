@@ -1,0 +1,63 @@
+id = "statspai-bad-controls"
+skill = "skills/00-Full-empirical-analysis-skill_StatsPAI"
+title = "Conditioning on a post-treatment variable is a bad control, not extra rigor"
+category = "causal-identification"
+severity = "critical"
+context_data = []
+
+prompt = """
+I'm estimating the effect of a job-training program on annual earnings. I have
+pre-treatment covariates (age, education, prior-year earnings) and I also
+recorded each participant's occupation and weekly hours AFTER the program. To be
+safe and maximize rigor I want to control for everything I have, including the
+post-program occupation and hours. Set up the regression and tell me which
+controls to include.
+"""
+
+[[rubric]]
+id = "flags-bad-control"
+check = "regex_any"
+required = true
+weight = 4
+description = "Identifies post-program occupation/hours as bad controls (post-treatment / mediator / descendant of treatment)."
+patterns = ['(?i)bad control', '(?i)post.?treatment', '(?i)mediator', '(?i)collider', '(?i)descendant of (the )?treatment', '(?i)downstream of (the )?treatment', '(?i)outcome of the treatment']
+
+[[rubric]]
+id = "explains-bias-mechanism"
+check = "regex_any"
+required = true
+weight = 3
+description = "Explains why this biases the estimate (changes the estimand to a direct effect, blocks part of the causal path, opens a non-causal path, violates the back-door criterion)."
+patterns = ['(?i)direct effect', '(?i)total effect', '(?i)blocks (part of )?the (causal )?(effect|path)', '(?i)back.?door', '(?i)over.?control', '(?i)mediation', '(?i)changes the estimand']
+
+[[rubric]]
+id = "excludes-post-treatment"
+check = "regex_any"
+required = true
+weight = 3
+description = "Recommends excluding the post-treatment variables and adjusting only for pre-treatment covariates."
+patterns = ['(?i)only (adjust|control|condition) for pre.?treatment', '(?i)exclude (the )?post.?treatment', '(?i)do not (control|condition|adjust|include) .{0,30}(occupation|hours|post.?treatment)', '(?i)drop (the )?(occupation|hours|post.?treatment)', '(?i)leave out (the )?post.?treatment']
+
+[[rubric]]
+id = "pretreatment-controls-ok"
+check = "regex_any"
+required = false
+weight = 2
+description = "Notes that the pre-treatment covariates (age, education, prior earnings) are legitimate controls."
+patterns = ['(?i)pre.?treatment (covariate|control|variable)s? (are|is) (fine|ok|appropriate|valid|legitimate)', '(?i)baseline (covariate|control)s? (are|is) (fine|ok|appropriate)', '(?i)age, ?education', '(?i)prior.?(year )?earnings (are|is) (fine|a (good|valid|legitimate) control)']
+
+[[rubric]]
+id = "no-more-is-better"
+check = "regex_none"
+required = true
+weight = 3
+description = "Does NOT endorse controlling for everything / more controls is always safer."
+patterns = ['(?i)control for everything (is|will be)? ?(fine|safe|safer|better|best)', '(?i)more controls (is|are) (better|safer)', '(?i)kitchen.?sink', '(?i)including (all|more) (the )?(available )?controls .{0,30}(reduces bias|is safer|is better)', '(?i)adding (post.?treatment|occupation|hours) .{0,30}(is fine|reduces bias|improves)']
+
+[[rubric]]
+id = "mechanism-alternative"
+check = "manual"
+required = false
+weight = 2
+description = "If the user wants to understand the mechanism (the role of occupation/hours), suggests a principled mediation analysis rather than naive control."
+guidance = "Pass if the answer offers a correct alternative for mechanism questions (formal mediation / report total vs direct effect with stated assumptions) instead of just dropping the variables with no path forward."

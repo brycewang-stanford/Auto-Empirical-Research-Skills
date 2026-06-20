@@ -1,0 +1,79 @@
+id = "english-deslop"
+skill = "skills/47-conorbronsdon-avoid-ai-writing"
+title = "English de-slop must remove AI tells without changing facts"
+category = "writing-style"
+severity = "medium"
+context_data = []
+
+prompt = """
+Rewrite the paragraph below to remove AI-writing tells. Keep every fact and
+number. Return the rewritten paragraph, then a short list of changes.
+
+Paragraph: "It is important to note that our findings delve into a rich tapestry
+of economic dynamics. Moreover, the results underscore a multifaceted interplay
+between policy and growth — a relationship that is, perhaps, more nuanced than
+previously assumed. Furthermore, it is worth noting that the 12% increase in
+output is not insignificant. In conclusion, these findings illuminate important
+implications for policymakers."
+"""
+
+# Body-scoped absence checks: capture text before a "Changes" / "---" section.
+[[rubric]]
+id = "remove-tell-words"
+check = "regex_none"
+section = '(?is)^(.*?)(?:-{3,}|\bchanges?\b\s*[:：]|change list)'
+required = true
+weight = 4
+description = "Removes hallmark AI tells (delve, tapestry, 'it is important/worth to note', underscore, illuminate, multifaceted) from the rewrite."
+patterns = [
+  '(?i)\bdelve',
+  '(?i)\btapestry\b',
+  '(?i)it is (important|worth) to note',
+  '(?i)it is important to note that',
+  '(?i)\bmultifaceted\b',
+  '(?i)\billuminate',
+]
+
+[[rubric]]
+id = "reduce-em-dashes"
+check = "regex_count_max"
+section = '(?is)^(.*?)(?:-{3,}|\bchanges?\b\s*[:：]|change list)'
+pattern = '—|(?<!-)--(?!-)'
+target = 1
+required = false
+weight = 2
+description = "Removes em dashes / double-hyphen substitutes from the rewrite (target at most one)."
+
+[[rubric]]
+id = "reduce-transition-fillers"
+check = "regex_count_max"
+section = '(?is)^(.*?)(?:-{3,}|\bchanges?\b\s*[:：]|change list)'
+pattern = '(?i)\b(moreover|furthermore|in conclusion|in summary|additionally)\b'
+target = 1
+required = false
+weight = 2
+description = "Thins out mechanical transition fillers in the rewrite."
+
+[[rubric]]
+id = "keeps-the-number"
+check = "regex_any"
+required = true
+weight = 3
+description = "Preserves the factual 12% magnitude."
+patterns = ['12\s?(percent|%)']
+
+[[rubric]]
+id = "change-list-present"
+check = "regex_any"
+required = false
+weight = 1
+description = "Ends with a short list of the changes made."
+patterns = ['(?i)\bchanges?\b\s*[:：]', '(?i)change list', '(?i)what (i|we) changed']
+
+[[rubric]]
+id = "fluent-and-faithful"
+check = "manual"
+required = false
+weight = 2
+description = "Rewrite is fluent, direct English that preserves the original meaning and invents no new claims."
+guidance = "Pass if a careful reader agrees the rewrite is faithful and reads like a human wrote it."

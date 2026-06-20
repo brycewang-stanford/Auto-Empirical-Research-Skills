@@ -1,0 +1,113 @@
+id: edgartools-financials
+name: EdgarTools Financials
+version: "1.1"
+
+# See also: sharp-edges.yaml for production gotchas
+
+identity: Financial statement analyst. Use get_X() for single metrics, statements for full data. View parameter controls detail level.
+
+patterns:
+  - name: Get Financials
+    when: Start financial analysis
+    code: |
+      financials = company.get_financials()              # Annual (from 10-K)
+      quarterly = company.get_quarterly_financials()     # Quarterly (from 10-Q)
+
+  - name: Quick Metrics
+    when: Need a single metric for the current year only
+    code: |
+      financials.get_revenue()                    # Total revenue
+      financials.get_net_income()                 # Net income
+      financials.get_operating_income()           # Operating income
+      financials.get_total_assets()               # Total assets
+      financials.get_total_liabilities()          # Total liabilities
+      financials.get_stockholders_equity()        # Stockholders equity
+      financials.get_current_assets()             # Current assets
+      financials.get_current_liabilities()        # Current liabilities
+      financials.get_operating_cash_flow()        # Operating cash flow
+      financials.get_free_cash_flow()             # Free cash flow
+      financials.get_capital_expenditures()       # CapEx
+      financials.get_shares_outstanding_basic()   # Basic shares
+      financials.get_shares_outstanding_diluted() # Diluted shares
+
+      # Prior periods: period_offset (0=current, 1=prior, 2=two years ago)
+      financials.get_revenue(period_offset=1)     # Prior year revenue
+    note: |
+      get_X() returns ONE value. For multi-year data, use income_statement() instead.
+
+  - name: Multi-Year Revenue or Metrics
+    when: Need revenue or any metric for 2-3 years (trend, history)
+    code: |
+      # For multi-year data, use the full statement (already includes 3 years)
+      financials = company.get_financials()
+      income = financials.income_statement()      # 3-year income table
+      print(income)                                # Shows revenue across 3 years
+    note: |
+      Do NOT call get_revenue() three times with period_offset 0,1,2.
+      income_statement() already contains 3 years of revenue in one call.
+
+  - name: Full Statements
+    when: Need complete financial statement
+    code: |
+      # view parameter: standard (default), detailed (all line items), summary (key totals)
+      income = financials.income_statement()                    # standard
+      income = financials.income_statement(view="detailed")     # all line items
+      balance = financials.balance_sheet(view="summary")        # key totals only
+      cashflow = financials.cashflow_statement()   # or cash_flow_statement()
+
+      # view also works on multi-period stitched statements (MultiFinancials / XBRLS)
+      from edgar import MultiFinancials
+      filings = company.get_filings(form="10-K").head(3)
+      multi = MultiFinancials.extract(filings)
+      income_detailed = multi.income_statement(view="detailed")  # dimensional breakdowns across years
+
+      # Drill down: statement line item → note that explains it
+      # (requires the filing object: tenk = company.get_filings(form="10-K")[0].obj())
+      bs = tenk.balance_sheet                            # Statement from report object
+      item = bs['Commercial paper']                      # exact match → StatementLineItem
+      item.note                                          # → Note object for 'Debt'
+      item.note.text                                     # narrative explanation
+      bs.search('debt')                                  # fuzzy → ranked list of StatementLineItems
+
+  - name: All Metrics at Once
+    when: Comprehensive snapshot
+    code: |
+      metrics = financials.get_financial_metrics()  # Returns dict with:
+      # revenue, net_income, total_assets, total_liabilities, stockholders_equity,
+      # operating_cash_flow, free_cash_flow, current_assets, current_liabilities,
+      # shares_outstanding_basic, shares_outstanding_diluted,
+      # current_ratio, debt_to_equity, return_on_equity, profit_margin
+
+  - name: Compare Companies
+    when: Side-by-side comparison, revenue trends, multi-company analysis
+    code: |
+      # For specific metrics (revenue, net income, total assets):
+      for ticker in ["AAPL", "MSFT", "GOOGL"]:
+          f = Company(ticker).get_financials()
+          print(f"{ticker}: Rev={f.get_revenue():,} NI={f.get_net_income():,} Assets={f.get_total_assets():,}")
+
+      # For full statement comparison (income + balance sheet):
+      for ticker in ["AAPL", "MSFT", "GOOGL"]:
+          f = Company(ticker).get_financials()
+          print(f"\n{ticker}:")
+          print(f.income_statement())
+          print(f.balance_sheet())
+    note: |
+      Use get_X() methods for specific values. Use income_statement()/balance_sheet() for full tables.
+      Do NOT use DataFrame indexing like .iloc[0].get("Revenue") on statement objects.
+      Do NOT build manual DataFrames or period-alignment logic.
+      get_financials() handles period alignment automatically.
+
+avoid:
+  - pattern: "financials.income_statement(view='detailed')"
+    when: Just need one metric
+    fix: "financials.get_revenue()"
+    why: Quick getters are faster and return exact values
+
+  - pattern: "get_facts() with manual iteration for comparison"
+    when: Comparing companies or getting revenue trends
+    fix: |
+      for ticker in tickers:
+          f = Company(ticker).get_financials()
+          print(f.get_revenue())
+    why: get_financials() is simpler, handles period alignment, and avoids manual iteration
