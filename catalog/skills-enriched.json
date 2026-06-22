@@ -2,54 +2,54 @@
   "generated_by": "scripts/build-catalog-enrich.py",
   "schema_version": 1,
   "summary": {
-    "skills": 1145,
+    "skills": 1150,
     "mean_quality_score": 99.2,
-    "with_frontmatter_description": 1141,
+    "with_frontmatter_description": 1146,
     "body_derived_description": 4,
     "no_description": 0,
-    "tagged": 558
+    "tagged": 563
   },
   "taxonomy": {
     "language": {
       "latex": 95,
-      "stata": 48,
-      "python": 45,
+      "stata": 49,
+      "python": 46,
       "r": 22
     },
     "method": {
-      "iv": 27,
-      "rdd": 25,
+      "iv": 28,
+      "rdd": 26,
       "panel-fe": 19,
       "staggered-did": 17,
       "bayesian": 13,
+      "synthetic-control": 11,
       "did": 10,
       "dml": 10,
       "event-study": 10,
-      "synthetic-control": 10,
-      "matching": 9,
+      "matching": 10,
       "survival": 3
     },
     "stage": {
-      "analysis": 138,
-      "writing": 83,
-      "submission": 76,
+      "analysis": 139,
+      "writing": 87,
+      "submission": 78,
       "literature": 62,
       "reproduction": 58,
       "citation": 48,
       "presentation": 42,
       "tables-figures": 42,
-      "ideation": 33,
-      "peer-review": 25,
-      "robustness": 25,
+      "ideation": 34,
+      "peer-review": 26,
+      "robustness": 26,
       "de-aigc": 18,
       "data": 12
     },
     "topic": {
-      "econometrics": 79,
-      "scientific-writing": 67,
+      "econometrics": 80,
+      "scientific-writing": 71,
       "reproducibility": 58,
       "proofreading": 35,
-      "causal-inference": 29
+      "causal-inference": 30
     }
   },
   "skills": [
@@ -18593,10 +18593,37 @@
       "sync": "manual vendor snapshot"
     },
     {
+      "name": "aer-consistency",
+      "path": "skills/50-brycewang-aer-skills/skills/aer-consistency/SKILL.md",
+      "collection": "50-brycewang-aer-skills",
+      "line_count": 225,
+      "description_effective": "Use when auditing a finished or near-finished AER, AER:Insights, or AEJ manuscript for internal consistency: headline numbers across abstract, introduction, results, and tables; sample sizes; log-point and percentage-point conversions; cross-references; and in-text-citation/bibliography matching. Apply after the body and exhibits exist, before aer-referee-sim and aer-submission.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "method": [
+          "matching"
+        ],
+        "stage": [
+          "submission",
+          "writing"
+        ],
+        "topic": [
+          "scientific-writing"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "MIT",
+      "commercial_use": "allowed",
+      "source_url": "https://github.com/brycewang-stanford/AER-skills",
+      "sync": "weekly GitHub Actions sync"
+    },
+    {
       "name": "aer-identification",
       "path": "skills/50-brycewang-aer-skills/skills/aer-identification/SKILL.md",
       "collection": "50-brycewang-aer-skills",
-      "line_count": 203,
+      "line_count": 207,
       "description_effective": "Use when selecting, implementing, or stress-testing the causal identification strategy for an empirical economics manuscript — difference-in-differences (including staggered designs), instrumental variables (including weak-IV-robust inference), regression discontinuity, synthetic control, or shift-share / Bartik. Apply before writing the introduction or results.",
       "description_source": "frontmatter",
       "has_references": false,
@@ -18627,8 +18654,55 @@
       "name": "aer-introduction",
       "path": "skills/50-brycewang-aer-skills/skills/aer-introduction/SKILL.md",
       "collection": "50-brycewang-aer-skills",
-      "line_count": 161,
-      "description_effective": "Use when drafting or rewriting the introduction of an economics manuscript targeted at AER, AER:Insights, or an AEJ, or when compressing an abstract to the mandatory 100-word limit. Implements the Keith Head / Bellemare five-paragraph formula and AER-specific formatting conventions.",
+      "line_count": 163,
+      "description_effective": "Use when drafting or rewriting the introduction of an economics manuscript targeted at AER, AER:Insights, or an AEJ, or when compressing an abstract to the mandatory 100-word limit. Implements the Keith Head / Bellemare five-paragraph formula and AER-specific formatting conventions. Apply after the body sections exist.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "stage": [
+          "writing"
+        ],
+        "topic": [
+          "scientific-writing"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "MIT",
+      "commercial_use": "allowed",
+      "source_url": "https://github.com/brycewang-stanford/AER-skills",
+      "sync": "weekly GitHub Actions sync"
+    },
+    {
+      "name": "aer-literature",
+      "path": "skills/50-brycewang-aer-skills/skills/aer-literature/SKILL.md",
+      "collection": "50-brycewang-aer-skills",
+      "line_count": 219,
+      "description_effective": "Use when positioning a manuscript against the existing economics literature, building the antecedents map for the introduction, deciding what to cite, or verifying that every reference in the bibliography is real, correctly attributed, and cited to the published version. Apply at topic selection for the novelty scan and again before drafting the introduction.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "stage": [
+          "ideation",
+          "writing"
+        ],
+        "topic": [
+          "scientific-writing"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "MIT",
+      "commercial_use": "allowed",
+      "source_url": "https://github.com/brycewang-stanford/AER-skills",
+      "sync": "weekly GitHub Actions sync"
+    },
+    {
+      "name": "aer-paper-body",
+      "path": "skills/50-brycewang-aer-skills/skills/aer-paper-body/SKILL.md",
+      "collection": "50-brycewang-aer-skills",
+      "line_count": 260,
+      "description_effective": "Use when drafting or revising the body sections of an AER, AER:Insights, or AEJ manuscript — institutional background, data, empirical strategy, results, mechanisms, and conclusion. Covers equation conventions, results-paragraph narration, magnitude interpretation, and back-of-envelope policy calculations. Apply after the empirics are stable and before or alongside aer-introduction.",
       "description_source": "frontmatter",
       "has_references": false,
       "tags": {
@@ -18650,8 +18724,8 @@
       "name": "aer-rebuttal",
       "path": "skills/50-brycewang-aer-skills/skills/aer-rebuttal/SKILL.md",
       "collection": "50-brycewang-aer-skills",
-      "line_count": 275,
-      "description_effective": "Use when responding to any post-review decision from AER, AER:Insights, or an AEJ — Revise & Resubmit, reject-and-resubmit, or conditional acceptance — and a point-by-point response letter plus aligned manuscript revisions are needed. Handles comment triage, the concede / clarify / push-back decision, and the response-letter format that editors actually read.",
+      "line_count": 276,
+      "description_effective": "Use when responding to a Revise & Resubmit decision from AER, AER:Insights, or an AEJ, and a point-by-point response letter plus aligned manuscript revisions are needed. Handles triage, the concede / clarify / push-back decision, and the response-letter format that editors actually read.",
       "description_source": "frontmatter",
       "has_references": false,
       "tags": {
@@ -18671,10 +18745,31 @@
       "sync": "weekly GitHub Actions sync"
     },
     {
+      "name": "aer-referee-sim",
+      "path": "skills/50-brycewang-aer-skills/skills/aer-referee-sim/SKILL.md",
+      "collection": "50-brycewang-aer-skills",
+      "line_count": 240,
+      "description_effective": "Use when a complete draft exists and needs an adversarial internal review before submission — simulating the AER desk screen and three referee reports with calibrated severity, scoring the paper against the editorial rubric, and producing a prioritized revise list. Apply after aer-consistency passes and before aer-submission; rerun until the simulated verdict is at least major R&R.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "stage": [
+          "peer-review",
+          "submission"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "MIT",
+      "commercial_use": "allowed",
+      "source_url": "https://github.com/brycewang-stanford/AER-skills",
+      "sync": "weekly GitHub Actions sync"
+    },
+    {
       "name": "aer-replication",
       "path": "skills/50-brycewang-aer-skills/skills/aer-replication/SKILL.md",
       "collection": "50-brycewang-aer-skills",
-      "line_count": 238,
+      "line_count": 255,
       "description_effective": "Use when assembling the AEA Data and Code Availability deposit for an AER, AER:Insights, or AEJ acceptance, writing the README, or auditing a replication package before the AEA Data Editor review. Implements the current AEA policy, including the February 2026 Data and Code Availability Policy.",
       "description_source": "frontmatter",
       "has_references": false,
@@ -18698,7 +18793,7 @@
       "name": "aer-robustness",
       "path": "skills/50-brycewang-aer-skills/skills/aer-robustness/SKILL.md",
       "collection": "50-brycewang-aer-skills",
-      "line_count": 141,
+      "line_count": 150,
       "description_effective": "Use when the main empirical results exist but the manuscript lacks the robustness, heterogeneity, mechanism, and placebo checks that AER referees will demand. Apply after aer-identification and before aer-introduction so that the value-added paragraph can reference these tests.",
       "description_source": "frontmatter",
       "has_references": false,
@@ -18720,10 +18815,46 @@
       "sync": "weekly GitHub Actions sync"
     },
     {
+      "name": "aer-statspai",
+      "path": "skills/50-brycewang-aer-skills/skills/aer-statspai/SKILL.md",
+      "collection": "50-brycewang-aer-skills",
+      "line_count": 213,
+      "description_effective": "Use when implementing or running the empirical analysis for an AER-track manuscript with StatsPAI — the agent-native unified Python engine and MCP server for causal inference and econometrics — as an alternative to hand-written Stata / R / Python template code. Covers DiD, IV, RDD, synthetic control, robustness, sensitivity, and publication-ready table export.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "language": [
+          "python",
+          "stata"
+        ],
+        "method": [
+          "iv",
+          "rdd",
+          "synthetic-control"
+        ],
+        "stage": [
+          "analysis",
+          "robustness",
+          "writing"
+        ],
+        "topic": [
+          "causal-inference",
+          "econometrics",
+          "scientific-writing"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "MIT",
+      "commercial_use": "allowed",
+      "source_url": "https://github.com/brycewang-stanford/AER-skills",
+      "sync": "weekly GitHub Actions sync"
+    },
+    {
       "name": "aer-submission",
       "path": "skills/50-brycewang-aer-skills/skills/aer-submission/SKILL.md",
       "collection": "50-brycewang-aer-skills",
-      "line_count": 189,
+      "line_count": 203,
       "description_effective": "Use when running the final pre-submission audit for an AER, AER:Insights, or AEJ manuscript — length, format, cover letter, per-author disclosure statements, file packaging, and routing among the AEA journal family. Apply immediately before clicking submit.",
       "description_source": "frontmatter",
       "has_references": false,
@@ -18775,7 +18906,7 @@
       "name": "aer-topic-selection",
       "path": "skills/50-brycewang-aer-skills/skills/aer-topic-selection/SKILL.md",
       "collection": "50-brycewang-aer-skills",
-      "line_count": 124,
+      "line_count": 135,
       "description_effective": "Use when evaluating whether a research idea clears the AER top-5 bar, when routing between AER, AER:Insights, and the AEJ family, or when sharpening a fuzzy contribution sentence into one publishable claim. Apply before any writing begins.",
       "description_source": "frontmatter",
       "has_references": false,
@@ -18791,7 +18922,7 @@
       "name": "aer-workflow",
       "path": "skills/50-brycewang-aer-skills/skills/aer-workflow/SKILL.md",
       "collection": "50-brycewang-aer-skills",
-      "line_count": 86,
+      "line_count": 142,
       "description_effective": "Use when deciding which AER-skills sub-skill to use next, or when sequencing manuscript work from topic selection through rebuttal for the American Economic Review, AER:Insights, or AEJ journals. Routes — does not replace — the specialized skills.",
       "description_source": "frontmatter",
       "has_references": false,

@@ -10120,7 +10120,17 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 203,
+      "line_count": 225,
+      "name": "aer-consistency",
+      "path": "skills/50-brycewang-aer-skills/skills/aer-consistency/SKILL.md"
+    },
+    {
+      "collection": "50-brycewang-aer-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 207,
       "name": "aer-identification",
       "path": "skills/50-brycewang-aer-skills/skills/aer-identification/SKILL.md"
     },
@@ -10130,7 +10140,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 161,
+      "line_count": 163,
       "name": "aer-introduction",
       "path": "skills/50-brycewang-aer-skills/skills/aer-introduction/SKILL.md"
     },
@@ -10140,7 +10150,27 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 275,
+      "line_count": 219,
+      "name": "aer-literature",
+      "path": "skills/50-brycewang-aer-skills/skills/aer-literature/SKILL.md"
+    },
+    {
+      "collection": "50-brycewang-aer-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 260,
+      "name": "aer-paper-body",
+      "path": "skills/50-brycewang-aer-skills/skills/aer-paper-body/SKILL.md"
+    },
+    {
+      "collection": "50-brycewang-aer-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 276,
       "name": "aer-rebuttal",
       "path": "skills/50-brycewang-aer-skills/skills/aer-rebuttal/SKILL.md"
     },
@@ -10150,7 +10180,17 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 238,
+      "line_count": 240,
+      "name": "aer-referee-sim",
+      "path": "skills/50-brycewang-aer-skills/skills/aer-referee-sim/SKILL.md"
+    },
+    {
+      "collection": "50-brycewang-aer-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 255,
       "name": "aer-replication",
       "path": "skills/50-brycewang-aer-skills/skills/aer-replication/SKILL.md"
     },
@@ -10160,7 +10200,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 141,
+      "line_count": 150,
       "name": "aer-robustness",
       "path": "skills/50-brycewang-aer-skills/skills/aer-robustness/SKILL.md"
     },
@@ -10170,7 +10210,17 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 189,
+      "line_count": 213,
+      "name": "aer-statspai",
+      "path": "skills/50-brycewang-aer-skills/skills/aer-statspai/SKILL.md"
+    },
+    {
+      "collection": "50-brycewang-aer-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 203,
       "name": "aer-submission",
       "path": "skills/50-brycewang-aer-skills/skills/aer-submission/SKILL.md"
     },
@@ -10190,7 +10240,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 124,
+      "line_count": 135,
       "name": "aer-topic-selection",
       "path": "skills/50-brycewang-aer-skills/skills/aer-topic-selection/SKILL.md"
     },
@@ -10200,7 +10250,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 86,
+      "line_count": 142,
       "name": "aer-workflow",
       "path": "skills/50-brycewang-aer-skills/skills/aer-workflow/SKILL.md"
     },
@@ -11888,11 +11938,11 @@
   "schema_version": "1.0",
   "summary": {
     "duplicate_skill_names": 92,
-    "exact_case_skill_files": 1145,
+    "exact_case_skill_files": 1150,
     "missing_description": 4,
     "missing_frontmatter": 4,
     "non_exact_case_skill_files": 0,
     "over_500_lines": 91,
-    "skill_like_files": 1145
+    "skill_like_files": 1150
   }
 }

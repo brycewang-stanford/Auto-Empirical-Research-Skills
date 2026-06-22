@@ -841,11 +841,11 @@
       "license": "MIT",
       "path": "skills/50-brycewang-aer-skills",
       "primary_skill": {
-        "description": "Use when selecting, implementing, or stress-testing the causal identification strategy for an empirical economics manuscript — difference-in-differences (including staggered designs), instrumental variables (including weak-IV-robust inference), regression discontinuity, synthetic control, or shift-share / Bartik. Apply before writing the introduction or results.",
-        "name": "aer-identification",
-        "path": "skills/50-brycewang-aer-skills/skills/aer-identification/SKILL.md"
+        "description": "Use when auditing a finished or near-finished AER, AER:Insights, or AEJ manuscript for internal consistency: headline numbers across abstract, introduction, results, and tables; sample sizes; log-point and percentage-point conversions; cross-references; and in-text-citation/bibliography matching. Apply after the body and exhibits exist, before aer-referee-sim and aer-submission.",
+        "name": "aer-consistency",
+        "path": "skills/50-brycewang-aer-skills/skills/aer-consistency/SKILL.md"
       },
-      "skill_count": 9,
+      "skill_count": 14,
       "source_confidence": "high",
       "source_url": "https://github.com/brycewang-stanford/AER-skills",
       "sync": "weekly GitHub Actions sync"
@@ -15961,6 +15961,20 @@
     },
     {
       "collection": "50-brycewang-aer-skills",
+      "description": "Use when auditing a finished or near-finished AER, AER:Insights, or AEJ manuscript for internal consistency: headline numbers across abstract, introduction, results, and tables; sample sizes; log-point and percentage-point conversions; cross-references; and in-text-citation/bibliography matching. Apply after the body and exhibits exist, before aer-referee-sim and aer-submission.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 225,
+      "name": "aer-consistency",
+      "path": "skills/50-brycewang-aer-skills/skills/aer-consistency/SKILL.md"
+    },
+    {
+      "collection": "50-brycewang-aer-skills",
       "description": "Use when selecting, implementing, or stress-testing the causal identification strategy for an empirical economics manuscript — difference-in-differences (including staggered designs), instrumental variables (including weak-IV-robust inference), regression discontinuity, synthetic control, or shift-share / Bartik. Apply before writing the introduction or results.",
       "frontmatter_fields": [
         "description",
@@ -15969,13 +15983,13 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 203,
+      "line_count": 207,
       "name": "aer-identification",
       "path": "skills/50-brycewang-aer-skills/skills/aer-identification/SKILL.md"
     },
     {
       "collection": "50-brycewang-aer-skills",
-      "description": "Use when drafting or rewriting the introduction of an economics manuscript targeted at AER, AER:Insights, or an AEJ, or when compressing an abstract to the mandatory 100-word limit. Implements the Keith Head / Bellemare five-paragraph formula and AER-specific formatting conventions.",
+      "description": "Use when drafting or rewriting the introduction of an economics manuscript targeted at AER, AER:Insights, or an AEJ, or when compressing an abstract to the mandatory 100-word limit. Implements the Keith Head / Bellemare five-paragraph formula and AER-specific formatting conventions. Apply after the body sections exist.",
       "frontmatter_fields": [
         "description",
         "name"
@@ -15983,13 +15997,13 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 161,
+      "line_count": 163,
       "name": "aer-introduction",
       "path": "skills/50-brycewang-aer-skills/skills/aer-introduction/SKILL.md"
     },
     {
       "collection": "50-brycewang-aer-skills",
-      "description": "Use when responding to any post-review decision from AER, AER:Insights, or an AEJ — Revise & Resubmit, reject-and-resubmit, or conditional acceptance — and a point-by-point response letter plus aligned manuscript revisions are needed. Handles comment triage, the concede / clarify / push-back decision, and the response-letter format that editors actually read.",
+      "description": "Use when positioning a manuscript against the existing economics literature, building the antecedents map for the introduction, deciding what to cite, or verifying that every reference in the bibliography is real, correctly attributed, and cited to the published version. Apply at topic selection for the novelty scan and again before drafting the introduction.",
       "frontmatter_fields": [
         "description",
         "name"
@@ -15997,9 +16011,51 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 275,
+      "line_count": 219,
+      "name": "aer-literature",
+      "path": "skills/50-brycewang-aer-skills/skills/aer-literature/SKILL.md"
+    },
+    {
+      "collection": "50-brycewang-aer-skills",
+      "description": "Use when drafting or revising the body sections of an AER, AER:Insights, or AEJ manuscript — institutional background, data, empirical strategy, results, mechanisms, and conclusion. Covers equation conventions, results-paragraph narration, magnitude interpretation, and back-of-envelope policy calculations. Apply after the empirics are stable and before or alongside aer-introduction.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 260,
+      "name": "aer-paper-body",
+      "path": "skills/50-brycewang-aer-skills/skills/aer-paper-body/SKILL.md"
+    },
+    {
+      "collection": "50-brycewang-aer-skills",
+      "description": "Use when responding to a Revise & Resubmit decision from AER, AER:Insights, or an AEJ, and a point-by-point response letter plus aligned manuscript revisions are needed. Handles triage, the concede / clarify / push-back decision, and the response-letter format that editors actually read.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 276,
       "name": "aer-rebuttal",
       "path": "skills/50-brycewang-aer-skills/skills/aer-rebuttal/SKILL.md"
+    },
+    {
+      "collection": "50-brycewang-aer-skills",
+      "description": "Use when a complete draft exists and needs an adversarial internal review before submission — simulating the AER desk screen and three referee reports with calibrated severity, scoring the paper against the editorial rubric, and producing a prioritized revise list. Apply after aer-consistency passes and before aer-submission; rerun until the simulated verdict is at least major R&R.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 240,
+      "name": "aer-referee-sim",
+      "path": "skills/50-brycewang-aer-skills/skills/aer-referee-sim/SKILL.md"
     },
     {
       "collection": "50-brycewang-aer-skills",
@@ -16011,7 +16067,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 238,
+      "line_count": 255,
       "name": "aer-replication",
       "path": "skills/50-brycewang-aer-skills/skills/aer-replication/SKILL.md"
     },
@@ -16025,9 +16081,23 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 141,
+      "line_count": 150,
       "name": "aer-robustness",
       "path": "skills/50-brycewang-aer-skills/skills/aer-robustness/SKILL.md"
+    },
+    {
+      "collection": "50-brycewang-aer-skills",
+      "description": "Use when implementing or running the empirical analysis for an AER-track manuscript with StatsPAI — the agent-native unified Python engine and MCP server for causal inference and econometrics — as an alternative to hand-written Stata / R / Python template code. Covers DiD, IV, RDD, synthetic control, robustness, sensitivity, and publication-ready table export.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 213,
+      "name": "aer-statspai",
+      "path": "skills/50-brycewang-aer-skills/skills/aer-statspai/SKILL.md"
     },
     {
       "collection": "50-brycewang-aer-skills",
@@ -16039,7 +16109,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 189,
+      "line_count": 203,
       "name": "aer-submission",
       "path": "skills/50-brycewang-aer-skills/skills/aer-submission/SKILL.md"
     },
@@ -16067,7 +16137,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 124,
+      "line_count": 135,
       "name": "aer-topic-selection",
       "path": "skills/50-brycewang-aer-skills/skills/aer-topic-selection/SKILL.md"
     },
@@ -16081,7 +16151,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 86,
+      "line_count": 142,
       "name": "aer-workflow",
       "path": "skills/50-brycewang-aer-skills/skills/aer-workflow/SKILL.md"
     },
@@ -18569,7 +18639,7 @@
     "missing_frontmatter": 4,
     "missing_name": 4,
     "oversized_skill_files_over_500_lines": 91,
-    "skill_files": 1145,
+    "skill_files": 1150,
     "top_level_collections": 69
   }
 }
