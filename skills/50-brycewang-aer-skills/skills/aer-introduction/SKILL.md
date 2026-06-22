@@ -129,6 +129,17 @@ If the draft is over 100 words:
 
 When working from the AER-skills repository or plugin bundle, read `examples/intro-example.md` only when the user asks for a model introduction, a concrete before/after rewrite, or abstract compression.
 
+## Pre-Handoff Gate
+
+Ship the introduction only when **all** are true:
+
+- [ ] Abstract ≤ 100 words by actual word count, with most words spent on the result
+- [ ] All five paragraphs present in order — Hook, Question, Identification, Antecedents+Value, Roadmap
+- [ ] Identification strategy named within pages 1-3, not deferred to the methods section
+- [ ] Exactly three (max four) contributions, each meaningful only against the cited antecedents
+- [ ] No "Introduction" heading; the method claim matches the actual estimator
+- [ ] No banned phrasing — "to the best of our knowledge, the first to...", vacuous "we contribute to the literature on..."
+
 ## Handoff
 
 ```text

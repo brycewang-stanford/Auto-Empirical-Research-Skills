@@ -1,6 +1,6 @@
 ---
 name: aer-rebuttal
-description: Use when responding to a Revise & Resubmit decision from AER, AER:Insights, or an AEJ, and a point-by-point response letter plus aligned manuscript revisions are needed. Handles triage, the concede / clarify / push-back decision, and the response-letter format that editors actually read.
+description: Use when responding to any post-review decision from AER, AER:Insights, or an AEJ — Revise & Resubmit, reject-and-resubmit, or conditional acceptance — and a point-by-point response letter plus aligned manuscript revisions are needed. Handles comment triage, the concede / clarify / push-back decision, and the response-letter format that editors actually read.
 ---
 
 # AER Rebuttal

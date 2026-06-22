@@ -53,3 +53,7 @@ Each skill in this repository solves one slice. `aer-workflow` exists to compose
 ## 10. English-First, Globally Usable
 
 All skill content is in English so the agent can apply it regardless of the user's primary language. Chinese-language navigation is provided through `README.zh-CN.md` for discoverability.
+
+## 11. Self-Verifying Gates
+
+Every skill ends with a binary, checkable gate — a checklist or a Handoff contract — that the agent must satisfy before declaring the stage done. The skills are self-verifying, not merely advisory. This is the same validation-gate discipline that text-space skill optimizers such as Microsoft SkillOpt use to accept only strictly-improving edits, brought *inside* each skill so an agent can apply it without an external evaluation harness. See `skillopt-optimization.md` for the optimization pass that introduced the missing gates.

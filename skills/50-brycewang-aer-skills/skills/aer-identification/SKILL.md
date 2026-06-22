@@ -174,6 +174,16 @@ When working from the AER-skills repository or plugin bundle, load only the rele
 - Staggered DiD implementation: `templates/stata/03_main_did.do`, `templates/r/03_main_did.R`, or `templates/python/main_did.py`
 - Classic design examples: `examples/aer-exemplars.md`
 
+## Identification Gate
+
+Do not advance to robustness or writing until, for the chosen design, **all** are true:
+
+- [ ] A modern estimator is used — no TWFE on staggered data, no first-stage-F-only IV, no high-order-polynomial RDD
+- [ ] Every required diagnostic for the design (see the per-design lists above) is run and reported
+- [ ] Inference matches the design — cluster-robust / AR / wild bootstrap / permutation, not default OLS SEs by reflex
+- [ ] The identifying assumption is stated in one sentence, ready to drop into the introduction
+- [ ] No item in "Red Flags for Referees" is present
+
 ## Handoff
 
 ```text

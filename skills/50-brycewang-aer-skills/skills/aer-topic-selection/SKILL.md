@@ -95,6 +95,16 @@ Peer feedback measurably improves journal placement: one SD more comments → 47
 
 Skip none of these for an AER target. AER: Insights tolerates a shorter cycle because the contribution is sharper and the venue is younger.
 
+## Go / No-Go Gate
+
+Advance to `aer-identification` / `aer-introduction` only if **all** hold; otherwise route down (AEJ / field journal) or stop:
+
+- [ ] Contribution sentence written in one line with every blank (X, Y, Z, D, M, Q) filled
+- [ ] All four Top-5 Bar tests evaluated; AER chosen as target only if all four pass
+- [ ] Target venue named explicitly, with a one-sentence reason it is not one tier lower
+- [ ] No kill switch live — no "and we also explore", no "we already knew that", no "interesting but not economics"
+- [ ] At least three subfields that would plausibly cite the paper can be named
+
 ## Handoff
 
 When this skill finishes, emit:

@@ -111,6 +111,17 @@ Keep main-text robustness to **one table** with each row a different specificati
 - Magnitude differences are explained in the text, not left to the reader to compute
 - Sample-size changes across rows are flagged
 
+## Coverage Gate
+
+The empirical section is referee-ready only when **all** are present and theory-motivated (not mined):
+
+- [ ] Robustness spans specification, sample, outcome definition, clustering, and estimator
+- [ ] Heterogeneity is mechanism-predicted (interaction form), labeled pre-specified vs. exploratory
+- [ ] Mechanism shows both channel evidence and explicit ruling-out of the 2-3 leading alternatives
+- [ ] Placebo / falsification covers pre-treatment, cross-unit, and outcome placebo as applicable
+- [ ] Each of the top-5 anticipated referee comments has a visible pre-emption in the paper
+- [ ] Any null is reported with demonstrated power and tight CIs, never over-claimed as "no effect"
+
 ## Handoff
 
 ```text
