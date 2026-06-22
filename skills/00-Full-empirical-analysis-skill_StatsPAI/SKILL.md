@@ -91,6 +91,24 @@ This skill drives StatsPAI through the **canonical pipeline of an applied AER em
 3. **One import, full pipeline**: data contract → Table 1 → estimand-first DSL → identification graphs → main table → heterogeneity → mechanisms → robustness → replication package.
 4. **Estimand-first**: `sp.causal_question(...).identify()` forces the "DID vs RD vs IV?" decision *before* estimation, with the identifying assumption written down — the way a referee expects to read it.
 
+## SkillOpt-style execution gate
+
+Use this long playbook as a library, not as a script to exhaustively apply. Before generating code or revising a workflow, compress the task into a task-local `best_skill` card:
+
+```text
+best_skill: <mode + design + artifact target>
+train_signal: <current failure, user goal, or missing evidence>
+heldout_gate: <checks the patch must pass beyond the focal example>
+patch_scope: <one estimator/sample/export/robustness change>
+reject_if: <conditions that force rollback to the last passing spec>
+```
+
+1. **Route card**: record the mode (`econ`, `epi`, or `ml-causal`), estimand, identification design, focal outcome/treatment, and required artifacts.
+2. **Bounded edit**: change one decision at a time (estimator, sample rule, export format, or robustness check). Do not rewrite the whole pipeline when a local patch can pass.
+3. **Held-out gate**: define checks before running code: row counts, key uniqueness, treatment support, missingness thresholds, expected table/figure files, and one non-focal robustness/specification that the change must not break.
+4. **Reject buffer**: if a candidate spec fails the gate, keep the failure reason in `analysis_log.md`, revert to the last passing spec, and avoid retrying the same unchecked pattern.
+5. **Promote only after validation**: only turn a one-off fix into reusable project boilerplate after it passes the current data and at least one alternate outcome/sample/specification.
+
 ## The AER-style empirical pipeline
 
 The skill mirrors the canonical sections of an applied AER / QJE / AEJ paper. Each step below is one paper section and one set of artifacts on disk.

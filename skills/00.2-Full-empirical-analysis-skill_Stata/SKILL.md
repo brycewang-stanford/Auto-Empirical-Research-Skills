@@ -91,6 +91,24 @@ This skill is the *canonical* 8-step pipeline an applied economist runs on every
 4. **Rich outputs.** Every step yields at least one table (`.tex`/`.rtf`) or figure (`.pdf`/`.png`) — never a coefficient printed to the Results window and forgotten.
 5. **Progressive disclosure.** `SKILL.md` gives the canonical command at each step; [`references/`](references/) holds variant-specific depth (dozens of tests, estimator-specific diagnostics, graph recipes).
 
+## SkillOpt-style execution gate
+
+Use this long playbook as a library, not as a script to exhaustively apply. Before writing or revising a `.do` file, compress the user's request into a task-local `best_skill` card:
+
+```text
+best_skill: <mode + design + artifact target>
+train_signal: <current failure, user goal, or missing evidence>
+heldout_gate: <checks the patch must pass beyond the focal example>
+patch_scope: <one estimator/sample/export/robustness change>
+reject_if: <conditions that force rollback to the last passing spec>
+```
+
+1. **Route card**: record the mode (`econ`, `epi`, or `ml-causal`), estimand, identification design, focal outcome/treatment, Stata command family, and required artifacts.
+2. **Bounded edit**: change one decision at a time (sample rule, estimator command, fixed effects, clustering, export format, or robustness check). Prefer the smallest patch that can pass validation.
+3. **Held-out gate**: define checks before running code: `isid`/duplicate status, merge assertions, treatment support, missingness thresholds, expected table/figure files, and one non-focal robustness/specification that the change must not break.
+4. **Reject buffer**: if a candidate spec fails the gate, log the failure in `analysis_log.md` or the Stata log, revert to the last passing spec, and do not retry the same unchecked pattern.
+5. **Promote only after validation**: only turn a one-off fix into reusable `.do` boilerplate after it passes the current data and at least one alternate outcome/sample/specification.
+
 ---
 
 ## Three domain modes (default = AER econ; alternates = epi & ML-causal)
