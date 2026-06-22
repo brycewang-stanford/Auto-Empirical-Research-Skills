@@ -33,6 +33,45 @@ and the estimand-first `sp.causal_question(...).identify()` DSL —
 switching modes only changes which Step-4 estimators you reach
 for, not the surrounding scaffolding.
 
+## SkillOpt-style improvements
+
+This skill now treats the playbook as a validation-gated operating policy,
+inspired by [SkillOpt](https://github.com/microsoft/SkillOpt): route the task,
+freeze the analysis contract, execute the smallest verified call shape, widen
+one block at a time, and accept the final answer only after the requested
+artifacts or blocking gates are concrete.
+
+The high-level rules live near the top of `SKILL.md`:
+
+- **Mode routing before code.** Narrow export requests stay narrow; AER, epi,
+  and ML-causal work enter their own pipelines.
+- **Artifact gates.** DID, IV, RD, matching, epi, ML-causal, and Stata/R
+  migration tasks each have minimum diagnostics before the agent may call a
+  result paper-ready.
+- **Bounded repair.** Signature errors, optional-extra misses, result-type
+  mismatches, and plot return-shape mistakes are fixed as local rule updates,
+  not broad pipeline rewrites.
+- **Future maintenance rule.** Edits to this skill should be small
+  add/delete/replace changes accepted only when they address a concrete failure
+  case without regressing the verified skeleton, export cookbook, or Common
+  Mistakes table.
+- **Runnable validation gate.** [`validate_api_claims.py`](validate_api_claims.py)
+  turns SkillOpt's "edits pass only if they survive a validation gate" into a
+  command you can run: it parses `SKILL.md`, then checks every `sp.*` reference,
+  the documented argument names, and the result-object attribute claims against
+  the **installed** `statspai` (smoke fits included). It exits non-zero on drift,
+  so it doubles as a CI check. Re-run it whenever you bump the pinned version or
+  edit an API claim:
+
+  ```bash
+  python validate_api_claims.py          # full gate (exits 1 on drift)
+  python validate_api_claims.py --quick  # existence + signatures only, no fits
+  ```
+
+  This is how the skill was re-validated from `1.16.1` to `statspai 1.19.0`: the
+  gate caught one real drift — `AFTResult` gained `.params`, so `sp.regtable(aft)`
+  now works directly and the old "hand-build a DataFrame" workaround was removed. `EVALS.md` provides the held-out gate cases for that check.
+
 ## What this skill ships (paper-ready, in three formats)
 
 Every numbered table in the AER pipeline emits parallel
@@ -82,11 +121,17 @@ cp -r StatsPAI_full_data_analysis_skill ~/.claude/skills/StatsPAI_skill
 ln -s "$(pwd)/StatsPAI_full_data_analysis_skill" ~/.claude/skills/StatsPAI_skill
 ```
 
-Then install the Python package itself:
+Then install the Python package itself (API surface verified against **statspai 1.19.0** via `validate_api_claims.py`):
 
 ```bash
-pip install statspai          # >= 1.6.6 (Word/Excel export stack)
+# Recommended — covers the default pipeline (high-dim FE + figures):
+pip install "statspai[fixest,plotting]"
+
+# Full skill (adds neural causal + text-as-treatment):
+pip install "statspai[fixest,plotting,neural,text]"
 ```
+
+> The bare `pip install statspai` does **not** pull `pyfixest` (needed by `sp.feols`, the default for any `y ~ x | fe` regression — it raises `ImportError` without it), matplotlib (any figure), or torch (`dragonnet`/`tarnet`/`cevae`). See the dependency matrix at the top of `SKILL.md`.
 
 ## Activate
 
@@ -172,7 +217,8 @@ hands the `CausalResult` back to you).
   - **3-tier export cookbook** (single table / paper-format multi-panel / full session bundle)
   - **17 standard AER figures** (raw trends, rollout heatmap, event-study, Bacon, CS-DID, RD plot, McCrary, love plot, SCM trajectory, coefplot, dose-response, CATE, robustness forest, spec curve, sensitivity dashboard)
   - **Method Catalog** (classical OLS / `feols` / IV / panel / DID / RD / matching / SCM / ML / neural / text / mediation / robustness)
-  - **Common Mistakes table** (26 anti-patterns with corrections — incl. `fmt="auto"` for mixed-magnitude regtables, auto Control/Treated headers on binary `by=`)
+  - **Common Mistakes table** (65 anti-patterns with corrections — re-validated against statspai 1.19.0 by `validate_api_claims.py`; incl. the `(fig, ax)` plot-save idiom, `fmt="auto"` for mixed-magnitude regtables, and the §A/§B signature traps)
+- `EVALS.md` — SkillOpt-style held-out gate cases for future edits to this skill
 - `README.md` — this file
 
 ---
@@ -262,11 +308,17 @@ cp -r StatsPAI_full_data_analysis_skill ~/.claude/skills/StatsPAI_skill
 ln -s "$(pwd)/StatsPAI_full_data_analysis_skill" ~/.claude/skills/StatsPAI_skill
 ```
 
-再装 Python 包本体：
+再装 Python 包本体（API 接口已对照 **statspai 1.19.0** 由 `validate_api_claims.py` 验证）：
 
 ```bash
-pip install statspai          # >= 1.6.6（含 Word/Excel 导出栈）
+# 推荐 —— 覆盖默认流程（高维固定效应 + 出图）：
+pip install "statspai[fixest,plotting]"
+
+# 完整 skill（再加神经因果 + 文本处理）：
+pip install "statspai[fixest,plotting,neural,text]"
 ```
+
+> 仅 `pip install statspai` **不会**装上 `pyfixest`（`sp.feols` 需要它——任何 `y ~ x | fe` 回归的默认入口，缺失会 `ImportError`）、matplotlib（任何图）、torch（`dragonnet`/`tarnet`/`cevae`）。完整依赖矩阵见 `SKILL.md` 顶部。
 
 ### 激活
 
@@ -309,5 +361,5 @@ Skill 会被自然语言触发词自动激活，例如 *"run a DID analysis"*、
   - **3 档导出 cookbook**（单表 / 论文级多面板 / 整套 session bundle）
   - **17 张标准 AER 图**（原始趋势、rollout 热图、event-study、Bacon、CS-DID、RD plot、McCrary、love plot、SCM 轨迹、coefplot、剂量反应、CATE、robustness 森林图、spec curve、sensitivity 面板）
   - **Method Catalog**（经典 OLS / `feols` / IV / 面板 / DID / RD / 匹配 / SCM / ML / 神经 / 文本 / 中介 / robustness）
-  - **Common Mistakes 反模式表**（24 条带正确写法）
+  - **Common Mistakes 反模式表**（65 条带正确写法，由 `validate_api_claims.py` 对照 statspai 1.19.0 复核；含 `(fig, ax)` 出图保存范式与 §A/§B 签名陷阱）
 - `README.md` — 本文件
