@@ -107,14 +107,16 @@ antecedents.*
 
 ### Paragraph 5 — Roadmap
 
-> Section 2 describes the Connect America Fund auction mechanism and
-> our data sources. Section 3 presents the empirical strategy.
-> Section 4 reports main results. Section 5 explores heterogeneity by
-> occupation and tests the skill-biased technology mechanism. Section 6
-> presents a calibrated benefit-cost framework. Section 7 concludes.
+> Section I describes the Connect America Fund auction mechanism and
+> our data sources. Section II presents the empirical strategy.
+> Section III reports main results. Section IV explores heterogeneity by
+> occupation and tests the skill-biased technology mechanism. Section V
+> presents a calibrated benefit-cost framework. Section VI concludes.
 
-*One paragraph, terse. Six sections; each section serves one purpose.
-Some AER papers omit the roadmap entirely — acceptable for short papers.*
+*One paragraph, terse. Six numbered sections (AER house style numbers
+them with Roman numerals; the introduction is unnumbered), each serving
+one purpose. Some AER papers omit the roadmap entirely — acceptable for
+short papers.*
 
 ---
 

@@ -5,17 +5,40 @@
 Install all skills under your user profile so they are available across projects:
 
 ```bash
-git clone https://github.com/brycewang-stanford/AER-skills.git
-cd AER-skills
-mkdir -p ~/.claude/skills
-cp -R skills/aer-* ~/.claude/skills/
+git clone https://github.com/brycewang-stanford/AER-Skills.git
+cd AER-Skills
+python3 scripts/install_skills.py claude
 ```
 
 Restart Claude Code (or run `/reload-plugins` if your install supports it).
 
-Manual copying installs the skill instructions. Keep the cloned repository
+The installer copies the full skill directories. Keep the cloned repository
 available if you want the `templates/` and `examples/` resources referenced by
 the skills.
+
+To preview the copy without writing files:
+
+```bash
+python3 scripts/install_skills.py claude --dry-run
+```
+
+To overwrite an existing install:
+
+```bash
+python3 scripts/install_skills.py claude --replace
+```
+
+Do not pass a repository source directory such as `.`, `skills/`, `docs/`, or
+`templates/` to `--dest`; the installer refuses those destinations to avoid
+copying generated skill folders into the source tree. Project-scoped installs
+should use `.claude/skills`.
+
+Manual fallback:
+
+```bash
+mkdir -p ~/.claude/skills
+cp -R skills/aer-* ~/.claude/skills/
+```
 
 ## Project-Scoped Install
 
@@ -23,7 +46,7 @@ If you want the skills available only in the current project:
 
 ```bash
 mkdir -p .claude/skills
-cp -R skills/aer-* .claude/skills/
+python3 scripts/install_skills.py claude --dest .claude/skills
 ```
 
 ## Verify
@@ -47,9 +70,9 @@ Use aer-workflow to tell me which skill I should use next for this manuscript.
 Pull the repo and recopy:
 
 ```bash
-cd AER-skills
+cd AER-Skills
 git pull
-cp -R skills/aer-* ~/.claude/skills/
+python3 scripts/install_skills.py claude --replace
 ```
 
 ## Subagent Wrapper (advanced)

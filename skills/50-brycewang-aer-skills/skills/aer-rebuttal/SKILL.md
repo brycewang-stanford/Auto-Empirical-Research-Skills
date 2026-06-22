@@ -1,6 +1,6 @@
 ---
 name: aer-rebuttal
-description: Use when responding to any post-review decision from AER, AER:Insights, or an AEJ — Revise & Resubmit, reject-and-resubmit, or conditional acceptance — and a point-by-point response letter plus aligned manuscript revisions are needed. Handles comment triage, the concede / clarify / push-back decision, and the response-letter format that editors actually read.
+description: Use when responding to a Revise & Resubmit decision from AER, AER:Insights, or an AEJ, and a point-by-point response letter plus aligned manuscript revisions are needed. Handles triage, the concede / clarify / push-back decision, and the response-letter format that editors actually read.
 ---
 
 # AER Rebuttal
@@ -221,6 +221,7 @@ Avoid:
 3. **Cross-check** the response letter against the revised manuscript — every page/line reference must resolve.
 4. **Update table and figure numbering** if exhibits were added or removed; cite the new identifiers.
 5. **Re-run the replication package** if results changed; re-deposit if material.
+6. **Re-run `aer-consistency`** on the revised manuscript — revisions are where headline numbers, exhibit numbering, and citations desynchronize.
 
 ## Decision Letter Conventions
 

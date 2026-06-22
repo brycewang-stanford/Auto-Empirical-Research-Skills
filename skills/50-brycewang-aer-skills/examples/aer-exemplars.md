@@ -26,7 +26,7 @@ should look like in 2026.
 |---|---|---|---|---|
 | Card & Krueger, "Minimum Wages and Employment: A Case Study of the Fast-Food Industry in New Jersey and Pennsylvania" | 1994 | AER | The canonical 2×2 DiD. Read for narrative restraint, falsification design, and how to defend a single research design across multiple critiques. | n/a (pre-policy) |
 | Autor, Dorn & Hanson, "The China Syndrome: Local Labor Market Effects of Import Competition in the United States" | 2013 | AER | Shift-share / Bartik IV done right; foreign-instrument exclusion restriction narrative; cross-subfield reach (labor + trade + macro). | [openICPSR 112670](https://www.openicpsr.org/openicpsr/project/112670) |
-| Beraja, Hurst & Ospina, "The Aggregate Implications of Regional Business Cycles" | 2019 | Econometrica | Modern staggered DiD anchored in theory — read for how to integrate empirical design with structural modeling. | journal site |
+| Beraja, Hurst & Ospina, "The Aggregate Implications of Regional Business Cycles" | 2019 | Econometrica | Modern staggered DiD anchored in theory — read for how to integrate empirical design with structural modeling. | [Article DOI](https://doi.org/10.3982/ECTA14243) |
 
 ### Instrumental Variables
 
@@ -34,7 +34,7 @@ should look like in 2026.
 |---|---|---|---|---|
 | Acemoglu, Johnson & Robinson, "The Colonial Origins of Comparative Development" | 2001 | AER | The most-cited IV paper in modern economics. Settler-mortality instrument; defense of the exclusion restriction across 50+ pages of subsequent debate. Read alongside Albouy's comment and the AJR reply. | [openICPSR 112563](https://www.openicpsr.org/openicpsr/project/112563) / [112564](https://www.openicpsr.org/openicpsr/project/112564) |
 | Angrist & Krueger, "Does Compulsory School Attendance Affect Schooling and Earnings?" | 1991 | QJE | Quarter-of-birth IV. Read for how to *structure* an IV introduction and how to anticipate weak-instrument critiques. | n/a |
-| Nunn & Wantchekon, "The Slave Trade and the Origins of Mistrust in Africa" | 2011 | AER | Historical IV with cross-subfield reach (development + political economy). | journal site |
+| Nunn & Wantchekon, "The Slave Trade and the Origins of Mistrust in Africa" | 2011 | AER | Historical IV with cross-subfield reach (development + political economy). | [AEA article](https://www.aeaweb.org/articles?id=10.1257/aer.101.7.3221) |
 
 ### Regression Discontinuity
 
@@ -42,21 +42,21 @@ should look like in 2026.
 |---|---|---|---|---|
 | Dell, "The Persistent Effects of Peru's Mining Mita" | 2010 | Econometrica | Geographic (multidimensional) RDD. Read for spatial-discontinuity design, density tests, and historical narrative. | [Dell research site](https://dell-research-harvard.github.io/projects/498mita) |
 | Lee, "Randomized Experiments from Non-random Selection in U.S. House Elections" | 2008 | J. Econometrics | The paper that established close-elections RDD as a workhorse. | n/a |
-| Carrell, Sacerdote & West, "From Natural Variation to Optimal Policy?" | 2013 | Econometrica | RDD with a behavioral-mechanism twist; read for *negative* heterogeneity that forced the authors to update their structural prior. | journal site |
+| Carrell, Sacerdote & West, "From Natural Variation to Optimal Policy?" | 2013 | Econometrica | RDD with a behavioral-mechanism twist; read for *negative* heterogeneity that forced the authors to update their structural prior. | [Article DOI](https://doi.org/10.3982/ECTA10168) |
 
 ### Synthetic Control
 
 | Paper | Year | Outlet | Why it's the exemplar | Deposit |
 |---|---|---|---|---|
-| Abadie, Diamond & Hainmueller, "Comparative Politics and the Synthetic Control Method" | 2015 | AJPS | The methodological reference. Read alongside Abadie's 2021 JEL survey for the modern toolkit. | journal site |
-| Abadie & Gardeazabal, "The Economic Costs of Conflict" | 2003 | AER | The original SCM application. | journal site |
+| Abadie, Diamond & Hainmueller, "Comparative Politics and the Synthetic Control Method" | 2015 | AJPS | The methodological reference. Read alongside Abadie's 2021 JEL survey for the modern toolkit. | [Article DOI](https://doi.org/10.1111/ajps.12116) |
+| Abadie & Gardeazabal, "The Economic Costs of Conflict" | 2003 | AER | The original SCM application. | [AEA article](https://www.aeaweb.org/articles?id=10.1257/000282803321455188) |
 
 ### Field Experiment / RCT
 
 | Paper | Year | Outlet | Why it's the exemplar | Deposit |
 |---|---|---|---|---|
 | Banerjee, Duflo, Glennerster & Kinnan, "The Miracle of Microfinance? Evidence from a Randomized Evaluation" | 2015 | AEJ:App | Multi-site RCT with PAP, attrition, multiple-hypothesis correction. Cited as a model AEA RCT Registry entry. | [AEA RCT Registry](https://www.socialscienceregistry.org/) |
-| Karlan & List, "Does Price Matter in Charitable Giving?" | 2007 | AER | Compact RCT design; read for power-calculation reporting. | journal site |
+| Karlan & List, "Does Price Matter in Charitable Giving?" | 2007 | AER | Compact RCT design; read for power-calculation reporting. | [AEA article](https://www.aeaweb.org/articles?id=10.1257/aer.97.5.1774) |
 
 ---
 

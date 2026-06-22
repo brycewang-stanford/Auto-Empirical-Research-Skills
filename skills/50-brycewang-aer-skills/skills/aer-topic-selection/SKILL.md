@@ -9,7 +9,7 @@ description: Use when evaluating whether a research idea clears the AER top-5 ba
 
 The single most expensive mistake in top-5 economics is writing a polished manuscript around a contribution that was always going to be desk-rejected. This skill is the **pre-mortem**: stress-test the idea, the audience, and the venue *before* the introduction is drafted.
 
-The AER acceptance rate is **6–8%** of submitted papers and the desk rejection rate at the AER family runs **45–62%** depending on the journal. Roughly half of the survival probability is determined before the first paragraph is written.
+AER accepts only a small share of submissions — on the order of **6–8%** historically (Card and DellaVigna 2013, *Nine Facts about Top Journals*), and recent *Reports of the Editor* put the rate lower still. A large fraction of submissions are desk-rejected before ever reaching a referee; for *AER: Insights*, founding editor Amy Finkelstein has reported desk-rejecting "roughly 45%" of submissions. Either way, much of a paper's survival probability is determined before the first paragraph is written.
 
 ## When to Use
 
@@ -60,7 +60,8 @@ If any blank cannot be filled in:
 
 ## Novelty Audit
 
-Run these five questions:
+Run these five questions (the search protocol and antecedents map live in
+`aer-literature` — use it to answer them with evidence, not recall):
 
 1. Has someone in NBER, IZA, CEPR, or SSRN already done this? (Search before writing.)
 2. Is the closest published paper in a top-5 within the last 5 years? If yes, what does yours add — new method, new setting, new mechanism, opposite sign?
@@ -95,6 +96,16 @@ Peer feedback measurably improves journal placement: one SD more comments → 47
 
 Skip none of these for an AER target. AER: Insights tolerates a shorter cycle because the contribution is sharper and the venue is younger.
 
+## Repository Resources
+
+When working from the AER-skills repository or plugin bundle, load only the
+relevant resource:
+
+- Recent AER/AEJ exemplars by subfield: `examples/modern-aer-exemplars.md`
+- Classic contribution archetypes: `examples/aer-exemplars.md`
+- Desk-rejection no-go audit: `docs/desk-rejection-audit.md`
+- Workflow routing after the topic decision: `docs/workflow-map.md`
+
 ## Go / No-Go Gate
 
 Advance to `aer-identification` / `aer-introduction` only if **all** hold; otherwise route down (AEJ / field journal) or stop:
@@ -114,7 +125,7 @@ CONTRIBUTION SENTENCE: <one line>
 TARGET VENUE: <AER | AER:Insights | AEJ:Applied | AEJ:Policy | AEJ:Macro | AEJ:Micro>
 TOP-5 BAR TESTS PASSED: <count>/4
 KILL SWITCHES TRIGGERED: <list, or "none">
-NEXT SKILL: <aer-identification | aer-introduction>
+NEXT SKILL: <aer-literature | aer-identification>
 ```
 
 ## Anti-Patterns

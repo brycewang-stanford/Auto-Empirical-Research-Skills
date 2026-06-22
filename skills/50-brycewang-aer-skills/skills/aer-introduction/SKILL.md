@@ -1,6 +1,6 @@
 ---
 name: aer-introduction
-description: Use when drafting or rewriting the introduction of an economics manuscript targeted at AER, AER:Insights, or an AEJ, or when compressing an abstract to the mandatory 100-word limit. Implements the Keith Head / Bellemare five-paragraph formula and AER-specific formatting conventions.
+description: Use when drafting or rewriting the introduction of an economics manuscript targeted at AER, AER:Insights, or an AEJ, or when compressing an abstract to the mandatory 100-word limit. Implements the Keith Head / Bellemare five-paragraph formula and AER-specific formatting conventions. Apply after the body sections exist.
 ---
 
 # AER Introduction
@@ -12,7 +12,7 @@ The introduction is the **only** part of the paper most editors read in full. To
 Two non-negotiable AER formatting facts:
 
 1. **No "Introduction" heading.** The introductory section is unlabeled and begins immediately after the title and abstract.
-2. **Abstract ≤ 100 words.** Roughly 4-5 sentences. Manuscripts exceeding the limit are returned without review.
+2. **Abstract ≤ 100 words.** Roughly 4-5 sentences. The AER Style Guide states the abstract "must not exceed 100 words"; an over-length abstract is flagged in editorial screening and returned for correction.
 
 ## When to Use
 
@@ -72,7 +72,7 @@ Avoid:
 
 ### Paragraph 5 — The Roadmap
 
-One short paragraph. "Section 2 describes the data. Section 3 presents the empirical strategy. Section 4 reports results. Section 5 explores mechanisms. Section 6 concludes."
+One short paragraph. "Section I describes the data. Section II presents the empirical strategy. Section III reports results. Section IV explores mechanisms. Section V concludes." (AER numbers sections with Roman numerals; the introduction is unnumbered.)
 
 Some AER authors omit the roadmap entirely. Acceptable for short papers (AER: Insights). Required for full-length AER.
 
@@ -114,9 +114,9 @@ If the draft is over 100 words:
 - **No vertical space markup.** Use `\section` and `\subsection`; do not insert `\vspace` or `\bigskip`.
 - **Footnotes, not endnotes.** Inline citations use `\cite{}` (author-year), not numbered references.
 - **Style emphasis sparingly.** No `\textbf` for emphasis in body text — italics only, rarely.
-- **No "Section 1" label.** The first numbered section after the introduction is `\section{Data}` or whatever the title is. AER convention treats the intro as section 0.
+- **Sections use Roman numerals.** Per the AER Style Guide, major sections are numbered with Roman numerals (I., II., III.) and subsections with capital letters (A., B., C.). The introduction itself receives **no number and no heading** — the first *numbered* section is the one after it (e.g. "I. Data"). In LaTeX, switch the numbering with `\renewcommand{\thesection}{\Roman{section}}` or use the AEA sample article class, which does this for you.
 
-## Common Failure Modes
+## Anti-Patterns
 
 - Three-page introduction that never names the identification strategy → desk reject
 - Five contributions in the value-added paragraph, one of them weak → referee picks the weak one
@@ -127,7 +127,9 @@ If the draft is over 100 words:
 
 ## Repository Resources
 
-When working from the AER-skills repository or plugin bundle, read `examples/intro-example.md` only when the user asks for a model introduction, a concrete before/after rewrite, or abstract compression.
+When working from the AER-skills repository or plugin bundle, read `examples/intro-example.md` only when the user asks for a model introduction, a concrete before/after rewrite, or abstract compression. Sentence-level prose rules shared with the body sections live in `docs/style-guide.md`; the antecedents paragraph consumes the map built by `skills/aer-literature/SKILL.md`.
+
+Draft the introduction **after** the body sections exist (`skills/aer-paper-body/SKILL.md`) — the introduction summarizes a paper, it does not promise one.
 
 ## Pre-Handoff Gate
 
@@ -147,7 +149,7 @@ ABSTRACT WORD COUNT: <n>/100
 INTRODUCTION PARAGRAPHS: Hook | Question | Identification | Antecedents+Value | Roadmap
 CONTRIBUTIONS LISTED: <n> (target: 3, max 4)
 KILL SWITCHES: <list of remaining red flags, or "none">
-NEXT SKILL: <aer-tables-figures | aer-submission>
+NEXT SKILL: <aer-tables-figures | aer-consistency>
 ```
 
 ## Reference Pattern
@@ -158,4 +160,4 @@ A canonical AER-style intro architecture (paragraph-by-paragraph):
 2. **Question.** "This paper estimates the causal effect of [policy] on top-wealth concentration using [variation]."
 3. **Identification.** "We exploit [quasi-experiment]. The identifying assumption is [...]. We validate this by [pre-trends test / placebo / institutional argument]."
 4. **Antecedents + value-added.** "Three prior papers (A 2019, B 2021, C 2023) study related questions. A used [method] but [limitation]. B documented [fact] but did not establish causation. C addressed causation but in [different setting]. This paper makes three contributions: first, [...]; second, [...]; third, [...]."
-5. **Roadmap.** "Section 2 describes [...]. Section 3 [...]."
+5. **Roadmap.** "Section I describes [...]. Section II [...]."

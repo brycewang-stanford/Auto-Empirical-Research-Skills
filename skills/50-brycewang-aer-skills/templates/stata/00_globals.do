@@ -1,10 +1,12 @@
 /*------------------------------------------------------------------
   00_globals.do
-  Project-wide globals. Edit the `project` line once.
+  Project-wide globals. Run from the project root.
 -------------------------------------------------------------------*/
 
-* ---- Edit this line, and only this line --------------------------
-global project "/Users/<you>/Documents/replication-package"
+version 18.0
+
+* ---- Project root -------------------------------------------------
+global project "`c(pwd)'"
 
 * ---- Derived paths -----------------------------------------------
 global data        "$project/data"
@@ -21,6 +23,11 @@ global docs        "$project/docs"
 foreach d in "$data" "$raw" "$intermediate" "$output" "$tables" "$figures" "$logs" "$docs" {
     capture mkdir "`d'"
 }
+
+* ---- Model specification -----------------------------------------
+* Controls used across the analysis scripts. Edit to match your data;
+* the R and Python templates use the same two example covariates.
+global controls "x1 x2"
 
 * ---- Reproducibility ---------------------------------------------
 set seed 20260101    // fixed seed for any randomization

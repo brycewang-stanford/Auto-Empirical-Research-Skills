@@ -1,38 +1,33 @@
 /*------------------------------------------------------------------
   00_install_packages.do
-  Pin every user-written package. Comment out after first run.
+  Install user-written packages if missing, then record their locations.
+
+  SSC packages are not exactly version-pinned by `ssc install`. For final
+  replication, record package versions in the README and preserve an ado/plus
+  snapshot if exact package reproduction is required.
 -------------------------------------------------------------------*/
 
-* ---- Identification toolkit --------------------------------------
-ssc install reghdfe, replace          // high-dimensional FE OLS
-ssc install ftools, replace           // reghdfe dependency
-ssc install ivreg2, replace           // IV with weak-IV diagnostics
-ssc install ranktest, replace         // weak identification tests
-ssc install weakivtest, replace       // Olea-Pflueger effective F
+version 18.0
 
-* ---- Modern DiD --------------------------------------------------
-ssc install csdid, replace            // Callaway-Sant'Anna
-ssc install drdid, replace            // doubly-robust DiD
-ssc install did_imputation, replace   // Borusyak-Jaravel-Spiess
-ssc install did_multiplegt, replace   // de Chaisemartin-D'Haultfœuille
-ssc install eventstudyinteract, replace // Sun-Abraham
-ssc install bacondecomp, replace      // Goodman-Bacon decomposition
-ssc install honestdid, replace        // Rambachan-Roth sensitivity
+local ssc_packages ///
+    reghdfe ftools ivreg2 ranktest weakivtest ///
+    csdid drdid did_imputation did_multiplegt eventstudyinteract ///
+    bacondecomp honestdid rdrobust rddensity synth synth2 ///
+    estout coefplot binscatter asdoc boottest
 
-* ---- RDD ---------------------------------------------------------
-ssc install rdrobust, replace         // Calonico-Cattaneo-Titiunik
-ssc install rddensity, replace        // Cattaneo-Jansson-Ma density test
+foreach pkg of local ssc_packages {
+    capture which `pkg'
+    if _rc {
+        display as text "Installing `pkg' from SSC..."
+        ssc install `pkg'
+    }
+    which `pkg'
+}
 
-* ---- SCM ---------------------------------------------------------
-ssc install synth, replace
-ssc install synth2, replace
-net install scul, from("https://raw.githubusercontent.com/hollina/scul/master/")
+capture which scul
+if _rc {
+    net install scul, from("https://raw.githubusercontent.com/hollina/scul/master/")
+}
+which scul
 
-* ---- Tables & figures --------------------------------------------
-ssc install estout, replace           // esttab / estout
-ssc install coefplot, replace         // forest plots & event-study viz
-ssc install binscatter, replace       // efficient binned scatter
-ssc install asdoc, replace            // alternative reporter
-ssc install boottest, replace         // wild cluster bootstrap
-
-display as result "All packages installed and pinned."
+display as result "All required user-written Stata packages are available."

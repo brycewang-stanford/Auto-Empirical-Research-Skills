@@ -11,7 +11,7 @@ from pathlib import Path
 import numpy as np
 
 # ---- Paths ---------------------------------------------------------
-ROOT         = Path(__file__).resolve().parent.parent
+ROOT         = Path(__file__).resolve().parent
 DATA         = ROOT / "data"
 RAW          = DATA / "raw"
 INTERMEDIATE = DATA / "intermediate"
