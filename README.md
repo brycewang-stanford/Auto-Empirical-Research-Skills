@@ -395,6 +395,8 @@ Replication → Submission → Peer Review Response → Defense
      09          10             10                  10
 ```
 
+🗺️ **[Workflow map — 10 stages → the skills this repo vendors](docs/WORKFLOW_MAP.md)** · from topic to submission, on one screen.
+
 Per-stage skill notes (bilingual): [01 Topic & design](docs/01-选题与研究设计.md) · [02 Lit review](docs/02-文献检索与综述.md) · [03 Paper reading](docs/03-论文阅读与拆解.md) · [04 Data & cleaning](docs/04-数据获取与清洗.md) · [05 Causal inference](docs/05-统计分析与因果推断.md) · [06 Writing](docs/06-论文写作.md) · [07 Revision](docs/07-论文修改与润色.md) · [08 Citation & typesetting](docs/08-引用管理与排版.md) · [09 Replication](docs/09-论文复现与可复现研究.md) · [10 Review response](docs/10-审稿回复与学术答辩.md)
 
 ### Comprehensive skill suites
