@@ -346,6 +346,7 @@ Four parallel implementations of the **same 8-step empirical loop** — *data cl
 - **Copy-paste a full workflow** → [`docs/GOLDEN_WORKFLOWS.md`](docs/GOLDEN_WORKFLOWS.md)
 - **Install into a runtime / use without installing** → [`docs/INSTALL.md`](docs/INSTALL.md)
 - **Machine-readable index** → [`catalog/skills.json`](catalog/skills.json) · taxonomy: [`docs/TAXONOMY.md`](docs/TAXONOMY.md) · full catalog: [`docs/SKILL_CATALOG.md`](docs/SKILL_CATALOG.md)
+- **How AERS fits the wider research-automation ecosystem & composes with other tools** → [`docs/ECOSYSTEM.md`](docs/ECOSYSTEM.md) · pipeline recipes: [`docs/INTEROP.md`](docs/INTEROP.md)
 - **FAQ** → [`docs/FAQ.md`](docs/FAQ.md)
 
 ---

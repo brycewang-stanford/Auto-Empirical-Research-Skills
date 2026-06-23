@@ -19,6 +19,7 @@ This roadmap is scoped to making AERS a high-quality, high-trust GitHub project 
 - Add scheduled external-link triage notes to releases when weekly checks fail.
 - Convert the flagship eval prompts into executable scorecards where artifacts can be generated in CI without paid APIs.
 - Replace manual release notes with a generated release snapshot once the catalog/eval metadata stabilizes.
+- Keep [`ECOSYSTEM.md`](ECOSYSTEM.md) and [`../ecosystem/ecosystem.json`](../ecosystem/ecosystem.json) current as the agentic-research ecosystem evolves, and expand the [`INTEROP.md`](INTEROP.md) pipeline recipes (e.g. a benchmarked AERS-vs-Econometrics-Agent comparison).
 
 ## Later
 
@@ -31,3 +32,4 @@ This roadmap is scoped to making AERS a high-quality, high-trust GitHub project 
 - Generated machine-readable catalog and provenance metadata.
 - Added license audit, skill hygiene audit, static search page, install guide, submission guide, flagship demos, release process, external-link workflow, and clean CI validation.
 - Added machine-readable flagship eval prompts and generated reviewer docs.
+- Added an ecosystem positioning map ([`ECOSYSTEM.md`](ECOSYSTEM.md)), interoperability recipes ([`INTEROP.md`](INTEROP.md)), a machine-readable registry ([`../ecosystem/ecosystem.json`](../ecosystem/ecosystem.json)), and a sync-enforcing validator (`scripts/check-ecosystem.py`, wired into `make validate`).
