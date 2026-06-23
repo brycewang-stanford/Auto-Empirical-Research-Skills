@@ -197,6 +197,14 @@ class TestGrader(unittest.TestCase):
         self.assertEqual(replication["status"], "needs-manual")
         self.assertEqual(replication["required_failed"], [])
 
+        # Portable-execution fixture must pass required clean-checkout checks.
+        portable = run_evals.grade_candidate(
+            by_id["aer-replication-portable-execution"], cand
+        )
+        self.assertEqual(portable["status"], "needs-manual")
+        self.assertEqual(portable["required_failed"], [])
+        self.assertIn("aea-ready-protocol", portable["manual_items"])
+
         # Multiple-testing fixture must pass required anti-cherry-picking checks.
         robustness = run_evals.grade_candidate(by_id["aer-robustness-multiple-testing"], cand)
         self.assertEqual(robustness["status"], "needs-manual")
@@ -212,7 +220,7 @@ class TestGrader(unittest.TestCase):
             self.assertEqual(
                 run_evals.main([
                     "--grade", str(cand),
-                    "--expect-graded", "8",
+                    "--expect-graded", "9",
                     "--expect-fail-required", "statspai-weak-iv",
                     "--expect-graded-categories",
                     "causal-identification,reproducibility,citation-hygiene,runtime-safety,research-integrity",
@@ -263,8 +271,8 @@ class TestGrader(unittest.TestCase):
         with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
             self.assertEqual(
                 run_evals.main([
-                    "--min-scenarios", "17",
-                    "--min-auto-checks", "80",
+                    "--min-scenarios", "18",
+                    "--min-auto-checks", "86",
                     "--expect-categories",
                     "causal-identification,reproducibility,citation-hygiene,runtime-safety,research-integrity,writing-compliance,writing-style",
                 ]),

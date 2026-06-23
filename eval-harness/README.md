@@ -63,7 +63,7 @@ python3 eval-harness/run_evals.py
 
 # 1b. CI lint gate: fail if scenario/category/auto-check coverage regresses
 python3 eval-harness/run_evals.py \
-  --min-scenarios 17 --min-auto-checks 80 \
+  --min-scenarios 18 --min-auto-checks 86 \
   --expect-categories causal-identification,reproducibility,citation-hygiene,runtime-safety,research-integrity,writing-compliance,writing-style
 
 # 2. List scenarios
@@ -75,7 +75,7 @@ python3 eval-harness/run_evals.py --grade eval-harness/candidates/_example
 
 # 3b. CI smoke: only the deliberately weak fixture may fail required items
 python3 eval-harness/run_evals.py --grade eval-harness/candidates/_example \
-  --expect-graded 8 --expect-fail-required statspai-weak-iv \
+  --expect-graded 9 --expect-fail-required statspai-weak-iv \
   --expect-graded-categories causal-identification,reproducibility,citation-hygiene,runtime-safety,research-integrity \
   --fail-on-orphans --fail-on-partial --no-write
 

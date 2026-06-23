@@ -36,14 +36,14 @@ evals:
 # Distinct from `make evals` (the declarative flagship-evals prompt matrix).
 eval-harness:
 	python3 eval-harness/run_evals.py \
-		--min-scenarios 17 --min-auto-checks 80 \
+		--min-scenarios 18 --min-auto-checks 86 \
 		--expect-categories causal-identification,reproducibility,citation-hygiene,runtime-safety,research-integrity,writing-compliance,writing-style
 
 # Grade fixture candidates as a smoke test. The fixture set intentionally
-# has eight outputs and includes one weak answer; fail on drift.
+# has nine outputs and includes one weak answer; fail on drift.
 eval-smoke:
 	python3 eval-harness/run_evals.py --grade eval-harness/candidates/_example \
-		--expect-graded 8 --expect-fail-required statspai-weak-iv \
+		--expect-graded 9 --expect-fail-required statspai-weak-iv \
 		--expect-graded-categories causal-identification,reproducibility,citation-hygiene,runtime-safety,research-integrity \
 		--fail-on-orphans --fail-on-partial --no-write
 
