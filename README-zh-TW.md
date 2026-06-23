@@ -1,3 +1,11 @@
+<p align="center">
+  <a href="https://www.atlascloud.ai/?utm_source=github&utm_medium=link&utm_campaign=auto-empirical-research-skills">
+    <img src="assets/atlas-cloud-logo.png" alt="Atlas Cloud" width="140" />
+  </a>
+  <br />
+  <sub><strong>Atlas Cloud</strong> provides OpenAI-compatible LLM APIs and async image/video generation APIs for research agents and multimodal experiment workflows.</sub>
+</p>
+
 # Auto-Empirical Research Skills (AERS)
 
 <div align="center">
