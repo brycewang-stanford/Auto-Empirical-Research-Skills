@@ -1,0 +1,8 @@
+{
+  "task": "synthetic-control-recovery",
+  "method": "Synthetic control (simplex-fit donor weights on the pre-period) vs equal-weight donor average",
+  "n": 8,
+  "true_effect": 3.0,
+  "sc_effect": 3.0,
+  "naive_effect": 4.8167
+}

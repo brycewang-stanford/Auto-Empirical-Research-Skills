@@ -1,0 +1,83 @@
+id = "event-study-recovery"
+title = "Event-study recovery: does the pipeline recover the dynamic path and show clean pre-trends?"
+data = "benchmark/data/sim-event-study.csv"
+reference_candidate = "reference-eventstudy"
+
+description = """
+A deterministic, noiseless balanced panel (30 units x 8 periods) with one treated
+cohort adopting at period 4 and a never-treated control group. The untreated
+potential outcome is additive in unit and time effects, so parallel trends hold by
+construction; the treated cohort has GROWING dynamic effects (1, 2, 3, 4, 5 at
+event times 0..4). The true average post-adoption effect is known (mean = 3) and
+recomputed by the checker as mean(y - y0) over treated post-periods (y0 ships as a
+column the estimators never read).
+
+The lesson: an event-study regression with unit and time fixed effects and
+treated x relative-time dummies recovers the dynamic path — post-period coefficients
+equal the true effects and pre-period (placebo) coefficients are zero — while a
+naive treated-only before/after comparison is biased by the common time trend.
+Data-derived golds are recomputed from the dataset, so a candidate cannot pass by
+fabricating numbers.
+"""
+
+true_att_by_construction = 3.0
+
+[[gold]]
+id = "es-recovers-true-att"
+required = true
+weight = 4
+description = "The average post-period event-study coefficient recovers the true dynamic ATT recomputed from the data."
+check = "recovers_truth"
+field = "es_att"
+truth_key = "true_att"
+tol = 0.05
+
+[[gold]]
+id = "pretrends-are-flat"
+required = true
+weight = 3
+description = "The largest pre-period (placebo) event coefficient is essentially zero, evidencing parallel pre-trends."
+check = "value_near"
+field = "es_pre_max"
+expected = 0.0
+tol = 0.05
+
+[[gold]]
+id = "naive-is-biased"
+required = true
+weight = 3
+description = "The naive treated-only before/after estimate is far from the truth (biased by the common time trend)."
+check = "biased_away"
+field = "naive_before_after"
+truth_key = "true_att"
+min_gap = 0.5
+
+[[gold]]
+id = "es-beats-naive"
+required = false
+weight = 2
+description = "The event-study estimate is closer to the truth than the naive before/after estimate is (informational)."
+check = "closer_to_truth"
+near_field = "es_att"
+far_field = "naive_before_after"
+truth_key = "true_att"
+
+[[gold]]
+id = "honest-es"
+required = true
+weight = 2
+description = "The candidate's reported dynamic ATT matches what the checker recomputes by running the estimator (no fabricated numbers)."
+check = "recovers_truth"
+field = "es_att"
+truth_key = "es_att"
+tol = 0.01
+
+[[gold]]
+id = "honest-pretrends"
+required = true
+weight = 2
+description = "The candidate's reported max pre-period coefficient matches what the checker recomputes (cannot fake a clean placebo)."
+check = "recovers_truth"
+field = "es_pre_max"
+truth_key = "es_pre_max"
+tol = 0.01

@@ -1,0 +1,72 @@
+id = "dml-recovery"
+title = "DML recovery: does cross-fitted partialling-out remove control confounding the naive estimate misses?"
+data = "benchmark/data/sim-dml.csv"
+reference_candidate = "reference-dml"
+
+description = """
+Deterministic, noiseless data (120 units, 4 controls) where the outcome is exactly
+linear in the treatment and the controls, and the treatment is correlated with
+those controls. The true effect is known by construction (THETA = 1.5) and is
+recomputed by the checker as the fully-controlled OLS coefficient on the treatment.
+
+The lesson: a naive OLS of the outcome on the treatment alone is biased by the
+omitted controls, while a cross-fitted partialling-out estimator (residualize the
+outcome and the treatment on the controls using out-of-fold predictions, then
+regress the residuals) recovers the true effect. With linear nuisance and no
+noise the cross-fitted estimate equals the fully-controlled coefficient, so the
+task exercises the cross-fitting machinery and the omitted-control bias.
+Data-derived golds are recomputed from the dataset, so a candidate cannot pass by
+fabricating numbers.
+"""
+
+true_tau_by_construction = 1.5
+
+[[gold]]
+id = "dml-recovers-true"
+required = true
+weight = 4
+description = "The cross-fitted DML estimate recovers the true effect recomputed (fully controlled) from the data."
+check = "recovers_truth"
+field = "dml_theta"
+truth_key = "true_theta"
+tol = 0.05
+
+[[gold]]
+id = "naive-is-biased"
+required = true
+weight = 3
+description = "The naive treatment-only OLS estimate is far from the truth, surfacing the omitted-control bias."
+check = "biased_away"
+field = "naive_theta"
+truth_key = "true_theta"
+min_gap = 0.5
+
+[[gold]]
+id = "dml-beats-naive"
+required = false
+weight = 2
+description = "The DML estimate is closer to the truth than the naive estimate is (informational)."
+check = "closer_to_truth"
+near_field = "dml_theta"
+far_field = "naive_theta"
+truth_key = "true_theta"
+
+[[gold]]
+id = "honest-dml"
+required = true
+weight = 2
+description = "The candidate's reported DML estimate matches what the checker recomputes by running the estimator (no fabricated numbers)."
+check = "recovers_truth"
+field = "dml_theta"
+truth_key = "dml_theta"
+tol = 0.01
+
+[[gold]]
+id = "honest-naive"
+required = true
+weight = 2
+description = "The candidate's reported naive estimate matches what the checker recomputes (no fabricated numbers)."
+check = "recovers_truth"
+field = "naive_theta"
+truth_key = "naive_theta"
+tol = 0.01

@@ -1,0 +1,69 @@
+id = "bayesian-recovery"
+title = "Bayesian recovery: does a weakly-informative prior recover the data where an overconfident prior biases?"
+data = "benchmark/data/sim-bayesian.csv"
+reference_candidate = "reference-bayesian"
+
+description = """
+Deterministic data (20 observations) symmetric around a known mean (2.0) with a
+known observation variance. The conjugate Normal-Normal posterior mean is a
+closed-form weighted average of the prior mean and the data mean, recomputed by
+the checker.
+
+The lesson (prior sensitivity): a weakly-informative prior yields a posterior
+mean that recovers the data mean, while an overconfident, miscalibrated prior
+(centered at 10 with tiny variance) drags the posterior far from the data. Data-
+derived golds are recomputed from the dataset, so a candidate cannot pass by
+fabricating numbers.
+"""
+
+true_tau_by_construction = 2.0
+
+[[gold]]
+id = "weak-prior-recovers"
+required = true
+weight = 4
+description = "The posterior mean under a weakly-informative prior recovers the data mean recomputed from the dataset."
+check = "recovers_truth"
+field = "posterior_weak"
+truth_key = "data_mean"
+tol = 0.05
+
+[[gold]]
+id = "strong-wrong-prior-biased"
+required = true
+weight = 3
+description = "The posterior mean under an overconfident, miscalibrated prior is far from the data mean, surfacing prior sensitivity."
+check = "biased_away"
+field = "posterior_strong"
+truth_key = "data_mean"
+min_gap = 0.5
+
+[[gold]]
+id = "weak-beats-strong"
+required = false
+weight = 2
+description = "The weakly-informative posterior is closer to the data than the overconfident one (informational)."
+check = "closer_to_truth"
+near_field = "posterior_weak"
+far_field = "posterior_strong"
+truth_key = "data_mean"
+
+[[gold]]
+id = "honest-weak"
+required = true
+weight = 2
+description = "The candidate's reported weakly-informative posterior mean matches what the checker recomputes (no fabricated numbers)."
+check = "recovers_truth"
+field = "posterior_weak"
+truth_key = "posterior_weak"
+tol = 0.01
+
+[[gold]]
+id = "honest-strong"
+required = true
+weight = 2
+description = "The candidate's reported overconfident posterior mean matches what the checker recomputes (no fabricated numbers)."
+check = "recovers_truth"
+field = "posterior_strong"
+truth_key = "posterior_strong"
+tol = 0.01

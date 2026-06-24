@@ -1,0 +1,8 @@
+{
+  "task": "bayesian-recovery",
+  "method": "Conjugate Normal-Normal posterior mean: weakly-informative vs overconfident miscalibrated prior",
+  "n": 20,
+  "data_mean": 2.0,
+  "posterior_weak": 2.0,
+  "posterior_strong": 5.5556
+}

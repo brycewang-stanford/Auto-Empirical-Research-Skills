@@ -19,6 +19,12 @@ import card  # noqa: E402
 import simdid  # noqa: E402
 import rdd  # noqa: E402
 import badcontrol  # noqa: E402
+import panelfe  # noqa: E402
+import eventstudy  # noqa: E402
+import dml  # noqa: E402
+import survival  # noqa: E402
+import bayesian  # noqa: E402
+import synth  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 CAND = Path(__file__).resolve().parent / "candidates"
@@ -122,6 +128,112 @@ def badcontrol_candidate(write_missing_data: bool = True) -> dict:
     }
 
 
+def panelfe_candidate(write_missing_data: bool = True) -> dict:
+    data_path = ROOT / "benchmark" / "data" / "sim-panel-fe.csv"
+    if not data_path.exists():
+        if not write_missing_data:
+            raise FileNotFoundError(data_path)
+        panelfe.write_csv(data_path)
+    rows = panelfe.load(data_path)
+    return {
+        "task": "panel-fe-recovery",
+        "method": "Two-way (unit+time) fixed effects vs pooled OLS that ignores unit heterogeneity",
+        "n": len(rows),
+        "true_att": round(panelfe.true_att(rows), 4),
+        "twoway_fe_att": round(panelfe.twoway_fe_att(rows), 4),
+        "pooled_att": round(panelfe.pooled_att(rows), 4),
+    }
+
+
+def eventstudy_candidate(write_missing_data: bool = True) -> dict:
+    data_path = ROOT / "benchmark" / "data" / "sim-event-study.csv"
+    if not data_path.exists():
+        if not write_missing_data:
+            raise FileNotFoundError(data_path)
+        eventstudy.write_csv(data_path)
+    rows = eventstudy.load(data_path)
+    return {
+        "task": "event-study-recovery",
+        "method": "Event-study with unit+time FE and treated x relative-time dummies vs naive treated-only before/after",
+        "n": len(rows),
+        "true_att": round(eventstudy.true_att(rows), 4),
+        "es_att": round(eventstudy.es_att(rows), 4),
+        "es_pre_max": round(eventstudy.es_pre_max(rows), 4),
+        "naive_before_after": round(eventstudy.naive_before_after(rows), 4),
+    }
+
+
+def dml_candidate(write_missing_data: bool = True) -> dict:
+    data_path = ROOT / "benchmark" / "data" / "sim-dml.csv"
+    if not data_path.exists():
+        if not write_missing_data:
+            raise FileNotFoundError(data_path)
+        dml.write_csv(data_path)
+    rows = dml.load(data_path)
+    return {
+        "task": "dml-recovery",
+        "method": "Cross-fitted partialling-out (DML) vs naive OLS of outcome on treatment only",
+        "n": len(rows),
+        "true_theta": round(dml.true_theta(rows), 4),
+        "dml_theta": round(dml.dml_theta(rows), 4),
+        "naive_theta": round(dml.naive_theta(rows), 4),
+    }
+
+
+def survival_candidate(write_missing_data: bool = True) -> dict:
+    data_path = ROOT / "benchmark" / "data" / "sim-survival.csv"
+    if not data_path.exists():
+        if not write_missing_data:
+            raise FileNotFoundError(data_path)
+        survival.write_csv(data_path)
+    rows = survival.load(data_path)
+    return {
+        "task": "survival-recovery",
+        "method": "Kaplan-Meier survival (handles censoring) vs naive proportion that treats censored as failures",
+        "n": len(rows),
+        "true_surv_treat": round(survival.true_survival(rows, 1), 4),
+        "true_surv_control": round(survival.true_survival(rows, 0), 4),
+        "km_surv_treat": round(survival.km_survival(rows, 1), 4),
+        "km_surv_control": round(survival.km_survival(rows, 0), 4),
+        "naive_surv_treat": round(survival.naive_survival(rows, 1), 4),
+        "naive_surv_control": round(survival.naive_survival(rows, 0), 4),
+    }
+
+
+def bayesian_candidate(write_missing_data: bool = True) -> dict:
+    data_path = ROOT / "benchmark" / "data" / "sim-bayesian.csv"
+    if not data_path.exists():
+        if not write_missing_data:
+            raise FileNotFoundError(data_path)
+        bayesian.write_csv(data_path)
+    rows = bayesian.load(data_path)
+    return {
+        "task": "bayesian-recovery",
+        "method": "Conjugate Normal-Normal posterior mean: weakly-informative vs overconfident miscalibrated prior",
+        "n": len(rows),
+        "data_mean": round(bayesian.data_mean(rows), 4),
+        "posterior_weak": round(bayesian.posterior_weak(rows), 4),
+        "posterior_strong": round(bayesian.posterior_strong(rows), 4),
+    }
+
+
+def synth_candidate(write_missing_data: bool = True) -> dict:
+    data_path = ROOT / "benchmark" / "data" / "sim-synth.csv"
+    if not data_path.exists():
+        if not write_missing_data:
+            raise FileNotFoundError(data_path)
+        synth.write_csv(data_path)
+    rows = synth.load(data_path)
+    return {
+        "task": "synthetic-control-recovery",
+        "method": "Synthetic control (simplex-fit donor weights on the pre-period) vs equal-weight donor average",
+        "n": len(rows),
+        "true_effect": round(synth.true_effect(rows), 4),
+        "sc_effect": round(synth.sc_effect(rows), 4),
+        "naive_effect": round(synth.naive_effect(rows), 4),
+    }
+
+
 def reference_candidates(write_missing_data: bool = True) -> list[tuple[Path, dict]]:
     return [
         (CAND / "reference-ols" / "results.json", lalonde_candidate()),
@@ -129,6 +241,12 @@ def reference_candidates(write_missing_data: bool = True) -> list[tuple[Path, di
         (CAND / "reference-did" / "results.json", did_candidate(write_missing_data)),
         (CAND / "reference-rd" / "results.json", rdd_candidate(write_missing_data)),
         (CAND / "reference-badcontrol" / "results.json", badcontrol_candidate(write_missing_data)),
+        (CAND / "reference-panelfe" / "results.json", panelfe_candidate(write_missing_data)),
+        (CAND / "reference-eventstudy" / "results.json", eventstudy_candidate(write_missing_data)),
+        (CAND / "reference-dml" / "results.json", dml_candidate(write_missing_data)),
+        (CAND / "reference-survival" / "results.json", survival_candidate(write_missing_data)),
+        (CAND / "reference-bayesian" / "results.json", bayesian_candidate(write_missing_data)),
+        (CAND / "reference-synth" / "results.json", synth_candidate(write_missing_data)),
     ]
 
 
@@ -155,6 +273,36 @@ def print_summary(payloads: list[tuple[Path, dict]]) -> None:
     print(
         f"  bad control: good {bc['good_control_effect']} -> bad/mediator {bc['bad_control_effect']} "
         f"(true total {bc['true_total']})"
+    )
+    pf = by_task["panel-fe-recovery"]
+    print(
+        f"  panel FE: pooled {pf['pooled_att']} -> two-way FE {pf['twoway_fe_att']} "
+        f"(true {pf['true_att']})"
+    )
+    es = by_task["event-study-recovery"]
+    print(
+        f"  event study: naive {es['naive_before_after']} -> dynamic ATT {es['es_att']} "
+        f"(true {es['true_att']}, max |pre| {es['es_pre_max']})"
+    )
+    dm = by_task["dml-recovery"]
+    print(
+        f"  DML: naive {dm['naive_theta']} -> cross-fit {dm['dml_theta']} "
+        f"(true {dm['true_theta']})"
+    )
+    sv = by_task["survival-recovery"]
+    print(
+        f"  survival: naive treated {sv['naive_surv_treat']} -> KM {sv['km_surv_treat']} "
+        f"(true {sv['true_surv_treat']})"
+    )
+    bayes = by_task["bayesian-recovery"]
+    print(
+        f"  bayesian: strong-wrong-prior {bayes['posterior_strong']} -> weak-prior "
+        f"{bayes['posterior_weak']} (true {bayes['data_mean']})"
+    )
+    sc = by_task["synthetic-control-recovery"]
+    print(
+        f"  synthetic control: naive {sc['naive_effect']} -> SC {sc['sc_effect']} "
+        f"(true {sc['true_effect']})"
     )
 
 

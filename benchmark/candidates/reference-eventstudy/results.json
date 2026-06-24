@@ -1,0 +1,9 @@
+{
+  "task": "event-study-recovery",
+  "method": "Event-study with unit+time FE and treated x relative-time dummies vs naive treated-only before/after",
+  "n": 240,
+  "true_att": 3.0,
+  "es_att": 3.0,
+  "es_pre_max": 0.0,
+  "naive_before_after": 5.4
+}

@@ -1,0 +1,8 @@
+{
+  "task": "panel-fe-recovery",
+  "method": "Two-way (unit+time) fixed effects vs pooled OLS that ignores unit heterogeneity",
+  "n": 240,
+  "true_att": 2.0,
+  "twoway_fe_att": 2.0,
+  "pooled_att": 7.0667
+}

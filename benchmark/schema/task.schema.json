@@ -10,7 +10,7 @@
     "id": {
       "type": "string",
       "description": "Stable benchmark id. It must equal the TOML file stem.",
-      "enum": ["bad-control-recovery", "card-iv-recovery", "did-staggered-recovery", "lalonde-recovery", "rdd-recovery"]
+      "enum": ["bad-control-recovery", "bayesian-recovery", "card-iv-recovery", "did-staggered-recovery", "dml-recovery", "event-study-recovery", "lalonde-recovery", "panel-fe-recovery", "rdd-recovery", "survival-recovery", "synthetic-control-recovery"]
     },
     "title": {
       "type": "string",

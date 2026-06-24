@@ -1,0 +1,85 @@
+id = "statspai-matching-overlap"
+skill = "skills/00-Full-empirical-analysis-skill_StatsPAI"
+title = "Propensity-score matching must check overlap and balance and not claim causality without unconfoundedness"
+category = "causal-identification"
+severity = "high"
+context_data = []
+
+prompt = """
+I want to estimate the effect of a job-training program on later earnings using
+observational data: a group of trainees and a large comparison group drawn from
+a national survey. I plan to estimate the propensity score from age, education,
+race, and pre-program earnings, then match treated to comparison units and read
+off the difference in earnings. Run the propensity-score matching and report the
+treatment effect the way a careful applied micro paper would.
+"""
+
+[[rubric]]
+id = "reports-overlap-common-support"
+check = "regex_any"
+required = true
+weight = 3
+description = "Checks propensity-score overlap / common support and restricts to it (off-support units rely on extrapolation)."
+patterns = [
+  '(?i)common support',
+  '(?i)overlap',
+  '(?i)off.?support',
+  '(?i)positivity',
+  '(?i)region of common support',
+  '(?i)propensity.{0,15}(distribution|overlap)',
+]
+
+[[rubric]]
+id = "reports-covariate-balance"
+check = "regex_any"
+required = true
+weight = 4
+description = "Reports post-matching covariate balance (standardized mean differences / balance table / love plot) rather than assuming matching worked."
+patterns = [
+  '(?i)standardi[sz]ed mean difference',
+  '(?i)\bSMD\b',
+  '(?i)balance (table|check|diagnostic|test)',
+  '(?i)covariate balance',
+  '(?i)love plot',
+]
+
+[[rubric]]
+id = "unconfoundedness-caveat"
+check = "regex_any"
+required = true
+weight = 4
+description = "States that identification rests on unconfoundedness / selection on observables and that matching cannot remove unobserved confounding."
+patterns = [
+  '(?i)unconfoundedness',
+  '(?i)conditional independence',
+  '(?i)selection on observables',
+  '(?i)ignorability',
+  '(?i)(unobserved|omitted).{0,20}(confound|variable|selection)',
+  '(?i)cannot (rule out|address|remove|fix).{0,30}unobserved',
+]
+
+[[rubric]]
+id = "matching-aware-inference"
+check = "regex_any"
+required = false
+weight = 2
+description = "Uses inference that accounts for matching / estimated propensity (Abadie-Imbens SEs or bootstrap), not naive OLS standard errors."
+patterns = [
+  '(?i)abadie.?imbens',
+  '(?i)bootstrap',
+  '(?i)(matching|ai).{0,20}standard error',
+  '(?i)account for.{0,30}(estimated )?propensity',
+]
+
+[[rubric]]
+id = "observational-not-experimental"
+check = "regex_any"
+required = false
+weight = 1
+description = "Frames the estimate as observational and not a substitute for randomization (the LaLonde lesson)."
+patterns = [
+  '(?i)observational',
+  '(?i)not a (substitute|replacement) for (random|experiment)',
+  '(?i)la.?londe',
+  '(?i)experimental benchmark',
+]

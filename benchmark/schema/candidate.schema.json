@@ -9,7 +9,7 @@
   "properties": {
     "task": {
       "type": "string",
-      "enum": ["bad-control-recovery", "card-iv-recovery", "did-staggered-recovery", "lalonde-recovery", "rdd-recovery"]
+      "enum": ["bad-control-recovery", "bayesian-recovery", "card-iv-recovery", "did-staggered-recovery", "dml-recovery", "event-study-recovery", "lalonde-recovery", "panel-fe-recovery", "rdd-recovery", "survival-recovery", "synthetic-control-recovery"]
     },
     "method": {
       "type": "string"
@@ -75,6 +75,66 @@
       "type": "number"
     },
     "bad_control_effect": {
+      "type": "number"
+    },
+    "twoway_fe_att": {
+      "type": "number"
+    },
+    "pooled_att": {
+      "type": "number"
+    },
+    "es_att": {
+      "type": "number"
+    },
+    "es_pre_max": {
+      "type": "number"
+    },
+    "naive_before_after": {
+      "type": "number"
+    },
+    "true_theta": {
+      "type": "number"
+    },
+    "dml_theta": {
+      "type": "number"
+    },
+    "naive_theta": {
+      "type": "number"
+    },
+    "true_surv_treat": {
+      "type": "number"
+    },
+    "true_surv_control": {
+      "type": "number"
+    },
+    "km_surv_treat": {
+      "type": "number"
+    },
+    "km_surv_control": {
+      "type": "number"
+    },
+    "naive_surv_treat": {
+      "type": "number"
+    },
+    "naive_surv_control": {
+      "type": "number"
+    },
+    "data_mean": {
+      "type": "number"
+    },
+    "posterior_weak": {
+      "type": "number"
+    },
+    "posterior_strong": {
+      "type": "number"
+    },
+    "true_effect": {
+      "type": "number"
+    },
+    "sc_effect": {
+      "type": "number"
+    },
+    "naive_effect": {
       "type": "number"
     },
     "balance": {
@@ -143,6 +203,78 @@
       },
       "then": {
         "required": ["true_total", "naive_effect", "good_control_effect", "bad_control_effect"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "task": {
+            "const": "panel-fe-recovery"
+          }
+        }
+      },
+      "then": {
+        "required": ["true_att", "twoway_fe_att", "pooled_att"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "task": {
+            "const": "event-study-recovery"
+          }
+        }
+      },
+      "then": {
+        "required": ["true_att", "es_att", "es_pre_max", "naive_before_after"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "task": {
+            "const": "dml-recovery"
+          }
+        }
+      },
+      "then": {
+        "required": ["true_theta", "dml_theta", "naive_theta"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "task": {
+            "const": "survival-recovery"
+          }
+        }
+      },
+      "then": {
+        "required": ["true_surv_treat", "true_surv_control", "km_surv_treat", "km_surv_control", "naive_surv_treat", "naive_surv_control"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "task": {
+            "const": "bayesian-recovery"
+          }
+        }
+      },
+      "then": {
+        "required": ["data_mean", "posterior_weak", "posterior_strong"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "task": {
+            "const": "synthetic-control-recovery"
+          }
+        }
+      },
+      "then": {
+        "required": ["true_effect", "sc_effect", "naive_effect"]
       }
     }
   ]

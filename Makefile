@@ -7,12 +7,14 @@ catalog:
 	python3 scripts/build-evals.py
 	python3 scripts/build-catalog-enrich.py
 	python3 scripts/build-tools-catalog.py
+	python3 scripts/build-coverage-map.py
 
 # Catalog/provenance/audit/eval freshness + repo link & frontmatter validation.
 validate:
 	python3 scripts/validate-repo.py
 	python3 scripts/check-repo-hygiene.py
 	python3 scripts/validate-workflows.py
+	python3 scripts/check-ecosystem.py
 	$(MAKE) paper-workflow-check
 	python3 scripts/build-provenance.py --check
 	python3 scripts/build-skill-audit.py --check
@@ -20,6 +22,7 @@ validate:
 	python3 scripts/build-evals.py --check
 	python3 scripts/build-catalog-enrich.py --check
 	python3 scripts/build-tools-catalog.py --check
+	python3 scripts/build-coverage-map.py --check
 
 paper-workflow-check:
 	@if [ ! -f skills/69-Paper-WorkFlow/validate_skill.py ]; then \
