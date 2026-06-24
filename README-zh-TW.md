@@ -6,18 +6,14 @@
 
 <br/>
 
-  <img src="images/aers-readme-cover-cn.png" alt="實證研究智能體技能大全封面圖" width="100%" />
-
-  <br/>
-
   <table>
     <tr>
       <td align="center">
-        <a href="https://copaper.ai"><img src="images/copaper-logo.png" alt="CoPaper.AI" width="260" /></a>
+        <a href="https://copaper.ai"><img src="images/copaper-logo.png" alt="CoPaper.AI" width="300" /></a>
       </td>
-      <td width="60"></td>
+      <td width="72"></td>
       <td align="center">
-        <img src="images/stanford-reap-logo.png" alt="Stanford REAP - Center on China's Economy & Institutions" width="380" />
+        <img src="images/stanford-reap-logo.png" alt="Stanford REAP - Center on China's Economy & Institutions" width="440" />
       </td>
     </tr>
   </table>
@@ -26,6 +22,11 @@
 
   <strong>Stanford REAP × CoPaper.AI</strong> · 實證研究 AI 工具的學術工業級產品<br/>
   <sub>由史丹佛實證研究方法論團隊打造，涵蓋從資料清洗到頂刊投稿的完整工作流</sub>
+
+  <br/>
+  <br/>
+
+  <img src="images/aers-readme-cover-cn.png" alt="實證研究智能體技能大全封面圖" width="100%" />
 
   <br/>
 </div>

@@ -6,18 +6,14 @@
 
 <br/>
 
-  <img src="images/aers-readme-cover-en.png" alt="Auto-Empirical Research Skills cover" width="100%" />
-
-  <br/>
-
   <table>
     <tr>
       <td align="center">
-        <a href="https://copaper.ai"><img src="images/copaper-logo.png" alt="CoPaper.AI" width="260" /></a>
+        <a href="https://copaper.ai"><img src="images/copaper-logo.png" alt="CoPaper.AI" width="300" /></a>
       </td>
-      <td width="60"></td>
+      <td width="72"></td>
       <td align="center">
-        <img src="images/stanford-reap-logo.png" alt="Stanford REAP - Center on China's Economy & Institutions" width="380" />
+        <img src="images/stanford-reap-logo.png" alt="Stanford REAP - Center on China's Economy & Institutions" width="440" />
       </td>
     </tr>
   </table>
@@ -26,6 +22,11 @@
 
   <strong>Stanford REAP × CoPaper.AI</strong> · An academic–industrial AI toolkit for empirical research<br/>
   <sub>Built by Stanford's empirical-methodology team — the full pipeline from data cleaning to top-journal submission</sub>
+
+  <br/>
+  <br/>
+
+  <img src="images/aers-readme-cover-en.png" alt="Auto-Empirical Research Skills cover" width="100%" />
 
   <br/>
 </div>
@@ -346,6 +347,7 @@ Four parallel implementations of the **same 8-step empirical loop** — *data cl
 - **Copy-paste a full workflow** → [`docs/GOLDEN_WORKFLOWS.md`](docs/GOLDEN_WORKFLOWS.md)
 - **Install into a runtime / use without installing** → [`docs/INSTALL.md`](docs/INSTALL.md)
 - **Machine-readable index** → [`catalog/skills.json`](catalog/skills.json) · taxonomy: [`docs/TAXONOMY.md`](docs/TAXONOMY.md) · full catalog: [`docs/SKILL_CATALOG.md`](docs/SKILL_CATALOG.md)
+- **How AERS fits the wider research-automation ecosystem & composes with other tools** → [`docs/ECOSYSTEM.md`](docs/ECOSYSTEM.md) · pipeline recipes: [`docs/INTEROP.md`](docs/INTEROP.md)
 - **FAQ** → [`docs/FAQ.md`](docs/FAQ.md)
 
 ---
