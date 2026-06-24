@@ -68,6 +68,7 @@ SCENARIO_METHOD = {
     "causal-inference-twfe-trap": "staggered-did",
     "aer-identification-staggered": "staggered-did",
     "statspai-pretrends-eventstudy": "event-study",
+    "statspai-matching-overlap": "matching",
     "statspai-bad-controls": "*",
     "statspai-clustered-inference": "*",
     "aer-robustness-multiple-testing": "*",

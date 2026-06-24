@@ -22,7 +22,7 @@ A family is **covered** when it has both an eval scenario and a benchmark task, 
 | Event study / pre-trends | 10 | `statspai-pretrends-eventstudy` (high) | — | eval only |
 | Panel fixed effects | 19 | — | — | gap |
 | Synthetic control | 11 | — | — | gap |
-| Matching / propensity scores | 10 | — | `lalonde-recovery` | benchmark only |
+| Matching / propensity scores | 10 | `statspai-matching-overlap` (high) | `lalonde-recovery` | covered |
 | Double/debiased ML | 10 | — | — | gap |
 | Bayesian methods | 13 | — | — | gap |
 | Survival / duration | 3 | — | — | gap |
@@ -44,7 +44,6 @@ Notes:
 Partially covered (one of two layers):
 
 - **Event study / pre-trends** — eval only.
-- **Matching / propensity scores** — benchmark only.
 
 ## Cross-cutting checks (method-agnostic)
 
@@ -70,4 +69,4 @@ Non-method checks that gate the rest of the workflow (writing, citations, reprod
 
 ---
 
-_17 eval scenarios and 5 benchmark tasks across 11 method families; 3 families fully covered, 6 open gaps. Regenerate with `make catalog`._
+_18 eval scenarios and 5 benchmark tasks across 11 method families; 4 families fully covered, 6 open gaps. Regenerate with `make catalog`._
