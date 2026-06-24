@@ -54,7 +54,7 @@ jobs:
         run: >-
           python3 eval-harness/run_evals.py
           --grade eval-harness/candidates/_example
-          --expect-graded 8
+          --expect-graded 9
           --expect-fail-required statspai-weak-iv
           --expect-graded-categories causal-identification,reproducibility,citation-hygiene,runtime-safety,research-integrity
           --fail-on-orphans
