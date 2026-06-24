@@ -22363,7 +22363,7 @@
       "name": "paper-workflow",
       "path": "skills/69-Paper-WorkFlow/SKILL.md",
       "collection": "69-Paper-WorkFlow",
-      "line_count": 410,
+      "line_count": 312,
       "description_effective": "经管 / 社科**实证论文全流程总编排器（meta-orchestrator）**：把「选题 → 设计 → 数据 → 计量识别与估计 → 方法闸门 → 表与图 → 写作初稿 → 全流程打磨 → 语言去 AI 味 → 初稿质量门 → 模拟评审与修订 → 选刊与投稿 → 复盘交付」这条端到端流水线自动跑通。本 skill **不重复实现任何子能力**， 而是采用「多代理 + 上下文保护」执行范式与 `paper-pipeline` 的「固定顺序 + 可断点续跑 + 交互档位」编排范式，按阶段**调用既有 skill / 派发并行 subagent** 完成一篇 可投稿的实证论文，并在 Stage 3–4 提供 Python/StatsPAI、Stata、R 三种分析后端选择。触发场景：用户说 \"/paper-workflow\"、\"帮我写一篇实证论文\"、 \"从选题到投稿\"、\"实证论文全流程\"、\"经管社科论文工作流\"、\"端到端跑一篇 paper\"、 \"automate an empirical paper\"、\"end-to-end empirical research pipeline\"、\"paper workflow\"， 或带着一个研究方向 / 一份计划书 / 一份数据 / 一份初稿希望「一条龙」推进到投稿；也适用于用户要求 \"用 Stata 跑完整实证\"、\"用 R/fixest/Quarto 复现\" 或 \"Python/StatsPAI、Stata、R 三选一\"。",
       "description_source": "frontmatter",
       "has_references": true,
