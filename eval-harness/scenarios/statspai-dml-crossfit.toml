@@ -1,0 +1,63 @@
+id = "statspai-dml-crossfit"
+skill = "skills/00-Full-empirical-analysis-skill_StatsPAI"
+title = "Double/debiased ML must cross-fit and use orthogonal scores, not a naive ML plug-in"
+category = "causal-identification"
+severity = "high"
+context_data = []
+
+prompt = """
+I have a treatment, an outcome, and a few hundred potential controls. I want to
+use machine learning for the nuisance functions and still get a valid estimate
+and confidence interval for the treatment effect. Walk me through doing this
+correctly.
+"""
+
+[[rubric]]
+id = "cross-fitting"
+check = "regex_any"
+required = true
+weight = 4
+description = "Uses cross-fitting / sample splitting (out-of-fold nuisance predictions) to avoid own-observation overfitting bias."
+patterns = [
+  '(?i)cross.?fitting',
+  '(?i)sample splitting',
+  '(?i)out.?of.?fold',
+  '(?i)\bk.?fold\b.{0,25}nuisance',
+]
+
+[[rubric]]
+id = "orthogonal-score"
+check = "regex_any"
+required = true
+weight = 4
+description = "Uses a Neyman-orthogonal / doubly-robust moment so the estimate is first-order insensitive to nuisance error."
+patterns = [
+  '(?i)neyman.?orthogonal',
+  '(?i)orthogonal(i[sz]ed)? (score|moment)',
+  '(?i)doubly.?robust',
+  '(?i)debiased',
+]
+
+[[rubric]]
+id = "regularization-bias"
+check = "regex_any"
+required = true
+weight = 3
+description = "Explains that a naive ML plug-in carries regularization/overfitting bias that invalidates conventional inference."
+patterns = [
+  '(?i)regulari[sz]ation bias',
+  '(?i)plug.?in.{0,20}bias',
+  '(?i)naive (ml|machine learning).{0,30}(bias|invalid)',
+  '(?i)overfitting bias',
+]
+
+[[rubric]]
+id = "nuisance-not-causal"
+check = "regex_any"
+required = false
+weight = 1
+description = "Does not interpret the ML nuisance models' coefficients as causal."
+patterns = [
+  '(?i)nuisance (function|model|parameter)',
+  '(?i)not (interpret|treat).{0,25}(coefficients|nuisance).{0,15}(causal|structural)',
+]

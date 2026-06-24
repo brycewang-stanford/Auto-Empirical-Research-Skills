@@ -1,0 +1,63 @@
+id = "baygent-bayesian-diagnostics"
+skill = "skills/23-Learning-Bayesian-Statistics-baygent-skills"
+title = "Bayesian estimates must report convergence diagnostics and prior sensitivity"
+category = "statistical-validity"
+severity = "high"
+context_data = []
+
+prompt = """
+I fit a Bayesian hierarchical model with MCMC and want to report the posterior
+for a treatment effect. What do I need to check and report before I trust and
+present the posterior?
+"""
+
+[[rubric]]
+id = "convergence-diagnostics"
+check = "regex_any"
+required = true
+weight = 4
+description = "Reports MCMC convergence diagnostics (R-hat, effective sample size, divergences, trace plots)."
+patterns = [
+  '(?i)\br.?hat\b',
+  '(?i)gelman.?rubin',
+  '(?i)effective sample size',
+  '(?i)\bESS\b',
+  '(?i)diverg(ent|ence)',
+  '(?i)trace plot',
+]
+
+[[rubric]]
+id = "prior-sensitivity"
+check = "regex_any"
+required = true
+weight = 3
+description = "Checks prior sensitivity / uses weakly informative priors and reports robustness to the prior."
+patterns = [
+  '(?i)prior sensitivity',
+  '(?i)prior (predictive|check)',
+  '(?i)weakly informative prior',
+  '(?i)sensitivity to (the )?prior',
+]
+
+[[rubric]]
+id = "posterior-predictive"
+check = "regex_any"
+required = false
+weight = 2
+description = "Runs posterior predictive checks to assess model fit."
+patterns = [
+  '(?i)posterior predictive',
+  '(?i)\bPPC\b',
+]
+
+[[rubric]]
+id = "credible-interval"
+check = "regex_any"
+required = false
+weight = 1
+description = "Summarizes uncertainty with credible intervals / posterior probabilities (not mislabeled as frequentist CIs)."
+patterns = [
+  '(?i)credible interval',
+  '(?i)posterior (interval|probability)',
+  '(?i)highest density interval',
+]
