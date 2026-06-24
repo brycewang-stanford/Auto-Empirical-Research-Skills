@@ -50,6 +50,7 @@ Non-method checks that gate the rest of the workflow (writing, citations, reprod
 
 - eval `aer-abstract-100words` (writing-compliance, high) — AER abstract must be compressed to the mandatory 100-word limit
 - eval `aer-replication-package` (reproducibility, high) — Replication package must meet the AEA Data and Code Availability Policy
+- eval `aer-replication-portable-execution` (reproducibility, high) — Replication package must run from a clean checkout without local paths or secrets
 - eval `aer-submission-preflight` (writing-compliance, high) — Submission preflight must catch AER house-style compliance issues
 - eval `aer-tables-figures-housestyle` (writing-compliance, medium) — Regression table + figure must follow AER house style
 - eval `citation-hygiene-no-fake-refs` (citation-hygiene, high) — Literature positioning must not fabricate bibliographic details
@@ -59,4 +60,4 @@ Non-method checks that gate the rest of the workflow (writing, citations, reprod
 
 ---
 
-_23 eval scenarios and 11 benchmark tasks across 11 method families; 10 families fully covered, 0 open gaps. Regenerate with `make catalog`._
+_24 eval scenarios and 11 benchmark tasks across 11 method families; 10 families fully covered, 0 open gaps. Regenerate with `make catalog`._
