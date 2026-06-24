@@ -19,6 +19,8 @@ import card  # noqa: E402
 import simdid  # noqa: E402
 import rdd  # noqa: E402
 import badcontrol  # noqa: E402
+import panelfe  # noqa: E402
+import eventstudy  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 CAND = Path(__file__).resolve().parent / "candidates"
@@ -122,6 +124,41 @@ def badcontrol_candidate(write_missing_data: bool = True) -> dict:
     }
 
 
+def panelfe_candidate(write_missing_data: bool = True) -> dict:
+    data_path = ROOT / "benchmark" / "data" / "sim-panel-fe.csv"
+    if not data_path.exists():
+        if not write_missing_data:
+            raise FileNotFoundError(data_path)
+        panelfe.write_csv(data_path)
+    rows = panelfe.load(data_path)
+    return {
+        "task": "panel-fe-recovery",
+        "method": "Two-way (unit+time) fixed effects vs pooled OLS that ignores unit heterogeneity",
+        "n": len(rows),
+        "true_att": round(panelfe.true_att(rows), 4),
+        "twoway_fe_att": round(panelfe.twoway_fe_att(rows), 4),
+        "pooled_att": round(panelfe.pooled_att(rows), 4),
+    }
+
+
+def eventstudy_candidate(write_missing_data: bool = True) -> dict:
+    data_path = ROOT / "benchmark" / "data" / "sim-event-study.csv"
+    if not data_path.exists():
+        if not write_missing_data:
+            raise FileNotFoundError(data_path)
+        eventstudy.write_csv(data_path)
+    rows = eventstudy.load(data_path)
+    return {
+        "task": "event-study-recovery",
+        "method": "Event-study with unit+time FE and treated x relative-time dummies vs naive treated-only before/after",
+        "n": len(rows),
+        "true_att": round(eventstudy.true_att(rows), 4),
+        "es_att": round(eventstudy.es_att(rows), 4),
+        "es_pre_max": round(eventstudy.es_pre_max(rows), 4),
+        "naive_before_after": round(eventstudy.naive_before_after(rows), 4),
+    }
+
+
 def reference_candidates(write_missing_data: bool = True) -> list[tuple[Path, dict]]:
     return [
         (CAND / "reference-ols" / "results.json", lalonde_candidate()),
@@ -129,6 +166,8 @@ def reference_candidates(write_missing_data: bool = True) -> list[tuple[Path, di
         (CAND / "reference-did" / "results.json", did_candidate(write_missing_data)),
         (CAND / "reference-rd" / "results.json", rdd_candidate(write_missing_data)),
         (CAND / "reference-badcontrol" / "results.json", badcontrol_candidate(write_missing_data)),
+        (CAND / "reference-panelfe" / "results.json", panelfe_candidate(write_missing_data)),
+        (CAND / "reference-eventstudy" / "results.json", eventstudy_candidate(write_missing_data)),
     ]
 
 
@@ -155,6 +194,16 @@ def print_summary(payloads: list[tuple[Path, dict]]) -> None:
     print(
         f"  bad control: good {bc['good_control_effect']} -> bad/mediator {bc['bad_control_effect']} "
         f"(true total {bc['true_total']})"
+    )
+    pf = by_task["panel-fe-recovery"]
+    print(
+        f"  panel FE: pooled {pf['pooled_att']} -> two-way FE {pf['twoway_fe_att']} "
+        f"(true {pf['true_att']})"
+    )
+    es = by_task["event-study-recovery"]
+    print(
+        f"  event study: naive {es['naive_before_after']} -> dynamic ATT {es['es_att']} "
+        f"(true {es['true_att']}, max |pre| {es['es_pre_max']})"
     )
 
 

@@ -93,6 +93,8 @@ TASK_METHOD = {
     "rdd-recovery": "rdd",
     "did-staggered-recovery": "staggered-did",
     "lalonde-recovery": "matching",
+    "panel-fe-recovery": "panel-fe",
+    "event-study-recovery": "event-study",
     "bad-control-recovery": "*",
 }
 

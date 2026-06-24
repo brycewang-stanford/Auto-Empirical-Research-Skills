@@ -19,8 +19,8 @@ A family is **covered** when it has both an eval scenario and a benchmark task, 
 | Regression discontinuity (RDD) | 26 | `statspai-rdd-diagnostics` (high) | `rdd-recovery` | covered |
 | Difference-in-differences (2x2) | 10 | — | — | indirect |
 | Staggered DiD / TWFE | 17 | `aer-identification-staggered` (critical)<br>`causal-inference-twfe-trap` (high)<br>`statspai-staggered-did` (critical) | `did-staggered-recovery` | covered |
-| Event study / pre-trends | 10 | `statspai-pretrends-eventstudy` (high) | — | eval only |
-| Panel fixed effects | 19 | `pyfixest-panel-clustering` (high) | — | eval only |
+| Event study / pre-trends | 10 | `statspai-pretrends-eventstudy` (high) | `event-study-recovery` | covered |
+| Panel fixed effects | 19 | `pyfixest-panel-clustering` (high) | `panel-fe-recovery` | covered |
 | Synthetic control | 11 | `statspai-synthetic-control` (high) | — | eval only |
 | Matching / propensity scores | 10 | `statspai-matching-overlap` (high) | `lalonde-recovery` | covered |
 | Double/debiased ML | 10 | `statspai-dml-crossfit` (high) | — | eval only |
@@ -37,8 +37,6 @@ Notes:
 
 Partially covered (one of two layers):
 
-- **Event study / pre-trends** — eval only.
-- **Panel fixed effects** — eval only.
 - **Synthetic control** — eval only.
 - **Double/debiased ML** — eval only.
 - **Bayesian methods** — eval only.
@@ -68,4 +66,4 @@ Non-method checks that gate the rest of the workflow (writing, citations, reprod
 
 ---
 
-_23 eval scenarios and 5 benchmark tasks across 11 method families; 4 families fully covered, 0 open gaps. Regenerate with `make catalog`._
+_23 eval scenarios and 7 benchmark tasks across 11 method families; 6 families fully covered, 0 open gaps. Regenerate with `make catalog`._

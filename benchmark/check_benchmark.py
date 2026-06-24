@@ -35,6 +35,8 @@ import card  # noqa: E402
 import simdid  # noqa: E402
 import rdd  # noqa: E402
 import badcontrol  # noqa: E402
+import panelfe  # noqa: E402
+import eventstudy  # noqa: E402
 
 TASKS_DIR = Path(__file__).resolve().parent / "tasks"
 CANDIDATES_DIR = Path(__file__).resolve().parent / "candidates"
@@ -44,7 +46,9 @@ SUPPORTED_TASK_IDS = {
     "bad-control-recovery",
     "card-iv-recovery",
     "did-staggered-recovery",
+    "event-study-recovery",
     "lalonde-recovery",
+    "panel-fe-recovery",
     "rdd-recovery",
 }
 CANDIDATE_DIR_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
@@ -111,6 +115,8 @@ CANDIDATE_NUMERIC_FIELDS = {
     "did-staggered-recovery": ("true_att", "twfe_att", "cs_att"),
     "lalonde-recovery": ("naive_att", "adjusted_att"),
     "rdd-recovery": ("true_tau", "naive_jump", "global_att", "local_att"),
+    "panel-fe-recovery": ("true_att", "twoway_fe_att", "pooled_att"),
+    "event-study-recovery": ("true_att", "es_att", "es_pre_max", "naive_before_after"),
 }
 CANDIDATE_NUMERIC_MAP_FIELDS = {
     "lalonde-recovery": ("balance",),
@@ -351,6 +357,25 @@ def compute_truth(task: dict) -> dict:
             "naive_effect": badcontrol.naive_effect(rows),
             "good_control_effect": badcontrol.good_control_effect(rows),
             "bad_control_effect": badcontrol.bad_control_effect(rows),
+        }
+    if task["id"] == "panel-fe-recovery":
+        data = ROOT / task["data"]
+        rows = panelfe.load(data)
+        return {
+            "n": len(rows),
+            "true_att": panelfe.true_att(rows),
+            "twoway_fe_att": panelfe.twoway_fe_att(rows),
+            "pooled_att": panelfe.pooled_att(rows),
+        }
+    if task["id"] == "event-study-recovery":
+        data = ROOT / task["data"]
+        rows = eventstudy.load(data)
+        return {
+            "n": len(rows),
+            "true_att": eventstudy.true_att(rows),
+            "es_att": eventstudy.es_att(rows),
+            "es_pre_max": eventstudy.es_pre_max(rows),
+            "naive_before_after": eventstudy.naive_before_after(rows),
         }
     raise ValueError(f"unknown task {task['id']}")
 
