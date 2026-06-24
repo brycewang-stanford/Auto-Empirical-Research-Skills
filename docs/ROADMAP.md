@@ -19,15 +19,19 @@ This roadmap is scoped to making AERS a high-quality, high-trust GitHub project 
 - Add scheduled external-link triage notes to releases when weekly checks fail.
 - Convert the flagship eval prompts into executable scorecards where artifacts can be generated in CI without paid APIs.
 - Replace manual release notes with a generated release snapshot once the catalog/eval metadata stabilizes.
+- Keep [`ECOSYSTEM.md`](ECOSYSTEM.md) and [`../ecosystem/ecosystem.json`](../ecosystem/ecosystem.json) current as the agentic-research ecosystem evolves, and expand the [`INTEROP.md`](INTEROP.md) pipeline recipes (e.g. a benchmarked AERS-vs-Econometrics-Agent comparison).
 
 ## Later
 
 - Package first-party AERS skills as installable bundles for agent runtimes that support plugins/marketplaces.
 - Add per-skill eval prompts for flagship first-party skills.
 - Maintain a public benchmark of empirical-research agent workflows: correctness, reproducibility, citation hygiene, and runtime safety.
+- Close the rigor gaps surfaced by [`RIGOR_COVERAGE.md`](RIGOR_COVERAGE.md): method families with tagged skills but no eval scenario or benchmark task yet (synthetic control, panel FE, double/debiased ML, Bayesian, survival), plus the partials (an event-study benchmark task; a matching/PSM eval scenario).
 
 ## Completed Hardening Pass
 
 - Generated machine-readable catalog and provenance metadata.
 - Added license audit, skill hygiene audit, static search page, install guide, submission guide, flagship demos, release process, external-link workflow, and clean CI validation.
 - Added machine-readable flagship eval prompts and generated reviewer docs.
+- Added a generated methodological rigor coverage map ([`RIGOR_COVERAGE.md`](RIGOR_COVERAGE.md), built by `scripts/build-coverage-map.py` and freshness-checked in `make validate`) that joins the method taxonomy with eval scenarios and benchmark tasks and surfaces open gaps.
+- Added an ecosystem positioning map ([`ECOSYSTEM.md`](ECOSYSTEM.md)), interoperability recipes ([`INTEROP.md`](INTEROP.md)), a machine-readable registry ([`../ecosystem/ecosystem.json`](../ecosystem/ecosystem.json)), and a sync-enforcing validator (`scripts/check-ecosystem.py`, wired into `make validate`).

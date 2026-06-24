@@ -6,18 +6,14 @@
 
 <br/>
 
-  <img src="images/aers-readme-cover-cn.png" alt="实证研究智能体技能大全封面图" width="100%" />
-
-  <br/>
-
   <table>
     <tr>
       <td align="center">
-        <a href="https://copaper.ai"><img src="images/copaper-logo.png" alt="CoPaper.AI" width="260" /></a>
+        <a href="https://copaper.ai"><img src="images/copaper-logo.png" alt="CoPaper.AI" width="300" /></a>
       </td>
-      <td width="60"></td>
+      <td width="72"></td>
       <td align="center">
-        <img src="images/stanford-reap-logo.png" alt="Stanford REAP - Center on China's Economy & Institutions" width="380" />
+        <img src="images/stanford-reap-logo.png" alt="Stanford REAP - Center on China's Economy & Institutions" width="440" />
       </td>
     </tr>
   </table>
@@ -26,6 +22,11 @@
 
   <strong>Stanford REAP × CoPaper.AI</strong> · 实证研究 AI 工具的学术工业级产品<br/>
   <sub>由斯坦福实证研究方法论团队打造，覆盖从数据清洗到顶刊投稿的完整工作流</sub>
+
+  <br/>
+  <br/>
+
+  <img src="images/aers-readme-cover-cn.png" alt="实证研究智能体技能大全封面图" width="100%" />
 
   <br/>
 </div>
@@ -396,6 +397,8 @@ make check       # 完整 gate：validate + Python 编译 + 单元测试 + eval 
    ▼           ▼          ▼          ▼
   09          10         10         10
 ```
+
+🗺️ **[研究流程地图 — 10 阶段直达仓库 vendored skill](docs/WORKFLOW_MAP.md)** · 从选题到投稿，一屏看全。
 
 各阶段 skill 速查（中英双语）：[01 选题与研究设计](docs/01-选题与研究设计.md) · [02 文献检索与综述](docs/02-文献检索与综述.md) · [03 论文阅读与拆解](docs/03-论文阅读与拆解.md) · [04 数据获取与清洗](docs/04-数据获取与清洗.md) · [05 统计分析与因果推断](docs/05-统计分析与因果推断.md) · [06 论文写作](docs/06-论文写作.md) · [07 论文修改与润色](docs/07-论文修改与润色.md) · [08 引用管理与排版](docs/08-引用管理与排版.md) · [09 论文复现与可复现研究](docs/09-论文复现与可复现研究.md) · [10 审稿回复与学术答辩](docs/10-审稿回复与学术答辩.md)
 

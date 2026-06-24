@@ -221,6 +221,7 @@ Avoid:
 3. **Cross-check** the response letter against the revised manuscript — every page/line reference must resolve.
 4. **Update table and figure numbering** if exhibits were added or removed; cite the new identifiers.
 5. **Re-run the replication package** if results changed; re-deposit if material.
+6. **Re-run `aer-consistency`** on the revised manuscript — revisions are where headline numbers, exhibit numbering, and citations desynchronize.
 
 ## Decision Letter Conventions
 

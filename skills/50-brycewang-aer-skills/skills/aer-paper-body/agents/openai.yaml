@@ -1,0 +1,4 @@
+interface:
+  display_name: "AER Paper Body"
+  short_description: "Draft AER body sections and interpret magnitudes"
+  default_prompt: "Use $aer-paper-body to draft the data, empirical strategy, results, mechanisms, and conclusion sections of this manuscript."

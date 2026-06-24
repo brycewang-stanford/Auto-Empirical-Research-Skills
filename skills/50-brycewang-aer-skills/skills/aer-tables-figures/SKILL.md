@@ -141,7 +141,7 @@ AER convention: `*** p<0.01, ** p<0.05, * p<0.1`. Some authors and Angrist-Pisch
 4. Sample restrictions
 5. N (observations or clusters)
 
-## Common Mistakes
+## Anti-Patterns
 
 - 14-column main results table — readers cannot scan
 - Standard errors in brackets and parentheses in the same paper
@@ -177,5 +177,5 @@ MAIN TABLES: <count>
 APPENDIX TABLES: <count>
 FIGURES: <count>
 STYLE COMPLIANT: <yes / list of remaining fixes>
-NEXT SKILL: <aer-replication | aer-submission>
+NEXT SKILL: <aer-consistency | aer-replication>
 ```

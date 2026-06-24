@@ -1,0 +1,4 @@
+interface:
+  display_name: "AER Consistency"
+  short_description: "Audit manuscript numbers, refs, and citations"
+  default_prompt: "Use $aer-consistency to audit this manuscript for number, sample-size, cross-reference, and citation consistency."

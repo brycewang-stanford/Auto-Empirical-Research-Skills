@@ -35,6 +35,12 @@ import card  # noqa: E402
 import simdid  # noqa: E402
 import rdd  # noqa: E402
 import badcontrol  # noqa: E402
+import panelfe  # noqa: E402
+import eventstudy  # noqa: E402
+import dml  # noqa: E402
+import survival  # noqa: E402
+import bayesian  # noqa: E402
+import synth  # noqa: E402
 
 TASKS_DIR = Path(__file__).resolve().parent / "tasks"
 CANDIDATES_DIR = Path(__file__).resolve().parent / "candidates"
@@ -42,10 +48,16 @@ RESULTS_DIR = Path(__file__).resolve().parent / "results"
 
 SUPPORTED_TASK_IDS = {
     "bad-control-recovery",
+    "bayesian-recovery",
     "card-iv-recovery",
     "did-staggered-recovery",
+    "dml-recovery",
+    "event-study-recovery",
     "lalonde-recovery",
+    "panel-fe-recovery",
     "rdd-recovery",
+    "survival-recovery",
+    "synthetic-control-recovery",
 }
 CANDIDATE_DIR_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
 KNOWN_CHECKS = {
@@ -111,6 +123,16 @@ CANDIDATE_NUMERIC_FIELDS = {
     "did-staggered-recovery": ("true_att", "twfe_att", "cs_att"),
     "lalonde-recovery": ("naive_att", "adjusted_att"),
     "rdd-recovery": ("true_tau", "naive_jump", "global_att", "local_att"),
+    "panel-fe-recovery": ("true_att", "twoway_fe_att", "pooled_att"),
+    "event-study-recovery": ("true_att", "es_att", "es_pre_max", "naive_before_after"),
+    "dml-recovery": ("true_theta", "dml_theta", "naive_theta"),
+    "survival-recovery": (
+        "true_surv_treat", "true_surv_control",
+        "km_surv_treat", "km_surv_control",
+        "naive_surv_treat", "naive_surv_control",
+    ),
+    "bayesian-recovery": ("data_mean", "posterior_weak", "posterior_strong"),
+    "synthetic-control-recovery": ("true_effect", "sc_effect", "naive_effect"),
 }
 CANDIDATE_NUMERIC_MAP_FIELDS = {
     "lalonde-recovery": ("balance",),
@@ -351,6 +373,64 @@ def compute_truth(task: dict) -> dict:
             "naive_effect": badcontrol.naive_effect(rows),
             "good_control_effect": badcontrol.good_control_effect(rows),
             "bad_control_effect": badcontrol.bad_control_effect(rows),
+        }
+    if task["id"] == "panel-fe-recovery":
+        data = ROOT / task["data"]
+        rows = panelfe.load(data)
+        return {
+            "n": len(rows),
+            "true_att": panelfe.true_att(rows),
+            "twoway_fe_att": panelfe.twoway_fe_att(rows),
+            "pooled_att": panelfe.pooled_att(rows),
+        }
+    if task["id"] == "event-study-recovery":
+        data = ROOT / task["data"]
+        rows = eventstudy.load(data)
+        return {
+            "n": len(rows),
+            "true_att": eventstudy.true_att(rows),
+            "es_att": eventstudy.es_att(rows),
+            "es_pre_max": eventstudy.es_pre_max(rows),
+            "naive_before_after": eventstudy.naive_before_after(rows),
+        }
+    if task["id"] == "dml-recovery":
+        data = ROOT / task["data"]
+        rows = dml.load(data)
+        return {
+            "n": len(rows),
+            "true_theta": dml.true_theta(rows),
+            "dml_theta": dml.dml_theta(rows),
+            "naive_theta": dml.naive_theta(rows),
+        }
+    if task["id"] == "survival-recovery":
+        data = ROOT / task["data"]
+        rows = survival.load(data)
+        return {
+            "n": len(rows),
+            "true_surv_treat": survival.true_survival(rows, 1),
+            "true_surv_control": survival.true_survival(rows, 0),
+            "km_surv_treat": survival.km_survival(rows, 1),
+            "km_surv_control": survival.km_survival(rows, 0),
+            "naive_surv_treat": survival.naive_survival(rows, 1),
+            "naive_surv_control": survival.naive_survival(rows, 0),
+        }
+    if task["id"] == "bayesian-recovery":
+        data = ROOT / task["data"]
+        rows = bayesian.load(data)
+        return {
+            "n": len(rows),
+            "data_mean": bayesian.data_mean(rows),
+            "posterior_weak": bayesian.posterior_weak(rows),
+            "posterior_strong": bayesian.posterior_strong(rows),
+        }
+    if task["id"] == "synthetic-control-recovery":
+        data = ROOT / task["data"]
+        rows = synth.load(data)
+        return {
+            "n": len(rows),
+            "true_effect": synth.true_effect(rows),
+            "sc_effect": synth.sc_effect(rows),
+            "naive_effect": synth.naive_effect(rows),
         }
     raise ValueError(f"unknown task {task['id']}")
 

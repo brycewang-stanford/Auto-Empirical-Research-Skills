@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "generated_by": null,
+  "maintained": "hand-curated source of truth for docs/ECOSYSTEM.md and docs/INTEROP.md",
+  "updated": "2026-06-23",
+  "notes": [
+    "star_snapshot values are point-in-time counts (month in 'updated') and WILL drift; the validator does not assert them.",
+    "This registry positions AERS within the wider agentic-research ecosystem. It does NOT duplicate tools/tools.json, which catalogs individual installable tools/MCP servers; here we track whole projects/frameworks and how AERS relates to them.",
+    "relation vocabulary: format-peer (same Agent Skills format, different domain), complement (composes with AERS in a pipeline), sibling (overlapping technical scope), contrast (different paradigm AERS deliberately does not pursue)."
+  ],
+  "projects": [
+    {
+      "id": "kdense-scientific-agent-skills",
+      "name": "Scientific Agent Skills",
+      "org": "K-Dense-AI",
+      "url": "https://github.com/K-Dense-AI/scientific-agent-skills",
+      "category": "agent-skills-library",
+      "license": "MIT",
+      "star_snapshot": 29100,
+      "domain": "life-sciences (biology, chemistry, medicine, drug discovery)",
+      "relation": "format-peer",
+      "summary": "147 ready-to-use skills plus 100+ scientific databases that turn any Agent-Skills-compatible runtime into a life-sciences research assistant.",
+      "aers_takeaway": "Same Agent Skills format and openness, disjoint domain. Validates the 'skills library' thesis at scale (29k stars) and sets the bar on tested examples, an explicit compatibility matrix, and a unified-database story — all worth mirroring for social science."
+    },
+    {
+      "id": "sakana-ai-scientist",
+      "name": "The AI Scientist",
+      "org": "SakanaAI",
+      "url": "https://github.com/SakanaAI/AI-Scientist",
+      "category": "closed-loop-discovery",
+      "license": "AI Scientist Source Code License (Responsible-AI-License derivative)",
+      "star_snapshot": 14100,
+      "domain": "machine-learning research",
+      "relation": "contrast",
+      "summary": "End-to-end autonomous pipeline: idea generation, code+experiments, LaTeX paper writing, and AI peer review, at roughly <$15/paper on frontier models.",
+      "aers_takeaway": "The headline 'auto-paper' paradigm. AERS deliberately does NOT chase full autonomy: social-science difficulty lives in identification, data cleaning, and credibility — exactly where blind closed loops are weakest. AERS keeps the human in the loop and certifies method correctness instead."
+    },
+    {
+      "id": "agent-laboratory",
+      "name": "Agent Laboratory",
+      "org": "SamuelSchmidgall",
+      "url": "https://github.com/SamuelSchmidgall/AgentLaboratory",
+      "category": "research-orchestrator",
+      "license": "MIT",
+      "star_snapshot": 5700,
+      "domain": "general research workflow",
+      "relation": "complement",
+      "summary": "Human-in-the-loop multi-agent workflow spanning literature review, experimentation, and report writing, with a co-pilot mode.",
+      "aers_takeaway": "A natural orchestration host. AERS can supply the domain-correct methods and writing skills that a generic orchestrator like this lacks for empirical social science."
+    },
+    {
+      "id": "econometrics-agent",
+      "name": "Econometrics AI Agent",
+      "org": "FromCSUZhou",
+      "url": "https://github.com/FromCSUZhou/Econometrics-Agent",
+      "category": "domain-execution-agent",
+      "license": "Apache-2.0",
+      "star_snapshot": 355,
+      "domain": "econometrics (IV-2SLS, DiD, RDD, propensity-score methods)",
+      "relation": "sibling",
+      "summary": "Specialized zero-shot agent with a custom econometrics tool library and expert prompts; paper: 'Can AI Master Econometrics?' (arXiv:2506.00856).",
+      "aers_takeaway": "Closest technical sibling and the strongest interop target as an execution back-end. AERS contributes breadth (1,150 skills across 8 disciplines, R/Python/Stata/Julia) and the methodological-pitfall evals this agent could be scored against."
+    },
+    {
+      "id": "open-deep-research",
+      "name": "Open Deep Research",
+      "org": "langchain-ai",
+      "url": "https://github.com/langchain-ai/open_deep_research",
+      "category": "deep-research",
+      "license": "MIT",
+      "star_snapshot": 11800,
+      "domain": "general deep research (multi-provider, MCP)",
+      "relation": "complement",
+      "summary": "Configurable open-source deep-research agent with full MCP compatibility and support for multiple LLM providers and search tools.",
+      "aers_takeaway": "Best-fit literature-review front-end. Its MCP support means AERS data-source MCP servers (e.g. FRED, OpenAlex, EDGAR) and AERS skills can be wired in directly."
+    },
+    {
+      "id": "gpt-researcher",
+      "name": "GPT Researcher",
+      "org": "assafelovic",
+      "url": "https://github.com/assafelovic/gpt-researcher",
+      "category": "deep-research",
+      "license": "Apache-2.0",
+      "star_snapshot": 27900,
+      "domain": "autonomous web/document research with citations",
+      "relation": "complement",
+      "summary": "Autonomous agent that aggregates 20+ sources into detailed, cited reports, designed to reduce single-source bias.",
+      "aers_takeaway": "A mature lit-review/citation front-end. Pair it with AERS citation-hygiene skills to keep references real and AERS de-AIGC skills to clean prose."
+    },
+    {
+      "id": "deer-flow",
+      "name": "DeerFlow",
+      "org": "bytedance",
+      "url": "https://github.com/bytedance/deer-flow",
+      "category": "research-orchestrator",
+      "license": null,
+      "star_snapshot": null,
+      "domain": "long-horizon super-agent harness (sandboxes, memory, sub-agents)",
+      "relation": "complement",
+      "summary": "Open-source super-agent harness that researches, codes, and creates using sandboxes, memory, tools, skills, and sub-agents; reached GitHub Trending #1 in Feb 2026.",
+      "aers_takeaway": "A heavyweight orchestration host whose 'skills' slot can load AERS skills; useful when a task needs sandboxed multi-hour runs."
+    },
+    {
+      "id": "deepanalyze",
+      "name": "DeepAnalyze",
+      "org": "ruc-datalab",
+      "url": "https://github.com/ruc-datalab/DeepAnalyze",
+      "category": "data-science-agent",
+      "license": null,
+      "star_snapshot": null,
+      "domain": "autonomous data science / automated reporting",
+      "relation": "sibling",
+      "summary": "Agentic LLM for autonomous data science that ingests large datasets and emits analysis reports.",
+      "aers_takeaway": "Adjacent: strong on generic data analysis, weak on causal identification — the exact axis AERS specializes in. Possible upstream for a data-exploration stage."
+    },
+    {
+      "id": "datamind",
+      "name": "DataMind",
+      "org": "zjunlp",
+      "url": "https://github.com/zjunlp/DataMind",
+      "category": "data-science-agent",
+      "license": null,
+      "star_snapshot": null,
+      "domain": "open-source LLM data-analysis agents (ICLR/AAAI 2026)",
+      "relation": "sibling",
+      "summary": "Open data-analysis agent line; DataMind-14B reports state-of-the-art on data-analysis benchmarks.",
+      "aers_takeaway": "Adjacent open models for data analysis; relevant as a local back-end where paid APIs are not allowed."
+    }
+  ],
+  "interop_roles": [
+    {
+      "role": "literature-review",
+      "description": "Find, screen, and synthesize prior work with real citations.",
+      "external": ["open-deep-research", "gpt-researcher"],
+      "aers_collections": [
+        "skills/36-taoyunudt-literature-review-skill",
+        "skills/52-keemanxp-slr-prisma",
+        "skills/53-keemanxp-thematic-analysis-skill",
+        "skills/59-shiquda-openalex-skill",
+        "skills/60-regisely-superpapers"
+      ]
+    },
+    {
+      "role": "data-access",
+      "description": "Reach empirical data sources programmatically.",
+      "external": ["open-deep-research"],
+      "aers_collections": [
+        "skills/57-dgunning-edgartools",
+        "skills/58-charlescoverdale-econstack",
+        "skills/59-shiquda-openalex-skill"
+      ]
+    },
+    {
+      "role": "identification-and-methods",
+      "description": "Choose and defend a credible identification strategy.",
+      "external": ["econometrics-agent"],
+      "aers_collections": [
+        "skills/10-Jill0099-causal-inference-mixtape",
+        "skills/13-scunning1975-MixtapeTools",
+        "skills/50-brycewang-aer-skills",
+        "skills/51-pymc-labs-CausalPy"
+      ]
+    },
+    {
+      "role": "execution",
+      "description": "Run the analysis reproducibly in R/Python/Stata.",
+      "external": ["econometrics-agent", "deepanalyze", "datamind"],
+      "aers_collections": [
+        "skills/00-Full-empirical-analysis-skill_StatsPAI",
+        "skills/00.2-Full-empirical-analysis-skill_Stata",
+        "skills/39-vincentarelbundock-marginaleffects",
+        "skills/40-py-econometrics-pyfixest",
+        "skills/64-tmonk-mcp-stata"
+      ]
+    },
+    {
+      "role": "writing-and-submission",
+      "description": "Draft, format, and prepare the manuscript for submission.",
+      "external": ["agent-laboratory"],
+      "aers_collections": [
+        "skills/01-lishix520-academic-paper-skills",
+        "skills/04-K-Dense-AI-claude-scientific-writer",
+        "skills/06-fuhaoda-stats-paper-writing",
+        "skills/56-hanlulong-econ-writing-skill"
+      ]
+    },
+    {
+      "role": "integrity-and-de-aigc",
+      "description": "Verify citations and remove AI-tell prose before submission.",
+      "external": [],
+      "aers_collections": [
+        "skills/62-PHY041-claude-skill-citation-checker",
+        "skills/44-matsuikentaro1-humanizer_academic",
+        "skills/45-stephenturner-skill-deslop",
+        "skills/48-copaper-ai-chinese-de-aigc"
+      ]
+    },
+    {
+      "role": "reproduction",
+      "description": "Package and verify a runnable replication archive.",
+      "external": [],
+      "aers_collections": [
+        "skills/28-maxwell2732-paper-replicate-agent-demo",
+        "skills/54-scdenney-open-science-skills"
+      ]
+    }
+  ]
+}

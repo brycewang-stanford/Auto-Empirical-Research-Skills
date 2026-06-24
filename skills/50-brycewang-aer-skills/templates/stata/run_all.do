@@ -8,8 +8,8 @@
   Stata       : 18.0 MP
 
   Reproducibility contract:
-    1. Edit `00_globals.do` so $project points to this directory.
-    2. Change directory to the project root and run `do run_all.do`.
+    1. Change directory to the project root and run `do run_all.do`.
+    2. `00_globals.do` sets $project to the current working directory.
     3. All output is written to `output/`. No file outside the project
        directory is read or written.
 

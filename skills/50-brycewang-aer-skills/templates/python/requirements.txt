@@ -6,13 +6,16 @@ numpy==2.1.3
 pandas==2.2.3
 pyarrow==18.1.0
 polars==1.18.0
+scipy==1.14.1
 
 # ---- Econometrics & identification ------------------------------
-pyfixest==0.27.0           # high-dim FE OLS, AER-style etable
+pyfixest==0.50.1           # high-dim FE OLS, AER-style etable
 linearmodels==6.6          # IV with weak-IV diagnostics
-differences==0.3.1         # Callaway-Sant'Anna in Python
+differences==0.3.0         # Callaway-Sant'Anna in Python
 econtools==0.3.5           # AER-flavored regression helpers
 statsmodels==0.14.4
+rdrobust==2.0.0            # robust bias-corrected RDD
+rddensity==2.4.6           # manipulation / density test at cutoff
 
 # ---- Plotting ---------------------------------------------------
 matplotlib==3.9.2

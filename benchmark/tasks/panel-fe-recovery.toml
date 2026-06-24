@@ -1,0 +1,72 @@
+id = "panel-fe-recovery"
+title = "Panel fixed-effects recovery: does the pipeline remove unit heterogeneity instead of pooling?"
+data = "benchmark/data/sim-panel-fe.csv"
+reference_candidate = "reference-panelfe"
+
+description = """
+A deterministic, noiseless balanced panel (40 units x 6 periods) whose untreated
+potential outcome is additive in unit and time effects. Treatment turns on and
+off WITHIN units (high-type units are treated in even periods only) and is
+correlated with the unit effects, so treatment is confounded by who gets treated.
+The true within-unit effect is known by construction (BETA = 2) and recomputed by
+the checker as mean(y - y0) over treated unit-periods (y0, the untreated potential
+outcome, ships as a column the estimators never read).
+
+The lesson: a pooled OLS that ignores unit heterogeneity is biased upward (treated
+unit-periods belong to high-type units), while a two-way (unit + time) fixed-
+effects estimator differences the unit effects out and recovers the truth.
+Data-derived golds are recomputed from the dataset, so a candidate cannot pass by
+fabricating numbers.
+"""
+
+true_att_by_construction = 2.0
+
+[[gold]]
+id = "fe-recovers-true-att"
+required = true
+weight = 4
+description = "The two-way fixed-effects estimate recovers the true within-unit effect recomputed from the data."
+check = "recovers_truth"
+field = "twoway_fe_att"
+truth_key = "true_att"
+tol = 0.05
+
+[[gold]]
+id = "pooled-is-biased"
+required = true
+weight = 3
+description = "The pooled OLS estimate (no fixed effects) is far from the truth, surfacing the omitted-unit-heterogeneity bias rather than hiding it."
+check = "biased_away"
+field = "pooled_att"
+truth_key = "true_att"
+min_gap = 1.0
+
+[[gold]]
+id = "fe-beats-pooled"
+required = false
+weight = 2
+description = "The fixed-effects estimate is closer to the truth than the pooled estimate is (informational)."
+check = "closer_to_truth"
+near_field = "twoway_fe_att"
+far_field = "pooled_att"
+truth_key = "true_att"
+
+[[gold]]
+id = "honest-fe"
+required = true
+weight = 2
+description = "The candidate's reported two-way FE estimate matches what the checker recomputes by running the estimator on the data (no fabricated numbers)."
+check = "recovers_truth"
+field = "twoway_fe_att"
+truth_key = "twoway_fe_att"
+tol = 0.01
+
+[[gold]]
+id = "honest-pooled"
+required = true
+weight = 2
+description = "The candidate's reported pooled estimate matches what the checker recomputes (no fabricated numbers)."
+check = "recovers_truth"
+field = "pooled_att"
+truth_key = "pooled_att"
+tol = 0.01

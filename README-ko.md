@@ -6,18 +6,14 @@
 
 <br/>
 
-  <img src="images/aers-readme-cover-en.png" alt="Auto-Empirical Research Skills 커버 이미지" width="100%" />
-
-  <br/>
-
   <table>
     <tr>
       <td align="center">
-        <a href="https://copaper.ai"><img src="images/copaper-logo.png" alt="CoPaper.AI" width="260" /></a>
+        <a href="https://copaper.ai"><img src="images/copaper-logo.png" alt="CoPaper.AI" width="300" /></a>
       </td>
-      <td width="60"></td>
+      <td width="72"></td>
       <td align="center">
-        <img src="images/stanford-reap-logo.png" alt="Stanford REAP - Center on China's Economy & Institutions" width="380" />
+        <img src="images/stanford-reap-logo.png" alt="Stanford REAP - Center on China's Economy & Institutions" width="440" />
       </td>
     </tr>
   </table>
@@ -26,6 +22,11 @@
 
   <strong>Stanford REAP × CoPaper.AI</strong> · 실증 연구를 위한 학술–산업 AI 툴킷<br/>
   <sub>스탠퍼드 실증 방법론 팀이 구축 — 데이터 정제부터 top-journal 투고까지 전체 파이프라인</sub>
+
+  <br/>
+  <br/>
+
+  <img src="images/aers-readme-cover-en.png" alt="Auto-Empirical Research Skills 커버 이미지" width="100%" />
 
   <br/>
 </div>

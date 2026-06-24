@@ -28,24 +28,25 @@ Three pillars:
 
 Materials must be deposited in an **openly accessible trusted repository**. The strongly encouraged repository is the **AEA Data and Code Repository at openICPSR**, which gives the Data Editor automatic access to draft deposits.
 
-### Forms Required
+### Forms and Statements
 
-- **Data and Code Information Form**
-- **Data and Code Availability Form** (signed)
-- **Data and Code Archive Agreement Form** (signed)
+The current policy centers on the **Data and Code Availability Statement** embedded in the README, plus any forms the editorial office sends during the revision stage (for example, confirming whether a private copy of restricted data can be shared with the Data Editor for verification). Exact form titles change between policy revisions, so:
 
-These forms are provided by the editorial office at the appropriate stage. Do not invent substitute forms.
+- Build the README Data Availability Statement to the AEA template (see below).
+- Complete whatever forms the editorial office provides at the revision stage — do not invent substitute forms or assume titles carried over from an older policy cycle.
 
 ## Repository Structure
 
 ```text
 replication-package/
-├── README.md (or README.pdf)
+├── README.pdf                       (required for final AEA deposit)
+├── README.md                        (optional editable source)
 ├── LICENSE                         (commonly MIT or CC-BY for code; data per source license)
 ├── data/
 │   ├── raw/                        (original files as obtained, never modified)
 │   ├── intermediate/               (cleaned analytic datasets)
-│   └── codebook/                   (variable definitions, source mapping)
+│   └── codebook/
+│       └── source-register.md      (source inventory, crosswalk, derived files)
 ├── code/
 │   ├── 00_setup.do                 (or .R, .py)
 │   ├── 01_clean.do
@@ -56,13 +57,17 @@ replication-package/
 │   ├── tables/
 │   └── figures/
 └── docs/
+    ├── exhibit-register.md
     ├── data_appendix.pdf
     └── computing_environment.txt
 ```
 
 ## README Required Sections
 
-The AEA Data Editor's office publishes a template. Required sections:
+The AEA Data Editor's office publishes a template and requires a README
+document in PDF format in the uppermost directory of the replication package.
+Keep `README.md` as editable source if useful, but render `README.pdf` for the
+final deposit. Required sections:
 
 ### 1. Overview
 
@@ -88,6 +93,9 @@ If data cannot be deposited (proprietary, restricted, IRB), the author must:
 ### 3. Dataset List
 
 A table of every file in `data/`, with columns: Filename | Description | Source | Notes.
+Keep `data/codebook/source-register.md` synchronized with this section so every
+raw source, derived file, access restriction, and analytic variable has one
+auditable home.
 
 ### 4. Computational Requirements
 
@@ -126,6 +134,10 @@ A second table mapping each exhibit in the published paper to the script that pr
 | Table 2      | 03_tables.do        | 67             | output/tables/tab2.tex   |
 | Figure 1     | 04_figures.do       | 8              | output/figures/fig1.pdf  |
 
+For a fuller audit, keep `docs/exhibit-register.md` synchronized with this
+README table. The register should also record the supported claim, exact sample
+size, estimator or statistic, table/figure note, and accessibility evidence.
+
 ## Coding Discipline for Reproducibility
 
 Adopt from day one. Retrofitting is expensive.
@@ -135,14 +147,17 @@ Adopt from day one. Retrofitting is expensive.
 - **One master script** that runs the entire pipeline end-to-end
 - **Relative paths only** — `data/raw/foo.csv`, never `/Users/yourname/...`
 - **Set the random seed** explicitly in any stochastic procedure
-- **Version-pin** packages: in Stata, `setup` script with `ssc install ... , version`; in R, use `renv` or `groundhog`; in Python, `requirements.txt` with exact versions
+- **Document package versions**: in Stata, install from a setup script and
+  record `which` / `ado describe` output; vendor an `ado/` snapshot if exact
+  SSC versions are required. In R, use `renv` or `groundhog`; in Python, use
+  `requirements.txt` with exact versions
 - **Log files** for every run, saved to `logs/`
 
 ### Stata
 
 - `version 18.0` at the top of every do-file
 - `set seed` before any randomization
-- Avoid `set more off` and other display tweaks in shared scripts
+- Keep display tweaks such as `set more off` in the master script, not hidden inside analysis scripts
 - Use `reghdfe` over `xtreg, fe` for performance and clarity
 - Comment heavily — Julian Reif's Stata Coding Guide is a reasonable standard
 
@@ -201,6 +216,8 @@ If data is restricted:
 When working from the AER-skills repository or plugin bundle, load only the relevant resource:
 
 - Deposit skeleton: `examples/replication-package-skeleton/`
+- Data source register template: `examples/replication-package-skeleton/data/codebook/source-register.md`
+- Exhibit register template: `examples/replication-package-skeleton/docs/exhibit-register.md`
 - Language template: `templates/stata/`, `templates/r/`, or `templates/python/`
 - Classic replication examples and repository links: `examples/aer-exemplars.md`
 

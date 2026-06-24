@@ -841,11 +841,11 @@
       "license": "MIT",
       "path": "skills/50-brycewang-aer-skills",
       "primary_skill": {
-        "description": "Use when selecting, implementing, or stress-testing the causal identification strategy for an empirical economics manuscript — difference-in-differences (including staggered designs), instrumental variables (including weak-IV-robust inference), regression discontinuity, synthetic control, or shift-share / Bartik. Apply before writing the introduction or results.",
-        "name": "aer-identification",
-        "path": "skills/50-brycewang-aer-skills/skills/aer-identification/SKILL.md"
+        "description": "Use when auditing a finished or near-finished AER, AER:Insights, or AEJ manuscript for internal consistency: headline numbers across abstract, introduction, results, and tables; sample sizes; log-point and percentage-point conversions; cross-references; and in-text-citation/bibliography matching. Apply after the body and exhibits exist, before aer-referee-sim and aer-submission.",
+        "name": "aer-consistency",
+        "path": "skills/50-brycewang-aer-skills/skills/aer-consistency/SKILL.md"
       },
-      "skill_count": 9,
+      "skill_count": 14,
       "source_confidence": "high",
       "source_url": "https://github.com/brycewang-stanford/AER-skills",
       "sync": "weekly GitHub Actions sync"
@@ -1089,11 +1089,11 @@
       "sync": "manual vendor snapshot"
     },
     {
-      "commercial_use": "unknown",
+      "commercial_use": "share-alike",
       "has_license": false,
       "has_readme": false,
       "id": "65-game-theory-paper-writer",
-      "license": "UNKNOWN - check upstream",
+      "license": "CC-BY-SA-4.0",
       "path": "skills/65-game-theory-paper-writer",
       "primary_skill": {
         "description": "Generate, continue, revise, polish, and stress-test game theory research papers. Use when the user provides a game theory topic, phenomenon, draft, outline, model idea, literature anchor, reviewer comments, or asks for 博弈论论文生成, 选题建模, 文献迁移, 模型修正, 均衡分析, 数值模拟, 论文润色, 改稿打磨, or R&R response work.",
@@ -1101,16 +1101,16 @@
         "path": "skills/65-game-theory-paper-writer/SKILL.md"
       },
       "skill_count": 1,
-      "source_confidence": "low",
-      "source_url": "https://github.com/game/theory-paper-writer",
-      "sync": "manual vendor snapshot"
+      "source_confidence": "medium",
+      "source_url": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills/pull/17",
+      "sync": "manual"
     },
     {
-      "commercial_use": "unknown",
+      "commercial_use": "share-alike",
       "has_license": false,
       "has_readme": false,
       "id": "66-zheng-siyao-empirical-research-skills",
-      "license": "UNKNOWN - check upstream",
+      "license": "GPL-3.0",
       "path": "skills/66-zheng-siyao-empirical-research-skills",
       "primary_skill": {
         "description": "R语言实证分析优化Skill。优化R代码效率、处理大规模面板数据、加速回归计算（并行化、向量化、向量化）。触发词：R语言优化/R加速/R性能优化/大规模数据处理/R optimization",
@@ -1119,7 +1119,7 @@
       },
       "skill_count": 7,
       "source_confidence": "high",
-      "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
+      "source_url": "https://github.com/SiyaoZheng/ai4ss-skills",
       "sync": "manual vendor snapshot"
     },
     {
@@ -1164,7 +1164,7 @@
       "license": "MIT",
       "path": "skills/69-Paper-WorkFlow",
       "primary_skill": {
-        "description": "经管 / 社科**实证论文全流程总编排器（meta-orchestrator）**：把「选题 → 设计 → 数据 → 计量识别与估计 → 方法闸门 → 表与图 → 写作初稿 → 全流程打磨 → 语言去 AI 味 → 初稿质量门 → 模拟评审与修订 → 选刊与投稿 → 复盘交付」这条端到端流水线自动跑通。本 skill **不重复实现任何子能力**， 而是借鉴 `do-agent` 的「多代理 + 上下文保护」执行范式与 `paper-pipeline` 的「固定顺序 + 可断点续跑 + 交互档位」编排范式，按阶段**调用既有 skill / 派发并行 subagent** 完成一篇 可投稿的实证论文。触发场景：用户说 \"/paper-workflow\"、\"帮我写一篇实证论文\"、 \"从选题到投稿\"、\"实证论文全流程\"、\"经管社科论文工作流\"、\"端到端跑一篇 paper\"、 \"automate an empirical paper\"、\"end-to-end empirical research pipeline\"、\"paper workflow\"， 或带着一个研究方向 / 一份计划书 / 一份数据 / 一份初稿希望「一条龙」推进到投稿。",
+        "description": "经管 / 社科实证论文全流程 meta-orchestrator：把选题、设计、数据、估计、方法闸门、 表图、写作、去 AI 味、质量门、修订、投稿与复盘编排成 Stage 0–9 可断点续跑流水线。 本 skill 不重复实现子能力，而是按阶段调用既有 skill 或并行 subagent，并在 Stage 3–4 路由 Python/StatsPAI、Stata、R 三种分析后端。触发：/paper-workflow、帮我写一篇实证论文、 从选题到投稿、端到端 empirical paper、已有 proposal/数据/初稿要推进到投稿，或明确要求 用 Stata / R/fixest / Python-StatsPAI 完整复现。",
         "name": "paper-workflow",
         "path": "skills/69-Paper-WorkFlow/SKILL.md"
       },
@@ -1188,7 +1188,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 1943,
+      "line_count": 2250,
       "name": "StatsPAI_skill",
       "path": "skills/00-Full-empirical-analysis-skill_StatsPAI/SKILL.md"
     },
@@ -1203,7 +1203,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 2029,
+      "line_count": 2052,
       "name": "Full-empirical-analysis-skill",
       "path": "skills/00.1-Full-empirical-analysis-skill_Python/SKILL.md"
     },
@@ -1218,7 +1218,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 2345,
+      "line_count": 2368,
       "name": "Full-empirical-analysis-skill-Stata",
       "path": "skills/00.2-Full-empirical-analysis-skill_Stata/SKILL.md"
     },
@@ -1233,7 +1233,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 2443,
+      "line_count": 2466,
       "name": "Full-empirical-analysis-skill-R",
       "path": "skills/00.3-Full-empirical-analysis-skill_R/SKILL.md"
     },
@@ -15961,6 +15961,20 @@
     },
     {
       "collection": "50-brycewang-aer-skills",
+      "description": "Use when auditing a finished or near-finished AER, AER:Insights, or AEJ manuscript for internal consistency: headline numbers across abstract, introduction, results, and tables; sample sizes; log-point and percentage-point conversions; cross-references; and in-text-citation/bibliography matching. Apply after the body and exhibits exist, before aer-referee-sim and aer-submission.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 225,
+      "name": "aer-consistency",
+      "path": "skills/50-brycewang-aer-skills/skills/aer-consistency/SKILL.md"
+    },
+    {
+      "collection": "50-brycewang-aer-skills",
       "description": "Use when selecting, implementing, or stress-testing the causal identification strategy for an empirical economics manuscript — difference-in-differences (including staggered designs), instrumental variables (including weak-IV-robust inference), regression discontinuity, synthetic control, or shift-share / Bartik. Apply before writing the introduction or results.",
       "frontmatter_fields": [
         "description",
@@ -15969,13 +15983,13 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 193,
+      "line_count": 207,
       "name": "aer-identification",
       "path": "skills/50-brycewang-aer-skills/skills/aer-identification/SKILL.md"
     },
     {
       "collection": "50-brycewang-aer-skills",
-      "description": "Use when drafting or rewriting the introduction of an economics manuscript targeted at AER, AER:Insights, or an AEJ, or when compressing an abstract to the mandatory 100-word limit. Implements the Keith Head / Bellemare five-paragraph formula and AER-specific formatting conventions.",
+      "description": "Use when drafting or rewriting the introduction of an economics manuscript targeted at AER, AER:Insights, or an AEJ, or when compressing an abstract to the mandatory 100-word limit. Implements the Keith Head / Bellemare five-paragraph formula and AER-specific formatting conventions. Apply after the body sections exist.",
       "frontmatter_fields": [
         "description",
         "name"
@@ -15983,9 +15997,37 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 150,
+      "line_count": 163,
       "name": "aer-introduction",
       "path": "skills/50-brycewang-aer-skills/skills/aer-introduction/SKILL.md"
+    },
+    {
+      "collection": "50-brycewang-aer-skills",
+      "description": "Use when positioning a manuscript against the existing economics literature, building the antecedents map for the introduction, deciding what to cite, or verifying that every reference in the bibliography is real, correctly attributed, and cited to the published version. Apply at topic selection for the novelty scan and again before drafting the introduction.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 219,
+      "name": "aer-literature",
+      "path": "skills/50-brycewang-aer-skills/skills/aer-literature/SKILL.md"
+    },
+    {
+      "collection": "50-brycewang-aer-skills",
+      "description": "Use when drafting or revising the body sections of an AER, AER:Insights, or AEJ manuscript — institutional background, data, empirical strategy, results, mechanisms, and conclusion. Covers equation conventions, results-paragraph narration, magnitude interpretation, and back-of-envelope policy calculations. Apply after the empirics are stable and before or alongside aer-introduction.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 260,
+      "name": "aer-paper-body",
+      "path": "skills/50-brycewang-aer-skills/skills/aer-paper-body/SKILL.md"
     },
     {
       "collection": "50-brycewang-aer-skills",
@@ -15997,9 +16039,23 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 275,
+      "line_count": 276,
       "name": "aer-rebuttal",
       "path": "skills/50-brycewang-aer-skills/skills/aer-rebuttal/SKILL.md"
+    },
+    {
+      "collection": "50-brycewang-aer-skills",
+      "description": "Use when a complete draft exists and needs an adversarial internal review before submission — simulating the AER desk screen and three referee reports with calibrated severity, scoring the paper against the editorial rubric, and producing a prioritized revise list. Apply after aer-consistency passes and before aer-submission; rerun until the simulated verdict is at least major R&R.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 240,
+      "name": "aer-referee-sim",
+      "path": "skills/50-brycewang-aer-skills/skills/aer-referee-sim/SKILL.md"
     },
     {
       "collection": "50-brycewang-aer-skills",
@@ -16011,7 +16067,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 238,
+      "line_count": 255,
       "name": "aer-replication",
       "path": "skills/50-brycewang-aer-skills/skills/aer-replication/SKILL.md"
     },
@@ -16025,9 +16081,23 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 130,
+      "line_count": 150,
       "name": "aer-robustness",
       "path": "skills/50-brycewang-aer-skills/skills/aer-robustness/SKILL.md"
+    },
+    {
+      "collection": "50-brycewang-aer-skills",
+      "description": "Use when implementing or running the empirical analysis for an AER-track manuscript with StatsPAI — the agent-native unified Python engine and MCP server for causal inference and econometrics — as an alternative to hand-written Stata / R / Python template code. Covers DiD, IV, RDD, synthetic control, robustness, sensitivity, and publication-ready table export.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 213,
+      "name": "aer-statspai",
+      "path": "skills/50-brycewang-aer-skills/skills/aer-statspai/SKILL.md"
     },
     {
       "collection": "50-brycewang-aer-skills",
@@ -16039,7 +16109,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 189,
+      "line_count": 203,
       "name": "aer-submission",
       "path": "skills/50-brycewang-aer-skills/skills/aer-submission/SKILL.md"
     },
@@ -16067,7 +16137,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 114,
+      "line_count": 135,
       "name": "aer-topic-selection",
       "path": "skills/50-brycewang-aer-skills/skills/aer-topic-selection/SKILL.md"
     },
@@ -16081,7 +16151,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 86,
+      "line_count": 142,
       "name": "aer-workflow",
       "path": "skills/50-brycewang-aer-skills/skills/aer-workflow/SKILL.md"
     },
@@ -18549,7 +18619,7 @@
     },
     {
       "collection": "69-Paper-WorkFlow",
-      "description": "经管 / 社科**实证论文全流程总编排器（meta-orchestrator）**：把「选题 → 设计 → 数据 → 计量识别与估计 → 方法闸门 → 表与图 → 写作初稿 → 全流程打磨 → 语言去 AI 味 → 初稿质量门 → 模拟评审与修订 → 选刊与投稿 → 复盘交付」这条端到端流水线自动跑通。本 skill **不重复实现任何子能力**， 而是借鉴 `do-agent` 的「多代理 + 上下文保护」执行范式与 `paper-pipeline` 的「固定顺序 + 可断点续跑 + 交互档位」编排范式，按阶段**调用既有 skill / 派发并行 subagent** 完成一篇 可投稿的实证论文。触发场景：用户说 \"/paper-workflow\"、\"帮我写一篇实证论文\"、 \"从选题到投稿\"、\"实证论文全流程\"、\"经管社科论文工作流\"、\"端到端跑一篇 paper\"、 \"automate an empirical paper\"、\"end-to-end empirical research pipeline\"、\"paper workflow\"， 或带着一个研究方向 / 一份计划书 / 一份数据 / 一份初稿希望「一条龙」推进到投稿。",
+      "description": "经管 / 社科实证论文全流程 meta-orchestrator：把选题、设计、数据、估计、方法闸门、 表图、写作、去 AI 味、质量门、修订、投稿与复盘编排成 Stage 0–9 可断点续跑流水线。 本 skill 不重复实现子能力，而是按阶段调用既有 skill 或并行 subagent，并在 Stage 3–4 路由 Python/StatsPAI、Stata、R 三种分析后端。触发：/paper-workflow、帮我写一篇实证论文、 从选题到投稿、端到端 empirical paper、已有 proposal/数据/初稿要推进到投稿，或明确要求 用 Stata / R/fixest / Python-StatsPAI 完整复现。",
       "frontmatter_fields": [
         "allowed-tools",
         "argument-hint",
@@ -18559,7 +18629,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 304,
+      "line_count": 259,
       "name": "paper-workflow",
       "path": "skills/69-Paper-WorkFlow/SKILL.md"
     }
@@ -18569,7 +18639,7 @@
     "missing_frontmatter": 4,
     "missing_name": 4,
     "oversized_skill_files_over_500_lines": 91,
-    "skill_files": 1145,
+    "skill_files": 1150,
     "top_level_collections": 69
   }
 }

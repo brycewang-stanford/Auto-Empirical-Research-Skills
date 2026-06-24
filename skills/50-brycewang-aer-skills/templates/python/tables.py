@@ -32,7 +32,7 @@ def run() -> None:
     pf.etable(
         models      = [m1, m2, m3, m4, m5],
         type        = "tex",
-        file_path   = str(setup.TABLES / "tab_main.tex"),
+        file_name   = str(setup.TABLES / "tab_main.tex"),
         signif_code = [0.01, 0.05, 0.10],
         digits      = 3,
         keep        = ["treat", "endog"],

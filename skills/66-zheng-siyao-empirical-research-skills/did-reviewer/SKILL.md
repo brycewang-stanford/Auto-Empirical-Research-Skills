@@ -5,7 +5,7 @@ version: "1.0"
 metadata:
   openclaw:
     emoji: "📊"
-    homepage: "https://github.com/zheng-siyao/ai4socialscience-skills"
+    homepage: "https://github.com/SiyaoZheng/ai4ss-skills"
 ---
 
 # did-reviewer — 双重差分 (DID) 实证审查Skill

@@ -2,54 +2,54 @@
   "generated_by": "scripts/build-catalog-enrich.py",
   "schema_version": 1,
   "summary": {
-    "skills": 1145,
+    "skills": 1150,
     "mean_quality_score": 99.2,
-    "with_frontmatter_description": 1141,
+    "with_frontmatter_description": 1146,
     "body_derived_description": 4,
     "no_description": 0,
-    "tagged": 557
+    "tagged": 563
   },
   "taxonomy": {
     "language": {
       "latex": 95,
-      "stata": 47,
-      "python": 44,
-      "r": 21
+      "stata": 49,
+      "python": 46,
+      "r": 22
     },
     "method": {
-      "iv": 27,
-      "rdd": 25,
+      "iv": 28,
+      "rdd": 26,
       "panel-fe": 19,
       "staggered-did": 17,
       "bayesian": 13,
+      "synthetic-control": 11,
       "did": 10,
       "dml": 10,
       "event-study": 10,
-      "synthetic-control": 10,
-      "matching": 9,
+      "matching": 10,
       "survival": 3
     },
     "stage": {
-      "analysis": 138,
-      "writing": 83,
-      "submission": 76,
+      "analysis": 139,
+      "writing": 87,
+      "submission": 78,
       "literature": 62,
       "reproduction": 58,
       "citation": 48,
       "presentation": 42,
       "tables-figures": 42,
-      "ideation": 33,
-      "peer-review": 25,
-      "robustness": 25,
+      "ideation": 34,
+      "peer-review": 26,
+      "robustness": 26,
       "de-aigc": 18,
       "data": 12
     },
     "topic": {
-      "econometrics": 79,
-      "scientific-writing": 67,
+      "econometrics": 80,
+      "scientific-writing": 71,
       "reproducibility": 58,
       "proofreading": 35,
-      "causal-inference": 29
+      "causal-inference": 30
     }
   },
   "skills": [
@@ -57,7 +57,7 @@
       "name": "StatsPAI_skill",
       "path": "skills/00-Full-empirical-analysis-skill_StatsPAI/SKILL.md",
       "collection": "00-Full-empirical-analysis-skill_StatsPAI",
-      "line_count": 1943,
+      "line_count": 2250,
       "description_effective": "Use when the user asks to run a full empirical / causal analysis in Python — by default in the style of an applied economics paper (AER / QJE / JPE / ReStud / AEJ) with DID / RD / IV / SCM / DML / matching, written-out estimating equation + identifying assumption, Table 1 / Table 2 / event-study figure / robustness gauntlet — OR in epidemiology / public health style (target-trial emulation, IPTW + g-formula + TMLE triplet, Mendelian randomization, KM/AFT survival, E-value sensitivity, STROBE/TRIPOD reporting) — OR in ML causal inference style (DML, S/T/X/R/DR meta-learners, causal forest, Dragonnet/TARNet/CEVAE, BCF, CATE distribution, policy learning, conformal causal, fairness audit, causal discovery). Also covers exporting multi-column regression tables to Word / Excel / LaTeX (Stata outreg2 / esttab / R modelsummary equivalent) and bundling an entire replication appendix into one .docx / .xlsx / .tex file. Triggers on keywords \"StatsPAI\", \"statspai\", \"AER empirical analysis\", \"applied micro pipeline\", \"Table 1 balance\", \"event study\", \"first-stage F\", \"Oster bound\", \"honest_did\", \"spec_curve\", \"callaway_santanna\", \"dragonnet\", \"text as treatment\", \"outreg2 in Python\", \"regression table to Word/Excel\", \"sp.regtable\", \"sp.collect\", \"sp.paper_tables\", \"sp.feols\", \"summary_col\", \"modelsummary\", \"AER style table\", \"QJE style table\", \"epidemiology pipeline\", \"target trial emulation\", \"g-formula\", \"IPTW\", \"TMLE\", \"Mendelian randomization\", \"STROBE\", \"TRIPOD\", \"公共健康\", \"流行病学\", \"DML\", \"double machine learning\", \"causal forest\", \"meta-learner\", \"CATE\", \"conformal causal\", \"policy learning\", \"因果机器学习\", \"ML causal\".",
       "description_source": "frontmatter",
       "has_references": false,
@@ -102,7 +102,7 @@
       "name": "Full-empirical-analysis-skill",
       "path": "skills/00.1-Full-empirical-analysis-skill_Python/SKILL.md",
       "collection": "00.1-Full-empirical-analysis-skill_Python",
-      "line_count": 2029,
+      "line_count": 2052,
       "description_effective": "Classical end-to-end empirical analysis workflow in the traditional Python econometric stack — pandas + numpy + scipy + statsmodels + linearmodels + pyfixest + rdrobust + econml + causalml + matplotlib/seaborn. **Defaults to economics empirical-paper style** (AER / QJE / AEJ) — every run produces a publication-ready output set with a multi-column regression table (M1→M6 progressive controls/FE) as the centerpiece, plus Table 1 (descriptives), mechanism / heterogeneity / robustness tables, and event-study + coefficient + trend figures. Covers the full 8-step pipeline an applied economist or quantitative social scientist runs on every paper — (1) data cleaning, (2) variable construction & transformation, (3) descriptive statistics & Table 1, (4) statistical diagnostic tests, (5) baseline empirical modeling, (6) robustness battery, (7) further analysis (mechanism, heterogeneity, mediation, moderation), (8) publication-ready tables & figures. **Also covers two parallel domain modes that share the same 8-step scaffolding** — **Mode A — Epidemiology / public health** (target-trial emulation via `zepid` / hand-rolled `pandas`, IPTW + g-formula + TMLE doubly-robust triplet via `zepid` / `econml` / `lifelines`, Mendelian randomization via `pymr` / `mrtool` (or `rpy2` → `MendelianRandomization`/`TwoSampleMR`), KM / AFT / Cox survival via `lifelines`, E-value sensitivity, principal stratification — STROBE / TRIPOD reporting), and **Mode B — ML causal inference** (DML via `econml.dml` / `doubleml`, S/T/X/R/DR meta-learners via `econml.metalearners` / `causalml`, causal forest via `econml.grf` / `causalml`, Dragonnet / TARNet / CEVAE neural causal via `causalml`, BCF via `pymc-bart` / `bcf-py`, matrix completion, CATE distribution + policy tree via `econml.policy` / `policytree-py`, off-policy evaluation, conformal causal via `mapie`, fairness audit via `fairlearn`, DAG learning via `causal-learn` / `cdt` / LLM-assisted). Prescribes which library to reach for at each step, shows the canonical code, and links to deeper `references/` files for variant-specific patterns. Use when the user asks for a **complete empirical analysis** in Python, wants to replicate an applied-economics paper from scratch, needs a reproducible workflow that is NOT opinionated on any single vertical package (contrast with StatsPAI), wants explicit control over every estimator and diagnostic, or asks \"how do I write a full empirical pipeline in Python?\". Also triggers when the user names a specific classical step in isolation — \"winsorize at 1/99%\", \"run Breusch-Pagan\", \"build a Table 1 balance table\", \"do a placebo test\", \"event study plot\", \"mediation analysis\" — and wants it wired into the broader pipeline. Mode A triggers on \"target trial emulation\", \"IPTW\", \"TMLE\", \"Mendelian randomization\", \"STROBE\", \"公共健康\", \"流行病学\". Mode B triggers on \"DML\", \"double machine learning\", \"causal forest\", \"meta-learner\", \"Dragonnet\", \"BCF\", \"policy tree\", \"conformal causal\", \"fairness audit\", \"因果机器学习\".",
       "description_source": "frontmatter",
       "has_references": true,
@@ -140,7 +140,7 @@
       "name": "Full-empirical-analysis-skill-Stata",
       "path": "skills/00.2-Full-empirical-analysis-skill_Stata/SKILL.md",
       "collection": "00.2-Full-empirical-analysis-skill_Stata",
-      "line_count": 2345,
+      "line_count": 2368,
       "description_effective": "Classical end-to-end empirical analysis workflow in the traditional Stata ecosystem — native Stata + reghdfe + ivreg2 + csdid + did_imputation + eventstudyinteract + sdid + rdrobust + rddensity + synth + synth_runner + psmatch2 + teffects + ebalance + coefplot + esttab + asdoc + binscatter. **Defaults to economics empirical-paper style** (AER / QJE / AEJ) — every run produces a publication-ready output set with a multi-column regression table (M1→M6 progressive controls/FE) as the centerpiece, plus Table 1 (descriptives), mechanism / heterogeneity / robustness tables, and event-study + coefficient + trend figures. Covers the full 8-step Stata pipeline an applied economist runs on every paper — (1) data import & cleaning (use/import, destring, misstable, duplicates, merge assert), (2) variable construction (gen/egen/winsor2/xtile/xtset with L./F./D.), (3) descriptive statistics & Table 1 (tabstat/balancetable/asdoc), (4) classical diagnostic tests (sktest/swilk/hettest/imtest/xtserial/xttest3/vif/dfuller/kpss/hausman/estat overid), (5) baseline modeling (reg/xtreg/reghdfe/ivreg2/ivregress/csdid/did_imputation/eventstudyinteract/sdid/rdrobust/synth/psmatch2/teffects/heckman/qreg/ppmlhdfe), (6) robustness battery (bacondecomp/honestdid/rwolf/ritest/wildbootstrap/oster), (7) further analysis (subgroup/triple-diff/interactions/medsem/marginsplot/binscatter by group), (8) publication-ready tables & figures (esttab/outreg2/estout/coefplot/marginsplot/rdplot/twoway combined). **Also covers two parallel domain modes that share the same 8-step scaffolding** — **Mode A — Epidemiology / public health** (target-trial emulation, IPTW + g-formula + TMLE doubly-robust triplet via `teffects ipw` / `teffects ipwra` / `teffects aipw` / `eltmle`, Mendelian randomization via `mrrobust` (IVW / Egger / weighted median) and `mregger` / `mrpresso`, KM / Cox / AFT / RMST survival via `sts` / `stcox` / `streg` / `strmst2`, E-value sensitivity via `evalue` (Linden-Mathur), principal stratification — STROBE / TRIPOD reporting), and **Mode B — ML causal inference** (DML via `ddml` / `pdslasso`, S/T/X/R/DR meta-learners via `crforest` and `ddml interactive`, causal forest via `crforest` / `cforest`, BART/BCF via `bart` / `bartCause`-style externals, CATE distribution + policy tree via `crforest`, off-policy evaluation, conformal causal externals, fairness audit, DAG learning via `pcalg` / external Python callouts). Use when the user asks for a complete Stata empirical analysis, wants a reproducible .do-file pipeline, needs a Stata counterpart to the Python StatsPAI / Full-empirical-analysis-skill, or names a specific Stata step in isolation (\"run reghdfe with two-way clustering\", \"csdid event study\", \"winsor2 at 1%\", \"esttab to LaTeX\", \"coefplot with CI\", \"ivreg2 weak-IV test\", \"synth_runner placebos\", \"teffects psmatch balance check\"). Mode A triggers on \"target trial emulation Stata\", \"teffects ipw aipw\", \"eltmle\", \"mrrobust\", \"mregger weighted median\", \"stcox AFT survival\", \"strmst2\", \"evalue Stata\", \"STROBE Stata\", \"公共健康 Stata\", \"流行病学 Stata\". Mode B triggers on \"ddml Stata\", \"pdslasso\", \"crforest causal forest Stata\", \"policy tree Stata\", \"因果机器学习 Stata\".",
       "description_source": "frontmatter",
       "has_references": true,
@@ -181,7 +181,7 @@
       "name": "Full-empirical-analysis-skill-R",
       "path": "skills/00.3-Full-empirical-analysis-skill_R/SKILL.md",
       "collection": "00.3-Full-empirical-analysis-skill_R",
-      "line_count": 2443,
+      "line_count": 2466,
       "description_effective": "Classical end-to-end empirical analysis workflow in the modern tidyverse + econometrics R ecosystem — dplyr + tidyr + haven + fixest + sandwich + lmtest + clubSandwich + AER + ivreg + did + bacondecomp + HonestDiD + eventstudyr + rdrobust + rddensity + Synth + gsynth + synthdid + MatchIt + WeightIt + cobalt + ebal + grf + DoubleML + mediation + marginaleffects + modelsummary + kableExtra + gt + ggplot2 + ggpubr + cowplot + binsreg. **Defaults to economics empirical-paper style** (AER / QJE / AEJ) — every run produces a publication-ready output set with a multi-column regression table (M1→M6 progressive controls/FE) as the centerpiece, plus Table 1 (descriptives), mechanism / heterogeneity / robustness tables, and event-study + coefficient + trend figures. Covers the full 8-step R pipeline an applied economist runs on every paper — (1) data import & cleaning (read_dta/read_csv, naniar, janitor, validate-merges), (2) variable construction (mutate/across/winsorize/group_by + lag/lead with dplyr), (3) descriptive statistics & Table 1 (gtsummary, modelsummary::datasummary, tableone), (4) classical diagnostic tests (shapiro/jarque.bera.test/bptest/dwtest/bgtest/vif/adf.test/kpss.test/Hausman), (5) baseline modeling (fixest::feols, ivreg, did::att_gt, eventstudyr, sun_ab, did_imputation, synthdid, rdrobust, MatchIt, WeightIt, grf::causal_forest, DoubleML, mediation), (6) robustness battery (modelsummary stack, clubSandwich CRSE, fwildclusterboot, ri2, robomit Oster, bacondecomp, HonestDiD), (7) further analysis (interactions + marginaleffects, mediation::mediate, gsem via lavaan, dose-response splines, grf CATE), (8) publication-ready tables & figures (modelsummary, kableExtra, gt, stargazer, texreg, flextable to LaTeX/Word/HTML; ggplot2 + ggpubr + cowplot + binsreg + iplot for figures). **Also covers two parallel domain modes that share the same 8-step scaffolding** — **Mode A — Epidemiology / public health** (target-trial emulation, IPTW + g-formula + TMLE doubly-robust triplet via `WeightIt` / `gfoRmula` / `tmle` / `ltmle`, Mendelian randomization via `MendelianRandomization` / `TwoSampleMR` / `MRPRESSO`, KM / Cox / AFT / RMST survival via `survival` / `survminer` / `flexsurv`, E-value sensitivity via `EValue`, principal stratification — STROBE / TRIPOD reporting), and **Mode B — ML causal inference** (DML via `DoubleML`, S/T/X/R/DR meta-learners via `causalweight` / `grf`, causal forest via `grf::causal_forest`, BART/BCF via `bartCause` / `bcf`, matrix completion via `MCPanel`, CATE distribution + policy tree via `policytree`, off-policy evaluation, conformal causal via `conformalInference` / `cfcausal`, fairness audit via `fairmodels`, DAG learning via `pcalg` / `bnlearn` / LLM-assisted). Use when the user asks for a complete R empirical analysis, wants a tidyverse-style reproducible R script / Quarto workflow, prefers fixest over reghdfe, needs the R counterpart to StatsPAI / 00.1 / 00.2, or names a specific R step in isolation (\"feols with cluster\", \"MatchIt nearest neighbor\", \"bacondecomp in R\", \"gtsummary table 1\", \"modelsummary to Word\"). Mode A triggers on \"target trial emulation R\", \"tmle ltmle\", \"MendelianRandomization\", \"TwoSampleMR\", \"MRPRESSO\", \"survival cox AFT\", \"STROBE R\", \"EValue R\", \"公共健康 R\", \"流行病学 R\". Mode B triggers on \"DoubleML R\", \"grf causal forest\", \"policytree\", \"bartCause bcf\", \"conformal causal R\", \"fairmodels\", \"pcalg NOTEARS\", \"因果机器学习 R\".",
       "description_source": "frontmatter",
       "has_references": true,
@@ -18593,10 +18593,37 @@
       "sync": "manual vendor snapshot"
     },
     {
+      "name": "aer-consistency",
+      "path": "skills/50-brycewang-aer-skills/skills/aer-consistency/SKILL.md",
+      "collection": "50-brycewang-aer-skills",
+      "line_count": 225,
+      "description_effective": "Use when auditing a finished or near-finished AER, AER:Insights, or AEJ manuscript for internal consistency: headline numbers across abstract, introduction, results, and tables; sample sizes; log-point and percentage-point conversions; cross-references; and in-text-citation/bibliography matching. Apply after the body and exhibits exist, before aer-referee-sim and aer-submission.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "method": [
+          "matching"
+        ],
+        "stage": [
+          "submission",
+          "writing"
+        ],
+        "topic": [
+          "scientific-writing"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "MIT",
+      "commercial_use": "allowed",
+      "source_url": "https://github.com/brycewang-stanford/AER-skills",
+      "sync": "weekly GitHub Actions sync"
+    },
+    {
       "name": "aer-identification",
       "path": "skills/50-brycewang-aer-skills/skills/aer-identification/SKILL.md",
       "collection": "50-brycewang-aer-skills",
-      "line_count": 193,
+      "line_count": 207,
       "description_effective": "Use when selecting, implementing, or stress-testing the causal identification strategy for an empirical economics manuscript — difference-in-differences (including staggered designs), instrumental variables (including weak-IV-robust inference), regression discontinuity, synthetic control, or shift-share / Bartik. Apply before writing the introduction or results.",
       "description_source": "frontmatter",
       "has_references": false,
@@ -18627,8 +18654,55 @@
       "name": "aer-introduction",
       "path": "skills/50-brycewang-aer-skills/skills/aer-introduction/SKILL.md",
       "collection": "50-brycewang-aer-skills",
-      "line_count": 150,
-      "description_effective": "Use when drafting or rewriting the introduction of an economics manuscript targeted at AER, AER:Insights, or an AEJ, or when compressing an abstract to the mandatory 100-word limit. Implements the Keith Head / Bellemare five-paragraph formula and AER-specific formatting conventions.",
+      "line_count": 163,
+      "description_effective": "Use when drafting or rewriting the introduction of an economics manuscript targeted at AER, AER:Insights, or an AEJ, or when compressing an abstract to the mandatory 100-word limit. Implements the Keith Head / Bellemare five-paragraph formula and AER-specific formatting conventions. Apply after the body sections exist.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "stage": [
+          "writing"
+        ],
+        "topic": [
+          "scientific-writing"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "MIT",
+      "commercial_use": "allowed",
+      "source_url": "https://github.com/brycewang-stanford/AER-skills",
+      "sync": "weekly GitHub Actions sync"
+    },
+    {
+      "name": "aer-literature",
+      "path": "skills/50-brycewang-aer-skills/skills/aer-literature/SKILL.md",
+      "collection": "50-brycewang-aer-skills",
+      "line_count": 219,
+      "description_effective": "Use when positioning a manuscript against the existing economics literature, building the antecedents map for the introduction, deciding what to cite, or verifying that every reference in the bibliography is real, correctly attributed, and cited to the published version. Apply at topic selection for the novelty scan and again before drafting the introduction.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "stage": [
+          "ideation",
+          "writing"
+        ],
+        "topic": [
+          "scientific-writing"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "MIT",
+      "commercial_use": "allowed",
+      "source_url": "https://github.com/brycewang-stanford/AER-skills",
+      "sync": "weekly GitHub Actions sync"
+    },
+    {
+      "name": "aer-paper-body",
+      "path": "skills/50-brycewang-aer-skills/skills/aer-paper-body/SKILL.md",
+      "collection": "50-brycewang-aer-skills",
+      "line_count": 260,
+      "description_effective": "Use when drafting or revising the body sections of an AER, AER:Insights, or AEJ manuscript — institutional background, data, empirical strategy, results, mechanisms, and conclusion. Covers equation conventions, results-paragraph narration, magnitude interpretation, and back-of-envelope policy calculations. Apply after the empirics are stable and before or alongside aer-introduction.",
       "description_source": "frontmatter",
       "has_references": false,
       "tags": {
@@ -18650,7 +18724,7 @@
       "name": "aer-rebuttal",
       "path": "skills/50-brycewang-aer-skills/skills/aer-rebuttal/SKILL.md",
       "collection": "50-brycewang-aer-skills",
-      "line_count": 275,
+      "line_count": 276,
       "description_effective": "Use when responding to a Revise & Resubmit decision from AER, AER:Insights, or an AEJ, and a point-by-point response letter plus aligned manuscript revisions are needed. Handles triage, the concede / clarify / push-back decision, and the response-letter format that editors actually read.",
       "description_source": "frontmatter",
       "has_references": false,
@@ -18671,10 +18745,31 @@
       "sync": "weekly GitHub Actions sync"
     },
     {
+      "name": "aer-referee-sim",
+      "path": "skills/50-brycewang-aer-skills/skills/aer-referee-sim/SKILL.md",
+      "collection": "50-brycewang-aer-skills",
+      "line_count": 240,
+      "description_effective": "Use when a complete draft exists and needs an adversarial internal review before submission — simulating the AER desk screen and three referee reports with calibrated severity, scoring the paper against the editorial rubric, and producing a prioritized revise list. Apply after aer-consistency passes and before aer-submission; rerun until the simulated verdict is at least major R&R.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "stage": [
+          "peer-review",
+          "submission"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "MIT",
+      "commercial_use": "allowed",
+      "source_url": "https://github.com/brycewang-stanford/AER-skills",
+      "sync": "weekly GitHub Actions sync"
+    },
+    {
       "name": "aer-replication",
       "path": "skills/50-brycewang-aer-skills/skills/aer-replication/SKILL.md",
       "collection": "50-brycewang-aer-skills",
-      "line_count": 238,
+      "line_count": 255,
       "description_effective": "Use when assembling the AEA Data and Code Availability deposit for an AER, AER:Insights, or AEJ acceptance, writing the README, or auditing a replication package before the AEA Data Editor review. Implements the current AEA policy, including the February 2026 Data and Code Availability Policy.",
       "description_source": "frontmatter",
       "has_references": false,
@@ -18698,7 +18793,7 @@
       "name": "aer-robustness",
       "path": "skills/50-brycewang-aer-skills/skills/aer-robustness/SKILL.md",
       "collection": "50-brycewang-aer-skills",
-      "line_count": 130,
+      "line_count": 150,
       "description_effective": "Use when the main empirical results exist but the manuscript lacks the robustness, heterogeneity, mechanism, and placebo checks that AER referees will demand. Apply after aer-identification and before aer-introduction so that the value-added paragraph can reference these tests.",
       "description_source": "frontmatter",
       "has_references": false,
@@ -18720,10 +18815,46 @@
       "sync": "weekly GitHub Actions sync"
     },
     {
+      "name": "aer-statspai",
+      "path": "skills/50-brycewang-aer-skills/skills/aer-statspai/SKILL.md",
+      "collection": "50-brycewang-aer-skills",
+      "line_count": 213,
+      "description_effective": "Use when implementing or running the empirical analysis for an AER-track manuscript with StatsPAI — the agent-native unified Python engine and MCP server for causal inference and econometrics — as an alternative to hand-written Stata / R / Python template code. Covers DiD, IV, RDD, synthetic control, robustness, sensitivity, and publication-ready table export.",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "language": [
+          "python",
+          "stata"
+        ],
+        "method": [
+          "iv",
+          "rdd",
+          "synthetic-control"
+        ],
+        "stage": [
+          "analysis",
+          "robustness",
+          "writing"
+        ],
+        "topic": [
+          "causal-inference",
+          "econometrics",
+          "scientific-writing"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "MIT",
+      "commercial_use": "allowed",
+      "source_url": "https://github.com/brycewang-stanford/AER-skills",
+      "sync": "weekly GitHub Actions sync"
+    },
+    {
       "name": "aer-submission",
       "path": "skills/50-brycewang-aer-skills/skills/aer-submission/SKILL.md",
       "collection": "50-brycewang-aer-skills",
-      "line_count": 189,
+      "line_count": 203,
       "description_effective": "Use when running the final pre-submission audit for an AER, AER:Insights, or AEJ manuscript — length, format, cover letter, per-author disclosure statements, file packaging, and routing among the AEA journal family. Apply immediately before clicking submit.",
       "description_source": "frontmatter",
       "has_references": false,
@@ -18775,7 +18906,7 @@
       "name": "aer-topic-selection",
       "path": "skills/50-brycewang-aer-skills/skills/aer-topic-selection/SKILL.md",
       "collection": "50-brycewang-aer-skills",
-      "line_count": 114,
+      "line_count": 135,
       "description_effective": "Use when evaluating whether a research idea clears the AER top-5 bar, when routing between AER, AER:Insights, and the AEJ family, or when sharpening a fuzzy contribution sentence into one publishable claim. Apply before any writing begins.",
       "description_source": "frontmatter",
       "has_references": false,
@@ -18791,7 +18922,7 @@
       "name": "aer-workflow",
       "path": "skills/50-brycewang-aer-skills/skills/aer-workflow/SKILL.md",
       "collection": "50-brycewang-aer-skills",
-      "line_count": 86,
+      "line_count": 142,
       "description_effective": "Use when deciding which AER-skills sub-skill to use next, or when sequencing manuscript work from topic selection through rebuttal for the American Economic Review, AER:Insights, or AEJ journals. Routes — does not replace — the specialized skills.",
       "description_source": "frontmatter",
       "has_references": false,
@@ -20751,10 +20882,10 @@
       },
       "quality_score": 100,
       "quality_flags": [],
-      "license": "UNKNOWN - check upstream",
-      "commercial_use": "unknown",
-      "source_url": "https://github.com/game/theory-paper-writer",
-      "sync": "manual vendor snapshot"
+      "license": "CC-BY-SA-4.0",
+      "commercial_use": "share-alike",
+      "source_url": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills/pull/17",
+      "sync": "manual"
     },
     {
       "name": "R-optimizer",
@@ -20767,9 +20898,9 @@
       "tags": {},
       "quality_score": 100,
       "quality_flags": [],
-      "license": "UNKNOWN - check upstream",
-      "commercial_use": "unknown",
-      "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
+      "license": "GPL-3.0",
+      "commercial_use": "share-alike",
+      "source_url": "https://github.com/SiyaoZheng/ai4ss-skills",
       "sync": "manual vendor snapshot"
     },
     {
@@ -20783,9 +20914,9 @@
       "tags": {},
       "quality_score": 100,
       "quality_flags": [],
-      "license": "UNKNOWN - check upstream",
-      "commercial_use": "unknown",
-      "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
+      "license": "GPL-3.0",
+      "commercial_use": "share-alike",
+      "source_url": "https://github.com/SiyaoZheng/ai4ss-skills",
       "sync": "manual vendor snapshot"
     },
     {
@@ -20799,9 +20930,9 @@
       "tags": {},
       "quality_score": 100,
       "quality_flags": [],
-      "license": "UNKNOWN - check upstream",
-      "commercial_use": "unknown",
-      "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
+      "license": "GPL-3.0",
+      "commercial_use": "share-alike",
+      "source_url": "https://github.com/SiyaoZheng/ai4ss-skills",
       "sync": "manual vendor snapshot"
     },
     {
@@ -20819,9 +20950,9 @@
       },
       "quality_score": 100,
       "quality_flags": [],
-      "license": "UNKNOWN - check upstream",
-      "commercial_use": "unknown",
-      "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
+      "license": "GPL-3.0",
+      "commercial_use": "share-alike",
+      "source_url": "https://github.com/SiyaoZheng/ai4ss-skills",
       "sync": "manual vendor snapshot"
     },
     {
@@ -20842,9 +20973,9 @@
       },
       "quality_score": 100,
       "quality_flags": [],
-      "license": "UNKNOWN - check upstream",
-      "commercial_use": "unknown",
-      "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
+      "license": "GPL-3.0",
+      "commercial_use": "share-alike",
+      "source_url": "https://github.com/SiyaoZheng/ai4ss-skills",
       "sync": "manual vendor snapshot"
     },
     {
@@ -20858,9 +20989,9 @@
       "tags": {},
       "quality_score": 100,
       "quality_flags": [],
-      "license": "UNKNOWN - check upstream",
-      "commercial_use": "unknown",
-      "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
+      "license": "GPL-3.0",
+      "commercial_use": "share-alike",
+      "source_url": "https://github.com/SiyaoZheng/ai4ss-skills",
       "sync": "manual vendor snapshot"
     },
     {
@@ -20878,9 +21009,9 @@
       },
       "quality_score": 100,
       "quality_flags": [],
-      "license": "UNKNOWN - check upstream",
-      "commercial_use": "unknown",
-      "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
+      "license": "GPL-3.0",
+      "commercial_use": "share-alike",
+      "source_url": "https://github.com/SiyaoZheng/ai4ss-skills",
       "sync": "manual vendor snapshot"
     },
     {
@@ -22232,11 +22363,17 @@
       "name": "paper-workflow",
       "path": "skills/69-Paper-WorkFlow/SKILL.md",
       "collection": "69-Paper-WorkFlow",
-      "line_count": 304,
-      "description_effective": "经管 / 社科**实证论文全流程总编排器（meta-orchestrator）**：把「选题 → 设计 → 数据 → 计量识别与估计 → 方法闸门 → 表与图 → 写作初稿 → 全流程打磨 → 语言去 AI 味 → 初稿质量门 → 模拟评审与修订 → 选刊与投稿 → 复盘交付」这条端到端流水线自动跑通。本 skill **不重复实现任何子能力**， 而是借鉴 `do-agent` 的「多代理 + 上下文保护」执行范式与 `paper-pipeline` 的「固定顺序 + 可断点续跑 + 交互档位」编排范式，按阶段**调用既有 skill / 派发并行 subagent** 完成一篇 可投稿的实证论文。触发场景：用户说 \"/paper-workflow\"、\"帮我写一篇实证论文\"、 \"从选题到投稿\"、\"实证论文全流程\"、\"经管社科论文工作流\"、\"端到端跑一篇 paper\"、 \"automate an empirical paper\"、\"end-to-end empirical research pipeline\"、\"paper workflow\"， 或带着一个研究方向 / 一份计划书 / 一份数据 / 一份初稿希望「一条龙」推进到投稿。",
+      "line_count": 259,
+      "description_effective": "经管 / 社科实证论文全流程 meta-orchestrator：把选题、设计、数据、估计、方法闸门、 表图、写作、去 AI 味、质量门、修订、投稿与复盘编排成 Stage 0–9 可断点续跑流水线。 本 skill 不重复实现子能力，而是按阶段调用既有 skill 或并行 subagent，并在 Stage 3–4 路由 Python/StatsPAI、Stata、R 三种分析后端。触发：/paper-workflow、帮我写一篇实证论文、 从选题到投稿、端到端 empirical paper、已有 proposal/数据/初稿要推进到投稿，或明确要求 用 Stata / R/fixest / Python-StatsPAI 完整复现。",
       "description_source": "frontmatter",
       "has_references": true,
-      "tags": {},
+      "tags": {
+        "language": [
+          "python",
+          "r",
+          "stata"
+        ]
+      },
       "quality_score": 100,
       "quality_flags": [],
       "license": "MIT",

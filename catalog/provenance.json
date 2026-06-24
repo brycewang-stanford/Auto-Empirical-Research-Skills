@@ -744,7 +744,7 @@
       "origin": "first-party upstream mirror",
       "path": "skills/50-brycewang-aer-skills",
       "security_review": "SECURITY-SCAN-REPORT.md",
-      "skill_count": 9,
+      "skill_count": 14,
       "source_confidence": "high",
       "source_url": "https://github.com/brycewang-stanford/AER-skills",
       "sync": "weekly GitHub Actions sync",
@@ -961,32 +961,32 @@
       "vendored_commit": null
     },
     {
-      "commercial_use": "unknown",
+      "commercial_use": "share-alike",
       "id": "65-game-theory-paper-writer",
       "last_aers_review": "2026-05-31",
-      "license": "UNKNOWN - check upstream",
+      "license": "CC-BY-SA-4.0",
       "license_file": null,
-      "origin": "vendored upstream",
+      "origin": "original community contribution via PR #17 (game-theory paper-writing skill); no external upstream — repo-default license applies",
       "path": "skills/65-game-theory-paper-writer",
       "security_review": "SECURITY-SCAN-REPORT.md",
       "skill_count": 1,
-      "source_confidence": "low",
-      "source_url": "https://github.com/game/theory-paper-writer",
-      "sync": "manual vendor snapshot",
+      "source_confidence": "medium",
+      "source_url": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills/pull/17",
+      "sync": "manual",
       "vendored_commit": null
     },
     {
-      "commercial_use": "unknown",
+      "commercial_use": "share-alike",
       "id": "66-zheng-siyao-empirical-research-skills",
       "last_aers_review": "2026-05-31",
-      "license": "UNKNOWN - check upstream",
+      "license": "GPL-3.0",
       "license_file": null,
-      "origin": "vendored upstream snapshot (7 SKILL.md skills) 2026-06-15",
+      "origin": "vendored upstream snapshot (7 SKILL.md skills) from SiyaoZheng/ai4ss-skills (郑思尧 / AI4SS) 2026-06-15; contributed via PR #18",
       "path": "skills/66-zheng-siyao-empirical-research-skills",
       "security_review": "SECURITY-SCAN-REPORT.md",
       "skill_count": 7,
       "source_confidence": "high",
-      "source_url": "https://github.com/zheng-siyao/ai4socialscience-skills",
+      "source_url": "https://github.com/SiyaoZheng/ai4ss-skills",
       "sync": "manual vendor snapshot",
       "vendored_commit": null
     },
@@ -1044,23 +1044,25 @@
     "commercial_use": {
       "allowed": 36,
       "restricted": 2,
-      "share-alike": 5,
-      "unknown": 26
+      "share-alike": 7,
+      "unknown": 24
     },
     "licenses": {
       "AGPL-3.0": 1,
       "Apache-2.0": 1,
       "CC-BY-NC-4.0 (non-commercial)": 1,
+      "CC-BY-SA-4.0": 1,
       "CC-BY-SA-4.0 (repository default)": 4,
+      "GPL-3.0": 1,
       "MIT": 35,
       "MIT Non-Commercial": 1,
       "Mixed (per-skill; see folder)": 2,
-      "UNKNOWN - check upstream": 24
+      "UNKNOWN - check upstream": 22
     },
     "source_confidence": {
       "high": 38,
-      "low": 7,
-      "medium": 20,
+      "low": 6,
+      "medium": 21,
       "unresolved": 4
     }
   }

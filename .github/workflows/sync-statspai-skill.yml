@@ -19,9 +19,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
+          submodules: recursive
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
 
       - name: Run sync script
         id: sync
@@ -41,6 +46,20 @@ jobs:
             exit "$rc"
           fi
 
+      # Regenerate catalog/docs from the synced tree, then run the same full
+      # gate a human PR must pass (`make check`). This is what catches an
+      # upstream snapshot that silently clobbers local invariants (e.g. the
+      # SkillOpt execution-gate terms enforced by tests/test_skillopt_gates.py)
+      # before it can be merged. PRs opened by GITHUB_TOKEN do not trigger CI,
+      # so this in-job gate is the only pre-merge signal.
+      - name: Regenerate catalog and run full gate
+        id: gate
+        if: steps.sync.outputs.drift == 'true'
+        run: |
+          set +e
+          make catalog && make check
+          echo "status=$?" >> "$GITHUB_OUTPUT"
+
       - name: Open PR on drift
         if: steps.sync.outputs.drift == 'true'
         uses: peter-evans/create-pull-request@v8
@@ -52,8 +71,13 @@ jobs:
             Automated sync from
             [`brycewang-stanford/StatsPAI:StatsPAI_skill/`](https://github.com/brycewang-stanford/StatsPAI/tree/main/StatsPAI_skill).
 
+            **Local full gate (`make catalog && make check`):** ${{ steps.gate.outputs.status == '0' && '✅ passed — review the diff and merge if intended' || '❌ FAILED — do NOT merge until fixed; see the run log (PR labelled needs-fix)' }}
+
             Triggered by `.github/workflows/sync-statspai-skill.yml`.
-            Review the diff and merge if upstream changes are intended.
-          labels: |
-            sync
-            skills
+          labels: ${{ steps.gate.outputs.status == '0' && 'sync,skills' || 'sync,skills,needs-fix' }}
+
+      - name: Fail the run if the synced tree breaks the gate
+        if: steps.sync.outputs.drift == 'true' && steps.gate.outputs.status != '0'
+        run: |
+          echo "::error::Synced upstream fails 'make check' (exit ${{ steps.gate.outputs.status }}). A PR was opened and labelled needs-fix; do not merge until the gate passes."
+          exit 1

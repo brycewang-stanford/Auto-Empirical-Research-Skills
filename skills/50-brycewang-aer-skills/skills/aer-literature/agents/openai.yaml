@@ -1,0 +1,4 @@
+interface:
+  display_name: "AER Literature"
+  short_description: "Position the paper and verify every citation"
+  default_prompt: "Use $aer-literature to map the closest antecedent papers and verify every reference in the bibliography against fetched sources."

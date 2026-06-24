@@ -1,0 +1,403 @@
+% references.bib --- starter bibliography for AER-track empirical work
+%
+% Modern identification/inference methods plus a few classic design-based
+% exemplars cited across the AER-skills stack. Every entry was verified
+% against the Crossref REST API by DOI (title, authors, journal, volume,
+% issue, pages, year). Years use the print-issue year when it differs from
+% the online-first date. Card & Krueger (1994) predates AEA DOIs; its JSTOR
+% stable URL is recorded in the note field.
+%
+% Compile with biber (UTF-8 native) or BibTeX. Companion quick-reference:
+% docs/methods-reference.md
+
+% ===== Difference-in-differences and event-study estimators =====
+@article{callaway_santanna_2021,
+  author    = {Callaway, Brantly and Sant'Anna, Pedro H.C.},
+  title     = {{Difference-in-Differences with multiple time periods}},
+  journal   = {Journal of Econometrics},
+  year      = {2021},
+  volume    = {225},
+  number    = {2},
+  pages     = {200--230},
+  doi       = {10.1016/j.jeconom.2020.12.001}
+}
+
+@article{sun_abraham_2021,
+  author    = {Sun, Liyang and Abraham, Sarah},
+  title     = {{Estimating dynamic treatment effects in event studies with heterogeneous treatment effects}},
+  journal   = {Journal of Econometrics},
+  year      = {2021},
+  volume    = {225},
+  number    = {2},
+  pages     = {175--199},
+  doi       = {10.1016/j.jeconom.2020.09.006}
+}
+
+@article{dechaisemartin_dhaultfoeuille_2020,
+  author    = {de Chaisemartin, Cl{\'e}ment and D'Haultf{\oe}uille, Xavier},
+  title     = {{Two-Way Fixed Effects Estimators with Heterogeneous Treatment Effects}},
+  journal   = {American Economic Review},
+  year      = {2020},
+  volume    = {110},
+  number    = {9},
+  pages     = {2964--2996},
+  doi       = {10.1257/aer.20181169}
+}
+
+@article{borusyak_jaravel_spiess_2024,
+  author    = {Borusyak, Kirill and Jaravel, Xavier and Spiess, Jann},
+  title     = {{Revisiting Event-Study Designs: Robust and Efficient Estimation}},
+  journal   = {Review of Economic Studies},
+  year      = {2024},
+  volume    = {91},
+  number    = {6},
+  pages     = {3253--3285},
+  doi       = {10.1093/restud/rdae007}
+}
+
+@article{goodmanbacon_2021,
+  author    = {Goodman-Bacon, Andrew},
+  title     = {{Difference-in-differences with variation in treatment timing}},
+  journal   = {Journal of Econometrics},
+  year      = {2021},
+  volume    = {225},
+  number    = {2},
+  pages     = {254--277},
+  doi       = {10.1016/j.jeconom.2021.03.014}
+}
+
+@article{rambachan_roth_2023,
+  author    = {Rambachan, Ashesh and Roth, Jonathan},
+  title     = {{A More Credible Approach to Parallel Trends}},
+  journal   = {Review of Economic Studies},
+  year      = {2023},
+  volume    = {90},
+  number    = {5},
+  pages     = {2555--2591},
+  doi       = {10.1093/restud/rdad018}
+}
+
+@article{roth_2022,
+  author    = {Roth, Jonathan},
+  title     = {{Pretest with Caution: Event-Study Estimates after Testing for Parallel Trends}},
+  journal   = {American Economic Review: Insights},
+  year      = {2022},
+  volume    = {4},
+  number    = {3},
+  pages     = {305--322},
+  doi       = {10.1257/aeri.20210236}
+}
+
+@article{roth_santanna_bilinski_poe_2023,
+  author    = {Roth, Jonathan and Sant'Anna, Pedro H.C. and Bilinski, Alyssa and Poe, John},
+  title     = {{What's trending in difference-in-differences? A synthesis of the recent econometrics literature}},
+  journal   = {Journal of Econometrics},
+  year      = {2023},
+  volume    = {235},
+  number    = {2},
+  pages     = {2218--2244},
+  doi       = {10.1016/j.jeconom.2023.03.008}
+}
+
+% ===== Instrumental variables, weak-IV-robust inference, and shift-share designs =====
+@article{goldsmithpinkham_sorkin_swift_2020,
+  author    = {Goldsmith-Pinkham, Paul and Sorkin, Isaac and Swift, Henry},
+  title     = {{Bartik Instruments: What, When, Why, and How}},
+  journal   = {American Economic Review},
+  year      = {2020},
+  volume    = {110},
+  number    = {8},
+  pages     = {2586--2624},
+  doi       = {10.1257/aer.20181047}
+}
+
+@article{borusyak_hull_jaravel_2022,
+  author    = {Borusyak, Kirill and Hull, Peter and Jaravel, Xavier},
+  title     = {{Quasi-Experimental Shift-Share Research Designs}},
+  journal   = {The Review of Economic Studies},
+  year      = {2022},
+  volume    = {89},
+  number    = {1},
+  pages     = {181--213},
+  doi       = {10.1093/restud/rdab030}
+}
+
+@article{adao_kolesar_morales_2019,
+  author    = {Ad{\~a}o, Rodrigo and Koles{\'a}r, Michal and Morales, Eduardo},
+  title     = {{Shift-Share Designs: Theory and Inference}},
+  journal   = {The Quarterly Journal of Economics},
+  year      = {2019},
+  volume    = {134},
+  number    = {4},
+  pages     = {1949--2010},
+  doi       = {10.1093/qje/qjz025}
+}
+
+@article{montielolea_pflueger_2013,
+  author    = {Montiel Olea, Jos\'e Luis and Pflueger, Carolin},
+  title     = {{A Robust Test for Weak Instruments}},
+  journal   = {Journal of Business \& Economic Statistics},
+  year      = {2013},
+  volume    = {31},
+  number    = {3},
+  pages     = {358--369},
+  doi       = {10.1080/00401706.2013.806694}
+}
+
+@article{andrews_stock_sun_2019,
+  author    = {Andrews, Isaiah and Stock, James H. and Sun, Liyang},
+  title     = {{Weak Instruments in Instrumental Variables Regression: Theory and Practice}},
+  journal   = {Annual Review of Economics},
+  year      = {2019},
+  volume    = {11},
+  number    = {1},
+  pages     = {727--753},
+  doi       = {10.1146/annurev-economics-080218-025643}
+}
+
+@incollection{stock_yogo_2005,
+  author    = {Stock, James H. and Yogo, Motohiro},
+  title     = {{Testing for Weak Instruments in Linear IV Regression}},
+  booktitle = {Identification and Inference for Econometric Models: Essays in Honor of Thomas Rothenberg},
+  editor    = {Andrews, Donald W. K. and Stock, James H.},
+  publisher = {Cambridge University Press},
+  address   = {Cambridge},
+  year      = {2005},
+  pages     = {80--108},
+  doi       = {10.1017/cbo9780511614491.006}
+}
+
+@article{conley_hansen_rossi_2012,
+  author    = {Conley, Timothy G. and Hansen, Christian B. and Rossi, Peter E.},
+  title     = {{Plausibly Exogenous}},
+  journal   = {Review of Economics and Statistics},
+  year      = {2012},
+  volume    = {94},
+  number    = {1},
+  pages     = {260--272},
+  doi       = {10.1162/rest_a_00139}
+}
+
+@article{lee_mccrary_moreira_porter_2022,
+  author    = {Lee, David S. and McCrary, Justin and Moreira, Marcelo J. and Porter, Jack},
+  title     = {{Valid t-ratio Inference for IV}},
+  journal   = {American Economic Review},
+  year      = {2022},
+  volume    = {112},
+  number    = {10},
+  pages     = {3260--3290},
+  doi       = {10.1257/aer.20211063}
+}
+
+% ===== Regression discontinuity designs =====
+@article{calonico_cattaneo_titiunik_2014,
+  author    = {Calonico, Sebastian and Cattaneo, Matias D. and Titiunik, Rocio},
+  title     = {{Robust Nonparametric Confidence Intervals for Regression-Discontinuity Designs}},
+  journal   = {Econometrica},
+  year      = {2014},
+  volume    = {82},
+  number    = {6},
+  pages     = {2295--2326},
+  doi       = {10.3982/ecta11757}
+}
+
+@article{cattaneo_jansson_ma_2020,
+  author    = {Cattaneo, Matias D. and Jansson, Michael and Ma, Xinwei},
+  title     = {{Simple Local Polynomial Density Estimators}},
+  journal   = {Journal of the American Statistical Association},
+  year      = {2020},
+  volume    = {115},
+  number    = {531},
+  pages     = {1449--1455},
+  doi       = {10.1080/01621459.2019.1635480}
+}
+
+@article{mccrary_2008,
+  author    = {McCrary, Justin},
+  title     = {{Manipulation of the running variable in the regression discontinuity design: A density test}},
+  journal   = {Journal of Econometrics},
+  year      = {2008},
+  volume    = {142},
+  number    = {2},
+  pages     = {698--714},
+  doi       = {10.1016/j.jeconom.2007.05.005}
+}
+
+@article{gelman_imbens_2019,
+  author    = {Gelman, Andrew and Imbens, Guido},
+  title     = {{Why High-Order Polynomials Should Not Be Used in Regression Discontinuity Designs}},
+  journal   = {Journal of Business \& Economic Statistics},
+  year      = {2019},
+  volume    = {37},
+  number    = {3},
+  pages     = {447--456},
+  doi       = {10.1080/07350015.2017.1366909}
+}
+
+% ===== Synthetic control and synthetic difference-in-differences =====
+@article{abadie_diamond_hainmueller_2010,
+  author    = {Abadie, Alberto and Diamond, Alexis and Hainmueller, Jens},
+  title     = {{Synthetic Control Methods for Comparative Case Studies: Estimating the Effect of California's Tobacco Control Program}},
+  journal   = {Journal of the American Statistical Association},
+  year      = {2010},
+  volume    = {105},
+  number    = {490},
+  pages     = {493--505},
+  doi       = {10.1198/jasa.2009.ap08746}
+}
+
+@article{abadie_gardeazabal_2003,
+  author    = {Abadie, Alberto and Gardeazabal, Javier},
+  title     = {{The Economic Costs of Conflict: A Case Study of the Basque Country}},
+  journal   = {American Economic Review},
+  year      = {2003},
+  volume    = {93},
+  number    = {1},
+  pages     = {113--132},
+  doi       = {10.1257/000282803321455188}
+}
+
+@article{xu_2017,
+  author    = {Xu, Yiqing},
+  title     = {{Generalized Synthetic Control Method: Causal Inference with Interactive Fixed Effects Models}},
+  journal   = {Political Analysis},
+  year      = {2017},
+  volume    = {25},
+  number    = {1},
+  pages     = {57--76},
+  doi       = {10.1017/pan.2016.2}
+}
+
+@article{benmichael_feller_rothstein_2021,
+  author    = {Ben-Michael, Eli and Feller, Avi and Rothstein, Jesse},
+  title     = {{The Augmented Synthetic Control Method}},
+  journal   = {Journal of the American Statistical Association},
+  year      = {2021},
+  volume    = {116},
+  number    = {536},
+  pages     = {1789--1803},
+  doi       = {10.1080/01621459.2021.1929245}
+}
+
+@article{arkhangelsky_etal_2021,
+  author    = {Arkhangelsky, Dmitry and Athey, Susan and Hirshberg, David A. and Imbens, Guido W. and Wager, Stefan},
+  title     = {{Synthetic Difference-in-Differences}},
+  journal   = {American Economic Review},
+  year      = {2021},
+  volume    = {111},
+  number    = {12},
+  pages     = {4088--4118},
+  doi       = {10.1257/aer.20190159}
+}
+
+@article{abadie_2021,
+  author    = {Abadie, Alberto},
+  title     = {{Using Synthetic Controls: Feasibility, Data Requirements, and Methodological Aspects}},
+  journal   = {Journal of Economic Literature},
+  year      = {2021},
+  volume    = {59},
+  number    = {2},
+  pages     = {391--425},
+  doi       = {10.1257/jel.20191450}
+}
+
+% ===== Clustered inference, multiple testing, and sensitivity analysis =====
+@article{cameron_gelbach_miller_2008,
+  author    = {Cameron, A. Colin and Gelbach, Jonah B. and Miller, Douglas L.},
+  title     = {{Bootstrap-Based Improvements for Inference with Clustered Errors}},
+  journal   = {Review of Economics and Statistics},
+  year      = {2008},
+  volume    = {90},
+  number    = {3},
+  pages     = {414--427},
+  doi       = {10.1162/rest.90.3.414}
+}
+
+@article{mackinnon_webb_2017,
+  author    = {MacKinnon, James G. and Webb, Matthew D.},
+  title     = {{Wild Bootstrap Inference for Wildly Different Cluster Sizes}},
+  journal   = {Journal of Applied Econometrics},
+  year      = {2017},
+  volume    = {32},
+  number    = {2},
+  pages     = {233--254},
+  doi       = {10.1002/jae.2508}
+}
+
+@article{simonsohn_simmons_nelson_2020,
+  author    = {Simonsohn, Uri and Simmons, Joseph P. and Nelson, Leif D.},
+  title     = {{Specification curve analysis}},
+  journal   = {Nature Human Behaviour},
+  year      = {2020},
+  volume    = {4},
+  number    = {11},
+  pages     = {1208--1214},
+  doi       = {10.1038/s41562-020-0912-z}
+}
+
+@article{oster_2019,
+  author    = {Oster, Emily},
+  title     = {{Unobservable Selection and Coefficient Stability: Theory and Evidence}},
+  journal   = {Journal of Business \& Economic Statistics},
+  year      = {2019},
+  volume    = {37},
+  number    = {2},
+  pages     = {187--204},
+  doi       = {10.1080/07350015.2016.1227711}
+}
+
+% ===== Classic design-based empirical exemplars =====
+@article{card_krueger_1994,
+  author    = {Card, David and Krueger, Alan B.},
+  title     = {{Minimum Wages and Employment: A Case Study of the Fast-Food Industry in New Jersey and Pennsylvania}},
+  journal   = {American Economic Review},
+  year      = {1994},
+  volume    = {84},
+  number    = {4},
+  pages     = {772--793},
+  note      = {No Crossref DOI; JSTOR stable URL https://www.jstor.org/stable/2118030}
+}
+
+@article{acemoglu_johnson_robinson_2001,
+  author    = {Acemoglu, Daron and Johnson, Simon and Robinson, James A},
+  title     = {{The Colonial Origins of Comparative Development: An Empirical Investigation}},
+  journal   = {American Economic Review},
+  year      = {2001},
+  volume    = {91},
+  number    = {5},
+  pages     = {1369--1401},
+  doi       = {10.1257/aer.91.5.1369}
+}
+
+@article{autor_dorn_hanson_2013,
+  author    = {Autor, David H and Dorn, David and Hanson, Gordon H},
+  title     = {{The China Syndrome: Local Labor Market Effects of Import Competition in the United States}},
+  journal   = {American Economic Review},
+  year      = {2013},
+  volume    = {103},
+  number    = {6},
+  pages     = {2121--2168},
+  doi       = {10.1257/aer.103.6.2121}
+}
+
+@article{dell_2010,
+  author    = {Dell, Melissa},
+  title     = {{The Persistent Effects of Peru's Mining Mita}},
+  journal   = {Econometrica},
+  year      = {2010},
+  volume    = {78},
+  number    = {6},
+  pages     = {1863--1903},
+  doi       = {10.3982/ecta8121}
+}
+
+@article{nunn_2008,
+  author    = {Nunn, Nathan},
+  title     = {{The Long-Term Effects of Africa's Slave Trades}},
+  journal   = {Quarterly Journal of Economics},
+  year      = {2008},
+  volume    = {123},
+  number    = {1},
+  pages     = {139--176},
+  doi       = {10.1162/qjec.2008.123.1.139}
+}

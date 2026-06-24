@@ -1,0 +1,4 @@
+interface:
+  display_name: "AER Referee Simulation"
+  short_description: "Adversarial desk screen and three referee reports"
+  default_prompt: "Use $aer-referee-sim to run an adversarial AER desk screen and three referee reports against this draft."

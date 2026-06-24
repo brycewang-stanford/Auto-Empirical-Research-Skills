@@ -1,0 +1,70 @@
+id = "synthetic-control-recovery"
+title = "Synthetic-control recovery: do pre-period donor weights recover the effect a naive average misses?"
+data = "benchmark/data/sim-synth.csv"
+reference_candidate = "reference-synth"
+
+description = """
+Deterministic, noiseless panel: one treated unit and three donors over eight
+periods (four pre, four post). The treated unit's untreated potential outcome is,
+by construction, an exact convex combination of the donors (0.5, 0.3, 0.2), so a
+synthetic control that fits donor weights on the pre-period recovers it and the
+post-period gap equals the true effect (3.0). The untreated potential outcome
+ships as a column the estimators never read; the checker recomputes the truth.
+
+The lesson: a synthetic control with pre-period-fit weights recovers the effect,
+while a naive equal-weight donor average does not match the pre-period and is
+biased. Data-derived golds are recomputed from the dataset, so a candidate cannot
+pass by fabricating numbers.
+"""
+
+true_tau_by_construction = 3.0
+
+[[gold]]
+id = "sc-recovers-true"
+required = true
+weight = 4
+description = "The synthetic-control post gap (pre-period-fit weights) recovers the true effect recomputed from the data."
+check = "recovers_truth"
+field = "sc_effect"
+truth_key = "true_effect"
+tol = 0.05
+
+[[gold]]
+id = "naive-is-biased"
+required = true
+weight = 3
+description = "The naive equal-weight donor average is far from the true effect, surfacing the no-pre-fit bias."
+check = "biased_away"
+field = "naive_effect"
+truth_key = "true_effect"
+min_gap = 0.5
+
+[[gold]]
+id = "sc-beats-naive"
+required = false
+weight = 2
+description = "The synthetic-control estimate is closer to the truth than the naive average is (informational)."
+check = "closer_to_truth"
+near_field = "sc_effect"
+far_field = "naive_effect"
+truth_key = "true_effect"
+
+[[gold]]
+id = "honest-sc"
+required = true
+weight = 2
+description = "The candidate's reported synthetic-control estimate matches what the checker recomputes by fitting the weights (no fabricated numbers)."
+check = "recovers_truth"
+field = "sc_effect"
+truth_key = "sc_effect"
+tol = 0.01
+
+[[gold]]
+id = "honest-naive"
+required = true
+weight = 2
+description = "The candidate's reported naive estimate matches what the checker recomputes (no fabricated numbers)."
+check = "recovers_truth"
+field = "naive_effect"
+truth_key = "naive_effect"
+tol = 0.01

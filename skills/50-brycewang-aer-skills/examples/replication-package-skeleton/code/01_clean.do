@@ -3,6 +3,8 @@
   Raw-to-analytic data construction placeholder.
 -------------------------------------------------------------------*/
 
+version 18.0
+
 capture confirm file "$intermediate/analytic.dta"
 if _rc {
     display as error "Missing $intermediate/analytic.dta."

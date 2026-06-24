@@ -1,4 +1,4 @@
-.PHONY: catalog validate check audit hygiene clean external-links external-links-dry tools-links tools-links-dry evals eval-harness eval-smoke benchmark-lint benchmark benchmark-refresh test python-compat
+.PHONY: catalog validate paper-workflow-check check audit hygiene clean external-links external-links-dry tools-links tools-links-dry evals eval-harness eval-smoke benchmark-lint benchmark benchmark-refresh test python-compat
 
 catalog:
 	python3 scripts/build-provenance.py
@@ -7,18 +7,29 @@ catalog:
 	python3 scripts/build-evals.py
 	python3 scripts/build-catalog-enrich.py
 	python3 scripts/build-tools-catalog.py
+	python3 scripts/build-coverage-map.py
 
 # Catalog/provenance/audit/eval freshness + repo link & frontmatter validation.
 validate:
 	python3 scripts/validate-repo.py
 	python3 scripts/check-repo-hygiene.py
 	python3 scripts/validate-workflows.py
+	python3 scripts/check-ecosystem.py
+	$(MAKE) paper-workflow-check
 	python3 scripts/build-provenance.py --check
 	python3 scripts/build-skill-audit.py --check
 	python3 scripts/build-catalog.py --check
 	python3 scripts/build-evals.py --check
 	python3 scripts/build-catalog-enrich.py --check
 	python3 scripts/build-tools-catalog.py --check
+	python3 scripts/build-coverage-map.py --check
+
+paper-workflow-check:
+	@if [ ! -f skills/69-Paper-WorkFlow/validate_skill.py ]; then \
+		echo "skills/69-Paper-WorkFlow is not checked out; run git submodule update --init --recursive" >&2; \
+		exit 1; \
+	fi
+	cd skills/69-Paper-WorkFlow && python3 validate_skill.py
 
 # Declarative flagship eval prompt matrix (docs/EVALS.md).
 evals:

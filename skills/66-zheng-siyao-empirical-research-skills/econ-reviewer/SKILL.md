@@ -5,7 +5,7 @@ version: "1.0"
 metadata:
   openclaw:
     emoji: "🔍"
-    homepage: "https://github.com/zheng-siyao/ai4socialscience-skills"
+    homepage: "https://github.com/SiyaoZheng/ai4ss-skills"
 ---
 
 # econ-reviewer — 经济学顶刊标准审稿Skill

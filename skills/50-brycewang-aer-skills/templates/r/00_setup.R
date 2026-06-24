@@ -40,7 +40,7 @@ required_pkgs <- c(
   "ivDiag",         # weak-IV diagnostics
   "AER",            # ivreg with diagnostics
   # Tables & figures
-  "modelsummary", "kableExtra", "gt", "fixest",
+  "modelsummary", "kableExtra", "gt",
   "ggplot2", "ggthemes", "scales", "patchwork", "viridis",
   # Inference
   "sandwich", "lmtest", "fwildclusterboot", "clubSandwich"

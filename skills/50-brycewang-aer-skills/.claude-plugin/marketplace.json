@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "name": "aer-skills",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "An opinionated agent skill stack for top-5 economics manuscripts targeted at AER, AER: Insights, and AEJ.",
   "owner": {
     "name": "Bryce Wang",
@@ -13,16 +13,16 @@
   "plugins": [
     {
       "name": "aer-skills",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "source": "./",
-      "description": "Full nine-skill bundle covering the AER manuscript lifecycle: topic selection, identification, robustness, introduction, tables/figures, replication, submission, rebuttal, and the workflow router. Ships with Stata, R, and Python templates plus replication-package skeleton and classic-paper exemplars.",
+      "description": "Fourteen-skill bundle covering the AER manuscript lifecycle: topic selection, literature positioning with citation verification, identification, robustness, body-section drafting, introduction, tables/figures, manuscript consistency audit, adversarial referee simulation, replication, submission, rebuttal, and the workflow router, plus the optional StatsPAI implementation engine. Ships with Stata, R, and Python templates plus replication-package skeleton and classic-paper exemplars.",
       "author": {
         "name": "Bryce Wang",
         "email": "brycew6m@stanford.edu"
       },
       "license": "MIT",
-      "homepage": "https://github.com/brycewang-stanford/AER-skills",
-      "repository": "https://github.com/brycewang-stanford/AER-skills",
+      "homepage": "https://github.com/brycewang-stanford/AER-Skills",
+      "repository": "https://github.com/brycewang-stanford/AER-Skills",
       "keywords": [
         "economics",
         "aer",
@@ -32,19 +32,25 @@
         "regression-discontinuity",
         "synthetic-control",
         "replication",
-        "academic-writing"
+        "academic-writing",
+        "statspai"
       ],
       "category": "academic",
       "skills": [
         "skills/aer-workflow",
         "skills/aer-topic-selection",
+        "skills/aer-literature",
         "skills/aer-identification",
         "skills/aer-robustness",
+        "skills/aer-paper-body",
         "skills/aer-introduction",
         "skills/aer-tables-figures",
+        "skills/aer-consistency",
+        "skills/aer-referee-sim",
         "skills/aer-replication",
         "skills/aer-submission",
-        "skills/aer-rebuttal"
+        "skills/aer-rebuttal",
+        "skills/aer-statspai"
       ]
     }
   ]

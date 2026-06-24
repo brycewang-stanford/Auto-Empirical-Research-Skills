@@ -92,6 +92,29 @@ This skill is the *canonical* 8-step pipeline an applied economist runs on every
 4. **Rich outputs.** Every step yields at least one table or figure — tex/docx/png/pdf.
 5. **Progressive disclosure.** `SKILL.md` gives the canonical call per step; [`references/`](references/) holds variant-specific depth.
 
+## SkillOpt-style execution gate
+
+Use this long playbook as a seed skill, not as a script to exhaustively apply. SkillOpt discipline: treat each local R/Quarto change as a candidate patch that must beat a selection check and survive a held-out check before it becomes reusable boilerplate. Before writing or revising an R script/Quarto workflow, compress the user's request into a task-local `best_skill` card:
+
+```text
+best_skill: <mode + design + artifact target>
+train_signal: <current failure, user goal, or missing evidence>
+selection_split: <focal dataset/spec/output used to judge the candidate>
+heldout_gate: <checks the patch must pass beyond the focal example>
+accepted_patterns: <rules to reuse after validation>
+rejected_patterns: <failed shortcuts not to retry without new evidence>
+patch_scope: <one estimator/sample/export/robustness change>
+reject_if: <conditions that force rollback to the last passing spec>
+```
+
+1. **Route card**: record the mode (`econ`, `epi`, or `ml-causal`), estimand, identification design, focal outcome/treatment, R package family, and required artifacts.
+2. **Bounded edit**: change one decision at a time (sample rule, estimator, clustering, export format, or robustness check). Prefer the smallest patch that can pass validation.
+3. **Selection split discipline**: treat the user's immediate failure or requested artifact as the selection split. Reserve at least one alternate outcome, sample window, estimator family, or export target as the held-out gate.
+4. **Held-out gate**: define checks before running code: row counts, `distinct()` key uniqueness, treatment support, missingness thresholds, expected table/figure files, and one non-focal robustness/specification that the change must not break.
+5. **Reject buffer**: if a candidate spec fails the gate, log the failure, R/Quarto diff, and gate output in `analysis_log.md`; revert to the last passing spec and do not retry the same unchecked pattern.
+6. **Slow/meta update**: at the end of the task, write down `accepted_patterns` and `rejected_patterns` from the trajectory. Do not widen the canonical project template from a single passing run.
+7. **Promote only after validation**: only turn a one-off fix into reusable project boilerplate after it passes the current data and at least one alternate outcome/sample/specification.
+
 ---
 
 ## Three domain modes (default = AER econ; alternates = epi & ML-causal)

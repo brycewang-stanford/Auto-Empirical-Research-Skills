@@ -11,6 +11,7 @@ from _helpers import ROOT, load_module
 
 build_catalog = load_module("scripts/build-catalog.py", "aers_build_catalog")
 validate_repo = load_module("scripts/validate-repo.py", "aers_validate_repo")
+build_provenance = load_module("scripts/build-provenance.py", "aers_build_provenance")
 
 
 class TestFrontmatterParser(unittest.TestCase):
@@ -76,6 +77,47 @@ class TestGeneratedArtifactsAreCurrent(unittest.TestCase):
     def test_skill_audit_current(self):
         r = self._run("scripts/build-skill-audit.py", "--check")
         self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+
+
+class TestProvenanceNeverFabricatesSource(unittest.TestCase):
+    """Regression: provenance must never invent a source URL from the folder
+    name. A descriptive folder ("game-theory-paper-writer") once produced the
+    bogus 404 "github.com/game/theory-paper-writer", which failed the weekly
+    external-links CI."""
+
+    def test_descriptive_folder_name_yields_unknown(self):
+        url, confidence = build_provenance.infer_source_url(
+            "65-game-theory-paper-writer", ""
+        )
+        self.assertIsNone(url)
+        self.assertEqual(confidence, "unknown")
+
+    def test_owner_repo_shaped_folder_name_yields_unknown(self):
+        # Even a folder that *looks* like "owner-repo" must not be fabricated
+        # into a URL without an in-text source line or an explicit override.
+        url, confidence = build_provenance.infer_source_url("99-foo-bar", "")
+        self.assertIsNone(url)
+        self.assertEqual(confidence, "unknown")
+
+    def test_in_text_source_line_is_still_honored(self):
+        url, confidence = build_provenance.infer_source_url(
+            "12-whatever", "Source: https://github.com/real-owner/real-repo\n"
+        )
+        self.assertEqual(url, "https://github.com/real-owner/real-repo")
+        self.assertEqual(confidence, "high")
+
+    def test_low_confidence_urls_are_pinned_in_overrides(self):
+        # Any committed "low"-confidence source_url must trace to an explicit
+        # OVERRIDES entry, never to a silent heuristic guess.
+        import json
+
+        data = json.loads(
+            (ROOT / "catalog" / "provenance.json").read_text(encoding="utf-8")
+        )
+        for record in data["collections"]:
+            if record.get("source_confidence") == "low" and record.get("source_url"):
+                with self.subTest(collection=record["id"]):
+                    self.assertIn(record["id"], build_provenance.OVERRIDES)
 
 
 class TestCatalogSnapshotConsistency(unittest.TestCase):
@@ -221,6 +263,23 @@ class TestLocalAndCiGates(unittest.TestCase):
                 self.assertIn("make check", text)
         trust = (ROOT / "docs" / "TRUST.md").read_text(encoding="utf-8")
         self.assertIn("--fail-on-orphans --fail-on-partial --no-write", trust)
+
+    def test_sync_workflows_run_full_gate_before_pr(self):
+        # Regression: an upstream auto-sync once clobbered local invariants and
+        # reached main because GITHUB_TOKEN-opened PRs do not trigger CI. Each
+        # sync workflow must check out submodules, regenerate the catalog, run
+        # the full `make check` gate, and fail the run (labelling the PR
+        # needs-fix) when the synced tree breaks.
+        for name in ("sync-statspai-skill.yml", "sync-aer-skills.yml"):
+            with self.subTest(workflow=name):
+                text = (ROOT / ".github" / "workflows" / name).read_text(
+                    encoding="utf-8"
+                )
+                self.assertIn("submodules: recursive", text)
+                self.assertIn("actions/setup-python@", text)
+                self.assertIn("make catalog && make check", text)
+                self.assertIn("needs-fix", text)
+                self.assertIn("steps.gate.outputs.status != '0'", text)
 
 
 if __name__ == "__main__":

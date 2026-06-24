@@ -1,0 +1,188 @@
+{
+  "schema": 1,
+  "description": "SkillOpt-style routing scenarios for the AER-Skills workflow gate.",
+  "scenarios": [
+    {
+      "id": "selection-contribution-unclear",
+      "split": "selection",
+      "prompt": "I have a promising labor-market idea but I cannot state the AER contribution in one sentence or decide between AER and AEJ: Applied.",
+      "expected_skill": "aer-topic-selection",
+      "gate_status": "Gate A open",
+      "success_criteria": [
+        "NEXT SKILL: aer-topic-selection",
+        "REASON:",
+        "INPUTS NEEDED:",
+        "GATE STATUS:"
+      ]
+    },
+    {
+      "id": "selection-citation-verification",
+      "split": "selection",
+      "prompt": "The draft claims that several recent AER papers used this design, but I do not trust the citations and need the closest-papers map verified.",
+      "expected_skill": "aer-literature",
+      "gate_status": "Gate B open",
+      "success_criteria": [
+        "NEXT SKILL: aer-literature",
+        "REASON:",
+        "INPUTS NEEDED:",
+        "GATE STATUS:"
+      ]
+    },
+    {
+      "id": "selection-staggered-did",
+      "split": "selection",
+      "prompt": "My panel has staggered state adoption, dynamic treatment effects, and a TWFE event-study figure that may be misleading.",
+      "expected_skill": "aer-identification",
+      "gate_status": "Gate A open",
+      "success_criteria": [
+        "NEXT SKILL: aer-identification",
+        "REASON:",
+        "INPUTS NEEDED:",
+        "GATE STATUS:"
+      ]
+    },
+    {
+      "id": "selection-referee-robustness",
+      "split": "selection",
+      "prompt": "The main result is estimated, but a referee will ask whether it is driven by pre-trends, one state, and alternative treatment timing.",
+      "expected_skill": "aer-robustness",
+      "gate_status": "Gate B open",
+      "success_criteria": [
+        "NEXT SKILL: aer-robustness",
+        "REASON:",
+        "INPUTS NEEDED:",
+        "GATE STATUS:"
+      ]
+    },
+    {
+      "id": "selection-results-narration",
+      "split": "selection",
+      "prompt": "My results section just walks through Table 2 column by column and never converts the log-wage coefficient into an economic magnitude.",
+      "expected_skill": "aer-paper-body",
+      "gate_status": "Gate B open",
+      "success_criteria": [
+        "NEXT SKILL: aer-paper-body",
+        "REASON:",
+        "INPUTS NEEDED:",
+        "GATE STATUS:"
+      ]
+    },
+    {
+      "id": "selection-intro-too-long",
+      "split": "selection",
+      "prompt": "The introduction is four pages, the abstract is 170 words, and the editor said the contribution is buried.",
+      "expected_skill": "aer-introduction",
+      "gate_status": "Gate B open",
+      "success_criteria": [
+        "NEXT SKILL: aer-introduction",
+        "REASON:",
+        "INPUTS NEEDED:",
+        "GATE STATUS:"
+      ]
+    },
+    {
+      "id": "selection-table-overload",
+      "split": "selection",
+      "prompt": "Table 3 has 14 columns, long notes, inconsistent stars, and the main coefficient is hard to find.",
+      "expected_skill": "aer-tables-figures",
+      "gate_status": "Gate C open",
+      "success_criteria": [
+        "NEXT SKILL: aer-tables-figures",
+        "REASON:",
+        "INPUTS NEEDED:",
+        "GATE STATUS:"
+      ]
+    },
+    {
+      "id": "selection-number-audit",
+      "split": "selection",
+      "prompt": "Before submission I need to know whether the abstract numbers, sample sizes, table notes, cross-references, and bibliography all reconcile.",
+      "expected_skill": "aer-consistency",
+      "gate_status": "Gate C open",
+      "success_criteria": [
+        "NEXT SKILL: aer-consistency",
+        "REASON:",
+        "INPUTS NEEDED:",
+        "GATE STATUS:"
+      ]
+    },
+    {
+      "id": "selection-adversarial-review",
+      "split": "selection",
+      "prompt": "The manuscript is complete; tear it apart like an editor and three skeptical referees before I submit.",
+      "expected_skill": "aer-referee-sim",
+      "gate_status": "Gate D open",
+      "success_criteria": [
+        "NEXT SKILL: aer-referee-sim",
+        "REASON:",
+        "INPUTS NEEDED:",
+        "GATE STATUS:"
+      ]
+    },
+    {
+      "id": "selection-replication-package",
+      "split": "selection",
+      "prompt": "The Data Editor flagged the replication README, provenance statement, and openICPSR deposit layout.",
+      "expected_skill": "aer-replication",
+      "gate_status": "Gate E open",
+      "success_criteria": [
+        "NEXT SKILL: aer-replication",
+        "REASON:",
+        "INPUTS NEEDED:",
+        "GATE STATUS:"
+      ]
+    },
+    {
+      "id": "selection-final-submit",
+      "split": "selection",
+      "prompt": "We submit tomorrow and need the final length, formatting, cover-letter, disclosure, and file-package preflight.",
+      "expected_skill": "aer-submission",
+      "gate_status": "Gate E open",
+      "success_criteria": [
+        "NEXT SKILL: aer-submission",
+        "REASON:",
+        "INPUTS NEEDED:",
+        "GATE STATUS:"
+      ]
+    },
+    {
+      "id": "selection-rr-letter",
+      "split": "selection",
+      "prompt": "We received an R&R with three referee reports and need a point-by-point response aligned to the revised manuscript.",
+      "expected_skill": "aer-rebuttal",
+      "gate_status": "Revision gate open",
+      "success_criteria": [
+        "NEXT SKILL: aer-rebuttal",
+        "REASON:",
+        "INPUTS NEEDED:",
+        "GATE STATUS:"
+      ]
+    },
+    {
+      "id": "test-run-fixed-design",
+      "split": "test",
+      "prompt": "The identification decision is fixed; now I want the agent to run the IV, robustness audit, and export the paper-ready tables.",
+      "expected_skill": "aer-statspai",
+      "gate_status": "Implementation engine optional",
+      "success_criteria": [
+        "NEXT SKILL: aer-statspai",
+        "REASON:",
+        "INPUTS NEEDED:",
+        "GATE STATUS:"
+      ]
+    },
+    {
+      "id": "test-router-sequence",
+      "split": "test",
+      "prompt": "I lost track of the project stage. The design is unresolved, the body is not drafted, and the introduction is tempting me.",
+      "expected_skill": "aer-identification",
+      "gate_status": "Gate A open",
+      "success_criteria": [
+        "NEXT SKILL: aer-identification",
+        "REASON:",
+        "INPUTS NEEDED:",
+        "GATE STATUS:"
+      ]
+    }
+  ]
+}

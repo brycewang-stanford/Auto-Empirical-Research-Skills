@@ -7,6 +7,8 @@
   unit_id, year, treat, treat_year, outcome, x1, x2, endog, iv, balanced.
 -------------------------------------------------------------------*/
 
+version 18.0
+
 capture confirm file "$intermediate/analytic.dta"
 if _rc {
     display as error "Missing $intermediate/analytic.dta."

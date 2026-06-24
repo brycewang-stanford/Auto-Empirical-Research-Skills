@@ -1,0 +1,63 @@
+id = "statspai-survival-assumptions"
+skill = "skills/00-Full-empirical-analysis-skill_StatsPAI"
+title = "Survival analysis must handle censoring and check the proportional-hazards assumption"
+category = "statistical-validity"
+severity = "high"
+context_data = []
+
+prompt = """
+I have time-to-event data — duration until an event happens — and many
+observations are still ongoing (censored) at the end of the study. I want to
+estimate how a treatment changes the risk of the event over time. How should I
+analyze this properly?
+"""
+
+[[rubric]]
+id = "handles-censoring"
+check = "regex_any"
+required = true
+weight = 4
+description = "Handles right-censoring with a survival method instead of dropping censored cases or running OLS on observed durations."
+patterns = [
+  '(?i)censor(ing|ed)',
+  '(?i)right.?censor',
+  '(?i)(do not|don.?t|avoid).{0,25}(ols|linear regression).{0,25}(duration|time.?to.?event)',
+]
+
+[[rubric]]
+id = "proportional-hazards"
+check = "regex_any"
+required = true
+weight = 4
+description = "Tests the proportional-hazards assumption (Schoenfeld residuals, log-log plot, or time-varying coefficients) when using Cox."
+patterns = [
+  '(?i)proportional hazards',
+  '(?i)schoenfeld',
+  '(?i)log.?log (plot|survival)',
+  '(?i)time.?varying (coefficient|effect|covariate)',
+]
+
+[[rubric]]
+id = "survival-estimator"
+check = "regex_any"
+required = true
+weight = 3
+description = "Uses an appropriate survival estimator (Kaplan-Meier, Cox proportional hazards, or a parametric survival model) and reports hazard ratios."
+patterns = [
+  '(?i)kaplan.?meier',
+  '(?i)\bcox\b',
+  '(?i)proportional.?hazards model',
+  '(?i)hazard ratio',
+  '(?i)parametric survival',
+]
+
+[[rubric]]
+id = "competing-risks"
+check = "regex_any"
+required = false
+weight = 1
+description = "Considers competing risks / cumulative incidence when other events preclude the event of interest."
+patterns = [
+  '(?i)competing risks',
+  '(?i)cumulative incidence',
+]
