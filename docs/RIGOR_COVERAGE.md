@@ -21,10 +21,10 @@ A family is **covered** when it has both an eval scenario and a benchmark task, 
 | Staggered DiD / TWFE | 17 | `aer-identification-staggered` (critical)<br>`causal-inference-twfe-trap` (high)<br>`statspai-staggered-did` (critical) | `did-staggered-recovery` | covered |
 | Event study / pre-trends | 10 | `statspai-pretrends-eventstudy` (high) | `event-study-recovery` | covered |
 | Panel fixed effects | 19 | `pyfixest-panel-clustering` (high) | `panel-fe-recovery` | covered |
-| Synthetic control | 11 | `statspai-synthetic-control` (high) | — | eval only |
+| Synthetic control | 11 | `statspai-synthetic-control` (high) | `synthetic-control-recovery` | covered |
 | Matching / propensity scores | 10 | `statspai-matching-overlap` (high) | `lalonde-recovery` | covered |
 | Double/debiased ML | 10 | `statspai-dml-crossfit` (high) | `dml-recovery` | covered |
-| Bayesian methods | 13 | `baygent-bayesian-diagnostics` (high) | — | eval only |
+| Bayesian methods | 13 | `baygent-bayesian-diagnostics` (high) | `bayesian-recovery` | covered |
 | Survival / duration | 3 | `statspai-survival-assumptions` (high) | `survival-recovery` | covered |
 
 Notes:
@@ -34,11 +34,6 @@ Notes:
 ## Open gaps (skills exist, rigor check missing)
 
 - None — every method family with tagged skills has at least one rigor check.
-
-Partially covered (one of two layers):
-
-- **Synthetic control** — eval only.
-- **Bayesian methods** — eval only.
 
 ## Cross-cutting checks (method-agnostic)
 
@@ -64,4 +59,4 @@ Non-method checks that gate the rest of the workflow (writing, citations, reprod
 
 ---
 
-_23 eval scenarios and 9 benchmark tasks across 11 method families; 8 families fully covered, 0 open gaps. Regenerate with `make catalog`._
+_23 eval scenarios and 11 benchmark tasks across 11 method families; 10 families fully covered, 0 open gaps. Regenerate with `make catalog`._

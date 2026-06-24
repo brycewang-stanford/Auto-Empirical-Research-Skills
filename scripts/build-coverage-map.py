@@ -97,6 +97,8 @@ TASK_METHOD = {
     "event-study-recovery": "event-study",
     "dml-recovery": "dml",
     "survival-recovery": "survival",
+    "bayesian-recovery": "bayesian",
+    "synthetic-control-recovery": "synthetic-control",
     "bad-control-recovery": "*",
 }
 

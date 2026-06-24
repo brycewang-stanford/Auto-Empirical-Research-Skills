@@ -23,6 +23,8 @@ import panelfe  # noqa: E402
 import eventstudy  # noqa: E402
 import dml  # noqa: E402
 import survival  # noqa: E402
+import bayesian  # noqa: E402
+import synth  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 CAND = Path(__file__).resolve().parent / "candidates"
@@ -198,6 +200,40 @@ def survival_candidate(write_missing_data: bool = True) -> dict:
     }
 
 
+def bayesian_candidate(write_missing_data: bool = True) -> dict:
+    data_path = ROOT / "benchmark" / "data" / "sim-bayesian.csv"
+    if not data_path.exists():
+        if not write_missing_data:
+            raise FileNotFoundError(data_path)
+        bayesian.write_csv(data_path)
+    rows = bayesian.load(data_path)
+    return {
+        "task": "bayesian-recovery",
+        "method": "Conjugate Normal-Normal posterior mean: weakly-informative vs overconfident miscalibrated prior",
+        "n": len(rows),
+        "data_mean": round(bayesian.data_mean(rows), 4),
+        "posterior_weak": round(bayesian.posterior_weak(rows), 4),
+        "posterior_strong": round(bayesian.posterior_strong(rows), 4),
+    }
+
+
+def synth_candidate(write_missing_data: bool = True) -> dict:
+    data_path = ROOT / "benchmark" / "data" / "sim-synth.csv"
+    if not data_path.exists():
+        if not write_missing_data:
+            raise FileNotFoundError(data_path)
+        synth.write_csv(data_path)
+    rows = synth.load(data_path)
+    return {
+        "task": "synthetic-control-recovery",
+        "method": "Synthetic control (simplex-fit donor weights on the pre-period) vs equal-weight donor average",
+        "n": len(rows),
+        "true_effect": round(synth.true_effect(rows), 4),
+        "sc_effect": round(synth.sc_effect(rows), 4),
+        "naive_effect": round(synth.naive_effect(rows), 4),
+    }
+
+
 def reference_candidates(write_missing_data: bool = True) -> list[tuple[Path, dict]]:
     return [
         (CAND / "reference-ols" / "results.json", lalonde_candidate()),
@@ -209,6 +245,8 @@ def reference_candidates(write_missing_data: bool = True) -> list[tuple[Path, di
         (CAND / "reference-eventstudy" / "results.json", eventstudy_candidate(write_missing_data)),
         (CAND / "reference-dml" / "results.json", dml_candidate(write_missing_data)),
         (CAND / "reference-survival" / "results.json", survival_candidate(write_missing_data)),
+        (CAND / "reference-bayesian" / "results.json", bayesian_candidate(write_missing_data)),
+        (CAND / "reference-synth" / "results.json", synth_candidate(write_missing_data)),
     ]
 
 
@@ -255,6 +293,16 @@ def print_summary(payloads: list[tuple[Path, dict]]) -> None:
     print(
         f"  survival: naive treated {sv['naive_surv_treat']} -> KM {sv['km_surv_treat']} "
         f"(true {sv['true_surv_treat']})"
+    )
+    bayes = by_task["bayesian-recovery"]
+    print(
+        f"  bayesian: strong-wrong-prior {bayes['posterior_strong']} -> weak-prior "
+        f"{bayes['posterior_weak']} (true {bayes['data_mean']})"
+    )
+    sc = by_task["synthetic-control-recovery"]
+    print(
+        f"  synthetic control: naive {sc['naive_effect']} -> SC {sc['sc_effect']} "
+        f"(true {sc['true_effect']})"
     )
 
 

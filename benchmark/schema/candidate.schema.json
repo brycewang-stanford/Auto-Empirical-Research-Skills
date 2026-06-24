@@ -9,7 +9,7 @@
   "properties": {
     "task": {
       "type": "string",
-      "enum": ["bad-control-recovery", "card-iv-recovery", "did-staggered-recovery", "dml-recovery", "event-study-recovery", "lalonde-recovery", "panel-fe-recovery", "rdd-recovery", "survival-recovery"]
+      "enum": ["bad-control-recovery", "bayesian-recovery", "card-iv-recovery", "did-staggered-recovery", "dml-recovery", "event-study-recovery", "lalonde-recovery", "panel-fe-recovery", "rdd-recovery", "survival-recovery", "synthetic-control-recovery"]
     },
     "method": {
       "type": "string"
@@ -117,6 +117,24 @@
       "type": "number"
     },
     "naive_surv_control": {
+      "type": "number"
+    },
+    "data_mean": {
+      "type": "number"
+    },
+    "posterior_weak": {
+      "type": "number"
+    },
+    "posterior_strong": {
+      "type": "number"
+    },
+    "true_effect": {
+      "type": "number"
+    },
+    "sc_effect": {
+      "type": "number"
+    },
+    "naive_effect": {
       "type": "number"
     },
     "balance": {
@@ -233,6 +251,30 @@
       },
       "then": {
         "required": ["true_surv_treat", "true_surv_control", "km_surv_treat", "km_surv_control", "naive_surv_treat", "naive_surv_control"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "task": {
+            "const": "bayesian-recovery"
+          }
+        }
+      },
+      "then": {
+        "required": ["data_mean", "posterior_weak", "posterior_strong"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "task": {
+            "const": "synthetic-control-recovery"
+          }
+        }
+      },
+      "then": {
+        "required": ["true_effect", "sc_effect", "naive_effect"]
       }
     }
   ]

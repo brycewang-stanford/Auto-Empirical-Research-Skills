@@ -39,6 +39,8 @@ import panelfe  # noqa: E402
 import eventstudy  # noqa: E402
 import dml  # noqa: E402
 import survival  # noqa: E402
+import bayesian  # noqa: E402
+import synth  # noqa: E402
 
 TASKS_DIR = Path(__file__).resolve().parent / "tasks"
 CANDIDATES_DIR = Path(__file__).resolve().parent / "candidates"
@@ -46,6 +48,7 @@ RESULTS_DIR = Path(__file__).resolve().parent / "results"
 
 SUPPORTED_TASK_IDS = {
     "bad-control-recovery",
+    "bayesian-recovery",
     "card-iv-recovery",
     "did-staggered-recovery",
     "dml-recovery",
@@ -54,6 +57,7 @@ SUPPORTED_TASK_IDS = {
     "panel-fe-recovery",
     "rdd-recovery",
     "survival-recovery",
+    "synthetic-control-recovery",
 }
 CANDIDATE_DIR_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
 KNOWN_CHECKS = {
@@ -127,6 +131,8 @@ CANDIDATE_NUMERIC_FIELDS = {
         "km_surv_treat", "km_surv_control",
         "naive_surv_treat", "naive_surv_control",
     ),
+    "bayesian-recovery": ("data_mean", "posterior_weak", "posterior_strong"),
+    "synthetic-control-recovery": ("true_effect", "sc_effect", "naive_effect"),
 }
 CANDIDATE_NUMERIC_MAP_FIELDS = {
     "lalonde-recovery": ("balance",),
@@ -407,6 +413,24 @@ def compute_truth(task: dict) -> dict:
             "km_surv_control": survival.km_survival(rows, 0),
             "naive_surv_treat": survival.naive_survival(rows, 1),
             "naive_surv_control": survival.naive_survival(rows, 0),
+        }
+    if task["id"] == "bayesian-recovery":
+        data = ROOT / task["data"]
+        rows = bayesian.load(data)
+        return {
+            "n": len(rows),
+            "data_mean": bayesian.data_mean(rows),
+            "posterior_weak": bayesian.posterior_weak(rows),
+            "posterior_strong": bayesian.posterior_strong(rows),
+        }
+    if task["id"] == "synthetic-control-recovery":
+        data = ROOT / task["data"]
+        rows = synth.load(data)
+        return {
+            "n": len(rows),
+            "true_effect": synth.true_effect(rows),
+            "sc_effect": synth.sc_effect(rows),
+            "naive_effect": synth.naive_effect(rows),
         }
     raise ValueError(f"unknown task {task['id']}")
 
