@@ -354,7 +354,7 @@ Four parallel implementations of the **same 8-step empirical loop** — *data cl
 
 ## What makes this more than a 23K-skill dump
 
-Public-skill counts are easy to inflate, and recent studies show large skill indexes are often redundant and occasionally unsafe. AERS competes on **verifiable quality**, not raw count. Every layer below runs locally via `make check` and in CI.
+Public-skill counts are easy to inflate, and recent studies show large skill indexes are often redundant and occasionally unsafe. AERS competes on **verifiable quality**, not raw count. Every layer below runs locally via `make check` and in CI. For a per-method-family view of exactly which pitfalls and numeric recoveries are tested — and which method families are still open gaps — see [`docs/RIGOR_COVERAGE.md`](docs/RIGOR_COVERAGE.md).
 
 | Layer | What it catches | Where |
 |---|---|---|
