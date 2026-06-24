@@ -37,6 +37,8 @@ import rdd  # noqa: E402
 import badcontrol  # noqa: E402
 import panelfe  # noqa: E402
 import eventstudy  # noqa: E402
+import dml  # noqa: E402
+import survival  # noqa: E402
 
 TASKS_DIR = Path(__file__).resolve().parent / "tasks"
 CANDIDATES_DIR = Path(__file__).resolve().parent / "candidates"
@@ -46,10 +48,12 @@ SUPPORTED_TASK_IDS = {
     "bad-control-recovery",
     "card-iv-recovery",
     "did-staggered-recovery",
+    "dml-recovery",
     "event-study-recovery",
     "lalonde-recovery",
     "panel-fe-recovery",
     "rdd-recovery",
+    "survival-recovery",
 }
 CANDIDATE_DIR_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
 KNOWN_CHECKS = {
@@ -117,6 +121,12 @@ CANDIDATE_NUMERIC_FIELDS = {
     "rdd-recovery": ("true_tau", "naive_jump", "global_att", "local_att"),
     "panel-fe-recovery": ("true_att", "twoway_fe_att", "pooled_att"),
     "event-study-recovery": ("true_att", "es_att", "es_pre_max", "naive_before_after"),
+    "dml-recovery": ("true_theta", "dml_theta", "naive_theta"),
+    "survival-recovery": (
+        "true_surv_treat", "true_surv_control",
+        "km_surv_treat", "km_surv_control",
+        "naive_surv_treat", "naive_surv_control",
+    ),
 }
 CANDIDATE_NUMERIC_MAP_FIELDS = {
     "lalonde-recovery": ("balance",),
@@ -376,6 +386,27 @@ def compute_truth(task: dict) -> dict:
             "es_att": eventstudy.es_att(rows),
             "es_pre_max": eventstudy.es_pre_max(rows),
             "naive_before_after": eventstudy.naive_before_after(rows),
+        }
+    if task["id"] == "dml-recovery":
+        data = ROOT / task["data"]
+        rows = dml.load(data)
+        return {
+            "n": len(rows),
+            "true_theta": dml.true_theta(rows),
+            "dml_theta": dml.dml_theta(rows),
+            "naive_theta": dml.naive_theta(rows),
+        }
+    if task["id"] == "survival-recovery":
+        data = ROOT / task["data"]
+        rows = survival.load(data)
+        return {
+            "n": len(rows),
+            "true_surv_treat": survival.true_survival(rows, 1),
+            "true_surv_control": survival.true_survival(rows, 0),
+            "km_surv_treat": survival.km_survival(rows, 1),
+            "km_surv_control": survival.km_survival(rows, 0),
+            "naive_surv_treat": survival.naive_survival(rows, 1),
+            "naive_surv_control": survival.naive_survival(rows, 0),
         }
     raise ValueError(f"unknown task {task['id']}")
 

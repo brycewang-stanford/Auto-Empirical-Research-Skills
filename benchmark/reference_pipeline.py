@@ -21,6 +21,8 @@ import rdd  # noqa: E402
 import badcontrol  # noqa: E402
 import panelfe  # noqa: E402
 import eventstudy  # noqa: E402
+import dml  # noqa: E402
+import survival  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 CAND = Path(__file__).resolve().parent / "candidates"
@@ -159,6 +161,43 @@ def eventstudy_candidate(write_missing_data: bool = True) -> dict:
     }
 
 
+def dml_candidate(write_missing_data: bool = True) -> dict:
+    data_path = ROOT / "benchmark" / "data" / "sim-dml.csv"
+    if not data_path.exists():
+        if not write_missing_data:
+            raise FileNotFoundError(data_path)
+        dml.write_csv(data_path)
+    rows = dml.load(data_path)
+    return {
+        "task": "dml-recovery",
+        "method": "Cross-fitted partialling-out (DML) vs naive OLS of outcome on treatment only",
+        "n": len(rows),
+        "true_theta": round(dml.true_theta(rows), 4),
+        "dml_theta": round(dml.dml_theta(rows), 4),
+        "naive_theta": round(dml.naive_theta(rows), 4),
+    }
+
+
+def survival_candidate(write_missing_data: bool = True) -> dict:
+    data_path = ROOT / "benchmark" / "data" / "sim-survival.csv"
+    if not data_path.exists():
+        if not write_missing_data:
+            raise FileNotFoundError(data_path)
+        survival.write_csv(data_path)
+    rows = survival.load(data_path)
+    return {
+        "task": "survival-recovery",
+        "method": "Kaplan-Meier survival (handles censoring) vs naive proportion that treats censored as failures",
+        "n": len(rows),
+        "true_surv_treat": round(survival.true_survival(rows, 1), 4),
+        "true_surv_control": round(survival.true_survival(rows, 0), 4),
+        "km_surv_treat": round(survival.km_survival(rows, 1), 4),
+        "km_surv_control": round(survival.km_survival(rows, 0), 4),
+        "naive_surv_treat": round(survival.naive_survival(rows, 1), 4),
+        "naive_surv_control": round(survival.naive_survival(rows, 0), 4),
+    }
+
+
 def reference_candidates(write_missing_data: bool = True) -> list[tuple[Path, dict]]:
     return [
         (CAND / "reference-ols" / "results.json", lalonde_candidate()),
@@ -168,6 +207,8 @@ def reference_candidates(write_missing_data: bool = True) -> list[tuple[Path, di
         (CAND / "reference-badcontrol" / "results.json", badcontrol_candidate(write_missing_data)),
         (CAND / "reference-panelfe" / "results.json", panelfe_candidate(write_missing_data)),
         (CAND / "reference-eventstudy" / "results.json", eventstudy_candidate(write_missing_data)),
+        (CAND / "reference-dml" / "results.json", dml_candidate(write_missing_data)),
+        (CAND / "reference-survival" / "results.json", survival_candidate(write_missing_data)),
     ]
 
 
@@ -204,6 +245,16 @@ def print_summary(payloads: list[tuple[Path, dict]]) -> None:
     print(
         f"  event study: naive {es['naive_before_after']} -> dynamic ATT {es['es_att']} "
         f"(true {es['true_att']}, max |pre| {es['es_pre_max']})"
+    )
+    dm = by_task["dml-recovery"]
+    print(
+        f"  DML: naive {dm['naive_theta']} -> cross-fit {dm['dml_theta']} "
+        f"(true {dm['true_theta']})"
+    )
+    sv = by_task["survival-recovery"]
+    print(
+        f"  survival: naive treated {sv['naive_surv_treat']} -> KM {sv['km_surv_treat']} "
+        f"(true {sv['true_surv_treat']})"
     )
 
 

@@ -95,6 +95,8 @@ TASK_METHOD = {
     "lalonde-recovery": "matching",
     "panel-fe-recovery": "panel-fe",
     "event-study-recovery": "event-study",
+    "dml-recovery": "dml",
+    "survival-recovery": "survival",
     "bad-control-recovery": "*",
 }
 

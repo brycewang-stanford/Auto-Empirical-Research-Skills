@@ -270,7 +270,7 @@ Numbers in this README are kept honest and disambiguated. "Vendored" means the f
 | Skills **vendored into this repo** and cataloged | **1,145** | [`catalog/skills.json`](catalog/skills.json) |
 | Vendored **collections** | **69** | [`catalog/skills.json`](catalog/skills.json) · [all 69 at a glance ↑](#all-69-skill-collections-at-a-glance) |
 | **First-party flagship** full-pipeline skills (StatsPAI DSL + explicit Python/Stata/R) | **4** | [`skills/00*`](skills/) |
-| Numeric **benchmark tasks** with gold values recomputed from data each run | **7** | [`benchmark/`](benchmark/) |
+| Numeric **benchmark tasks** with gold values recomputed from data each run | **9** | [`benchmark/`](benchmark/) |
 | Behavioral **eval scenarios / rubric items** | **17 / 95** | [`eval-harness/`](eval-harness/) |
 | Security audit of the **original baseline** (collections / files) | **52 / 2,940+**, 52/52 CLEAN | [`SECURITY-SCAN-REPORT.md`](SECURITY-SCAN-REPORT.md) |
 | Curated **map of the wider ecosystem** | **23,000+ skills / 119 repos** | this README · [`docs/SKILL_CATALOG.md`](docs/SKILL_CATALOG.md) |
@@ -358,7 +358,7 @@ Public-skill counts are easy to inflate, and recent studies show large skill ind
 
 | Layer | What it catches | Where |
 |---|---|---|
-| **Numeric benchmark** | Reported numbers that don't match truth recomputed from real data — the naive-DID sign trap, weak-IV without first-stage F, TWFE bias under staggered timing, RDD trend confound, post-treatment bad controls, omitted unit heterogeneity (panel FE), and dynamic effects / pre-trends (event study) | [`benchmark/`](benchmark/) · 7 tasks |
+| **Numeric benchmark** | Reported numbers that don't match truth recomputed from real data — the naive-DID sign trap, weak-IV without first-stage F, TWFE bias under staggered timing, RDD trend confound, post-treatment bad controls, omitted unit heterogeneity (panel FE), dynamic effects / pre-trends (event study), omitted-control bias under cross-fitting (DML), and censoring (survival) | [`benchmark/`](benchmark/) · 9 tasks |
 | **Eval harness** | Prose-level failures: weak-IV false reassurance, staggered-DID TWFE misuse, fabricated citations, unsafe `curl \| bash` setup, multiple-testing abuse, AER compliance gaps | [`eval-harness/`](eval-harness/) · 23 scenarios / 121 rubric items |
 | **Security audit** | Pipe-to-shell, reverse shells, credential exfiltration, prompt injection across 13 risk categories — 6-phase, 40+ hook scripts reviewed by hand | [`SECURITY-SCAN-REPORT.md`](SECURITY-SCAN-REPORT.md) |
 | **Provenance & license** | Unvendored sources, license risk, hygiene drift across all 1,145 cataloged skills | [`docs/LICENSE_AUDIT.md`](docs/LICENSE_AUDIT.md) · [`docs/SKILL_QUALITY.md`](docs/SKILL_QUALITY.md) |

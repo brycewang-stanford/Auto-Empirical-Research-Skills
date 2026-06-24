@@ -1,0 +1,78 @@
+id = "survival-recovery"
+title = "Survival recovery: does Kaplan-Meier handle censoring where a naive proportion is biased?"
+data = "benchmark/data/sim-survival.csv"
+reference_candidate = "reference-survival"
+
+description = """
+Deterministic time-to-event data for a treated and a control group (80 each, 6
+periods, horizon 4) with right-censoring that is independent of the latent event
+time. The latent event time ships as a column the estimators never read, so the
+true survival past the horizon is known by construction (treated ~0.65, control
+~0.30) and recomputed by the checker.
+
+The lesson: a Kaplan-Meier estimator that accounts for censoring recovers the true
+survival in each group, while a naive proportion that treats censored observations
+as failures underestimates survival (most visibly in the treated group). Data-
+derived golds are recomputed from the dataset, so a candidate cannot pass by
+fabricating numbers.
+"""
+
+[[gold]]
+id = "km-recovers-treated"
+required = true
+weight = 4
+description = "The Kaplan-Meier survival for the treated group recovers the true survival recomputed from the latent event times."
+check = "recovers_truth"
+field = "km_surv_treat"
+truth_key = "true_surv_treat"
+tol = 0.05
+
+[[gold]]
+id = "km-recovers-control"
+required = true
+weight = 3
+description = "The Kaplan-Meier survival for the control group recovers the true survival recomputed from the latent event times."
+check = "recovers_truth"
+field = "km_surv_control"
+truth_key = "true_surv_control"
+tol = 0.05
+
+[[gold]]
+id = "naive-underestimates-treated"
+required = true
+weight = 3
+description = "The naive proportion (censored treated as failures) is far from the true treated survival, surfacing the censoring bias."
+check = "biased_away"
+field = "naive_surv_treat"
+truth_key = "true_surv_treat"
+min_gap = 0.05
+
+[[gold]]
+id = "km-beats-naive-treated"
+required = false
+weight = 2
+description = "The Kaplan-Meier estimate is closer to the truth than the naive proportion is (informational)."
+check = "closer_to_truth"
+near_field = "km_surv_treat"
+far_field = "naive_surv_treat"
+truth_key = "true_surv_treat"
+
+[[gold]]
+id = "honest-km-treated"
+required = true
+weight = 2
+description = "The candidate's reported Kaplan-Meier survival matches what the checker recomputes (no fabricated numbers)."
+check = "recovers_truth"
+field = "km_surv_treat"
+truth_key = "km_surv_treat"
+tol = 0.01
+
+[[gold]]
+id = "honest-naive-treated"
+required = true
+weight = 2
+description = "The candidate's reported naive survival matches what the checker recomputes (no fabricated numbers)."
+check = "recovers_truth"
+field = "naive_surv_treat"
+truth_key = "naive_surv_treat"
+tol = 0.01

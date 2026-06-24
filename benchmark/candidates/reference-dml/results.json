@@ -1,0 +1,8 @@
+{
+  "task": "dml-recovery",
+  "method": "Cross-fitted partialling-out (DML) vs naive OLS of outcome on treatment only",
+  "n": 120,
+  "true_theta": 1.5,
+  "dml_theta": 1.5,
+  "naive_theta": 3.4284
+}

@@ -23,9 +23,9 @@ A family is **covered** when it has both an eval scenario and a benchmark task, 
 | Panel fixed effects | 19 | `pyfixest-panel-clustering` (high) | `panel-fe-recovery` | covered |
 | Synthetic control | 11 | `statspai-synthetic-control` (high) | — | eval only |
 | Matching / propensity scores | 10 | `statspai-matching-overlap` (high) | `lalonde-recovery` | covered |
-| Double/debiased ML | 10 | `statspai-dml-crossfit` (high) | — | eval only |
+| Double/debiased ML | 10 | `statspai-dml-crossfit` (high) | `dml-recovery` | covered |
 | Bayesian methods | 13 | `baygent-bayesian-diagnostics` (high) | — | eval only |
-| Survival / duration | 3 | `statspai-survival-assumptions` (high) | — | eval only |
+| Survival / duration | 3 | `statspai-survival-assumptions` (high) | `survival-recovery` | covered |
 
 Notes:
 
@@ -38,9 +38,7 @@ Notes:
 Partially covered (one of two layers):
 
 - **Synthetic control** — eval only.
-- **Double/debiased ML** — eval only.
 - **Bayesian methods** — eval only.
-- **Survival / duration** — eval only.
 
 ## Cross-cutting checks (method-agnostic)
 
@@ -66,4 +64,4 @@ Non-method checks that gate the rest of the workflow (writing, citations, reprod
 
 ---
 
-_23 eval scenarios and 7 benchmark tasks across 11 method families; 6 families fully covered, 0 open gaps. Regenerate with `make catalog`._
+_23 eval scenarios and 9 benchmark tasks across 11 method families; 8 families fully covered, 0 open gaps. Regenerate with `make catalog`._
