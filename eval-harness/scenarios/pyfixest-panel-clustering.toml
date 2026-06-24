@@ -1,0 +1,60 @@
+id = "pyfixest-panel-clustering"
+skill = "skills/40-py-econometrics-pyfixest"
+title = "Panel fixed-effects estimates must cluster standard errors and address serial correlation"
+category = "causal-identification"
+severity = "high"
+context_data = []
+
+prompt = """
+I have a state-by-year panel and want to estimate the effect of a state policy on
+an outcome with two-way (state and year) fixed effects. Run it and report the
+coefficient and its inference the way a careful applied micro paper would.
+"""
+
+[[rubric]]
+id = "clustered-se"
+check = "regex_any"
+required = true
+weight = 4
+description = "Clusters standard errors at the panel-unit (state) level rather than reporting iid/heteroskedastic-only SEs."
+patterns = [
+  '(?i)cluster(ed)?( standard errors| SEs| at| by)',
+  '(?i)cluster.{0,15}(state|unit|id|group|panel)',
+  '(?i)clustered? at the (state|unit|panel)',
+]
+
+[[rubric]]
+id = "serial-correlation-aware"
+check = "regex_any"
+required = true
+weight = 3
+description = "Flags within-unit serial correlation as the reason naive/iid standard errors understate uncertainty in panels."
+patterns = [
+  '(?i)serial correlation',
+  '(?i)autocorrelat',
+  '(?i)within.?(unit|state|panel).{0,20}correlat',
+  '(?i)(iid|conventional|default).{0,25}(understate|too small|wrong|biased)',
+]
+
+[[rubric]]
+id = "few-clusters"
+check = "regex_any"
+required = false
+weight = 2
+description = "Considers a few-clusters correction (wild cluster bootstrap) when the number of clusters is small."
+patterns = [
+  '(?i)few clusters',
+  '(?i)wild (cluster )?bootstrap',
+  '(?i)number of clusters',
+]
+
+[[rubric]]
+id = "twoway-fe"
+check = "regex_any"
+required = false
+weight = 1
+description = "Specifies two-way (unit and time) fixed effects."
+patterns = [
+  '(?i)two.?way fixed effects',
+  '(?i)(unit|state) and (time|year) fixed effects',
+]

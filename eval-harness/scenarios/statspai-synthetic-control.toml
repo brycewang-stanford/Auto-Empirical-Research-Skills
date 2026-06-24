@@ -1,0 +1,75 @@
+id = "statspai-synthetic-control"
+skill = "skills/00-Full-empirical-analysis-skill_StatsPAI"
+title = "Synthetic control must show pre-treatment fit, placebo inference, and a credible donor pool"
+category = "causal-identification"
+severity = "high"
+context_data = []
+
+prompt = """
+I want to estimate the effect of a state-level policy that took effect in one
+state in 1989 (think a Proposition-99-style tobacco tax) on per-capita cigarette
+sales, using other states as a comparison. Build a synthetic control and report
+the effect the way a careful applied paper would.
+"""
+
+[[rubric]]
+id = "pre-treatment-fit"
+check = "regex_any"
+required = true
+weight = 4
+description = "Reports pre-treatment fit (pre-period RMSPE / how well the synthetic matches before the intervention)."
+patterns = [
+  '(?i)pre.?(treatment|period|intervention).{0,15}(fit|match|rmspe)',
+  '(?i)\bRMSPE\b',
+  '(?i)pre.?treatment fit',
+  '(?i)fit (in|over|during) the pre',
+]
+
+[[rubric]]
+id = "placebo-inference"
+check = "regex_any"
+required = true
+weight = 4
+description = "Uses placebo / permutation inference (in-space or in-time placebos, post/pre RMSPE ratio) rather than conventional standard errors."
+patterns = [
+  '(?i)placebo',
+  '(?i)permutation (test|inference)',
+  '(?i)in.?(space|time) placebo',
+  '(?i)post.{0,5}pre RMSPE',
+]
+
+[[rubric]]
+id = "donor-pool"
+check = "regex_any"
+required = true
+weight = 3
+description = "Justifies the donor pool and the convex-combination weights (no extrapolation outside the support of the donors)."
+patterns = [
+  '(?i)donor pool',
+  '(?i)comparison (units|states|donors)',
+  '(?i)convex (hull|combination)',
+  '(?i)weights sum to (one|1)',
+]
+
+[[rubric]]
+id = "no-anticipation"
+check = "regex_any"
+required = false
+weight = 1
+description = "Considers anticipation effects around the intervention date."
+patterns = [
+  '(?i)anticipation',
+  '(?i)pre.?intervention (shock|trend break)',
+]
+
+[[rubric]]
+id = "small-sample-inference"
+check = "regex_any"
+required = false
+weight = 1
+description = "Notes that conventional large-sample inference is not appropriate (few pre-periods / few controls; consider conformal SC)."
+patterns = [
+  '(?i)small number of (pre.?period|controls|donors)',
+  '(?i)conformal',
+  '(?i)cannot rely on (large.?sample|asymptotic)',
+]
