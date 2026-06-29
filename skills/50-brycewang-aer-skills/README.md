@@ -202,6 +202,23 @@ make preflight
 检查会带告警跳过。CI 会安装 R，先运行 `make preflight`，再运行 `make validate-strict` —
 后者在缺少可选工具时直接失败，而不是静默跳过。
 
+可运行示例的 Monte Carlo 断言是可选的第二层 gate。安装
+`templates/python/requirements.txt` 中的依赖（以及需要时的 R 包）后运行：
+
+```bash
+make smoke-examples
+# 或：python3 scripts/run_example_smoke.py --strict-deps
+```
+
+默认模式会跳过缺少可选依赖的 demo；发布前用 `--strict-deps`，让任何缺失依赖或失败断言
+直接返回非零状态。
+
+`make preflight` 还运行引用完整性门（`verify_citations.py --selftest`）：用 gold set
+离线核验，确保 `references.bib` 与其录制的 Crossref/OpenAlex 元数据一致——把"任何引用
+都不能凭记忆写"从原则变成可复跑的检查。对照线上索引核验用 `make verify-citations-online`，
+对草稿做 `\cite` ↔ bib 双向核验用 `--manuscript`。详见
+[引用完整性协议](docs/citation-integrity-protocol.md)。
+
 ---
 
 ## 示例
@@ -221,6 +238,10 @@ make preflight
 | [`examples/staggered-did-demo/`](examples/staggered-did-demo/) | 可运行的 Python/R 模拟：错时处理下 naive TWFE 为什么会失败 |
 | [`examples/iv-weak-instrument-demo/`](examples/iv-weak-instrument-demo/) | 可运行的 Python 模拟：弱工具变量下传统 2SLS 推断与 Anderson-Rubin 推断对比 |
 | [`examples/rdd-polynomial-demo/`](examples/rdd-polynomial-demo/) | 可运行的 Python 模拟：高阶 global-polynomial RDD 为什么不安全 |
+| [`examples/synthetic-control-demo/`](examples/synthetic-control-demo/) | 可运行的 Python 模拟：合成控制法的推断来自 placebo-in-space 置换分布，而非肉眼可见的事前拟合 |
+| [`examples/shift-share-demo/`](examples/shift-share-demo/) | 可运行的 Python 模拟：shift-share/Bartik 推断应落在 shock（行业）层面而非地区层面——地区聚类标准误会过度拒绝 |
+| [`examples/few-clusters-demo/`](examples/few-clusters-demo/) | 可运行的 Python 模拟：聚类数较少时聚类稳健 t 检验会过度拒绝，wild cluster bootstrap 可恢复名义检验水平 |
+| [`examples/multiple-testing-demo/`](examples/multiple-testing-demo/) | 可运行的 Python 模拟：检验多个结果变量会抬高族系误差率，Bonferroni/Holm 校正可在保留功效的同时将其控制住 |
 
 ---
 
@@ -239,6 +260,8 @@ make preflight
 
 关键参考文档：
 
+- [Academic Research Skills reference review](docs/academic-research-skills-review.md) —
+  本轮参考外部 ARS 仓库后的取舍与本地改动记录
 - [Desk-rejection audit](docs/desk-rejection-audit.md) — 从编辑/审稿人视角做的
   投稿前 no-go 检查
 - [Methods reference](docs/methods-reference.md) — 估计量默认值、诊断、包调用，
@@ -274,6 +297,8 @@ AER-Skills/
 │   ├── plugin.json         (插件清单)
 │   └── marketplace.json    (Claude Code marketplace 条目)
 ├── docs/
+│   ├── academic-research-skills-review.md
+│   ├── citation-integrity-protocol.md
 │   ├── desk-rejection-audit.md
 │   ├── design-principles.md
 │   ├── glossary.md
@@ -310,14 +335,17 @@ AER-Skills/
 │   ├── run_skillopt_gate.py    (SkillOpt 路由门)
 │   ├── scaffold_project.py
 │   ├── skill_audit.py          (SkillOpt 文档质量审计)
-│   └── validate_repo.py
+│   ├── validate_repo.py
+│   ├── verify_citations.py     (引用完整性核验器)
+│   └── citation_gold/          (离线 gold set + 录制的索引响应)
 └── examples/
     ├── aer-exemplars.md
     ├── intro-example.md
     ├── rebuttal-example.md
     └── replication-package-skeleton/
         ├── data/codebook/source-register.md
-        └── docs/exhibit-register.md
+        ├── docs/exhibit-register.md
+        └── docs/claim-evidence-ledger.csv
 ```
 
 ---

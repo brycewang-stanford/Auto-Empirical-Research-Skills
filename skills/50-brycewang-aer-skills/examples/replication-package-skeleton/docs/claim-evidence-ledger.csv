@@ -1,0 +1,4 @@
+claim_id,claim_text,claim_location,evidence_type,evidence_ref,status,notes
+C-001,"[Main abstract result, stated as a complete sentence]","Abstract paragraph 1","exhibit","label:tab:main","NEEDS-EVIDENCE","Replace label with the final LaTeX table or figure label; status must be OK/PASS before handoff."
+C-002,"[Mechanism or heterogeneity claim from the introduction]","Introduction paragraph 5","exhibit","label:fig:mechanism; file:../output/figures/[figure].pdf","NEEDS-EVIDENCE","Use consistency language unless the design identifies the mechanism."
+C-003,"[External contextual fact used to motivate the paper]","Introduction paragraph 1","citation","cite:[bib_key]","NEEDS-EVIDENCE","Use a verified citation key from references.bib and cite it in the manuscript."

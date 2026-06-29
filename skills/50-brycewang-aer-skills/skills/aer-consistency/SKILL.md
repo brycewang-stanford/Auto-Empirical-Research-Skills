@@ -141,6 +141,11 @@ CLAIM                                          EVIDENCE          STATUS
   rules.
 - Any claim with no exhibit or citation is rewritten or deleted — "we find"
   with nothing to point at is how overclaiming enters a manuscript.
+- When a replication package skeleton is available, maintain
+  `docs/claim-evidence-ledger.csv`: use `label:<tex-label>` for manuscript
+  exhibits, `cite:<bib-key>` for externally sourced claims, and
+  `file:<relative-output>` for generated output files. Rows must be `OK` or
+  `PASS` before handoff.
 
 ## Mechanical Procedure
 
@@ -149,6 +154,8 @@ CLAIM                                          EVIDENCE          STATUS
 
    ```bash
    python3 skills/aer-consistency/scripts/audit_manuscript.py paper.tex references.bib
+   python3 skills/aer-consistency/scripts/audit_manuscript.py paper_dir references.bib \
+     --claim-ledger paper_dir/docs/claim-evidence-ledger.csv
    ```
 
 2. Extract every number from the abstract and introduction (grep for
@@ -195,6 +202,8 @@ relevant resource:
 
 - Exhibit-to-script mapping that fixes each number's source of truth:
   `examples/replication-package-skeleton/docs/exhibit-register.md`
+- Claim-to-evidence template checked by the bundled script:
+  `examples/replication-package-skeleton/docs/claim-evidence-ledger.csv`
 - Narration rules the claim-evidence map enforces:
   `skills/aer-paper-body/SKILL.md`
 - Citation verification protocol behind Audit 6:
@@ -210,6 +219,7 @@ HEADLINE NUMBERS MATCHED: <n>/<n>
 OPEN FAILURES: <list, or "none">
 ABSTRACT WORD COUNT: <n>/100
 CITATION LEDGER: <closed / open rows remain>
+CLAIM-EVIDENCE LEDGER: <n> claims, <closed / open rows remain>
 NEXT SKILL: <aer-referee-sim | aer-submission>
 ```
 

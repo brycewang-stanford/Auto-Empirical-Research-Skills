@@ -207,6 +207,28 @@ with a warning when `Rscript` is unavailable. CI installs R, runs
 `make preflight`, then runs `make validate-strict`, which fails instead of
 skipping optional-tool checks.
 
+Runnable example Monte Carlo assertions are the optional second-layer gate.
+After installing the dependencies in `templates/python/requirements.txt` (and
+the R packages when needed), run:
+
+```bash
+make smoke-examples
+# or: python3 scripts/run_example_smoke.py --strict-deps
+```
+
+The default mode skips demos whose optional dependencies are missing. Use
+`--strict-deps` before release so any missing dependency or failed assertion
+returns a non-zero status.
+
+`make preflight` also runs the citation-integrity gate
+(`verify_citations.py --selftest`): a hermetic, gold-set check that
+`references.bib` still matches the Crossref/OpenAlex metadata it was verified
+against — turning *"no citation from memory"* from a principle into a
+re-runnable test. Verify against the live indexes with
+`make verify-citations-online`, and check a draft's `\cite` ↔ bib
+correspondence with `--manuscript`. See the
+[citation-integrity protocol](docs/citation-integrity-protocol.md).
+
 ---
 
 ## Examples
@@ -226,6 +248,10 @@ See the full examples index in [examples/README.md](examples/README.md).
 | [`examples/staggered-did-demo/`](examples/staggered-did-demo/) | Runnable Python/R simulation showing why naive TWFE fails under staggered adoption |
 | [`examples/iv-weak-instrument-demo/`](examples/iv-weak-instrument-demo/) | Runnable Python simulation contrasting conventional 2SLS inference with Anderson-Rubin inference |
 | [`examples/rdd-polynomial-demo/`](examples/rdd-polynomial-demo/) | Runnable Python simulation showing why high-order global-polynomial RDD is unsafe |
+| [`examples/synthetic-control-demo/`](examples/synthetic-control-demo/) | Runnable Python simulation showing why synthetic-control inference comes from the placebo-in-space permutation distribution, not visual pre-period fit |
+| [`examples/shift-share-demo/`](examples/shift-share-demo/) | Runnable Python simulation showing why shift-share/Bartik inference belongs at the shock (industry) level, not the region level — region-clustered SEs over-reject |
+| [`examples/few-clusters-demo/`](examples/few-clusters-demo/) | Runnable Python simulation showing why a cluster-robust t-test over-rejects with few clusters and the wild cluster bootstrap restores nominal size |
+| [`examples/multiple-testing-demo/`](examples/multiple-testing-demo/) | Runnable Python simulation showing why testing many outcomes inflates the family-wise error rate and how Bonferroni/Holm control it without killing power |
 
 ---
 
@@ -244,6 +270,8 @@ See [docs/design-principles.md](docs/design-principles.md).
 
 Key references:
 
+- [Academic Research Skills reference review](docs/academic-research-skills-review.md) —
+  what transferred from the external ARS repository and what stayed out
 - [Desk-rejection audit](docs/desk-rejection-audit.md) — pre-submission no-go
   checks from an editor/referee perspective
 - [Methods reference](docs/methods-reference.md) — estimator defaults,
@@ -280,6 +308,8 @@ AER-Skills/
 │   ├── plugin.json         (plugin manifest)
 │   └── marketplace.json    (Claude Code marketplace entry)
 ├── docs/
+│   ├── academic-research-skills-review.md
+│   ├── citation-integrity-protocol.md
 │   ├── desk-rejection-audit.md
 │   ├── design-principles.md
 │   ├── glossary.md
@@ -316,14 +346,17 @@ AER-Skills/
 │   ├── run_skillopt_gate.py    (SkillOpt routing gate)
 │   ├── scaffold_project.py
 │   ├── skill_audit.py          (SkillOpt document-quality audit)
-│   └── validate_repo.py
+│   ├── validate_repo.py
+│   ├── verify_citations.py     (citation-integrity verifier)
+│   └── citation_gold/          (hermetic gold set + recorded index responses)
 └── examples/
     ├── aer-exemplars.md
     ├── intro-example.md
     ├── rebuttal-example.md
     └── replication-package-skeleton/
         ├── data/codebook/source-register.md
-        └── docs/exhibit-register.md
+        ├── docs/exhibit-register.md
+        └── docs/claim-evidence-ledger.csv
 ```
 
 ---

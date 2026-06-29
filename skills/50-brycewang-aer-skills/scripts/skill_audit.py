@@ -18,6 +18,17 @@ the house section structure and this repo's own style-guide discipline
 deterministic signal that points editing effort at the weakest skill, not a
 ground-truth grade.
 
+Alongside the 0-100 score the auditor counts *substance anchors* -- the worked
+figures, quoted exemplars, and equation/code blocks that make a domain skill
+imitable. This count is deliberately NOT folded into the score: the budget
+dimension rewards deletion, and a generic optimizer will trade a worked example
+for a few budget points without noticing. The anchor count is the dual of that
+pressure -- a tripwire (--substance-gate) and a do-not-regress guard (--against)
+so a skill cannot raise its quality score by gutting its concrete content. The
+score is a floor to clear, not a number to maximize; what the auditor cannot see
+-- whether the economics is current and correct -- is the higher-value axis and
+belongs in a domain-correctness pass, not here.
+
 No third-party dependencies, so it runs in the same fresh environments as
 scripts/validate_repo.py.
 
@@ -26,11 +37,12 @@ Usage:
     python3 scripts/skill_audit.py --skill aer-paper-body --verbose
     python3 scripts/skill_audit.py --json
     python3 scripts/skill_audit.py --gate 60      # exit 1 if any skill < 60
+    python3 scripts/skill_audit.py --substance-gate 8  # exit 1 if any skill is over-trimmed
     python3 scripts/skill_audit.py --selftest     # run scorer self-tests
 
     # SkillOpt "do not regress" gate around an edit:
     python3 scripts/skill_audit.py --baseline before.json   # snapshot, then edit
-    python3 scripts/skill_audit.py --against before.json     # exit 1 if any score dropped
+    python3 scripts/skill_audit.py --against before.json     # exit 1 if score OR substance dropped
 """
 
 from __future__ import annotations
@@ -118,6 +130,24 @@ NEGATION_SECTION = (
     "pitfall", "blacklist", "scrub", "wrong", "ban", "do not", "don't",
 )
 HYGIENE_HITS_PER_K_ZERO = 8.0  # hits per 1000 words at which hygiene hits 0
+
+# Substance floor -- the dual of the budget ceiling. The budget dimension
+# rewards deletion; these patterns count the concrete, imitable content a
+# generic optimizer strips first. Counted as a floor, never folded into the
+# 0-100 score (see module docstring): the point is a tripwire, not another
+# number to maximize.
+FIGURE_RE = re.compile(
+    r"\b\d{1,3}(?:,\d{3})+\b"        # grouped thousands: 48,212
+    r"|\b\d+\.\d+\b"                  # decimals / magnitudes: 4.2, 0.042
+    r"|\b\d+\s*(?:percent\b|%)"      # 5 percent, 4%
+    r"|\bp\s*[=<>]\s*\.?\d"          # p = 0.71
+    r"|\$\s?\d",                      # $4.5
+    re.IGNORECASE,
+)
+INLINE_MATH_RE = re.compile(r"\$[^$\n]+\$")
+EXEMPLAR_MIN_WORDS = 5      # a quoted span this long reads as an imitable example
+SUBSTANCE_FLOOR = 8        # anchors below which a skill reads as over-trimmed
+SUBSTANCE_REGRESS_FRAC = 0.15  # fractional anchor loss that --against flags
 
 
 def estimate_tokens(text: str) -> int:
@@ -266,6 +296,39 @@ def score_handoff(headings: list[str], body: str) -> float:
     return round(0.6 * has_section + 0.4 * has_routing, 3)
 
 
+def score_substance(body: str) -> dict:
+    """Count concrete-substance anchors -- a floor, never part of the score.
+
+    Anchors are the worked figures, quoted exemplars, and equation/code blocks
+    that make a domain skill imitable. Reported and gated independently of the
+    0-100 score so the budget dimension's deletion pressure cannot quietly
+    strip them out (the Goodhart failure a generic token-budget optimizer
+    invites). Returns the anchor breakdown so a recommendation can name what is
+    thin.
+    """
+    figures = len(FIGURE_RE.findall(body))
+
+    exemplars = 0
+    for span in QUOTED_SPAN_RE.findall(body):
+        if len(span.strip("\"“”").split()) >= EXEMPLAR_MIN_WORDS:
+            exemplars += 1
+    in_quote = False
+    for line in body.splitlines():
+        is_quote = line.lstrip().startswith(">")
+        if is_quote and not in_quote:  # count each blockquote block once
+            exemplars += 1
+        in_quote = is_quote
+
+    blocks = body.count("```") // 2 + len(INLINE_MATH_RE.findall(body))
+
+    return {
+        "anchors": figures + exemplars + blocks,
+        "figures": figures,
+        "exemplars": exemplars,
+        "blocks": blocks,
+    }
+
+
 def grade(score: float) -> str:
     for cutoff, letter in ((90, "A"), (80, "B"), (70, "C"), (60, "D")):
         if score >= cutoff:
@@ -308,6 +371,13 @@ def recommend(dims: dict[str, float], detail: dict) -> list[str]:
         tips.append(f"DELETE filler ({len(detail['hygiene_hits'])} hits): {sample}.")
     if dims["handoff"] < 1.0:
         tips.append("ADD a Handoff block with explicit NEXT SKILL routing.")
+    anchors = detail.get("substance_anchors")
+    if anchors is not None and anchors < SUBSTANCE_FLOOR:
+        tips.append(
+            f"THIN ({anchors} substance anchors): restore a worked example, "
+            "concrete magnitude, or equation -- do NOT trim further to chase "
+            "the budget score."
+        )
     return tips
 
 
@@ -334,6 +404,7 @@ def audit_skill(skill_md: Path) -> dict:
         "handoff": s_handoff,
     }
     total = round(sum(dims[k] * WEIGHTS[k] for k in WEIGHTS), 1)
+    substance = score_substance(body)
     detail = {
         "tokens": tokens,
         "lines": len(text.splitlines()),
@@ -343,12 +414,14 @@ def audit_skill(skill_md: Path) -> dict:
         "body_lines": body_lines,
         "hygiene_hits": hygiene_hits,
         "trigger_issues": trigger_issues,
+        "substance_anchors": substance["anchors"],
     }
     return {
         "name": skill_md.parent.name,
         "score": total,
         "grade": grade(total),
         "dimensions": dims,
+        "substance": substance,
         "detail": detail,
         "recommendations": recommend(dims, detail),
     }
@@ -372,55 +445,94 @@ def weakest(dims: dict[str, float], n: int = 2) -> str:
 
 def print_table(results: list[dict]) -> None:
     results = sorted(results, key=lambda r: r["score"])
-    print(f"{'skill':<22}{'tok':>6}{'grade':>7}{'score':>8}  weakest dimensions")
-    print("-" * 78)
+    print(f"{'skill':<22}{'tok':>6}{'anch':>6}{'grade':>7}{'score':>8}  weakest dimensions")
+    print("-" * 84)
     for r in results:
+        anchors = r["substance"]["anchors"]
+        thin = "  THIN" if anchors < SUBSTANCE_FLOOR else ""
         print(
-            f"{r['name']:<22}{r['detail']['tokens']:>6}{r['grade']:>7}"
-            f"{r['score']:>8}  {weakest(r['dimensions'])}"
+            f"{r['name']:<22}{r['detail']['tokens']:>6}{anchors:>6}{r['grade']:>7}"
+            f"{r['score']:>8}  {weakest(r['dimensions'])}{thin}"
         )
     scores = [r["score"] for r in results]
     if scores:
-        print("-" * 78)
+        anchors = [r["substance"]["anchors"] for r in results]
+        thin = [r["name"] for r in results if r["substance"]["anchors"] < SUBSTANCE_FLOOR]
+        print("-" * 84)
         print(
             f"{len(scores)} skills  mean {sum(scores) / len(scores):.1f}  "
-            f"min {min(scores):.1f}  max {max(scores):.1f}"
+            f"min {min(scores):.1f}  max {max(scores):.1f}  "
+            f"| anchors min {min(anchors)} (floor {SUBSTANCE_FLOOR})"
+            + (f"  THIN: {', '.join(thin)}" if thin else "")
         )
 
 
 def print_detail(results: list[dict]) -> None:
     for r in sorted(results, key=lambda r: r["score"]):
         d = r["detail"]
+        s = r["substance"]
         print(f"\n### {r['name']}  ({r['grade']}, {r['score']}/100)")
         print(
             f"    {d['tokens']} tokens | {d['lines']} lines | {d['words']} words | "
             f"{d['actionable']}/{d['body_lines']} actionable lines"
+        )
+        print(
+            f"    substance: {s['anchors']} anchors (floor {SUBSTANCE_FLOOR}) = "
+            f"{s['figures']} figures + {s['exemplars']} exemplars + {s['blocks']} blocks"
         )
         print("    " + " ".join(f"{k}={v:.2f}" for k, v in r["dimensions"].items()))
         for tip in r["recommendations"]:
             print(f"      - {tip}")
 
 
-def compare_baseline(results: list[dict], baseline_path: Path, tolerance: float) -> list[str]:
-    """Report skills whose score dropped vs a saved baseline (the SkillOpt gate).
+def compare_baseline(
+    results: list[dict],
+    baseline_path: Path,
+    tolerance: float,
+    substance_frac: float,
+) -> list[str]:
+    """Report skills whose score OR substance dropped vs a saved baseline.
 
-    Returns the list of regression messages; empty means no regression.
+    This is the SkillOpt "do not regress" gate. It guards two axes at once: the
+    0-100 quality score (allowed to drop by `tolerance`) and the substance
+    anchor count (allowed to drop by `substance_frac`, default 15%). The second
+    axis is the point -- it stops an edit from raising the quality score by
+    deleting a worked example. Returns the regression messages; empty means no
+    regression.
     """
     baseline = json.loads(baseline_path.read_text(encoding="utf-8"))
-    prior = {r["name"]: r["score"] for r in baseline}
+    prior = {r["name"]: r for r in baseline}
     regressions: list[str] = []
-    print(f"\n{'skill':<22}{'base':>8}{'now':>8}{'delta':>8}")
-    print("-" * 46)
+    print(f"\n{'skill':<22}{'base':>8}{'now':>8}{'delta':>8}{'anch':>10}")
+    print("-" * 56)
     for r in sorted(results, key=lambda r: r["name"]):
-        before = prior.get(r["name"])
-        if before is None:
-            print(f"{r['name']:<22}{'--':>8}{r['score']:>8}{'new':>8}")
+        base = prior.get(r["name"])
+        now_anchors = r["substance"]["anchors"]
+        if base is None:
+            print(f"{r['name']:<22}{'--':>8}{r['score']:>8}{'new':>8}{now_anchors:>10}")
             continue
+        before = base["score"]
         delta = round(r["score"] - before, 1)
-        mark = "  <-- REGRESSED" if delta < -tolerance else ""
-        print(f"{r['name']:<22}{before:>8}{r['score']:>8}{delta:>+8}{mark}")
-        if delta < -tolerance:
-            regressions.append(f"{r['name']}: {before} -> {r['score']} ({delta:+})")
+        # Old baselines predate substance tracking; skip that axis if absent.
+        base_anchors = base.get("substance", {}).get("anchors")
+        anchor_floor = None if base_anchors is None else math.floor(base_anchors * (1 - substance_frac))
+        score_drop = delta < -tolerance
+        anchor_drop = anchor_floor is not None and now_anchors < anchor_floor
+        anchor_cell = "--" if base_anchors is None else f"{base_anchors}->{now_anchors}"
+        marks = []
+        if score_drop:
+            marks.append("SCORE")
+        if anchor_drop:
+            marks.append("SUBSTANCE")
+        mark = ("  <-- REGRESSED: " + "+".join(marks)) if marks else ""
+        print(f"{r['name']:<22}{before:>8}{r['score']:>8}{delta:>+8}{anchor_cell:>10}{mark}")
+        if score_drop:
+            regressions.append(f"{r['name']} score: {before} -> {r['score']} ({delta:+})")
+        if anchor_drop:
+            regressions.append(
+                f"{r['name']} substance: {base_anchors} -> {now_anchors} anchors "
+                f"(worked content trimmed below {int((1 - substance_frac) * 100)}% of baseline)"
+            )
     return regressions
 
 
@@ -463,6 +575,20 @@ def run_selftest() -> int:
     check("handoff full", score_handoff(["Handoff"], "NEXT SKILL: aer-submission") == 1.0)
     check("handoff absent", score_handoff(["Overview"], "no routing here") == 0.0)
 
+    rich = (
+        'The reform raises earnings by 4.2 percent (p = 0.01) over 48,212 firms.\n'
+        '> "The point estimate implies a $4.5 billion gain," the authors write.\n'
+        '```latex\nY = \\beta D\n```\n'
+        'Here $\\beta$ is the object of interest.\n'
+    )
+    thin = "Draft the section. Keep it tight. Route onward when done.\n"
+    rich_anchors = score_substance(rich)["anchors"]
+    check("rich body clears the substance floor", rich_anchors >= SUBSTANCE_FLOOR)
+    check("thin body trips the substance floor", score_substance(thin)["anchors"] < SUBSTANCE_FLOOR)
+    check("figures counted", score_substance("4.2 percent and 0.042 and 48,212").get("figures") >= 3)
+    check("short quotes are not exemplars", score_substance('say "no" here').get("exemplars") == 0)
+    check("trimming worked content lowers anchors", score_substance(rich)["anchors"] > score_substance(thin)["anchors"])
+
     if failures:
         for label in failures:
             print(f"SELFTEST FAILED: {label}", file=sys.stderr)
@@ -481,6 +607,10 @@ def main(argv: list[str]) -> int:
         help="exit 1 if any audited skill scores below this threshold",
     )
     parser.add_argument(
+        "--substance-gate", type=int, default=None, metavar="N",
+        help="exit 1 if any skill has fewer than N substance anchors (over-trimmed)",
+    )
+    parser.add_argument(
         "--baseline", metavar="PATH",
         help="write current scores to PATH (a snapshot to compare later edits against)",
     )
@@ -491,6 +621,10 @@ def main(argv: list[str]) -> int:
     parser.add_argument(
         "--tolerance", type=float, default=0.1,
         help="allowed score drop before --against flags a regression (default 0.1)",
+    )
+    parser.add_argument(
+        "--substance-tolerance", type=float, default=SUBSTANCE_REGRESS_FRAC,
+        help=f"fractional anchor loss --against tolerates (default {SUBSTANCE_REGRESS_FRAC})",
     )
     parser.add_argument(
         "--selftest", action="store_true",
@@ -529,7 +663,9 @@ def main(argv: list[str]) -> int:
         if not against_path.is_file():
             print(f"baseline not found: {args.against}", file=sys.stderr)
             return 2
-        regressions = compare_baseline(results, against_path, args.tolerance)
+        regressions = compare_baseline(
+            results, against_path, args.tolerance, args.substance_tolerance
+        )
         if regressions:
             print(f"\nREGRESSION ({len(regressions)}): " + "; ".join(regressions), file=sys.stderr)
             exit_code = 1
@@ -544,6 +680,15 @@ def main(argv: list[str]) -> int:
             exit_code = 1
         else:
             print(f"\nGATE PASSED: all skills >= {args.gate}")
+
+    if args.substance_gate is not None:
+        thin = [r for r in results if r["substance"]["anchors"] < args.substance_gate]
+        if thin:
+            names = ", ".join(f"{r['name']} ({r['substance']['anchors']})" for r in thin)
+            print(f"\nSUBSTANCE GATE FAILED (< {args.substance_gate} anchors): {names}", file=sys.stderr)
+            exit_code = 1
+        else:
+            print(f"\nSUBSTANCE GATE PASSED: all skills >= {args.substance_gate} anchors")
 
     return exit_code
 

@@ -1,9 +1,10 @@
-.PHONY: preflight validate validate-strict skillopt-gate audit-skills audit-skills-gate install-codex install-claude scaffold-stata scaffold-r scaffold-python scaffold-skeleton
+.PHONY: preflight validate validate-strict skillopt-gate audit-skills audit-skills-gate verify-citations verify-citations-online smoke-examples install-codex install-claude scaffold-stata scaffold-r scaffold-python scaffold-skeleton
 
 preflight:
 	python3 scripts/validate_repo.py
 	python3 scripts/run_skillopt_gate.py
 	python3 scripts/skill_audit.py --selftest
+	python3 scripts/verify_citations.py --selftest
 	git diff --check
 	git diff --cached --check
 
@@ -20,7 +21,16 @@ audit-skills:
 	python3 scripts/skill_audit.py
 
 audit-skills-gate:
-	python3 scripts/skill_audit.py --gate 85
+	python3 scripts/skill_audit.py --gate 85 --substance-gate 8
+
+verify-citations:
+	python3 scripts/verify_citations.py --offline
+
+verify-citations-online:
+	python3 scripts/verify_citations.py --online
+
+smoke-examples:
+	python3 scripts/run_example_smoke.py
 
 install-codex:
 	python3 scripts/install_skills.py codex
