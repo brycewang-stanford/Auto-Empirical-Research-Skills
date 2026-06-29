@@ -15969,7 +15969,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 225,
+      "line_count": 235,
       "name": "aer-consistency",
       "path": "skills/50-brycewang-aer-skills/skills/aer-consistency/SKILL.md"
     },
@@ -15983,7 +15983,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 207,
+      "line_count": 219,
       "name": "aer-identification",
       "path": "skills/50-brycewang-aer-skills/skills/aer-identification/SKILL.md"
     },
@@ -16039,7 +16039,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 276,
+      "line_count": 284,
       "name": "aer-rebuttal",
       "path": "skills/50-brycewang-aer-skills/skills/aer-rebuttal/SKILL.md"
     },
@@ -16087,7 +16087,7 @@
     },
     {
       "collection": "50-brycewang-aer-skills",
-      "description": "Use when implementing or running the empirical analysis for an AER-track manuscript with StatsPAI — the agent-native unified Python engine and MCP server for causal inference and econometrics — as an alternative to hand-written Stata / R / Python template code. Covers DiD, IV, RDD, synthetic control, robustness, sensitivity, and publication-ready table export.",
+      "description": "Use when aer-identification has fixed the design, after methodology choice and before aer-robustness or aer-tables-figures, to run an AER-track analysis with StatsPAI — the agent-native Python engine and MCP server for causal inference, robustness, sensitivity, and publication-ready table export.",
       "frontmatter_fields": [
         "description",
         "name"
@@ -16095,7 +16095,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 213,
+      "line_count": 224,
       "name": "aer-statspai",
       "path": "skills/50-brycewang-aer-skills/skills/aer-statspai/SKILL.md"
     },
@@ -16115,7 +16115,7 @@
     },
     {
       "collection": "50-brycewang-aer-skills",
-      "description": "Use when constructing or revising regression tables, descriptive statistics tables, or figures for an AER, AER:Insights, or AEJ manuscript. Implements AER booktabs house style, the standard regression-table layout, and the figure-notes convention.",
+      "description": "Use when constructing or revising regression tables, descriptive statistics tables, or figures after results are estimated and before submission for an AER, AER:Insights, or AEJ manuscript. Implements AER booktabs house style, regression-table layout, and figure-note conventions.",
       "frontmatter_fields": [
         "description",
         "name"
@@ -16143,7 +16143,7 @@
     },
     {
       "collection": "50-brycewang-aer-skills",
-      "description": "Use when deciding which AER-skills sub-skill to use next, or when sequencing manuscript work from topic selection through rebuttal for the American Economic Review, AER:Insights, or AEJ journals. Routes — does not replace — the specialized skills.",
+      "description": "Use when deciding which AER-skills sub-skill to use next, before choosing a specialized skill or after a user asks how to sequence manuscript work from topic selection through rebuttal for AER, AER:Insights, or AEJ journals. Routes — does not replace — the specialized skills.",
       "frontmatter_fields": [
         "description",
         "name"

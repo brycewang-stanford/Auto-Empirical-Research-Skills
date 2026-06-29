@@ -1,0 +1,451 @@
+{
+  "_comment": "Recorded Crossref/OpenAlex responses for hermetic offline verification. Regenerate real entries with `verify_citations.py --record-from-bib`. Synthetic fabricated/mismatch fixtures for the gold set are appended by hand.",
+  "responses": {
+    "10.1002/jae.2508": {
+      "found": true,
+      "source": "crossref",
+      "title": "Wild Bootstrap Inference for Wildly Different Cluster Sizes",
+      "surnames": [
+        "mackinnon",
+        "webb"
+      ],
+      "year": 2017,
+      "venue": "Journal of Applied Econometrics",
+      "status": "ok"
+    },
+    "10.1016/j.jeconom.2007.05.005": {
+      "found": true,
+      "source": "crossref",
+      "title": "Manipulation of the running variable in the regression discontinuity design: A density test",
+      "surnames": [
+        "mccrary"
+      ],
+      "year": 2008,
+      "venue": "Journal of Econometrics",
+      "status": "ok"
+    },
+    "10.1016/j.jeconom.2020.09.006": {
+      "found": true,
+      "source": "crossref",
+      "title": "Estimating dynamic treatment effects in event studies with heterogeneous treatment effects",
+      "surnames": [
+        "sun",
+        "abraham"
+      ],
+      "year": 2021,
+      "venue": "Journal of Econometrics",
+      "status": "ok"
+    },
+    "10.1016/j.jeconom.2020.12.001": {
+      "found": true,
+      "source": "crossref",
+      "title": "Difference-in-Differences with multiple time periods",
+      "surnames": [
+        "callaway",
+        "anna"
+      ],
+      "year": 2021,
+      "venue": "Journal of Econometrics",
+      "status": "ok"
+    },
+    "10.1016/j.jeconom.2021.03.014": {
+      "found": true,
+      "source": "crossref",
+      "title": "Difference-in-differences with variation in treatment timing",
+      "surnames": [
+        "bacon"
+      ],
+      "year": 2021,
+      "venue": "Journal of Econometrics",
+      "status": "ok"
+    },
+    "10.1016/j.jeconom.2023.03.008": {
+      "found": true,
+      "source": "crossref",
+      "title": "What’s trending in difference-in-differences? A synthesis of the recent econometrics literature",
+      "surnames": [
+        "roth",
+        "anna",
+        "bilinski",
+        "poe"
+      ],
+      "year": 2023,
+      "venue": "Journal of Econometrics",
+      "status": "ok"
+    },
+    "10.1017/cbo9780511614491.006": {
+      "found": true,
+      "source": "crossref",
+      "title": "Testing for Weak Instruments in Linear IV Regression",
+      "surnames": [
+        "stock",
+        "yogo"
+      ],
+      "year": 2005,
+      "venue": "Identification and Inference for Econometric Models",
+      "status": "ok"
+    },
+    "10.1017/pan.2016.2": {
+      "found": true,
+      "source": "crossref",
+      "title": "Generalized Synthetic Control Method: Causal Inference with Interactive Fixed Effects Models",
+      "surnames": [
+        "xu"
+      ],
+      "year": 2017,
+      "venue": "Political Analysis",
+      "status": "ok"
+    },
+    "10.1038/s41562-020-0912-z": {
+      "found": true,
+      "source": "crossref",
+      "title": "Specification curve analysis",
+      "surnames": [
+        "simonsohn",
+        "simmons",
+        "nelson"
+      ],
+      "year": 2020,
+      "venue": "Nature Human Behaviour",
+      "status": "ok"
+    },
+    "10.1080/00401706.2013.806694": {
+      "found": true,
+      "source": "crossref",
+      "title": "A Robust Test for Weak Instruments",
+      "surnames": [
+        "olea",
+        "pflueger"
+      ],
+      "year": 2013,
+      "venue": "Journal of Business &amp; Economic Statistics",
+      "status": "ok"
+    },
+    "10.1080/01621459.2019.1635480": {
+      "found": true,
+      "source": "crossref",
+      "title": "Simple Local Polynomial Density Estimators",
+      "surnames": [
+        "cattaneo",
+        "jansson",
+        "ma"
+      ],
+      "year": 2020,
+      "venue": "Journal of the American Statistical Association",
+      "status": "ok"
+    },
+    "10.1080/01621459.2021.1929245": {
+      "found": true,
+      "source": "crossref",
+      "title": "The Augmented Synthetic Control Method",
+      "surnames": [
+        "michael",
+        "feller",
+        "rothstein"
+      ],
+      "year": 2021,
+      "venue": "Journal of the American Statistical Association",
+      "status": "ok"
+    },
+    "10.1080/07350015.2016.1227711": {
+      "found": true,
+      "source": "crossref",
+      "title": "Unobservable Selection and Coefficient Stability: Theory and Evidence",
+      "surnames": [
+        "oster"
+      ],
+      "year": 2019,
+      "venue": "Journal of Business &amp; Economic Statistics",
+      "status": "ok"
+    },
+    "10.1080/07350015.2017.1366909": {
+      "found": true,
+      "source": "crossref",
+      "title": "Why High-Order Polynomials Should Not Be Used in Regression Discontinuity Designs",
+      "surnames": [
+        "gelman",
+        "imbens"
+      ],
+      "year": 2019,
+      "venue": "Journal of Business &amp; Economic Statistics",
+      "status": "ok"
+    },
+    "10.1093/qje/qjz025": {
+      "found": true,
+      "source": "crossref",
+      "title": "Shift-Share Designs: Theory and Inference*",
+      "surnames": [
+        "adao",
+        "kolesar",
+        "morales"
+      ],
+      "year": 2019,
+      "venue": "The Quarterly Journal of Economics",
+      "status": "ok"
+    },
+    "10.1093/restud/rdab030": {
+      "found": true,
+      "source": "crossref",
+      "title": "Quasi-Experimental Shift-Share Research Designs",
+      "surnames": [
+        "borusyak",
+        "hull",
+        "jaravel"
+      ],
+      "year": 2022,
+      "venue": "The Review of Economic Studies",
+      "status": "ok"
+    },
+    "10.1093/restud/rdad018": {
+      "found": true,
+      "source": "crossref",
+      "title": "A More Credible Approach to Parallel Trends",
+      "surnames": [
+        "rambachan",
+        "roth"
+      ],
+      "year": 2023,
+      "venue": "Review of Economic Studies",
+      "status": "ok"
+    },
+    "10.1093/restud/rdae007": {
+      "found": true,
+      "source": "crossref",
+      "title": "Revisiting Event-Study Designs: Robust and Efficient Estimation",
+      "surnames": [
+        "borusyak",
+        "jaravel",
+        "spiess"
+      ],
+      "year": 2024,
+      "venue": "Review of Economic Studies",
+      "status": "ok"
+    },
+    "10.1146/annurev-economics-080218-025643": {
+      "found": true,
+      "source": "crossref",
+      "title": "Weak Instruments in Instrumental Variables Regression: Theory and Practice",
+      "surnames": [
+        "andrews",
+        "stock",
+        "sun"
+      ],
+      "year": 2019,
+      "venue": "Annual Review of Economics",
+      "status": "ok"
+    },
+    "10.1162/qjec.2008.123.1.139": {
+      "found": true,
+      "source": "crossref",
+      "title": "The Long-Term Effects of Africa's Slave Trades<sup>*</sup>",
+      "surnames": [
+        "nunn"
+      ],
+      "year": 2008,
+      "venue": "Quarterly Journal of Economics",
+      "status": "ok"
+    },
+    "10.1162/rest.90.3.414": {
+      "found": true,
+      "source": "crossref",
+      "title": "Bootstrap-Based Improvements for Inference with Clustered Errors",
+      "surnames": [
+        "cameron",
+        "gelbach",
+        "miller"
+      ],
+      "year": 2008,
+      "venue": "Review of Economics and Statistics",
+      "status": "ok"
+    },
+    "10.1162/rest_a_00139": {
+      "found": true,
+      "source": "crossref",
+      "title": "Plausibly Exogenous",
+      "surnames": [
+        "conley",
+        "hansen",
+        "rossi"
+      ],
+      "year": 2012,
+      "venue": "Review of Economics and Statistics",
+      "status": "ok"
+    },
+    "10.1198/jasa.2009.ap08746": {
+      "found": true,
+      "source": "crossref",
+      "title": "Synthetic Control Methods for Comparative Case Studies: Estimating the Effect of California’s Tobacco Control Program",
+      "surnames": [
+        "abadie",
+        "diamond",
+        "hainmueller"
+      ],
+      "year": 2010,
+      "venue": "Journal of the American Statistical Association",
+      "status": "ok"
+    },
+    "10.1257/000282803321455188": {
+      "found": true,
+      "source": "crossref",
+      "title": "The Economic Costs of Conflict: A Case Study of the Basque Country",
+      "surnames": [
+        "abadie",
+        "gardeazabal"
+      ],
+      "year": 2003,
+      "venue": "American Economic Review",
+      "status": "ok"
+    },
+    "10.1257/aer.103.6.2121": {
+      "found": true,
+      "source": "crossref",
+      "title": "The China Syndrome: Local Labor Market Effects of Import Competition in the United States",
+      "surnames": [
+        "autor",
+        "dorn",
+        "hanson"
+      ],
+      "year": 2013,
+      "venue": "American Economic Review",
+      "status": "ok"
+    },
+    "10.1257/aer.20181047": {
+      "found": true,
+      "source": "crossref",
+      "title": "Bartik Instruments: What, When, Why, and How",
+      "surnames": [
+        "pinkham",
+        "sorkin",
+        "swift"
+      ],
+      "year": 2020,
+      "venue": "American Economic Review",
+      "status": "ok"
+    },
+    "10.1257/aer.20181169": {
+      "found": true,
+      "source": "crossref",
+      "title": "Two-Way Fixed Effects Estimators with Heterogeneous Treatment Effects",
+      "surnames": [
+        "chaisemartin",
+        "haultfoeuille"
+      ],
+      "year": 2020,
+      "venue": "American Economic Review",
+      "status": "ok"
+    },
+    "10.1257/aer.20190159": {
+      "found": true,
+      "source": "crossref",
+      "title": "Synthetic Difference-in-Differences",
+      "surnames": [
+        "arkhangelsky",
+        "athey",
+        "hirshberg",
+        "imbens",
+        "wager"
+      ],
+      "year": 2021,
+      "venue": "American Economic Review",
+      "status": "ok"
+    },
+    "10.1257/aer.20211063": {
+      "found": true,
+      "source": "crossref",
+      "title": "Valid <i>t</i>-ratio Inference for IV",
+      "surnames": [
+        "lee",
+        "mccrary",
+        "moreira",
+        "porter"
+      ],
+      "year": 2022,
+      "venue": "American Economic Review",
+      "status": "ok"
+    },
+    "10.1257/aer.29999999": {
+      "found": false,
+      "source": "crossref+openalex",
+      "title": "",
+      "surnames": [],
+      "year": null,
+      "venue": "",
+      "status": "not_found"
+    },
+    "10.1257/aer.91.5.1369": {
+      "found": true,
+      "source": "crossref",
+      "title": "The Colonial Origins of Comparative Development: An Empirical Investigation",
+      "surnames": [
+        "acemoglu",
+        "johnson",
+        "robinson"
+      ],
+      "year": 2001,
+      "venue": "American Economic Review",
+      "status": "ok"
+    },
+    "10.1257/aeri.20210236": {
+      "found": true,
+      "source": "crossref",
+      "title": "Pretest with Caution: Event-Study Estimates after Testing for Parallel Trends",
+      "surnames": [
+        "roth"
+      ],
+      "year": 2022,
+      "venue": "American Economic Review: Insights",
+      "status": "ok"
+    },
+    "10.1257/jel.20191450": {
+      "found": true,
+      "source": "crossref",
+      "title": "Using Synthetic Controls: Feasibility, Data Requirements, and Methodological Aspects",
+      "surnames": [
+        "abadie"
+      ],
+      "year": 2021,
+      "venue": "Journal of Economic Literature",
+      "status": "ok"
+    },
+    "10.3982/ecta11757": {
+      "found": true,
+      "source": "crossref",
+      "title": "Robust Nonparametric Confidence Intervals for Regression-Discontinuity Designs",
+      "surnames": [
+        "calonico",
+        "cattaneo",
+        "titiunik"
+      ],
+      "year": 2014,
+      "venue": "Econometrica",
+      "status": "ok"
+    },
+    "10.3982/ecta8121": {
+      "found": true,
+      "source": "crossref",
+      "title": "The Persistent Effects of Peru's Mining<i>Mita</i>",
+      "surnames": [],
+      "year": 2010,
+      "venue": "Econometrica",
+      "status": "ok"
+    },
+    "10.5555/unreachable.0001": {
+      "found": false,
+      "source": "crossref+openalex",
+      "title": "",
+      "surnames": [],
+      "year": null,
+      "venue": "",
+      "status": "error: timeout"
+    },
+    "10.9999/fake.00000": {
+      "found": false,
+      "source": "crossref+openalex",
+      "title": "",
+      "surnames": [],
+      "year": null,
+      "venue": "",
+      "status": "not_found"
+    }
+  }
+}

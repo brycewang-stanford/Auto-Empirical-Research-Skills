@@ -12,27 +12,27 @@
   "taxonomy": {
     "language": {
       "latex": 95,
-      "stata": 49,
+      "stata": 48,
       "python": 46,
       "r": 22
     },
     "method": {
-      "iv": 28,
-      "rdd": 26,
+      "iv": 27,
+      "rdd": 25,
       "panel-fe": 19,
       "staggered-did": 17,
       "bayesian": 13,
-      "synthetic-control": 11,
       "did": 10,
       "dml": 10,
       "event-study": 10,
       "matching": 10,
+      "synthetic-control": 10,
       "survival": 3
     },
     "stage": {
       "analysis": 139,
-      "writing": 87,
-      "submission": 78,
+      "writing": 86,
+      "submission": 79,
       "literature": 62,
       "reproduction": 58,
       "citation": 48,
@@ -45,8 +45,8 @@
       "data": 12
     },
     "topic": {
-      "econometrics": 80,
-      "scientific-writing": 71,
+      "econometrics": 79,
+      "scientific-writing": 70,
       "reproducibility": 58,
       "proofreading": 35,
       "causal-inference": 30
@@ -18596,7 +18596,7 @@
       "name": "aer-consistency",
       "path": "skills/50-brycewang-aer-skills/skills/aer-consistency/SKILL.md",
       "collection": "50-brycewang-aer-skills",
-      "line_count": 225,
+      "line_count": 235,
       "description_effective": "Use when auditing a finished or near-finished AER, AER:Insights, or AEJ manuscript for internal consistency: headline numbers across abstract, introduction, results, and tables; sample sizes; log-point and percentage-point conversions; cross-references; and in-text-citation/bibliography matching. Apply after the body and exhibits exist, before aer-referee-sim and aer-submission.",
       "description_source": "frontmatter",
       "has_references": false,
@@ -18623,7 +18623,7 @@
       "name": "aer-identification",
       "path": "skills/50-brycewang-aer-skills/skills/aer-identification/SKILL.md",
       "collection": "50-brycewang-aer-skills",
-      "line_count": 207,
+      "line_count": 219,
       "description_effective": "Use when selecting, implementing, or stress-testing the causal identification strategy for an empirical economics manuscript — difference-in-differences (including staggered designs), instrumental variables (including weak-IV-robust inference), regression discontinuity, synthetic control, or shift-share / Bartik. Apply before writing the introduction or results.",
       "description_source": "frontmatter",
       "has_references": false,
@@ -18724,7 +18724,7 @@
       "name": "aer-rebuttal",
       "path": "skills/50-brycewang-aer-skills/skills/aer-rebuttal/SKILL.md",
       "collection": "50-brycewang-aer-skills",
-      "line_count": 276,
+      "line_count": 284,
       "description_effective": "Use when responding to a Revise & Resubmit decision from AER, AER:Insights, or an AEJ, and a point-by-point response letter plus aligned manuscript revisions are needed. Handles triage, the concede / clarify / push-back decision, and the response-letter format that editors actually read.",
       "description_source": "frontmatter",
       "has_references": false,
@@ -18818,29 +18818,20 @@
       "name": "aer-statspai",
       "path": "skills/50-brycewang-aer-skills/skills/aer-statspai/SKILL.md",
       "collection": "50-brycewang-aer-skills",
-      "line_count": 213,
-      "description_effective": "Use when implementing or running the empirical analysis for an AER-track manuscript with StatsPAI — the agent-native unified Python engine and MCP server for causal inference and econometrics — as an alternative to hand-written Stata / R / Python template code. Covers DiD, IV, RDD, synthetic control, robustness, sensitivity, and publication-ready table export.",
+      "line_count": 224,
+      "description_effective": "Use when aer-identification has fixed the design, after methodology choice and before aer-robustness or aer-tables-figures, to run an AER-track analysis with StatsPAI — the agent-native Python engine and MCP server for causal inference, robustness, sensitivity, and publication-ready table export.",
       "description_source": "frontmatter",
       "has_references": false,
       "tags": {
         "language": [
-          "python",
-          "stata"
-        ],
-        "method": [
-          "iv",
-          "rdd",
-          "synthetic-control"
+          "python"
         ],
         "stage": [
           "analysis",
-          "robustness",
-          "writing"
+          "robustness"
         ],
         "topic": [
-          "causal-inference",
-          "econometrics",
-          "scientific-writing"
+          "causal-inference"
         ]
       },
       "quality_score": 100,
@@ -18879,7 +18870,7 @@
       "path": "skills/50-brycewang-aer-skills/skills/aer-tables-figures/SKILL.md",
       "collection": "50-brycewang-aer-skills",
       "line_count": 181,
-      "description_effective": "Use when constructing or revising regression tables, descriptive statistics tables, or figures for an AER, AER:Insights, or AEJ manuscript. Implements AER booktabs house style, the standard regression-table layout, and the figure-notes convention.",
+      "description_effective": "Use when constructing or revising regression tables, descriptive statistics tables, or figures after results are estimated and before submission for an AER, AER:Insights, or AEJ manuscript. Implements AER booktabs house style, regression-table layout, and figure-note conventions.",
       "description_source": "frontmatter",
       "has_references": false,
       "tags": {
@@ -18888,6 +18879,7 @@
         ],
         "stage": [
           "analysis",
+          "submission",
           "tables-figures",
           "writing"
         ],
@@ -18923,7 +18915,7 @@
       "path": "skills/50-brycewang-aer-skills/skills/aer-workflow/SKILL.md",
       "collection": "50-brycewang-aer-skills",
       "line_count": 142,
-      "description_effective": "Use when deciding which AER-skills sub-skill to use next, or when sequencing manuscript work from topic selection through rebuttal for the American Economic Review, AER:Insights, or AEJ journals. Routes — does not replace — the specialized skills.",
+      "description_effective": "Use when deciding which AER-skills sub-skill to use next, before choosing a specialized skill or after a user asks how to sequence manuscript work from topic selection through rebuttal for AER, AER:Insights, or AEJ journals. Routes — does not replace — the specialized skills.",
       "description_source": "frontmatter",
       "has_references": false,
       "tags": {

@@ -17,6 +17,10 @@ Worked examples that show what the skills produce in practice.
 | [`staggered-did-demo/`](staggered-did-demo/) | Runnable Python/R simulation showing why TWFE fails under staggered adoption with heterogeneous dynamic effects |
 | [`iv-weak-instrument-demo/`](iv-weak-instrument-demo/) | Runnable Python simulation showing why conventional 2SLS inference can over-reject with weak instruments and why Anderson-Rubin inference is safer |
 | [`rdd-polynomial-demo/`](rdd-polynomial-demo/) | Runnable Python simulation showing why high-order global polynomials mislead in RDD and local-linear `rdrobust` is safer |
+| [`synthetic-control-demo/`](synthetic-control-demo/) | Runnable Python simulation showing why synthetic-control inference comes from the placebo-in-space permutation distribution, not visual pre-period fit |
+| [`shift-share-demo/`](shift-share-demo/) | Runnable Python simulation showing why shift-share/Bartik inference belongs at the shock (industry) level, not the region level — region-clustered SEs over-reject |
+| [`few-clusters-demo/`](few-clusters-demo/) | Runnable Python simulation showing why a cluster-robust t-test over-rejects with few clusters and the wild cluster bootstrap restores nominal size |
+| [`multiple-testing-demo/`](multiple-testing-demo/) | Runnable Python simulation showing why testing many outcomes inflates the family-wise error rate and how Bonferroni/Holm control it without killing power |
 
 ## How to Use
 
@@ -38,6 +42,19 @@ python3 scripts/scaffold_project.py skeleton /path/to/new-replication-package
 ```
 
 Add `--dry-run` first if you want to inspect the planned copies.
+
+For runnable demos, install the pinned Python stack in
+[`../templates/python/requirements.txt`](../templates/python/requirements.txt)
+and run the optional smoke gate from the repository root:
+
+```bash
+make smoke-examples
+```
+
+The smoke gate executes demo assertions when dependencies are present and skips
+missing optional stacks by default. Use
+`python3 scripts/run_example_smoke.py --strict-deps` before release to fail on
+any missing dependency or failed demo assertion.
 
 Before copying an example's structure into a manuscript, cross-check the design
 against [`../docs/methods-reference.md`](../docs/methods-reference.md) and run

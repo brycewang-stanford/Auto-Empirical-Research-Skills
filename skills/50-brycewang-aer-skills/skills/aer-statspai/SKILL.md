@@ -1,6 +1,6 @@
 ---
 name: aer-statspai
-description: Use when implementing or running the empirical analysis for an AER-track manuscript with StatsPAI — the agent-native unified Python engine and MCP server for causal inference and econometrics — as an alternative to hand-written Stata / R / Python template code. Covers DiD, IV, RDD, synthetic control, robustness, sensitivity, and publication-ready table export.
+description: Use when aer-identification has fixed the design, after methodology choice and before aer-robustness or aer-tables-figures, to run an AER-track analysis with StatsPAI — the agent-native Python engine and MCP server for causal inference, robustness, sensitivity, and publication-ready table export.
 ---
 
 # AER StatsPAI
@@ -96,6 +96,17 @@ no need to ferry betas, standard errors, or covariance matrices by hand.
 
 Token economy: pass `detail='minimal'` on cheap sub-step calls; the default
 `detail='agent'` carries the violations list and `next_steps` you actually need.
+
+## Worked Execution Snapshot
+
+Before handing results to `aer-robustness`, leave this shape:
+
+```text
+DESIGN: staggered DiD; n = 48,212; cohorts = 37
+RESULT: ATT = -0.042; SE = 0.011; pretrend p = 0.64
+AUDIT: forbidden weight = 0.31; honest-DiD Mbar=1 bound [-0.071, -0.009]
+DECISION: advance only if template cross-check agrees within 0.002
+```
 
 ## Mapping AER Identification Strategies to StatsPAI
 

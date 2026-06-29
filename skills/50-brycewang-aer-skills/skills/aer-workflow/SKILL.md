@@ -1,6 +1,6 @@
 ---
 name: aer-workflow
-description: Use when deciding which AER-skills sub-skill to use next, or when sequencing manuscript work from topic selection through rebuttal for the American Economic Review, AER:Insights, or AEJ journals. Routes — does not replace — the specialized skills.
+description: Use when deciding which AER-skills sub-skill to use next, before choosing a specialized skill or after a user asks how to sequence manuscript work from topic selection through rebuttal for AER, AER:Insights, or AEJ journals. Routes — does not replace — the specialized skills.
 ---
 
 # AER Workflow
