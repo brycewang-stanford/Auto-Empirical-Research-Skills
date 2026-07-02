@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import ast
+import csv
 import json
 import re
 import shutil
@@ -54,6 +55,8 @@ REQUIRED_CLI_SCRIPTS = (
     ROOT / "scripts" / "validate_repo.py",
     ROOT / "scripts" / "skill_audit.py",
     ROOT / "scripts" / "run_skillopt_gate.py",
+    ROOT / "scripts" / "run_example_smoke.py",
+    ROOT / "scripts" / "verify_citations.py",
 )
 PYTHON_IMPORT_PACKAGE_MAP = {
     "dateutil": "python-dateutil",
@@ -177,6 +180,7 @@ REQUIRED_SKELETON_README_TEXT = (
     "data/codebook/source-register.md",
     "docs/",
     "docs/exhibit-register.md",
+    "docs/claim-evidence-ledger.csv",
     "exact sample size",
     "do run_all.do",
     "output/tables/*.tex",
@@ -186,6 +190,23 @@ REQUIRED_SKELETON_README_TEXT = (
     "logs/run_all.log",
     "logs/",
     "[BRACKETED]",
+)
+CLAIM_LEDGER_COLUMNS = (
+    "claim_id",
+    "claim_text",
+    "claim_location",
+    "evidence_type",
+    "evidence_ref",
+    "status",
+    "notes",
+)
+REQUIRED_PREFLIGHT_COMMANDS = (
+    "python3 scripts/validate_repo.py",
+    "python3 scripts/run_skillopt_gate.py",
+    "python3 scripts/skill_audit.py --selftest",
+    "python3 scripts/verify_citations.py --selftest",
+    "git diff --check",
+    "git diff --cached --check",
 )
 EXPECTED_EXAMPLE_DEMOS = {
     "iv-weak-instrument-demo": {
@@ -201,10 +222,27 @@ EXPECTED_EXAMPLE_DEMOS = {
         "staggered_did_demo.R",
         "staggered_did_demo.py",
     },
+    "synthetic-control-demo": {
+        "README.md",
+        "synthetic_control_demo.py",
+    },
+    "shift-share-demo": {
+        "README.md",
+        "shift_share_demo.py",
+    },
+    "few-clusters-demo": {
+        "README.md",
+        "few_clusters_demo.py",
+    },
+    "multiple-testing-demo": {
+        "README.md",
+        "multiple_testing_demo.py",
+    },
 }
 TEXT_SUFFIXES = {
     "",
     ".bib",
+    ".csv",
     ".do",
     ".json",
     ".md",
@@ -342,6 +380,7 @@ REQUIRED_RESOURCE_LINKS = {
     ),
     ROOT / "skills" / "aer-consistency" / "SKILL.md": (
         "examples/replication-package-skeleton/docs/exhibit-register.md",
+        "examples/replication-package-skeleton/docs/claim-evidence-ledger.csv",
         "skills/aer-paper-body/SKILL.md",
         "skills/aer-literature/SKILL.md",
         "docs/style-guide.md",
@@ -927,6 +966,21 @@ def markdown_anchors(path: Path) -> set[str]:
     return anchors
 
 
+def make_target_body(makefile_text: str, target: str) -> str:
+    body: list[str] = []
+    in_target = False
+    for line in makefile_text.splitlines():
+        target_match = re.match(r"^([A-Za-z0-9_.-]+)\s*:", line)
+        if target_match:
+            if in_target:
+                break
+            in_target = target_match.group(1) == target
+            continue
+        if in_target:
+            body.append(line)
+    return "\n".join(body).strip()
+
+
 def check_validator_self_tests(errors: list[str]) -> None:
     slug_cases = {
         "1. Difference-in-differences (staggered adoption)": (
@@ -1022,6 +1076,27 @@ def check_validator_self_tests(errors: list[str]) -> None:
         missing = sorted(expected_anchors - actual_anchors)
         if missing:
             fail(errors, f"validator: markdown anchor self-test missed {', '.join(missing)}")
+
+    makefile_fixture = "\n".join(
+        [
+            ".PHONY: preflight other",
+            "",
+            "preflight:",
+            "\tpython3 scripts/validate_repo.py",
+            "\tgit diff --check",
+            "",
+            "other:",
+            "\tgit diff --cached --check",
+            "",
+        ]
+    )
+    preflight_body = make_target_body(makefile_fixture, "preflight")
+    if "python3 scripts/validate_repo.py" not in preflight_body:
+        fail(errors, "validator: Makefile target parser missed preflight body")
+    if "git diff --cached --check" in preflight_body:
+        fail(errors, "validator: Makefile target parser leaked commands from next target")
+    if make_target_body(makefile_fixture, "missing"):
+        fail(errors, "validator: Makefile target parser returned body for missing target")
 
     with tempfile.TemporaryDirectory() as tempdir:
         fixture_dir = Path(tempdir)
@@ -1226,6 +1301,35 @@ def check_template_layout(errors: list[str]) -> None:
         ):
             if phrase not in exhibit_register_text:
                 fail(errors, f"{rel(skeleton_exhibit_register)}: missing {phrase!r}")
+    skeleton_claim_ledger = skeleton / "docs" / "claim-evidence-ledger.csv"
+    if not skeleton_claim_ledger.is_file():
+        fail(errors, f"{rel(skeleton_claim_ledger)}: missing")
+    else:
+        with skeleton_claim_ledger.open(newline="", encoding="utf-8") as handle:
+            reader = csv.DictReader(handle)
+            fieldnames = reader.fieldnames or []
+            missing_columns = [name for name in CLAIM_LEDGER_COLUMNS if name not in fieldnames]
+            if missing_columns:
+                fail(
+                    errors,
+                    f"{rel(skeleton_claim_ledger)}: missing columns "
+                    + ", ".join(missing_columns),
+                )
+            rows = list(reader)
+        if len(rows) < 3:
+            fail(errors, f"{rel(skeleton_claim_ledger)}: expected at least 3 example rows")
+        for index, row in enumerate(rows, start=2):
+            label = row.get("claim_id") or f"row {index}"
+            for column in CLAIM_LEDGER_COLUMNS:
+                if not (row.get(column) or "").strip():
+                    fail(errors, f"{rel(skeleton_claim_ledger)}: {label} missing {column}")
+            if (row.get("status") or "").strip() != "NEEDS-EVIDENCE":
+                fail(errors, f"{rel(skeleton_claim_ledger)}: {label} should start as NEEDS-EVIDENCE")
+            evidence_ref = row.get("evidence_ref") or ""
+            if not any(
+                marker in evidence_ref for marker in ("label:", "cite:", "file:", "external:")
+            ):
+                fail(errors, f"{rel(skeleton_claim_ledger)}: {label} lacks typed evidence_ref")
     skeleton_top_level = {child.name for child in skeleton.iterdir() if child.is_file()}
     expected_top_level = {"LICENSE", "README.md", "run_all.do"}
     missing = sorted(expected_top_level - skeleton_top_level)
@@ -1848,20 +1952,29 @@ def check_makefile(errors: list[str]) -> None:
         fail(errors, "Makefile: missing")
         return
     text = makefile.read_text(encoding="utf-8")
-    if "preflight:" not in text:
+    preflight_body = make_target_body(text, "preflight")
+    if not preflight_body:
         fail(errors, "Makefile: missing preflight target")
-    if "git diff --check" not in text:
-        fail(errors, "Makefile: preflight should run git diff --check")
-    if "git diff --cached --check" not in text:
-        fail(errors, "Makefile: preflight should run git diff --cached --check")
+    else:
+        for command in REQUIRED_PREFLIGHT_COMMANDS:
+            if command not in preflight_body:
+                fail(errors, f"Makefile: preflight should run {command}")
     if "scaffold-skeleton:" not in text:
         fail(errors, "Makefile: missing scaffold-skeleton target")
     if "./aer-" in text:
         fail(errors, "Makefile: scaffold targets should require explicit DEST")
     for target in ("scaffold-stata", "scaffold-r", "scaffold-python", "scaffold-skeleton"):
-        pattern = rf"{target}:\n\t@test -n \"\$\(DEST\)\""
-        if not re.search(pattern, text):
+        body = make_target_body(text, target)
+        if '@test -n "$(DEST)"' not in body:
             fail(errors, f"Makefile: {target} should require DEST")
+    audit_gate_body = make_target_body(text, "audit-skills-gate")
+    expected_audit_gate = "python3 scripts/skill_audit.py --gate 85 --substance-gate 8"
+    if expected_audit_gate not in audit_gate_body:
+        fail(errors, f"Makefile: audit-skills-gate should run {expected_audit_gate}")
+    smoke_body = make_target_body(text, "smoke-examples")
+    expected_smoke = "python3 scripts/run_example_smoke.py"
+    if expected_smoke not in smoke_body:
+        fail(errors, f"Makefile: smoke-examples should run {expected_smoke}")
 
 
 def check_gitignore(errors: list[str]) -> None:
@@ -1922,6 +2035,7 @@ def check_ci_workflow(errors: list[str]) -> None:
         "sudo apt-get install -y r-base",
         "make preflight",
         "make validate-strict",
+        "make audit-skills-gate",
     )
     for snippet in required_snippets:
         if snippet not in text:

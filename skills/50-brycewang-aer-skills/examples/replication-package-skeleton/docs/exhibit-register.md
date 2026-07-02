@@ -5,6 +5,10 @@ code, statistical method, and output artifact. Keep it synchronized with the
 manuscript, appendix, and `README.md` table titled "List of Tables, Figures, and
 Programs."
 
+Use `docs/claim-evidence-ledger.csv` for the inverse map: every abstract,
+introduction, and conclusion claim must point back to one or more exhibit
+labels, citation keys, or output files.
+
 ## Main Exhibits
 
 | Exhibit | Claim supported | Script and lines | Input data | Estimator or statistic | Exact sample size | Output file | Figure/table note | Accessibility note |

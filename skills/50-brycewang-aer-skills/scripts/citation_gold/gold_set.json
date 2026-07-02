@@ -1,0 +1,124 @@
+{
+  "_comment": "Labeled gold set for verify_citations.py --selftest. Each tuple is a synthetic bib entry exercising one verdict path of the verifier, resolved hermetically against recorded_responses.json (no network). Real DOIs are reused from references.bib; fabricated/unreachable DOIs are recorded as not-found / error fixtures. Mirrors the reference repo's evals/gold/citation_extraction design, specialized to economics.",
+  "schema": {
+    "id": "stable tuple identifier",
+    "key": "synthetic bibtex key",
+    "doi": "DOI under test (may be empty)",
+    "title": "title as it would appear in the bib entry",
+    "author": "author field in bibtex form",
+    "year": "year as recorded in the bib entry",
+    "note": "bib note field (used for no-DOI exemptions)",
+    "expected": "expected verdict from VERDICT_SEVERITY"
+  },
+  "tuples": [
+    {
+      "id": "001-verified-aer-dcdh-2020",
+      "key": "dcdh_2020",
+      "doi": "10.1257/aer.20181169",
+      "title": "Two-Way Fixed Effects Estimators with Heterogeneous Treatment Effects",
+      "author": "de Chaisemartin, Cl{\\'e}ment and D'Haultf{\\oe}uille, Xavier",
+      "year": 2020,
+      "expected": "VERIFIED"
+    },
+    {
+      "id": "002-verified-aer-ajr-2001",
+      "key": "ajr_2001",
+      "doi": "10.1257/aer.91.5.1369",
+      "title": "The Colonial Origins of Comparative Development: An Empirical Investigation",
+      "author": "Acemoglu, Daron and Johnson, Simon and Robinson, James A.",
+      "year": 2001,
+      "expected": "VERIFIED"
+    },
+    {
+      "id": "003-verified-qje-shiftshare-2019",
+      "key": "akm_2019",
+      "doi": "10.1093/qje/qjz025",
+      "title": "Shift-Share Designs: Theory and Inference",
+      "author": "Adao, Rodrigo and Kolesar, Michal and Morales, Eduardo",
+      "year": 2019,
+      "expected": "VERIFIED"
+    },
+    {
+      "id": "004-fabricated-aer-lookalike-doi",
+      "key": "ghost_did_2029",
+      "doi": "10.1257/aer.29999999",
+      "title": "Causal Effects That Were Never Estimated",
+      "author": "Phantom, Paula",
+      "year": 2029,
+      "expected": "FABRICATED"
+    },
+    {
+      "id": "005-fabricated-unknown-registrant",
+      "key": "vapor_iv_2024",
+      "doi": "10.9999/fake.00000",
+      "title": "Instruments From Thin Air",
+      "author": "Mirage, Marco",
+      "year": 2024,
+      "expected": "FABRICATED"
+    },
+    {
+      "id": "006-title-mismatch-real-doi",
+      "key": "misattributed_title_2020",
+      "doi": "10.1257/aer.20181169",
+      "title": "A Theory of Minimum Wages and Teenage Employment in New Jersey",
+      "author": "de Chaisemartin, Cl{\\'e}ment and D'Haultf{\\oe}uille, Xavier",
+      "year": 2020,
+      "expected": "TITLE_MISMATCH"
+    },
+    {
+      "id": "007-author-mismatch-real-doi",
+      "key": "misattributed_author_2001",
+      "doi": "10.1257/aer.91.5.1369",
+      "title": "The Colonial Origins of Comparative Development: An Empirical Investigation",
+      "author": "Imposter, Ivan",
+      "year": 2001,
+      "expected": "AUTHOR_MISMATCH"
+    },
+    {
+      "id": "008-year-mismatch-real-doi",
+      "key": "misattributed_year_2020",
+      "doi": "10.1257/aer.20181169",
+      "title": "Two-Way Fixed Effects Estimators with Heterogeneous Treatment Effects",
+      "author": "de Chaisemartin, Cl{\\'e}ment and D'Haultf{\\oe}uille, Xavier",
+      "year": 2010,
+      "expected": "YEAR_MISMATCH"
+    },
+    {
+      "id": "009-exempt-no-doi-noted",
+      "key": "card_krueger_1994",
+      "doi": "",
+      "title": "Minimum Wages and Employment: A Case Study of the Fast-Food Industry in New Jersey and Pennsylvania",
+      "author": "Card, David and Krueger, Alan B.",
+      "year": 1994,
+      "note": "Predates AEA Crossref DOIs; JSTOR stable URL recorded.",
+      "expected": "EXEMPT"
+    },
+    {
+      "id": "010-missing-doi-no-note",
+      "key": "mystery_2020",
+      "doi": "",
+      "title": "A Paper With No Identifier And No Explanation",
+      "author": "Anonymous, Anne",
+      "year": 2020,
+      "expected": "MISSING_DOI"
+    },
+    {
+      "id": "011-bad-doi-malformed",
+      "key": "broken_doi_2021",
+      "doi": "11.1234/not-a-real-doi-prefix",
+      "title": "An Entry With A Structurally Invalid DOI",
+      "author": "Typo, Tom",
+      "year": 2021,
+      "expected": "BAD_DOI"
+    },
+    {
+      "id": "012-unresolved-network-error",
+      "key": "offline_2022",
+      "doi": "10.5555/unreachable.0001",
+      "title": "A Real-Looking Entry The Index Could Not Be Reached For",
+      "author": "Network, Nadia",
+      "year": 2022,
+      "expected": "UNRESOLVED"
+    }
+  ]
+}
