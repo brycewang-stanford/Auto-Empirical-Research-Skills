@@ -111,6 +111,27 @@ Keep main-text robustness to **one table** with each row a different specificati
 - Magnitude differences are explained in the text, not left to the reader to compute
 - Sample-size changes across rows are flagged
 
+## StatsPAI Tool Bindings
+
+<!-- tool-bindings -->
+When a StatsPAI MCP server is connected, drive the referee-anticipating battery
+through **validated tools** rather than hand-rolled scripts — and let
+`audit_result` enumerate what is still missing instead of guessing. The full
+registry lives in `skills/aer-statspai/SKILL.md`.
+
+| Check | Call (StatsPAI) | Do not hand-roll |
+|---|---|---|
+| Missing-checks enumeration | `audit_result` | picking robustness checks from memory |
+| Specification curve | `spec_curve` | a hand-picked grid of two flattering specs |
+| Few-cluster inference | `wild_cluster_bootstrap`, `twoway_cluster` | default cluster-robust SEs with < 30 clusters |
+| Spatial correlation | `conley` | ignoring spatial dependence in geographic data |
+| Pre-trends sensitivity | `honest_did`, `honest_did_from_result` | asserting parallel trends from a flat pre-period |
+| Selection on unobservables | `oster_delta`, `oster_bounds`, `sensitivity_from_result` | a hand-rolled "controls barely move the coefficient" claim |
+| Observational confounding | `evalue_from_result` | a verbal "unobservables would have to be huge" argument |
+| Heterogeneity / CATE | `causal_forest`, `metalearner` | subgroup splits mined until one is significant |
+| Multiple-outcome FWER | `romano_wolf` | reporting many outcomes with uncorrected p-values |
+<!-- /tool-bindings -->
+
 ## Repository Resources
 
 When working from the AER-skills repository or plugin bundle, load only the

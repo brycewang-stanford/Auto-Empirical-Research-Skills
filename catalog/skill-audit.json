@@ -10130,7 +10130,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 219,
+      "line_count": 241,
       "name": "aer-identification",
       "path": "skills/50-brycewang-aer-skills/skills/aer-identification/SKILL.md"
     },
@@ -10200,7 +10200,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 150,
+      "line_count": 171,
       "name": "aer-robustness",
       "path": "skills/50-brycewang-aer-skills/skills/aer-robustness/SKILL.md"
     },
@@ -10210,7 +10210,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 224,
+      "line_count": 229,
       "name": "aer-statspai",
       "path": "skills/50-brycewang-aer-skills/skills/aer-statspai/SKILL.md"
     },

@@ -25,6 +25,7 @@ calonico_cattaneo_titiunik_2014, cattaneo_jansson_ma_2020.
 
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -36,6 +37,9 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 from rdrobust import rdrobust
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from _aer_numeric_check import numeric_check  # noqa: E402
 
 SEED = 20260101
 N = 1000
@@ -176,10 +180,10 @@ def main() -> int:
     print(f"Figure written to {pdf.relative_to(pdf.parents[2])}")
 
     # ---- assertions ----
-    assert abs(gp["bias"]) > 0.20, "global polynomial should be materially biased"
-    assert gp["ci_coverage"] < 0.50, "global-poly CI should badly under-cover"
-    assert abs(rdr["bias"]) < 0.10, "rdrobust should recover the jump"
-    assert rdr["ci_coverage"] > 0.90, "rdrobust RBC CI should cover near nominal"
+    numeric_check("global-polynomial bias is material", abs(gp["bias"]), lo=0.20)
+    numeric_check("global-poly CI badly under-covers", gp["ci_coverage"], hi=0.50)
+    numeric_check("rdrobust recovers the jump", abs(rdr["bias"]), hi=0.10)
+    numeric_check("rdrobust RBC CI covers near nominal", rdr["ci_coverage"], lo=0.90)
     print("\nAll assertions passed: the global polynomial misleads; rdrobust does not.")
     return 0
 

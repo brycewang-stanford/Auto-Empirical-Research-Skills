@@ -35,6 +35,7 @@ borusyak_hull_jaravel_2022, goldsmithpinkham_sorkin_swift_2020.
 
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -42,6 +43,9 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from _aer_numeric_check import numeric_check  # noqa: E402
 
 SEED = 20260101
 R = 300                  # regions
@@ -184,15 +188,11 @@ def main() -> int:
     print(f"\nFigure written to {pdf.relative_to(pdf.parents[2])}")
 
     # ---- assertions: the demo is also a test -------------------------
-    assert size["hc1_reject_rate"] > 0.15, (
-        "region-level HC1 should over-reject under shared industry shocks")
-    assert size["shock_reject_rate"] <= 0.10, (
-        f"shock-level randomization should hold ~{ALPHA} size, "
-        f"got {size['shock_reject_rate']:.3f}")
-    assert size["hc1_reject_rate"] > 2 * size["shock_reject_rate"], (
-        "region-level inference should reject far more often than shock-level")
-    assert power["shock_reject_rate"] > 0.50, (
-        "shock-level randomization should still have power against a real effect")
+    numeric_check("HC1 over-rejects under shared shocks", size["hc1_reject_rate"], lo=0.15)
+    numeric_check("shock-level inference keeps ~nominal size", size["shock_reject_rate"], hi=0.10)
+    numeric_check("HC1 over-rejects at >2x the shock-level rate",
+                  size["hc1_reject_rate"] - 2 * size["shock_reject_rate"], lo=0.0)
+    numeric_check("shock-level inference retains power", power["shock_reject_rate"], lo=0.50)
     print("\nAll assertions passed: region-level SEs over-reject; shock-level "
           "randomization\nholds size and keeps power. Inference belongs at the "
           "shock level.")

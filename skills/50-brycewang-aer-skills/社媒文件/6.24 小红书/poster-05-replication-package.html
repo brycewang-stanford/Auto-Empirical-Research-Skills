@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1080, initial-scale=1" />
+<title>Poster 05 - Replication Package</title>
+<style>
+@font-face { font-family: "Work Sans Local"; src: url("file:///Users/brycewang/.codex/skills/canvas-design/canvas-fonts/WorkSans-Regular.ttf") format("truetype"); font-weight: 400; }
+@font-face { font-family: "Work Sans Local"; src: url("file:///Users/brycewang/.codex/skills/canvas-design/canvas-fonts/WorkSans-Bold.ttf") format("truetype"); font-weight: 700; }
+@font-face { font-family: "Bricolage Local"; src: url("file:///Users/brycewang/.codex/skills/canvas-design/canvas-fonts/BricolageGrotesque-Bold.ttf") format("truetype"); font-weight: 700; }
+@font-face { font-family: "JetBrains Mono Local"; src: url("file:///Users/brycewang/.codex/skills/canvas-design/canvas-fonts/JetBrainsMono-Regular.ttf") format("truetype"); font-weight: 400; }
+@font-face { font-family: "IBM Plex Serif Local"; src: url("file:///Users/brycewang/.codex/skills/canvas-design/canvas-fonts/IBMPlexSerif-Bold.ttf") format("truetype"); font-weight: 700; }
+* { box-sizing: border-box; }
+html, body {
+  width: 1080px;
+  height: 1920px;
+  margin: 0;
+  overflow: hidden;
+  background: #061b2d;
+}
+body {
+  font-family: "Work Sans Local", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+.poster {
+  --navy: #061b2d;
+  --navy-2: #0b2439;
+  --sky: #e8f6ff;
+  --blue: #1594f6;
+  --blue-2: #0e79d8;
+  --maroon: #751e38;
+  --orange: #e87345;
+  --gold: #f5c04c;
+  --ink: #092034;
+  --muted: #527084;
+  --line: rgba(9, 32, 52, .16);
+  --paper: #fbfdff;
+  position: relative;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  color: var(--ink);
+  background: var(--navy);
+}
+.header,
+.footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background: var(--navy);
+  color: #f4fbff;
+}
+.header { top: 0; height: 154px; }
+.footer { bottom: 0; height: 178px; }
+.stage {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 154px;
+  height: 1588px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.34), rgba(255,255,255,0) 35%),
+    var(--sky);
+}
+.stage::before {
+  content: "";
+  position: absolute;
+  left: 70px;
+  right: 70px;
+  top: 72px;
+  height: 1px;
+  background: rgba(9, 32, 52, .08);
+}
+.brand {
+  position: absolute;
+  left: 78px;
+  top: 43px;
+  height: 78px;
+  min-width: 330px;
+  display: flex;
+  align-items: center;
+  padding: 0 26px;
+  border-radius: 8px;
+  background: #101a2c;
+  box-shadow: 0 1px 0 rgba(255,255,255,.06) inset;
+}
+.brand-text {
+  font-size: 38px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.series {
+  position: absolute;
+  right: 78px;
+  top: 52px;
+  font-family: "JetBrains Mono Local", monospace;
+  font-size: 24px;
+  line-height: 1.35;
+  color: rgba(244,251,255,.72);
+  text-align: right;
+}
+.series strong {
+  display: block;
+  color: #f4fbff;
+  font-size: 32px;
+  font-weight: 400;
+}
+.footer .url {
+  position: absolute;
+  left: 78px;
+  top: 44px;
+  font-family: "JetBrains Mono Local", monospace;
+  font-size: 32px;
+  line-height: 1.2;
+  color: #ffffff;
+}
+.footer .cmd {
+  position: absolute;
+  left: 78px;
+  top: 95px;
+  font-family: "JetBrains Mono Local", monospace;
+  font-size: 27px;
+  line-height: 1.3;
+  color: #b7cede;
+}
+.footer .mark {
+  position: absolute;
+  right: 78px;
+  top: 48px;
+  display: flex;
+  gap: 10px;
+}
+.footer .mark span {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--blue);
+}
+.footer .mark span:nth-child(2) { background: var(--maroon); }
+.footer .mark span:nth-child(3) { background: var(--orange); }
+.kicker,
+.mono,
+.chip,
+.small-label,
+.node,
+.metric-number,
+.command,
+.skill,
+.dimension,
+.stack-card {
+  font-family: "JetBrains Mono Local", monospace;
+  letter-spacing: 0;
+}
+.wrap {
+  position: absolute;
+  left: 70px;
+  right: 70px;
+  top: 86px;
+  bottom: 86px;
+}
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 13px;
+  border-radius: 8px;
+  background: rgba(117, 30, 56, .12);
+  color: var(--maroon);
+  font-size: 20px;
+  text-transform: uppercase;
+}
+.kicker.blue {
+  background: rgba(21, 148, 246, .12);
+  color: var(--blue-2);
+}
+.title {
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: var(--ink);
+}
+.title strong {
+  color: var(--blue);
+  font-weight: 700;
+}
+.subtitle {
+  margin: 0;
+  font-size: 40px;
+  line-height: 1.34;
+  color: #183c55;
+  font-weight: 700;
+}
+.subtitle em {
+  color: var(--maroon);
+  font-style: normal;
+}
+.panel {
+  border-radius: 8px;
+  background: rgba(255, 255, 255, .78);
+  border: 2px solid rgba(9, 32, 52, .10);
+  box-shadow: 0 18px 36px rgba(6, 27, 45, .08);
+}
+.blue-panel {
+  border-radius: 8px;
+  background: var(--blue);
+  color: #ffffff;
+  box-shadow: 0 22px 45px rgba(21, 148, 246, .28);
+}
+.maroon-panel {
+  border-radius: 8px;
+  background: var(--maroon);
+  color: #ffffff;
+  box-shadow: 0 22px 45px rgba(117, 30, 56, .20);
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.chip {
+  height: 58px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 20px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 2px solid rgba(21, 148, 246, .35);
+  color: #12324b;
+  font-size: 21px;
+}
+.chip.dark {
+  background: var(--navy);
+  border-color: rgba(255,255,255,.18);
+  color: #f4fbff;
+}
+.rule {
+  width: 100%;
+  height: 2px;
+  background: var(--line);
+}
+
+.p5 .title {
+  position: absolute;
+  left: 70px;
+  top: 190px;
+  width: 920px;
+  font-family: "Bricolage Local", "Work Sans Local", sans-serif;
+  font-size: 138px;
+  line-height: .95;
+}
+.p5 .subtitle {
+  position: absolute;
+  left: 70px;
+  top: 372px;
+  width: 780px;
+  font-size: 43px;
+  line-height: 1.28;
+}
+.p5 .folder {
+  display: none;
+}
+.p5 .folder-tab {
+  position: absolute;
+  left: 42px;
+  top: -52px;
+  width: 305px;
+  height: 52px;
+  border-radius: 8px 8px 0 0;
+  background: var(--blue);
+}
+.p5 .folder h3 {
+  margin: 0;
+  font-family: "Bricolage Local", "Work Sans Local", sans-serif;
+  font-size: 68px;
+  line-height: 1;
+  letter-spacing: 0;
+}
+.p5 .folder p {
+  width: 690px;
+  margin: 26px 0 0;
+  font-size: 28px;
+  line-height: 1.32;
+  font-weight: 700;
+  color: rgba(255,255,255,.82);
+}
+.p5 .ok {
+  position: absolute;
+  right: 42px;
+  bottom: 42px;
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Bricolage Local", "Work Sans Local", sans-serif;
+  font-size: 45px;
+}
+.p5 .stacks {
+  display: none;
+}
+.p5 .stack-card {
+  height: 112px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 23px;
+}
+.p5 .stack-card span {
+  font-size: 16px;
+  color: var(--muted);
+}
+.p5 .commands {
+  display: none;
+}
+.p5 .command {
+  height: 94px;
+  border-radius: 8px;
+  background: var(--navy);
+  color: #d7edf9;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  font-size: 21px;
+}
+.p5 .command strong {
+  color: var(--gold);
+  font-weight: 400;
+}
+.p5 .stage-mark {
+  display: none;
+}
+.p5 .deposit-flow {
+  position: absolute;
+  left: 128px;
+  right: 128px;
+  top: 565px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+.p5 .deposit-node {
+  width: 100%;
+  height: 128px;
+  border-radius: 8px;
+  background: rgba(255,255,255,.92);
+  border: 2px solid rgba(9,32,52,.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 38px;
+  line-height: 1.04;
+  font-weight: 700;
+  box-shadow: 0 18px 34px rgba(6,27,45,.08);
+}
+.p5 .deposit-node span {
+  display: block;
+  margin-top: 8px;
+  font-family: "JetBrains Mono Local", monospace;
+  font-size: 20px;
+  line-height: 1.18;
+  font-weight: 400;
+  color: var(--muted);
+}
+.p5 .deposit-node.primary {
+  background: var(--maroon);
+  color: #ffffff;
+}
+.p5 .deposit-node.primary span {
+  color: rgba(255,255,255,.78);
+}
+.p5 .deposit-arrow {
+  text-align: center;
+  color: var(--blue);
+  font-size: 58px;
+  line-height: .8;
+  font-weight: 700;
+}
+.p5 .deposit-command {
+  position: absolute;
+  left: 128px;
+  right: 128px;
+  top: 1350px;
+  min-height: 110px;
+  padding: 20px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background: var(--navy);
+  color: #d7edf9;
+  font-family: "JetBrains Mono Local", monospace;
+  font-size: 24px;
+  line-height: 1.45;
+}
+.p5 .deposit-command strong {
+  color: var(--gold);
+  font-weight: 400;
+}
+</style>
+</head>
+<body><main class="poster">
+    <header class="header">
+      <div class="brand"><div class="brand-text">AER-Skills</div></div>
+      <div class="series">XHS POSTER<strong>05/05</strong></div>
+    </header>
+    <section class="stage"><div class="wrap p5">
+        <h1 class="title">AER-Skills</h1>
+        <p class="subtitle">复现包 = 论文的一部分</p>
+        <div class="deposit-flow" aria-label="AER-Skills replication submission flow">
+          <div class="deposit-node">Stata / R / Python<span>reghdfe · fixest · pyfixest</span></div>
+          <div class="deposit-arrow">↓</div>
+          <div class="deposit-node">README-first<span>data · codebook · exhibit register</span></div>
+          <div class="deposit-arrow">↓</div>
+          <div class="deposit-node primary">make preflight<span>validate · skillopt · citations</span></div>
+          <div class="deposit-arrow">↓</div>
+          <div class="deposit-node">AEA / openICPSR<span>DCAP-ready replication deposit</span></div>
+        </div>
+        <div class="deposit-command"><div><strong>$</strong>&nbsp; scaffold_project.py skeleton</div><div><strong>$</strong>&nbsp; make preflight</div></div>
+      </div></section>
+    <footer class="footer">
+      <div class="url">github.com/brycewang-stanford/AER-Skills</div>
+      <div class="cmd">python3 scripts/scaffold_project.py skeleton /path/to/paper</div>
+      <div class="mark" aria-hidden="true"><span></span><span></span><span></span></div>
+    </footer>
+  </main></body>
+</html>

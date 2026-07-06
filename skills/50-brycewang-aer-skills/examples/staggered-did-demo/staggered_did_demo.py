@@ -29,6 +29,7 @@ References (keys are in ../../references.bib):
 
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -39,6 +40,9 @@ matplotlib.use("Agg")  # headless: write files, never open a window
 import matplotlib.pyplot as plt
 
 import pyfixest as pf
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from _aer_numeric_check import numeric_check  # noqa: E402
 
 SEED = 20260101                       # repository-wide fixed seed
 OUT = Path(__file__).resolve().parent / "output"
@@ -193,9 +197,10 @@ def main() -> int:
     print(f"Figure written to {pdf.relative_to(pdf.parents[2])}")
 
     # ---- assertions: this demo is also a test of the core claim ----
-    assert abs(did2s_bias) < 0.05, f"did2s should recover truth, bias={did2s_bias:.3f}"
-    assert twfe_bias < -0.25, f"TWFE should be badly biased down, bias={twfe_bias:.3f}"
-    assert (es.loc[es["e"] < 0, "estimate"].abs() < 0.3).all(), "pre-trends not flat"
+    numeric_check("did2s recovers the truth", did2s_bias, target=0.0, tol=0.05)
+    numeric_check("TWFE is badly biased downward", twfe_bias, hi=-0.25)
+    numeric_check("pre-trend coefficients are flat (max abs)",
+                  es.loc[es["e"] < 0, "estimate"].abs().max(), hi=0.3)
     print("\nAll assertions passed: modern estimator recovers truth; TWFE does not.")
     return 0
 

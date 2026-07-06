@@ -38,6 +38,7 @@ abadie_gardeazabal_2003, abadie_2021.
 
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -47,6 +48,9 @@ from scipy.optimize import minimize
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from _aer_numeric_check import numeric_check  # noqa: E402
 
 SEED = 20260101
 N_DONORS = 30            # size of the donor pool
@@ -251,14 +255,13 @@ def main() -> int:
     print(f"\nFigure written to {pdf.relative_to(pdf.parents[2])}")
 
     # ---- assertions: the demo is also a test -------------------------
-    assert res["treated_rank"] <= 2, (
-        "a real effect should put the treated unit in the extreme tail")
-    assert res["p_value"] <= 2.0 / res["n_units"] + 1e-9, (
-        "permutation p-value should be significant when an effect is present")
-    assert best_placebo_pre <= 1.5 * treated_pre, (
-        "placebo donors should achieve pre-fit comparable to the treated unit")
-    assert fpr <= 0.20, (
-        f"permutation test should control size near {ALPHA}, got {fpr:.3f}")
+    numeric_check("treated unit ranks near top of placebo distribution",
+                  res["treated_rank"], hi=2)
+    numeric_check("permutation p-value is small", res["p_value"],
+                  hi=2.0 / res["n_units"])
+    numeric_check("treated pre-fit is competitive with best placebo",
+                  best_placebo_pre, hi=1.5 * treated_pre)
+    numeric_check("placebo false-positive rate controlled", fpr, hi=0.20)
     print("\nAll assertions passed: a real effect lands in the tail, the test "
           "controls size,\nand good pre-fit is not evidence of an effect.")
     return 0

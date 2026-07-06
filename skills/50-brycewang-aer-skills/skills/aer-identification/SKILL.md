@@ -167,6 +167,28 @@ A common confusion: **identification answers whether X causes Y; mechanism answe
 - IV exclusion restriction defended only by "we control for X"
 - Quoting an Angrist-Pischke citation as a substitute for showing the diagnostic
 
+## StatsPAI Tool Bindings
+
+<!-- tool-bindings -->
+When a StatsPAI MCP server is connected, **select the validated tool, then let it
+run the estimator** — do not hand-roll the design. The methodological *choice*
+still comes from the decision tree above; this table is only the execution
+surface. The full registry and chained workflow live in
+`skills/aer-statspai/SKILL.md`.
+
+| Design / diagnostic | Call (StatsPAI) | Do not hand-roll |
+|---|---|---|
+| Staggered DiD ATT(g,t) | `callaway_santanna` then `aggte` | a pooled two-way fixed-effects regression |
+| Imputation / dCDH variants | `did_imputation`, `sun_abraham`, `did_multiplegt` | event-study leads and lags assembled by hand on staggered data |
+| Forbidden-comparison weight | `bacon_decomposition` | eyeballing whether TWFE is "probably fine" |
+| Pre-trends (joint, not visual) | `event_study`, `pretrends_test` | declaring parallel trends from a plot alone |
+| IV under weak instruments | `ivreg` with `anderson_rubin_ci`, `effective_f_test` | a first-stage-F-only 2SLS table |
+| Shift-share / Bartik | `bartik` | a Bartik IV with no Rotemberg-weight report |
+| RDD (local-linear, RBC) | `rdrobust`, `rdbwselect`, `rdplot`, `rddensity` | a high-order global-polynomial RDD |
+| Synthetic control | `synth`, `augsynth`, `gsynth`, `sdid`, `synth_time_placebo`, `synth_loo` | SCM with no placebo or leave-one-out inference |
+| Design / estimator selection | `detect_design`, `preflight`, `recommend` | guessing the estimator before profiling the data |
+<!-- /tool-bindings -->
+
 ## Repository Resources
 
 When working from the repo or plugin bundle, load only the relevant resource:

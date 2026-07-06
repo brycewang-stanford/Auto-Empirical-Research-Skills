@@ -120,10 +120,28 @@ ggsave(file.path(out_dir, "event_study_R.png"), p, width = 6, height = 4, dpi = 
 cat(sprintf("Figure written to %s\n", file.path("output", "event_study_R.pdf")))
 
 # ---- assertions --------------------------------------------------------------
-stopifnot(
-  "Callaway-Sant'Anna should recover the truth" =
-    abs((cs_att - true_att) / true_att) < 0.05,
-  "TWFE should be materially biased downward" =
-    (twfe_att - true_att) / true_att < -0.25
-)
+# numeric_check mirrors examples/_aer_numeric_check.py: it pins an estimate to a
+# known target and emits a NUMERIC-CHECK line that run_example_smoke.py verifies.
+numeric_check <- function(name, got, target = NA, tol = NA, lo = NA, hi = NA) {
+  got <- as.numeric(got)
+  if (!is.na(target)) {
+    ok <- abs(got - target) <= tol + 1e-12
+    spec <- sprintf("target=%g tol=%g", target, tol)
+  } else {
+    ok <- TRUE
+    parts <- c()
+    if (!is.na(lo)) { ok <- ok && got >= lo - 1e-12; parts <- c(parts, sprintf(">=%g", lo)) }
+    if (!is.na(hi)) { ok <- ok && got <= hi + 1e-12; parts <- c(parts, sprintf("<=%g", hi)) }
+    spec <- paste(parts, collapse = " ")
+  }
+  status <- if (ok) "PASS" else "FAIL"
+  cat(sprintf("NUMERIC-CHECK | %s | got=%.4f | %s | %s\n", name, got, spec, status))
+  if (!ok) stop(sprintf("numeric check failed: %s: got %.4f, expected %s", name, got, spec))
+  invisible(got)
+}
+
+numeric_check("Callaway-Sant'Anna recovers the truth (relative bias)",
+              abs((cs_att - true_att) / true_att), hi = 0.05)
+numeric_check("TWFE is materially biased downward (relative bias)",
+              (twfe_att - true_att) / true_att, hi = -0.25)
 cat("\nAll assertions passed: Callaway-Sant'Anna recovers truth; TWFE does not.\n")

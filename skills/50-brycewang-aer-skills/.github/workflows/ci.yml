@@ -24,3 +24,33 @@ jobs:
         run: make validate-strict
       - name: Enforce skill document-quality floor
         run: make audit-skills-gate
+      - name: Verify bibliography against recorded index responses
+        run: make verify-citations
+      - name: Enforce prose-level citation groundedness
+        run: make verify-citations-groundedness
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pytest
+        run: python -m pip install pytest
+      - name: Run the quality-tooling unit tests
+        run: make test
+
+  example-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: templates/python/requirements.txt
+      - name: Install the pinned Python stack
+        run: python -m pip install -r templates/python/requirements.txt
+      - name: Run every Python demo under the numeric-check contract
+        run: python3 scripts/run_example_smoke.py --language python --strict-deps

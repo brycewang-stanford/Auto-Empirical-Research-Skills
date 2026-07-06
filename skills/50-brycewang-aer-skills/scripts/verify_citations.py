@@ -75,12 +75,15 @@ VERDICT_SEVERITY = {
     "MISSING_DOI": "warn",
     "UNRESOLVED": "warn",
     "UNCITED": "warn",
+    "GROUNDED": "ok",
     "BAD_DOI": "fail",
     "FABRICATED": "fail",
     "UNDEFINED_CITATION": "fail",
     "TITLE_MISMATCH": "fail",
     "AUTHOR_MISMATCH": "fail",
     "YEAR_MISMATCH": "fail",
+    "PHANTOM_CITATION": "fail",
+    "DANGLING_KEY": "fail",
 }
 
 
@@ -519,6 +522,248 @@ def check_two_way(bib_keys: set[str], manuscript_text: str) -> list[Finding]:
 
 
 # --------------------------------------------------------------------------- #
+# Claim groundedness (no citation from memory, at the prose level)
+# --------------------------------------------------------------------------- #
+#
+# ``verify_entry`` guarantees that every ``references.bib`` entry resolves to a
+# real indexed record. Groundedness closes the remaining gap: every *citation in
+# the prose* must resolve to such an entry. This is the economics analogue of an
+# automated claim-support / anti-hallucination check --- a citation that points
+# at nothing is the prose-level signature of a reference written from memory.
+#
+# Two citation forms are checked:
+#   * author-year mentions ("Oster (2019)", "(Callaway and Sant'Anna, 2021)") in
+#     skill and reference-doc prose -> must resolve to a bib entry by first-author
+#     surname + year (PHANTOM_CITATION on failure);
+#   * inline-code bib keys ("`romano_wolf_2005`") anywhere in the repo -> must
+#     exist in references.bib (DANGLING_KEY on failure).
+#
+# Illustrative example *manuscripts* under examples/ deliberately cite the wider
+# literature to demonstrate citation style, so they are checked for dangling bib
+# keys only, not for author-year groundedness. A line carrying a
+# ``<!-- cite-exempt -->`` marker is skipped (use sparingly; it is visible in
+# the source and should carry a reason).
+
+# Surfaces scanned. Author-year groundedness is enforced where the repo instructs
+# the agent (skills) or documents methods (docs); examples are key-only.
+GROUNDEDNESS_AUTHOR_YEAR_DIRS = ("skills", "docs")
+GROUNDEDNESS_KEY_ONLY_DIRS = ("examples",)
+
+# Nobiliary particles dropped from surname token sets so "de Chaisemartin"
+# matches on "chaisemartin". Hyphenated compounds (Ben-Michael) are kept whole.
+_NAME_PARTICLES = {"de", "van", "von", "der", "den", "di", "la", "le", "du",
+                   "da", "dos", "del", "della", "ter", "ten"}
+
+# Capitalized words that can precede "(YYYY)" without being an author surname.
+_CITATION_STOPWORDS = {
+    "table", "figure", "fig", "section", "appendix", "panel", "column", "col",
+    "equation", "eq", "note", "notes", "step", "stage", "model", "spec",
+    "specification", "theorem", "lemma", "assumption", "footnote", "chapter",
+    "part", "box", "exhibit", "row", "line", "page", "version", "item",
+    "since", "see", "the", "and", "or", "but", "household", "income", "wave",
+    "january", "february", "march", "april", "may", "june", "july", "august",
+    "september", "october", "november", "december",
+}
+
+_NAME = r"[A-Z][A-Za-z'’.]+(?:-[A-Z][A-Za-z'’.]+)*"
+_NAME_CONNECT = r"(?:\s*,\s*(?:and\s+|&\s+)?|\s+(?:and|&)\s+)"
+_NAME_GROUP = rf"{_NAME}(?:{_NAME_CONNECT}{_NAME}){{0,3}}(?:\s+et\s+al\.?)?"
+_AUTHOR_YEAR_RE = re.compile(rf"\b({_NAME_GROUP})\s*\(\s*((?:19|20)\d{{2}})[a-z]?\s*\)")
+_PAREN_CITE_RE = re.compile(rf"\(\s*({_NAME_GROUP}),?\s+((?:19|20)\d{{2}})[a-z]?\s*\)")
+_BIB_KEY_TOKEN_RE = re.compile(r"\b([a-z][a-z0-9]*(?:_[a-z0-9]+)*_(?:19|20)\d{2})\b")
+_FENCE_RE = re.compile(r"\s*```")
+_EXEMPT_RE = re.compile(r"<!--\s*cite-exempt\b[^>]*-->")
+
+
+def surname_tokens(surname_part: str) -> set[str]:
+    """Tokenize a surname into comparable parts, dropping nobiliary particles."""
+    toks = {t for t in norm_name(surname_part).split() if len(t) >= 2}
+    core = {t for t in toks if t not in _NAME_PARTICLES}
+    return core or toks
+
+
+def entry_surname_tokens(author_field: str) -> set[str]:
+    """All surname tokens across every author of a bib ``author`` field."""
+    tokens: set[str] = set()
+    for chunk in re.split(r"\s+and\s+", (author_field or "").strip()):
+        chunk = chunk.strip()
+        if not chunk:
+            continue
+        if "," in chunk:  # "Surname, Given"
+            surname_part = chunk.split(",", 1)[0]
+        else:  # "Given Surname"
+            parts = chunk.split()
+            surname_part = parts[-1] if parts else chunk
+        tokens |= surname_tokens(surname_part)
+    return tokens
+
+
+def first_author_tokens(name_group: str) -> set[str]:
+    """Surname tokens of the *first* author named in a prose citation group."""
+    cleaned = re.sub(r"\bet\s+al\.?", "", name_group)
+    first = re.split(r"\s*,\s*|\s+(?:and|&)\s+", cleaned.strip())[0]
+    return surname_tokens(first)
+
+
+@dataclass
+class BibIndex:
+    """Resolution index over references.bib for prose-level grounding."""
+
+    keys: set[str]
+    entries: list  # list[tuple[set[str], Optional[int], str]] = (surnames, year, key)
+
+    @classmethod
+    def from_entries(cls, entries: Iterable[BibEntry]) -> "BibIndex":
+        keys: set[str] = set()
+        index: list = []
+        for entry in entries:
+            if entry.entry_type in {"comment", "string", "preamble"}:
+                continue
+            keys.add(entry.key)
+            author = entry.get("author") or entry.get("editor")
+            year_raw = entry.get("year")
+            year = int(year_raw) if year_raw.isdigit() else None
+            index.append((entry_surname_tokens(author), year, entry.key))
+        return cls(keys=keys, entries=index)
+
+    def resolve_author_year(self, author_tokens: set[str], year: int) -> Optional[str]:
+        """Return a matching bib key (shared first-author token, year within
+        ``YEAR_TOLERANCE``) or ``None`` if the citation grounds nowhere."""
+        if not author_tokens:
+            return None
+        for tokens, entry_year, key in self.entries:
+            if entry_year is None:
+                continue
+            if abs(entry_year - year) <= YEAR_TOLERANCE and (author_tokens & tokens):
+                return key
+        return None
+
+
+def _strip_code_fences(text: str) -> str:
+    """Blank out fenced ``` code blocks while preserving line numbers."""
+    out: list[str] = []
+    in_fence = False
+    for line in text.split("\n"):
+        if _FENCE_RE.match(line):
+            in_fence = not in_fence
+            out.append("")
+        else:
+            out.append("" if in_fence else line)
+    return "\n".join(out)
+
+
+def _line_of(text: str, offset: int) -> int:
+    return text.count("\n", 0, offset) + 1
+
+
+def _inline_code_spans(text: str) -> list:
+    """Yield (content_offset, content) for each inline code span, following the
+    CommonMark rule: a run of N backticks is closed only by a run of exactly N.
+    Robust to documents that *display* backticks via doubled/quadrupled runs."""
+    spans: list = []
+    i, n = 0, len(text)
+    while i < n:
+        if text[i] != "`":
+            i += 1
+            continue
+        j = i
+        while j < n and text[j] == "`":
+            j += 1
+        run = j - i  # opening backtick-run length
+        k = j
+        closed = False
+        while k < n:
+            if text[k] == "`":
+                m = k
+                while m < n and text[m] == "`":
+                    m += 1
+                if m - k == run:  # matching closing run
+                    spans.append((j, text[j:k]))
+                    i, closed = m, True
+                    break
+                k = m
+            else:
+                k += 1
+        if not closed:  # unterminated run: not a code span
+            i = j
+    return spans
+
+
+def _exempt_lines(text: str) -> set[int]:
+    return {_line_of(text, m.start()) for m in _EXEMPT_RE.finditer(text)}
+
+
+def groundedness_findings(
+    text: str,
+    bib_index: BibIndex,
+    *,
+    label: str,
+    check_author_year: bool,
+) -> list[Finding]:
+    """Findings for one document. ``GROUNDED`` for resolved citations,
+    ``PHANTOM_CITATION`` / ``DANGLING_KEY`` for unresolved ones."""
+    findings: list[Finding] = []
+    body = _strip_code_fences(text)
+    exempt = _exempt_lines(text)
+
+    # Check A: inline-code bib keys must exist in references.bib.
+    for span_start, content in _inline_code_spans(body):
+        for key_match in _BIB_KEY_TOKEN_RE.finditer(content):
+            key = key_match.group(1)
+            line = _line_of(body, span_start)
+            if line in exempt:
+                continue
+            if key in bib_index.keys:
+                findings.append(Finding(f"{label}:{line}", "GROUNDED",
+                                        f"`{key}` in references.bib", "groundedness"))
+            else:
+                findings.append(Finding(f"{label}:{line}", "DANGLING_KEY",
+                                        f"`{key}` cited but absent from references.bib", "groundedness"))
+
+    # Check B: author-year mentions must resolve to a references.bib entry.
+    if check_author_year:
+        seen: set[tuple[int, int]] = set()
+        for regex in (_AUTHOR_YEAR_RE, _PAREN_CITE_RE):
+            for match in regex.finditer(body):
+                key_span = (match.start(), match.end())
+                if key_span in seen:
+                    continue
+                seen.add(key_span)
+                name_group, year = match.group(1), int(match.group(2))
+                tokens = first_author_tokens(name_group)
+                if not tokens or (len(tokens) == 1 and next(iter(tokens)) in _CITATION_STOPWORDS):
+                    continue
+                line = _line_of(body, match.start())
+                if line in exempt:
+                    continue
+                resolved = bib_index.resolve_author_year(tokens, year)
+                citation = f"{' '.join(name_group.split())} ({year})"
+                if resolved:
+                    findings.append(Finding(f"{label}:{line}", "GROUNDED",
+                                            f"{citation} -> {resolved}", "groundedness"))
+                else:
+                    findings.append(Finding(f"{label}:{line}", "PHANTOM_CITATION",
+                                            f"{citation} resolves to no references.bib entry", "groundedness"))
+    return findings
+
+
+def check_groundedness(bib_index: BibIndex, root: Path = ROOT) -> list[Finding]:
+    """Scan the repository's prose surfaces for citation groundedness."""
+    findings: list[Finding] = []
+    for subdir in GROUNDEDNESS_AUTHOR_YEAR_DIRS:
+        for path in sorted((root / subdir).rglob("*.md")):
+            findings += groundedness_findings(
+                path.read_text(encoding="utf-8"), bib_index,
+                label=str(path.relative_to(root)), check_author_year=True)
+    for subdir in GROUNDEDNESS_KEY_ONLY_DIRS:
+        for path in sorted((root / subdir).rglob("*.md")):
+            findings += groundedness_findings(
+                path.read_text(encoding="utf-8"), bib_index,
+                label=str(path.relative_to(root)), check_author_year=False)
+    return findings
+
+
+# --------------------------------------------------------------------------- #
 # Reporting
 # --------------------------------------------------------------------------- #
 
@@ -581,9 +826,38 @@ def run_selftest() -> int:
         failures += 1
         print(f"  FAIL references.bib/{finding.key}: {finding.verdict} -- {finding.detail}")
 
+    # Groundedness regression: labeled snippet cases + a live "repo scans clean".
+    bib_index = BibIndex.from_entries(bib_entries)
+    ground_cases = gold.get("groundedness_cases", [])
+    for case in ground_cases:
+        total += 1
+        case_findings = groundedness_findings(
+            case["text"], bib_index, label=case["id"],
+            check_author_year=case.get("check_author_year", True),
+        )
+        verdicts = {f.verdict for f in case_findings}
+        expected = case["expected"]
+        if expected == "NONE":
+            passed = not any(VERDICT_SEVERITY.get(v) == "fail" for v in verdicts)
+        else:
+            passed = expected in verdicts
+        if not passed:
+            failures += 1
+            print(
+                f"  FAIL {case['id']}: expected {expected}, "
+                f"got {sorted(verdicts) or ['<none>']}"
+            )
+    repo_ground = check_groundedness(bib_index)
+    repo_ground_fails = [f for f in repo_ground if f.severity == "fail"]
+    for finding in repo_ground_fails:
+        failures += 1
+        print(f"  FAIL groundedness/{finding.key}: {finding.verdict} -- {finding.detail}")
+    repo_ground_ok = sum(1 for f in repo_ground if f.verdict == "GROUNDED")
+
     status = "PASS" if failures == 0 else "FAIL"
     print(
-        f"selftest {status}: {total} gold tuples + {len(bib_entries)} bib entries, "
+        f"selftest {status}: {total} gold tuples + {len(bib_entries)} bib entries "
+        f"+ {len(ground_cases)} groundedness cases + {repo_ground_ok} repo citations, "
         f"{failures} failure(s)"
     )
     return 0 if failures == 0 else 1
@@ -637,6 +911,8 @@ def build_parser() -> argparse.ArgumentParser:
     mode.add_argument("--online", action="store_true", help="live Crossref/OpenAlex lookups")
     mode.add_argument("--offline", action="store_true", help="verify against recorded responses (hermetic)")
     mode.add_argument("--selftest", action="store_true", help="run the gold-set regression gate (hermetic)")
+    mode.add_argument("--groundedness", action="store_true",
+                      help="check that every prose citation grounds in references.bib (hermetic)")
     mode.add_argument("--record-from-bib", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument("--mailto", default=DEFAULT_MAILTO, help="contact email for index polite pools")
     parser.add_argument("--timeout", type=float, default=15.0, help="per-request timeout (seconds)")
@@ -656,6 +932,24 @@ def main(argv: Optional[list[str]] = None) -> int:
         print(f"error: {args.bib} not found", file=sys.stderr)
         return 2
     entries = parse_bib(args.bib.read_text(encoding="utf-8"))
+
+    if args.groundedness:
+        findings = check_groundedness(BibIndex.from_entries(entries))
+        if args.json:
+            payload = {
+                "mode": "Citation groundedness (prose -> references.bib)",
+                "summary": summarize(findings),
+                "findings": [
+                    {"key": f.key, "verdict": f.verdict, "severity": f.severity,
+                     "detail": f.detail, "source": f.source}
+                    for f in findings
+                ],
+            }
+            print(json.dumps(payload, indent=2, ensure_ascii=False))
+            fails = sum(1 for f in findings if f.severity == "fail")
+        else:
+            fails, _ = print_report(findings, title="Citation groundedness (prose -> references.bib)")
+        return 1 if fails else 0
 
     if args.online:
         resolver: object = LiveResolver(mailto=args.mailto, timeout=args.timeout)

@@ -1,0 +1,11 @@
+# Editorial Harbor
+
+Editorial Harbor treats the page as a working desk between two dark institutional bands. The header and footer are deep navy, almost archival, while the center is a pale blue field where the argument is assembled with restraint. The design should feel meticulously crafted: every block is aligned to a quiet grid, every label has a defined role, and the page reads like a master-level editorial object rather than a screenshot.
+
+Color carries the repository's logic. AER maroon enters through the opening cover background and small route marks; electric blue marks the active agent layer; warm orange signals the human editorial decision. These accents must be sparse and calibrated with painstaking attention, so the light center remains clean and readable. The final set should look labored over by someone at the top of their field, with no stray decoration and no cheap visual noise.
+
+The AER cover is not a pasted decoration. It is the opening environment: a large institutional artifact behind the first page, giving the poster stack its journal target and severity. After that first page, the series relies on workflow diagrams, scorecards, repository gates, and manuscript-routing surfaces without repeating the cover image. Information is expressed through spatial order first, then short labels; paragraphs are replaced by disciplined fragments.
+
+Typography is phone-first: every headline, node, and command must remain legible in a compressed mobile feed, with fewer words and larger type replacing explanatory density. Chinese headlines carry the argument; English monospace labels pin the repo mechanics to the grid. The result should have the feel of a carefully proofed journal production board, with the craft of a polished social campaign and the restraint of an AER submission checklist.
+
+Across the five pages, variation comes from composition rather than palette drift: an AER journal-information opening page, then four stripped-down title posters carrying only the AER-Skills name. The system must remain unmistakably one set. Every poster should feel like the product of countless small refinements, where hierarchy and margins have been tuned until the visual argument is obvious at a glance.
