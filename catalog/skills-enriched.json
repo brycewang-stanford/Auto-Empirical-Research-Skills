@@ -8,9 +8,9 @@
     "body_derived_description": 0,
     "no_description": 0,
     "tagged": 566,
-    "with_eval_coverage": 11,
-    "with_eval_coverage_pct": 1.0,
-    "total_eval_scenarios": 12
+    "with_eval_coverage": 18,
+    "with_eval_coverage_pct": 1.6,
+    "total_eval_scenarios": 19
   },
   "taxonomy": {
     "language": {
@@ -106,21 +106,21 @@
       "source_url": "https://github.com/brycewang-stanford/StatsPAI",
       "sync": "weekly GitHub Actions sync",
       "eval_coverage": [
-        "cate-uncertainty",
-        "competing-risks",
-        "covariate-balance-placebo",
-        "did-quantile-assumptions",
-        "distribution-beyond-the-mean",
-        "elasticity-identification",
-        "estimating-equation-and-assumption",
-        "interaction-allowed",
-        "mechanism-alternative",
-        "no-false-reassurance",
-        "nuisance-not-causal",
-        "observational-not-experimental",
-        "power-caveat",
-        "presentation-strategy",
-        "small-sample-inference"
+        "statspai-bad-controls",
+        "statspai-bunching",
+        "statspai-clustered-inference",
+        "statspai-decomposition",
+        "statspai-dml-crossfit",
+        "statspai-heterogeneous-effects",
+        "statspai-matching-overlap",
+        "statspai-mediation-assumptions",
+        "statspai-pretrends-eventstudy",
+        "statspai-quantile-effects",
+        "statspai-rdd-diagnostics",
+        "statspai-staggered-did",
+        "statspai-survival-assumptions",
+        "statspai-synthetic-control",
+        "statspai-weak-iv"
       ]
     },
     {
@@ -1358,7 +1358,7 @@
       "source_url": "https://github.com/Jill0099/causal-inference-mixtape",
       "sync": "manual vendor snapshot",
       "eval_coverage": [
-        "runnable-template"
+        "causal-inference-twfe-trap"
       ]
     },
     {
@@ -7936,7 +7936,9 @@
       "commercial_use": "unknown",
       "source_url": "https://github.com/vincentarelbundock/marginaleffects",
       "sync": "manual vendor snapshot",
-      "eval_coverage": []
+      "eval_coverage": [
+        "marginaleffects-interaction-ame"
+      ]
     },
     {
       "name": "pyfixest-reference",
@@ -7967,7 +7969,7 @@
       "source_url": "https://github.com/py-econometrics/pyfixest",
       "sync": "manual vendor snapshot",
       "eval_coverage": [
-        "twoway-fe"
+        "pyfixest-panel-clustering"
       ]
     },
     {
@@ -7995,7 +7997,9 @@
       "commercial_use": "unknown",
       "source_url": "https://github.com/sticerd-eee/sewage",
       "sync": "manual vendor snapshot",
-      "eval_coverage": []
+      "eval_coverage": [
+        "econ-audit-recompute-not-restate"
+      ]
     },
     {
       "name": "commit",
@@ -19557,7 +19561,7 @@
       "source_url": "https://github.com/conorbronsdon/avoid-ai-writing",
       "sync": "manual vendor snapshot",
       "eval_coverage": [
-        "fluent-and-faithful"
+        "english-deslop"
       ]
     },
     {
@@ -19580,7 +19584,7 @@
       "source_url": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills",
       "sync": "manual",
       "eval_coverage": [
-        "meaning-and-fluency"
+        "de-aigc-structural"
       ]
     },
     {
@@ -19667,8 +19671,8 @@
       "source_url": "https://github.com/brycewang-stanford/AER-skills",
       "sync": "weekly GitHub Actions sync",
       "eval_coverage": [
-        "pretrends-check",
-        "referee-framing"
+        "aer-identification-staggered",
+        "aer-shiftshare-identification"
       ]
     },
     {
@@ -19694,8 +19698,8 @@
       "source_url": "https://github.com/brycewang-stanford/AER-skills",
       "sync": "weekly GitHub Actions sync",
       "eval_coverage": [
-        "names-identification",
-        "source-faithful"
+        "aer-abstract-100words",
+        "citation-hygiene-no-fake-refs"
       ]
     },
     {
@@ -19818,9 +19822,9 @@
       "source_url": "https://github.com/brycewang-stanford/AER-skills",
       "sync": "weekly GitHub Actions sync",
       "eval_coverage": [
-        "aea-ready-protocol",
-        "completeness",
-        "reproducibility-preserved"
+        "aer-replication-package",
+        "aer-replication-portable-execution",
+        "runtime-safety-replication-setup"
       ]
     },
     {
@@ -19848,7 +19852,7 @@
       "source_url": "https://github.com/brycewang-stanford/AER-skills",
       "sync": "weekly GitHub Actions sync",
       "eval_coverage": [
-        "mechanism-discipline"
+        "aer-robustness-multiple-testing"
       ]
     },
     {
@@ -19903,7 +19907,7 @@
       "source_url": "https://github.com/brycewang-stanford/AER-skills",
       "sync": "weekly GitHub Actions sync",
       "eval_coverage": [
-        "no-missed-issues"
+        "aer-submission-preflight"
       ]
     },
     {
@@ -19935,7 +19939,7 @@
       "source_url": "https://github.com/brycewang-stanford/AER-skills",
       "sync": "weekly GitHub Actions sync",
       "eval_coverage": [
-        "one-claim-per-exhibit"
+        "aer-tables-figures-housestyle"
       ]
     },
     {
@@ -20048,7 +20052,9 @@
       "commercial_use": "allowed",
       "source_url": "https://github.com/pymc-labs/CausalPy",
       "sync": "manual vendor snapshot",
-      "eval_coverage": []
+      "eval_coverage": [
+        "causalpy-placebo-inference"
+      ]
     },
     {
       "name": "slr-prisma",
@@ -20073,7 +20079,9 @@
       "commercial_use": "allowed",
       "source_url": "https://github.com/keemanxp/slr-prisma",
       "sync": "manual vendor snapshot",
-      "eval_coverage": []
+      "eval_coverage": [
+        "prisma-reproducible-search"
+      ]
     },
     {
       "name": "thematic-analysis",
@@ -20742,7 +20750,9 @@
       "commercial_use": "allowed",
       "source_url": "https://github.com/hanlulong/econ-writing-skill",
       "sync": "manual vendor snapshot",
-      "eval_coverage": []
+      "eval_coverage": [
+        "logpoint-percent-interpretation"
+      ]
     },
     {
       "name": "EdgarTools",
@@ -20914,7 +20924,9 @@
       "commercial_use": "allowed",
       "source_url": "https://github.com/shiquda/openalex-skill",
       "sync": "manual vendor snapshot",
-      "eval_coverage": []
+      "eval_coverage": [
+        "openalex-no-hallucinated-metadata"
+      ]
     },
     {
       "name": "academic-baseline",
@@ -21488,7 +21500,9 @@
       "commercial_use": "allowed",
       "source_url": "https://github.com/PHY041/claude-skill-citation-checker",
       "sync": "manual vendor snapshot",
-      "eval_coverage": []
+      "eval_coverage": [
+        "citation-checker-doi-verification"
+      ]
     },
     {
       "name": "dowhy",

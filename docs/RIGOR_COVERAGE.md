@@ -21,7 +21,7 @@ A family is **covered** when it has both an eval scenario and a benchmark task, 
 | Staggered DiD / TWFE | 17 | `aer-identification-staggered` (critical)<br>`causal-inference-twfe-trap` (high)<br>`statspai-staggered-did` (critical) | `did-staggered-recovery` | covered |
 | Event study / pre-trends | 10 | `statspai-pretrends-eventstudy` (high) | `event-study-recovery` | covered |
 | Panel fixed effects | 19 | `pyfixest-panel-clustering` (high) | `panel-fe-recovery` | covered |
-| Synthetic control | 10 | `statspai-synthetic-control` (high) | `synthetic-control-recovery` | covered |
+| Synthetic control | 10 | `causalpy-placebo-inference` (high)<br>`statspai-synthetic-control` (high) | `synthetic-control-recovery` | covered |
 | Matching / propensity scores | 10 | `statspai-matching-overlap` (high) | `lalonde-recovery` | covered |
 | Double/debiased ML | 8 | `statspai-dml-crossfit` (high) | `dml-recovery` | covered |
 | Heterogeneous effects (CATE) | 8 | `statspai-heterogeneous-effects` (high) | `cate-recovery` | covered |
@@ -46,6 +46,9 @@ Notes:
 These defend correctness across method families (controls, inference, multiple testing):
 
 - eval `aer-robustness-multiple-testing` (critical) — Robustness plan must not cherry-pick significant heterogeneity
+- eval `econ-audit-recompute-not-restate` (high) — A replication audit must independently recompute, not restate the paper's numbers
+- eval `logpoint-percent-interpretation` (high) — A large log-outcome coefficient is not a raw-percent effect
+- eval `marginaleffects-interaction-ame` (high) — Nonlinear interaction effect must be an average marginal effect, not the raw coefficient
 - eval `statspai-bad-controls` (critical) — Conditioning on a post-treatment variable is a bad control, not extra rigor
 - eval `statspai-clustered-inference` (high) — Few-cluster DiD inference must cluster at the treatment level and correct for few clusters
 - benchmark `bad-control-recovery` — Bad-control recovery: does the pipeline avoid conditioning on a post-treatment mediator?
@@ -59,9 +62,12 @@ Non-method checks that gate the rest of the workflow (writing, citations, reprod
 - eval `aer-replication-portable-execution` (reproducibility, high) — Replication package must run from a clean checkout without local paths or secrets
 - eval `aer-submission-preflight` (writing-compliance, high) — Submission preflight must catch AER house-style compliance issues
 - eval `aer-tables-figures-housestyle` (writing-compliance, medium) — Regression table + figure must follow AER house style
+- eval `citation-checker-doi-verification` (citation-hygiene, high) — Citation check must verify against an external index, not trust plausible-looking refs
 - eval `citation-hygiene-no-fake-refs` (citation-hygiene, high) — Literature positioning must not fabricate bibliographic details
 - eval `de-aigc-structural` (writing-style, medium) — Chinese de-AIGC rewrite must reduce AI-pattern markers without changing facts
 - eval `english-deslop` (writing-style, medium) — English de-slop must remove AI tells without changing facts
+- eval `openalex-no-hallucinated-metadata` (citation-hygiene, high) — OpenAlex lookups must use returned fields and flag works not found
+- eval `prisma-reproducible-search` (reproducibility, high) — Systematic review must ship a reproducible search string and a PRISMA flow
 - eval `runtime-safety-replication-setup` (runtime-safety, critical) — Replication setup must not execute untrusted shell or expose credentials
 
 ## Unclassified (please classify in build-coverage-map.py)
@@ -71,4 +77,4 @@ Non-method checks that gate the rest of the workflow (writing, citations, reprod
 
 ---
 
-_30 eval scenarios and 17 benchmark tasks across 16 method families; 15 families fully covered, 0 open gaps. Regenerate with `make catalog`._
+_37 eval scenarios and 17 benchmark tasks across 16 method families; 15 families fully covered, 0 open gaps. Regenerate with `make catalog`._

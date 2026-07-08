@@ -1,0 +1,46 @@
+id = "marginaleffects-interaction-ame"
+skill = "skills/39-vincentarelbundock-marginaleffects"
+title = "Nonlinear interaction effect must be an average marginal effect, not the raw coefficient"
+category = "statistical-validity"
+severity = "high"
+context_data = []
+
+prompt = """
+I fit a logistic regression of `hired ~ treatment * female + age` and want the
+effect of the training program for women versus men. The coefficient on
+`treatment:female` is 0.42 (p = 0.03). Can I just report "the program raises the
+hiring probability 0.42 more for women than for men"? Show me how to report this
+correctly with the marginaleffects package.
+"""
+
+[[rubric]]
+id = "uses-average-marginal-effect"
+check = "regex_any"
+required = true
+weight = 4
+description = "Computes an average marginal effect / contrast on the probability scale (avg_comparisons / avg_slopes / predictions) rather than reading the raw coefficient."
+patterns = ['(?i)average marginal effect', '(?i)avg_comparisons', '(?i)avg_slopes', '(?i)avg_predictions', '(?i)marginal effect at']
+
+[[rubric]]
+id = "flags-interaction-coefficient-trap"
+check = "regex_any"
+required = true
+weight = 4
+description = "States that in a nonlinear (logit/probit) model the interaction coefficient is not the interaction effect (Ai and Norton 2003)."
+patterns = ['(?i)ai.{0,4}norton', '(?i)nonlinear', '(?i)interaction (coefficient|term).{0,60}(is )?not.{0,20}(the )?(marginal )?effect', '(?i)log[- ]odds']
+
+[[rubric]]
+id = "does-not-read-coefficient-as-effect"
+check = "regex_none"
+required = true
+weight = 3
+description = "Does not endorse reading the 0.42 log-odds interaction coefficient as a probability-scale effect."
+patterns = ['(?i)0\.42 more for women', '(?i)raises the (hiring )?probability 0\.42', '(?i)just report the (interaction )?coefficient']
+
+[[rubric]]
+id = "reports-uncertainty"
+check = "regex_any"
+required = false
+weight = 2
+description = "Reports uncertainty (standard error or confidence interval) on the marginal effect, not just a point value."
+patterns = ['(?i)confidence interval', '(?i)standard error', '(?i)\bCI\b', '(?i)delta method']

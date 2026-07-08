@@ -1,0 +1,45 @@
+id = "causalpy-placebo-inference"
+skill = "skills/51-pymc-labs-CausalPy/skills/running-placebo-analysis"
+title = "Bayesian synthetic control / ITS must validate with placebo and pre-period fit"
+category = "causal-identification"
+severity = "high"
+context_data = []
+
+prompt = """
+I ran a Bayesian synthetic control in CausalPy comparing a treated region to a
+donor pool after a 2015 policy. The post-2015 gap between the observed series
+and the synthetic counterfactual is clearly above zero. Can I conclude the
+policy had a positive causal effect?
+"""
+
+[[rubric]]
+id = "requires-pretreatment-fit"
+check = "regex_any"
+required = true
+weight = 4
+description = "Requires demonstrating good pre-treatment / pre-intervention fit before interpreting the post-period gap."
+patterns = ['(?i)pre[- ]?(treatment|intervention|period) fit', '(?i)pre[- ]?2015', '(?i)fit (well )?before', '(?i)r2 .{0,20}pre']
+
+[[rubric]]
+id = "requires-placebo"
+check = "regex_any"
+required = true
+weight = 4
+description = "Calls for placebo checks (in-space donor placebos and/or in-time placebo) to gauge whether the observed gap is unusual."
+patterns = ['(?i)placebo', '(?i)permutation', '(?i)in-(space|time) (test|placebo)', '(?i)donor .{0,20}placebo']
+
+[[rubric]]
+id = "uses-bayesian-uncertainty"
+check = "regex_any"
+required = true
+weight = 3
+description = "Interprets the effect through the posterior / credible interval or posterior predictive, not a single point gap."
+patterns = ['(?i)posterior predictive', '(?i)credible interval', '(?i)\bHDI\b', '(?i)posterior (distribution|of the effect)']
+
+[[rubric]]
+id = "does-not-conclude-from-gap-alone"
+check = "regex_none"
+required = true
+weight = 3
+description = "Does not conclude a causal effect from the raw post-period gap alone."
+patterns = ['(?i)(yes,? )?the gap (alone )?(proves|confirms|means)', '(?i)above zero,? so (the )?(policy|effect) is (causal|real)']

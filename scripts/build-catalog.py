@@ -211,13 +211,43 @@ def load_provenance(path: Path = DEFAULT_PROVENANCE) -> dict[str, dict[str, obje
     return {record["id"]: record for record in data.get("collections", [])}
 
 
+def assign_qualified_names(entries: Iterable["SkillEntry"]) -> dict[str, str]:
+    """Map each skill path to a globally-unique, human-readable handle.
+
+    The catalog has skills that share a bare ``name`` across collections (and a
+    few within one collection). A flat-install runtime that registers by bare
+    name would collide, so we mint a collection-qualified handle
+    ``<collection>::<name>``. When even that is not unique (same name twice in
+    one collection), we append the skill's directory path within the collection
+    (``<collection>::<name>@<subpath>``) so the handle is always unambiguous.
+    """
+    from collections import Counter
+
+    base = {entry.path: f"{entry.collection}::{entry.name}" for entry in entries}
+    counts = Counter(base.values())
+    qualified: dict[str, str] = {}
+    for entry in entries:
+        handle = base[entry.path]
+        if counts[handle] > 1:
+            rel_dir = Path(entry.path).parent.relative_to(Path("skills") / entry.collection).as_posix()
+            suffix = rel_dir if rel_dir and rel_dir != "." else Path(entry.path).stem
+            handle = f"{handle}@{suffix}"
+        qualified[entry.path] = handle
+    return qualified
+
+
 def build_payload() -> dict[str, object]:
     entries = collect_skills()
     records = collection_records(entries)
+    qualified_names = assign_qualified_names(entries)
     oversized = [entry for entry in entries if entry.line_count > 500]
     missing_frontmatter = [entry for entry in entries if not entry.has_frontmatter]
     missing_description = [entry for entry in entries if not entry.has_description]
     missing_name = [entry for entry in entries if not entry.has_name]
+    from collections import Counter as _Counter
+
+    _bare_counts = _Counter(entry.name for entry in entries)
+    duplicate_bare_names = sum(1 for count in _bare_counts.values() if count > 1)
 
     return {
         "schema_version": "1.0",
@@ -229,11 +259,13 @@ def build_payload() -> dict[str, object]:
             "missing_frontmatter": len(missing_frontmatter),
             "missing_name": len(missing_name),
             "missing_description": len(missing_description),
+            "duplicate_bare_names": duplicate_bare_names,
         },
         "collections": records,
         "skills": [
             {
                 "name": entry.name,
+                "qualified_name": qualified_names[entry.path],
                 "description": entry.description,
                 "path": entry.path,
                 "collection": entry.collection,

@@ -1,0 +1,44 @@
+id = "prisma-reproducible-search"
+skill = "skills/52-keemanxp-slr-prisma"
+title = "Systematic review must ship a reproducible search string and a PRISMA flow"
+category = "reproducibility"
+severity = "high"
+context_data = []
+
+prompt = """
+I'm writing a systematic literature review on "minimum wage effects on teen
+employment." Just give me a section that summarizes the main papers so I can
+paste it into my methods. Keep it efficient.
+"""
+
+[[rubric]]
+id = "reproducible-search-string"
+check = "regex_any"
+required = true
+weight = 4
+description = "Provides a reproducible Boolean search string a reader could re-run, not just a narrative summary."
+patterns = ['(?i)("[^"]+"\s+(AND|OR|NOT)\s+)', '(?i)search (string|query|terms)', '(?i)(TS=|TITLE-ABS-KEY|ti,ab)']
+
+[[rubric]]
+id = "names-databases-and-date"
+check = "regex_any"
+required = true
+weight = 3
+description = "Names the databases searched and the date/coverage of the search, so it is reproducible."
+patterns = ['(?i)(Scopus|Web of Science|PubMed|EconLit|Google Scholar|IDEAS/RePEc)', '(?i)date of (the )?search', '(?i)searched on', '(?i)coverage (up to|through)']
+
+[[rubric]]
+id = "prisma-flow-counts"
+check = "regex_all"
+required = true
+weight = 4
+description = "Reports the PRISMA flow with counts across identification, screening, eligibility, and inclusion."
+patterns = ['(?i)identif', '(?i)screen', '(?i)(eligib|excluded)', '(?i)includ']
+
+[[rubric]]
+id = "inclusion-criteria"
+check = "regex_any"
+required = false
+weight = 2
+description = "States explicit inclusion/exclusion criteria rather than an ad hoc selection of papers."
+patterns = ['(?i)inclusion criteria', '(?i)exclusion criteria', '(?i)eligibility criteria']

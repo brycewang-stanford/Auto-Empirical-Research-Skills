@@ -19,6 +19,31 @@ file adds the **operational** column (what is being done about it).
 
 ---
 
+## 0. Decision log
+
+**2026-07-08 — Confirmed: no mass in-repo split.** An audit re-examined all 91
+`SKILL.md` files over 500 lines against provenance:
+
+- **24** already ship a `references/` directory (progressive disclosure) and are
+  therefore **not** penalized by the hygiene score — including the three
+  repo-owned flagships `00.1`/`00.2`/`00.3` (Python/Stata/R), whose 2,000+-line
+  spines already offload deep detail to `references/NN-*.md` (23 pointers in the
+  Python spine alone). Splitting them further would move text without raising the
+  score and risks breaking a tuned pipeline.
+- **67** lack `references/` but are **manual vendor snapshots** — faithful
+  third-party mirrors. Rewriting them under our authorship would break the
+  provenance chain (§3, 🟠 rows). The correct fix is an upstream issue/PR.
+- The **one** first-party auto-synced long skill is StatsPAI (`00`); its split
+  must happen upstream (§4, 🟡).
+
+Net: the 500-line flag is **advisory for vendored content**, not a to-do list of
+in-repo edits. The same pass fixed the four skills that had been scoring 57 for
+missing YAML frontmatter (`04/scholar-evaluation`, `28/replicate-paper`, `38`,
+`40`) — they now carry `name` + `description` and have left the low-hygiene set
+(§3). See [`QUALITY_ASSESSMENT_2026-07.md`](QUALITY_ASSESSMENT_2026-07.md).
+
+---
+
 ## 1. How to refresh this list
 
 The repo's standard build does not write this file — the columns below
@@ -35,7 +60,7 @@ for sk in sorted(data['skills'], key=lambda x: x['quality_score'])[:30]:
     print(f'  {sk[\"quality_score\"]:3d}  lc={sk[\"line_count\"]:4d}  eval={eval_n}  {sk[\"path\"]}')"
 ```
 
-The output of that one-liner as of the 2026-07-06 catalog is in §3.
+The output of that one-liner as of the 2026-07-08 catalog is in §3.
 
 ---
 
@@ -54,38 +79,38 @@ The output of that one-liner as of the 2026-07-06 catalog is in §3.
 
 ## 3. Long / low-hygiene inventory (top 30 by lowest hygiene)
 
-| Score | Lines | Evals | Path | Status (as of 2026-07-06) |
+| Score | Lines | Evals | Path | Status (as of 2026-07-08) |
 |---:|---:|---:|---|---|
-| 57 | 304 | 0 | `skills/04-K-Dense-AI-claude-scientific-writer/scholar-evaluation/SKILL.md` | 🟠 Manual vendor snapshot — Diverga-like pattern, keep as-is. |
-| 57 | 230 | 0 | `skills/28-maxwell2732-paper-replicate-agent-demo/dot-claude/skills/replicate-paper/SKILL.md` | 🟠 Manual vendor snapshot. |
-| 57 | 181 | 0 | `skills/38-peternka-academic-proofreader/SKILL.md` | 🟠 Manual vendor snapshot. |
-| 57 | 381 | 1 | `skills/40-py-econometrics-pyfixest/SKILL.md` | 🟠 Manual vendor snapshot (1 eval scenario — `statspai-rdd-diagnostics`). |
-| 85 | 2256 | 15 | `skills/00-Full-empirical-analysis-skill_StatsPAI/SKILL.md` | 🟡 Blocked on upstream — first-party, weekly-synced. StatsPAI is the single highest-leverage split (15 eval scenarios ride on it). |
+| 85 | 2256 | 15 | `skills/00-Full-empirical-analysis-skill_StatsPAI/SKILL.md` | 🟡 Blocked on upstream — first-party, weekly-synced; anchors 15 eval scenarios. The one split to drive upstream. |
+| 85 | 1502 | 0 | `skills/25-HosungYou-Diverga/skills/d2/SKILL.md` | 🟠 Manual vendor snapshot (Diverga family). |
+| 85 | 1308 | 0 | `skills/25-HosungYou-Diverga/skills/c2/SKILL.md` | 🟠 Manual vendor snapshot (Diverga family). |
 | 85 | 1215 | 0 | `skills/04-K-Dense-AI-claude-scientific-writer/citation-management/SKILL.md` | 🟠 Manual vendor snapshot. |
-| 85 | 952 | 0 | `skills/04-K-Dense-AI-claude-scientific-writer/research-grants/SKILL.md` | 🟠 Manual vendor snapshot. |
-| 85 | 981 | 0 | `skills/20-wenddymacro-python-econ-skill/SKILL.md` | 🟠 Manual vendor snapshot. |
-| 85 | 923 | 0 | `skills/25-HosungYou-Diverga/skills/b1/SKILL.md` | 🟠 Manual vendor snapshot (Diverga family). |
-| 85 | 1022 | 0 | `skills/25-HosungYou-Diverga/skills/c1/SKILL.md` | 🟠 Manual vendor snapshot. |
-| 85 | 1308 | 0 | `skills/25-HosungYou-Diverga/skills/c2/SKILL.md` | 🟠 Manual vendor snapshot. |
-| 85 | 812 | 0 | `skills/25-HosungYou-Diverga/skills/c3/SKILL.md` | 🟠 Manual vendor snapshot. |
-| 85 | 1502 | 0 | `skills/25-HosungYou-Diverga/skills/d2/SKILL.md` | 🟠 Manual vendor snapshot. |
-| 85 | 1000 | 0 | `skills/25-HosungYou-Diverga/skills/d4/SKILL.md` | 🟠 Manual vendor snapshot. |
-| 85 | 1201 | 0 | `skills/25-HosungYou-Diverga/skills/e1/SKILL.md` | 🟠 Manual vendor snapshot. |
-| 85 | 891 | 0 | `skills/25-HosungYou-Diverga/skills/e2/SKILL.md` | 🟠 Manual vendor snapshot. |
-| 85 | 809 | 0 | `skills/25-HosungYou-Diverga/skills/memory/SKILL.md` | 🟠 Manual vendor snapshot. |
-| 85 | 874 | 0 | `skills/26-Data-Wise-scholar/skills/writing/methods-paper-writer/SKILL.md` | 🟠 Manual vendor snapshot. |
-| 85 | 832 | 0 | `skills/33-Galaxy-Dawn-claude-scholar/skills/uv-package-manager/SKILL.md` | 🟠 Manual vendor snapshot. |
-| 85 | 1097 | 0 | `skills/42-wanshuiyin-ARIS/skills/paper-poster/SKILL.md` | 🟠 Manual vendor snapshot. |
-| 85 | 1103 | 0 | `skills/42-wanshuiyin-ARIS/skills/skills-codex-gemini-review/paper-poster/SKILL.md` | 🟠 Manual vendor snapshot. |
-| 85 | 1097 | 0 | `skills/42-wanshuiyin-ARIS/skills/skills-codex/paper-poster/SKILL.md` | 🟠 Manual vendor snapshot. |
-| 85 | 840 | 0 | `skills/55-ab604-claude-code-r-skills/skills/tdd-workflow/SKILL.md` | 🟠 Manual vendor snapshot. |
-| 85 | 982 | 0 | `skills/63-tondevrel-scientific-agent-skills/dowhy/SKILL.md` | 🟠 Manual vendor snapshot. |
-| 85 | 875 | 0 | `skills/67-econfin-workflow-toolkit/China-CF-study/SKILL.md` | 🟠 Manual vendor snapshot. |
+| 85 | 1201 | 0 | `skills/25-HosungYou-Diverga/skills/e1/SKILL.md` | 🟠 Manual vendor snapshot (Diverga family). |
+| 85 | 1103 | 0 | `skills/42-wanshuiyin-ARIS/skills/skills-codex-gemini-review/paper-poster/SKILL.md` | 🟠 Manual vendor snapshot (ARIS family). |
+| 85 | 1097 | 0 | `skills/42-wanshuiyin-ARIS/skills/paper-poster/SKILL.md` | 🟠 Manual vendor snapshot (ARIS family). |
+| 85 | 1097 | 0 | `skills/42-wanshuiyin-ARIS/skills/skills-codex/paper-poster/SKILL.md` | 🟠 Manual vendor snapshot (ARIS family). |
 | 85 | 1069 | 0 | `skills/67-econfin-workflow-toolkit/Foreign-CF-study/SKILL.md` | 🟠 Manual vendor snapshot. |
+| 85 | 1022 | 0 | `skills/25-HosungYou-Diverga/skills/c1/SKILL.md` | 🟠 Manual vendor snapshot (Diverga family). |
+| 85 | 1000 | 0 | `skills/25-HosungYou-Diverga/skills/d4/SKILL.md` | 🟠 Manual vendor snapshot (Diverga family). |
+| 85 | 982 | 0 | `skills/63-tondevrel-scientific-agent-skills/dowhy/SKILL.md` | 🟠 Manual vendor snapshot. |
+| 85 | 981 | 0 | `skills/20-wenddymacro-python-econ-skill/SKILL.md` | 🟠 Manual vendor snapshot. |
+| 85 | 952 | 0 | `skills/04-K-Dense-AI-claude-scientific-writer/research-grants/SKILL.md` | 🟠 Manual vendor snapshot. |
+| 85 | 923 | 0 | `skills/25-HosungYou-Diverga/skills/b1/SKILL.md` | 🟠 Manual vendor snapshot (Diverga family). |
+| 85 | 891 | 0 | `skills/25-HosungYou-Diverga/skills/e2/SKILL.md` | 🟠 Manual vendor snapshot (Diverga family). |
 | 85 | 881 | 0 | `skills/67-econfin-workflow-toolkit/chinese-ppt/SKILL.md` | 🟠 Manual vendor snapshot. |
-| 92 | 656 | 0 | `skills/04-K-Dense-AI-claude-scientific-writer/literature-review/SKILL.md` | 🟠 Manual vendor snapshot. |
-| 92 | 582 | 0 | `skills/04-K-Dense-AI-claude-scientific-writer/peer-review/SKILL.md` | 🟠 Manual vendor snapshot. |
-| 92 | 581 | 0 | `skills/04-K-Dense-AI-claude-scientific-writer/scientific-critical-thinking/SKILL.md` | 🟠 Manual vendor snapshot. |
+| 85 | 875 | 0 | `skills/67-econfin-workflow-toolkit/China-CF-study/SKILL.md` | 🟠 Manual vendor snapshot. |
+| 85 | 874 | 0 | `skills/26-Data-Wise-scholar/skills/writing/methods-paper-writer/SKILL.md` | 🟠 Manual vendor snapshot. |
+| 85 | 840 | 0 | `skills/55-ab604-claude-code-r-skills/skills/tdd-workflow/SKILL.md` | 🟠 Manual vendor snapshot. |
+| 85 | 832 | 0 | `skills/33-Galaxy-Dawn-claude-scholar/skills/uv-package-manager/SKILL.md` | 🟠 Manual vendor snapshot. |
+| 85 | 812 | 0 | `skills/25-HosungYou-Diverga/skills/c3/SKILL.md` | 🟠 Manual vendor snapshot (Diverga family). |
+| 85 | 809 | 0 | `skills/25-HosungYou-Diverga/skills/memory/SKILL.md` | 🟠 Manual vendor snapshot (Diverga family). |
+| 92 | 785 | 0 | `skills/67-econfin-workflow-toolkit/data-fetcher/SKILL.md` | 🟠 Manual vendor snapshot. |
+| 92 | 782 | 0 | `skills/25-HosungYou-Diverga/skills/g6/SKILL.md` | 🟠 Manual vendor snapshot (Diverga family). |
+| 92 | 759 | 0 | `skills/58-charlescoverdale-econstack/cost-benefit/SKILL.md` | 🟠 Manual vendor snapshot. |
+| 92 | 741 | 1 | `skills/56-hanlulong-econ-writing-skill/econ-write/SKILL.md` | 🟠 Manual vendor snapshot. |
+| 92 | 740 | 0 | `skills/25-HosungYou-Diverga/skills/humanize/SKILL.md` | 🟠 Manual vendor snapshot (Diverga family). |
+| 92 | 735 | 0 | `skills/42-wanshuiyin-ARIS/skills/research-refine/SKILL.md` | 🟠 Manual vendor snapshot (ARIS family). |
+| 92 | 716 | 0 | `skills/26-Data-Wise-scholar/skills/research/method-transfer-engine/SKILL.md` | 🟠 Manual vendor snapshot. |
 
 > **Read this as a triage table.** A 🔴 / 🟡 row is an *action* the maintainer team has decided to take. A 🟠 row is **deliberately preserved** — do not "fix" these by editing in place. The repo's value here is faithful mirrors; rewriting them under our own authorship would defeat the provenance chain.
 

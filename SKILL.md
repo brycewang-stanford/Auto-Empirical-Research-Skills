@@ -48,7 +48,7 @@ Match the user's identification strategy or task to a starting collection, then 
 - Whole-repo imports are supported by this root `SKILL.md` as a lightweight compatibility entry point.
 - Individual skill installs are still preferred when a runtime expects one folder per skill. Copy the folder that directly contains the target `SKILL.md`.
 - Do not copy the repository root into a runtime and expect every child skill to become individually registered unless that runtime explicitly supports recursive skill discovery.
-- **Name collisions:** the catalog contains skills that share a `name` across collections (e.g. `data-analysis`, `lit-review`, `proofread`). When a runtime registers skills by flat name, install one collection at a time, or disambiguate by referring to a skill by its full `skills/<collection>/.../SKILL.md` path rather than by bare name.
+- **Name collisions:** the catalog contains 92 bare `name`s shared across collections (e.g. `data-analysis`, `lit-review`, `proofread`). When a runtime registers skills by flat name, install one collection at a time, or disambiguate with the globally-unique `qualified_name` field in `catalog/skills.json` (`<collection>::<name>`, e.g. `12-pedrohcgs-claude-code-my-workflow::data-analysis`), or the full `skills/<collection>/.../SKILL.md` path.
 
 ## Key Files
 

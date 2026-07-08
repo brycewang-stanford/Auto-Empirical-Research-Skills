@@ -181,8 +181,10 @@ def _parse_minimal_toml(path: Path) -> dict:
         if not s.strip():
             continue
         if _TOML_ARRAY_RE.match(s):
-            # Nested arrays of tables aren't needed for the fields we read.
-            continue
+            # Stop at the first table / array-of-tables header (e.g. `[[rubric]]`).
+            # We only read top-level scalars (id, skill); continuing past this
+            # point would let a rubric's `id =` clobber the scenario `id`.
+            break
         m = _TOML_KV_RE.match(s)
         if not m:
             continue

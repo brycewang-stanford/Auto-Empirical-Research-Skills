@@ -67,16 +67,16 @@ Stata / R / 文献 / 引用 / 写作 / de-AIGC / 复现），以及**重名（na
 
 ---
 
-## 3. 仍待处理的结构性短板 · Remaining structural debt（未在本轮修）
+## 3. 结构性短板与本轮跟进 · Structural debt & follow-up
 
-这些不是 bug，是需要单独立项的方法学/内容工作，**不宜在一次自动化 pass 里草率处理**
-（多为第三方 vendored 内容，重构会破坏原作者意图）：
+第一轮修红 CI 之后，第二轮（2026-07-08）继续处理了 §5 提出的建议。状态如下：
 
-| 短板 | 现状 | 建议 |
+| 短板 | 原状 | 本轮处理 |
 |---|---|---|
-| **行为级验证覆盖率极低** | 1,150 个技能只有 **11 个（~1%）** 进入 eval-harness | 这才是"质量"的真实瓶颈。把 badge 叙事从"1150×99 分"改为"覆盖率优先"，按方法（IV/DiD/RDD…）逐条补 eval，而非追求平均分。 |
-| **91 个 `SKILL.md` 超 500 行** | 违反渐进式披露（progressive disclosure）原则；最长 2,466 行 | 仓库已有 [`LONG_SKILL_SPLIT_PLAN.md`](LONG_SKILL_SPLIT_PLAN.md) 与 `scripts/split-skill.py`。对**自有**旗舰（`00.*` / `50`）先做拆分示范，vendored 的谨慎处理。 |
-| **92 组重名技能** | 扁平安装时会互相覆盖 | 根 `SKILL.md` 已加告警；长期可在 catalog 生成 `collection::name` 命名空间。 |
+| **行为级验证覆盖率低** | 1,150 个技能仅 **11 个（1.0%）** 有 eval | ✅ 新增 **7 个真实方法学陷阱场景**，覆盖此前无 eval 的 7 个技能（marginaleffects 非线性交互项、log-point 百分比误读、PRISMA 可复现检索、引用 DOI 核验、CausalPy 安慰剂检验、复现审计"重算而非复述"、OpenAlex 禁止编造元数据）。覆盖 **11 → 18 技能，30 → 37 场景，159 → 183 rubric 项**。方法族覆盖本就 100%（见 [`RIGOR_COVERAGE.md`](RIGOR_COVERAGE.md)）——真正稀疏的是"每个技能"维度。同时修了 `eval_coverage` 一直显示 rubric-id 而非 scenario-id 的解析 bug。 |
+| **91 个 `SKILL.md` 超 500 行** | 疑似违反渐进式披露 | ✅ **证据化决策：不做整仓机械拆分。** 91 个里 24 个已带 `references/`（含自有旗舰 `00.1/00.2/00.3`，其 2000+ 行主干已把细节下放到 `references/`，故不被扣分）；其余 67 个全是 vendored 快照，重写会破坏 provenance。唯一的一等公民长技能 StatsPAI（`00`）走上游拆分。详见 [`LONG_SKILL_STATUS.md`](LONG_SKILL_STATUS.md) §0。 |
+| **92 组重名技能** | 扁平安装互相覆盖 | ✅ catalog 现为每个技能生成全局唯一的 `qualified_name`（`<collection>::<name>`，同合集内再撞名则追加 `@子路径`）——**1150/1150 唯一**；`skills.json.summary` 新增 `duplicate_bare_names`；根 `SKILL.md` 指向该字段。 |
+| **主分支缺 CI 保护** | badge 绿、门禁红曾直达 main | ⚠️ 见 §5 —— 需仓库管理员在 GitHub 设置里开启（非代码可改）。 |
 
 ---
 
@@ -95,9 +95,15 @@ Stata / R / 文献 / 引用 / 写作 / de-AIGC / 复现），以及**重名（na
 
 ---
 
-## 5. 给维护者的一句话建议 · One-line recommendation
+## 5. 给维护者的建议 · Recommendations
 
-**别再优化那个 99 分了 —— 它已经封顶且衡量的是形式。把下一阶段的力气全部投到
-"行为级 eval 覆盖率"（当前 1%）和"超长技能拆分"（91 个）上，这两项才是把"看起来严谨"
-变成"真的严谨"的杠杆。** 同时，给主分支加一条"CI 必须绿才能合并"的保护规则，避免
-再次出现本轮这种"badge 绿、门禁红"的失配。
+1. **开启主分支保护（唯一未做项，需管理员）。** 本轮的根因是"badge 绿、门禁红"的提交
+   直达 `main`。在 GitHub → Settings → Branches → Branch protection rules 给 `main`
+   加：require status checks to pass（勾选 `validate-catalog` 与 `quality-evals`）+
+   require branch up to date。这样红门禁再也进不了 `main`。这是设置项，不是代码改动，
+   所以本轮只能建议、无法代改。
+2. **eval 覆盖继续按"每技能"补，而非追平均分。** 方法族已 100%，但 1,150 个技能里仍只有
+   18 个有行为级 eval。优先给高流量的 vendored 因果/写作技能各补 1 个陷阱场景。
+3. **长技能维持"上游拆分"策略**（见 `LONG_SKILL_STATUS.md`），不要在仓库内改 vendored 快照。
+4. **把"99 分"叙事降级为"卫生分 + 覆盖率"双指标**：卫生分已封顶且只测形式，覆盖率
+   （benchmark 17 / eval 37 场景 / 18 技能）才是可持续增长、真正反映严谨性的数字。

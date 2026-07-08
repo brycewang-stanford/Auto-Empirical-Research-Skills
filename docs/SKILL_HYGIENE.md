@@ -15,8 +15,8 @@ A skill can be **well-formed** (high hygiene) yet **untested for the traps an ap
 
 - Skills scored: **1150**
 - Mean hygiene score: **99.4/100**
-- Skills with at least one eval scenario: **11** (1.0% of catalog)
-- Total eval-harness scenarios that target a specific skill: **12**
+- Skills with at least one eval scenario: **18** (1.6% of catalog)
+- Total eval-harness scenarios that target a specific skill: **19**
 - Descriptions: 1150 from frontmatter, 0 body-derived, 0 none
 - Tagged with at least one taxonomy facet: 566
 
@@ -62,9 +62,9 @@ A skill can be **well-formed** (high hygiene) yet **untested for the traps an ap
 | `35-bahayonghang-academic-writing-skills` | 5 | 100.0 | 100 | 0 | 0 |
 | `36-taoyunudt-literature-review-skill` | 1 | 100.0 | 100 | 0 | 0 |
 | `38-peternka-academic-proofreader` | 1 | 100.0 | 100 | 0 | 0 |
-| `39-vincentarelbundock-marginaleffects` | 1 | 100.0 | 100 | 0 | 0 |
+| `39-vincentarelbundock-marginaleffects` | 1 | 100.0 | 100 | 1 | 1 |
 | `40-py-econometrics-pyfixest` | 1 | 100.0 | 100 | 1 | 1 |
-| `41-sticerd-eee-sewage-econometrics-check` | 22 | 100.0 | 100 | 0 | 0 |
+| `41-sticerd-eee-sewage-econometrics-check` | 22 | 100.0 | 100 | 1 | 1 |
 | `42-wanshuiyin-ARIS` | 104 | 98.6 | 85 | 0 | 0 |
 | `43-wentorai-research-plugins` | 478 | 100.0 | 95 | 0 | 0 |
 | `44-matsuikentaro1-humanizer_academic` | 1 | 92.0 | 92 | 0 | 0 |
@@ -74,18 +74,18 @@ A skill can be **well-formed** (high hygiene) yet **untested for the traps an ap
 | `48-copaper-ai-chinese-de-aigc` | 1 | 100.0 | 100 | 1 | 1 |
 | `49-voidborne-d-humanize-chinese` | 1 | 100.0 | 100 | 0 | 0 |
 | `50-brycewang-aer-skills` | 14 | 100.0 | 100 | 6 | 10 |
-| `51-pymc-labs-CausalPy` | 3 | 100.0 | 100 | 0 | 0 |
-| `52-keemanxp-slr-prisma` | 1 | 100.0 | 100 | 0 | 0 |
+| `51-pymc-labs-CausalPy` | 3 | 100.0 | 100 | 1 | 1 |
+| `52-keemanxp-slr-prisma` | 1 | 100.0 | 100 | 1 | 1 |
 | `53-keemanxp-thematic-analysis-skill` | 1 | 100.0 | 100 | 0 | 0 |
 | `54-scdenney-open-science-skills` | 24 | 100.0 | 100 | 0 | 0 |
 | `55-ab604-claude-code-r-skills` | 8 | 98.1 | 85 | 0 | 0 |
-| `56-hanlulong-econ-writing-skill` | 1 | 92.0 | 92 | 0 | 0 |
+| `56-hanlulong-econ-writing-skill` | 1 | 92.0 | 92 | 1 | 1 |
 | `57-dgunning-edgartools` | 1 | 100.0 | 100 | 0 | 0 |
 | `58-charlescoverdale-econstack` | 7 | 97.7 | 92 | 0 | 0 |
-| `59-shiquda-openalex-skill` | 1 | 100.0 | 100 | 0 | 0 |
+| `59-shiquda-openalex-skill` | 1 | 100.0 | 100 | 1 | 1 |
 | `60-regisely-superpapers` | 16 | 100.0 | 100 | 0 | 0 |
 | `61-phdemotions-research-methods` | 9 | 100.0 | 100 | 0 | 0 |
-| `62-PHY041-claude-skill-citation-checker` | 1 | 100.0 | 100 | 0 | 0 |
+| `62-PHY041-claude-skill-citation-checker` | 1 | 100.0 | 100 | 1 | 1 |
 | `63-tondevrel-scientific-agent-skills` | 2 | 92.5 | 85 | 0 | 0 |
 | `64-tmonk-mcp-stata` | 20 | 100.0 | 100 | 0 | 0 |
 | `65-game-theory-paper-writer` | 1 | 100.0 | 100 | 0 | 0 |
@@ -98,7 +98,7 @@ A skill can be **well-formed** (high hygiene) yet **untested for the traps an ap
 
 | Score | Skill | Flags | Eval coverage |
 |---:|---|---|---:|
-| 85 | [`skills/00-Full-empirical-analysis-skill_StatsPAI/SKILL.md`](../skills/00-Full-empirical-analysis-skill_StatsPAI/SKILL.md) | very-long-no-references | cate-uncertainty, competing-risks, covariate-balance-placebo, did-quantile-assumptions, distribution-beyond-the-mean, elasticity-identification, estimating-equation-and-assumption, interaction-allowed, mechanism-alternative, no-false-reassurance, nuisance-not-causal, observational-not-experimental, power-caveat, presentation-strategy, small-sample-inference |
+| 85 | [`skills/00-Full-empirical-analysis-skill_StatsPAI/SKILL.md`](../skills/00-Full-empirical-analysis-skill_StatsPAI/SKILL.md) | very-long-no-references | statspai-bad-controls, statspai-bunching, statspai-clustered-inference, statspai-decomposition, statspai-dml-crossfit, statspai-heterogeneous-effects, statspai-matching-overlap, statspai-mediation-assumptions, statspai-pretrends-eventstudy, statspai-quantile-effects, statspai-rdd-diagnostics, statspai-staggered-did, statspai-survival-assumptions, statspai-synthetic-control, statspai-weak-iv |
 | 85 | [`skills/04-K-Dense-AI-claude-scientific-writer/citation-management/SKILL.md`](../skills/04-K-Dense-AI-claude-scientific-writer/citation-management/SKILL.md) | very-long-no-references | — |
 | 85 | [`skills/04-K-Dense-AI-claude-scientific-writer/research-grants/SKILL.md`](../skills/04-K-Dense-AI-claude-scientific-writer/research-grants/SKILL.md) | very-long-no-references | — |
 | 85 | [`skills/20-wenddymacro-python-econ-skill/SKILL.md`](../skills/20-wenddymacro-python-econ-skill/SKILL.md) | very-long-no-references | — |
@@ -133,12 +133,16 @@ A skill can be **well-formed** (high hygiene) yet **untested for the traps an ap
 | 2 | [`skills/50-brycewang-aer-skills/skills/aer-identification/SKILL.md`](../skills/50-brycewang-aer-skills/skills/aer-identification/SKILL.md) | 100 |
 | 2 | [`skills/50-brycewang-aer-skills/skills/aer-introduction/SKILL.md`](../skills/50-brycewang-aer-skills/skills/aer-introduction/SKILL.md) | 100 |
 | 1 | [`skills/10-Jill0099-causal-inference-mixtape/SKILL.md`](../skills/10-Jill0099-causal-inference-mixtape/SKILL.md) | 100 |
+| 1 | [`skills/39-vincentarelbundock-marginaleffects/SKILL.md`](../skills/39-vincentarelbundock-marginaleffects/SKILL.md) | 100 |
 | 1 | [`skills/40-py-econometrics-pyfixest/SKILL.md`](../skills/40-py-econometrics-pyfixest/SKILL.md) | 100 |
+| 1 | [`skills/41-sticerd-eee-sewage-econometrics-check/skills/audit-replication/SKILL.md`](../skills/41-sticerd-eee-sewage-econometrics-check/skills/audit-replication/SKILL.md) | 100 |
 | 1 | [`skills/47-conorbronsdon-avoid-ai-writing/SKILL.md`](../skills/47-conorbronsdon-avoid-ai-writing/SKILL.md) | 100 |
 | 1 | [`skills/48-copaper-ai-chinese-de-aigc/SKILL.md`](../skills/48-copaper-ai-chinese-de-aigc/SKILL.md) | 100 |
 | 1 | [`skills/50-brycewang-aer-skills/skills/aer-robustness/SKILL.md`](../skills/50-brycewang-aer-skills/skills/aer-robustness/SKILL.md) | 100 |
 | 1 | [`skills/50-brycewang-aer-skills/skills/aer-submission/SKILL.md`](../skills/50-brycewang-aer-skills/skills/aer-submission/SKILL.md) | 100 |
 | 1 | [`skills/50-brycewang-aer-skills/skills/aer-tables-figures/SKILL.md`](../skills/50-brycewang-aer-skills/skills/aer-tables-figures/SKILL.md) | 100 |
+| 1 | [`skills/51-pymc-labs-CausalPy/skills/running-placebo-analysis/SKILL.md`](../skills/51-pymc-labs-CausalPy/skills/running-placebo-analysis/SKILL.md) | 100 |
+| 1 | [`skills/52-keemanxp-slr-prisma/SKILL.md`](../skills/52-keemanxp-slr-prisma/SKILL.md) | 100 |
 
 ## Reading this report
 

@@ -288,7 +288,7 @@ Numbers in this README are kept honest and disambiguated. "Vendored" means the f
 | Vendored **collections** | **69** | [`catalog/skills.json`](catalog/skills.json) · [all 69 at a glance ↑](#all-69-skill-collections-at-a-glance) |
 | **First-party flagship** full-pipeline skills (StatsPAI DSL + explicit Python/Stata/R) | **4** | [`skills/00*`](skills/) |
 | Numeric **benchmark tasks** with gold values recomputed from data each run | **17** | [`benchmark/`](benchmark/) |
-| Behavioral **eval scenarios / rubric items** | **30 / 159** | [`eval-harness/`](eval-harness/) |
+| Behavioral **eval scenarios / rubric items** | **37 / 183** | [`eval-harness/`](eval-harness/) |
 | Security audit of the **original baseline** (collections / files) | **52 / 2,940+**, 52/52 CLEAN | [`SECURITY-SCAN-REPORT.md`](SECURITY-SCAN-REPORT.md) |
 | Curated **map of the wider ecosystem** | **23,000+ skills / 119 repos** | this README · [`docs/SKILL_CATALOG.md`](docs/SKILL_CATALOG.md) |
 | **Tools catalog** (`tools/`): causal/econometrics libraries, autonomous research agents, MCP servers, causal discovery, benchmark datasets | **334 tools / 6 categories** | [`tools/tools.json`](tools/tools.json) · [`tools/CATALOG.md`](tools/CATALOG.md) |
@@ -389,7 +389,7 @@ Public-skill counts are easy to inflate, and recent studies show large skill ind
 | Layer | What it catches | Where |
 |---|---|---|
 | **Numeric benchmark** | Reported numbers that don't match truth recomputed from real data — the naive-DID sign trap, weak-IV without first-stage F, TWFE bias under staggered timing, RDD trend confound, post-treatment bad controls, omitted unit heterogeneity (panel FE), dynamic effects / pre-trends (event study), omitted-control bias under cross-fitting (DML), censoring (survival), prior sensitivity (Bayesian), pre-period donor fit (synthetic control), opposite-signed subgroup effects a pooled mean hides (CATE), tail-only gains a mean-only report misses (QTE), local-shock confounding in a shift-share (Bartik) IV, mediator-as-control sign flips (mediation), and reference-dependent gap splits (Oaxaca-Blinder), and excess mass at a kink hidden by the unmodified baseline (bunching) | [`benchmark/`](benchmark/) · 17 tasks |
-| **Eval harness** | Prose-level failures: weak-IV false reassurance, staggered-DID TWFE misuse, fabricated citations, unsafe `curl \| bash` setup, multiple-testing abuse, AER compliance gaps | [`eval-harness/`](eval-harness/) · 30 scenarios / 159 rubric items |
+| **Eval harness** | Prose-level failures: weak-IV false reassurance, staggered-DID TWFE misuse, fabricated citations, unsafe `curl \| bash` setup, multiple-testing abuse, AER compliance gaps | [`eval-harness/`](eval-harness/) · 37 scenarios / 183 rubric items |
 | **Security audit** | Pipe-to-shell, reverse shells, credential exfiltration, prompt injection across 13 risk categories — 6-phase, 40+ hook scripts reviewed by hand | [`SECURITY-SCAN-REPORT.md`](SECURITY-SCAN-REPORT.md) |
 | **Provenance & license** | Unvendored sources, license risk, hygiene drift across all 1,150 cataloged skills | [`docs/LICENSE_AUDIT.md`](docs/LICENSE_AUDIT.md) · [`docs/SKILL_HYGIENE.md`](docs/SKILL_HYGIENE.md) |
 | **CI & compatibility** | Catalog freshness, broken local links, GitHub Actions policy, Python 3.9 **and** 3.12 syntax floor | [`.github/workflows/`](.github/workflows/) · 6 workflows |

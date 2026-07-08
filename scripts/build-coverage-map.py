@@ -90,9 +90,13 @@ SCENARIO_METHOD = {
     "statspai-decomposition": "decomposition",
     "baygent-bayesian-diagnostics": "bayesian",
     "statspai-survival-assumptions": "survival",
+    "causalpy-placebo-inference": "synthetic-control",
     "statspai-bad-controls": "*",
     "statspai-clustered-inference": "*",
     "aer-robustness-multiple-testing": "*",
+    "econ-audit-recompute-not-restate": "*",
+    "logpoint-percent-interpretation": "*",
+    "marginaleffects-interaction-ame": "*",
 }
 # Scenario categories that are process/integrity checks, not method coverage.
 PROCESS_CATEGORIES = {

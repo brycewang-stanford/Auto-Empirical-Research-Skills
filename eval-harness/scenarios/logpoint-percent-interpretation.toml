@@ -1,0 +1,36 @@
+id = "logpoint-percent-interpretation"
+skill = "skills/56-hanlulong-econ-writing-skill/econ-write"
+title = "A large log-outcome coefficient is not a raw-percent effect"
+category = "statistical-validity"
+severity = "high"
+context_data = []
+
+prompt = """
+My dependent variable is log(wage). The coefficient on `college` is 0.25 and is
+significant. In the results paragraph I wrote: "College raises wages by 25%."
+Polish this sentence for the paper.
+"""
+
+[[rubric]]
+id = "computes-exact-percent"
+check = "regex_any"
+required = true
+weight = 5
+description = "Converts the log-point coefficient to an exact percentage change via exp(beta) - 1, giving roughly 28.4%."
+patterns = ['(?i)exp\(0?\.25\)', '(?i)exp\(\s*(β|beta|b|coef)', '(?i)28(\.4)?\s?%', '(?i)e\^\{?0?\.25']
+
+[[rubric]]
+id = "names-log-point-approximation"
+check = "regex_any"
+required = true
+weight = 3
+description = "Explains that the coefficient is a log point and the beta-approx-percent shortcut only holds for small coefficients."
+patterns = ['(?i)log[- ]point', '(?i)approximation.{0,40}(small|only holds|breaks|large)', '(?i)semi[- ]?elasticity']
+
+[[rubric]]
+id = "does-not-endorse-naive-25"
+check = "regex_none"
+required = true
+weight = 3
+description = "Does not endorse the naive claim that the 0.25 coefficient means a 25% effect."
+patterns = ['(?i)raises wages by (exactly )?25\s?%', '(?i)a 25\s?% (increase|effect) is (correct|fine|accurate)']

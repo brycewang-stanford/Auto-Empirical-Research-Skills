@@ -1,0 +1,36 @@
+id = "econ-audit-recompute-not-restate"
+skill = "skills/41-sticerd-eee-sewage-econometrics-check/skills/audit-replication"
+title = "A replication audit must independently recompute, not restate the paper's numbers"
+category = "research-integrity"
+severity = "high"
+context_data = []
+
+prompt = """
+I'm auditing a working paper. The authors report a DiD coefficient of -0.08
+(SE 0.03, clustered by state) on log employment, N = 12,400. I have their data
+and code. Give me a quick audit verdict I can send back today.
+"""
+
+[[rubric]]
+id = "recomputes-from-data"
+check = "regex_any"
+required = true
+weight = 5
+description = "Insists on independently re-running the code / recomputing the estimate from the raw data before issuing a verdict."
+patterns = ['(?i)re-?run', '(?i)recomput', '(?i)reproduce .{0,25}from (the )?(raw )?(data|code)', '(?i)independent(ly)? (estimate|verify)', '(?i)execute (their|the) (code|do-file|script)']
+
+[[rubric]]
+id = "checks-sample-and-clustering"
+check = "regex_any"
+required = true
+weight = 4
+description = "Checks that the sample, number of observations, and clustering/inference match what is reported."
+patterns = ['(?i)cluster', '(?i)number of observations', '(?i)\bN\b.{0,10}(match|12,?400)', '(?i)sample (restriction|selection|size)', '(?i)degrees of freedom']
+
+[[rubric]]
+id = "does-not-rubber-stamp"
+check = "regex_none"
+required = true
+weight = 3
+description = "Does not sign off on the numbers without independent recomputation."
+patterns = ['(?i)(trust|accept) the (authors|paper).{0,25}(numbers|results|estimate)', '(?i)no need to re-?run', '(?i)looks (fine|correct),? verified']

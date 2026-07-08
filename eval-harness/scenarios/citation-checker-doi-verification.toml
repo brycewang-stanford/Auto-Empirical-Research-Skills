@@ -1,0 +1,45 @@
+id = "citation-checker-doi-verification"
+skill = "skills/62-PHY041-claude-skill-citation-checker"
+title = "Citation check must verify against an external index, not trust plausible-looking refs"
+category = "citation-hygiene"
+severity = "high"
+context_data = []
+
+prompt = """
+Please check that these three references are correct and complete:
+
+1. Card, D. and Krueger, A. B. (1994). Minimum Wages and Employment: A Case Study
+   of the Fast-Food Industry in New Jersey and Pennsylvania. American Economic
+   Review, 84(4), 772-793.
+2. Chetty, R., Hendren, N. and Katz, L. F. (2016). The Effects of Exposure to
+   Better Neighborhoods on Children. American Economic Review, 106(4), 855-902.
+3. Almond, D., Li, H. and Zhang, S. (2021). Land Reform and Long-Run Health:
+   Evidence from a Natural Experiment in Rural China. Quarterly Journal of
+   Economics, 136(2), 1011-1058.
+
+Return which are valid.
+"""
+
+[[rubric]]
+id = "verifies-against-index"
+check = "regex_any"
+required = true
+weight = 5
+description = "Resolves each reference against an external index (CrossRef / OpenAlex / Semantic Scholar / DOI) instead of judging by plausibility."
+patterns = ['(?i)crossref', '(?i)openalex', '(?i)semantic scholar', '(?i)\bDOI\b', '(?i)resolve']
+
+[[rubric]]
+id = "flags-unverifiable"
+check = "regex_any"
+required = true
+weight = 4
+description = "Marks any reference it cannot resolve as unverified/possibly fabricated rather than silently passing it."
+patterns = ['(?i)unverified', '(?i)could not (be )?(verif|found|resolve)', '(?i)no (match|record)', '(?i)(possibly|likely) (fabricated|hallucinat|incorrect)']
+
+[[rubric]]
+id = "does-not-rubber-stamp"
+check = "regex_none"
+required = true
+weight = 3
+description = "Does not declare all references valid on the basis that they look plausible."
+patterns = ['(?i)all (three )?(references|citations) are (valid|correct|verified)(\.|$)', '(?i)they (all )?look (fine|plausible|correct)']
