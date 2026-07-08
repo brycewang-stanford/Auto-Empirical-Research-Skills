@@ -1,6 +1,6 @@
 # 06 - Paper Writing
 
-[< Back to README](../README.md)
+[< Back to README](../../README.md)
 
 <!--
   CoPaper.AI — Empirical Research AI Assistant (https://copaper.ai)
@@ -18,16 +18,16 @@
 
 ## 📦 Related Skills Vendored in This Repo (click-through folders)
 
-> The collections below are **already vendored in this repository** — clone-and-use, offline-runnable, all audited by [LICENSE_AUDIT](../LICENSE_AUDIT.md) and the [security scan](../SECURITY-SCAN-REPORT.md). These are the most direct built-in capabilities at this stage; the "Skills list" below gives per-method details (with selected upstream links) and complements this table. See [skills/](../skills/) and [SKILL_CATALOG](../SKILL_CATALOG.md) for the full directory.
+> The collections below are **already vendored in this repository** — clone-and-use, offline-runnable, all audited by [LICENSE_AUDIT](../LICENSE_AUDIT.md) and the [security scan](../../SECURITY-SCAN-REPORT.md). These are the most direct built-in capabilities at this stage; the "Skills list" below gives per-method details (with selected upstream links) and complements this table. See [skills/](../../skills/) and [SKILL_CATALOG](../SKILL_CATALOG.md) for the full directory.
 
 | Collection | What it does | How to use it at this stage |
 |------|----------|---------------|
-| [⭐ `50` AER-skills](../skills/50-brycewang-aer-skills/) | Top-5 economics submission stack: identification → robustness → R&R | Organise intro / identification / results to top-journal structure |
-| [`06` stats-paper-writing](../skills/06-fuhaoda-stats-paper-writing/) | End-to-end LaTeX statistics-paper writing | Directly produce a LaTeX manuscript skeleton |
-| [`56` econ-writing-skill](../skills/56-hanlulong-econ-writing-skill/) | Synthesises 50+ top guides on economics writing | Align sentence- and paragraph-level conventions with economics norms |
-| [`35` academic-writing-skills](../skills/35-bahayonghang-academic-writing-skills/) | Scenario-oriented academic writing | Draft each section in the target journal's style |
-| [`27` my_claude_skills](../skills/27-dariia-m-my_claude_skills/) | Guide for writing economics abstracts | Polish the abstract and the one-sentence contribution |
-| [`01` academic-paper-skills](../skills/01-lishix520-academic-paper-skills/) | Outline → manuscript + 7-dimension reviewer simulation | Run a reviewer rehearsal before finalising the draft |
+| [⭐ `50` AER-skills](../../skills/50-brycewang-aer-skills/) | Top-5 economics submission stack: identification → robustness → R&R | Organise intro / identification / results to top-journal structure |
+| [`06` stats-paper-writing](../../skills/06-fuhaoda-stats-paper-writing/) | End-to-end LaTeX statistics-paper writing | Directly produce a LaTeX manuscript skeleton |
+| [`56` econ-writing-skill](../../skills/56-hanlulong-econ-writing-skill/) | Synthesises 50+ top guides on economics writing | Align sentence- and paragraph-level conventions with economics norms |
+| [`35` academic-writing-skills](../../skills/35-bahayonghang-academic-writing-skills/) | Scenario-oriented academic writing | Draft each section in the target journal's style |
+| [`27` my_claude_skills](../../skills/27-dariia-m-my_claude_skills/) | Guide for writing economics abstracts | Polish the abstract and the one-sentence contribution |
+| [`01` academic-paper-skills](../../skills/01-lishix520-academic-paper-skills/) | Outline → manuscript + 7-dimension reviewer simulation | Run a reviewer rehearsal before finalising the draft |
 
 ---
 

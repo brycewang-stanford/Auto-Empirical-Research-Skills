@@ -1,6 +1,6 @@
 # 03 - Paper Reading and Decomposition
 
-[< Back to README](../README.md)
+[< Back to README](../../README.md)
 
 <!--
   CoPaper.AI — Empirical Research AI Assistant (https://copaper.ai)
@@ -16,16 +16,16 @@
 
 ## 📦 Related Skills Vendored in This Repo (click-through folders)
 
-> The collections below are **already vendored in this repository** — clone-and-use, offline-runnable, all audited by [LICENSE_AUDIT](../LICENSE_AUDIT.md) and the [security scan](../SECURITY-SCAN-REPORT.md). These are the most direct built-in capabilities at this stage; the "Skills list" below gives per-method details (with selected upstream links) and complements this table. See [skills/](../skills/) and [SKILL_CATALOG](../SKILL_CATALOG.md) for the full directory.
+> The collections below are **already vendored in this repository** — clone-and-use, offline-runnable, all audited by [LICENSE_AUDIT](../LICENSE_AUDIT.md) and the [security scan](../../SECURITY-SCAN-REPORT.md). These are the most direct built-in capabilities at this stage; the "Skills list" below gives per-method details (with selected upstream links) and complements this table. See [skills/](../../skills/) and [SKILL_CATALOG](../SKILL_CATALOG.md) for the full directory.
 
 | Collection | What it does | How to use it at this stage |
 |------|----------|---------------|
-| [`21` AI-research-feedback](../skills/21-claesbackman-AI-research-feedback/) | 2-agent deep review of economics papers | Decompose a top-journal paper's identification strategy; detect over-claimed causal claims |
-| [`24` academic-research-skills](../skills/24-Imbad0202-academic-research-skills/) | 5-reviewer multi-perspective paper review | Multi-angle decomposition of a target paper's contribution and weaknesses |
-| [`33` claude-scholar](../skills/33-Galaxy-Dawn-claude-scholar/) | Full research lifecycle, with self-review and citation check | Verify citations during decomposition and review methodological credibility |
-| [`28` paper-replicate-agent](../skills/28-maxwell2732-paper-replicate-agent-demo/) | Paper-replication agent demo | Push "understand" all the way to "replicate" and verify methodological details |
-| [`02` research-skills](../skills/02-luwill-research-skills/) | Reviews, proposals, paper-to-slides | Organise decomposition conclusions into shareable notes/talk slides |
-| [`62` citation-checker](../skills/62-PHY041-claude-skill-citation-checker/) | Verify citations against CrossRef / S2 / OpenAlex | Confirm that citations really exist while decomposing |
+| [`21` AI-research-feedback](../../skills/21-claesbackman-AI-research-feedback/) | 2-agent deep review of economics papers | Decompose a top-journal paper's identification strategy; detect over-claimed causal claims |
+| [`24` academic-research-skills](../../skills/24-Imbad0202-academic-research-skills/) | 5-reviewer multi-perspective paper review | Multi-angle decomposition of a target paper's contribution and weaknesses |
+| [`33` claude-scholar](../../skills/33-Galaxy-Dawn-claude-scholar/) | Full research lifecycle, with self-review and citation check | Verify citations during decomposition and review methodological credibility |
+| [`28` paper-replicate-agent](../../skills/28-maxwell2732-paper-replicate-agent-demo/) | Paper-replication agent demo | Push "understand" all the way to "replicate" and verify methodological details |
+| [`02` research-skills](../../skills/02-luwill-research-skills/) | Reviews, proposals, paper-to-slides | Organise decomposition conclusions into shareable notes/talk slides |
+| [`62` citation-checker](../../skills/62-PHY041-claude-skill-citation-checker/) | Verify citations against CrossRef / S2 / OpenAlex | Confirm that citations really exist while decomposing |
 
 ---
 

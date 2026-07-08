@@ -1,3 +1,9 @@
+---
+name: replicate-paper
+description: "Run a full 6-phase autonomous replication of a biomedical/epidemiology paper against UK Biobank or similar cohort data, producing Python and R scripts plus a validated replication report. Use when asked to replicate a paper end-to-end, or when invoked as /replicate-paper [paper.pdf] [data.csv|dta]."
+allowed-tools: ["Read", "Write", "Edit", "Bash", "Glob", "Grep"]
+---
+
 # Skill: /replicate-paper
 
 **Trigger:** `/replicate-paper [paper.pdf] [data.csv|dta]` or "replicate this paper"

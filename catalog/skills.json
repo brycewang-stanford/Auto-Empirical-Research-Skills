@@ -637,8 +637,8 @@
       "license": "UNKNOWN - check upstream",
       "path": "skills/38-peternka-academic-proofreader",
       "primary_skill": {
-        "description": "",
-        "name": "38-peternka-academic-proofreader",
+        "description": "Perform an exhaustive, multi-pass proofread and copy-edit of an applied-microeconomics manuscript to top-economics-journal standards (AER, QJE, Econometrica, ReStud), checking prose, equations, table notes, footnotes, and citations for avoidable errors. Use before submitting or circulating an empirical economics paper.",
+        "name": "academic-proofreader",
         "path": "skills/38-peternka-academic-proofreader/SKILL.md"
       },
       "skill_count": 1,
@@ -671,8 +671,8 @@
       "license": "UNKNOWN - check upstream",
       "path": "skills/40-py-econometrics-pyfixest",
       "primary_skill": {
-        "description": "",
-        "name": "40-py-econometrics-pyfixest",
+        "description": "Dense, machine-readable API reference for PyFixest — high-dimensional fixed-effects OLS/WLS/IV and Poisson (feols, fepois, feglm), clustered/robust standard errors, R-style formula syntax, and post-estimation. Use when writing or debugging Python fixed-effects regressions with the pyfixest package.",
+        "name": "pyfixest-reference",
         "path": "skills/40-py-econometrics-pyfixest/SKILL.md"
       },
       "skill_count": 1,
@@ -1456,12 +1456,16 @@
     },
     {
       "collection": "04-K-Dense-AI-claude-scientific-writer",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
-      "line_count": 304,
+      "description": "Apply the ScholarEval framework to systematically evaluate scholarly work across quality dimensions (novelty, rigor, significance, and clarity). Use to critique academic papers, research proposals, literature reviews, or grant applications and produce a structured, criterion-based assessment.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 310,
       "name": "scholar-evaluation",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/scholar-evaluation/SKILL.md"
     },
@@ -5204,12 +5208,16 @@
     },
     {
       "collection": "28-maxwell2732-paper-replicate-agent-demo",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
-      "line_count": 230,
+      "description": "Run a full 6-phase autonomous replication of a biomedical/epidemiology paper against UK Biobank or similar cohort data, producing Python and R scripts plus a validated replication report. Use when asked to replicate a paper end-to-end, or when invoked as /replicate-paper [paper.pdf] [data.csv|dta].",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 236,
       "name": "replicate-paper",
       "path": "skills/28-maxwell2732-paper-replicate-agent-demo/dot-claude/skills/replicate-paper/SKILL.md"
     },
@@ -6753,13 +6761,17 @@
     },
     {
       "collection": "38-peternka-academic-proofreader",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
-      "line_count": 181,
-      "name": "38-peternka-academic-proofreader",
+      "description": "Perform an exhaustive, multi-pass proofread and copy-edit of an applied-microeconomics manuscript to top-economics-journal standards (AER, QJE, Econometrica, ReStud), checking prose, equations, table notes, footnotes, and citations for avoidable errors. Use before submitting or circulating an empirical economics paper.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 187,
+      "name": "academic-proofreader",
       "path": "skills/38-peternka-academic-proofreader/SKILL.md"
     },
     {
@@ -6781,13 +6793,17 @@
     },
     {
       "collection": "40-py-econometrics-pyfixest",
-      "description": "",
-      "frontmatter_fields": [],
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
-      "line_count": 381,
-      "name": "40-py-econometrics-pyfixest",
+      "description": "Dense, machine-readable API reference for PyFixest — high-dimensional fixed-effects OLS/WLS/IV and Poisson (feols, fepois, feglm), clustered/robust standard errors, R-style formula syntax, and post-estimation. Use when writing or debugging Python fixed-effects regressions with the pyfixest package.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 387,
+      "name": "pyfixest-reference",
       "path": "skills/40-py-econometrics-pyfixest/SKILL.md"
     },
     {
@@ -18635,9 +18651,9 @@
     }
   ],
   "summary": {
-    "missing_description": 4,
-    "missing_frontmatter": 4,
-    "missing_name": 4,
+    "missing_description": 0,
+    "missing_frontmatter": 0,
+    "missing_name": 0,
     "oversized_skill_files_over_500_lines": 91,
     "skill_files": 1150,
     "top_level_collections": 69

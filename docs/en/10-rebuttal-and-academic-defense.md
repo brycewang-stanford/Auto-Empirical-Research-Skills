@@ -1,6 +1,6 @@
 # 10 - Rebuttal and Academic Defence
 
-[< Back to README](../README.md)
+[< Back to README](../../README.md)
 
 <!--
   CoPaper.AI — Empirical Research AI Assistant (https://copaper.ai)
@@ -17,16 +17,16 @@
 
 ## 📦 Related Skills Vendored in This Repo (click-through folders)
 
-> The collections below are **already vendored in this repository** — clone-and-use, offline-runnable, all audited by [LICENSE_AUDIT](../LICENSE_AUDIT.md) and the [security scan](../SECURITY-SCAN-REPORT.md). These are the most direct built-in capabilities at this stage; the "Skills list" below gives per-method details (with selected upstream links) and complements this table. See [skills/](../skills/) and [SKILL_CATALOG](../SKILL_CATALOG.md) for the full directory.
+> The collections below are **already vendored in this repository** — clone-and-use, offline-runnable, all audited by [LICENSE_AUDIT](../LICENSE_AUDIT.md) and the [security scan](../../SECURITY-SCAN-REPORT.md). These are the most direct built-in capabilities at this stage; the "Skills list" below gives per-method details (with selected upstream links) and complements this table. See [skills/](../../skills/) and [SKILL_CATALOG](../SKILL_CATALOG.md) for the full directory.
 
 | Collection | What it does | How to use it at this stage |
 |------|----------|---------------|
-| [`24` academic-research-skills](../skills/24-Imbad0202-academic-research-skills/) | 5-reviewer multi-perspective paper review | Pre-submission reviewer rehearsal; fill gaps before submission |
-| [⭐ `50` AER-skills](../skills/50-brycewang-aer-skills/) | Top-5 submission stack: identification → robustness → R&R | Systematic R&R response drafting |
-| [`16` clo-author](../skills/16-hsantanna88-clo-author/) | Multi-agent data analysis, including submit / review / talk sub-skills | Submission, response, and defence-talk material in one place |
-| [`42` ARIS](../skills/42-wanshuiyin-ARIS/) | Autonomous end-to-end research agent (104 skills; submission / presentation) | Generate cover letter, response letter, and presentation material |
-| [`12` claude-code-my-workflow](../skills/12-pedrohcgs-claude-code-my-workflow/) | Commit → PR → merge research workflow | Manage R&R revisions and version history |
-| [`13` MixtapeTools](../skills/13-scunning1975-MixtapeTools/) | Cunningham's causal-inference toolkit and lecture notes | Lecture notes and figures for defence / presentations |
+| [`24` academic-research-skills](../../skills/24-Imbad0202-academic-research-skills/) | 5-reviewer multi-perspective paper review | Pre-submission reviewer rehearsal; fill gaps before submission |
+| [⭐ `50` AER-skills](../../skills/50-brycewang-aer-skills/) | Top-5 submission stack: identification → robustness → R&R | Systematic R&R response drafting |
+| [`16` clo-author](../../skills/16-hsantanna88-clo-author/) | Multi-agent data analysis, including submit / review / talk sub-skills | Submission, response, and defence-talk material in one place |
+| [`42` ARIS](../../skills/42-wanshuiyin-ARIS/) | Autonomous end-to-end research agent (104 skills; submission / presentation) | Generate cover letter, response letter, and presentation material |
+| [`12` claude-code-my-workflow](../../skills/12-pedrohcgs-claude-code-my-workflow/) | Commit → PR → merge research workflow | Manage R&R revisions and version history |
+| [`13` MixtapeTools](../../skills/13-scunning1975-MixtapeTools/) | Cunningham's causal-inference toolkit and lecture notes | Lecture notes and figures for defence / presentations |
 
 ---
 
@@ -134,4 +134,4 @@ Below we address each point in detail.
 
 ---
 
-[← Previous chapter](09-replication-and-reproducible-research.md) | [Back to README →](../README.md)
+[← Previous chapter](09-replication-and-reproducible-research.md) | [Back to README →](../../README.md)

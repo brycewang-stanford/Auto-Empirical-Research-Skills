@@ -1,3 +1,9 @@
+---
+name: pyfixest-reference
+description: "Dense, machine-readable API reference for PyFixest — high-dimensional fixed-effects OLS/WLS/IV and Poisson (feols, fepois, feglm), clustered/robust standard errors, R-style formula syntax, and post-estimation. Use when writing or debugging Python fixed-effects regressions with the pyfixest package."
+allowed-tools: ["Read", "Write", "Edit", "Bash"]
+---
+
 # PyFixest LLM Skill Reference
 
 > Dense, machine-readable reference for LLMs. No prose padding.

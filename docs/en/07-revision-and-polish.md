@@ -1,6 +1,6 @@
 # 07 - Revision and Polish
 
-[< Back to README](../README.md)
+[< Back to README](../../README.md)
 
 <!--
   CoPaper.AI — Empirical Research AI Assistant (https://copaper.ai)
@@ -16,17 +16,17 @@
 
 ## 📦 Related Skills Vendored in This Repo (click-through folders)
 
-> The collections below are **already vendored in this repository** — clone-and-use, offline-runnable, all audited by [LICENSE_AUDIT](../LICENSE_AUDIT.md) and the [security scan](../SECURITY-SCAN-REPORT.md). These are the most direct built-in capabilities at this stage; the "Skills list" below gives per-method details (with selected upstream links) and complements this table. See [skills/](../skills/) and [SKILL_CATALOG](../SKILL_CATALOG.md) for the full directory.
+> The collections below are **already vendored in this repository** — clone-and-use, offline-runnable, all audited by [LICENSE_AUDIT](../LICENSE_AUDIT.md) and the [security scan](../../SECURITY-SCAN-REPORT.md). These are the most direct built-in capabilities at this stage; the "Skills list" below gives per-method details (with selected upstream links) and complements this table. See [skills/](../../skills/) and [SKILL_CATALOG](../SKILL_CATALOG.md) for the full directory.
 
 | Collection | What it does | How to use it at this stage |
 |------|----------|---------------|
-| [⭐ `48` chinese-de-aigc](../skills/48-copaper-ai-chinese-de-aigc/) | Chinese de-AIGC (CNKI / Wanfang / Turnitin-CN) | De-AI Chinese papers; respond to domestic plagiarism checks |
-| [`49` humanize-chinese](../skills/49-voidborne-d-humanize-chinese/) | Detect and humanise AI-generated Chinese | Polish Chinese paragraphs to remove machine tone |
-| [`44` humanizer_academic](../skills/44-matsuikentaro1-humanizer_academic/) | De-AI medical / academic manuscripts (23 patterns) | Remove AI traces from English academic manuscripts |
-| [`45` deslop](../skills/45-stephenturner-skill-deslop/) | Remove AI-writing clichés (5-dimensional scoring) | Quantify and remove AI boilerplate |
-| [`46` stop-slop](../skills/46-hardikpandya-stop-slop/) | 3-layer AI-trace detection and rewrite | Detect → rewrite → recheck closed loop |
-| [`47` avoid-ai-writing](../skills/47-conorbronsdon-avoid-ai-writing/) | Audit → rewrite → re-audit (leaves an edit trail) | Compliant polishing that preserves modification history |
-| [`38` academic-proofreader](../skills/38-peternka-academic-proofreader/) | Academic proofreading | Grammar / spelling / formatting final pass |
+| [⭐ `48` chinese-de-aigc](../../skills/48-copaper-ai-chinese-de-aigc/) | Chinese de-AIGC (CNKI / Wanfang / Turnitin-CN) | De-AI Chinese papers; respond to domestic plagiarism checks |
+| [`49` humanize-chinese](../../skills/49-voidborne-d-humanize-chinese/) | Detect and humanise AI-generated Chinese | Polish Chinese paragraphs to remove machine tone |
+| [`44` humanizer_academic](../../skills/44-matsuikentaro1-humanizer_academic/) | De-AI medical / academic manuscripts (23 patterns) | Remove AI traces from English academic manuscripts |
+| [`45` deslop](../../skills/45-stephenturner-skill-deslop/) | Remove AI-writing clichés (5-dimensional scoring) | Quantify and remove AI boilerplate |
+| [`46` stop-slop](../../skills/46-hardikpandya-stop-slop/) | 3-layer AI-trace detection and rewrite | Detect → rewrite → recheck closed loop |
+| [`47` avoid-ai-writing](../../skills/47-conorbronsdon-avoid-ai-writing/) | Audit → rewrite → re-audit (leaves an edit trail) | Compliant polishing that preserves modification history |
+| [`38` academic-proofreader](../../skills/38-peternka-academic-proofreader/) | Academic proofreading | Grammar / spelling / formatting final pass |
 
 ---
 
@@ -194,7 +194,7 @@ AI-generated text has statistically detectable patterns — "LLMs use statistica
 | **Source** | voidborne-d/humanize-chinese (local vendor snapshot; upstream URL did not pass the 2026-05-31 outbound-link sweep) |
 | **Form** | **Provides both SKILL.md and a standalone Python CLI/library** — the repo root contains SKILL.md (with frontmatter, topics tagged `claude-code-skill`), directly loadable inside Claude Code / OpenClaw / Hermes and similar agents; also a zero-third-party-dependency Python library that can be `pip install`-ed and run in any pipeline / CI / server for batch jobs. This entry focuses on the CLI/library form; agent-internal usage can refer to the chinese-de-aigc workflow positioning |
 | **Function** | Chinese AI-text detection and rewriting: 17 detection features + 7 style rewriters (academic / novel / blog / casual / Xiaohongshu / WeChat / literary), tuned on CNKI / Wanfang / VIP / Turnitin Chinese-edition benchmarks |
-| **Install** | `pip install humanize-chinese` or use the local copy in this repo [`skills/49`](../skills/49-voidborne-d-humanize-chinese/) |
+| **Install** | `pip install humanize-chinese` or use the local copy in this repo [`skills/49`](../../skills/49-voidborne-d-humanize-chinese/) |
 | **License** | **MIT (Non-Commercial)** — non-standard modified MIT, **commercial use explicitly prohibited** (no SaaS / paid API / integration into commercial products / paid content-rewriting services). Personal use, academic research, educational use, and non-commercial derivative open-source projects are allowed. Commercial downstream use requires separate authorisation from the author; it cannot be used under standard MIT terms |
 
 **Comparison with chinese-de-aigc / humanizer_academic (focused on the CLI/library form's complementarity)**:

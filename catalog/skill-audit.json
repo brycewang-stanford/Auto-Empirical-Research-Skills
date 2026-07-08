@@ -617,10 +617,10 @@
     {
       "collection": "04-K-Dense-AI-claude-scientific-writer",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
-      "line_count": 304,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 310,
       "name": "scholar-evaluation",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/scholar-evaluation/SKILL.md"
     },
@@ -3007,10 +3007,10 @@
     {
       "collection": "28-maxwell2732-paper-replicate-agent-demo",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
-      "line_count": 230,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 236,
       "name": "replicate-paper",
       "path": "skills/28-maxwell2732-paper-replicate-agent-demo/dot-claude/skills/replicate-paper/SKILL.md"
     },
@@ -3987,11 +3987,11 @@
     {
       "collection": "38-peternka-academic-proofreader",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
-      "line_count": 181,
-      "name": "38-peternka-academic-proofreader",
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 187,
+      "name": "academic-proofreader",
       "path": "skills/38-peternka-academic-proofreader/SKILL.md"
     },
     {
@@ -4007,11 +4007,11 @@
     {
       "collection": "40-py-econometrics-pyfixest",
       "exact_case": true,
-      "has_description": false,
-      "has_frontmatter": false,
-      "has_name": false,
-      "line_count": 381,
-      "name": "40-py-econometrics-pyfixest",
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 387,
+      "name": "pyfixest-reference",
       "path": "skills/40-py-econometrics-pyfixest/SKILL.md"
     },
     {
@@ -11939,8 +11939,8 @@
   "summary": {
     "duplicate_skill_names": 92,
     "exact_case_skill_files": 1150,
-    "missing_description": 4,
-    "missing_frontmatter": 4,
+    "missing_description": 0,
+    "missing_frontmatter": 0,
     "non_exact_case_skill_files": 0,
     "over_500_lines": 91,
     "skill_like_files": 1150

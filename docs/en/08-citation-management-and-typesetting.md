@@ -1,6 +1,6 @@
 # 08 - Citation Management and Typesetting
 
-[< Back to README](../README.md)
+[< Back to README](../../README.md)
 
 <!--
   CoPaper.AI — Empirical Research AI Assistant (https://copaper.ai)
@@ -15,16 +15,16 @@
 
 ## 📦 Related Skills Vendored in This Repo (click-through folders)
 
-> The collections below are **already vendored in this repository** — clone-and-use, offline-runnable, all audited by [LICENSE_AUDIT](../LICENSE_AUDIT.md) and the [security scan](../SECURITY-SCAN-REPORT.md). These are the most direct built-in capabilities at this stage; the per-tool details below complement this table. See [skills/](../skills/) and [SKILL_CATALOG](../SKILL_CATALOG.md) for the full directory.
+> The collections below are **already vendored in this repository** — clone-and-use, offline-runnable, all audited by [LICENSE_AUDIT](../LICENSE_AUDIT.md) and the [security scan](../../SECURITY-SCAN-REPORT.md). These are the most direct built-in capabilities at this stage; the per-tool details below complement this table. See [skills/](../../skills/) and [SKILL_CATALOG](../SKILL_CATALOG.md) for the full directory.
 
 | Collection | What it does | How to use it at this stage |
 |------|----------|---------------|
-| [`62` citation-checker](../skills/62-PHY041-claude-skill-citation-checker/) | Verify citations against CrossRef / S2 / OpenAlex | Batch-verify every citation before submission |
-| [`08` latex-document-skill](../skills/08-ndpvt-web-latex-document-skill/) | Create / compile any LaTeX document to PDF | Typeset and compile a LaTeX manuscript |
-| [`07` AI-Research-SKILLs](../skills/07-Orchestra-Research-AI-Research-SKILLs/) | Publication-grade ML figures, LaTeX, citation verification | Generate publication-grade figures + LaTeX + citation verification |
-| [`04` scientific-writer](../skills/04-K-Dense-AI-claude-scientific-writer/) | Citation management + scientific writing | Maintain a BibTeX file and unify citation styles |
-| [`22` christopherkenny-skills](../skills/22-christopherkenny-skills/) | APSA-style checks for Quarto (`.qmd`) | Political-science / Quarto typesetting-style validator |
-| [`54` open-science-skills](../skills/54-scdenney-open-science-skills/) | Citation consistency, DOI, and argument-support audit | Check that every textual claim has citation support |
+| [`62` citation-checker](../../skills/62-PHY041-claude-skill-citation-checker/) | Verify citations against CrossRef / S2 / OpenAlex | Batch-verify every citation before submission |
+| [`08` latex-document-skill](../../skills/08-ndpvt-web-latex-document-skill/) | Create / compile any LaTeX document to PDF | Typeset and compile a LaTeX manuscript |
+| [`07` AI-Research-SKILLs](../../skills/07-Orchestra-Research-AI-Research-SKILLs/) | Publication-grade ML figures, LaTeX, citation verification | Generate publication-grade figures + LaTeX + citation verification |
+| [`04` scientific-writer](../../skills/04-K-Dense-AI-claude-scientific-writer/) | Citation management + scientific writing | Maintain a BibTeX file and unify citation styles |
+| [`22` christopherkenny-skills](../../skills/22-christopherkenny-skills/) | APSA-style checks for Quarto (`.qmd`) | Political-science / Quarto typesetting-style validator |
+| [`54` open-science-skills](../../skills/54-scdenney-open-science-skills/) | Citation consistency, DOI, and argument-support audit | Check that every textual claim has citation support |
 
 ---
 

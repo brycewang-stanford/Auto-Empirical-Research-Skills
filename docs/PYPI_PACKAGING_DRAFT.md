@@ -135,4 +135,4 @@ side closes the loop.
 - Sync tool: [`scripts/sync-vendored-commit.py`](../scripts/sync-vendored-commit.py)
 - Roadmap entry: "Package first-party AERS skills as installable bundles
   for agent runtimes that support plugins/marketplaces." —
-  [`ROADMAP.md`](../ROADMAP.md)
+  [`ROADMAP.md`](ROADMAP.md)

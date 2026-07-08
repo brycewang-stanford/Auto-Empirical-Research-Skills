@@ -1,6 +1,6 @@
 # 01 - Research Topic and Study Design
 
-[< Back to README](../README.md)
+[< Back to README](../../README.md)
 
 <!--
   CoPaper.AI — Empirical Research AI Assistant (https://copaper.ai)
@@ -16,18 +16,18 @@
 
 ## 📦 Related Skills Vendored in This Repo (click-through folders)
 
-> The collections below are **already vendored in this repository** — clone-and-use, offline-runnable, all audited by [LICENSE_AUDIT](../LICENSE_AUDIT.md) and the [security scan](../SECURITY-SCAN-REPORT.md). These are the most direct built-in capabilities at this stage; the "Skills list" below gives per-method details (with selected upstream links) and complements this table. See [skills/](../skills/) and [SKILL_CATALOG](../SKILL_CATALOG.md) for the full directory.
+> The collections below are **already vendored in this repository** — clone-and-use, offline-runnable, all audited by [LICENSE_AUDIT](../LICENSE_AUDIT.md) and the [security scan](../../SECURITY-SCAN-REPORT.md). These are the most direct built-in capabilities at this stage; the "Skills list" below gives per-method details (with selected upstream links) and complements this table. See [skills/](../../skills/) and [SKILL_CATALOG](../SKILL_CATALOG.md) for the full directory.
 
 | Collection | What it does | How to use it at this stage |
 |------|----------|---------------|
-| [`25` Diverga](../skills/25-HosungYou-Diverga/) | Research-question refiner that combats "mode-collapse" homogeneous topic selection | Refine a fuzzy direction into a testable, differentiated research question |
-| [`03` scientific-skills](../skills/03-K-Dense-AI-claude-scientific-skills/) | Hypothesis generation + 28 scientific databases | Auto-generate testable hypotheses from the literature and check data availability |
-| [`34` research-companion](../skills/34-andrehuang-research-companion/) | Brainstorm, evaluate, and decide among research directions | Score and compare multiple directions to pick one |
-| [`05` research-superpower](../skills/05-kthorn-research-superpower/) | Systematic search, screening, and citation back-tracing | Use literature gaps to verify the novelty of a topic |
-| [⭐ `50` AER-skills](../skills/50-brycewang-aer-skills/) | Top-5 economics submission stack: identification → robustness → R&R | Anchor identification strategy and publishability from the topic stage |
-| [`42` ARIS](../skills/42-wanshuiyin-ARIS/) | Autonomous "research while sleeping" end-to-end agent (104 skills) | Run an end-to-end exploration to produce an initial research framework |
+| [`25` Diverga](../../skills/25-HosungYou-Diverga/) | Research-question refiner that combats "mode-collapse" homogeneous topic selection | Refine a fuzzy direction into a testable, differentiated research question |
+| [`03` scientific-skills](../../skills/03-K-Dense-AI-claude-scientific-skills/) | Hypothesis generation + 28 scientific databases | Auto-generate testable hypotheses from the literature and check data availability |
+| [`34` research-companion](../../skills/34-andrehuang-research-companion/) | Brainstorm, evaluate, and decide among research directions | Score and compare multiple directions to pick one |
+| [`05` research-superpower](../../skills/05-kthorn-research-superpower/) | Systematic search, screening, and citation back-tracing | Use literature gaps to verify the novelty of a topic |
+| [⭐ `50` AER-skills](../../skills/50-brycewang-aer-skills/) | Top-5 economics submission stack: identification → robustness → R&R | Anchor identification strategy and publishability from the topic stage |
+| [`42` ARIS](../../skills/42-wanshuiyin-ARIS/) | Autonomous "research while sleeping" end-to-end agent (104 skills) | Run an end-to-end exploration to produce an initial research framework |
 
-> Want the entire chain "topic → design → analysis → writing → submission" handed to a single orchestrator? See [⭐ `69` Paper-WorkFlow](../skills/69-Paper-WorkFlow/) and [⭐ `00` StatsPAI](../skills/00-Full-empirical-analysis-skill_StatsPAI/).
+> Want the entire chain "topic → design → analysis → writing → submission" handed to a single orchestrator? See [⭐ `69` Paper-WorkFlow](../../skills/69-Paper-WorkFlow/) and [⭐ `00` StatsPAI](../../skills/00-Full-empirical-analysis-skill_StatsPAI/).
 
 ---
 

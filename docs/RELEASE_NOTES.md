@@ -20,7 +20,7 @@ Paste this snapshot into the GitHub release body and add a hand-written
 
 ### Method families (skills tagged)
 
-- `iv`: 27
+- `iv`: 28
 - `rdd`: 25
 - `panel-fe`: 19
 - `staggered-did`: 17

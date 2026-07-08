@@ -55,6 +55,17 @@
 
 ---
 
+### 信任面 · Trust surface (rigor stats)
+
+| Rigor lane | Count | Where |
+|---|---|---|
+| Numeric **benchmark tasks** — gold values recomputed from real data each run | **17** | [`benchmark/`](benchmark/) |
+| Behavioral **eval scenarios / rubric items** | **30 / 159** | [`eval-harness/`](eval-harness/) |
+
+> Full trust overview: [`docs/TRUST.md`](docs/TRUST.md) · [`docs/RIGOR_COVERAGE.md`](docs/RIGOR_COVERAGE.md)
+
+---
+
 ## 中文版指引（P2.2 重构）
 
 本文件（P2.2 重构后）只承担 GitHub 默认入口的角色，**完整中文内容已迁出到 [`docs/CONTENT_ZH.md`](docs/CONTENT_ZH.md)**：
@@ -70,6 +81,8 @@
 
 > [!NOTE]
 > **维护规则：** 任何对正文（先看这里 / 69 合集 / 旗舰流水线 / 信任说明等）的改动，请改 [`docs/CONTENT_ZH.md`](docs/CONTENT_ZH.md)；本 README 仅维护顶部 banner、badges、底部脚注与本节简短入口。
+>
+> **贡献者（Contributors）：** 提交前请在本地跑通完整门禁 `make check`（catalog 校验 + 链接 + 单元测试 + eval-harness + benchmark）。详见 [`CONTRIBUTING.md`](CONTRIBUTING.md)。
 >
 > **旧版归档：** [`README-zh-CN.md`](README-zh-CN.md) 已重写为同一指向 CONTENT_ZH.md 的极简入口（与本文件等价）。原 README.md 的完整中文正文未删，仅迁移到 CONTENT_ZH.md，并在所有内部链接前缀前加 `../`（保留可用性）。
 

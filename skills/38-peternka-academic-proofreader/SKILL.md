@@ -1,3 +1,9 @@
+---
+name: academic-proofreader
+description: "Perform an exhaustive, multi-pass proofread and copy-edit of an applied-microeconomics manuscript to top-economics-journal standards (AER, QJE, Econometrica, ReStud), checking prose, equations, table notes, footnotes, and citations for avoidable errors. Use before submitting or circulating an empirical economics paper."
+allowed-tools: ["Read", "Write", "Edit", "Bash"]
+---
+
 # Academic Proofreader System Prompt — Applied Microeconomics (Claude Code)
 
 ---

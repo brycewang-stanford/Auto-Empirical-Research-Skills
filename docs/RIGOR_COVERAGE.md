@@ -15,7 +15,7 @@ A family is **covered** when it has both an eval scenario and a benchmark task, 
 
 | Method family | Skills tagged | Eval scenarios (severity) | Benchmark tasks | Status |
 |---|---:|---|---|---|
-| Instrumental variables (IV / 2SLS) | 27 | `statspai-weak-iv` (critical) | `card-iv-recovery` | covered |
+| Instrumental variables (IV / 2SLS) | 28 | `statspai-weak-iv` (critical) | `card-iv-recovery` | covered |
 | Regression discontinuity (RDD) | 25 | `statspai-rdd-diagnostics` (high) | `rdd-recovery` | covered |
 | Difference-in-differences (2x2) | 10 | — | — | indirect |
 | Staggered DiD / TWFE | 17 | `aer-identification-staggered` (critical)<br>`causal-inference-twfe-trap` (high)<br>`statspai-staggered-did` (critical) | `did-staggered-recovery` | covered |

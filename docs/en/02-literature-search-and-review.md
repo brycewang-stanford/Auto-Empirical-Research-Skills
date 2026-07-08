@@ -1,6 +1,6 @@
 # 02 - Literature Search and Review
 
-[< Back to README](../README.md)
+[< Back to README](../../README.md)
 
 <!--
   CoPaper.AI — Empirical Research AI Assistant (https://copaper.ai)
@@ -17,16 +17,16 @@
 
 ## 📦 Related Skills Vendored in This Repo (click-through folders)
 
-> The collections below are **already vendored in this repository** — clone-and-use, offline-runnable, all audited by [LICENSE_AUDIT](../LICENSE_AUDIT.md) and the [security scan](../SECURITY-SCAN-REPORT.md). These are the most direct built-in capabilities at this stage; the "Skills list" below gives per-method details (with selected upstream links) and complements this table. See [skills/](../skills/) and [SKILL_CATALOG](../SKILL_CATALOG.md) for the full directory.
+> The collections below are **already vendored in this repository** — clone-and-use, offline-runnable, all audited by [LICENSE_AUDIT](../LICENSE_AUDIT.md) and the [security scan](../../SECURITY-SCAN-REPORT.md). These are the most direct built-in capabilities at this stage; the "Skills list" below gives per-method details (with selected upstream links) and complements this table. See [skills/](../../skills/) and [SKILL_CATALOG](../SKILL_CATALOG.md) for the full directory.
 
 | Collection | What it does | How to use it at this stage |
 |------|----------|---------------|
-| [`05` research-superpower](../skills/05-kthorn-research-superpower/) | Systematic search, screening, and citation back-tracing | Run an end-to-end systematic-review retrieval and de-duplicated screening |
-| [`59` openalex-skill](../skills/59-shiquda-openalex-skill/) | Query 240M+ scholarly works via OpenAlex | Programmatically pull candidate papers and citation networks for free |
-| [`36` literature-review-skill](../skills/36-taoyunudt-literature-review-skill/) | End-to-end literature-review workflow (Chinese) | Full Chinese-context review pipeline from retrieval to manuscript |
-| [`52` slr-prisma](../skills/52-keemanxp-slr-prisma/) | Systematic literature review following PRISMA 2020 | Use when you need a standard PRISMA flowchart and reproducible screening |
-| [`33` claude-scholar](../skills/33-Galaxy-Dawn-claude-scholar/) | Full research lifecycle: ideation → review → experiment → response | Integrated retrieval, citation check, and review writing |
-| [`43` research-plugins](../skills/43-wentorai-research-plugins/) | 478 research plugins: visualisation, domains, infrastructure | Pick domain/database-specific retrieval and review plugins |
+| [`05` research-superpower](../../skills/05-kthorn-research-superpower/) | Systematic search, screening, and citation back-tracing | Run an end-to-end systematic-review retrieval and de-duplicated screening |
+| [`59` openalex-skill](../../skills/59-shiquda-openalex-skill/) | Query 240M+ scholarly works via OpenAlex | Programmatically pull candidate papers and citation networks for free |
+| [`36` literature-review-skill](../../skills/36-taoyunudt-literature-review-skill/) | End-to-end literature-review workflow (Chinese) | Full Chinese-context review pipeline from retrieval to manuscript |
+| [`52` slr-prisma](../../skills/52-keemanxp-slr-prisma/) | Systematic literature review following PRISMA 2020 | Use when you need a standard PRISMA flowchart and reproducible screening |
+| [`33` claude-scholar](../../skills/33-Galaxy-Dawn-claude-scholar/) | Full research lifecycle: ideation → review → experiment → response | Integrated retrieval, citation check, and review writing |
+| [`43` research-plugins](../../skills/43-wentorai-research-plugins/) | 478 research plugins: visualisation, domains, infrastructure | Pick domain/database-specific retrieval and review plugins |
 
 ---
 

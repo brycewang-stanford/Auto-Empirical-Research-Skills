@@ -14,11 +14,11 @@ A skill can be **well-formed** (high hygiene) yet **untested for the traps an ap
 ## Summary
 
 - Skills scored: **1150**
-- Mean hygiene score: **99.2/100**
+- Mean hygiene score: **99.4/100**
 - Skills with at least one eval scenario: **11** (1.0% of catalog)
 - Total eval-harness scenarios that target a specific skill: **12**
-- Descriptions: 1146 from frontmatter, 4 body-derived, 0 none
-- Tagged with at least one taxonomy facet: 565
+- Descriptions: 1150 from frontmatter, 0 body-derived, 0 none
+- Tagged with at least one taxonomy facet: 566
 
 ## Per-collection: hygiene × eval coverage
 
@@ -31,7 +31,7 @@ A skill can be **well-formed** (high hygiene) yet **untested for the traps an ap
 | `01-lishix520-academic-paper-skills` | 2 | 100.0 | 100 | 0 | 0 |
 | `02-luwill-research-skills` | 3 | 100.0 | 100 | 0 | 0 |
 | `03-K-Dense-AI-claude-scientific-skills` | 4 | 100.0 | 100 | 0 | 0 |
-| `04-K-Dense-AI-claude-scientific-writer` | 8 | 86.9 | 57 | 0 | 0 |
+| `04-K-Dense-AI-claude-scientific-writer` | 8 | 92.2 | 85 | 0 | 0 |
 | `05-kthorn-research-superpower` | 10 | 96.8 | 92 | 0 | 0 |
 | `06-fuhaoda-stats-paper-writing` | 1 | 100.0 | 100 | 0 | 0 |
 | `07-Orchestra-Research-AI-Research-SKILLs` | 3 | 100.0 | 100 | 0 | 0 |
@@ -53,7 +53,7 @@ A skill can be **well-formed** (high hygiene) yet **untested for the traps an ap
 | `25-HosungYou-Diverga` | 34 | 95.1 | 85 | 0 | 0 |
 | `26-Data-Wise-scholar` | 17 | 93.5 | 85 | 0 | 0 |
 | `27-dariia-m-my_claude_skills` | 6 | 100.0 | 100 | 0 | 0 |
-| `28-maxwell2732-paper-replicate-agent-demo` | 11 | 96.1 | 57 | 0 | 0 |
+| `28-maxwell2732-paper-replicate-agent-demo` | 11 | 100.0 | 100 | 0 | 0 |
 | `29-quarcs-lab-project20XXy` | 24 | 100.0 | 100 | 0 | 0 |
 | `31-thalysandratos-claude-code-skills` | 13 | 100.0 | 100 | 0 | 0 |
 | `32-dylantmoore-stata-skill` | 3 | 100.0 | 100 | 0 | 0 |
@@ -61,9 +61,9 @@ A skill can be **well-formed** (high hygiene) yet **untested for the traps an ap
 | `34-andrehuang-research-companion` | 1 | 100.0 | 100 | 0 | 0 |
 | `35-bahayonghang-academic-writing-skills` | 5 | 100.0 | 100 | 0 | 0 |
 | `36-taoyunudt-literature-review-skill` | 1 | 100.0 | 100 | 0 | 0 |
-| `38-peternka-academic-proofreader` | 1 | 57.0 | 57 | 0 | 0 |
+| `38-peternka-academic-proofreader` | 1 | 100.0 | 100 | 0 | 0 |
 | `39-vincentarelbundock-marginaleffects` | 1 | 100.0 | 100 | 0 | 0 |
-| `40-py-econometrics-pyfixest` | 1 | 57.0 | 57 | 1 | 1 |
+| `40-py-econometrics-pyfixest` | 1 | 100.0 | 100 | 1 | 1 |
 | `41-sticerd-eee-sewage-econometrics-check` | 22 | 100.0 | 100 | 0 | 0 |
 | `42-wanshuiyin-ARIS` | 104 | 98.6 | 85 | 0 | 0 |
 | `43-wentorai-research-plugins` | 478 | 100.0 | 95 | 0 | 0 |
@@ -98,10 +98,6 @@ A skill can be **well-formed** (high hygiene) yet **untested for the traps an ap
 
 | Score | Skill | Flags | Eval coverage |
 |---:|---|---|---:|
-| 57 | [`skills/04-K-Dense-AI-claude-scientific-writer/scholar-evaluation/SKILL.md`](../skills/04-K-Dense-AI-claude-scientific-writer/scholar-evaluation/SKILL.md) | no-frontmatter, description-derived-from-body, no-name | — |
-| 57 | [`skills/28-maxwell2732-paper-replicate-agent-demo/dot-claude/skills/replicate-paper/SKILL.md`](../skills/28-maxwell2732-paper-replicate-agent-demo/dot-claude/skills/replicate-paper/SKILL.md) | no-frontmatter, description-derived-from-body, no-name | — |
-| 57 | [`skills/38-peternka-academic-proofreader/SKILL.md`](../skills/38-peternka-academic-proofreader/SKILL.md) | no-frontmatter, description-derived-from-body, no-name | — |
-| 57 | [`skills/40-py-econometrics-pyfixest/SKILL.md`](../skills/40-py-econometrics-pyfixest/SKILL.md) | no-frontmatter, description-derived-from-body, no-name | twoway-fe |
 | 85 | [`skills/00-Full-empirical-analysis-skill_StatsPAI/SKILL.md`](../skills/00-Full-empirical-analysis-skill_StatsPAI/SKILL.md) | very-long-no-references | cate-uncertainty, competing-risks, covariate-balance-placebo, did-quantile-assumptions, distribution-beyond-the-mean, elasticity-identification, estimating-equation-and-assumption, interaction-allowed, mechanism-alternative, no-false-reassurance, nuisance-not-causal, observational-not-experimental, power-caveat, presentation-strategy, small-sample-inference |
 | 85 | [`skills/04-K-Dense-AI-claude-scientific-writer/citation-management/SKILL.md`](../skills/04-K-Dense-AI-claude-scientific-writer/citation-management/SKILL.md) | very-long-no-references | — |
 | 85 | [`skills/04-K-Dense-AI-claude-scientific-writer/research-grants/SKILL.md`](../skills/04-K-Dense-AI-claude-scientific-writer/research-grants/SKILL.md) | very-long-no-references | — |
@@ -123,6 +119,10 @@ A skill can be **well-formed** (high hygiene) yet **untested for the traps an ap
 | 85 | [`skills/55-ab604-claude-code-r-skills/skills/tdd-workflow/SKILL.md`](../skills/55-ab604-claude-code-r-skills/skills/tdd-workflow/SKILL.md) | very-long-no-references | — |
 | 85 | [`skills/63-tondevrel-scientific-agent-skills/dowhy/SKILL.md`](../skills/63-tondevrel-scientific-agent-skills/dowhy/SKILL.md) | very-long-no-references | — |
 | 85 | [`skills/67-econfin-workflow-toolkit/China-CF-study/SKILL.md`](../skills/67-econfin-workflow-toolkit/China-CF-study/SKILL.md) | very-long-no-references | — |
+| 85 | [`skills/67-econfin-workflow-toolkit/Foreign-CF-study/SKILL.md`](../skills/67-econfin-workflow-toolkit/Foreign-CF-study/SKILL.md) | very-long-no-references | — |
+| 85 | [`skills/67-econfin-workflow-toolkit/chinese-ppt/SKILL.md`](../skills/67-econfin-workflow-toolkit/chinese-ppt/SKILL.md) | very-long-no-references | — |
+| 92 | [`skills/04-K-Dense-AI-claude-scientific-writer/literature-review/SKILL.md`](../skills/04-K-Dense-AI-claude-scientific-writer/literature-review/SKILL.md) | long-no-references | — |
+| 92 | [`skills/04-K-Dense-AI-claude-scientific-writer/peer-review/SKILL.md`](../skills/04-K-Dense-AI-claude-scientific-writer/peer-review/SKILL.md) | long-no-references | — |
 
 ## Top 15 skills by eval coverage (the "tested and tidy" leaders)
 
@@ -133,7 +133,7 @@ A skill can be **well-formed** (high hygiene) yet **untested for the traps an ap
 | 2 | [`skills/50-brycewang-aer-skills/skills/aer-identification/SKILL.md`](../skills/50-brycewang-aer-skills/skills/aer-identification/SKILL.md) | 100 |
 | 2 | [`skills/50-brycewang-aer-skills/skills/aer-introduction/SKILL.md`](../skills/50-brycewang-aer-skills/skills/aer-introduction/SKILL.md) | 100 |
 | 1 | [`skills/10-Jill0099-causal-inference-mixtape/SKILL.md`](../skills/10-Jill0099-causal-inference-mixtape/SKILL.md) | 100 |
-| 1 | [`skills/40-py-econometrics-pyfixest/SKILL.md`](../skills/40-py-econometrics-pyfixest/SKILL.md) | 57 |
+| 1 | [`skills/40-py-econometrics-pyfixest/SKILL.md`](../skills/40-py-econometrics-pyfixest/SKILL.md) | 100 |
 | 1 | [`skills/47-conorbronsdon-avoid-ai-writing/SKILL.md`](../skills/47-conorbronsdon-avoid-ai-writing/SKILL.md) | 100 |
 | 1 | [`skills/48-copaper-ai-chinese-de-aigc/SKILL.md`](../skills/48-copaper-ai-chinese-de-aigc/SKILL.md) | 100 |
 | 1 | [`skills/50-brycewang-aer-skills/skills/aer-robustness/SKILL.md`](../skills/50-brycewang-aer-skills/skills/aer-robustness/SKILL.md) | 100 |

@@ -3,11 +3,11 @@
   "schema_version": 1,
   "summary": {
     "skills": 1150,
-    "mean_quality_score": 99.2,
-    "with_frontmatter_description": 1146,
-    "body_derived_description": 4,
+    "mean_quality_score": 99.4,
+    "with_frontmatter_description": 1150,
+    "body_derived_description": 0,
     "no_description": 0,
-    "tagged": 565,
+    "tagged": 566,
     "with_eval_coverage": 11,
     "with_eval_coverage_pct": 1.0,
     "total_eval_scenarios": 12
@@ -16,11 +16,11 @@
     "language": {
       "latex": 95,
       "stata": 48,
-      "python": 46,
+      "python": 47,
       "r": 22
     },
     "method": {
-      "iv": 27,
+      "iv": 28,
       "rdd": 25,
       "panel-fe": 19,
       "staggered-did": 17,
@@ -37,10 +37,10 @@
       "shift-share": 1
     },
     "stage": {
-      "analysis": 139,
-      "writing": 86,
+      "analysis": 140,
+      "writing": 87,
       "submission": 79,
-      "literature": 62,
+      "literature": 63,
       "reproduction": 58,
       "citation": 48,
       "presentation": 42,
@@ -53,7 +53,7 @@
     },
     "topic": {
       "econometrics": 79,
-      "scientific-writing": 70,
+      "scientific-writing": 71,
       "reproducibility": 58,
       "proofreading": 35,
       "causal-inference": 30
@@ -575,17 +575,17 @@
       "name": "scholar-evaluation",
       "path": "skills/04-K-Dense-AI-claude-scientific-writer/scholar-evaluation/SKILL.md",
       "collection": "04-K-Dense-AI-claude-scientific-writer",
-      "line_count": 304,
-      "description_effective": "Apply the ScholarEval framework to systematically evaluate scholarly and research work.",
-      "description_source": "derived",
+      "line_count": 310,
+      "description_effective": "Apply the ScholarEval framework to systematically evaluate scholarly work across quality dimensions (novelty, rigor, significance, and clarity). Use to critique academic papers, research proposals, literature reviews, or grant applications and produce a structured, criterion-based assessment.",
+      "description_source": "frontmatter",
       "has_references": false,
-      "tags": {},
-      "quality_score": 57,
-      "quality_flags": [
-        "no-frontmatter",
-        "description-derived-from-body",
-        "no-name"
-      ],
+      "tags": {
+        "stage": [
+          "literature"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
       "license": "MIT",
       "commercial_use": "allowed",
       "source_url": "https://github.com/K-Dense-AI/claude-scientific-writer",
@@ -5876,11 +5876,14 @@
       "name": "replicate-paper",
       "path": "skills/28-maxwell2732-paper-replicate-agent-demo/dot-claude/skills/replicate-paper/SKILL.md",
       "collection": "28-maxwell2732-paper-replicate-agent-demo",
-      "line_count": 230,
-      "description_effective": "Or with just: \"replicate this paper\" (Claude will ask for paths if not provided).",
-      "description_source": "derived",
+      "line_count": 236,
+      "description_effective": "Run a full 6-phase autonomous replication of a biomedical/epidemiology paper against UK Biobank or similar cohort data, producing Python and R scripts plus a validated replication report. Use when asked to replicate a paper end-to-end, or when invoked as /replicate-paper [paper.pdf] [data.csv|dta].",
+      "description_source": "frontmatter",
       "has_references": false,
       "tags": {
+        "language": [
+          "python"
+        ],
         "stage": [
           "reproduction"
         ],
@@ -5888,12 +5891,8 @@
           "reproducibility"
         ]
       },
-      "quality_score": 57,
-      "quality_flags": [
-        "no-frontmatter",
-        "description-derived-from-body",
-        "no-name"
-      ],
+      "quality_score": 100,
+      "quality_flags": [],
       "license": "MIT",
       "commercial_use": "allowed",
       "source_url": "https://github.com/maxwell2732/paper-replicate-agent-demo",
@@ -7883,25 +7882,26 @@
       "eval_coverage": []
     },
     {
-      "name": "38-peternka-academic-proofreader",
+      "name": "academic-proofreader",
       "path": "skills/38-peternka-academic-proofreader/SKILL.md",
       "collection": "38-peternka-academic-proofreader",
-      "line_count": 181,
-      "description_effective": "Academic Proofreader System Prompt — Applied Microeconomics (Claude Code)",
-      "description_source": "derived",
+      "line_count": 187,
+      "description_effective": "Perform an exhaustive, multi-pass proofread and copy-edit of an applied-microeconomics manuscript to top-economics-journal standards (AER, QJE, Econometrica, ReStud), checking prose, equations, table notes, footnotes, and citations for avoidable errors. Use before submitting or circulating an empirical economics paper.",
+      "description_source": "frontmatter",
       "has_references": false,
       "tags": {
+        "stage": [
+          "analysis",
+          "writing"
+        ],
         "topic": [
           "econometrics",
-          "proofreading"
+          "proofreading",
+          "scientific-writing"
         ]
       },
-      "quality_score": 57,
-      "quality_flags": [
-        "no-frontmatter",
-        "description-derived-from-body",
-        "no-name"
-      ],
+      "quality_score": 100,
+      "quality_flags": [],
       "license": "UNKNOWN - check upstream",
       "commercial_use": "unknown",
       "source_url": null,
@@ -7939,16 +7939,19 @@
       "eval_coverage": []
     },
     {
-      "name": "40-py-econometrics-pyfixest",
+      "name": "pyfixest-reference",
       "path": "skills/40-py-econometrics-pyfixest/SKILL.md",
       "collection": "40-py-econometrics-pyfixest",
-      "line_count": 381,
-      "description_effective": "Returns `Feols` for single model, `FixestMulti` for multiple estimation syntax.",
-      "description_source": "derived",
+      "line_count": 387,
+      "description_effective": "Dense, machine-readable API reference for PyFixest — high-dimensional fixed-effects OLS/WLS/IV and Poisson (feols, fepois, feglm), clustered/robust standard errors, R-style formula syntax, and post-estimation. Use when writing or debugging Python fixed-effects regressions with the pyfixest package.",
+      "description_source": "frontmatter",
       "has_references": false,
       "tags": {
         "language": [
           "python"
+        ],
+        "method": [
+          "iv"
         ],
         "stage": [
           "analysis"
@@ -7957,12 +7960,8 @@
           "econometrics"
         ]
       },
-      "quality_score": 57,
-      "quality_flags": [
-        "no-frontmatter",
-        "description-derived-from-body",
-        "no-name"
-      ],
+      "quality_score": 100,
+      "quality_flags": [],
       "license": "UNKNOWN - check upstream",
       "commercial_use": "unknown",
       "source_url": "https://github.com/py-econometrics/pyfixest",

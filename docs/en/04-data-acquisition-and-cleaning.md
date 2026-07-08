@@ -1,6 +1,6 @@
 # 04 - Data Acquisition and Cleaning
 
-[< Back to README](../README.md)
+[< Back to README](../../README.md)
 
 <!--
   CoPaper.AI — Empirical Research AI Assistant (https://copaper.ai)
@@ -16,15 +16,15 @@
 
 ## 📦 Related Skills Vendored in This Repo (click-through folders)
 
-> The collections below are **already vendored in this repository** — clone-and-use, offline-runnable, all audited by [LICENSE_AUDIT](../LICENSE_AUDIT.md) and the [security scan](../SECURITY-SCAN-REPORT.md). These are the most direct built-in capabilities at this stage; the per-tool and per-source details below complement this table. See [skills/](../skills/) and [SKILL_CATALOG](../SKILL_CATALOG.md) for the full directory.
+> The collections below are **already vendored in this repository** — clone-and-use, offline-runnable, all audited by [LICENSE_AUDIT](../LICENSE_AUDIT.md) and the [security scan](../../SECURITY-SCAN-REPORT.md). These are the most direct built-in capabilities at this stage; the per-tool and per-source details below complement this table. See [skills/](../../skills/) and [SKILL_CATALOG](../SKILL_CATALOG.md) for the full directory.
 
 | Collection | What it does | How to use it at this stage |
 |------|----------|---------------|
-| [⭐ `00.1` Full Empirical · Python](../skills/00.1-Full-empirical-analysis-skill_Python/) | Explicit stack: `pandas` · `statsmodels` · `linearmodels` · `pyfixest` | Use pandas to clean, build panels, and generate the analysis sample |
-| [`17` DAAF](../skills/17-DAAF-Contribution-Community-daaf/) | Safe-and-compliant agent framework with built-in education data-source skills | Pull public data such as Scorecard / FSA / campus-safety datasets |
-| [`57` edgartools](../skills/57-dgunning-edgartools/) | Query and analyse SEC filings | Pull listed-company financials and construct corporate-finance variables |
-| [`59` openalex-skill](../skills/59-shiquda-openalex-skill/) | Query 240M+ scholarly works via OpenAlex | Treat literature metadata as a structured data source |
-| [`43` research-plugins](../skills/43-wentorai-research-plugins/) | 478 research plugins: visualisation, domains, infrastructure | Pick specialised retrieval/cleaning plugins by data type |
+| [⭐ `00.1` Full Empirical · Python](../../skills/00.1-Full-empirical-analysis-skill_Python/) | Explicit stack: `pandas` · `statsmodels` · `linearmodels` · `pyfixest` | Use pandas to clean, build panels, and generate the analysis sample |
+| [`17` DAAF](../../skills/17-DAAF-Contribution-Community-daaf/) | Safe-and-compliant agent framework with built-in education data-source skills | Pull public data such as Scorecard / FSA / campus-safety datasets |
+| [`57` edgartools](../../skills/57-dgunning-edgartools/) | Query and analyse SEC filings | Pull listed-company financials and construct corporate-finance variables |
+| [`59` openalex-skill](../../skills/59-shiquda-openalex-skill/) | Query 240M+ scholarly works via OpenAlex | Treat literature metadata as a structured data source |
+| [`43` research-plugins](../../skills/43-wentorai-research-plugins/) | 478 research plugins: visualisation, domains, infrastructure | Pick specialised retrieval/cleaning plugins by data type |
 
 ---
 

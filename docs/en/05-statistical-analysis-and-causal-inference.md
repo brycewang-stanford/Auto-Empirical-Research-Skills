@@ -1,6 +1,6 @@
 # 05 - Statistical Analysis and Causal Inference
 
-[< Back to README](../README.md)
+[< Back to README](../../README.md)
 
 <!--
   CoPaper.AI — Empirical Research AI Assistant (https://copaper.ai)
@@ -18,18 +18,18 @@
 
 ## 📦 Related Skills Vendored in This Repo (click-through folders)
 
-> This stage is the main battlefield for AERS. The collections below are **already vendored in this repository** — clone-and-use, offline-runnable, all audited by [LICENSE_AUDIT](../LICENSE_AUDIT.md) and the [security scan](../SECURITY-SCAN-REPORT.md). The CoPaper.AI methodology notes below serve as a "method map," and the table below is what you can run locally right now. See [skills/](../skills/) and [SKILL_CATALOG](../SKILL_CATALOG.md) for the full directory.
+> This stage is the main battlefield for AERS. The collections below are **already vendored in this repository** — clone-and-use, offline-runnable, all audited by [LICENSE_AUDIT](../LICENSE_AUDIT.md) and the [security scan](../../SECURITY-SCAN-REPORT.md). The CoPaper.AI methodology notes below serve as a "method map," and the table below is what you can run locally right now. See [skills/](../../skills/) and [SKILL_CATALOG](../SKILL_CATALOG.md) for the full directory.
 
 | Collection | What it does | How to use it at this stage |
 |------|----------|---------------|
-| [⭐ `00` StatsPAI](../skills/00-Full-empirical-analysis-skill_StatsPAI/) | Agent-native Python DSL; one `sp.causal(...)` runs DID/RD/IV/SCM/DML | One-stop causal analysis + automated robustness gating |
-| [⭐ `00.2` Stata](../skills/00.2-Full-empirical-analysis-skill_Stata/) · [⭐ `00.3` R](../skills/00.3-Full-empirical-analysis-skill_R/) | `reghdfe` / `ivreg2` / `csdid` / `sdid` · `fixest` / `did` / `HonestDiD` | Replicate the same estimates and figures in Stata / R |
-| [`10` causal-inference-mixtape](../skills/10-Jill0099-causal-inference-mixtape/) | DID/IV/RDD/SCM templates (Cunningham) | Standardised templates for classical identification strategies |
-| [`40` pyfixest](../skills/40-py-econometrics-pyfixest/) | Python high-dimensional fixed-effects estimation at speed | Large-panel `reghdfe`-equivalent with clustered SEs |
-| [`39` marginaleffects](../skills/39-vincentarelbundock-marginaleffects/) | Predictions, slopes, and contrasts (R / Python) | Post-estimation marginal effects and heterogeneity interpretation |
-| [`51` CausalPy](../skills/51-pymc-labs-CausalPy/) | Bayesian quasi-experimental methods (PyMC Labs) | Bayesian DID/RD/SCM and uncertainty quantification |
-| [`64` mcp-stata](../skills/64-tmonk-mcp-stata/) | 20 Stata causal-inference and replication skills | Full causal-analysis workflow for Stata users |
-| [⭐ `50` AER-skills](../skills/50-brycewang-aer-skills/) | Top-5 submission stack: identification → robustness → R&R | Polish results to top-journal robustness standards |
+| [⭐ `00` StatsPAI](../../skills/00-Full-empirical-analysis-skill_StatsPAI/) | Agent-native Python DSL; one `sp.causal(...)` runs DID/RD/IV/SCM/DML | One-stop causal analysis + automated robustness gating |
+| [⭐ `00.2` Stata](../../skills/00.2-Full-empirical-analysis-skill_Stata/) · [⭐ `00.3` R](../../skills/00.3-Full-empirical-analysis-skill_R/) | `reghdfe` / `ivreg2` / `csdid` / `sdid` · `fixest` / `did` / `HonestDiD` | Replicate the same estimates and figures in Stata / R |
+| [`10` causal-inference-mixtape](../../skills/10-Jill0099-causal-inference-mixtape/) | DID/IV/RDD/SCM templates (Cunningham) | Standardised templates for classical identification strategies |
+| [`40` pyfixest](../../skills/40-py-econometrics-pyfixest/) | Python high-dimensional fixed-effects estimation at speed | Large-panel `reghdfe`-equivalent with clustered SEs |
+| [`39` marginaleffects](../../skills/39-vincentarelbundock-marginaleffects/) | Predictions, slopes, and contrasts (R / Python) | Post-estimation marginal effects and heterogeneity interpretation |
+| [`51` CausalPy](../../skills/51-pymc-labs-CausalPy/) | Bayesian quasi-experimental methods (PyMC Labs) | Bayesian DID/RD/SCM and uncertainty quantification |
+| [`64` mcp-stata](../../skills/64-tmonk-mcp-stata/) | 20 Stata causal-inference and replication skills | Full causal-analysis workflow for Stata users |
+| [⭐ `50` AER-skills](../../skills/50-brycewang-aer-skills/) | Top-5 submission stack: identification → robustness → R&R | Polish results to top-journal robustness standards |
 
 ---
 
@@ -185,7 +185,7 @@ tags: [causal-inference, DID, panel-data]
 
 | Attribute | Description |
 |------|------|
-| **Source** | [tmonk/mcp-stata](https://github.com/tmonk/mcp-stata) → this repo [`skills/64-tmonk-mcp-stata`](../skills/64-tmonk-mcp-stata/) |
+| **Source** | [tmonk/mcp-stata](https://github.com/tmonk/mcp-stata) → this repo [`skills/64-tmonk-mcp-stata`](../../skills/64-tmonk-mcp-stata/) |
 | **License** | AGPL-3.0 (copyleft; preserves the original LICENSE as "aggregation"; no vendored Python/Rust server-side code) |
 | **Function** | 20 SKILL.md files: `stata`, `stata-replication`, `stata-data-audit`, `stata-publication-qa`, `stata-modernize`, `stata-referee-response`, `stata-power-analysis`, `stata-causal-inference`, `stata-table-builder`, and more |
 | **Highlight** | Replication-and-robustness audit closed loop aimed at empirical researchers; running the original server requires Stata 17+ and the official `pystata` (this repo only vendors the skill docs) |

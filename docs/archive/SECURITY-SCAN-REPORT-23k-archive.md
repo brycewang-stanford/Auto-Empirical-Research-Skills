@@ -14,7 +14,7 @@
 **扫描人**：Claude（Opus 4.7，1M context），自动化 grep + 并行 agent 复核
 **结论先行**：**全部 95/95 仓库 CLEAN，零 SUSPICIOUS。** 14,138 条原始命中经分类聚合 + 抽样 triage + 143 个 hook 脚本逐个审查后，未发现任何后门、外泄通道、隐蔽 C2、加密挖矿、jailbreak 注入或恶意供应链组件。所有"看似敏感"的命中均归入三类合法内容（详见 §6）。
 
-> **与之前精选 52 报告的关系**：[`SECURITY-SCAN-REPORT.md`](SECURITY-SCAN-REPORT.md) 是对仓库内 **52 个精选 skill** 的深度审查（13 类 grep + hook 全量人工审查 + 3 个并行 agent 内容审查 + 完整性补充检查，覆盖 ~2,940 文件）。本报告（23k 版）是对**上游 95 仓库 / 62,957 文件 / 13,302 个 SKILL.md** 的**快速广度扫描**：自动化覆盖 16 类威胁模式 + 抽样 triage + 1 个并行 agent 做 hook 审计，覆盖率约 100% 的自动化模式扫描 + 6 个 hot-repo 深度 triage + 全部 hooks 复核。
+> **与之前精选 52 报告的关系**：[`SECURITY-SCAN-REPORT.md`](../../SECURITY-SCAN-REPORT.md) 是对仓库内 **52 个精选 skill** 的深度审查（13 类 grep + hook 全量人工审查 + 3 个并行 agent 内容审查 + 完整性补充检查，覆盖 ~2,940 文件）。本报告（23k 版）是对**上游 95 仓库 / 62,957 文件 / 13,302 个 SKILL.md** 的**快速广度扫描**：自动化覆盖 16 类威胁模式 + 抽样 triage + 1 个并行 agent 做 hook 审计，覆盖率约 100% 的自动化模式扫描 + 6 个 hot-repo 深度 triage + 全部 hooks 复核。
 
 ---
 
@@ -388,5 +388,5 @@ python3 scripts/aggregate-scan.py /tmp/scan_results > SECURITY-SCAN-REPORT-23k.m
 
 ---
 
-*报告由 Claude（Opus 4.7，1M context）于 2026-04-28 夜间生成。扫描方法：浅克隆 95 上游仓库 → 16 类自动化 grep 模式扫描（14,138 原始命中）→ 1 并行 agent 全量 hook/settings 审计（137 hook + 14 settings.json）→ 12 个 HOT-REPO 深度 triage。覆盖 95 仓库 / 62,957 文件 / 13,302 SKILL.md / ~3.8GB。**全部 CLEAN，零 SUSPICIOUS。** 与之前 52 精选审查（[`SECURITY-SCAN-REPORT.md`](SECURITY-SCAN-REPORT.md)）结论一致。*
+*报告由 Claude（Opus 4.7，1M context）于 2026-04-28 夜间生成。扫描方法：浅克隆 95 上游仓库 → 16 类自动化 grep 模式扫描（14,138 原始命中）→ 1 并行 agent 全量 hook/settings 审计（137 hook + 14 settings.json）→ 12 个 HOT-REPO 深度 triage。覆盖 95 仓库 / 62,957 文件 / 13,302 SKILL.md / ~3.8GB。**全部 CLEAN，零 SUSPICIOUS。** 与之前 52 精选审查（[`SECURITY-SCAN-REPORT.md`](../../SECURITY-SCAN-REPORT.md)）结论一致。*
 

@@ -1,6 +1,6 @@
 # 09 - Replication and Reproducible Research
 
-[< Back to README](../README.md)
+[< Back to README](../../README.md)
 
 <!--
   CoPaper.AI — Empirical Research AI Assistant (https://copaper.ai)
@@ -49,16 +49,16 @@ This is not a hypothetical — it is a real operation recorded by the Chinese co
 
 ## 📦 Related Skills Vendored in This Repo (click-through folders)
 
-> The collections below are **already vendored in this repository** — clone-and-use, offline-runnable, all audited by [LICENSE_AUDIT](../LICENSE_AUDIT.md) and the [security scan](../SECURITY-SCAN-REPORT.md). These are the most direct built-in capabilities at this stage; the per-tool details below complement this table. See [skills/](../skills/) and [SKILL_CATALOG](../SKILL_CATALOG.md) for the full directory.
+> The collections below are **already vendored in this repository** — clone-and-use, offline-runnable, all audited by [LICENSE_AUDIT](../LICENSE_AUDIT.md) and the [security scan](../../SECURITY-SCAN-REPORT.md). These are the most direct built-in capabilities at this stage; the per-tool details below complement this table. See [skills/](../../skills/) and [SKILL_CATALOG](../SKILL_CATALOG.md) for the full directory.
 
 | Collection | What it does | How to use it at this stage |
 |------|----------|---------------|
-| [`28` paper-replicate-agent](../skills/28-maxwell2732-paper-replicate-agent-demo/) | Paper-replication agent demo | Push from "understanding" to a runnable replication package |
-| [`54` open-science-skills](../skills/54-scdenney-open-science-skills/) | Citation consistency, DOI, and argument-support audit | Open-science compliance audit on the replication package |
-| [`29` project20XXy](../skills/29-quarcs-lab-project20XXy/) | Reproducible manuscript + notebook project skeleton | One-click reproducible project scaffolding |
-| [`41` sewage-econometrics-check](../skills/41-sticerd-eee-sewage-econometrics-check/) | 10-item replication-package audit checklist | Pre-submission self-check for STICERD-style replication review |
-| [`12` claude-code-my-workflow](../skills/12-pedrohcgs-claude-code-my-workflow/) | Commit → PR → merge research workflow (Emory) | Manage the whole replication pipeline with version control |
-| [`60` superpapers](../skills/60-regisely-superpapers/) | Comprehensive empirical-research support bundle | End-to-end replication toolbox |
+| [`28` paper-replicate-agent](../../skills/28-maxwell2732-paper-replicate-agent-demo/) | Paper-replication agent demo | Push from "understanding" to a runnable replication package |
+| [`54` open-science-skills](../../skills/54-scdenney-open-science-skills/) | Citation consistency, DOI, and argument-support audit | Open-science compliance audit on the replication package |
+| [`29` project20XXy](../../skills/29-quarcs-lab-project20XXy/) | Reproducible manuscript + notebook project skeleton | One-click reproducible project scaffolding |
+| [`41` sewage-econometrics-check](../../skills/41-sticerd-eee-sewage-econometrics-check/) | 10-item replication-package audit checklist | Pre-submission self-check for STICERD-style replication review |
+| [`12` claude-code-my-workflow](../../skills/12-pedrohcgs-claude-code-my-workflow/) | Commit → PR → merge research workflow (Emory) | Manage the whole replication pipeline with version control |
+| [`60` superpapers](../../skills/60-regisely-superpapers/) | Comprehensive empirical-research support bundle | End-to-end replication toolbox |
 
 ---
 
