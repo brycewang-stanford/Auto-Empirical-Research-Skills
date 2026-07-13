@@ -2,7 +2,7 @@
 name: master-thesis-review
 description: Generate master's thesis review reports (硕士论文评阅意见) calibrated to a given score. Outputs academic evaluation and shortcomings/suggestions in Chinese. Trigger when user says "master thesis review" / "硕士论文评阅" / "论文评阅" / "评阅意见" / "thesis review".
 allowed-tools: Read, Write, Glob, Grep, AskUserQuestion, Bash
-argument-hint: [path-to-thesis-folder]
+argument-hint: "[path-to-thesis-folder]"
 ---
 
 # Master Thesis Review (硕士论文评阅意见)

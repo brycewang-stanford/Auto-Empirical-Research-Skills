@@ -1,7 +1,7 @@
 ---
 name: research-review
 description: Get a deep critical review of research from GPT via Codex MCP. Use when user says "review my research", "help me review", "get external review", or wants critical feedback on research ideas, papers, or experimental results.
-argument-hint: [topic-or-scope]
+argument-hint: "[topic-or-scope]"
 allowed-tools: Bash(*), Read, Grep, Glob, Write, Edit, Agent, mcp__codex__codex, mcp__codex__codex-reply
 ---
 

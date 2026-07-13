@@ -2,7 +2,7 @@
 name: paper-pipeline
 description: "Orchestrate the complete post-first-draft polishing pipeline for an academic LaTeX paper by invoking five existing skills in fixed order: (1) paper-polish, (2) paper-self-revise, (3) paper-style, (4) paper-polish again, (5) reference-verify. Trigger when user says \"paper pipeline\" / \"paper-pipeline\" / \"论文流水线\" / \"全流程打磨\" / \"一条龙打磨\" / \"初稿打磨\" / \"full polish pipeline\" / \"run the whole pipeline\", or wants the entire post-draft polishing sequence run on a paper folder. Use this skill whenever the user asks for several paper-finishing steps (polish + revise + style + reference check) on one manuscript in one go, even if they don't name every individual skill."
 allowed-tools: Skill, Read, Edit, Write, Glob, Grep, Bash, AskUserQuestion, WebSearch, WebFetch, Agent
-argument-hint: [path-to-project-folder] [target-journal(optional)]
+argument-hint: "[path-to-project-folder] [target-journal(optional)]"
 ---
 
 # Paper Pipeline

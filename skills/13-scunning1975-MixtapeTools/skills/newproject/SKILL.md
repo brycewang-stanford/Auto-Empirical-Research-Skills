@@ -2,7 +2,7 @@
 name: newproject
 description: Scaffold a new research project with standard directory structure, CLAUDE.md template, and documented README. Use this at the start of every new project to ensure consistent organization.
 allowed-tools: Bash(mkdir*), Bash(cp*), Bash(ls*), Write, Read
-argument-hint: [project-name]
+argument-hint: "[project-name]"
 ---
 
 # New Project Scaffold

@@ -3,7 +3,7 @@ name: research-companion
 description: >-
   Strategic research companion — brainstorm, evaluate, and decide on research directions. TRIGGER when the user wants to brainstorm research, evaluate research ideas, do project triage, or explore a problem space. Orchestrates brainstormer, idea-critic, and research-strategist agents through a 6-phase pipeline: Seed → Diverge → Evaluate → Deepen → Frame → Decide. Includes Carlini's conclusion-first test.
 allowed-tools: Agent, Read, Glob, Grep, WebSearch, WebFetch
-argument-hint: [topic or problem space description]
+argument-hint: "[topic or problem space description]"
 ---
 
 # Research Companion — Structured Ideation Session

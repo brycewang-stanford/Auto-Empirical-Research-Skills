@@ -1,7 +1,7 @@
 ---
 name: reference-verify
 description: "Verify references in an academic paper: check whether each BibTeX entry is real, whether in-text citations match the cited paper's actual content, and produce a structured verification report. Use when user says \"验证参考文献\", \"ref verify\", \"check references\", \"核实引用\", \"引用是否正确\", or wants to audit citations in a LaTeX manuscript."
-argument-hint: [paper-directory-or-tex-file]
+argument-hint: "[paper-directory-or-tex-file]"
 allowed-tools: Bash(*), Read, Write, Edit, Grep, Glob, Agent, WebSearch, WebFetch
 ---
 

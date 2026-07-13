@@ -2,7 +2,7 @@
 name: paper-polish
 description: Proofread and verify academic papers in LaTeX. Runs 19 sequential checks covering titles, consistency, citations, formatting, theoretical tension in motivation, concise results reporting, cross-section repetition, em-dash usage, and auxiliary-text-to-footnote conversion. Trigger when user says "check paper" / "proofread" / "paper-checker" / "校对" / "核查论文".
 allowed-tools: Read, Bash, Edit, Write, Glob, Grep, AskUserQuestion, WebSearch, WebFetch
-argument-hint: [path-to-paper-directory]
+argument-hint: "[path-to-paper-directory]"
 ---
 
 # Paper Checker

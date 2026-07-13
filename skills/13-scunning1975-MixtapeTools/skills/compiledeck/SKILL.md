@@ -2,7 +2,7 @@
 name: compiledeck
 description: Create and compile beautiful Beamer presentations following the Rhetoric of Decks philosophy. Use when making slides, creating decks, or compiling .tex presentation files.
 allowed-tools: Bash(pdflatex*), Bash(latexmk*), Bash(ls*), Bash(open*), Bash(python*), Read, Write, Edit, Glob, Grep
-argument-hint: [topic-or-tex-file-path]
+argument-hint: "[topic-or-tex-file-path]"
 ---
 
 # Compile Deck

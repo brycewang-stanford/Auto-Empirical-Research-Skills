@@ -2,7 +2,7 @@
 name: paper-submission
 description: Evaluate a paper's contribution novelty, identify best-fit SSCI journal fields and ABS star rating, and recommend 20 target journals. Trigger when user says "paper submission" / "paper-submission" / "投稿评估" / "期刊推荐" / "target journal" / "选刊".
 allowed-tools: Read, Bash, Edit, Write, Glob, Grep, AskUserQuestion, WebSearch, WebFetch, Agent
-argument-hint: [path-to-paper-pdf-or-project-folder]
+argument-hint: "[path-to-paper-pdf-or-project-folder]"
 ---
 
 # Paper Submission Evaluator

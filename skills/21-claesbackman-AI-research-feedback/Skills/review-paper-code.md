@@ -2,7 +2,7 @@
 name: review-paper-code
 description: Review research code for reproducibility and quality, extract the paper's main empirical claims, compare paper to code, and write a constructive markdown report. Designed for social science / economics projects with LaTeX papers and Stata, R, or Python code.
 user-invocable: true
-argument-hint: [optional: path/to/main.tex] [optional: path/to/code_dir] [optional: main|full]
+argument-hint: "[optional: path/to/main.tex] [optional: path/to/code_dir] [optional: main|full]"
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash, Agent
 ---
 

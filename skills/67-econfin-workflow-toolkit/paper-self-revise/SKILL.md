@@ -2,7 +2,7 @@
 name: paper-self-revise
 description: Revise an academic paper based on internal review comments. Reads review report or annotated manuscript, then applies revisions one by one with user approval. Trigger when user says "self revise" / "paper-selfrevise" / "内部修改" / "根据审稿意见修改".
 allowed-tools: Read, Edit, Write, Glob, Grep, AskUserQuestion, Bash
-argument-hint: [path-to-project-folder]
+argument-hint: "[path-to-project-folder]"
 ---
 
 # Paper Self-Revise

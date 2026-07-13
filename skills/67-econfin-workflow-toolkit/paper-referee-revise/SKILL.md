@@ -2,7 +2,7 @@
 name: paper-referee-revise
 description: Revise an academic paper based on journal referee reports. Reads referee comments from review report or annotated manuscript, then directly modifies main.tex one comment at a time with user approval. Generates response letter after revision. Trigger when user says "referee revise" / "paper-referee-revise" / "审稿意见修改" / "根据审稿人意见修改" / "referee report".
 allowed-tools: Read, Edit, Write, Glob, Grep, AskUserQuestion, Bash
-argument-hint: [path-to-project-folder]
+argument-hint: "[path-to-project-folder]"
 ---
 
 # Paper Referee Revise

@@ -2,7 +2,7 @@
 name: readability
 description: Correct grammar errors, typos, and improve academic readability in LaTeX, Markdown, or plain-text manuscripts. Scans the document once, then walks through every issue one-by-one asking for approval before applying each fix. Trigger when the user says "readability", "check grammar", "fix typos", "proofread for grammar", "improve readability", "polish wording", "语言润色", "修语法", or asks you to clean up the prose in a paper/chapter/section without wanting full content restructuring.
 allowed-tools: Read, Edit, Write, Glob, Grep, Bash, AskUserQuestion
-argument-hint: [path-to-file-or-directory]
+argument-hint: "[path-to-file-or-directory]"
 ---
 
 # Readability

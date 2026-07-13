@@ -2,7 +2,7 @@
 name: referee-report
 description: Generate academic referee reports for economics/finance papers, followed by a 150-word letter to the editor with recommendation (Reject / Major Revision) and Kai Wu signature. Two modes (normal / high-level), configurable number of comments; recommendation choice drives evaluation tone (Reject → negative, Major Revision → neutral). Trigger when user says "referee report" / "write referee report" / "审稿报告" / "写审稿意见" / "generate referee report" / "review this paper".
 allowed-tools: Read, Write, Glob, Grep, AskUserQuestion, Bash
-argument-hint: [path-to-project-folder]
+argument-hint: "[path-to-project-folder]"
 ---
 
 # Referee Report Generator

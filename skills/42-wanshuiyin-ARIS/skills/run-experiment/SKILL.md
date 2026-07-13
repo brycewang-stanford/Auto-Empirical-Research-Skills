@@ -1,7 +1,7 @@
 ---
 name: run-experiment
 description: Deploy and run ML experiments on local or remote GPU servers. Use when user says "run experiment", "deploy to server", "跑实验", or needs to launch training jobs.
-argument-hint: [experiment-description]
+argument-hint: "[experiment-description]"
 allowed-tools: Bash(*), Read, Grep, Glob, Edit, Write, Agent
 ---
 

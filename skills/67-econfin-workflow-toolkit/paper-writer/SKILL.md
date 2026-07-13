@@ -2,7 +2,7 @@
 name: paper-writer
 description: Automatically write empirical sections of academic papers in LaTeX by reading tables/figures from a PDF. Trigger when user wants to write a paper from empirical results, has tables/figures in PDF, or says "write paper" / "paper-writer" / "写论文".
 allowed-tools: Read, Bash, Edit, Write, Glob, Grep, AskUserQuestion, WebSearch, WebFetch
-argument-hint: [path-to-pdf]
+argument-hint: "[path-to-pdf]"
 ---
 
 # Paper Writer
