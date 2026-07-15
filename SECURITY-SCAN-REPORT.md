@@ -202,3 +202,23 @@
 ---
 
 *报告由 Claude（Opus 4.7）生成。扫描方法：自动化 grep 模式匹配（13 类风险）+ hook 全量人工审查 + 3 个并行 agent 内容深读 + 完整性补充检查。覆盖 52 个 skill / 约 2,940+ 文件，覆盖率约 85%（重点目录 + 全部脚本 + 全部 hook + 抽样大型 reference）。二轮补扫 2026-04-28：4 个 `00-*` 系列 + 48-copaper-ai-chinese-de-aigc，全部 CLEAN。*
+
+---
+
+## 增补：49–70 增量模式扫描（2026-07-15）
+
+原始基线（52 个集合 / 2,940+ 文件）之后，仓库又收录了 **22 个集合**（`49-voidborne-d-humanize-chinese` 至 `70-ssci-polish`，含 50-brycewang-aer-skills）。本次对这 22 个集合的全部 **1,146 个文件**（其中 1,029 个文本文件）做了与 Phase 1 同类的自动化模式扫描（13 类风险维度：pipe-to-shell、反向 shell、解码后执行、长 base64 blob、凭据路径、环境变量外泄、远程 eval/exec、`rm -rf`、挖矿特征、键盘/剪贴板监听、可疑 webhook、prompt 注入标记、混淆 Python）。
+
+**结论：未发现恶意内容。9 个原始命中经逐一核验均为良性：**
+
+| 命中 | 位置 | 核验结论 |
+|---|---|---|
+| pipe-to-shell ×3 | `56-hanlulong-econ-writing-skill/README-original.md` | 上游作者自己仓库的安装命令，仅出现在文档中，skill 本身不执行 |
+| pipe-to-shell ×1 | `64-tmonk-mcp-stata/README-original.md` | 上游作者（tmonk）自有域名的安装器文档；同为文档性质，未被任何脚本调用 |
+| 长 base64 ×2 | `67/68-*/marp-slides-creator/themes/beam.css` | CSS 内嵌 SVG data-URI（装饰图形） |
+| 长 base64 ×2 | `69-Paper-WorkFlow/did_demo.ipynb` | notebook 输出中的 matplotlib PNG 图片 |
+| `exec(compile(...))` ×1 | `69-Paper-WorkFlow/scripts/check_demo_execution.py` | 本地执行仓库自带 notebook 单元的检查脚本，无网络 IO，属标准 nbconvert 模式 |
+
+**范围说明**：本增补为自动化模式扫描 + 命中人工核验，未包含基线报告的三 Agent 并行内容深读环节，严格程度低于原始六阶段方法论。README 徽章中的 "52/52 CLEAN" 仍指原始基线；依赖 49–70 号集合于高信任场景前，建议按原方法论补一轮深读。
+
+*增补扫描由 Claude（Fable 5）执行于 2026-07-15。*

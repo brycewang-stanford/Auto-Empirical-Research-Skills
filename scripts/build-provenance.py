@@ -96,6 +96,15 @@ OVERRIDES: dict[str, dict[str, object]] = {
         "sync": "weekly GitHub Actions sync",
         "source_confidence": "high",
     },
+    "70-ssci-polish": {
+        # Contributed directly to this repository (commit 85bf545) by
+        # 刘松岐 (辽宁大学, copaper.ai 团队培训班) — no external upstream.
+        "source_url": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills",
+        "license": "CC-BY-SA-4.0 (repository default)",
+        "origin": "direct community contribution",
+        "sync": "manual",
+        "source_confidence": "high",
+    },
     "12-pedrohcgs-claude-code-my-workflow": {
         "source_url": "https://github.com/pedrohcgs/claude-code-my-workflow",
         "source_confidence": "high",

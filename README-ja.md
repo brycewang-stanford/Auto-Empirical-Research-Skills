@@ -289,7 +289,7 @@ AERS は同時に二つの性格を持ちます。(1) 完全な実証パイプ�
 | **広域エコシステム**の精選マップ | **23,000+ スキル / 119 リポジトリ** | 本 README · [`docs/SKILL_CATALOG.md`](docs/SKILL_CATALOG.md) |
 | **ツールカタログ**（`tools/`）: 因果/計量ライブラリ、自律研究エージェント、MCP サーバー、因果探索、ベンチマークデータセット | **334 ツール / 6 カテゴリ** | [`tools/tools.json`](tools/tools.json) · [`tools/CATALOG.md`](tools/CATALOG.md) |
 
-> セキュリティ監査が対象としたのは、元の **52 コレクション / 2,940 ファイルのベースライン（52/52 CLEAN）**です。そのベースライン以降に取り込まれたスキルは [`catalog/provenance.json`](catalog/provenance.json)、[`docs/LICENSE_AUDIT.md`](docs/LICENSE_AUDIT.md)、[`docs/SKILL_AUDIT.md`](docs/SKILL_AUDIT.md) で追跡しています。高信頼が求められる文脈で利用する前には `make audit` を実行してください。
+> セキュリティ監査が対象としたのは、元の **52 コレクション / 2,940 ファイルのベースライン（52/52 CLEAN）**です。そのベースライン以降に取り込まれたスキルは [`catalog/provenance.json`](catalog/provenance.json)、[`docs/LICENSE_AUDIT.md`](docs/LICENSE_AUDIT.md)、[`docs/SKILL_AUDIT.md`](docs/SKILL_AUDIT.md) で追跡しています。高信頼が求められる文脈で利用する前には `make audit` を実行してください。コレクション 49–70 に対する増分パターンスキャン（2026-07-15）では悪意あるコンテンツは検出されませんでした —— [`SECURITY-SCAN-REPORT.md`](SECURITY-SCAN-REPORT.md) の増補を参照。
 
 ---
 

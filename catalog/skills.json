@@ -1174,11 +1174,11 @@
       "sync": "manual vendor snapshot"
     },
     {
-      "commercial_use": "unknown",
+      "commercial_use": "share-alike",
       "has_license": false,
       "has_readme": false,
       "id": "70-ssci-polish",
-      "license": "UNKNOWN - check upstream",
+      "license": "CC-BY-SA-4.0 (repository default)",
       "path": "skills/70-ssci-polish",
       "primary_skill": {
         "description": "Polish English academic papers for SSCI journal submission. This skill checks grammar, improves readability, and enhances academic tone. Use when the user asks to polish, proofread, edit, or improve their English academic paper, manuscript, or article — especially when targeting SSCI, SCI, or other international journals. Also use when the user asks to \"润色\", \"修改语法\", \"提升学术性\", \"polish my paper\", or mentions their paper needs language improvement for journal submission. Always trigger on any request involving academic English polishing, even if the user doesn't explicitly say \"SSCI.\"",
@@ -1186,9 +1186,9 @@
         "path": "skills/70-ssci-polish/SKILL.md"
       },
       "skill_count": 1,
-      "source_confidence": "unknown",
-      "source_url": null,
-      "sync": "manual vendor snapshot"
+      "source_confidence": "high",
+      "source_url": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills",
+      "sync": "manual"
     }
   ],
   "generated_by": "scripts/build-catalog.py",

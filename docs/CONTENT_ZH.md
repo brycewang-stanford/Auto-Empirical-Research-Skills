@@ -266,7 +266,7 @@ AERS 同时是两样东西：(1) 一小撮**自研旗舰 skill**，能跑通完�
 | 覆盖**更广生态**的精选地图 | **23,000+ skill / 119 仓库** | 本 README · [`SKILL_CATALOG.md`](SKILL_CATALOG.md) |
 | **工具目录**（`tools/`）：因果/计量库、自动化研究 Agent、MCP 服务、因果发现、基准数据集 | **334 工具 / 6 类** | [`tools/tools.json`](../tools/tools.json) · [`tools/CATALOG.md`](../tools/CATALOG.md) |
 
-> 安全审计覆盖的是**原始 52 合集 / 2,940 文件的基线（52/52 CLEAN）**。在该基线之后新增的 vendor skill 由 [`catalog/provenance.json`](../catalog/provenance.json)、[`LICENSE_AUDIT.md`](LICENSE_AUDIT.md)、[`SKILL_AUDIT.md`](SKILL_AUDIT.md) 跟踪；高信任场景使用前请先 `make audit` 复核。
+> 安全审计覆盖的是**原始 52 合集 / 2,940 文件的基线（52/52 CLEAN）**。在该基线之后新增的 vendor skill 由 [`catalog/provenance.json`](../catalog/provenance.json)、[`LICENSE_AUDIT.md`](LICENSE_AUDIT.md)、[`SKILL_AUDIT.md`](SKILL_AUDIT.md) 跟踪；高信任场景使用前请先 `make audit` 复核。针对 49–70 号合集的增量模式扫描（2026-07-15）未发现恶意内容 —— 见 [`SECURITY-SCAN-REPORT.md`](../SECURITY-SCAN-REPORT.md) 增补章节。
 
 ---
 

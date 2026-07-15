@@ -1,8 +1,0 @@
-{
-  "design": "rct (lalonde-approx)",
-  "n": 614,
-  "alpha": 0.05,
-  "power_target": 0.8,
-  "mde_in_sd_units": null,
-  "note": "Cohen's d in residual SD units; multiply by SD(re78) for $ units."
-}

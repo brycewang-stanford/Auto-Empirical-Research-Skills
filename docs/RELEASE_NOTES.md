@@ -53,12 +53,12 @@ Paste this snapshot into the GitHub release body and add a hand-written
 - Apache-2.0: 1
 - CC-BY-NC-4.0 (non-commercial): 1
 - CC-BY-SA-4.0: 1
-- CC-BY-SA-4.0 (repository default): 4
+- CC-BY-SA-4.0 (repository default): 5
 - GPL-3.0: 1
 - MIT: 35
 - MIT Non-Commercial: 1
 - Mixed (per-skill; see folder): 2
-- UNKNOWN - check upstream: 23
+- UNKNOWN - check upstream: 22
 
 ## Quality gates
 

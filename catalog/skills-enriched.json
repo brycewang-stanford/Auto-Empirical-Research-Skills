@@ -23632,10 +23632,10 @@
       },
       "quality_score": 100,
       "quality_flags": [],
-      "license": "UNKNOWN - check upstream",
-      "commercial_use": "unknown",
-      "source_url": null,
-      "sync": "manual vendor snapshot",
+      "license": "CC-BY-SA-4.0 (repository default)",
+      "commercial_use": "share-alike",
+      "source_url": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills",
+      "sync": "manual",
       "eval_coverage": []
     }
   ]
