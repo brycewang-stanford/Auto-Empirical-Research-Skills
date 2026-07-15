@@ -304,7 +304,7 @@ Numbers in this README are kept honest and disambiguated. "Vendored" means the f
 The most persuasive thing here is not a number — it is that the flagship pipeline's behavior is **checkable without an API key or paid model**. Just Python 3:
 
 ```bash
-git clone https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills.git
+git clone --recurse-submodules https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills.git
 cd Auto-Empirical-Research-Skills
 make check        # repo validation + unit tests + eval lint + numeric benchmark
 ```

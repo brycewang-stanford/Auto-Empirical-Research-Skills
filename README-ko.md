@@ -298,7 +298,7 @@ AERS는 두 가지를 동시에 제공합니다: (1) 완전한 실증 파이프�
 여기서 가장 설득력 있는 것은 숫자가 아니라, 플래그십 파이프라인의 동작을 **API 키나 유료 모델 없이도 확인할 수 있다**는 점입니다. Python 3만 있으면 됩니다:
 
 ```bash
-git clone https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills.git
+git clone --recurse-submodules https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills.git
 cd Auto-Empirical-Research-Skills
 make check        # repo validation + unit tests + eval lint + numeric benchmark
 ```

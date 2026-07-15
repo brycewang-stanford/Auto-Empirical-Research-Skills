@@ -298,7 +298,7 @@ AERS は同時に二つの性格を持ちます。(1) 完全な実証パイプ�
 ここで最も説得力があるのは数字ではなく、旗艦パイプラインの挙動が **API キーや有料モデルなしで検証できる**という点です。必要なのは Python 3 だけです:
 
 ```bash
-git clone https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills.git
+git clone --recurse-submodules https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills.git
 cd Auto-Empirical-Research-Skills
 make check        # repo validation + unit tests + eval lint + numeric benchmark
 ```

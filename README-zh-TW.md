@@ -300,7 +300,7 @@ AERS 同時是兩樣東西：(1) 一小撮**自研旗艦 skill**，能跑通完�
 這裡最有說服力的不是某個數字，而是：旗艦流水線的行為**不需要 API key、不需要付費模型就能複核**。只要 Python 3：
 
 ```bash
-git clone https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills.git
+git clone --recurse-submodules https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills.git
 cd Auto-Empirical-Research-Skills
 make check        # 仓库校验 + 单元测试 + eval lint + 数值基准
 ```

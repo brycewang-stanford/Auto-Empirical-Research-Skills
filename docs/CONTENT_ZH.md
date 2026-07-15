@@ -275,7 +275,7 @@ AERS 同时是两样东西：(1) 一小撮**自研旗舰 skill**，能跑通完�
 这里最有说服力的不是某个数字，而是：旗舰流水线的行为**不需要 API key、不需要付费模型就能复核**。只要 Python 3：
 
 ```bash
-git clone https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills.git
+git clone --recurse-submodules https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills.git
 cd Auto-Empirical-Research-Skills
 make check        # 仓库校验 + 单元测试 + eval lint + 数值基准
 ```
