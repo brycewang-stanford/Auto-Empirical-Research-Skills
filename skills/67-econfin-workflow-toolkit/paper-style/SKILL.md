@@ -2,7 +2,7 @@
 name: paper-style
 description: Restructure an academic paper's title and section structure to match a target journal's house style. Asks the user to specify the target journal first, then adjusts main.tex accordingly (title wording and case, section skeleton, heading case, numbering scheme, merging/splitting sections). Trigger when user says "paper style" / "paper-style" / "期刊风格" / "按目标期刊调整" / "调整为XX风格" / "JFE风格" / "convert to journal style" / "restructure for [journal]", or wants a paper's title/sections reformatted for a specific journal submission.
 allowed-tools: Read, Edit, Write, Glob, Grep, AskUserQuestion, Bash, WebSearch, WebFetch
-argument-hint: [path-to-project-folder] [target-journal(optional)]
+argument-hint: "[path-to-project-folder] [target-journal(optional)]"
 ---
 
 # Paper Style

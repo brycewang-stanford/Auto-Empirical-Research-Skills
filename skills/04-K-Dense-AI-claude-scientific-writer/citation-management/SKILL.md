@@ -1,3 +1,9 @@
+---
+name: citation-management
+description: Comprehensive citation management for academic research. Search Google Scholar and PubMed for papers, extract accurate metadata, validate citations, and generate properly formatted BibTeX entries. This skill should be used when you need to find papers, verify citation information, convert DOIs to BibTeX, or ensure reference accuracy in scientific writing.
+allowed-tools: [Read, Write, Edit, Bash]
+---
+
 <!--
   ╔══════════════════════════════════════════════════════════════╗
   ║  本文件为开源 Skill 原始文档，收录仅供学习与研究参考        ║
@@ -12,12 +18,6 @@
   声明: 本文件版权归原作者所有。此处收录旨在为社会科学实证研究者
   提供 AI Agent Skills 的集中参考。如有侵权，请联系删除。
 -->
-
----
-name: citation-management
-description: Comprehensive citation management for academic research. Search Google Scholar and PubMed for papers, extract accurate metadata, validate citations, and generate properly formatted BibTeX entries. This skill should be used when you need to find papers, verify citation information, convert DOIs to BibTeX, or ensure reference accuracy in scientific writing.
-allowed-tools: [Read, Write, Edit, Bash]
----
 
 # Citation Management
 

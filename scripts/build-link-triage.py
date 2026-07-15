@@ -74,7 +74,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--out", type=Path, default=OUT, help="output markdown path")
     args = parser.parse_args(argv)
     args.out.write_text(render(), encoding="utf-8")
-    print(f"Wrote {args.out.relative_to(ROOT)}")
+    out = args.out.resolve()
+    print(f"Wrote {out.relative_to(ROOT) if out.is_relative_to(ROOT) else out}")
     return 0
 
 

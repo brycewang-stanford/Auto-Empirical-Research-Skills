@@ -1,3 +1,8 @@
+---
+name: academic-paper-strategist
+description: 'Systematic strategic planning framework for philosophy and interdisciplinary academic papers targeting preprint platforms (PhilArchive, arXiv, PhilSci-Archive). Use when users want to: (1) plan a paper on a specific topic, (2) identify research gaps and assess originality, (3) develop optimized paper outlines, (4) prepare for preprint submission, or (5) understand platform requirements and writing standards. Triggered by phrases like ''plan a paper on,'' ''help me design a paper about,'' ''identify research gaps in,'' ''is this idea original,'' or when users need structured research planning. The skill guides through three phases: Platform Analysis (identifying target venue and studying sample papers), Theoretical Framework (AI-driven literature search and gap identification), and Outline Optimization (structured design with reviewer-perspective self-assessment). Each phase includes quality evaluation standards and validation checkpoints. Output: optimized detailed outline ready for systematic writing (use with academic-paper-composer skill).'
+---
+
 <!--
   ╔══════════════════════════════════════════════════════════════╗
   ║  本文件为开源 Skill 原始文档，收录仅供学习与研究参考        ║
@@ -12,11 +17,6 @@
   声明: 本文件版权归原作者所有。此处收录旨在为社会科学实证研究者
   提供 AI Agent Skills 的集中参考。如有侵权，请联系删除。
 -->
-
----
-name: academic-paper-strategist
-description: Systematic strategic planning framework for philosophy and interdisciplinary academic papers targeting preprint platforms (PhilArchive, arXiv, PhilSci-Archive). Use when users want to: (1) plan a paper on a specific topic, (2) identify research gaps and assess originality, (3) develop optimized paper outlines, (4) prepare for preprint submission, or (5) understand platform requirements and writing standards. Triggered by phrases like 'plan a paper on,' 'help me design a paper about,' 'identify research gaps in,' 'is this idea original,' or when users need structured research planning. The skill guides through three phases: Platform Analysis (identifying target venue and studying sample papers), Theoretical Framework (AI-driven literature search and gap identification), and Outline Optimization (structured design with reviewer-perspective self-assessment). Each phase includes quality evaluation standards and validation checkpoints. Output: optimized detailed outline ready for systematic writing (use with academic-paper-composer skill).
----
 
 # Academic Paper Strategist
 

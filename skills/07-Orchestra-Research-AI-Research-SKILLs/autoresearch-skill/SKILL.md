@@ -1,3 +1,12 @@
+---
+name: autoresearch
+description: Orchestrates end-to-end autonomous AI research projects using a two-loop architecture. The inner loop runs rapid experiment iterations with clear optimization targets. The outer loop synthesizes results, identifies patterns, and steers research direction. Routes to domain-specific skills for execution, supports continuous agent operation via Claude Code /loop and OpenClaw heartbeat, and produces research presentations and papers. Use when starting a research project, running autonomous experiments, or managing a multi-hypothesis research effort.
+version: 1.0.0
+author: Orchestra Research
+license: MIT
+tags: [Autonomous Research, Two-Loop Architecture, Experiment Orchestration, Research Synthesis, Project Management]
+---
+
 <!--
   ╔══════════════════════════════════════════════════════════════╗
   ║  本文件为开源 Skill 原始文档，收录仅供学习与研究参考        ║
@@ -12,15 +21,6 @@
   声明: 本文件版权归原作者所有。此处收录旨在为社会科学实证研究者
   提供 AI Agent Skills 的集中参考。如有侵权，请联系删除。
 -->
-
----
-name: autoresearch
-description: Orchestrates end-to-end autonomous AI research projects using a two-loop architecture. The inner loop runs rapid experiment iterations with clear optimization targets. The outer loop synthesizes results, identifies patterns, and steers research direction. Routes to domain-specific skills for execution, supports continuous agent operation via Claude Code /loop and OpenClaw heartbeat, and produces research presentations and papers. Use when starting a research project, running autonomous experiments, or managing a multi-hypothesis research effort.
-version: 1.0.0
-author: Orchestra Research
-license: MIT
-tags: [Autonomous Research, Two-Loop Architecture, Experiment Orchestration, Research Synthesis, Project Management]
----
 
 # Autoresearch
 

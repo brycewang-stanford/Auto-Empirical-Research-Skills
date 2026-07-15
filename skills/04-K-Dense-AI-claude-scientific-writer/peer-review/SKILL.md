@@ -1,3 +1,9 @@
+---
+name: peer-review
+description: "Systematic peer review toolkit. Evaluate methodology, statistics, design, reproducibility, ethics, figure integrity, reporting standards, for manuscript and grant review across disciplines."
+allowed-tools: [Read, Write, Edit, Bash]
+---
+
 <!--
   ╔══════════════════════════════════════════════════════════════╗
   ║  本文件为开源 Skill 原始文档，收录仅供学习与研究参考        ║
@@ -12,12 +18,6 @@
   声明: 本文件版权归原作者所有。此处收录旨在为社会科学实证研究者
   提供 AI Agent Skills 的集中参考。如有侵权，请联系删除。
 -->
-
----
-name: peer-review
-description: "Systematic peer review toolkit. Evaluate methodology, statistics, design, reproducibility, ethics, figure integrity, reporting standards, for manuscript and grant review across disciplines."
-allowed-tools: [Read, Write, Edit, Bash]
----
 
 # Scientific Critical Evaluation and Peer Review
 

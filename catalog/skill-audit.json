@@ -11933,16 +11933,26 @@
       "line_count": 265,
       "name": "paper-workflow",
       "path": "skills/69-Paper-WorkFlow/SKILL.md"
+    },
+    {
+      "collection": "70-ssci-polish",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 247,
+      "name": "ssci-polish",
+      "path": "skills/70-ssci-polish/SKILL.md"
     }
   ],
   "schema_version": "1.0",
   "summary": {
     "duplicate_skill_names": 92,
-    "exact_case_skill_files": 1150,
+    "exact_case_skill_files": 1151,
     "missing_description": 0,
     "missing_frontmatter": 0,
     "non_exact_case_skill_files": 0,
     "over_500_lines": 91,
-    "skill_like_files": 1150
+    "skill_like_files": 1151
   }
 }

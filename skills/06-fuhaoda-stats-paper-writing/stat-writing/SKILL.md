@@ -1,3 +1,13 @@
+---
+name: stat-writing
+description: End-to-end statistical writing assistant for LaTeX - draft title/abstract/keywords, expand outlines into sections, audit manuscripts, write reviewer reports and response letters, and scaffold book manuscripts.
+license: CC0-1.0
+metadata:
+  author: stat-writing-one-skill
+  version: "3.0"
+compatibility: Codex (CLI + IDE). Optional scripts require Python 3.
+---
+
 <!--
   ╔══════════════════════════════════════════════════════════════╗
   ║  本文件为开源 Skill 原始文档，收录仅供学习与研究参考        ║
@@ -12,16 +22,6 @@
   声明: 本文件版权归原作者所有。此处收录旨在为社会科学实证研究者
   提供 AI Agent Skills 的集中参考。如有侵权，请联系删除。
 -->
-
----
-name: stat-writing
-description: End-to-end statistical writing assistant for LaTeX - draft title/abstract/keywords, expand outlines into sections, audit manuscripts, write reviewer reports and response letters, and scaffold book manuscripts.
-license: CC0-1.0
-metadata:
-  author: stat-writing-one-skill
-  version: "3.0"
-compatibility: Codex (CLI + IDE). Optional scripts require Python 3.
----
 
 # Statistical Writing (One Skill)
 

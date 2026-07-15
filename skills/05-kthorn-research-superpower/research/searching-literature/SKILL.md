@@ -1,3 +1,10 @@
+---
+name: Searching Scientific Literature
+description: PubMed search with keyword optimization, result parsing, and metadata extraction
+when_to_use: When starting literature search. When user asks about papers, publications, studies. When need to find scientific articles. When building initial paper list for research question.
+version: 1.0.0
+---
+
 <!--
   ╔══════════════════════════════════════════════════════════════╗
   ║  本文件为开源 Skill 原始文档，收录仅供学习与研究参考        ║
@@ -12,13 +19,6 @@
   声明: 本文件版权归原作者所有。此处收录旨在为社会科学实证研究者
   提供 AI Agent Skills 的集中参考。如有侵权，请联系删除。
 -->
-
----
-name: Searching Scientific Literature
-description: PubMed search with keyword optimization, result parsing, and metadata extraction
-when_to_use: When starting literature search. When user asks about papers, publications, studies. When need to find scientific articles. When building initial paper list for research question.
-version: 1.0.0
----
 
 # Searching Scientific Literature
 

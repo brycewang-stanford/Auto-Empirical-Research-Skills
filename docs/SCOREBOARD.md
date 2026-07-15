@@ -57,7 +57,7 @@ data-derived number and demands the pipeline reproduce it.
 ## AERS-vs-Econometrics-Agent comparison (planned)
 
 The roadmap calls for an external benchmark of AERS skills against
-[Econometrics-Agent](https://github.com/brycewang-stanford/Econometrics-Agent)
+[Econometrics-Agent](https://github.com/FromCSUZhou/Econometrics-Agent)
 on the same 17 numeric tasks. The candidate grading protocol is in
 [`INTEROP.md` Recipe C](INTEROP.md); submissions go to
 `benchmark/candidates/`. Until that comparison is run, the

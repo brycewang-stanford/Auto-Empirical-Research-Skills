@@ -1,6 +1,6 @@
 # Auto-Empirical Research Skills (AERS)
 
-> **⚠️ 中文版已迁出本文件。** 中文 README 内容（先看这里段、69 合集表格、目录、信任面、旗舰流水线等正文）已抽取到
+> **⚠️ 中文版已迁出本文件。** 中文 README 内容（先看这里段、70 合集表格、目录、信任面、旗舰流水线等正文）已抽取到
 > [`docs/CONTENT_ZH.md`](docs/CONTENT_ZH.md)。本文件只保留顶部 banner + badges + 简短入口 + 底部脚注；
 > **完整中文内容请看 [docs/CONTENT_ZH.md](docs/CONTENT_ZH.md)。**
 >
@@ -37,7 +37,7 @@
   <br/>
 </div>
 
-> ### 🚀 New here? Open the **[Skill Search →](docs/search.html)** to filter all 1,150 skills by method, stage, language, and license. The 5-minute tour (`make quickstart`) prints the same picture in your terminal.
+> ### 🚀 New here? Open the **[Skill Search →](docs/search.html)** to filter all 1,151 skills by method, stage, language, and license. The 5-minute tour (`make quickstart`) prints the same picture in your terminal.
 >
 > ### 🇨🇳 **中文用户请直接看 [`docs/CONTENT_ZH.md`](docs/CONTENT_ZH.md)** —— 完整中文内容已迁出本文件。📖 **English readers:** see [`README-en.md`](README-en.md) — this file is just the GitHub default README (banner + badges + footer).
 
@@ -70,7 +70,7 @@
 
 本文件（P2.2 重构后）只承担 GitHub 默认入口的角色，**完整中文内容已迁出到 [`docs/CONTENT_ZH.md`](docs/CONTENT_ZH.md)**：
 
-- **先看这里段 / 69 合集一览 / 目录 / 按用途分组 / 精确数字 / 2 分钟验证 / 三层信任 / 旗舰流水线 / 30 秒入口 / 信任面表 / 浏览全景 / 安全扫描 / 更新日志 / 贡献与引用** → 全部在 CONTENT_ZH.md。
+- **先看这里段 / 70 合集一览 / 目录 / 按用途分组 / 精确数字 / 2 分钟验证 / 三层信任 / 旗舰流水线 / 30 秒入口 / 信任面表 / 浏览全景 / 安全扫描 / 更新日志 / 贡献与引用** → 全部在 CONTENT_ZH.md。
 - **顶部 banner / badges / 底部脚注** → 保留在本文件（GitHub 默认渲染）。
 - **入口分流**：
   - 中文读者 → [`docs/CONTENT_ZH.md`](docs/CONTENT_ZH.md)（新唯一权威中文版）
@@ -80,7 +80,7 @@
   - 韩文 → [`README-ko.md`](README-ko.md)
 
 > [!NOTE]
-> **维护规则：** 任何对正文（先看这里 / 69 合集 / 旗舰流水线 / 信任说明等）的改动，请改 [`docs/CONTENT_ZH.md`](docs/CONTENT_ZH.md)；本 README 仅维护顶部 banner、badges、底部脚注与本节简短入口。
+> **维护规则：** 任何对正文（先看这里 / 70 合集 / 旗舰流水线 / 信任说明等）的改动，请改 [`docs/CONTENT_ZH.md`](docs/CONTENT_ZH.md)；本 README 仅维护顶部 banner、badges、底部脚注与本节简短入口。
 >
 > **贡献者（Contributors）：** 提交前请在本地跑通完整门禁 `make check`（catalog 校验 + 链接 + 单元测试 + eval-harness + benchmark）。详见 [`CONTRIBUTING.md`](CONTRIBUTING.md)。
 >

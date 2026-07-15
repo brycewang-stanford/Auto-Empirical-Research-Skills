@@ -1,3 +1,10 @@
+---
+name: Traversing Citation Networks
+description: Smart backward and forward citation following via Semantic Scholar, with relevance filtering and deduplication
+when_to_use: After finding relevant paper. When need to find related work. When following references or citations. When building citation graph. When exploring paper connections.
+version: 1.0.0
+---
+
 <!--
   ╔══════════════════════════════════════════════════════════════╗
   ║  本文件为开源 Skill 原始文档，收录仅供学习与研究参考        ║
@@ -12,13 +19,6 @@
   声明: 本文件版权归原作者所有。此处收录旨在为社会科学实证研究者
   提供 AI Agent Skills 的集中参考。如有侵权，请联系删除。
 -->
-
----
-name: Traversing Citation Networks
-description: Smart backward and forward citation following via Semantic Scholar, with relevance filtering and deduplication
-when_to_use: After finding relevant paper. When need to find related work. When following references or citations. When building citation graph. When exploring paper connections.
-version: 1.0.0
----
 
 # Traversing Citation Networks
 

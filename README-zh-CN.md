@@ -2,7 +2,7 @@
 
 > **📣 本 README 已合并到 [`docs/CONTENT_ZH.md`](docs/CONTENT_ZH.md)。** GitHub 默认 README 见 [`README.md`](README.md)。
 >
-> 中文读者请直接阅读 [`docs/CONTENT_ZH.md`](docs/CONTENT_ZH.md)，那里包含完整的"先看这里"段、69 合集一览、目录、按用途分组、精确数字、2 分钟验证、三层信用锚点、旗舰流水线、30 秒入口、信任面表、浏览全景、安全扫描、更新日志与贡献引用。
+> 中文读者请直接阅读 [`docs/CONTENT_ZH.md`](docs/CONTENT_ZH.md)，那里包含完整的"先看这里"段、70 合集一览、目录、按用途分组、精确数字、2 分钟验证、三层信用锚点、旗舰流水线、30 秒入口、信任面表、浏览全景、安全扫描、更新日志与贡献引用。
 
 ---
 
@@ -12,7 +12,7 @@
 
 | 你想看 | 跳到这里 |
 |---|---|
-| 完整中文内容（先看这里 / 69 合集 / 目录 / 信任 / 旗舰流水线 / 浏览全景 / 安全扫描 / 引用） | **[`docs/CONTENT_ZH.md`](docs/CONTENT_ZH.md)** |
+| 完整中文内容（先看这里 / 70 合集 / 目录 / 信任 / 旗舰流水线 / 浏览全景 / 安全扫描 / 引用） | **[`docs/CONTENT_ZH.md`](docs/CONTENT_ZH.md)** |
 | GitHub 默认 README（banner + badges + 简短入口） | [`README.md`](README.md) |
 | 英文版 | [`README-en.md`](README-en.md) |
 | 繁體中文 | [`README-zh-TW.md`](README-zh-TW.md) |
@@ -61,7 +61,7 @@
 </div>
 
 > ### 🇨🇳 **请阅读 [`docs/CONTENT_ZH.md`](docs/CONTENT_ZH.md) 获取完整中文 README。**
-> ### 🚀 Open the **[Skill Search →](docs/search.html)** to filter all 1,150 skills. The 5-minute tour (`make quickstart`) prints the same picture in your terminal.
+> ### 🚀 Open the **[Skill Search →](docs/search.html)** to filter all 1,151 skills. The 5-minute tour (`make quickstart`) prints the same picture in your terminal.
 
 ---
 

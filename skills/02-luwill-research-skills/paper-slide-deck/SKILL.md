@@ -1,3 +1,8 @@
+---
+name: paper-slide-deck
+description: Generate professional slide deck images from academic papers and content. Creates comprehensive outlines with style instructions, auto-detects figures from PDFs, then generates individual slide images. Use when user asks to "create slides", "make a presentation", "generate deck", or "slide deck" for papers.
+---
+
 <!--
   ╔══════════════════════════════════════════════════════════════╗
   ║  本文件为开源 Skill 原始文档，收录仅供学习与研究参考        ║
@@ -12,11 +17,6 @@
   声明: 本文件版权归原作者所有。此处收录旨在为社会科学实证研究者
   提供 AI Agent Skills 的集中参考。如有侵权，请联系删除。
 -->
-
----
-name: paper-slide-deck
-description: Generate professional slide deck images from academic papers and content. Creates comprehensive outlines with style instructions, auto-detects figures from PDFs, then generates individual slide images. Use when user asks to "create slides", "make a presentation", "generate deck", or "slide deck" for papers.
----
 
 # Paper Slide Deck Generator
 

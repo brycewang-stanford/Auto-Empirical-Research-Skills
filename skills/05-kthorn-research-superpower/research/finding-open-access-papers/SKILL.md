@@ -1,3 +1,10 @@
+---
+name: Finding Open Access Papers
+description: Use Unpaywall API to find free full-text versions of paywalled papers
+when_to_use: When paper behind paywall. When PMC full text not available. When DOI resolution hits paywall. When need free access to paper. Before giving up on full text access.
+version: 1.0.0
+---
+
 <!--
   ╔══════════════════════════════════════════════════════════════╗
   ║  本文件为开源 Skill 原始文档，收录仅供学习与研究参考        ║
@@ -12,13 +19,6 @@
   声明: 本文件版权归原作者所有。此处收录旨在为社会科学实证研究者
   提供 AI Agent Skills 的集中参考。如有侵权，请联系删除。
 -->
-
----
-name: Finding Open Access Papers
-description: Use Unpaywall API to find free full-text versions of paywalled papers
-when_to_use: When paper behind paywall. When PMC full text not available. When DOI resolution hits paywall. When need free access to paper. Before giving up on full text access.
-version: 1.0.0
----
 
 # Finding Open Access Papers
 

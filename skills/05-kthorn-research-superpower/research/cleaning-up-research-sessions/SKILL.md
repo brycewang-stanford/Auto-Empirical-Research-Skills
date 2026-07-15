@@ -1,3 +1,10 @@
+---
+name: Cleaning Up Research Sessions
+description: Safely remove intermediate files from completed research sessions while preserving important data
+when_to_use: After research session is complete and consolidated. When research folder has accumulated temporary files. Before archiving or sharing research session.
+version: 1.0.0
+---
+
 <!--
   ╔══════════════════════════════════════════════════════════════╗
   ║  本文件为开源 Skill 原始文档，收录仅供学习与研究参考        ║
@@ -12,13 +19,6 @@
   声明: 本文件版权归原作者所有。此处收录旨在为社会科学实证研究者
   提供 AI Agent Skills 的集中参考。如有侵权，请联系删除。
 -->
-
----
-name: Cleaning Up Research Sessions
-description: Safely remove intermediate files from completed research sessions while preserving important data
-when_to_use: After research session is complete and consolidated. When research folder has accumulated temporary files. Before archiving or sharing research session.
-version: 1.0.0
----
 
 # Cleaning Up Research Sessions
 

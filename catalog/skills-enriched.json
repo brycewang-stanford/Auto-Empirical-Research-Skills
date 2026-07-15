@@ -2,12 +2,12 @@
   "generated_by": "scripts/build-catalog-enrich.py",
   "schema_version": 1,
   "summary": {
-    "skills": 1150,
+    "skills": 1151,
     "mean_quality_score": 99.4,
-    "with_frontmatter_description": 1150,
+    "with_frontmatter_description": 1151,
     "body_derived_description": 0,
     "no_description": 0,
-    "tagged": 566,
+    "tagged": 567,
     "with_eval_coverage": 18,
     "with_eval_coverage_pct": 1.6,
     "total_eval_scenarios": 19
@@ -38,8 +38,8 @@
     },
     "stage": {
       "analysis": 140,
-      "writing": 87,
-      "submission": 79,
+      "writing": 88,
+      "submission": 80,
       "literature": 63,
       "reproduction": 58,
       "citation": 48,
@@ -53,9 +53,9 @@
     },
     "topic": {
       "econometrics": 79,
-      "scientific-writing": 71,
+      "scientific-writing": 72,
       "reproducibility": 58,
-      "proofreading": 35,
+      "proofreading": 36,
       "causal-inference": 30
     }
   },
@@ -256,7 +256,7 @@
       "path": "skills/01-lishix520-academic-paper-skills/composer/SKILL.md",
       "collection": "01-lishix520-academic-paper-skills",
       "line_count": 855,
-      "description_effective": "Systematic writing framework for philosophy and interdisciplinary academic papers from optimized outline to submission-ready manuscript. Use when users want to: (1) write a paper from a detailed outline, (2) ensure quality control during writing, (3) maintain consistency across chapters, (4) prepare a submission-ready manuscript, or (5) systematically execute a planned paper. Triggered by phrases like 'write the paper from this outline,' 'compose the full manuscript,' 'execute the outline,' or when users have completed strategic planning (academic-paper-strategist skill) and are ready to write. Takes optimized outline as input; outputs complete manuscript with iterative quality checks.",
+      "description_effective": "Systematic writing framework for philosophy and interdisciplinary academic papers from optimized outline to submission-ready manuscript. Use when users want to: (1) write a paper from a detailed outline, (2) ensure quality control during writing, (3) maintain consistency across chapters, (4) prepare a submission-ready manuscript, or (5) systematically execute a planned paper. Triggered by phrases like ''write the paper from this outline,'' ''compose the full manuscript,'' ''execute the outline,'' or when users have completed strategic planning (academic-paper-strategist skill) and are ready to write. Takes optimized outline as input; outputs complete manuscript with iterative quality checks.",
       "description_source": "frontmatter",
       "has_references": true,
       "tags": {
@@ -281,7 +281,7 @@
       "path": "skills/01-lishix520-academic-paper-skills/strategist/SKILL.md",
       "collection": "01-lishix520-academic-paper-skills",
       "line_count": 685,
-      "description_effective": "Systematic strategic planning framework for philosophy and interdisciplinary academic papers targeting preprint platforms (PhilArchive, arXiv, PhilSci-Archive). Use when users want to: (1) plan a paper on a specific topic, (2) identify research gaps and assess originality, (3) develop optimized paper outlines, (4) prepare for preprint submission, or (5) understand platform requirements and writing standards. Triggered by phrases like 'plan a paper on,' 'help me design a paper about,' 'identify research gaps in,' 'is this idea original,' or when users need structured research planning. The skill guides through three phases: Platform Analysis (identifying target venue and studying sample papers), Theoretical Framework (AI-driven literature search and gap identification), and Outline Optimization (structured design with reviewer-perspective self-assessment). Each phase includes quality evaluation standards and validation checkpoints. Output: optimized detailed outline ready for systematic writing (use with academic-paper-composer skill).",
+      "description_effective": "Systematic strategic planning framework for philosophy and interdisciplinary academic papers targeting preprint platforms (PhilArchive, arXiv, PhilSci-Archive). Use when users want to: (1) plan a paper on a specific topic, (2) identify research gaps and assess originality, (3) develop optimized paper outlines, (4) prepare for preprint submission, or (5) understand platform requirements and writing standards. Triggered by phrases like ''plan a paper on,'' ''help me design a paper about,'' ''identify research gaps in,'' ''is this idea original,'' or when users need structured research planning. The skill guides through three phases: Platform Analysis (identifying target venue and studying sample papers), Theoretical Framework (AI-driven literature search and gap identification), and Outline Optimization (structured design with reviewer-perspective self-assessment). Each phase includes quality evaluation standards and validation checkpoints. Output: optimized detailed outline ready for systematic writing (use with academic-paper-composer skill).",
       "description_source": "frontmatter",
       "has_references": true,
       "tags": {
@@ -23609,6 +23609,32 @@
       "license": "MIT",
       "commercial_use": "allowed",
       "source_url": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills",
+      "sync": "manual vendor snapshot",
+      "eval_coverage": []
+    },
+    {
+      "name": "ssci-polish",
+      "path": "skills/70-ssci-polish/SKILL.md",
+      "collection": "70-ssci-polish",
+      "line_count": 247,
+      "description_effective": "Polish English academic papers for SSCI journal submission. This skill checks grammar, improves readability, and enhances academic tone. Use when the user asks to polish, proofread, edit, or improve their English academic paper, manuscript, or article — especially when targeting SSCI, SCI, or other international journals. Also use when the user asks to \"润色\", \"修改语法\", \"提升学术性\", \"polish my paper\", or mentions their paper needs language improvement for journal submission. Always trigger on any request involving academic English polishing, even if the user doesn't explicitly say \"SSCI.\"",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {
+        "stage": [
+          "submission",
+          "writing"
+        ],
+        "topic": [
+          "proofreading",
+          "scientific-writing"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "UNKNOWN - check upstream",
+      "commercial_use": "unknown",
+      "source_url": null,
       "sync": "manual vendor snapshot",
       "eval_coverage": []
     }

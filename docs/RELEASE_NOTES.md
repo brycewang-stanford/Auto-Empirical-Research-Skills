@@ -8,8 +8,8 @@ Paste this snapshot into the GitHub release body and add a hand-written
 
 ## Catalog
 
-- Top-level collections: **69**
-- `SKILL.md` files: **1150**
+- Top-level collections: **70**
+- `SKILL.md` files: **1151**
 - Cataloged agent tools: **334** ([`tools/CATALOG.md`](../tools/CATALOG.md))
 
 ## Methodological rigor
@@ -58,7 +58,7 @@ Paste this snapshot into the GitHub release body and add a hand-written
 - MIT: 35
 - MIT Non-Commercial: 1
 - Mixed (per-skill; see folder): 2
-- UNKNOWN - check upstream: 22
+- UNKNOWN - check upstream: 23
 
 ## Quality gates
 

@@ -1,3 +1,10 @@
+---
+name: Getting Started with Research Superpowers
+description: Introduction to literature search & review skills - systematic paper finding, screening, extraction, and citation traversal
+when_to_use: At start of each Claude Code session. When user asks literature search questions. When searching scientific literature. When reviewing papers or citations.
+version: 1.1.0
+---
+
 <!--
   ╔══════════════════════════════════════════════════════════════╗
   ║  本文件为开源 Skill 原始文档，收录仅供学习与研究参考        ║
@@ -12,13 +19,6 @@
   声明: 本文件版权归原作者所有。此处收录旨在为社会科学实证研究者
   提供 AI Agent Skills 的集中参考。如有侵权，请联系删除。
 -->
-
----
-name: Getting Started with Research Superpowers
-description: Introduction to literature search & review skills - systematic paper finding, screening, extraction, and citation traversal
-when_to_use: At start of each Claude Code session. When user asks literature search questions. When searching scientific literature. When reviewing papers or citations.
-version: 1.1.0
----
 
 # Getting Started with Research Superpowers
 

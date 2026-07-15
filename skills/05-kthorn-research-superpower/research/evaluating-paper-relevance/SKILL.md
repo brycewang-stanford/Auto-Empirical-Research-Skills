@@ -1,3 +1,10 @@
+---
+name: Evaluating Paper Relevance
+description: Two-stage paper screening - abstract scoring then deep dive for specific data extraction
+when_to_use: After literature search returns results. When need to determine if paper contains specific data. When screening papers for relevance. When extracting methods, results, data from papers.
+version: 1.0.0
+---
+
 <!--
   ╔══════════════════════════════════════════════════════════════╗
   ║  本文件为开源 Skill 原始文档，收录仅供学习与研究参考        ║
@@ -12,13 +19,6 @@
   声明: 本文件版权归原作者所有。此处收录旨在为社会科学实证研究者
   提供 AI Agent Skills 的集中参考。如有侵权，请联系删除。
 -->
-
----
-name: Evaluating Paper Relevance
-description: Two-stage paper screening - abstract scoring then deep dive for specific data extraction
-when_to_use: After literature search returns results. When need to determine if paper contains specific data. When screening papers for relevance. When extracting methods, results, data from papers.
-version: 1.0.0
----
 
 # Evaluating Paper Relevance
 
