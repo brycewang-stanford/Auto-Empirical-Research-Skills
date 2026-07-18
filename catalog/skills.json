@@ -1189,6 +1189,23 @@
       "source_confidence": "high",
       "source_url": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills",
       "sync": "manual"
+    },
+    {
+      "commercial_use": "allowed",
+      "has_license": false,
+      "has_readme": false,
+      "id": "71-Rimagination-scansci-pdf",
+      "license": "Apache-2.0",
+      "path": "skills/71-Rimagination-scansci-pdf",
+      "primary_skill": {
+        "description": "Use this skill whenever the user wants to download academic papers, search for research literature, get citations (BibTeX/RIS/EndNote), manage WebVPN institutional proxy for paper access, import .bib files, or batch-download papers. This skill orchestrates the scansci-pdf MCP server which has 13+ download sources, 100+ university WebVPNs, and parallel download. TRIGGER when: user mentions downloading papers, DOI, arXiv ID, Sci-Hub, paper search, literature review, citation export, WebVPN, institutional access, \"帮我下载论文\", \"搜索文献\", \"批量下载\", \"论文下载\", \"文献检索\", or provides a list of DOIs/arXiv IDs. SKIP: user is only discussing papers conceptually without intent to download/search/cite, or user asks about non-academic PDFs (invoices, reports, etc.).",
+        "name": "scansci-pdf",
+        "path": "skills/71-Rimagination-scansci-pdf/SKILL.md"
+      },
+      "skill_count": 1,
+      "source_confidence": "high",
+      "source_url": "https://github.com/Rimagination/scansci-pdf",
+      "sync": "manual vendor snapshot"
     }
   ],
   "generated_by": "scripts/build-catalog.py",
@@ -19831,6 +19848,21 @@
       "name": "ssci-polish",
       "path": "skills/70-ssci-polish/SKILL.md",
       "qualified_name": "70-ssci-polish::ssci-polish"
+    },
+    {
+      "collection": "71-Rimagination-scansci-pdf",
+      "description": "Use this skill whenever the user wants to download academic papers, search for research literature, get citations (BibTeX/RIS/EndNote), manage WebVPN institutional proxy for paper access, import .bib files, or batch-download papers. This skill orchestrates the scansci-pdf MCP server which has 13+ download sources, 100+ university WebVPNs, and parallel download. TRIGGER when: user mentions downloading papers, DOI, arXiv ID, Sci-Hub, paper search, literature review, citation export, WebVPN, institutional access, \"帮我下载论文\", \"搜索文献\", \"批量下载\", \"论文下载\", \"文献检索\", or provides a list of DOIs/arXiv IDs. SKIP: user is only discussing papers conceptually without intent to download/search/cite, or user asks about non-academic PDFs (invoices, reports, etc.).",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 405,
+      "name": "scansci-pdf",
+      "path": "skills/71-Rimagination-scansci-pdf/SKILL.md",
+      "qualified_name": "71-Rimagination-scansci-pdf::scansci-pdf"
     }
   ],
   "summary": {
@@ -19839,7 +19871,7 @@
     "missing_frontmatter": 0,
     "missing_name": 0,
     "oversized_skill_files_over_500_lines": 91,
-    "skill_files": 1151,
-    "top_level_collections": 70
+    "skill_files": 1152,
+    "top_level_collections": 71
   }
 }
