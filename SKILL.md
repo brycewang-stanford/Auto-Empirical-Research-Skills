@@ -1,6 +1,6 @@
 ---
 name: auto-empirical-research-skills
-description: Route empirical-research requests through the Auto-Empirical Research Skills catalog when this whole repository is installed as one skill in Codex, CodeBuddy, Claude Code, or another IDE. Use to choose and load the right vendored AERS skill for causal inference, econometrics, replication, manuscript writing, citation checking, de-AIGC editing, or full empirical-paper workflows without reading the entire repository at once.
+description: Route empirical-research requests through the Auto-Empirical Research Skills catalog when this whole repository is installed as one skill in Codex, CodeBuddy, Claude Code, or another IDE. Use to choose and load the right vendored AERS skill for causal inference, econometrics, replication, data acquisition, manuscript writing, peer review and referee responses, citation checking, de-AIGC editing, or full empirical-paper workflows without reading the entire repository at once.
 ---
 
 # Auto-Empirical Research Skills Router
@@ -18,7 +18,7 @@ The catalog holds **1,151 skills across 70 vendored collections**. Never read th
    - Replication, citation, or peer review: use `docs/SKILL_CATALOG.md` and `docs/GOLDEN_WORKFLOWS.md` to choose a focused skill.
    - Chinese academic de-AIGC or academic rewriting: start with `skills/48-copaper-ai-chinese-de-aigc/` or nearby writing skills in the catalog.
 2. Read only the selected child skill's `SKILL.md`, then follow its progressive-disclosure instructions for `references/`, `scripts/`, `assets/`, or templates.
-3. If no child skill clearly matches, inspect `catalog/skills.json` first (has `path`, `name`, `description`, `line_count`), then `docs/SKILL_CATALOG.md`. Avoid broad recursive reads of `skills/`.
+3. If no child skill clearly matches, inspect `catalog/skills.json` first (has `path`, `name`, `description`, `line_count`, and a globally-unique `qualified_name`), then `docs/SKILL_CATALOG.md`. For richer filtering (topic `tags`, `quality_score`, `license`, `commercial_use`), use `catalog/skills-enriched.json`. Avoid broad recursive reads of `skills/`.
 4. For installation help, use `docs/INSTALL.md` for Codex-style copy installs and `INSTALL.md` for Claude Code marketplace/plugin installs.
 5. If editing this repository, keep parent and nested repos separate. In particular, inspect `git status` inside `skills/69-Paper-WorkFlow/` (a git submodule) before touching it.
 
@@ -37,11 +37,22 @@ Match the user's identification strategy or task to a starting collection, then 
 | Bayesian modeling | `skills/23-Learning-Bayesian-Statistics-baygent-skills/`, `skills/51-pymc-labs-CausalPy/` |
 | Stata analysis | `skills/00.2-Full-empirical-analysis-skill_Stata/`, `skills/32-dylantmoore-stata-skill/`, `skills/64-tmonk-mcp-stata/` |
 | R analysis | `skills/00.3-Full-empirical-analysis-skill_R/`, `skills/55-ab604-claude-code-r-skills/` |
+| Game theory / theory papers | `skills/65-game-theory-paper-writer/` |
+| Qualitative / thematic analysis | `skills/53-keemanxp-thematic-analysis-skill/` |
+| Data acquisition (SEC filings, open data) | `skills/57-dgunning-edgartools/`, `skills/59-shiquda-openalex-skill/` |
 | Literature review | `skills/36-taoyunudt-literature-review-skill/`, `skills/52-keemanxp-slr-prisma/`, `skills/59-shiquda-openalex-skill/` |
 | Citation checking | `skills/62-PHY041-claude-skill-citation-checker/` |
 | Manuscript writing / proofreading | `skills/04-K-Dense-AI-claude-scientific-writer/`, `skills/38-peternka-academic-proofreader/` |
+| Peer review / referee reports / referee responses | `skills/21-claesbackman-AI-research-feedback/`, `skills/12-pedrohcgs-claude-code-my-workflow/`, `skills/67-econfin-workflow-toolkit/` |
+| LaTeX / Quarto compilation, slides | `skills/08-ndpvt-web-latex-document-skill/`, `skills/60-regisely-superpapers/`, `skills/12-pedrohcgs-claude-code-my-workflow/` |
 | De-AIGC / humanize | `skills/48-copaper-ai-chinese-de-aigc/`, `skills/45-stephenturner-skill-deslop/`, `skills/47-conorbronsdon-avoid-ai-writing/` |
+| Chinese SSCI/CSSCI journal polishing | `skills/70-ssci-polish/`, `skills/49-voidborne-d-humanize-chinese/` |
 | Replication | `skills/28-maxwell2732-paper-replicate-agent-demo/`, `skills/29-quarcs-lab-project20XXy/` |
+
+## Coverage Notes
+
+- `skills/69-Paper-WorkFlow/` is a **git submodule**. If its folder is empty, the copy or clone skipped submodules (`git submodule update --init` fixes a clone); fall back to the `skills/00.*` flagship pipeline skills, which are vendored directly.
+- Four legacy collections store skills as plain `.md` files instead of standard `SKILL.md` files, so they do **not** appear in `catalog/skills.json`. Browse them directly when relevant: `skills/19-CuellarC05-vera-economic-intelligence/` (policy briefs, research direction), `skills/21-claesbackman-AI-research-feedback/` (paper, code, and grant review), `skills/30-zirui-song-claude-skills/` (referee responses, robustness, data docs), `skills/37-IlanStrauss-ai-skills/` (economist data workflows).
 
 ## Install Notes
 
@@ -53,6 +64,7 @@ Match the user's identification strategy or task to a starting collection, then 
 ## Key Files
 
 - `catalog/skills.json`: machine-readable list of vendored skills.
+- `catalog/skills-enriched.json`: same list plus `tags`, `quality_score`, `license`, and `commercial_use` for filtering.
 - `docs/SKILL_CATALOG.md`: human-readable skill index.
 - `docs/TAXONOMY.md`: task and method taxonomy.
 - `docs/GOLDEN_WORKFLOWS.md`: ready-to-use empirical-research prompts.
