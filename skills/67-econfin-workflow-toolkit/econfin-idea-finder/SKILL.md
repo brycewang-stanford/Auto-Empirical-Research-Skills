@@ -11,7 +11,7 @@ description: >
   从用户输入的研究方向派生）；< 9 分的选题在 subagent 内部直接丢弃，绝不写盘、绝不输出**。当用户说"找选题"、"帮我找选题"、"想做 X 方向"、
   "empirical CF idea search"、"批量生成研究计划书"、"100 ideas"、"econfin-idea-finder"
   时触发。
-argument-hint: [research-direction or "" for interactive]
+argument-hint: '[research-direction or "" for interactive]'
 allowed-tools: Bash(*), Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, Agent, Skill, mcp__codex__codex, mcp__codex__codex-reply
 ---
 
