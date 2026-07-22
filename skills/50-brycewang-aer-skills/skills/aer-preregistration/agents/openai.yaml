@@ -1,0 +1,4 @@
+interface:
+  display_name: "AER Pre-Registration"
+  short_description: "Pre-analysis plan, power, RCT registry"
+  default_prompt: "Use $aer-preregistration to write the pre-analysis plan, size the sample from a power calculation, and register this experiment before data collection."

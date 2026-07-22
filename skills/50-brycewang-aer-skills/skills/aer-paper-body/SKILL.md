@@ -218,6 +218,11 @@ No new results, no new citations, no new caveats that belong in Results.
 
 ## Repository Resources
 
+Bundled with the installed skill, no repository checkout needed --- read it
+before the repo resources below:
+
+- `references/section-skeletons.md` --- per-section skeletons and conclusion-first results narration rules
+
 Load only the relevant resource:
 
 - Worked results-section narration (same fictional paper as the intro example):

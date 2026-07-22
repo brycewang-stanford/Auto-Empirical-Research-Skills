@@ -47,7 +47,6 @@ replace it with project-specific cleaning code.
 - **pyfixest** -- the Python `fixest`. AER-style tables and event studies.
 - **differences** -- Bernardo-Mello implementation of Callaway-Sant'Anna ATT(g,t)
 - **linearmodels** -- IV with weak-IV F (Olea-Pflueger), GMM, panel
-- **econtools** -- regression helpers in the spirit of Stata `outreg2`
 - **statsmodels / scipy** -- general OLS/WLS, diagnostics, simulations
 - **rdrobust / rddensity** -- robust bias-corrected RDD and density tests
 

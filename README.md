@@ -46,7 +46,7 @@
   <br/>
 </div>
 
-> ### 🚀 New here? Open the **[Skill Search →](docs/search.html)** to filter all 1,093 skills by method, stage, language, and license. The 5-minute tour (`make quickstart`) prints the same picture in your terminal.
+> ### 🚀 New here? Open the **[Skill Search →](docs/search.html)** to filter all 1,094 skills by method, stage, language, and license. The 5-minute tour (`make quickstart`) prints the same picture in your terminal.
 >
 > ### 🇨🇳 **中文用户从本文件开始**（流水线速览 + 74 行总表），每个合集的完整描述见 [`docs/CONTENT_ZH.md`](docs/CONTENT_ZH.md)。📖 **English readers:** see [`README-en.md`](README-en.md).
 
@@ -139,7 +139,7 @@
 
 ## 🧰 74 个核心 Skills 合集一览（`00 → 70`，编号连续无空缺）
 
-> **打开仓库 → 看见整座库。** 全部 **74 个合集 · 1,093 个 skill**，每一个都已 vendor 进本仓库，由 [`catalog/skills.json`](catalog/skills.json) 跟踪。**⭐ = Stanford REAP × CoPaper.AI 团队自研的 skill**；其余为精选、经安全审计的社区作品。
+> **打开仓库 → 看见整座库。** 全部 **74 个合集 · 1,094 个 skill**，每一个都已 vendor 进本仓库，由 [`catalog/skills.json`](catalog/skills.json) 跟踪。**⭐ = Stanford REAP × CoPaper.AI 团队自研的 skill**；其余为精选、经安全审计的社区作品。
 >
 > **主题图例 —** 🚀 全流程与编排器 · 🎯 因果推断与计量经济学 · 📚 文献与研究设计 · ✍️ 写作 / 编辑 / 去 AIGC · 📑 引用 / 复现 / 同行评审 · 🛠️ 数据 / 工具 / 基础设施
 >

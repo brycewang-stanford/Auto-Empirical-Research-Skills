@@ -10,9 +10,11 @@ python3 scripts/install_skills.py codex
 
 Restart Codex so new skills are picked up.
 
-The installer copies the full skill directories. Keep the cloned repository
-available if you want the `templates/` and `examples/` resources referenced by
-the skills.
+The installer copies the full skill directories, including each skill's
+bundled `references/` depth files, so the core guidance is self-contained
+after installation. Keep the cloned repository available if you also want the
+`templates/`, `examples/`, and repo-level `docs/` resources referenced by the
+skills.
 
 To preview the copy without writing files:
 
@@ -45,7 +47,7 @@ Ask Codex:
 List all skills starting with aer-.
 ```
 
-You should see all nine.
+You should see all fifteen `aer-*` skills.
 
 ## First Prompt
 

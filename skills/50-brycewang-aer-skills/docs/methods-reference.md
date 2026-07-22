@@ -64,6 +64,12 @@ implement in all three languages.
 | Imputation (efficient under homoskedasticity) | `did_imputation` | `didimputation::did_imputation` / `did2s::did2s` | `pyfixest` `did2s` | `borusyak_jaravel_spiess_2024` |
 | Interaction-weighted event study | `eventstudyinteract` | `fixest::sunab` | `pyfixest` `i(t, treat, ref)` | `sun_abraham_2021` |
 | Multiple groups & periods | `did_multiplegt` / `did_multiplegt_dyn` | `DIDmultiplegtDYN` | — | `dechaisemartin_dhaultfoeuille_2020` |
+| LP-DiD (local projections, clean controls) | `lpdid` | `lpdid` | StatsPAI `lp_did` | `dube_girardi_jorda_taylor_2023`, `jorda_2005` |
+
+Why the naive dynamic TWFE event study is a contaminated cross-cohort mixture,
+and how the Sun-Abraham interaction weights repair it inside one saturated
+regression, is worked out in
+[`examples/sun-abraham-demo/`](../examples/sun-abraham-demo/).
 
 **Required diagnostics** (see [`03_main_did`](../templates/stata/03_main_did.do)):
 
@@ -163,6 +169,7 @@ For one or a few treated units with a long pre-period and a clean donor pool.
 | Generalized SCM | several treated units, IFE | — | `gsynth::gsynth` | `xu_2017` |
 | Augmented SCM | poor pre-fit / bias correction | — | `augsynth::augsynth` | `benmichael_feller_rothstein_2021` |
 | Synthetic DiD | SCM × DiD weighting | — | `synthdid::synthdid_estimate` | `arkhangelsky_etal_2021` |
+| Matrix completion (MC-NNM) | larger treated blocks, factor confounding | — | `fect::fect(..., method = "mc")` | `athey_etal_2021` |
 
 **Required diagnostics** (`abadie_2021` is the practitioner's checklist):
 
@@ -180,13 +187,82 @@ For one or a few treated units with a long pre-period and a clean donor pool.
 |---|---|---|---|---|---|
 | Few clusters (< ~50) | wild cluster bootstrap | `boottest` | `fwildclusterboot` | `wildboottest` | `cameron_gelbach_miller_2008`, `mackinnon_webb_2017` |
 | Unequal cluster sizes | wild bootstrap (not CRVE) | `boottest` | `fwildclusterboot` | `wildboottest` | `mackinnon_webb_2017` |
-| Many hypotheses | FWER / FDR control | `wyoung` | `multcomp`, `fixest` | `statsmodels` `multipletests` | `roth_santanna_bilinski_poe_2023` |
+| Many hypotheses | FWER / FDR control | `wyoung` | `multcomp`, `fixest` | `statsmodels` `multipletests` | `list_shaikh_xu_2019`, `romano_wolf_2005` |
 | Omitted-variable bias | Oster δ bounding | `psacalc` | `robomit` | — | `oster_2019` |
+| Omitted-variable bias (partial R²) | robustness value / bias factor | `sensemakr` | `sensemakr` | `sensemakr`; StatsPAI `robustness_value` | `cinelli_hazlett_2020` |
+| Differential attrition / sample selection | Lee trimming bounds | `leebounds` | `leebounds` | StatsPAI `lee_bounds` | `lee_2009` |
 | "Researcher-chose-the-spec" | specification curve | `speccurve` | `specr` | — | `simonsohn_simmons_nelson_2020` |
+| Small N / concentrated leverage | randomization (Fisher) test | `ritest` | `ri2` | StatsPAI `ri_test` | `young_2019` |
+| Mean effect hides distributional action | quantile treatment effects | `qreg` / `ivqreg2` | `quantreg` | `statsmodels` `QuantReg`; StatsPAI `qte` | `koenker_bassett_1978` |
+
+The runnable anatomy of the partial-R² robustness value (with the bias-factor
+identity and a robust-vs-fragile contrast) is
+[`examples/sensitivity-rv-demo/`](../examples/sensitivity-rv-demo/); the Lee-bounds
+interval under differential attrition is
+[`examples/lee-bounds-demo/`](../examples/lee-bounds-demo/).
 
 See [`aer-robustness`](../skills/aer-robustness/SKILL.md) for *which* of these a
 referee will demand, and [`04_robustness`](../templates/stata/04_robustness.do)
 for a worked battery.
+
+---
+
+## 7. Machine-learning-based causal inference
+
+For high-dimensional or flexibly nonlinear nuisance functions around a
+low-dimensional causal parameter. The one-line rule here: **a flexible learner
+may estimate the nuisances, never the moment condition** — plug-in predictions
+in a non-orthogonal moment carry first-order regularization bias no sample
+size fixes.
+
+| Estimator | When | R | Python | Cite |
+|---|---|---|---|---|
+| DML partially linear (partialling-out) | many/nonlinear controls, scalar treatment effect | `DoubleML` | `doubleml`; StatsPAI `dml` | `chernozhukov_etal_2018`, `robinson_1988` |
+| DML AIPW / interactive | fully heterogeneous effects, ATE/ATTE | `DoubleML` | `doubleml`; StatsPAI `aipw` | `chernozhukov_etal_2018` |
+
+**Required diagnostics:**
+
+1. **Cross-fitting** — nuisances predicted out-of-fold (K ≥ 5); no in-sample
+   plug-ins.
+2. **Neyman orthogonality** — residualize *both* the outcome and the treatment
+   (Robinson (1988) partialling-out), never regress an outcome residual on the
+   raw treatment.
+3. **Learner sensitivity** — report the estimate across at least two nuisance
+   learners.
+
+The runnable anatomy of the plug-in bias — pinned to its *known* attenuation
+factor — is [`examples/dml-plr-demo/`](../examples/dml-plr-demo/).
+
+---
+
+## 8. Experimental design and power (ex-ante)
+
+For randomized and primary-data studies, the design work happens *before* the
+data exist. See [`aer-preregistration`](../skills/aer-preregistration/SKILL.md)
+for the pre-analysis plan; this section fixes the power arithmetic.
+
+Minimum detectable effect for a two-arm trial (equal-variance normal outcomes),
+size `sigma`, treatment share `p`, total `N`:
+
+```
+MDE = (z_power + z_{1-alpha/2}) * sigma * sqrt(1 / (p (1 - p) N))
+```
+
+| Concern | Fix | Tooling | Cite |
+|---|---|---|---|
+| Sample size | size from the MDE, not vice versa | `power` (Stata), `pwr` (R), `statsmodels.stats.power` | `duflo_glennerster_kremer_2007` |
+| Clustered assignment | inflate by the design effect `1 + (m-1)ρ` | `clustersampsi` (Stata), `pwr` + ICC | `duflo_glennerster_kremer_2007` |
+| Noisy outcomes | more time periods beat a bigger cross-section | ANCOVA / more rounds | `mckenzie_2012` |
+| Many outcomes | pre-specify the family + correction | `wyoung` / `romano_wolf` | `list_shaikh_xu_2019`, `romano_wolf_2005` |
+
+- Target **80% power** at a **5%** two-sided level: `z_power + z_alpha ≈ 2.80`.
+- An underpowered design does not merely miss; conditional on significance it
+  **exaggerates** the effect (Type-M / winner's curse). Never report "not
+  significant" as "no effect" without stating the MDE.
+
+The runnable check that the analytic MDE attains target power, plus the
+Type-M exaggeration of an underpowered design, is
+[`examples/power-mde-demo/`](../examples/power-mde-demo/).
 
 ---
 

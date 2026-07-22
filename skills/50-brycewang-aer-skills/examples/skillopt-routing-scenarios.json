@@ -159,6 +159,19 @@
       ]
     },
     {
+      "id": "selection-preregistration-power",
+      "split": "selection",
+      "prompt": "We are about to launch a village-level cash-transfer field experiment and need to justify the sample size and lock down the primary outcomes before any data collection begins.",
+      "expected_skill": "aer-preregistration",
+      "gate_status": "Gate A open",
+      "success_criteria": [
+        "NEXT SKILL: aer-preregistration",
+        "REASON:",
+        "INPUTS NEEDED:",
+        "GATE STATUS:"
+      ]
+    },
+    {
       "id": "test-run-fixed-design",
       "split": "test",
       "prompt": "The identification decision is fixed; now I want the agent to run the IV, robustness audit, and export the paper-ready tables.",

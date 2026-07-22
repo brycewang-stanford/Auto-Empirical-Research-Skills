@@ -45,6 +45,14 @@ The LaTeX table style (top/mid/bottom rules, **no vertical lines**) that is the
 AER house convention. Captions go *above* tables and *below* figures. See
 [`aer-tables-figures`](../skills/aer-tables-figures/SKILL.md).
 
+### Bunching
+Identification from excess mass at a kink or notch in a budget set: workers
+whose counterfactual choices would fall just above the threshold locate at it,
+and the excess mass over a counterfactual density — normalized and inverted
+through the iso-elastic identity — estimates the behavioral elasticity
+(`saez_2010`; survey and caveats in `kleven_2016`). Runnable anatomy:
+[`examples/bunching-demo/`](../examples/bunching-demo/).
+
 ### Citation integrity ledger
 The per-reference verification record (existence, field accuracy, claim
 accuracy, version, date checked) maintained alongside the bibliography. A
@@ -91,6 +99,14 @@ screen ends the run; referee reports are only simulated for drafts that pass.
 A regression discontinuity that drops observations in a small window *exactly* at
 the cutoff, to test whether the estimate is driven by bunching or manipulation
 right at the threshold.
+
+### Double machine learning (DML)
+Estimation of a low-dimensional causal parameter with flexible (machine-learned)
+nuisance functions, made valid by a *Neyman-orthogonal* moment condition plus
+*cross-fitting* — out-of-fold nuisance predictions. Plugging ML predictions into
+a non-orthogonal moment leaves first-order regularization bias that no sample
+size removes (`chernozhukov_etal_2018`, `robinson_1988`). Runnable anatomy:
+[`examples/dml-plr-demo/`](../examples/dml-plr-demo/).
 
 ### Doubly robust (DR)
 An estimator combining an outcome model and a propensity/weighting model that is
@@ -164,16 +180,51 @@ An event-study estimator that interacts relative-time dummies with cohort
 indicators and aggregates with proper weights, avoiding the contamination of
 TWFE event-study coefficients (`sun_abraham_2021`).
 
+### Lee bounds
+Sharp bounds on a treatment effect when the treatment changes who is *observed*
+(differential attrition, or selection into employment). Under a monotonicity
+assumption — treatment moves selection one way, leaving a well-defined
+always-observed subpopulation — the higher-selection arm is trimmed by its
+excess-selection fraction from one tail to bound the effect; the result is an
+identified *interval*, not a point (`lee_2009`). Runnable anatomy:
+[`examples/lee-bounds-demo/`](../examples/lee-bounds-demo/).
+
 ### Local-linear regression (RDD)
 The modern RDD workhorse: a first-order polynomial fit on each side of the cutoff
 within an MSE-optimal bandwidth, usually with a triangular kernel that puts most
 weight near the threshold (`calonico_cattaneo_titiunik_2014`).
+
+### LP-DiD (local-projections difference-in-differences)
+Estimation of dynamic treatment effects by regressing the long difference
+`y(t+h) - y(t-1)` on the treatment switch, horizon by horizon, using only
+CLEAN controls (never-treated and not-yet-treated units) — the local-projection
+idea of `jorda_2005` adapted to staggered adoption so the forbidden
+comparisons that contaminate pooled TWFE event studies never enter
+(`dube_girardi_jorda_taylor_2023`). Runnable anatomy:
+[`examples/lp-did-demo/`](../examples/lp-did-demo/).
 
 ### Manipulation / density test
 A test for sorting around the RDD cutoff: if the density of the running variable
 jumps at the threshold, units may be manipulating their assignment. Use the
 local-polynomial density test (`cattaneo_jansson_ma_2020`), which supersedes the
 original McCrary binned estimator (`mccrary_2008`).
+
+### Matrix completion (MC-NNM)
+A panel counterfactual method that treats the treated-by-post block of the
+outcome matrix as missing and imputes it from the low-rank (factor) structure
+of the observed entries, with nuclear-norm regularization in the estimable
+variant (`athey_etal_2021`; the interactive-fixed-effects sibling is
+`xu_2017`). The design of choice when treated units load differently on
+common factors, so parallel trends fails structurally. Runnable anatomy:
+[`examples/matrix-completion-demo/`](../examples/matrix-completion-demo/).
+
+### Minimum detectable effect (MDE)
+The smallest true effect a design can detect at a stated power and size:
+`MDE = (z_power + z_{1-alpha/2}) * sigma * sqrt(1 / (p (1-p) N))` for a two-arm
+trial. Size the sample from the MDE and benchmark it against the smallest
+economically interesting effect; correct for clustering (design effect
+`1 + (m-1)ρ`) and attrition (`duflo_glennerster_kremer_2007`, `mckenzie_2012`).
+Runnable anatomy: [`examples/power-mde-demo/`](../examples/power-mde-demo/).
 
 ### MSE-optimal bandwidth
 The bandwidth that minimizes the mean squared error of the local-linear RDD
@@ -184,6 +235,14 @@ optimal bandwidth does not invalidate inference (`calonico_cattaneo_titiunik_201
 Adjustment of p-values or confidence levels when several outcomes/subgroups are
 tested, controlling the family-wise error rate (FWER) or false discovery rate
 (FDR). Required when a paper reports many primary outcomes.
+
+### Numeric-check contract
+The rule that every runnable demo in this repository is also a regression test:
+each headline estimate is pinned to a *known* target — a Monte Carlo truth, a
+coverage rate, a derivable bias factor — within a stated tolerance, emitting one
+machine-checkable `NUMERIC-CHECK` line per assertion. A demo that runs but
+emits none, or reports a FAIL, fails the smoke gate: "runs" is not "correct."
+See [`examples/README.md`](../examples/README.md).
 
 ### Not-yet-treated control group
 Using units that *will* be treated later (but are untreated now) as the
@@ -235,6 +294,20 @@ referee simulation; the simulated verdict reaches major R&R before
 submission. A failed gate blocks advancement — it does not get noted and
 passed.
 
+### Quality scorecard
+The machine-generated one-page aggregate of every gate the repository enforces
+— skill-audit scores, demo numeric contracts, citation-verification totals,
+and the gate inventory itself. Regenerated by `make scorecard`; preflight
+fails when the committed page drifts from the measured state. See
+[`quality-scorecard.md`](./quality-scorecard.md).
+
+### Quantile treatment effect (QTE)
+The treatment effect at a given quantile of the outcome distribution,
+`QTE(tau) = F1^{-1}(tau) - F0^{-1}(tau)`, estimated by quantile regression
+(`koenker_bassett_1978`). The distributional answer referees ask for when the
+mean effect is a wash — a null ATE can coexist with large offsetting effects
+in the tails. Runnable anatomy: [`examples/qte-demo/`](../examples/qte-demo/).
+
 ### Referee simulation
 The adversarial internal review of a finished draft: a desk screen plus three
 independently drafted referee reports with distinct priors (identification
@@ -247,6 +320,15 @@ routed revise list; simulated praise certifies nothing. See
 The RDD confidence interval that recenters for the bias introduced by the
 MSE-optimal bandwidth and inflates the variance accordingly; the `rdrobust`
 default (`calonico_cattaneo_titiunik_2014`).
+
+### Robustness value (Cinelli-Hazlett)
+The partial R² a confounder must have with *both* treatment and outcome to move
+the estimate by a stated fraction (or to insignificance). Computed from the
+reported `t`-statistic and degrees of freedom, it summarizes sensitivity to
+omitted-variable bias in one number — and, benchmarked against observed
+covariates, replaces the fallacy that "the coefficient barely moved" bounds bias
+(`cinelli_hazlett_2020`). Runnable anatomy:
+[`examples/sensitivity-rv-demo/`](../examples/sensitivity-rv-demo/).
 
 ### Rotemberg weights
 The weights that reveal which exposure *shares* drive a Bartik/shift-share
@@ -279,6 +361,14 @@ The regression of an outcome on a treatment dummy with unit and time fixed
 effects. Unbiased for a single simultaneous treatment with homogeneous effects;
 biased — sometimes sign-flipped — under staggered timing with dynamic effects
 (`dechaisemartin_dhaultfoeuille_2020`).
+
+### Type-M (exaggeration) ratio
+The factor by which a design overstates an effect *conditional on reaching
+significance*. Underpowered designs do not merely miss more often; when they
+"win" they inflate the magnitude, so a significant estimate from a low-power
+study is upward-biased. The reason honest power calculations and pre-registration
+matter (Gelman-Carlin). Runnable anatomy:
+[`examples/power-mde-demo/`](../examples/power-mde-demo/).
 
 ### Weak instrument
 An instrument only mildly correlated with the endogenous regressor, which biases

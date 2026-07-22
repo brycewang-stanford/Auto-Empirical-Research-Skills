@@ -98,6 +98,11 @@ Skip none of these for an AER target. AER: Insights tolerates a shorter cycle be
 
 ## Repository Resources
 
+Bundled with the installed skill, no repository checkout needed --- read it
+before the repo resources below:
+
+- `references/venue-router.md` --- AER vs Insights vs AEJ routing tables, novelty audit, and kill criteria
+
 When working from the AER-skills repository or plugin bundle, load only the
 relevant resource:
 

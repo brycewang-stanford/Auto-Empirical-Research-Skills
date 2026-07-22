@@ -164,6 +164,11 @@ AER convention: `*** p<0.01, ** p<0.05, * p<0.1`. Some authors and Angrist-Pisch
 
 ## Repository Resources
 
+Bundled with the installed skill, no repository checkout needed --- read it
+before the repo resources below:
+
+- `references/exhibit-cookbook.md` --- booktabs anatomy, export snippets, notes template, figure rules
+
 When working from the AER-skills repository or plugin bundle, load only the relevant table/figure scaffold:
 
 - Stata: `templates/stata/06_tables.do`

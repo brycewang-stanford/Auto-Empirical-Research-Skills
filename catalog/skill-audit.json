@@ -9465,7 +9465,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 235,
+      "line_count": 240,
       "name": "aer-consistency",
       "path": "skills/50-brycewang-aer-skills/skills/aer-consistency/SKILL.md"
     },
@@ -9475,7 +9475,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 219,
+      "line_count": 246,
       "name": "aer-identification",
       "path": "skills/50-brycewang-aer-skills/skills/aer-identification/SKILL.md"
     },
@@ -9485,7 +9485,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 163,
+      "line_count": 168,
       "name": "aer-introduction",
       "path": "skills/50-brycewang-aer-skills/skills/aer-introduction/SKILL.md"
     },
@@ -9495,7 +9495,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 219,
+      "line_count": 224,
       "name": "aer-literature",
       "path": "skills/50-brycewang-aer-skills/skills/aer-literature/SKILL.md"
     },
@@ -9505,7 +9505,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 260,
+      "line_count": 265,
       "name": "aer-paper-body",
       "path": "skills/50-brycewang-aer-skills/skills/aer-paper-body/SKILL.md"
     },
@@ -9515,7 +9515,17 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 284,
+      "line_count": 154,
+      "name": "aer-preregistration",
+      "path": "skills/50-brycewang-aer-skills/skills/aer-preregistration/SKILL.md"
+    },
+    {
+      "collection": "50-brycewang-aer-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 289,
       "name": "aer-rebuttal",
       "path": "skills/50-brycewang-aer-skills/skills/aer-rebuttal/SKILL.md"
     },
@@ -9525,7 +9535,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 240,
+      "line_count": 245,
       "name": "aer-referee-sim",
       "path": "skills/50-brycewang-aer-skills/skills/aer-referee-sim/SKILL.md"
     },
@@ -9535,7 +9545,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 255,
+      "line_count": 260,
       "name": "aer-replication",
       "path": "skills/50-brycewang-aer-skills/skills/aer-replication/SKILL.md"
     },
@@ -9545,7 +9555,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 150,
+      "line_count": 178,
       "name": "aer-robustness",
       "path": "skills/50-brycewang-aer-skills/skills/aer-robustness/SKILL.md"
     },
@@ -9555,7 +9565,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 224,
+      "line_count": 232,
       "name": "aer-statspai",
       "path": "skills/50-brycewang-aer-skills/skills/aer-statspai/SKILL.md"
     },
@@ -9565,7 +9575,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 203,
+      "line_count": 208,
       "name": "aer-submission",
       "path": "skills/50-brycewang-aer-skills/skills/aer-submission/SKILL.md"
     },
@@ -9575,7 +9585,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 181,
+      "line_count": 186,
       "name": "aer-tables-figures",
       "path": "skills/50-brycewang-aer-skills/skills/aer-tables-figures/SKILL.md"
     },
@@ -9585,7 +9595,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 135,
+      "line_count": 140,
       "name": "aer-topic-selection",
       "path": "skills/50-brycewang-aer-skills/skills/aer-topic-selection/SKILL.md"
     },
@@ -9595,7 +9605,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 142,
+      "line_count": 150,
       "name": "aer-workflow",
       "path": "skills/50-brycewang-aer-skills/skills/aer-workflow/SKILL.md"
     },
@@ -11163,11 +11173,11 @@
   "schema_version": "1.0",
   "summary": {
     "duplicate_skill_names": 47,
-    "exact_case_skill_files": 1093,
+    "exact_case_skill_files": 1094,
     "missing_description": 0,
     "missing_frontmatter": 0,
     "non_exact_case_skill_files": 0,
     "over_500_lines": 83,
-    "skill_like_files": 1093
+    "skill_like_files": 1094
   }
 }

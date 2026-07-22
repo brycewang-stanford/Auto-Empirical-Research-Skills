@@ -32,6 +32,7 @@ mackinnon_webb_2017.
 
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -39,6 +40,9 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from _aer_numeric_check import numeric_check  # noqa: E402
 
 SEED = 20260101
 G = 10                   # number of clusters (few)
@@ -164,15 +168,11 @@ def main() -> int:
     print(f"\nFigure written to {pdf.relative_to(pdf.parents[2])}")
 
     # ---- assertions: the demo is also a test -------------------------
-    assert size["crve_reject_rate"] > 0.09, (
-        "cluster-robust t-test should over-reject with few clusters")
-    assert size["wild_reject_rate"] <= 0.075, (
-        f"wild cluster bootstrap should hold ~{ALPHA} size, "
-        f"got {size['wild_reject_rate']:.3f}")
-    assert size["crve_reject_rate"] > size["wild_reject_rate"], (
-        "CRVE should reject a true null more often than the wild bootstrap")
-    assert power["wild_reject_rate"] > 0.40, (
-        "wild cluster bootstrap should still have power against a real effect")
+    numeric_check("CRVE over-rejects with few clusters", size["crve_reject_rate"], lo=0.09)
+    numeric_check("wild cluster bootstrap keeps ~nominal size", size["wild_reject_rate"], hi=0.075)
+    numeric_check("CRVE over-rejects relative to wild bootstrap",
+                  size["crve_reject_rate"] - size["wild_reject_rate"], lo=0.0)
+    numeric_check("wild bootstrap retains power", power["wild_reject_rate"], lo=0.40)
     print("\nAll assertions passed: with few clusters the cluster-robust t-test "
           "over-rejects,\nwhile the wild cluster bootstrap holds size and keeps "
           "power.")

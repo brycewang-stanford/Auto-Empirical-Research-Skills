@@ -35,11 +35,49 @@ between a manuscript's `\cite{...}` keys and the bibliography.
 | `TITLE_MISMATCH` | fail | DOI resolves, but to a different title — likely a mis-attribution. |
 | `AUTHOR_MISMATCH` | fail | The entry's first author is absent from the resolved record's authors. |
 | `YEAR_MISMATCH` | fail | The entry's year differs from the record's by more than one. |
+| `GROUNDED` | ok | A prose citation resolves to a `references.bib` entry (see *Groundedness* below). |
+| `PHANTOM_CITATION` | fail | An author-year mention in skill/doc prose resolves to **no** `references.bib` entry — the prose-level signature of a citation written from memory. |
+| `DANGLING_KEY` | fail | An inline-code bib key (e.g. `` `oster_2019` ``) cited in prose is absent from `references.bib`. |
 
 Any `fail` makes the tool exit non-zero. `warn` is reported but tolerated. The
 year tolerance of one absorbs the common print-year vs. online-first-year gap;
 title matching uses a normalized sequence-and-token similarity so subtitle and
 casing differences do not trip a false alarm.
+
+## Groundedness: no citation from memory, at the prose level
+
+`verify_entry` guarantees every `references.bib` entry resolves to a real
+indexed record. **Groundedness** closes the remaining gap: every *citation in
+the prose* must resolve to such an entry. It is the economics analogue of an
+automated claim-support check — a citation that points at nothing is the
+prose-level signature of a reference written from memory. Two forms are checked:
+
+- **Author-year mentions** (`Oster (2019)`, `(Callaway and Sant'Anna, 2021)`)
+  are resolved against the bibliography by **first-author surname + year**
+  (token-set match, so `Goldsmith-Pinkham`, the Oxford comma in
+  `Borusyak, Jaravel, and Spiess (2024)`, and the particle in
+  `de Chaisemartin` all resolve). A mention that grounds nowhere is a
+  `PHANTOM_CITATION`.
+- **Inline-code bib keys** (`` `romano_wolf_2005` ``) must exist in
+  `references.bib`; an absent key is a `DANGLING_KEY`. Only inline code counts,
+  so a plain double-quoted dataset variable name such as "hh_inc_2017", or a key
+  shown inside a fenced code block (an illustrative ledger), is not mistaken for
+  a live citation.
+
+### Scope and exemptions
+
+Author-year groundedness is enforced where the repository **instructs the agent**
+(`skills/`) or **documents methods** (`docs/`). Illustrative example
+*manuscripts* under `examples/` deliberately cite the wider literature to
+demonstrate citation style, so they are checked for dangling bib keys only, not
+for author-year groundedness. A line carrying a `<!-- cite-exempt: reason -->`
+marker is skipped — use this sparingly (e.g. a working paper not yet in the
+bibliography); it stays visible in the source for review.
+
+This composes with the bibliography check into a complete chain:
+
+> prose citation (author-year **or** inline bib key) → `references.bib` entry →
+> Crossref / OpenAlex record.
 
 ## Modes
 
@@ -56,6 +94,9 @@ python3 scripts/verify_citations.py --online
 
 # Structural-only check (no network): DOI well-formedness + no-DOI notes.
 python3 scripts/verify_citations.py
+
+# Groundedness: every prose citation must resolve to references.bib (hermetic).
+python3 scripts/verify_citations.py --groundedness
 
 # Two-way \cite <-> bib check for a manuscript (combine with --online for both at once).
 python3 scripts/verify_citations.py --online --manuscript paper.tex
@@ -98,7 +139,10 @@ by the gold set and refreshes only the real DOI records. See the gold-set
 `make verify-citations` runs the live check; the hermetic `--selftest` runs
 inside `make preflight` next to the other gates, so a regression in the
 verifier or a drift in the shipped bibliography fails the build without
-requiring network access.
+requiring network access. The groundedness check is folded into `--selftest`
+(labeled snippet cases plus a live "every repo citation grounds" assertion), so
+a phantom citation or a dangling bib key in any skill or doc fails preflight
+too. `make verify-citations-groundedness` runs it on its own.
 
 ## Limitations
 

@@ -29,14 +29,16 @@ Run:  python3 multiple_testing_demo.py
 Deps: numpy, scipy, matplotlib
       (all pinned in ../../templates/python/requirements.txt)
 
-References: Bonferroni; Holm (1979) step-down; Romano-Wolf (2005) resampling
-FWER control; Benjamini-Hochberg (1995) for FDR. See
+References (keys in ../../references.bib): romano_wolf_2005 (resampling FWER
+control), list_shaikh_xu_2019 (multiple testing in experimental economics).
+Also Bonferroni; Holm (1979) step-down; Benjamini-Hochberg (1995) for FDR. See
 ../../docs/methods-reference.md section 6 for the per-stack tooling, and
 ../../skills/aer-identification/SKILL.md for when a referee will demand it.
 """
 
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -45,6 +47,9 @@ from scipy import stats
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from _aer_numeric_check import numeric_check  # noqa: E402
 
 SEED = 20260101
 N = 400                  # units
@@ -179,18 +184,13 @@ def main() -> int:
     print(f"\nFigure written to {pdf.relative_to(pdf.parents[2])}")
 
     # ---- assertions: the demo is also a test -------------------------
-    assert size["naive"] > 0.25, (
-        "testing K outcomes uncorrected should inflate the family-wise error")
-    assert size["bonferroni"] <= 0.06, (
-        f"Bonferroni should hold FWER <= {ALPHA}, got {size['bonferroni']:.3f}")
-    assert size["holm"] <= 0.06, (
-        f"Holm should hold FWER <= {ALPHA}, got {size['holm']:.3f}")
-    assert power["holm_detect"] >= power["bonf_detect"], (
-        "Holm step-down should never detect less often than Bonferroni")
-    assert power["holm_detect"] > 0.50, (
-        "the correction should retain power against a clear real effect")
-    assert power["holm_fwer_null"] <= 0.06, (
-        "false positives on the null outcomes should stay controlled under Holm")
+    numeric_check("naive per-comparison testing inflates FWER", size["naive"], lo=0.25)
+    numeric_check("Bonferroni controls FWER", size["bonferroni"], hi=0.06)
+    numeric_check("Holm controls FWER", size["holm"], hi=0.06)
+    numeric_check("Holm is at least as powerful as Bonferroni",
+                  power["holm_detect"] - power["bonf_detect"], lo=0.0)
+    numeric_check("Holm retains detection power", power["holm_detect"], lo=0.50)
+    numeric_check("Holm controls FWER under the global null", power["holm_fwer_null"], hi=0.06)
     print("\nAll assertions passed: uncorrected multiple testing inflates the "
           "family-wise\nerror; Bonferroni and Holm control it while retaining "
           "power on a real effect.")

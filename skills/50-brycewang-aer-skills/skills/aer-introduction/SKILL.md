@@ -127,6 +127,11 @@ If the draft is over 100 words:
 
 ## Repository Resources
 
+Bundled with the installed skill, no repository checkout needed --- read it
+before the repo resources below:
+
+- `references/intro-template.md` --- Keith Head five-paragraph templates plus the 100-word abstract recipe
+
 When working from the AER-skills repository or plugin bundle, read `examples/intro-example.md` only when the user asks for a model introduction, a concrete before/after rewrite, or abstract compression. Sentence-level prose rules shared with the body sections live in `docs/style-guide.md`; the antecedents paragraph consumes the map built by `skills/aer-literature/SKILL.md`.
 
 Draft the introduction **after** the body sections exist (`skills/aer-paper-body/SKILL.md`) — the introduction summarizes a paper, it does not promise one.

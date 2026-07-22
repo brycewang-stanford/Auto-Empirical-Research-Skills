@@ -260,6 +260,11 @@ If the editor wrote a summary letter with their own priorities (common at AER), 
 
 ## Repository Resources
 
+Bundled with the installed skill, no repository checkout needed --- read it
+before the repo resources below:
+
+- `references/response-letter-patterns.md` --- comment taxonomy and concede / clarify / rebut / decline templates
+
 When working from the AER-skills repository or plugin bundle, read `examples/rebuttal-example.md` only when the user needs a complete response-letter model or a concrete triage example.
 
 ## Handoff

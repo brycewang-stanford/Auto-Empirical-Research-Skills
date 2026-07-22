@@ -120,6 +120,22 @@ def text_tail(text: str, lines: int = 30) -> str:
     return "\n".join(["...", *body[-lines:]])
 
 
+def numeric_checks_in(output: str) -> tuple[int, int]:
+    """Count (total, failed) NUMERIC-CHECK protocol lines in captured output.
+
+    Demos pin estimates to known targets via examples/_aer_numeric_check.py
+    (Python) or an inline equivalent (R), each emitting a
+    ``NUMERIC-CHECK | ... | PASS|FAIL`` line. A demo that runs but emits none has
+    lost its correctness assertions; that is a gate failure, not a pass."""
+    total = failed = 0
+    for line in output.splitlines():
+        if line.startswith("NUMERIC-CHECK |"):
+            total += 1
+            if line.rstrip().endswith("FAIL"):
+                failed += 1
+    return total, failed
+
+
 def run_script(script_path: Path, timeout: int, verbose: bool) -> bool:
     command = command_for(script_path)
     env = os.environ.copy()
@@ -152,7 +168,21 @@ def run_script(script_path: Path, timeout: int, verbose: bool) -> bool:
     elapsed = time.monotonic() - started
     label = validate_repo.rel(script_path)
     if result.returncode == 0:
-        print(f"PASS {label} ({elapsed:.1f}s)")
+        total, failed = numeric_checks_in(result.stdout)
+        if total == 0:
+            print(
+                f"FAIL {label} ran but emitted no NUMERIC-CHECK lines "
+                f"({elapsed:.1f}s); a demo must pin an estimate to a target "
+                "(see examples/_aer_numeric_check.py)"
+            )
+            if result.stdout.strip():
+                print(text_tail(result.stdout))
+            return False
+        if failed:
+            print(f"FAIL {label}: {failed}/{total} numeric checks reported FAIL ({elapsed:.1f}s)")
+            print(text_tail(result.stdout))
+            return False
+        print(f"PASS {label} ({elapsed:.1f}s, {total} numeric checks)")
         if verbose and result.stdout.strip():
             print(text_tail(result.stdout))
         return True

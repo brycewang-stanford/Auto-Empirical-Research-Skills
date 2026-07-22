@@ -139,8 +139,19 @@ like this has failed its purpose, whatever the verdict.
 
 ---
 
+## Calibration Gate
+
+The verdict mapping above is executable. `scripts/referee_calibration.py` parses
+the `RUBRIC SCORES:` / `VERDICT:` block out of any scored run, recomputes the
+verdict from the scores by the ladder above (a floor, not an average), and fails
+if a stated verdict disagrees, if a dimension is missing, or if a score is out of
+range. It runs on the shipped worked example in `make preflight` and CI, so a
+simulation whose verdict drifts from this rubric cannot merge. Run it on a fresh
+simulation with `python3 scripts/referee_calibration.py path/to/run.md`.
+
 ## Related Pages
 
+- The calibration harness that enforces this mapping: `scripts/referee_calibration.py`
 - The simulation that consumes this rubric: `skills/aer-referee-sim/SKILL.md`
 - A complete worked simulation scored with these anchors:
   `examples/referee-report-example.md`

@@ -19,6 +19,10 @@ The intended journey through the AER-skills stack.
 │  aer-identification │   Design-based identification, modern estimators
 └──────────┬──────────┘
            │
+           ├─ ─ ─ ─ ─▶┌─────────────────────┐
+           │          │ aer-preregistration │  Experiments / primary data ONLY:
+           │          │  (ex-ante detour)   │  PAP, power/MDE sample size, AEA
+           │          └─────────────────────┘  RCT Registry — before intervention
            ▼
 ┌─────────────────────┐
 │   aer-robustness    │   Heterogeneity, mechanism, placebo, anticipation

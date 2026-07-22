@@ -213,6 +213,11 @@ If data is restricted:
 
 ## Repository Resources
 
+Bundled with the installed skill, no repository checkout needed --- read it
+before the repo resources below:
+
+- `references/aea-package-checklist.md` --- AEA compliance checklist, README sections, openICPSR deposit steps
+
 When working from the AER-skills repository or plugin bundle, load only the relevant resource:
 
 - Deposit skeleton: `examples/replication-package-skeleton/`

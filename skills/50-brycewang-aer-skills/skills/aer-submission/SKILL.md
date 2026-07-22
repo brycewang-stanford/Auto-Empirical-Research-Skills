@@ -164,6 +164,11 @@ AER charges a submission fee that scales with AEA membership status and country 
 
 ## Repository Resources
 
+Bundled with the installed skill, no repository checkout needed --- read it
+before the repo resources below:
+
+- `references/final-audit-checklist.md` --- desk-rejection no-go audit, length accounting, portal checklist
+
 When working from the AER-skills repository or plugin bundle, load only the
 relevant resource:
 

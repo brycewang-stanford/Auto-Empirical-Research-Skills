@@ -5,7 +5,10 @@
 </p>
 <p align="center"><em>An agent skill stack for targeting the <a href="https://www.aeaweb.org/journals/aer">American Economic Review</a>, <em>AER: Insights</em>, and the AEJ family.</em></p>
 
+[![CI](https://github.com/brycewang-stanford/AER-Skills/actions/workflows/ci.yml/badge.svg)](https://github.com/brycewang-stanford/AER-Skills/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/brycewang-stanford/AER-Skills)](https://github.com/brycewang-stanford/AER-Skills/releases)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Quality gates](https://img.shields.io/badge/quality%20gates-10%20enforced-brightgreen)](docs/quality-scorecard.md)
 [![Top-5 focused](https://img.shields.io/badge/focus-AER%20%2F%20AER%3AInsights%20%2F%20AEJ-1f6feb)](docs/workflow-map.md)
 [![Workflow](https://img.shields.io/badge/workflow-identification--driven-blue)](docs/design-principles.md)
 [![Claude Code](https://img.shields.io/badge/agent-Claude%20Code-cc785c)](docs/installation-claude.md)
@@ -19,13 +22,46 @@ This repository is opinionated. It is **not** a generic economics writing toolbo
 
 ## Recent Upgrades
 
-v1.1 expands AER-Skills from ten core skills to fourteen, and turns the fragile late-stage checks after "the draft is done" into explicit quality gates:
+v1.5 makes every installed skill **self-contained**: fourteen skills now bundle
+a distilled `references/*.md` depth file inside the skill directory --- estimator
+playbook, robustness menu, intro/abstract templates, section skeletons, venue
+router, referee scoring rubric, consistency audit checklist, rebuttal response
+patterns, AEA replication checklist, submission final audit, PAP template,
+citation-verification protocol, workflow gate map, and exhibit cookbook --- so
+the plugin or script install carries its core guidance without the repository
+checkout. A new bundled-reference gate in `scripts/validate_repo.py` enforces
+the standard (bundle exists, SKILL.md routes to it, mentioned files exist), and
+the bundled prose sits under the existing citation-groundedness and hygiene
+gates. See the [CHANGELOG](CHANGELOG.md).
 
-- New `aer-literature`: closest-papers mapping and citation verification before literature claims enter the manuscript.
-- New `aer-paper-body`: background, data, empirical strategy, results, mechanisms, and conclusion writing, with the body drafted before the introduction.
-- New `aer-consistency`: audit numbers, tables, sample funnels, unit conversions, cross-references, and the bibliography; ships a runnable LaTeX audit script.
-- New `aer-referee-sim`: pre-submission desk screen plus three adversarial referee reports, scored with a rubric and converted into a revise list.
-- New supporting resources: `docs/style-guide.md`, `docs/referee-report-rubric.md`, `examples/results-section-example.md`, and `examples/referee-report-example.md`.
+v1.4 extends the lifecycle to **ex-ante design** and closes two referee-frontier
+method gaps. It adds a 15th skill,
+[`aer-preregistration`](skills/aer-preregistration/SKILL.md) (pre-analysis plan,
+power/MDE-justified sample size, AEA RCT Registry), **4 new numeric-contract
+demos** (Sun-Abraham interaction-weighted event study, Lee-bounds partial
+identification, the Cinelli-Hazlett robustness value, and power/MDE with the
+Type-M exaggeration ratio — 20 new assertions), a
+[referee-calibration harness](scripts/referee_calibration.py) that turns the
+simulation's score-to-verdict mapping into an executable gate, and a
+[methods coverage matrix](docs/methods-coverage-matrix.md). See the
+[CHANGELOG](CHANGELOG.md).
+
+v1.3 closes the method-coverage gaps listed in the roadmap: **5 new
+numeric-contract demos** (randomization inference, QTE, LP-DiD, bunching,
+matrix completion — 21 new assertions), 7 Crossref-verified references, a
+StatsPAI registry expanded to 51 validated bindings, plus Zenodo archiving
+metadata and a launch kit. See the [CHANGELOG](CHANGELOG.md).
+
+The theme of v1.2 is **verifiability**: every discipline the skills impose on a manuscript is machine-enforced on the repository itself first (full status in the [quality scorecard](docs/quality-scorecard.md), plan in the [roadmap](docs/roadmap.md), history in the [CHANGELOG](CHANGELOG.md)):
+
+- **Numeric-correctness contract**: 11 runnable demos, 47 `NUMERIC-CHECK` assertions — every estimate pinned to a known truth within a stated tolerance; "runs but wrong" fails.
+- **Citation groundedness gate**: every prose citation must resolve to a Crossref-verified bib entry — `PHANTOM_CITATION` / `DANGLING_KEY` are hard failures.
+- **Tool-binding contract**: method skills route to 43 validated StatsPAI tools; no hand-rolled estimators.
+- **The quality tooling is itself tested**: 246 hermetic unit tests under `tests/` (`make test`).
+- **New examples**: the [end-to-end walkthrough](examples/end-to-end-walkthrough.md) (one paper through all 12 steps) and the [DML demo](examples/dml-plr-demo/) (orthogonalization + cross-fitting vs. the naive ML plug-in).
+- CI now runs three jobs — structural validation, unit tests, and the full numeric smoke over every Python demo — on every push and PR.
+
+v1.1 grew the stack from ten skills to fourteen (`aer-literature`, `aer-paper-body`, `aer-consistency`, `aer-referee-sim`) and established the 12-step gated workflow.
 
 ---
 
@@ -45,6 +81,15 @@ Top-5 economics journals impose constraints that do not exist in life-science ve
 
 Generic "scientific writing" skills (e.g. [Nature-Paper-Skills](https://github.com/Boom5426/Nature-Paper-Skills), [nature-skills](https://github.com/Yuan1z0825/nature-skills)) miss these constraints.
 
+### An honest comparison with adjacent projects
+
+| Project | What it is | How AER-Skills differs |
+|---|---|---|
+| Nature/generic writing skill packs | Life-science writing skills | No top-5 economics constraints; no machine-enforced quality gates |
+| Dynamic econometrics agents (e.g. Econometrics-Agent) | Runtime: pick tools, run code | They cover the *estimation* station only — not topic selection, literature, writing, refereeing, or submission. AER-Skills composes with such engines via `aer-statspai` |
+| Deep-research agents (e.g. open_deep_research) | General research synthesis | Their groundedness-evaluation idea is implemented here as a hard gate, but they do not produce a submittable economics manuscript |
+| **AER-Skills** | **Full-lifecycle skill stack, topic to R&R** | **Every design principle has a matching machine gate — citations verified, numbers pinned, tools validated, document quality floored — all enforced by CI** (see the [quality scorecard](docs/quality-scorecard.md)) |
+
 ---
 
 ## Quick Start
@@ -62,7 +107,7 @@ Generic "scientific writing" skills (e.g. [Nature-Paper-Skills](https://github.c
 /reload-plugins
 ```
 
-All fourteen skills are then available automatically.
+All fifteen skills are then available automatically.
 
 ### Option B — Scripted Install
 
@@ -77,10 +122,12 @@ python3 scripts/install_skills.py claude
 python3 scripts/install_skills.py codex
 ```
 
-The installer copies the full skill directories. Use `--replace` when updating
-an existing install, and `--dry-run` to inspect planned copies first. Keep the
-cloned repository available if you want the `templates/` and `examples/`
-resources referenced by the skills.
+The installer copies the full skill directories, including each skill's
+bundled `references/` depth files, so the core guidance is self-contained
+after installation. Use `--replace` when updating an existing install, and
+`--dry-run` to inspect planned copies first. Keep the cloned repository
+available if you also want the `templates/` and `examples/` resources
+referenced by the skills.
 
 ### First Prompt
 
@@ -135,6 +182,7 @@ See [docs/workflow-map.md](docs/workflow-map.md).
 | [`aer-topic-selection`](skills/aer-topic-selection/SKILL.md) | Top-5 bar test, novelty audit, AER vs Insights vs AEJ routing. |
 | [`aer-literature`](skills/aer-literature/SKILL.md) | Closest-papers map, positioning moves, and the citation-integrity protocol — every reference verified, no hallucinated citations. |
 | [`aer-identification`](skills/aer-identification/SKILL.md) | DiD (staggered), IV (weak-IV-robust), RDD, SCM, shift-share/Bartik. |
+| [`aer-preregistration`](skills/aer-preregistration/SKILL.md) | Ex-ante gate for experiments and primary-data collection: pre-analysis plan, power/MDE-justified sample size, AEA RCT Registry, pre-specified vs. exploratory. |
 | [`aer-robustness`](skills/aer-robustness/SKILL.md) | Robustness, heterogeneity, mechanism, placebo. Referee-anticipating. |
 | [`aer-paper-body`](skills/aer-paper-body/SKILL.md) | Body sections — background, data, empirical strategy, finding-first results narration, magnitude interpretation, mechanisms, conclusion. |
 | [`aer-introduction`](skills/aer-introduction/SKILL.md) | Keith Head five-paragraph formula + 100-word abstract drafting. |
@@ -220,6 +268,12 @@ The default mode skips demos whose optional dependencies are missing. Use
 `--strict-deps` before release so any missing dependency or failed assertion
 returns a non-zero status.
 
+The quality tooling is itself tested: `make test` runs the 272 hermetic unit
+tests under `tests/` (no network, no optional stacks) covering the validator,
+citation verifier, skill auditor, smoke runner, scaffolder, and installer.
+`make scorecard` regenerates the [quality scorecard](docs/quality-scorecard.md);
+preflight fails whenever the committed scorecard drifts from the measured state.
+
 `make preflight` also runs the citation-integrity gate
 (`verify_citations.py --selftest`): a hermetic, gold-set check that
 `references.bib` still matches the Crossref/OpenAlex metadata it was verified
@@ -238,6 +292,7 @@ See the full examples index in [examples/README.md](examples/README.md).
 
 | File | What it shows |
 |---|---|
+| [`examples/end-to-end-walkthrough.md`](examples/end-to-end-walkthrough.md) | **Start here** — the same fictional paper traced through all 12 workflow steps, naming the skill, the gate, and the artifact at each step, stitching the other examples into one route |
 | [`examples/aer-exemplars.md`](examples/aer-exemplars.md) | Classic papers (Card-Krueger, AJR, ADH, Dell, Chetty-Hendren, Abadie, BDGK, Karlan-List …) mapped to each skill, with openICPSR / Dataverse links |
 | [`examples/modern-aer-exemplars.md`](examples/modern-aer-exemplars.md) | **30+ recent (2018-2025) papers organized by 13 subfields** — Labor, Public, Development, Trade, Macro, IO, Health, Environment, Urban, Education, Finance, Political Economy, Social Networks — plus the modern identification-methods toolkit. Each with deposit link |
 | [`examples/intro-example.md`](examples/intro-example.md) | Full Keith Head five-paragraph introduction + 97-word abstract, with a counterexample of what not to write |
@@ -252,6 +307,19 @@ See the full examples index in [examples/README.md](examples/README.md).
 | [`examples/shift-share-demo/`](examples/shift-share-demo/) | Runnable Python simulation showing why shift-share/Bartik inference belongs at the shock (industry) level, not the region level — region-clustered SEs over-reject |
 | [`examples/few-clusters-demo/`](examples/few-clusters-demo/) | Runnable Python simulation showing why a cluster-robust t-test over-rejects with few clusters and the wild cluster bootstrap restores nominal size |
 | [`examples/multiple-testing-demo/`](examples/multiple-testing-demo/) | Runnable Python simulation showing why testing many outcomes inflates the family-wise error rate and how Bonferroni/Holm control it without killing power |
+| [`examples/spec-curve-demo/`](examples/spec-curve-demo/) | Runnable Python simulation showing why a single "preferred" specification can mislead and the specification-curve permutation test is the honest joint inference |
+| [`examples/oster-ovb-demo/`](examples/oster-ovb-demo/) | Runnable Python simulation showing why coefficient stability is not evidence against omitted-variable bias unless scaled by R-squared movement (Oster delta) |
+| [`examples/honest-did-demo/`](examples/honest-did-demo/) | Runnable Python simulation showing why a flat-looking pre-trend can break naive parallel-trends coverage and honest DiD relative-magnitudes bounds restore it |
+| [`examples/dml-plr-demo/`](examples/dml-plr-demo/) | Runnable Python simulation showing why flexible ML prediction alone is not causal inference — a non-orthogonal plug-in stays attenuated at a knowable factor while DML partialling-out with cross-fitting recovers the truth with honest coverage |
+| [`examples/randomization-inference-demo/`](examples/randomization-inference-demo/) | Runnable Python simulation showing why robust-SE t-tests over-reject in small experiments with concentrated leverage and the Fisher randomization test has exact size while retaining power |
+| [`examples/qte-demo/`](examples/qte-demo/) | Runnable Python simulation showing why a null ATE can hide large distributional effects — quantile treatment effects recover the analytic QTE curve while OLS sees nothing |
+| [`examples/lp-did-demo/`](examples/lp-did-demo/) | Runnable Python simulation showing why pooled TWFE event studies are contaminated under staggered adoption with heterogeneous dynamics and LP-DiD with clean controls recovers the true dynamic path |
+| [`examples/bunching-demo/`](examples/bunching-demo/) | Runnable Python simulation showing how excess mass at a tax kink identifies the earnings elasticity (Saez), with oracle-vs-feasible counterfactuals and two falsification worlds |
+| [`examples/matrix-completion-demo/`](examples/matrix-completion-demo/) | Runnable Python simulation showing why DiD is structurally biased under interactive fixed effects and low-rank matrix-completion imputation recovers the truth — including the rank-sensitivity caveat |
+| [`examples/sun-abraham-demo/`](examples/sun-abraham-demo/) | Runnable Python simulation showing why the naive dynamic TWFE event study is a contaminated cross-cohort mixture under heterogeneous dynamics and the Sun-Abraham interaction-weighted estimator recovers the true dynamic path in one saturated regression |
+| [`examples/lee-bounds-demo/`](examples/lee-bounds-demo/) | Runnable Python simulation showing why differential attrition breaks point identification in an RCT and Lee (2009) trimming bounds recover a valid interval around the always-selected effect — the right answer is an interval, not a number |
+| [`examples/sensitivity-rv-demo/`](examples/sensitivity-rv-demo/) | Runnable Python simulation showing why coefficient stability does not bound omitted-variable bias and the Cinelli-Hazlett robustness value reports the partial R-squared a confounder needs to overturn the result |
+| [`examples/power-mde-demo/`](examples/power-mde-demo/) | Runnable Python simulation showing why the analytic minimum detectable effect is exactly the target-power effect and an underpowered design exaggerates the estimates it manages to detect (Type-M) |
 
 ---
 
@@ -270,12 +338,18 @@ See [docs/design-principles.md](docs/design-principles.md).
 
 Key references:
 
+- [Roadmap](docs/roadmap.md) — the operating definition of "reference
+  automated-empirics repo" and the sprint plan toward it
+- [Quality scorecard](docs/quality-scorecard.md) — machine-generated one-page
+  aggregate of every enforced gate (`make scorecard`; drift fails preflight)
 - [Academic Research Skills reference review](docs/academic-research-skills-review.md) —
   what transferred from the external ARS repository and what stayed out
 - [Desk-rejection audit](docs/desk-rejection-audit.md) — pre-submission no-go
   checks from an editor/referee perspective
 - [Methods reference](docs/methods-reference.md) — estimator defaults,
   diagnostics, package calls, and BibTeX keys
+- [Methods coverage matrix](docs/methods-coverage-matrix.md) — one page mapping
+  each method to its runnable demo × skill × reference × StatsPAI tool
 - [Style guide](docs/style-guide.md) — sentence- and paragraph-level
   economics prose rules, plus the AI-pattern scrub
 - [Referee report rubric](docs/referee-report-rubric.md) — anchored 0-5
@@ -300,10 +374,12 @@ AER-Skills/
 ├── README.md               (Chinese, primary)
 ├── README.en.md            (English, full)
 ├── LICENSE                 (MIT)
-├── Makefile                (validation and install shortcuts)
+├── CHANGELOG.md            (release history)
+├── CITATION.cff            (software citation metadata)
+├── Makefile                (validation, test, and install shortcuts)
 ├── CONTRIBUTING.md         (concurrent-agent workflow)
 ├── .github/
-│   └── workflows/ci.yml    (repository validation)
+│   └── workflows/ci.yml    (structural validation + unit tests + demo numeric smoke)
 ├── .claude-plugin/
 │   ├── plugin.json         (plugin manifest)
 │   └── marketplace.json    (Claude Code marketplace entry)
@@ -315,18 +391,23 @@ AER-Skills/
 │   ├── glossary.md
 │   ├── installation-claude.md
 │   ├── installation-codex.md
+│   ├── launch-kit/             (announcement drafts and archiving steps)
 │   ├── methods-reference.md
+│   ├── methods-coverage-matrix.md
 │   ├── pnas-nexus-publication-plan.md
 │   ├── pnas-nexus-submission-checklist.md
+│   ├── quality-scorecard.md    (machine-generated gate status)
 │   ├── referee-report-rubric.md
+│   ├── roadmap.md              (the sprint plan)
 │   ├── source-register.md
 │   ├── style-guide.md
 │   └── workflow-map.md
-├── skills/                 (14 skill directories — SKILL.md + agents/openai.yaml)
+├── skills/                 (15 skill directories — SKILL.md + agents/openai.yaml)
 │   ├── aer-workflow/
 │   ├── aer-topic-selection/
 │   ├── aer-literature/
 │   ├── aer-identification/
+│   ├── aer-preregistration/
 │   ├── aer-robustness/
 │   ├── aer-paper-body/
 │   ├── aer-introduction/
@@ -343,16 +424,21 @@ AER-Skills/
 │   └── python/
 ├── scripts/
 │   ├── install_skills.py
+│   ├── quality_scorecard.py    (scorecard generator + drift gate)
+│   ├── run_example_smoke.py    (demo numeric smoke gate)
 │   ├── run_skillopt_gate.py    (SkillOpt routing gate)
 │   ├── scaffold_project.py
 │   ├── skill_audit.py          (SkillOpt document-quality audit)
 │   ├── validate_repo.py
 │   ├── verify_citations.py     (citation-integrity verifier)
 │   └── citation_gold/          (hermetic gold set + recorded index responses)
+├── tests/                  (unit tests for the quality tooling, make test)
 └── examples/
+    ├── end-to-end-walkthrough.md
     ├── aer-exemplars.md
     ├── intro-example.md
     ├── rebuttal-example.md
+    ├── dml-plr-demo/           (plus the other 19 runnable demos)
     └── replication-package-skeleton/
         ├── data/codebook/source-register.md
         ├── docs/exhibit-register.md

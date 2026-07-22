@@ -1,0 +1,93 @@
+# StatsPAI tool registry --- the blessed set of MCP tools the method skills may
+# bind to. Each name below is a real tool exposed by the live StatsPAI MCP
+# server (namespace `statspai`); the list is the machine-checkable registry that
+# `scripts/validate_repo.py::check_tool_bindings` enforces:
+#
+#   * every StatsPAI tool a method skill binds to must appear here
+#     (catches typos, drift, and hallucinated tool names), and
+#   * every tool here must be documented in `skills/aer-statspai/SKILL.md`
+#     (keeps the human-facing hub and this registry in sync).
+#
+# This is the "select a validated tool, then generate code" discipline made
+# enforceable: skills route to vetted estimators instead of hand-rolling them.
+#
+# Maintenance: when the StatsPAI server adds/removes tools, update this file and
+# the aer-statspai hub together. Lines starting with `#` and blank lines are
+# ignored; one tool name per line.
+
+# --- Agent-native workflow (design -> fit -> audit -> cite) ---
+detect_design
+preflight
+recommend
+audit_result
+bibtex
+aggte
+
+# --- Difference-in-differences (staggered-robust) ---
+callaway_santanna
+sun_abraham
+did_imputation
+did_multiplegt
+lp_did
+bacon_decomposition
+bacon_plot
+event_study
+pretrends_test
+honest_did
+honest_did_from_result
+
+# --- Instrumental variables (weak-IV-robust) ---
+ivreg
+anderson_rubin_ci
+effective_f_test
+
+# --- Shift-share / Bartik ---
+bartik
+
+# --- Regression discontinuity ---
+rdrobust
+rdbwselect
+rdplot
+rddensity
+
+# --- Synthetic control ---
+synth
+gsynth
+augsynth
+sdid
+synth_time_placebo
+synth_loo
+
+# --- Factor-model counterfactuals (interactive FE / matrix completion) ---
+interactive_fe
+matrix_completion
+
+# --- Bunching / kink designs ---
+bunching
+notch
+
+# --- DML / causal machine learning ---
+dml
+causal_forest
+metalearner
+tmle
+aipw
+
+# --- Distributional effects ---
+qte
+
+# --- Robustness, sensitivity, multiple testing ---
+spec_curve
+wild_cluster_bootstrap
+twoway_cluster
+conley
+ri_test
+sensitivity_from_result
+robustness_value
+oster_delta
+oster_bounds
+evalue_from_result
+romano_wolf
+
+# --- Partial identification (sample selection / attrition) ---
+lee_bounds

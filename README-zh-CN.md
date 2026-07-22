@@ -56,7 +56,7 @@
 </div>
 
 > ### 🇨🇳 **请阅读 [`docs/CONTENT_ZH.md`](docs/CONTENT_ZH.md) 获取完整中文 README。**
-> ### 🚀 Open the **[Skill Search →](docs/search.html)** to filter all 1,093 skills. The 5-minute tour (`make quickstart`) prints the same picture in your terminal.
+> ### 🚀 Open the **[Skill Search →](docs/search.html)** to filter all 1,094 skills. The 5-minute tour (`make quickstart`) prints the same picture in your terminal.
 
 ---
 

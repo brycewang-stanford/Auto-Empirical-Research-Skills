@@ -42,6 +42,9 @@ AGENT_FIELD_LIMITS = {
     "default_prompt": (20, 180),
 }
 ALLOWED_SKILL_TOP_LEVEL = {"SKILL.md", "agents", "scripts", "references", "assets"}
+# Skills whose SKILL.md is already self-contained (e.g. the StatsPAI hub keeps
+# its full validated tool registry inline), so no bundled depth file is needed.
+SKILLS_WITHOUT_BUNDLED_REFERENCES = {"aer-statspai"}
 BANNED_SKILL_FILENAMES = {
     "README.md",
     "INSTALLATION_GUIDE.md",
@@ -57,11 +60,11 @@ REQUIRED_CLI_SCRIPTS = (
     ROOT / "scripts" / "run_skillopt_gate.py",
     ROOT / "scripts" / "run_example_smoke.py",
     ROOT / "scripts" / "verify_citations.py",
+    ROOT / "scripts" / "quality_scorecard.py",
 )
 PYTHON_IMPORT_PACKAGE_MAP = {
     "dateutil": "python-dateutil",
     "differences": "differences",
-    "econtools": "econtools",
     "joblib": "joblib",
     "linearmodels": "linearmodels",
     "matplotlib": "matplotlib",
@@ -205,6 +208,7 @@ REQUIRED_PREFLIGHT_COMMANDS = (
     "python3 scripts/run_skillopt_gate.py",
     "python3 scripts/skill_audit.py --selftest",
     "python3 scripts/verify_citations.py --selftest",
+    "python3 scripts/quality_scorecard.py --check",
     "git diff --check",
     "git diff --cached --check",
 )
@@ -238,6 +242,58 @@ EXPECTED_EXAMPLE_DEMOS = {
         "README.md",
         "multiple_testing_demo.py",
     },
+    "spec-curve-demo": {
+        "README.md",
+        "spec_curve_demo.py",
+    },
+    "oster-ovb-demo": {
+        "README.md",
+        "oster_ovb_demo.py",
+    },
+    "honest-did-demo": {
+        "README.md",
+        "honest_did_demo.py",
+    },
+    "dml-plr-demo": {
+        "README.md",
+        "dml_plr_demo.py",
+    },
+    "randomization-inference-demo": {
+        "README.md",
+        "randomization_inference_demo.py",
+    },
+    "qte-demo": {
+        "README.md",
+        "qte_demo.py",
+    },
+    "lp-did-demo": {
+        "README.md",
+        "lp_did_demo.py",
+    },
+    "bunching-demo": {
+        "README.md",
+        "bunching_demo.py",
+    },
+    "matrix-completion-demo": {
+        "README.md",
+        "matrix_completion_demo.py",
+    },
+    "sun-abraham-demo": {
+        "README.md",
+        "sun_abraham_demo.py",
+    },
+    "lee-bounds-demo": {
+        "README.md",
+        "lee_bounds_demo.py",
+    },
+    "sensitivity-rv-demo": {
+        "README.md",
+        "sensitivity_rv_demo.py",
+    },
+    "power-mde-demo": {
+        "README.md",
+        "power_mde_demo.py",
+    },
 }
 TEXT_SUFFIXES = {
     "",
@@ -255,6 +311,7 @@ TEXT_SUFFIXES = {
 }
 GENERATED_OR_CACHE_DIRS = {
     ".git",
+    ".DS_Store",
     ".mypy_cache",
     ".pytest_cache",
     ".ruff_cache",
@@ -464,6 +521,24 @@ def parse_frontmatter(path: Path, errors: list[str]) -> dict[str, str]:
     if not match:
         fail(errors, f"{rel(path)}: missing YAML frontmatter")
         return {}
+
+    # Strict pass: skill loaders parse frontmatter with a real YAML parser, so
+    # a scalar that line-splitting tolerates (e.g. an unquoted inner colon) can
+    # still break skill loading. Enforce when PyYAML is available (CI installs it).
+    try:
+        import yaml  # type: ignore[import-untyped]
+    except ImportError:
+        pass
+    else:
+        try:
+            loaded = yaml.safe_load(match.group(1))
+        except yaml.YAMLError as exc:
+            fail(errors, f"{rel(path)}: frontmatter is not valid YAML: {exc}")
+            return {}
+        if not isinstance(loaded, dict):
+            fail(errors, f"{rel(path)}: frontmatter must be a YAML mapping")
+            return {}
+        return {str(k): str(v) for k, v in loaded.items()}
 
     fields: dict[str, str] = {}
     for line in match.group(1).splitlines():
@@ -853,6 +928,57 @@ def check_skill_resource_links(errors: list[str]) -> None:
                 fail(errors, f"{rel(path)}: listed repository resource missing: {resource}")
 
 
+def bundled_reference_mentions(text: str) -> list[str]:
+    """Backtick-quoted ``references/*.md`` paths mentioned in a SKILL.md.
+
+    Uses the CommonMark-aware ``inline_code_spans`` pairing (not the naive
+    backtick regex) so fenced code blocks earlier in the document cannot
+    mis-pair the inline spans that follow them."""
+    mentions: list[str] = []
+    for candidate in inline_code_spans(text):
+        if candidate.startswith("references/") and candidate.endswith(".md"):
+            if candidate not in mentions:
+                mentions.append(candidate)
+    return mentions
+
+
+def check_skill_bundled_references(errors: list[str]) -> None:
+    """Installed skills must be self-contained: every skill (except the
+    exempted ones) bundles at least one references/*.md depth file, the
+    SKILL.md mentions each bundled file, and every mentioned file exists."""
+
+    for skill_dir in sorted(p for p in (ROOT / "skills").iterdir() if p.is_dir()):
+        skill_md = skill_dir / "SKILL.md"
+        if not skill_md.is_file():
+            continue  # reported by check_skills
+        text = skill_md.read_text(encoding="utf-8")
+        mentions = bundled_reference_mentions(text)
+        references_dir = skill_dir / "references"
+        bundled = (
+            sorted(path for path in references_dir.glob("*.md") if path.is_file())
+            if references_dir.is_dir()
+            else []
+        )
+
+        if skill_dir.name not in SKILLS_WITHOUT_BUNDLED_REFERENCES and not bundled:
+            fail(
+                errors,
+                f"{rel(skill_dir)}: missing bundled references/*.md depth file "
+                "(installed skills must be self-contained)",
+            )
+        for mention in mentions:
+            if not (skill_dir / mention).is_file():
+                fail(errors, f"{rel(skill_md)}: mentioned bundled reference missing: {mention}")
+        for path in bundled:
+            mention = f"references/{path.name}"
+            if mention not in mentions:
+                fail(
+                    errors,
+                    f"{rel(skill_md)}: bundled reference {mention} is never mentioned "
+                    "(SKILL.md must route to every bundled depth file)",
+                )
+
+
 def check_bibliography_integrity(errors: list[str]) -> None:
     references = ROOT / "references.bib"
     methods_reference = ROOT / "docs" / "methods-reference.md"
@@ -1028,6 +1154,26 @@ def check_validator_self_tests(errors: list[str]) -> None:
             f"{actual_resources!r}, expected {expected_resources!r}",
         )
 
+    bundled_reference_fixture = "\n".join(
+        [
+            "# Skill",
+            "",
+            "Load `references/estimator-playbook.md` before choosing a design;",
+            "see also `references/estimator-playbook.md` (mentioned twice) and",
+            "the non-reference tokens `docs/methods-reference.md`, `references/`,",
+            "and `references/notes.txt` which must all be ignored.",
+            "",
+        ]
+    )
+    actual_mentions = bundled_reference_mentions(bundled_reference_fixture)
+    expected_mentions = ["references/estimator-playbook.md"]
+    if actual_mentions != expected_mentions:
+        fail(
+            errors,
+            "validator: bundled-reference self-test returned "
+            f"{actual_mentions!r}, expected {expected_mentions!r}",
+        )
+
     unfinished_cases = {
         "finish this " + "T" + "ODO" + " before release": "T" + "ODO",
         "this method is fully documented": None,
@@ -1041,6 +1187,33 @@ def check_validator_self_tests(errors: list[str]) -> None:
                 f"validator: unfinished marker self-test returned {actual!r}, "
                 f"expected {expected!r}",
             )
+
+    binding_fixture = "\n".join(
+        [
+            "intro prose with a `bib_key_2021` mention that is not a tool",
+            TOOL_BINDING_OPEN,
+            "| Design | Call (StatsPAI) | Do not hand-roll |",
+            "|---|---|---|",
+            "| Staggered DiD | `callaway_santanna` then `aggte` | a `poly4` TWFE by hand |",
+            "| RDD | `rdrobust`, `rddensity` | a global polynomial |",
+            TOOL_BINDING_CLOSE,
+            "trailing prose",
+        ]
+    )
+    block = extract_tool_binding_block(binding_fixture)
+    parsed = bound_tools_in_block(block) if block is not None else set()
+    expected_bound = {"callaway_santanna", "aggte", "rdrobust", "rddensity"}
+    if parsed != expected_bound:
+        fail(
+            errors,
+            f"validator: tool-binding self-test parsed {sorted(parsed)!r}, "
+            f"expected {sorted(expected_bound)!r}",
+        )
+    # The "Do not hand-roll" column (`poly4`) must be excluded from the tool set.
+    if "poly4" in parsed:
+        fail(errors, "validator: tool-binding self-test leaked the do-not-hand-roll column")
+    if extract_tool_binding_block("no markers in this text") is not None:
+        fail(errors, "validator: tool-binding block self-test should return None when markers absent")
 
     with tempfile.TemporaryDirectory() as tempdir:
         executable_fixture = Path(tempdir) / "entrypoint.py"
@@ -2112,6 +2285,175 @@ def check_placeholder_links(errors: list[str]) -> None:
             fail(errors, f"{rel(path)}: replace 'journal site' placeholder with a DOI or stable URL")
 
 
+# --------------------------------------------------------------------------- #
+# StatsPAI tool bindings: method skills must route to validated tools, not
+# hand-rolled estimators. "Select the validated tool, then generate code."
+# --------------------------------------------------------------------------- #
+
+STATSPAI_REGISTRY_FILE = ROOT / "scripts" / "statspai_tools.txt"
+STATSPAI_HUB_SKILL = "aer-statspai"
+TOOL_BINDING_SKILLS = ("aer-identification", "aer-robustness")
+TOOL_BINDING_OPEN = "<!-- tool-bindings -->"
+TOOL_BINDING_CLOSE = "<!-- /tool-bindings -->"
+_TOOL_WORD_RE = re.compile(r"[a-z][a-z0-9_]{2,}")
+
+
+def load_statspai_registry(path: Path) -> set[str]:
+    """One tool name per line; ``#`` comments and blank lines ignored."""
+    tools: set[str] = set()
+    for line in path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if line and not line.startswith("#"):
+            tools.add(line)
+    return tools
+
+
+def inline_code_spans(text: str) -> list[str]:
+    """Inline code-span contents, following the CommonMark rule that a run of N
+    backticks closes only on a run of exactly N. This treats a ```` ```fence ````
+    as one span rather than letting its backticks mis-pair the inline spans that
+    follow it (e.g. a mapping table after a code block)."""
+    spans: list[str] = []
+    i, n = 0, len(text)
+    while i < n:
+        if text[i] != "`":
+            i += 1
+            continue
+        j = i
+        while j < n and text[j] == "`":
+            j += 1
+        run = j - i
+        k = j
+        closed = False
+        while k < n:
+            if text[k] == "`":
+                m = k
+                while m < n and text[m] == "`":
+                    m += 1
+                if m - k == run:
+                    spans.append(text[j:k])
+                    i, closed = m, True
+                    break
+                k = m
+            else:
+                k += 1
+        if not closed:
+            i = j
+    return spans
+
+
+def tool_tokens_in(text: str) -> set[str]:
+    """Tool-shaped words (snake_case, length >= 3) inside inline ``code`` spans."""
+    tokens: set[str] = set()
+    for span in inline_code_spans(text):
+        tokens.update(_TOOL_WORD_RE.findall(span))
+    return tokens
+
+
+def extract_tool_binding_block(text: str) -> str | None:
+    start = text.find(TOOL_BINDING_OPEN)
+    end = text.find(TOOL_BINDING_CLOSE)
+    if start == -1 or end == -1 or end < start:
+        return None
+    return text[start + len(TOOL_BINDING_OPEN):end]
+
+
+def bound_tools_in_block(block: str) -> set[str]:
+    """Tools named in the 'Call (StatsPAI)' column of the bindings table."""
+    tools: set[str] = set()
+    call_col: int | None = None
+    for raw in block.splitlines():
+        line = raw.strip()
+        if not line.startswith("|"):
+            continue
+        cells = [c.strip() for c in line.strip("|").split("|")]
+        if call_col is None:  # header row identifies the StatsPAI column
+            for index, cell in enumerate(cells):
+                if "statspai" in cell.lower():
+                    call_col = index
+                    break
+            continue
+        if call_col < len(cells):
+            tools |= tool_tokens_in(cells[call_col])
+    return tools
+
+
+def check_tool_bindings(errors: list[str]) -> None:
+    if not STATSPAI_REGISTRY_FILE.is_file():
+        fail(errors, f"{rel(STATSPAI_REGISTRY_FILE)}: StatsPAI tool registry missing")
+        return
+    registry = load_statspai_registry(STATSPAI_REGISTRY_FILE)
+    if not registry:
+        fail(errors, f"{rel(STATSPAI_REGISTRY_FILE)}: StatsPAI tool registry is empty")
+        return
+
+    # Registry <-> hub sync: every registry tool must be documented in the hub
+    # skill (in inline code), so the human index and the machine registry agree.
+    hub_path = ROOT / "skills" / STATSPAI_HUB_SKILL / "SKILL.md"
+    hub_tokens = tool_tokens_in(hub_path.read_text(encoding="utf-8")) if hub_path.is_file() else set()
+    for tool in sorted(registry):
+        if tool not in hub_tokens:
+            fail(
+                errors,
+                f"{rel(STATSPAI_REGISTRY_FILE)}: tool {tool!r} is not documented in "
+                f"skills/{STATSPAI_HUB_SKILL}/SKILL.md (registry and hub must agree)",
+            )
+
+    # Each designated method skill must carry a bindings block routing to tools
+    # that exist in the registry (no typos, drift, or hallucinated tool names).
+    for skill in TOOL_BINDING_SKILLS:
+        skill_path = ROOT / "skills" / skill / "SKILL.md"
+        if not skill_path.is_file():
+            fail(errors, f"skills/{skill}/SKILL.md: missing (expected StatsPAI tool bindings)")
+            continue
+        block = extract_tool_binding_block(skill_path.read_text(encoding="utf-8"))
+        if block is None:
+            fail(
+                errors,
+                f"skills/{skill}/SKILL.md: missing {TOOL_BINDING_OPEN} block "
+                "(route methods to validated StatsPAI tools, do not hand-roll)",
+            )
+            continue
+        bound = bound_tools_in_block(block)
+        if not bound:
+            fail(
+                errors,
+                f"skills/{skill}/SKILL.md: tool-bindings block names no StatsPAI tools "
+                "in its 'Call (StatsPAI)' column",
+            )
+            continue
+        for tool in sorted(bound):
+            if tool not in registry:
+                fail(
+                    errors,
+                    f"skills/{skill}/SKILL.md: bound tool {tool!r} is not in the StatsPAI "
+                    f"registry ({rel(STATSPAI_REGISTRY_FILE)})",
+                )
+
+
+NUMERIC_CHECK_HELPER = ROOT / "examples" / "_aer_numeric_check.py"
+
+
+def check_numeric_contract(errors: list[str]) -> None:
+    """Every runnable demo must pin its results through the NUMERIC-CHECK
+    protocol, so 'the demo ran' cannot mask 'the answer is wrong' and the
+    assertions cannot silently rot into a no-op (see examples/_aer_numeric_check.py
+    and scripts/run_example_smoke.py)."""
+    if not NUMERIC_CHECK_HELPER.is_file():
+        fail(errors, f"{rel(NUMERIC_CHECK_HELPER)}: numeric-check helper missing")
+    for demo_name, expected_files in EXPECTED_EXAMPLE_DEMOS.items():
+        for script_name in sorted(n for n in expected_files if n.endswith((".py", ".R"))):
+            script_path = ROOT / "examples" / demo_name / script_name
+            if not script_path.is_file():
+                continue  # missing file is reported by check_example_demos
+            if "numeric_check" not in script_path.read_text(encoding="utf-8"):
+                fail(
+                    errors,
+                    f"{rel(script_path)}: demo must pin results via numeric_check "
+                    "(the NUMERIC-CHECK correctness contract)",
+                )
+
+
 def validate(require_optional_tools: bool = False) -> None:
     errors: list[str] = []
     check_validator_self_tests(errors)
@@ -2124,10 +2466,13 @@ def validate(require_optional_tools: bool = False) -> None:
     check_policy_guardrails(errors)
     check_installation_guardrails(errors)
     check_skill_resource_links(errors)
+    check_skill_bundled_references(errors)
     check_bibliography_integrity(errors)
+    check_tool_bindings(errors)
     check_markdown_links(errors)
     check_template_layout(errors)
     check_example_demos(errors)
+    check_numeric_contract(errors)
     check_python_templates(errors)
     check_cli_scripts(errors)
     check_r_templates(errors, require_optional_tools=require_optional_tools)

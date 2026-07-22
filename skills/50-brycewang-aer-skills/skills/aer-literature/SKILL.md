@@ -185,6 +185,11 @@ unverified citation.**
 
 ## Repository Resources
 
+Bundled with the installed skill, no repository checkout needed --- read it
+before the repo resources below:
+
+- `references/citation-verification-protocol.md` --- fetch-before-cite protocol, claim-audit table, BibTeX hygiene
+
 When working from the AER-skills repository or plugin bundle, load only the
 relevant resource:
 

@@ -5,7 +5,10 @@
 </p>
 <p align="center"><em>面向 <a href="https://www.aeaweb.org/journals/aer">《美国经济评论》</a>（AER）、<em>AER: Insights</em> 及 AEJ 系列期刊的 agent skill 栈。</em></p>
 
+[![CI](https://github.com/brycewang-stanford/AER-Skills/actions/workflows/ci.yml/badge.svg)](https://github.com/brycewang-stanford/AER-Skills/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/brycewang-stanford/AER-Skills)](https://github.com/brycewang-stanford/AER-Skills/releases)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![质量门](https://img.shields.io/badge/quality%20gates-10%20enforced-brightgreen)](docs/quality-scorecard.md)
 [![聚焦](https://img.shields.io/badge/focus-AER%20%2F%20AER%3AInsights%20%2F%20AEJ-1f6feb)](docs/workflow-map.md)
 [![工作流](https://img.shields.io/badge/workflow-识别驱动-blue)](docs/design-principles.md)
 [![Claude Code](https://img.shields.io/badge/agent-Claude%20Code-cc785c)](docs/installation-claude.md)
@@ -19,13 +22,34 @@
 
 ## 最近升级
 
-v1.1 把 AER-Skills 从十个核心 skill 扩展到十四个，并把"写完稿"之后最容易出错的环节前移成质量门：
+v1.5 让**安装后的 skill 自包含**：十四个 skill 在自己的目录里捆绑了一份蒸馏的
+`references/*.md` 深度文件——估计量手册、稳健性菜单、引言/摘要模板、章节骨架、
+选刊路由表、审稿评分量规、一致性审计清单、回复信模板、AEA 复现合规清单、
+投稿终审清单、PAP 模板、引用核验协议、工作流 gate 地图、表图 cookbook——
+插件或脚本安装后不再依赖仓库 checkout 也能拿到核心深度内容。
+`scripts/validate_repo.py` 新增捆绑文件门（必须捆绑、SKILL.md 必须路由到它、
+被提及的文件必须存在），捆绑正文同样接受既有的引用 groundedness 与文本卫生门。
+详见 [CHANGELOG](CHANGELOG.md)。
 
-- 新增 `aer-literature`：先做最近邻论文地图和引用核验，避免凭记忆写文献与幻觉引用。
-- 新增 `aer-paper-body`：覆盖 background、data、empirical strategy、results、mechanisms、conclusion，强调先写正文再写引言。
-- 新增 `aer-consistency`：审计正文数字、表格、样本漏斗、单位换算、交叉引用和 bibliography；附可运行的 LaTeX 检查脚本。
-- 新增 `aer-referee-sim`：在投稿前模拟 desk screen 和三位 adversarial referees，按 rubric 输出 revise list。
-- 新增配套资源：`docs/style-guide.md`、`docs/referee-report-rubric.md`、`examples/results-section-example.md`、`examples/referee-report-example.md`。
+v1.4 把生命周期向**事前设计**延伸，并补齐两类审稿前沿方法。新增第 15 个 skill
+[`aer-preregistration`](skills/aer-preregistration/SKILL.md)（预分析计划、功效/MDE
+定样本、AEA RCT Registry），**4 个新数值契约 demo**（Sun-Abraham 交互加权事件研究、
+Lee 边界的部分识别、Cinelli-Hazlett 稳健值、功效/MDE 与 Type-M 夸大，共 20 条新断言）、
+把审稿模拟评分-判定映射变成可执行门的[裁判校准脚本](scripts/referee_calibration.py)，
+外加[方法覆盖矩阵](docs/methods-coverage-matrix.md)。详见 [CHANGELOG](CHANGELOG.md)。
+
+v1.3 补齐了路线图列出的方法覆盖缺口：新增 **5 个数值契约 demo**（随机化推断、QTE、LP-DiD、bunching、matrix completion，共 21 条新断言）、7 条经 Crossref 验证的参考文献、StatsPAI 工具注册表扩至 51 个验证绑定，以及 Zenodo 存档元数据与宣发材料包。详见 [CHANGELOG](CHANGELOG.md)。
+
+v1.2 的主题是**可验证性**：仓库对稿件的每一条要求，先在自己身上机器强制执行（完整清单见[质量记分卡](docs/quality-scorecard.md)，计划见[路线图](docs/roadmap.md)，历史见 [CHANGELOG](CHANGELOG.md)）：
+
+- **数值正确性契约**：11 个可运行 demo、47 条 `NUMERIC-CHECK` 断言，每个估计值钉到已知真值 ± 容差，跑通但答错即失败。
+- **引用 groundedness 门**：每条散文引用必须解析到经 Crossref 验证的 bib 条目——`PHANTOM_CITATION` / `DANGLING_KEY` 是硬失败。
+- **工具绑定契约**：方法 skill 路由到 43 个已验证的 StatsPAI 工具，不允许手搓估计量。
+- **质量工具自身被测试**：`tests/` 下 246 个封闭单元测试（`make test`），验证器不再只靠自检。
+- **新增示例**：[端到端 walkthrough](examples/end-to-end-walkthrough.md)（一篇论文走完 12 步）与 [DML demo](examples/dml-plr-demo/)（正交化 + 交叉拟合 vs 朴素 ML plug-in）。
+- CI 升级为三个 job：结构校验 + 单元测试 + 全 demo 数值冒烟，每次 push/PR 全量执行。
+
+v1.1 把 skill 栈从十个扩展到十四个（`aer-literature`、`aer-paper-body`、`aer-consistency`、`aer-referee-sim`），并确立 12 步带门工作流。
 
 ---
 
@@ -45,6 +69,15 @@ Top-5 经济学期刊的硬约束在生命科学类期刊中并不存在：
 
 通用的 "scientific writing" skill（例如 [Nature-Paper-Skills](https://github.com/Boom5426/Nature-Paper-Skills)、[nature-skills](https://github.com/Yuan1z0825/nature-skills)）通常覆盖不到这些约束。
 
+### 与相邻项目的诚实对比
+
+| 项目 | 定位 | 与 AER-Skills 的差异 |
+|---|---|---|
+| Nature/generic writing skills | 生命科学写作 skill 包 | 无 top-5 经济学硬约束；无机器强制的质量门 |
+| Econometrics-Agent 等动态计量 agent | 运行时：选工具、跑代码 | 只覆盖"估计"一站；不管选题、文献、写作、审稿、投稿。AER-Skills 通过 `aer-statspai` 与这类引擎互补 |
+| open_deep_research 等深研 agent | 通用研究综述 | 其 groundedness 评估思想在这里被落成硬门，但它不产出可投稿的经济学稿件 |
+| **AER-Skills** | **从选题到 R&R 的全生命周期 skill 栈** | **每条设计原则都有对应的机器门：引用可验证、数值可复核、工具已验证、文档质量有下限，全部由 CI 强制**（见[质量记分卡](docs/quality-scorecard.md)） |
+
 ---
 
 ## 快速上手
@@ -62,7 +95,7 @@ Top-5 经济学期刊的硬约束在生命科学类期刊中并不存在：
 /reload-plugins
 ```
 
-之后十四个 skill 会全部自动可用。
+之后十五个 skill 会全部自动可用。
 
 ### 方式 B — 脚本安装
 
@@ -77,8 +110,9 @@ python3 scripts/install_skills.py claude
 python3 scripts/install_skills.py codex
 ```
 
-安装脚本会复制完整 skill 目录。更新已有安装时加 `--replace`，正式复制前可用
-`--dry-run` 预览计划中的复制操作。如果想用 skill 引用到的 `templates/` 和
+安装脚本会复制完整 skill 目录（含每个 skill 捆绑的 `references/` 深度文件），
+核心指引安装后即自包含。更新已有安装时加 `--replace`，正式复制前可用
+`--dry-run` 预览计划中的复制操作。如果还想用 skill 引用到的 `templates/` 和
 `examples/` 资源，请保留这个 cloned repository。
 
 ### 第一个提示词
@@ -135,6 +169,7 @@ aer-topic-selection
 | [`aer-topic-selection`](skills/aer-topic-selection/SKILL.md) | Top-5 标准检测、新颖性审计、AER/Insights/AEJ 路由。 |
 | [`aer-literature`](skills/aer-literature/SKILL.md) | 最近邻论文地图、定位策略、引用完整性协议 — 每条文献都核验，杜绝幻觉引用。 |
 | [`aer-identification`](skills/aer-identification/SKILL.md) | DiD（错时）、IV（弱 IV 稳健）、RDD、SCM、shift-share/Bartik。 |
+| [`aer-preregistration`](skills/aer-preregistration/SKILL.md) | 实验/一手数据的事前门：预分析计划（PAP）、功效/最小可检测效应（MDE）定样本量、AEA RCT Registry 注册、预设 vs 探索性区分。 |
 | [`aer-robustness`](skills/aer-robustness/SKILL.md) | 稳健性、异质性、机制、安慰剂 — 提前回应审稿人。 |
 | [`aer-paper-body`](skills/aer-paper-body/SKILL.md) | 正文各节写作 — 制度背景、数据、实证策略、"结论先行"的结果叙述、效应量解释、机制、结论。 |
 | [`aer-introduction`](skills/aer-introduction/SKILL.md) | Keith Head 五段式引言公式 + 100 词摘要起草。 |
@@ -213,6 +248,11 @@ make smoke-examples
 默认模式会跳过缺少可选依赖的 demo；发布前用 `--strict-deps`，让任何缺失依赖或失败断言
 直接返回非零状态。
 
+质量工具自身也被测试：`make test` 运行 `tests/` 下的 272 个封闭单元测试（无网络、无重依赖），
+覆盖校验器、引用核验器、skill 审计器、冒烟运行器、脚手架与安装器。
+`make scorecard` 重新生成[质量记分卡](docs/quality-scorecard.md)；preflight 会在记分卡
+与实测状态漂移时失败。
+
 `make preflight` 还运行引用完整性门（`verify_citations.py --selftest`）：用 gold set
 离线核验，确保 `references.bib` 与其录制的 Crossref/OpenAlex 元数据一致——把"任何引用
 都不能凭记忆写"从原则变成可复跑的检查。对照线上索引核验用 `make verify-citations-online`，
@@ -228,6 +268,7 @@ make smoke-examples
 
 | 文件 | 展示什么 |
 |---|---|
+| [`examples/end-to-end-walkthrough.md`](examples/end-to-end-walkthrough.md) | **从这里开始** — 同一篇虚构论文走完全部 12 个工作流步骤：每一步用哪个 skill、过哪道门、留下什么产物，并把其余示例串成一条完整路线 |
 | [`examples/aer-exemplars.md`](examples/aer-exemplars.md) | 经典论文（Card-Krueger、AJR、ADH、Dell、Chetty-Hendren、Abadie、BDGK、Karlan-List …）逐一映射到各 skill，附 openICPSR / Dataverse 链接 |
 | [`examples/modern-aer-exemplars.md`](examples/modern-aer-exemplars.md) | **30+ 篇近期（2018-2025）论文，按 13 个子领域组织** — Labor、Public、Development、Trade、Macro、IO、Health、Environment、Urban、Education、Finance、Political Economy、Social Networks — 外加现代识别方法工具箱，每篇都带 deposit 链接 |
 | [`examples/intro-example.md`](examples/intro-example.md) | 完整的 Keith Head 五段式引言 + 97 词摘要，并附一个"不该这么写"的反例 |
@@ -242,6 +283,19 @@ make smoke-examples
 | [`examples/shift-share-demo/`](examples/shift-share-demo/) | 可运行的 Python 模拟：shift-share/Bartik 推断应落在 shock（行业）层面而非地区层面——地区聚类标准误会过度拒绝 |
 | [`examples/few-clusters-demo/`](examples/few-clusters-demo/) | 可运行的 Python 模拟：聚类数较少时聚类稳健 t 检验会过度拒绝，wild cluster bootstrap 可恢复名义检验水平 |
 | [`examples/multiple-testing-demo/`](examples/multiple-testing-demo/) | 可运行的 Python 模拟：检验多个结果变量会抬高族系误差率，Bonferroni/Holm 校正可在保留功效的同时将其控制住 |
+| [`examples/spec-curve-demo/`](examples/spec-curve-demo/) | 可运行的 Python 模拟：只报告某个"偏好"设定会误导，规格曲线置换检验才是诚实的联合推断 |
+| [`examples/oster-ovb-demo/`](examples/oster-ovb-demo/) | 可运行的 Python 模拟：系数稳定本身并不能排除遗漏变量偏误，必须用 R² 变动来缩放（Oster δ） |
+| [`examples/honest-did-demo/`](examples/honest-did-demo/) | 可运行的 Python 模拟：看似平坦的事前趋势会让朴素平行趋势 CI 欠覆盖，honest DiD 相对幅度边界可恢复覆盖 |
+| [`examples/dml-plr-demo/`](examples/dml-plr-demo/) | 可运行的 Python 模拟：灵活的 ML 预测本身不是因果推断——非正交 plug-in 以可推知的因子持续衰减，DML 正交化 + 交叉拟合恢复真值且覆盖率诚实 |
+| [`examples/randomization-inference-demo/`](examples/randomization-inference-demo/) | 可运行的 Python 模拟：小样本高杠杆实验里稳健标准误 t 检验会过度拒绝，Fisher 随机化检验尺寸精确且保留功效 |
+| [`examples/qte-demo/`](examples/qte-demo/) | 可运行的 Python 模拟：均值效应为零也可能掩盖大幅分布效应——分位数处理效应复原解析 QTE 曲线，OLS 什么都看不见 |
+| [`examples/lp-did-demo/`](examples/lp-did-demo/) | 可运行的 Python 模拟：错时采纳 + 异质动态下合并 TWFE 事件研究被污染，LP-DiD 用干净对照恢复真实动态路径 |
+| [`examples/bunching-demo/`](examples/bunching-demo/) | 可运行的 Python 模拟：税收 kink 处的超额质量如何识别收入弹性（Saez），含 oracle/可行反事实对比与两个证伪世界 |
+| [`examples/matrix-completion-demo/`](examples/matrix-completion-demo/) | 可运行的 Python 模拟：交互固定效应下 DiD 存在结构性偏差，低秩矩阵补全插补恢复真值——并演示秩敏感性这一失效模式 |
+| [`examples/sun-abraham-demo/`](examples/sun-abraham-demo/) | 可运行的 Python 模拟：异质动态下朴素动态 TWFE 事件研究是被污染的跨队列混合，Sun-Abraham 交互加权估计量在单个饱和回归内恢复真实动态路径 |
+| [`examples/lee-bounds-demo/`](examples/lee-bounds-demo/) | 可运行的 Python 模拟：差异性流失（differential attrition）破坏点识别，Lee (2009) 修剪边界给出"始终被观测"子总体效应的有效区间——正确答案是一个区间而非一个数 |
+| [`examples/sensitivity-rv-demo/`](examples/sensitivity-rv-demo/) | 可运行的 Python 模拟：系数稳定并不能约束遗漏变量偏误，Cinelli-Hazlett 稳健值（robustness value）报告混淆因子需达到的偏 R² 才能推翻结论 |
+| [`examples/power-mde-demo/`](examples/power-mde-demo/) | 可运行的 Python 模拟：解析最小可检测效应恰好是目标功效对应的效应量，功效不足的设计会夸大它侥幸检出的估计（Type-M 夸大） |
 
 ---
 
@@ -260,12 +314,17 @@ make smoke-examples
 
 关键参考文档：
 
+- [Roadmap](docs/roadmap.md) — "全网第一自动实证 repo" 的操作性定义与月度冲刺计划
+- [Quality scorecard](docs/quality-scorecard.md) — 机器生成的全门通过状态一页汇总
+  （`make scorecard` 重新生成，preflight 防漂移）
 - [Academic Research Skills reference review](docs/academic-research-skills-review.md) —
   本轮参考外部 ARS 仓库后的取舍与本地改动记录
 - [Desk-rejection audit](docs/desk-rejection-audit.md) — 从编辑/审稿人视角做的
   投稿前 no-go 检查
 - [Methods reference](docs/methods-reference.md) — 估计量默认值、诊断、包调用，
   以及 BibTeX key
+- [Methods coverage matrix](docs/methods-coverage-matrix.md) — 每个方法到"可运行
+  demo × skill × 参考文献 × StatsPAI 工具"的一页映射
 - [Style guide](docs/style-guide.md) — 经济学论文的句子与段落级文风规则，
   外加 AI 痕迹清除清单
 - [Referee report rubric](docs/referee-report-rubric.md) — `aer-referee-sim`
@@ -289,10 +348,12 @@ AER-Skills/
 ├── README.md               (中文，主入口)
 ├── README.en.md            (英文，完整版)
 ├── LICENSE                 (MIT)
-├── Makefile                (校验与安装快捷命令)
+├── CHANGELOG.md            (版本历史)
+├── CITATION.cff            (软件引用元数据)
+├── Makefile                (校验、测试与安装快捷命令)
 ├── CONTRIBUTING.md         (并发 agent 工作流)
 ├── .github/
-│   └── workflows/ci.yml    (仓库校验)
+│   └── workflows/ci.yml    (结构校验 + 单元测试 + demo 数值冒烟)
 ├── .claude-plugin/
 │   ├── plugin.json         (插件清单)
 │   └── marketplace.json    (Claude Code marketplace 条目)
@@ -304,18 +365,23 @@ AER-Skills/
 │   ├── glossary.md
 │   ├── installation-claude.md
 │   ├── installation-codex.md
+│   ├── launch-kit/             (发布宣发材料包)
 │   ├── methods-reference.md
+│   ├── methods-coverage-matrix.md
 │   ├── pnas-nexus-publication-plan.md
 │   ├── pnas-nexus-submission-checklist.md
+│   ├── quality-scorecard.md    (机器生成的门状态汇总)
 │   ├── referee-report-rubric.md
+│   ├── roadmap.md              (月度冲刺路线图)
 │   ├── source-register.md
 │   ├── style-guide.md
 │   └── workflow-map.md
-├── skills/                 (14 个 skill 目录 — SKILL.md + agents/openai.yaml)
+├── skills/                 (15 个 skill 目录 — SKILL.md + agents/openai.yaml)
 │   ├── aer-workflow/
 │   ├── aer-topic-selection/
 │   ├── aer-literature/
 │   ├── aer-identification/
+│   ├── aer-preregistration/
 │   ├── aer-robustness/
 │   ├── aer-paper-body/
 │   ├── aer-introduction/
@@ -332,16 +398,21 @@ AER-Skills/
 │   └── python/
 ├── scripts/
 │   ├── install_skills.py
+│   ├── quality_scorecard.py    (记分卡生成器 + 漂移门)
+│   ├── run_example_smoke.py    (demo 数值冒烟门)
 │   ├── run_skillopt_gate.py    (SkillOpt 路由门)
 │   ├── scaffold_project.py
 │   ├── skill_audit.py          (SkillOpt 文档质量审计)
 │   ├── validate_repo.py
 │   ├── verify_citations.py     (引用完整性核验器)
 │   └── citation_gold/          (离线 gold set + 录制的索引响应)
+├── tests/                  (质量工具的单元测试，make test)
 └── examples/
+    ├── end-to-end-walkthrough.md
     ├── aer-exemplars.md
     ├── intro-example.md
     ├── rebuttal-example.md
+    ├── dml-plr-demo/           (以及其余 19 个可运行 demo)
     └── replication-package-skeleton/
         ├── data/codebook/source-register.md
         ├── docs/exhibit-register.md

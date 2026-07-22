@@ -197,6 +197,11 @@ Fix-and-rerun until all PASS. The report travels with the handoff so
 
 ## Repository Resources
 
+Bundled with the installed skill, no repository checkout needed --- read it
+before the repo resources below:
+
+- `references/audit-checklist.md` --- manual audit passes plus what the bundled script does and does not catch
+
 When working from the AER-skills repository or plugin bundle, load only the
 relevant resource:
 

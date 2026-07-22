@@ -27,6 +27,7 @@ andrews_stock_sun_2019, lee_mccrary_moreira_porter_2022, stock_yogo_2005.
 
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -38,6 +39,9 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 from linearmodels.iv import IV2SLS
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from _aer_numeric_check import numeric_check  # noqa: E402
 
 SEED = 20260101
 N = 200
@@ -187,9 +191,9 @@ def main() -> int:
     # ---- assertions: the demo is also a test ----
     strong = tbl.set_index("instrument").loc["strong"]
     weakest = tbl.set_index("instrument").loc["very weak"]
-    assert strong["tsls_reject_rate"] < 0.08, "2SLS should be ~5% with a strong instrument"
-    assert weakest["tsls_reject_rate"] > 0.10, "2SLS should over-reject when weak"
-    assert (tbl["ar_reject_rate"] < 0.075).all(), "AR should keep ~nominal size everywhere"
+    numeric_check("2SLS size with a strong instrument", strong["tsls_reject_rate"], hi=0.08)
+    numeric_check("2SLS over-rejects when the instrument is weak", weakest["tsls_reject_rate"], lo=0.10)
+    numeric_check("Anderson-Rubin keeps ~nominal size (max over F)", tbl["ar_reject_rate"].max(), hi=0.075)
     print("\nAll assertions passed: 2SLS size explodes when weak; AR stays at nominal.")
     return 0
 

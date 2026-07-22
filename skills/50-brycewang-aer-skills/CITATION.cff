@@ -1,0 +1,36 @@
+cff-version: 1.2.0
+message: "If you use AER-Skills in your research workflow, please cite it as below."
+type: software
+title: "AER-Skills: an identification-first agent skill stack for top-5 economics manuscripts"
+abstract: >-
+  A fifteen-skill agent bundle covering the full American Economic Review
+  manuscript lifecycle — topic selection, literature positioning with citation
+  verification, causal identification, experimental pre-registration with
+  power/MDE sizing, referee-anticipating robustness, body-section drafting,
+  introductions, tables and figures, full-manuscript consistency audits,
+  adversarial referee simulation, AEA-compliant replication packages, submission
+  preflight, and R&R rebuttals — with self-verifying quality gates
+  (numeric-correctness contracts on every runnable demo, Crossref-grounded
+  citation verification, validated tool bindings, and referee-verdict
+  calibration) enforced in continuous integration.
+authors:
+  - family-names: Wang
+    given-names: Bryce
+    email: brycew6m@stanford.edu
+repository-code: "https://github.com/brycewang-stanford/AER-Skills"
+url: "https://github.com/brycewang-stanford/AER-Skills"
+license: MIT
+version: 1.5.0
+date-released: 2026-07-08
+keywords:
+  - economics
+  - econometrics
+  - causal inference
+  - american economic review
+  - difference-in-differences
+  - instrumental variables
+  - regression discontinuity
+  - synthetic control
+  - replication
+  - agent skills
+  - academic writing

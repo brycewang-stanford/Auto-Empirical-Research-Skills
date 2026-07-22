@@ -13,6 +13,43 @@
       "venue": "Journal of Applied Econometrics",
       "status": "ok"
     },
+    "10.1007/s10683-018-09597-5": {
+      "found": true,
+      "source": "crossref",
+      "title": "Multiple hypothesis testing in experimental economics",
+      "surnames": [
+        "list",
+        "shaikh",
+        "xu"
+      ],
+      "year": 2019,
+      "venue": "Experimental Economics",
+      "status": "ok"
+    },
+    "10.1016/S1573-4471(07)04061-2": {
+      "found": true,
+      "source": "crossref",
+      "title": "Using Randomization in Development Economics Research: A Toolkit",
+      "surnames": [
+        "duflo",
+        "glennerster",
+        "kremer"
+      ],
+      "year": 2007,
+      "venue": "Handbook of Development Economics",
+      "status": "ok"
+    },
+    "10.1016/j.jdeveco.2012.01.002": {
+      "found": true,
+      "source": "crossref",
+      "title": "Beyond baseline and follow-up: The case for more T in experiments",
+      "surnames": [
+        "mckenzie"
+      ],
+      "year": 2012,
+      "venue": "Journal of Development Economics",
+      "status": "ok"
+    },
     "10.1016/j.jeconom.2007.05.005": {
       "found": true,
       "source": "crossref",
@@ -134,6 +171,21 @@
       "venue": "Journal of the American Statistical Association",
       "status": "ok"
     },
+    "10.1080/01621459.2021.1891924": {
+      "found": true,
+      "source": "crossref",
+      "title": "Matrix Completion Methods for Causal Panel Data Models",
+      "surnames": [
+        "athey",
+        "bayati",
+        "doudchenko",
+        "imbens",
+        "khosravi"
+      ],
+      "year": 2021,
+      "venue": "Journal of the American Statistical Association",
+      "status": "ok"
+    },
     "10.1080/01621459.2021.1929245": {
       "found": true,
       "source": "crossref",
@@ -168,6 +220,17 @@
       ],
       "year": 2019,
       "venue": "Journal of Business &amp; Economic Statistics",
+      "status": "ok"
+    },
+    "10.1093/qje/qjy029": {
+      "found": true,
+      "source": "crossref",
+      "title": "Channeling Fisher: Randomization Tests and the Statistical Insignificance of Seemingly Significant Experimental Results*",
+      "surnames": [
+        "young"
+      ],
+      "year": 2019,
+      "venue": "The Quarterly Journal of Economics",
       "status": "ok"
     },
     "10.1093/qje/qjz025": {
@@ -221,6 +284,58 @@
       "venue": "Review of Economic Studies",
       "status": "ok"
     },
+    "10.1111/ectj.12097": {
+      "found": true,
+      "source": "crossref",
+      "title": "Double/debiased machine learning for treatment and structural parameters",
+      "surnames": [
+        "chernozhukov",
+        "chetverikov",
+        "demirer",
+        "duflo",
+        "hansen",
+        "newey",
+        "robins"
+      ],
+      "year": 2018,
+      "venue": "The Econometrics Journal",
+      "status": "ok"
+    },
+    "10.1111/j.1467-937X.2009.00536.x": {
+      "found": true,
+      "source": "crossref",
+      "title": "Training, Wages, and Sample Selection: Estimating Sharp Bounds on Treatment Effects",
+      "surnames": [
+        "lee"
+      ],
+      "year": 2009,
+      "venue": "Review of Economic Studies",
+      "status": "ok"
+    },
+    "10.1111/j.1468-0262.2005.00615.x": {
+      "found": true,
+      "source": "crossref",
+      "title": "Stepwise Multiple Testing as Formalized Data Snooping",
+      "surnames": [
+        "romano",
+        "wolf"
+      ],
+      "year": 2005,
+      "venue": "Econometrica",
+      "status": "ok"
+    },
+    "10.1111/rssb.12348": {
+      "found": true,
+      "source": "crossref",
+      "title": "Making Sense of Sensitivity: Extending Omitted Variable Bias",
+      "surnames": [
+        "cinelli",
+        "hazlett"
+      ],
+      "year": 2020,
+      "venue": "Journal of the Royal Statistical Society Series B: Statistical Methodology",
+      "status": "ok"
+    },
     "10.1146/annurev-economics-080218-025643": {
       "found": true,
       "source": "crossref",
@@ -231,6 +346,17 @@
         "sun"
       ],
       "year": 2019,
+      "venue": "Annual Review of Economics",
+      "status": "ok"
+    },
+    "10.1146/annurev-economics-080315-015234": {
+      "found": true,
+      "source": "crossref",
+      "title": "Bunching",
+      "surnames": [
+        "kleven"
+      ],
+      "year": 2016,
       "venue": "Annual Review of Economics",
       "status": "ok"
     },
@@ -293,6 +419,17 @@
         "gardeazabal"
       ],
       "year": 2003,
+      "venue": "American Economic Review",
+      "status": "ok"
+    },
+    "10.1257/0002828053828518": {
+      "found": true,
+      "source": "crossref",
+      "title": "Estimation and Inference of Impulse Responses by Local Projections",
+      "surnames": [
+        "jorda"
+      ],
+      "year": 2005,
       "venue": "American Economic Review",
       "status": "ok"
     },
@@ -405,6 +542,54 @@
       ],
       "year": 2021,
       "venue": "Journal of Economic Literature",
+      "status": "ok"
+    },
+    "10.1257/pol.2.3.180": {
+      "found": true,
+      "source": "crossref",
+      "title": "Do Taxpayers Bunch at Kink Points?",
+      "surnames": [
+        "saez"
+      ],
+      "year": 2010,
+      "venue": "American Economic Journal: Economic Policy",
+      "status": "ok"
+    },
+    "10.2307/1912705": {
+      "found": true,
+      "source": "crossref",
+      "title": "Root-N-Consistent Semiparametric Regression",
+      "surnames": [
+        "robinson"
+      ],
+      "year": 1988,
+      "venue": "Econometrica",
+      "status": "ok"
+    },
+    "10.2307/1913643": {
+      "found": true,
+      "source": "crossref",
+      "title": "Regression Quantiles",
+      "surnames": [
+        "koenker",
+        "bassett"
+      ],
+      "year": 1978,
+      "venue": "Econometrica",
+      "status": "ok"
+    },
+    "10.3386/w31184": {
+      "found": true,
+      "source": "crossref",
+      "title": "A Local Projections Approach to Difference-in-Differences",
+      "surnames": [
+        "dube",
+        "girardi",
+        "jorda",
+        "taylor"
+      ],
+      "year": 2023,
+      "venue": "",
       "status": "ok"
     },
     "10.3982/ecta11757": {

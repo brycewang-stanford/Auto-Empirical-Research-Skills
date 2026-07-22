@@ -804,7 +804,7 @@
       "origin": "first-party upstream mirror",
       "path": "skills/50-brycewang-aer-skills",
       "security_review": "SECURITY-SCAN-REPORT.md",
-      "skill_count": 14,
+      "skill_count": 15,
       "source_confidence": "high",
       "source_url": "https://github.com/brycewang-stanford/AER-skills",
       "sync": "weekly GitHub Actions sync",

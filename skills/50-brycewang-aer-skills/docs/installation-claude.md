@@ -12,9 +12,11 @@ python3 scripts/install_skills.py claude
 
 Restart Claude Code (or run `/reload-plugins` if your install supports it).
 
-The installer copies the full skill directories. Keep the cloned repository
-available if you want the `templates/` and `examples/` resources referenced by
-the skills.
+The installer copies the full skill directories, including each skill's
+bundled `references/` depth files, so the core guidance is self-contained
+after installation. Keep the cloned repository available if you also want the
+`templates/`, `examples/`, and repo-level `docs/` resources referenced by the
+skills.
 
 To preview the copy without writing files:
 
@@ -57,7 +59,7 @@ In Claude Code, ask:
 List available skills matching "aer-".
 ```
 
-You should see all nine: `aer-workflow`, `aer-topic-selection`, `aer-identification`, `aer-robustness`, `aer-introduction`, `aer-tables-figures`, `aer-replication`, `aer-submission`, `aer-rebuttal`.
+You should see all fifteen: `aer-workflow`, `aer-topic-selection`, `aer-literature`, `aer-identification`, `aer-preregistration`, `aer-robustness`, `aer-paper-body`, `aer-introduction`, `aer-tables-figures`, `aer-consistency`, `aer-referee-sim`, `aer-replication`, `aer-submission`, `aer-rebuttal`, `aer-statspai`.
 
 ## First Prompt
 

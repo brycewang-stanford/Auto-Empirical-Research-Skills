@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "name": "aer-skills",
-  "version": "1.1.0",
+  "version": "1.5.0",
   "description": "An opinionated agent skill stack for top-5 economics manuscripts targeted at AER, AER: Insights, and AEJ.",
   "owner": {
     "name": "Bryce Wang",
@@ -13,9 +13,9 @@
   "plugins": [
     {
       "name": "aer-skills",
-      "version": "1.1.0",
+      "version": "1.5.0",
       "source": "./",
-      "description": "Fourteen-skill bundle covering the AER manuscript lifecycle: topic selection, literature positioning with citation verification, identification, robustness, body-section drafting, introduction, tables/figures, manuscript consistency audit, adversarial referee simulation, replication, submission, rebuttal, and the workflow router, plus the optional StatsPAI implementation engine. Ships with Stata, R, and Python templates plus replication-package skeleton and classic-paper exemplars.",
+      "description": "Fifteen-skill bundle covering the AER manuscript lifecycle: topic selection, literature positioning with citation verification, identification, experimental pre-registration with power/MDE sizing, robustness, body-section drafting, introduction, tables/figures, manuscript consistency audit, adversarial referee simulation, replication, submission, rebuttal, and the workflow router, plus the optional StatsPAI implementation engine. Ships with Stata, R, and Python templates plus replication-package skeleton and classic-paper exemplars.",
       "author": {
         "name": "Bryce Wang",
         "email": "brycew6m@stanford.edu"
@@ -41,6 +41,7 @@
         "skills/aer-topic-selection",
         "skills/aer-literature",
         "skills/aer-identification",
+        "skills/aer-preregistration",
         "skills/aer-robustness",
         "skills/aer-paper-body",
         "skills/aer-introduction",

@@ -200,6 +200,11 @@ no blocking comments, is the exit condition.
 
 ## Repository Resources
 
+Bundled with the installed skill, no repository checkout needed --- read it
+before the repo resources below:
+
+- `references/scoring-rubric.md` --- anchored 0-5 rubric, verdict mapping, desk-screen and report templates
+
 When working from the AER-skills repository or plugin bundle, load only the
 relevant resource:
 

@@ -115,14 +115,20 @@ execution surface.
 
 | Strategy | Modern default (see `aer-identification`) | StatsPAI entry point |
 |---|---|---|
-| Staggered DiD | Callaway-Sant'Anna ATT(g,t); never raw TWFE | `callaway_santanna`, `aggte`, `did_imputation`, `sun_abraham` |
+| Staggered DiD | Callaway-Sant'Anna ATT(g,t); never raw TWFE | `callaway_santanna`, `aggte`, `did_imputation`, `sun_abraham`, `did_multiplegt`, `lp_did` |
 | Forbidden-comparison check | Goodman-Bacon decomposition | `bacon_decomposition`, `bacon_plot` |
 | Event study / pre-trends | Joint pre-period test, not just the plot | `event_study`, `pretrends_test`, `honest_did` |
 | IV / weak instruments | Anderson-Rubin, not first-stage F > 10 | `ivreg`, `anderson_rubin_ci`, `effective_f_test`, `tF_adjustment` |
 | Shift-share / Bartik | Rotemberg weights or shock-level inference | `bartik` |
 | RDD | Local-linear, MSE-optimal bandwidth, RBC CI | `rdrobust`, `rdbwselect`, `rdplot`, `rddensity` (McCrary) |
 | Synthetic control | Placebo inference; modern variants | `synth`, `gsynth`, `augsynth`, `sdid`, `synth_time_placebo`, `synth_loo` |
-| DML / causal ML | Cross-fit nuisance; honest CIs | `dml`, `causal_forest`, `metalearner`, `tmle` |
+| Factor-model counterfactuals | Interactive FE / matrix completion for larger treated blocks | `interactive_fe`, `matrix_completion` |
+| Bunching / kink designs | Excess mass over a polynomial counterfactual | `bunching`, `notch` |
+| DML / causal ML | Cross-fit nuisance; honest CIs | `dml`, `causal_forest`, `metalearner`, `tmle`, `aipw` |
+| Distributional effects | Quantile treatment effects when the mean hides the action | `qte` |
+| Robustness / few-cluster inference | Specification curve; cluster-robust variance; exact randomization tests | `spec_curve`, `wild_cluster_bootstrap`, `twoway_cluster`, `conley`, `ri_test` |
+| Sensitivity to confounding / multiplicity | Oster δ-R²; Cinelli-Hazlett robustness value; FWER control | `oster_delta`, `oster_bounds`, `robustness_value`, `romano_wolf` |
+| Partial identification under attrition | Lee (2009) trimming bounds when selection is differential | `lee_bounds` |
 
 When in doubt about *whether* an estimator is appropriate, that decision belongs
 to `aer-identification`. This table is for *how* to run the one you've chosen.
@@ -140,6 +146,8 @@ re-specify the model:
 
 - `honest_did_from_result` — Rambachan-Roth (2023) honest bounds for DiD
 - `sensitivity_from_result` — Oster (2019) δ / unobserved-confounding bounds
+- `robustness_value` — Cinelli-Hazlett (2020) partial-R² robustness value and bias factor
+- `lee_bounds` — Lee (2009) trimming bounds under differential attrition
 - `evalue_from_result` — E-value for observational designs
 
 ## Publication Export — Hand Off to `aer-tables-figures`

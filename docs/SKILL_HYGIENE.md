@@ -13,12 +13,12 @@ A skill can be **well-formed** (high hygiene) yet **untested for the traps an ap
 
 ## Summary
 
-- Skills scored: **1093**
+- Skills scored: **1094**
 - Mean hygiene score: **99.4/100**
 - Skills with at least one eval scenario: **18** (1.6% of catalog)
 - Total eval-harness scenarios that target a specific skill: **19**
-- Descriptions: 1093 from frontmatter, 0 body-derived, 0 none
-- Tagged with at least one taxonomy facet: 557
+- Descriptions: 1094 from frontmatter, 0 body-derived, 0 none
+- Tagged with at least one taxonomy facet: 558
 
 ## Per-collection: hygiene × eval coverage
 
@@ -77,7 +77,7 @@ A skill can be **well-formed** (high hygiene) yet **untested for the traps an ap
 | `47-conorbronsdon-avoid-ai-writing` | 1 | 100.0 | 100 | 1 | 1 |
 | `48-copaper-ai-chinese-de-aigc` | 1 | 100.0 | 100 | 1 | 1 |
 | `49-voidborne-d-humanize-chinese` | 1 | 100.0 | 100 | 0 | 0 |
-| `50-brycewang-aer-skills` | 14 | 100.0 | 100 | 6 | 10 |
+| `50-brycewang-aer-skills` | 15 | 100.0 | 100 | 6 | 10 |
 | `51-pymc-labs-CausalPy` | 3 | 100.0 | 100 | 1 | 1 |
 | `52-keemanxp-slr-prisma` | 1 | 100.0 | 100 | 1 | 1 |
 | `53-keemanxp-thematic-analysis-skill` | 1 | 100.0 | 100 | 0 | 0 |

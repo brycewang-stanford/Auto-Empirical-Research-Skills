@@ -50,4 +50,5 @@ The methods reference lists the per-stack FWER/FDR tooling (`wyoung`,
 `multcomp`, `statsmodels` `multipletests`); the aer-identification RCT advice
 calls for a multiple-hypothesis correction whenever there is more than one
 primary outcome. Romano-Wolf (2005) resampling and Benjamini-Hochberg (1995)
-FDR are the less conservative alternatives when the outcomes are correlated.
+FDR are the less conservative alternatives when the outcomes are correlated; see
+`romano_wolf_2005` and `list_shaikh_xu_2019` in `../../references.bib`.

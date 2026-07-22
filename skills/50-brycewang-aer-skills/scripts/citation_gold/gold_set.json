@@ -120,5 +120,98 @@
       "year": 2022,
       "expected": "UNRESOLVED"
     }
+  ],
+  "groundedness_comment": "Snippet cases for the prose-level groundedness gate. Each is resolved hermetically against the in-repo references.bib (no network). 'text' is a markdown fragment; 'check_author_year' mirrors the per-surface policy (skills/docs check author-year, examples are key-only); 'expected' is the verdict that must appear, or NONE when the case must produce no failure (false-positive guards).",
+  "groundedness_cases": [
+    {
+      "id": "g01-author-year-grounded",
+      "text": "Use the Oster (2019) bounding argument for selection on unobservables.",
+      "check_author_year": true,
+      "expected": "GROUNDED"
+    },
+    {
+      "id": "g02-author-year-hyphen-grounded",
+      "text": "Exogenous shares (Goldsmith-Pinkham, Sorkin, Swift 2020) -- report Rotemberg weights.",
+      "check_author_year": true,
+      "expected": "GROUNDED"
+    },
+    {
+      "id": "g03-author-year-oxford-comma-grounded",
+      "text": "The imputation estimator of Borusyak, Jaravel, and Spiess (2024) avoids the contamination.",
+      "check_author_year": true,
+      "expected": "GROUNDED"
+    },
+    {
+      "id": "g04-author-year-particle-grounded",
+      "text": "Heterogeneous TWFE bias follows de Chaisemartin and D'Haultfoeuille (2020).",
+      "check_author_year": true,
+      "expected": "GROUNDED"
+    },
+    {
+      "id": "g05-phantom-unknown-author",
+      "text": "A robust correction was proposed by Phantomson and Vapor (2099).",
+      "check_author_year": true,
+      "expected": "PHANTOM_CITATION"
+    },
+    {
+      "id": "g06-phantom-real-author-impossible-year",
+      "text": "See the bounding logic in Oster (2051) for the adjustment.",
+      "check_author_year": true,
+      "expected": "PHANTOM_CITATION"
+    },
+    {
+      "id": "g07-stopword-not-a-citation",
+      "text": "As shown in Table (2019), the coefficients are stable across columns.",
+      "check_author_year": true,
+      "expected": "NONE"
+    },
+    {
+      "id": "g08-bib-key-grounded",
+      "text": "Apply the stepdown of `romano_wolf_2005` to control the FWER.",
+      "check_author_year": true,
+      "expected": "GROUNDED"
+    },
+    {
+      "id": "g09-bib-key-dangling",
+      "text": "Built on the framework of `nonexistent_method_2099` in `../../references.bib`.",
+      "check_author_year": true,
+      "expected": "DANGLING_KEY"
+    },
+    {
+      "id": "g10-fenced-block-ignored",
+      "text": "Example ledger:\n```text\nphantom_author_2099   yes   yes\n```\nThe ledger above is illustrative only.",
+      "check_author_year": true,
+      "expected": "NONE"
+    },
+    {
+      "id": "g11-quoted-varname-not-a-key",
+      "text": "Avoid raw variable names like \"hh_inc_2017\" in published tables.",
+      "check_author_year": true,
+      "expected": "NONE"
+    },
+    {
+      "id": "g12-example-surface-key-only-ignores-author-year",
+      "text": "Hjort and Poulsen (2019) study peer effects in a Kenyan factory.",
+      "check_author_year": false,
+      "expected": "NONE"
+    },
+    {
+      "id": "g13-exempt-marker-skips-line",
+      "text": "A forthcoming result by Newauthor (2099) is discussed. <!-- cite-exempt: working paper, not yet in bib -->",
+      "check_author_year": true,
+      "expected": "NONE"
+    },
+    {
+      "id": "g14-multi-backtick-display-not-a-key",
+      "text": "Write keys in inline code, e.g. `` `oster_2019` ``. A raw column name like \"hh_inc_2017\" must never reach a published table.",
+      "check_author_year": true,
+      "expected": "NONE"
+    },
+    {
+      "id": "g15-multi-backtick-display-dangling-key-caught",
+      "text": "Cite keys in inline code, e.g. `` `ghost_method_2099` ``, which must exist in the bibliography.",
+      "check_author_year": true,
+      "expected": "DANGLING_KEY"
+    }
   ]
 }
