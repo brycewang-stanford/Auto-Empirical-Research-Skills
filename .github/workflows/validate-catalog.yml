@@ -20,7 +20,7 @@ jobs:
           persist-credentials: false
           submodules: recursive
 
-      - uses: actions/setup-python@v6
+      - uses: actions/setup-python@v7
         with:
           # Bumped 3.11 -> 3.12 to match the rest of the workflows
           # (sync-aer-skills, sync-statspai-skill, quality matrix) and to
