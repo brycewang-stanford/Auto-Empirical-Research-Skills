@@ -1,6 +1,6 @@
 ---
 name: StatsPAI_skill
-description: Use when the user asks to run a full empirical / causal analysis in Python — by default in the style of an applied economics paper (AER / QJE / JPE / ReStud / AEJ) with DID / RD / IV / SCM / DML / matching, written-out estimating equation + identifying assumption, Table 1 / Table 2 / event-study figure / robustness gauntlet — OR in epidemiology / public health style (target-trial emulation, IPTW + g-formula + TMLE triplet, Mendelian randomization, KM/AFT survival, E-value sensitivity, STROBE/TRIPOD reporting) — OR in ML causal inference style (DML, S/T/X/R/DR meta-learners, causal forest, Dragonnet/TARNet/CEVAE, BCF, CATE distribution, policy learning, conformal causal, fairness audit, causal discovery). Also covers exporting multi-column regression tables to Word / Excel / LaTeX (Stata outreg2 / esttab / R modelsummary equivalent) and bundling an entire replication appendix into one .docx / .xlsx / .tex file. Triggers on keywords "StatsPAI", "statspai", "AER empirical analysis", "applied micro pipeline", "Table 1 balance", "event study", "first-stage F", "Oster bound", "honest_did", "spec_curve", "callaway_santanna", "dragonnet", "text as treatment", "outreg2 in Python", "regression table to Word/Excel", "sp.regtable", "sp.collect", "sp.paper_tables", "sp.feols", "summary_col", "modelsummary", "AER style table", "QJE style table", "epidemiology pipeline", "target trial emulation", "g-formula", "IPTW", "TMLE", "Mendelian randomization", "STROBE", "TRIPOD", "公共健康", "流行病学", "DML", "double machine learning", "causal forest", "meta-learner", "CATE", "conformal causal", "policy learning", "因果机器学习", "ML causal".
+description: Use when the user asks to run a full empirical / causal analysis in Python — by default in the style of an applied economics paper (AER / QJE / JPE / ReStud / AEJ) with DID / RD / IV / SCM / DML / matching, written-out estimating equation + identifying assumption, Table 1 / Table 2 / event-study figure / robustness gauntlet — OR in epidemiology / public health style (target-trial emulation, IPTW + g-formula + TMLE triplet, Mendelian randomization, KM/AFT survival, E-value sensitivity, STROBE/TRIPOD reporting) — OR in ML causal inference style (DML, S/T/X/R/DR meta-learners, causal forest, Dragonnet/TARNet/CEVAE, BCF, CATE distribution, policy learning, conformal causal, fairness audit, causal discovery) — OR in distributional / gap-decomposition style (Oaxaca–Blinder `sp.oaxaca`, Kitagawa `sp.kitagawa_decompose`, DiNardo–Fortin–Lemieux `sp.dfl_decompose`, Gelbach `sp.gelbach`, Fairlie `sp.fairlie`, RIF / FFL `sp.rif_decomposition`, all reachable through the `sp.decompose` dispatcher). Also covers exporting multi-column regression tables to Word / Excel / LaTeX (Stata outreg2 / esttab / R modelsummary equivalent) and bundling an entire replication appendix into one .docx / .xlsx / .tex file. Triggers on keywords "StatsPAI", "statspai", "AER empirical analysis", "applied micro pipeline", "Table 1 balance", "event study", "first-stage F", "Oster bound", "honest_did", "spec_curve", "callaway_santanna", "dragonnet", "text as treatment", "outreg2 in Python", "regression table to Word/Excel", "sp.regtable", "sp.collect", "sp.paper_tables", "sp.feols", "summary_col", "modelsummary", "AER style table", "QJE style table", "epidemiology pipeline", "target trial emulation", "g-formula", "IPTW", "TMLE", "Mendelian randomization", "STROBE", "TRIPOD", "公共健康", "流行病学", "DML", "double machine learning", "causal forest", "meta-learner", "CATE", "conformal causal", "policy learning", "因果机器学习", "ML causal", "decomposition", "Oaxaca-Blinder", "Kitagawa", "DiNardo-Fortin-Lemieux", "DFL", "Gelbach", "RIF decomposition", "wage gap decomposition", "sp.decompose", "sp.oaxaca".
 triggers:
   - causal inference in python
   - applied microeconomics pipeline
@@ -18,6 +18,12 @@ triggers:
   - spec_curve
   - estimand-first DSL
   - LLM-assisted DAG discovery
+  - Oaxaca-Blinder decomposition
+  - Kitagawa decomposition
+  - DiNardo-Fortin-Lemieux decomposition
+  - Gelbach decomposition
+  - RIF regression decomposition
+  - wage gap decomposition
   - text as treatment
   - export regression table to Word
   - export regression table to Excel
@@ -158,35 +164,7 @@ for ext in ("docx","xlsx","tex","md"): c.save(f"replication/paper.{ext}")
 
 SkillOpt's useful lesson for this skill is procedural, not cosmetic: a skill is a
 bounded decision policy that should improve from rollout evidence while preserving
-verified behavior.
-
-### SkillOpt-style execution gate (task-local card)
-
-Before generating or revising StatsPAI analysis code, compress
-the request into a task-local `best_skill` card:
-
-```text
-best_skill: <mode + design + artifact target>
-train_signal: <current failure, user goal, or missing evidence>
-selection_split: <focal dataset/spec/output used to judge the candidate>
-heldout_gate: <checks the patch must pass beyond the focal example>
-accepted_patterns: <rules to reuse after validation>
-rejected_patterns: <failed shortcuts not to retry without new evidence>
-patch_scope: <one estimator/sample/export/robustness change>
-reject_if: <conditions that force rollback to the last passing spec>
-```
-
-1. **Route card**: record the mode (`econ`, `epi`, or `ml-causal`), estimand, identification design, focal outcome/treatment, StatsPAI install extras, and required artifacts.
-2. **Bounded edit**: change one decision at a time (sample rule, estimator, optional extra, plot return shape, export format, or robustness check). Prefer the smallest patch that can pass validation.
-3. **Selection split discipline**: treat the user's immediate failure or requested artifact as the selection split. Reserve at least one alternate outcome, sample window, estimator family, or export target as the held-out gate.
-4. **Held-out gate**: define checks before running code: row counts, key uniqueness, treatment support, missingness thresholds, expected table/figure files, and one non-focal robustness/specification that the change must not break.
-5. **Reject buffer**: if a candidate spec fails the gate, log the failure, code diff, and gate output in `analysis_log.md`; revert to the last passing spec and do not retry the same unchecked pattern.
-6. **Slow/meta update**: at the end of the task, write down `accepted_patterns` and `rejected_patterns` from the trajectory. Do not widen the canonical project template from a single passing run.
-7. **Promote only after validation**: only turn a one-off fix into reusable project boilerplate after it passes the current data and at least one alternate outcome/sample/specification.
-
-### Mini-rollout loop
-
-Treat every StatsPAI request as a mini rollout:
+verified behavior. Treat every StatsPAI request as a mini rollout:
 
 1. **Route the mode first**: choose Default/AER, Mode A/epi, Mode B/ML-causal, or
    a narrow export-only path from the user's words. Do not run the full paper
@@ -209,6 +187,35 @@ Treat every StatsPAI request as a mini rollout:
 6. **Turn failures into bounded corrections**: if a call raises, fix the smallest
    wrong rule (signature, result type, optional extra, plot return shape) and
    continue from the last verified artifact. Do not rewrite the pipeline wholesale.
+
+### SkillOpt-style execution gate (task-local card)
+
+Before generating or revising StatsPAI analysis code, compress the request into a task-local `best_skill` card:
+
+```text
+best_skill: <mode + design + artifact target>
+train_signal: <current failure, user goal, or missing evidence>
+selection_split: <focal dataset/spec/output used to judge the candidate>
+heldout_gate: <checks the patch must pass beyond the focal example>
+accepted_patterns: <rules to reuse after validation>
+rejected_patterns: <failed shortcuts not to retry without new evidence>
+patch_scope: <one estimator/sample/export/robustness change>
+reject_if: <conditions that force rollback to the last passing spec>
+```
+
+1. **Route card**: record the mode (`econ`, `epi`, or `ml-causal`), estimand, identification design, focal outcome/treatment, StatsPAI install extras, and required artifacts.
+
+2. **Bounded edit**: change one decision at a time (sample rule, estimator, optional extra, plot return shape, export format, or robustness check). Prefer the smallest patch that can pass validation.
+
+3. **Selection split discipline**: treat the user's immediate failure or requested artifact as the selection split. Reserve at least one alternate outcome, sample window, estimator family, or export target as the held-out gate.
+
+4. **Held-out gate**: define checks before running code: row counts, key uniqueness, treatment support, missingness thresholds, expected table/figure files, and one non-focal robustness/specification that the change must not break.
+
+5. **Reject buffer**: if a candidate spec fails the gate, log the failure, code diff, and gate output in `analysis_log.md`; revert to the last passing spec and do not retry the same unchecked pattern.
+
+6. **Slow/meta update**: at the end of the task, write down `accepted_patterns` and `rejected_patterns` from the trajectory. Do not widen the canonical project template from a single passing run.
+
+7. **Promote only after validation**: only turn a one-off fix into reusable project boilerplate after it passes the current data and at least one alternate outcome/sample/specification.
 
 ### Acceptance gates by request type
 

@@ -28,7 +28,7 @@ A family is **covered** when it has both an eval scenario and a benchmark task, 
 | Quantile / distributional effects | 2 | `statspai-quantile-effects` (high) | `qte-recovery` | covered |
 | Shift-share / Bartik IV | 1 | `aer-shiftshare-identification` (high) | `bartik-recovery` | covered |
 | Causal mediation | 8 | `statspai-mediation-assumptions` (high) | `mediation-recovery` | covered |
-| Decomposition (Oaxaca-Blinder) | 0 | `statspai-decomposition` (high) | `decomposition-recovery` | covered |
+| Decomposition (Oaxaca-Blinder) | 1 | `statspai-decomposition` (high) | `decomposition-recovery` | covered |
 | Bayesian methods | 13 | `baygent-bayesian-diagnostics` (high) | `bayesian-recovery` | covered |
 | Survival / duration | 3 | `statspai-survival-assumptions` (high) | `survival-recovery` | covered |
 

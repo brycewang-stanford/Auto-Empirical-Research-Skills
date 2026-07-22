@@ -34,6 +34,7 @@ Paste this snapshot into the GitHub release body and add a hand-written
 - `mediation`: 8
 - `survival`: 3
 - `quantile`: 2
+- `decomposition`: 1
 - `shift-share`: 1
 
 ### Eval scenarios by category
