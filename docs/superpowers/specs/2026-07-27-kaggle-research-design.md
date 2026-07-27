@@ -1,7 +1,7 @@
 # Kaggle Research Integration Design
 
-**Date:** 2026-07-27  
-**Status:** Approved for implementation planning  
+**Date:** 2026-07-27
+**Status:** Approved for implementation planning
 **Target branch:** `feat/kaggle-research-integration`
 
 ## Purpose
