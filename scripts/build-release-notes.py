@@ -54,32 +54,14 @@ TASK_DIR = ROOT / "benchmark" / "tasks"
 OUT = ROOT / "docs" / "RELEASE_NOTES.md"
 BADGE_OUT = ROOT / "docs" / "badges" / "rigor-coverage.json"
 HTML_OUT = ROOT / "docs" / "releases" / "index.html"
+CANONICAL_REPO_SLUG = (
+    "brycewang-stanford/Auto-Empirical-Research-Skills"
+)
 
 
 def _repo_slug() -> str:
-    """Best-effort GitHub owner/repo slug for the HTML 'GitHub releases' link.
-
-    Falls back to a hardcoded default when `git` is unavailable so the page
-    still renders. Maintained by hand in lockstep with the repo URL.
-    """
-    try:
-        import subprocess
-        out = subprocess.check_output(
-            ["git", "remote", "get-url", "origin"],
-            cwd=str(ROOT),
-            stderr=subprocess.DEVNULL,
-            text=True,
-        ).strip()
-    except Exception:
-        return "brycewang-stanford/Auto-Empirical-Research-Skills"
-    s = out
-    for prefix in ("git@github.com:", "https://github.com/", "ssh://git@github.com/"):
-        if s.startswith(prefix):
-            s = s[len(prefix):]
-            break
-    if s.endswith(".git"):
-        s = s[:-4]
-    return s or "brycewang-stanford/Auto-Empirical-Research-Skills"
+    """Return the canonical upstream slug, independent of a contributor fork."""
+    return CANONICAL_REPO_SLUG
 
 
 def load_json(path: Path) -> dict:

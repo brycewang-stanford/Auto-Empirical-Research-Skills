@@ -16,7 +16,12 @@ import subprocess
 import sys
 import unittest
 
-from _helpers import ROOT
+from _helpers import ROOT, load_module
+
+build_release_notes = load_module(
+    "scripts/build-release-notes.py",
+    "aers_build_release_notes",
+)
 
 CHECKABLE = [
     [sys.executable, "scripts/build-coverage-map.py", "--check"],
@@ -31,6 +36,12 @@ CHECKABLE = [
 
 
 class TestGeneratorFreshness(unittest.TestCase):
+    def test_release_page_uses_canonical_upstream_not_contributor_fork(self):
+        self.assertEqual(
+            build_release_notes._repo_slug(),
+            "brycewang-stanford/Auto-Empirical-Research-Skills",
+        )
+
     def test_generators_pass_check_mode_against_committed_tree(self):
         for cmd in CHECKABLE:
             with self.subTest(cmd=" ".join(cmd[1:])):
