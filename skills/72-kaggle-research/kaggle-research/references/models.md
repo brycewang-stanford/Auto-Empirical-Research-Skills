@@ -15,4 +15,3 @@ Model creation, instance/version upload, and deletion are remote mutations.
 Preview first and obtain explicit authorization for the exact target. Writes
 require `--allow-write`; deletes additionally require `--allow-delete` and an
 exact `--confirm-resource`.
-

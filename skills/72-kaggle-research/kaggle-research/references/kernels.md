@@ -15,4 +15,3 @@ version. Do not assume a public notebook is licensed for redistribution.
 Kernel pushes and output publishing are remote writes. First run a dry-run,
 then require explicit user authorization and `--allow-write`. Never put a
 credential in notebook metadata, source, output, or audit logs.
-

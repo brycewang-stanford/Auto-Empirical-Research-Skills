@@ -21,4 +21,3 @@ The runtime resolves the path, rejects traversal outside it, and records file
 size and SHA-256 evidence. Set study-specific size limits before acquiring
 large data. Dataset create/version/delete operations are remote mutations and
 require the explicit write/delete policy flags described in `SKILL.md`.
-

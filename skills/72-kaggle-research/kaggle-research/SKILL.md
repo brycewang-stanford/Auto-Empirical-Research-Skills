@@ -84,4 +84,3 @@ environment. It must remain read/download-only.
   [references/testing-and-safety.md](references/testing-and-safety.md)
 
 Read only the reference page required for the active task.
-

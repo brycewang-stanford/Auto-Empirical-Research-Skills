@@ -16,4 +16,3 @@ competition, file, and message.
 
 Never fabricate a submission result. Preserve the returned submission ID,
 status, score visibility, timestamp, and redacted audit artifact.
-

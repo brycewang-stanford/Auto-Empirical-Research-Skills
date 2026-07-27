@@ -18,4 +18,3 @@ Credential values are external inputs, never research artifacts:
 Authentication failures are classified separately from network/transient and
 general command errors. Correct the external credential configuration; never
 weaken TLS verification or commit a fallback secret.
-

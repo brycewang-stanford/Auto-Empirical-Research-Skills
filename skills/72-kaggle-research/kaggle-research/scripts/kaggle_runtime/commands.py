@@ -14,14 +14,13 @@ READ_ACTIONS = frozenset(
         ("competitions", "submissions"),
         ("datasets", "files"),
         ("datasets", "list"),
-        ("datasets", "metadata"),
         ("datasets", "status"),
         ("datasets", "view"),
         ("kernels", "files"),
         ("kernels", "list"),
+        ("kernels", "logs"),
         ("kernels", "status"),
         ("models", "files"),
-        ("models", "get"),
         ("models", "list"),
     }
 )
@@ -29,10 +28,12 @@ READ_ACTIONS = frozenset(
 DOWNLOAD_ACTIONS = frozenset(
     {
         ("competitions", "download"),
+        ("competitions", "logs"),
+        ("competitions", "replay"),
         ("datasets", "download"),
+        ("datasets", "metadata"),
         ("kernels", "output"),
         ("kernels", "pull"),
-        ("models", "download"),
     }
 )
 
@@ -47,12 +48,51 @@ WRITE_ACTIONS = frozenset(
         ("kernels", "init"),
         ("kernels", "push"),
         ("models", "create"),
+        ("models", "init"),
         ("models", "update"),
     }
 )
 
 DELETE_GROUPS = frozenset(
-    {"competitions", "datasets", "kernels", "models", "model-variations"}
+    {"competitions", "datasets", "kernels", "models"}
+)
+
+GROUP_ALIASES = {
+    "c": "competitions",
+    "d": "datasets",
+    "k": "kernels",
+    "m": "models",
+}
+
+READ_PREFIXES = (
+    ("competitions", "team-submissions"),
+    ("competitions", "episodes"),
+    ("competitions", "pages"),
+    ("competitions", "topics"),
+    ("competitions", "topic-messages"),
+    ("datasets", "topics"),
+    ("kernels", "topics"),
+    ("models", "topics"),
+    ("models", "instances", "files"),
+    ("models", "instances", "list"),
+    ("models", "instances", "versions", "files"),
+    ("models", "instances", "versions", "list"),
+)
+
+DOWNLOAD_PREFIXES = (
+    ("models", "instances", "versions", "download"),
+)
+
+WRITE_PREFIXES = (
+    ("models", "instances", "init"),
+    ("models", "instances", "create"),
+    ("models", "instances", "update"),
+    ("models", "instances", "versions", "create"),
+)
+
+DELETE_PREFIXES = (
+    ("models", "instances", "delete"),
+    ("models", "instances", "versions", "delete"),
 )
 
 SENSITIVE_COMMANDS = frozenset({("auth", "print-access-token")})
@@ -72,19 +112,82 @@ RESOURCE_FLAGS = frozenset(
 
 
 def _group_action(arguments: Sequence[str]) -> tuple[str, str]:
-    if not arguments:
+    normalized = _normalized_arguments(arguments)
+    if not normalized:
         return "", ""
-    group = str(arguments[0]).strip().lower()
+    group = normalized[0]
     if group == "--version":
         return group, ""
-    action = str(arguments[1]).strip().lower() if len(arguments) > 1 else ""
+    action = normalized[1] if len(normalized) > 1 else ""
     return group, action
 
 
+def _normalized_arguments(arguments: Sequence[str]) -> tuple[str, ...]:
+    values = tuple(str(argument).strip().lower() for argument in arguments)
+    if not values:
+        return values
+    normalized = list(values)
+    normalized[0] = GROUP_ALIASES.get(normalized[0], normalized[0])
+    if len(normalized) > 1 and normalized[0] == "models":
+        if normalized[1] in {"i", "variations", "v"}:
+            normalized[1] = "instances"
+        if (
+            len(normalized) > 2
+            and normalized[1] == "instances"
+            and normalized[2] == "v"
+        ):
+            normalized[2] = "versions"
+    return tuple(normalized)
+
+
+def _starts_with(
+    arguments: Sequence[str],
+    prefix: tuple[str, ...],
+) -> bool:
+    return tuple(arguments[: len(prefix)]) == prefix
+
+
+def _has_path_option(arguments: Sequence[str]) -> bool:
+    return any(
+        argument in {"-p", "--path"}
+        or argument.startswith("-p=")
+        or argument.startswith("--path=")
+        for argument in arguments
+    )
+
+
 def classify(arguments: Sequence[str]) -> OperationClass:
-    group, action = _group_action(arguments)
+    normalized = _normalized_arguments(arguments)
+    group, action = _group_action(normalized)
     if group == "--version":
         return OperationClass.READ
+    if any(_starts_with(normalized, prefix) for prefix in DELETE_PREFIXES):
+        return OperationClass.REMOTE_DELETE
+    if any(_starts_with(normalized, prefix) for prefix in DOWNLOAD_PREFIXES):
+        return OperationClass.DOWNLOAD
+    if any(_starts_with(normalized, prefix) for prefix in WRITE_PREFIXES):
+        return OperationClass.REMOTE_WRITE
+    if any(_starts_with(normalized, prefix) for prefix in READ_PREFIXES):
+        return OperationClass.READ
+    if (
+        _starts_with(normalized, ("competitions", "leaderboard"))
+        and any(option in normalized for option in {"-d", "--download"})
+    ):
+        return OperationClass.DOWNLOAD
+    if _starts_with(normalized, ("competitions", "leaderboard")):
+        return OperationClass.READ
+    if _starts_with(normalized, ("models", "get")):
+        return (
+            OperationClass.DOWNLOAD
+            if _has_path_option(normalized)
+            else OperationClass.READ
+        )
+    if _starts_with(normalized, ("models", "instances", "get")):
+        return (
+            OperationClass.DOWNLOAD
+            if _has_path_option(normalized)
+            else OperationClass.READ
+        )
     if (group, action) in DOWNLOAD_ACTIONS:
         return OperationClass.DOWNLOAD
     if action == "delete" and group in DELETE_GROUPS:
@@ -113,8 +216,10 @@ def _extract_delete_resource(arguments: Sequence[str]) -> str | None:
             if str(argument).startswith(prefix):
                 return str(argument)[len(prefix) :]
 
-    if len(arguments) > 2:
-        for argument in arguments[2:]:
+    normalized = _normalized_arguments(arguments)
+    if "delete" in normalized:
+        delete_index = normalized.index("delete")
+        for argument in arguments[delete_index + 1 :]:
             value = str(argument)
             if not value.startswith("-"):
                 return value

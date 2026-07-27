@@ -33,6 +33,104 @@ class CommandClassificationTests(unittest.TestCase):
     def test_version_is_read_only(self):
         self.assertEqual(classify(("--version",)), OperationClass.READ)
 
+    def test_official_group_and_model_aliases_keep_the_same_policy(self):
+        cases = {
+            ("c", "list"): OperationClass.READ,
+            ("d", "download", "-d", "owner/data"): OperationClass.DOWNLOAD,
+            ("k", "delete", "owner/kernel"): OperationClass.REMOTE_DELETE,
+            (
+                "m",
+                "i",
+                "delete",
+                "owner/model/framework/instance",
+            ): OperationClass.REMOTE_DELETE,
+            (
+                "m",
+                "i",
+                "v",
+                "delete",
+                "owner/model/framework/instance/1",
+            ): OperationClass.REMOTE_DELETE,
+        }
+        for arguments, expected in cases.items():
+            with self.subTest(arguments=arguments):
+                self.assertEqual(classify(arguments), expected)
+
+    def test_nested_model_and_metadata_downloads_are_confined(self):
+        downloads = (
+            ("datasets", "metadata", "owner/data"),
+            ("competitions", "replay", "123"),
+            ("competitions", "logs", "123", "0"),
+            ("models", "get", "owner/model", "-p", "metadata"),
+            (
+                "models",
+                "instances",
+                "get",
+                "owner/model/framework/instance",
+                "-p",
+                "metadata",
+            ),
+            (
+                "models",
+                "instances",
+                "versions",
+                "download",
+                "owner/model/framework/instance/1",
+            ),
+        )
+        for arguments in downloads:
+            with self.subTest(arguments=arguments):
+                self.assertEqual(
+                    classify(arguments),
+                    OperationClass.DOWNLOAD,
+                )
+
+        self.assertEqual(
+            classify(("models", "get", "owner/model")),
+            OperationClass.READ,
+        )
+        self.assertEqual(
+            classify(
+                (
+                    "competitions",
+                    "leaderboard",
+                    "competition",
+                    "--show",
+                )
+            ),
+            OperationClass.READ,
+        )
+        self.assertEqual(
+            classify(
+                (
+                    "competitions",
+                    "leaderboard",
+                    "competition",
+                    "--download",
+                )
+            ),
+            OperationClass.DOWNLOAD,
+        )
+
+    def test_nested_read_commands_do_not_require_write_authority(self):
+        reads = (
+            ("competitions", "team-submissions", "123"),
+            ("competitions", "topics", "list", "competition"),
+            ("datasets", "topics", "list", "owner/data"),
+            ("kernels", "logs", "owner/kernel"),
+            ("models", "topics", "list", "owner/model"),
+            (
+                "models",
+                "instances",
+                "versions",
+                "files",
+                "owner/model/framework/instance/1",
+            ),
+        )
+        for arguments in reads:
+            with self.subTest(arguments=arguments):
+                self.assertEqual(classify(arguments), OperationClass.READ)
+
     def test_empty_arguments_are_unknown(self):
         self.assertEqual(classify(()), OperationClass.UNKNOWN)
 
@@ -88,6 +186,44 @@ class CommandAuthorizationTests(unittest.TestCase):
 
         request = CommandRequest(**base, confirm_resource="owner/data")
         self.assertEqual(authorize(request), OperationClass.REMOTE_DELETE)
+
+    def test_nested_model_delete_requires_delete_authority_and_exact_target(self):
+        arguments = (
+            "m",
+            "i",
+            "v",
+            "delete",
+            "owner/model/framework/instance/1",
+        )
+        with self.assertRaisesRegex(RuntimeError, "--allow-delete"):
+            authorize(
+                CommandRequest(
+                    arguments=arguments,
+                    allow_write=True,
+                )
+            )
+        with self.assertRaisesRegex(RuntimeError, "exactly match"):
+            authorize(
+                CommandRequest(
+                    arguments=arguments,
+                    allow_write=True,
+                    allow_delete=True,
+                    confirm_resource="wrong/resource",
+                )
+            )
+        self.assertEqual(
+            authorize(
+                CommandRequest(
+                    arguments=arguments,
+                    allow_write=True,
+                    allow_delete=True,
+                    confirm_resource=(
+                        "owner/model/framework/instance/1"
+                    ),
+                )
+            ),
+            OperationClass.REMOTE_DELETE,
+        )
 
     def test_print_access_token_is_always_rejected(self):
         for allow_write in (False, True):
