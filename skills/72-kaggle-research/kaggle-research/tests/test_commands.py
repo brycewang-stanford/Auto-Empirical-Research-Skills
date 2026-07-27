@@ -105,6 +105,22 @@ class CommandAuthorizationTests(unittest.TestCase):
             authorize(request)
         self.assertEqual(ctx.exception.category, "policy")
 
+    def test_inline_credentials_are_rejected_before_process_start(self):
+        for argv in (
+            ("datasets", "list", "--token", "secret"),
+            ("datasets", "list", "--token=secret"),
+            (
+                "datasets",
+                "list",
+                "--header",
+                "Authorization: Bearer secret",
+            ),
+        ):
+            with self.subTest(argv=argv):
+                with self.assertRaises(KaggleRuntimeError) as ctx:
+                    authorize(CommandRequest(arguments=argv))
+                self.assertEqual(ctx.exception.category, "policy")
+
 
 if __name__ == "__main__":
     unittest.main()

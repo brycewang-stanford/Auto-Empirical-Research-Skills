@@ -3,6 +3,7 @@ from __future__ import annotations
 from collections.abc import Sequence
 
 from .result import CommandRequest, KaggleRuntimeError, OperationClass
+from .security import contains_inline_credential
 
 
 READ_ACTIONS = frozenset(
@@ -127,6 +128,11 @@ def authorize(request: CommandRequest) -> OperationClass:
         raise KaggleRuntimeError(
             "policy",
             "Kaggle arguments cannot contain control characters",
+        )
+    if contains_inline_credential(request.arguments):
+        raise KaggleRuntimeError(
+            "policy",
+            "Credentials must be provided through official Kaggle authentication",
         )
 
     group_action = _group_action(request.arguments)
