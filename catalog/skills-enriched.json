@@ -2,12 +2,12 @@
   "generated_by": "scripts/build-catalog-enrich.py",
   "schema_version": 1,
   "summary": {
-    "skills": 1094,
+    "skills": 1095,
     "mean_quality_score": 99.4,
-    "with_frontmatter_description": 1094,
+    "with_frontmatter_description": 1095,
     "body_derived_description": 0,
     "no_description": 0,
-    "tagged": 558,
+    "tagged": 559,
     "with_eval_coverage": 18,
     "with_eval_coverage_pct": 1.6,
     "total_eval_scenarios": 19
@@ -15,8 +15,8 @@
   "taxonomy": {
     "language": {
       "latex": 88,
+      "python": 50,
       "stata": 50,
-      "python": 49,
       "r": 22
     },
     "method": {
@@ -39,11 +39,11 @@
     },
     "stage": {
       "analysis": 141,
-      "writing": 87,
+      "writing": 88,
       "submission": 80,
       "reproduction": 62,
-      "literature": 60,
-      "citation": 48,
+      "literature": 61,
+      "citation": 49,
       "tables-figures": 42,
       "presentation": 35,
       "ideation": 32,
@@ -22620,6 +22620,32 @@
       "license": "CC-BY-SA-4.0 (repository default)",
       "commercial_use": "share-alike",
       "source_url": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills",
+      "sync": "manual",
+      "eval_coverage": []
+    },
+    {
+      "name": "literature-review-tools",
+      "path": "skills/71-brycewang-lit-review-agent-tools/literature-review-tools/SKILL.md",
+      "collection": "71-brycewang-lit-review-agent-tools",
+      "line_count": 129,
+      "description_effective": "Recommend AND run open-source AI tools, agents, Claude Code / Codex skills, and MCP servers for any stage of a literature review — searching, reading, extracting, synthesizing, screening, citation-checking, and paper writing. Use when the user asks \"what tool should I use to...\" OR \"install/run/use <tool> to ...\" for research/lit-review work: automating a survey or related-work section, PDF→Markdown extraction for LLMs (MinerU/marker/docling), PRISMA / systematic review (ASReview), citation-backed Q&A over PDFs (PaperQA2), wiring papers into Claude/Cursor via MCP (arxiv/paper-search/zotero servers), or chatting with a Zotero library. Ships a launcher (scripts/litrun.py) that installs each tool in an isolated venv and runs it. Curated catalog of 70+ vetted projects. 支持中英文（用于「文献综述工具选型」与「一键安装/运行」）。",
+      "description_source": "frontmatter",
+      "has_references": false,
+      "tags": {
+        "language": [
+          "python"
+        ],
+        "stage": [
+          "citation",
+          "literature",
+          "writing"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "CC0-1.0",
+      "commercial_use": "allowed",
+      "source_url": "https://github.com/brycewang-stanford/lit-review-agent-tools",
       "sync": "manual",
       "eval_coverage": []
     }

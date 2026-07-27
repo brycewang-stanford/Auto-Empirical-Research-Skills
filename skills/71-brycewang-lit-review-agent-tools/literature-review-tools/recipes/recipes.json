@@ -1,0 +1,209 @@
+{
+  "_meta": {
+    "description": "Runnable-tool manifest for litrun.py. Commands verified against upstream READMEs/PyPI (2025-2026). Star counts and the full 70+ catalog live in ../reference/catalog.md; only tools that can be installed & driven programmatically are listed here.",
+    "source": "https://github.com/brycewang-stanford/lit-review-agent-tools"
+  },
+  "tools": [
+    {
+      "id": "mineru",
+      "name": "MinerU",
+      "category": "pdf-extraction",
+      "kind": "python-cli",
+      "repo": "https://github.com/opendatalab/MinerU",
+      "pip": ["mineru[all]"],
+      "entry": "mineru",
+      "example": "mineru -p input.pdf -o ./output -b pipeline",
+      "env": [],
+      "env_optional": [],
+      "notes": "PDF/Office/image -> LLM-ready Markdown/JSON. No API key. GPU optional; add '-b pipeline' for CPU-only. ~16GB RAM recommended."
+    },
+    {
+      "id": "marker",
+      "name": "marker",
+      "category": "pdf-extraction",
+      "kind": "python-cli",
+      "repo": "https://github.com/datalab-to/marker",
+      "pip": ["marker-pdf"],
+      "entry": "marker_single",
+      "example": "marker_single /path/to/file.pdf --output_dir ./output",
+      "env": [],
+      "env_optional": ["GOOGLE_API_KEY"],
+      "notes": "Fast PDF/doc -> Markdown/JSON. No key for base use; '--use_llm' boost needs an LLM key (e.g. GOOGLE_API_KEY). Pulls in PyTorch; GPU recommended. Use 'marker <dir>' for batch."
+    },
+    {
+      "id": "docling",
+      "name": "docling",
+      "category": "pdf-extraction",
+      "kind": "python-cli",
+      "repo": "https://github.com/docling-project/docling",
+      "pip": ["docling"],
+      "entry": "docling",
+      "example": "docling https://arxiv.org/pdf/2206.01062",
+      "env": [],
+      "env_optional": [],
+      "notes": "IBM document parser -> Markdown/JSON/HTML. No API key. Accepts local paths or URLs. Optional VLM pipeline: 'docling --pipeline vlm --vlm-model granite_docling <src>'."
+    },
+    {
+      "id": "paper-qa",
+      "name": "PaperQA2",
+      "category": "rag-qa",
+      "kind": "python-cli",
+      "repo": "https://github.com/Future-House/paper-qa",
+      "pip": ["paper-qa"],
+      "entry": "pqa",
+      "example": "pqa ask 'What methods does this corpus use?'",
+      "env": ["OPENAI_API_KEY"],
+      "env_optional": ["ANTHROPIC_API_KEY", "GEMINI_API_KEY", "CROSSREF_API_KEY", "SEMANTIC_SCHOLAR_API_KEY"],
+      "notes": "Citation-backed RAG QA. Run pqa from a directory containing your PDFs. Needs an LLM key (OpenAI by default; Anthropic/Gemini/local Ollama also supported). Python 3.11+."
+    },
+    {
+      "id": "asreview",
+      "name": "ASReview LAB",
+      "category": "systematic-review",
+      "kind": "python-cli",
+      "repo": "https://github.com/asreview/asreview",
+      "pip": ["asreview"],
+      "entry": "asreview",
+      "example": "asreview lab",
+      "env": [],
+      "env_optional": [],
+      "notes": "Active-learning screening for PRISMA/systematic reviews. 'asreview lab' launches a local web UI in the browser. Imports CSV/RIS/XLSX. No API key, no GPU. Python 3.10+."
+    },
+    {
+      "id": "gpt-researcher",
+      "name": "GPT Researcher",
+      "category": "deep-research",
+      "kind": "python-lib",
+      "repo": "https://github.com/assafelovic/gpt-researcher",
+      "pip": ["gpt-researcher"],
+      "entry": null,
+      "example": "python -c \"import asyncio; from gpt_researcher import GPTResearcher; r=GPTResearcher(query='YOUR TOPIC'); asyncio.run(r.conduct_research()); print(asyncio.run(r.write_report()))\"",
+      "env": ["OPENAI_API_KEY", "TAVILY_API_KEY"],
+      "env_optional": ["OPENAI_BASE_URL"],
+      "notes": "Async deep-research library (no console script). Needs BOTH OPENAI_API_KEY and TAVILY_API_KEY. For the web UI, clone the repo and run 'python -m uvicorn main:app --reload'.",
+      "clone_for_ui": true,
+      "ui": {
+        "requirements": ["requirements.txt"],
+        "write_env": true,
+        "run": ["python", "-m", "uvicorn", "main:app", "--reload"],
+        "url": "http://localhost:8000",
+        "notes": "FastAPI + web frontend. Reads keys from a .env in the repo root (litrun writes it for you). Serves at :8000."
+      }
+    },
+    {
+      "id": "storm",
+      "name": "STORM / Co-STORM",
+      "category": "deep-research",
+      "kind": "python-lib",
+      "repo": "https://github.com/stanford-oval/storm",
+      "pip": ["knowledge-storm"],
+      "entry": null,
+      "example": "See repo examples/ — instantiate STORMWikiRunner with an LM + retriever, then runner.run(topic=..., do_research=True, do_generate_article=True)",
+      "env": ["OPENAI_API_KEY", "YDC_API_KEY"],
+      "env_optional": ["BING_SEARCH_API_KEY"],
+      "notes": "Wikipedia-style survey generator (library). Needs an LLM key AND a retriever key (YDC_API_KEY from You.com, or Bing). Runnable demos + Streamlit UI live in the cloned repo's examples/frontend.",
+      "clone_for_ui": true,
+      "ui": {
+        "requirements": ["requirements.txt", "frontend/demo_light/requirements.txt"],
+        "write_env": false,
+        "run": ["streamlit", "run", "frontend/demo_light/storm.py"],
+        "url": "http://localhost:8501",
+        "notes": "Streamlit demo (frontend/demo_light). Enter your OpenAI + You.com (YDC) keys in the app's sidebar / secrets. Serves at :8501."
+      }
+    },
+    {
+      "id": "scholarly",
+      "name": "scholarly",
+      "category": "api-client",
+      "kind": "python-lib",
+      "repo": "https://github.com/scholarly-python-package/scholarly",
+      "pip": ["scholarly"],
+      "entry": null,
+      "example": "python -c \"from scholarly import scholarly; print(next(scholarly.search_author('Steven A Cholewiak')))\"",
+      "env": [],
+      "env_optional": [],
+      "notes": "Google Scholar client (library). No key, but Scholar blocks bare IPs on search_pubs/citedby — you typically need a proxy (built-in ProxyGenerator / ScraperAPI)."
+    },
+    {
+      "id": "pyalex",
+      "name": "pyalex",
+      "category": "api-client",
+      "kind": "python-lib",
+      "repo": "https://github.com/J535D165/pyalex",
+      "pip": ["pyalex"],
+      "entry": null,
+      "example": "python -c \"import pyalex; pyalex.config.email='you@example.com'; from pyalex import Works; print(Works()['W2741809807']['title'])\"",
+      "env": [],
+      "env_optional": ["OPENALEX_API_KEY"],
+      "notes": "OpenAlex API client (library). Set pyalex.config.email for the polite pool. As of ~2026 OpenAlex asks for an API key for higher limits: pyalex.config.api_key='...'."
+    },
+    {
+      "id": "arxiv-fetch",
+      "name": "arXiv search & download",
+      "category": "retrieval",
+      "kind": "python-script",
+      "repo": "https://github.com/lukasschwab/arxiv.py",
+      "pip": ["arxiv"],
+      "script": "fetch_arxiv.py",
+      "example": "arxiv-fetch --query 'retrieval augmented generation' --max 10 --outdir ./papers",
+      "env": [],
+      "env_optional": [],
+      "notes": "Bundled fetcher (uses the free 'arxiv' package). Searches arXiv and downloads PDFs + a manifest.json into --outdir. No API key. Query supports cat:, AND/OR. Feeds retrieval workflows into PaperQA2."
+    },
+    {
+      "id": "arxiv-mcp-server",
+      "name": "arxiv-mcp-server",
+      "category": "mcp-server",
+      "kind": "mcp-server",
+      "repo": "https://github.com/blazickjp/arxiv-mcp-server",
+      "pip": [],
+      "entry": null,
+      "env": [],
+      "env_optional": [],
+      "notes": "MCP server (stdio) to search/download/analyze arXiv. Runs via uvx (no install needed). Registered in an MCP client, not queried directly.",
+      "mcp": {
+        "key": "arxiv",
+        "launcher": "uvx",
+        "package": "arxiv-mcp-server",
+        "args_template": ["arxiv-mcp-server", "--storage-path", "{storage}"],
+        "env": {}
+      }
+    },
+    {
+      "id": "paper-search-mcp",
+      "name": "paper-search-mcp",
+      "category": "mcp-server",
+      "kind": "mcp-server",
+      "repo": "https://github.com/openags/paper-search-mcp",
+      "pip": ["paper-search-mcp"],
+      "entry": null,
+      "env": [],
+      "env_optional": ["PAPER_SEARCH_MCP_UNPAYWALL_EMAIL"],
+      "notes": "MCP server to search/download across 20+ sources (arXiv, PubMed, bioRxiv, S2, OpenAlex...). Set an Unpaywall email for OA lookups. Verify exact optional env-var names in the README before relying on them.",
+      "mcp": {
+        "key": "paper-search-mcp",
+        "launcher": "venv-module",
+        "module": "paper_search_mcp.server",
+        "env": {"PAPER_SEARCH_MCP_UNPAYWALL_EMAIL": "your@email.com"}
+      }
+    },
+    {
+      "id": "zotero-mcp",
+      "name": "zotero-mcp",
+      "category": "mcp-server",
+      "kind": "mcp-server",
+      "repo": "https://github.com/54yyyu/zotero-mcp",
+      "pip": ["zotero-mcp"],
+      "entry": "zotero-mcp",
+      "env": [],
+      "env_optional": ["ZOTERO_API_KEY", "ZOTERO_LIBRARY_ID", "OPENAI_API_KEY"],
+      "notes": "MCP server bridging your Zotero library. Easiest: after install run 'zotero-mcp setup' to auto-write the client config. Local mode (ZOTERO_LOCAL=true) needs the Zotero desktop app running with the local API enabled; Web API mode needs ZOTERO_API_KEY + ZOTERO_LIBRARY_ID.",
+      "mcp": {
+        "key": "zotero",
+        "launcher": "venv-entry",
+        "entry": "zotero-mcp",
+        "env": {"ZOTERO_LOCAL": "true"}
+      }
+    }
+  ]
+}

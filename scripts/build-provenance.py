@@ -135,6 +135,17 @@ OVERRIDES: dict[str, dict[str, object]] = {
         "sync": "manual",
         "source_confidence": "high",
     },
+    "71-brycewang-lit-review-agent-tools": {
+        # First-party team skill. Vendored snapshot of the upstream repo's
+        # `skills/literature-review-tools/` (upstream commit be0f048,
+        # 2026-07-27); only the skill folder, its LICENSE, and the upstream
+        # skills/README.md (kept as README-original.md) are mirrored here.
+        "source_url": "https://github.com/brycewang-stanford/lit-review-agent-tools",
+        "license": "CC0-1.0",
+        "origin": "first-party team repo; vendored snapshot of skills/literature-review-tools",
+        "sync": "manual",
+        "source_confidence": "high",
+    },
     "12-pedrohcgs-claude-code-my-workflow": {
         "source_url": "https://github.com/pedrohcgs/claude-code-my-workflow",
         "source_confidence": "high",
@@ -423,6 +434,10 @@ def commercial_use(license_name: str) -> str:
     if "non-commercial" in lower or "noncommercial" in lower:
         return "restricted"
     if lower.startswith(("mit", "apache", "bsd")):
+        return "allowed"
+    if lower.startswith("cc0") or "public domain" in lower:
+        # CC0 is a public-domain dedication: no attribution or share-alike
+        # obligation, so commercial reuse is unrestricted.
         return "allowed"
     if lower.startswith("cc-by-sa"):
         return "share-alike"

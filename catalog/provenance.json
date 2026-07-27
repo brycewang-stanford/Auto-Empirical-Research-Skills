@@ -1109,15 +1109,30 @@
       "source_url": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills",
       "sync": "manual",
       "vendored_commit": null
+    },
+    {
+      "commercial_use": "allowed",
+      "id": "71-brycewang-lit-review-agent-tools",
+      "last_aers_review": "2026-07-22",
+      "license": "CC0-1.0",
+      "license_file": "skills/71-brycewang-lit-review-agent-tools/LICENSE",
+      "origin": "first-party team repo; vendored snapshot of skills/literature-review-tools",
+      "path": "skills/71-brycewang-lit-review-agent-tools",
+      "security_review": "SECURITY-SCAN-REPORT.md",
+      "skill_count": 1,
+      "source_confidence": "high",
+      "source_url": "https://github.com/brycewang-stanford/lit-review-agent-tools",
+      "sync": "manual",
+      "vendored_commit": null
     }
   ],
   "generated_by": "scripts/build-provenance.py",
   "scan_date": "2026-07-22",
   "schema_version": "1.0",
   "summary": {
-    "collections": 74,
+    "collections": 75,
     "commercial_use": {
-      "allowed": 37,
+      "allowed": 38,
       "restricted": 2,
       "share-alike": 8,
       "unknown": 27
@@ -1128,6 +1143,7 @@
       "CC-BY-NC-4.0 (non-commercial)": 1,
       "CC-BY-SA-4.0": 1,
       "CC-BY-SA-4.0 (repository default)": 5,
+      "CC0-1.0": 1,
       "GPL-3.0": 1,
       "MIT": 36,
       "MIT Non-Commercial": 1,
@@ -1135,7 +1151,7 @@
       "UNKNOWN - check upstream": 25
     },
     "source_confidence": {
-      "high": 39,
+      "high": 40,
       "low": 10,
       "medium": 21,
       "unresolved": 4
