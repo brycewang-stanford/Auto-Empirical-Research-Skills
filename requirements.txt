@@ -9,7 +9,7 @@
 # 69-Paper-WorkFlow demo gate as of v2026.07. Upper bounds leave room
 # for upstream API changes and are not strict pins.
 numpy>=1.26,<3
-pandas>=2.0,<3
+pandas>=3.0.5,<4
 matplotlib>=3.11.1,<4
 statsmodels>=0.14,<1
 linearmodels>=4.27,<6
