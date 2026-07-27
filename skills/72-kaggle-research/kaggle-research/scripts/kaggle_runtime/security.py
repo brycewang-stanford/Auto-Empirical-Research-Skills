@@ -13,15 +13,18 @@ REDACTED = "[REDACTED]"
 
 _ENV_SECRET = re.compile(
     r"(?i)\b((?:KAGGLE_(?:API_TOKEN|KEY|USERNAME)|ACCESS_TOKEN|TOKEN)"
-    r"\s*=\s*)([^\s,;]+)"
+    r"\s*=\s*)([^\s,;'\"\\]+)"
 )
-_BEARER = re.compile(r"(?i)(Authorization\s*:\s*Bearer\s+)([^\s,;]+)")
+_BEARER = re.compile(
+    r"(?i)(Authorization\s*:\s*Bearer\s+)([^\s,;'\"\\]+)"
+)
 _TOKEN_ARGUMENT = re.compile(
-    r"(?i)(--?(?:api[-_]?token|token|key)(?:=|\s+))([^\s,;]+)"
+    r"(?i)(--?(?:api[-_]?token|token|key)(?:=|\s+))"
+    r"([^\s,;'\"\\]+)"
 )
 _SIGNED_QUERY = re.compile(
     r"(?i)([?&](?:X-Goog-Signature|X-Amz-Signature|Signature|"
-    r"Access_Token|Token)=)([^&#\s]+)"
+    r"Access_Token|Token)=)([^&#\s'\"\\]+)"
 )
 _KGAT_TOKEN = re.compile(r"\bKGAT_[A-Za-z0-9_-]+\b")
 _CONTROL_CHARACTERS = re.compile(r"[\x00-\x1f\x7f]")

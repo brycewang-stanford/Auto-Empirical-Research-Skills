@@ -2,6 +2,7 @@
 
 from .commands import authorize, classify
 from .runner import KaggleRunner
+from .smoke import run_readonly_smoke
 from .result import (
     CommandRequest,
     CommandResult,
@@ -17,4 +18,5 @@ __all__ = [
     "OperationClass",
     "authorize",
     "classify",
+    "run_readonly_smoke",
 ]
