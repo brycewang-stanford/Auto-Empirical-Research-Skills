@@ -39,7 +39,7 @@ import argparse
 import json
 import re
 import sys
-from pathlib import Path
+from pathlib import Path, PurePosixPath, PureWindowsPath
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -97,7 +97,11 @@ def validate_repo_relative_path(
     if not isinstance(value, str) or not value:
         return [f"{label} must be a non-empty string"]
     raw_path = Path(value)
-    if raw_path.is_absolute():
+    if (
+        raw_path.is_absolute()
+        or PurePosixPath(value).is_absolute()
+        or PureWindowsPath(value).is_absolute()
+    ):
         return [f"{label} '{value}' must be repo-relative, not absolute"]
     root = ROOT.resolve()
     resolved = (ROOT / raw_path).resolve(strict=False)
