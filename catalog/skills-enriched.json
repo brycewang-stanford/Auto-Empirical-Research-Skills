@@ -22653,7 +22653,7 @@
       "name": "kaggle-research",
       "path": "skills/72-kaggle-research/kaggle-research/SKILL.md",
       "collection": "72-kaggle-research",
-      "line_count": 87,
+      "line_count": 86,
       "description_effective": "Use when a research task needs reproducible Kaggle discovery, metadata inspection, bounded public-data downloads, competition or kernel discovery, model discovery, or an explicitly approved Kaggle write/delete operation through the official CLI.",
       "description_source": "frontmatter",
       "has_references": true,
