@@ -35,7 +35,7 @@ def iter_skill_like_files() -> list[Path]:
         for filename in filenames:
             if filename.lower() == "skill.md":
                 paths.append(Path(dirpath) / filename)
-    return sorted(paths)
+    return sorted(paths, key=lambda path: path.relative_to(SKILLS_DIR).parts)
 
 
 def _skip_leading_comment(lines: list[str]) -> list[str]:

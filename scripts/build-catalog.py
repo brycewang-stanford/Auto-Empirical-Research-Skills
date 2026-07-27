@@ -161,7 +161,7 @@ def iter_skill_files() -> list[Path]:
         for filename in filenames:
             if filename == "SKILL.md":
                 paths.append(Path(dirpath) / filename)
-    return sorted(paths)
+    return sorted(paths, key=lambda path: path.relative_to(SKILLS_DIR).parts)
 
 
 def collection_records(entries: Iterable[SkillEntry]) -> list[dict[str, object]]:

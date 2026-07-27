@@ -6,10 +6,12 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from _helpers import ROOT, load_module
 
 build_catalog = load_module("scripts/build-catalog.py", "aers_build_catalog")
+build_skill_audit = load_module("scripts/build-skill-audit.py", "aers_build_skill_audit")
 validate_repo = load_module("scripts/validate-repo.py", "aers_validate_repo")
 build_provenance = load_module("scripts/build-provenance.py", "aers_build_provenance")
 
@@ -52,6 +54,33 @@ class TestFrontmatterParser(unittest.TestCase):
         fm = build_catalog.parse_frontmatter(text)
         self.assertEqual(fm.get("name"), "x")
         self.assertIn("line one", fm.get("description", ""))
+
+
+class TestCrossPlatformSkillOrdering(unittest.TestCase):
+    def test_parent_skill_sorts_before_nested_skill_on_every_platform(self):
+        root = build_catalog.SKILLS_DIR / "99-example" / "topic"
+        walk_rows = [
+            (str(root), ["nested", "nested-code"], ["SKILL.md"]),
+            (str(root / "nested"), [], ["SKILL.md"]),
+            (str(root / "nested-code"), [], ["SKILL.md"]),
+        ]
+        expected = [
+            (root / "SKILL.md").as_posix(),
+            (root / "nested" / "SKILL.md").as_posix(),
+            (root / "nested-code" / "SKILL.md").as_posix(),
+        ]
+
+        with patch.object(build_catalog.os, "walk", return_value=walk_rows):
+            catalog_paths = [
+                path.as_posix() for path in build_catalog.iter_skill_files()
+            ]
+        with patch.object(build_skill_audit.os, "walk", return_value=walk_rows):
+            audit_paths = [
+                path.as_posix() for path in build_skill_audit.iter_skill_like_files()
+            ]
+
+        self.assertEqual(catalog_paths, expected)
+        self.assertEqual(audit_paths, expected)
 
 
 class TestGeneratedArtifactsAreCurrent(unittest.TestCase):
