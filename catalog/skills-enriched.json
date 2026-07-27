@@ -2,12 +2,12 @@
   "generated_by": "scripts/build-catalog-enrich.py",
   "schema_version": 1,
   "summary": {
-    "skills": 1095,
+    "skills": 1096,
     "mean_quality_score": 99.4,
-    "with_frontmatter_description": 1095,
+    "with_frontmatter_description": 1096,
     "body_derived_description": 0,
     "no_description": 0,
-    "tagged": 559,
+    "tagged": 560,
     "with_eval_coverage": 18,
     "with_eval_coverage_pct": 1.6,
     "total_eval_scenarios": 19
@@ -41,7 +41,7 @@
       "analysis": 141,
       "writing": 88,
       "submission": 80,
-      "reproduction": 62,
+      "reproduction": 63,
       "literature": 61,
       "citation": 49,
       "tables-figures": 42,
@@ -55,7 +55,7 @@
     "topic": {
       "econometrics": 79,
       "scientific-writing": 73,
-      "reproducibility": 62,
+      "reproducibility": 63,
       "proofreading": 35,
       "causal-inference": 30
     }
@@ -22646,6 +22646,30 @@
       "license": "CC0-1.0",
       "commercial_use": "allowed",
       "source_url": "https://github.com/brycewang-stanford/lit-review-agent-tools",
+      "sync": "manual",
+      "eval_coverage": []
+    },
+    {
+      "name": "kaggle-research",
+      "path": "skills/72-kaggle-research/kaggle-research/SKILL.md",
+      "collection": "72-kaggle-research",
+      "line_count": 87,
+      "description_effective": "Use when a research task needs reproducible Kaggle discovery, metadata inspection, bounded public-data downloads, competition or kernel discovery, model discovery, or an explicitly approved Kaggle write/delete operation through the official CLI.",
+      "description_source": "frontmatter",
+      "has_references": true,
+      "tags": {
+        "stage": [
+          "reproduction"
+        ],
+        "topic": [
+          "reproducibility"
+        ]
+      },
+      "quality_score": 100,
+      "quality_flags": [],
+      "license": "CC-BY-SA-4.0 (repository default)",
+      "commercial_use": "share-alike",
+      "source_url": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills",
       "sync": "manual",
       "eval_coverage": []
     }

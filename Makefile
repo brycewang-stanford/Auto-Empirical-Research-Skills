@@ -92,12 +92,14 @@ benchmark-refresh:
 # Stdlib unittest suite (no third-party deps required).
 test:
 	python3 -m unittest discover -s tests -p "test_*.py"
+	python3 -m unittest discover -s skills/72-kaggle-research/kaggle-research/tests -p "test_*.py"
 
 # Compile all repo-owned Python tooling with the active interpreter. In CI this
 # runs on the Python 3.9/3.12 matrix and catches syntax drift in scripts that
 # are not imported by the unit suite.
 python-compat:
 	python3 -m py_compile scripts/*.py benchmark/*.py benchmark/lib/*.py eval-harness/*.py tests/*.py
+	python3 -m py_compile skills/72-kaggle-research/kaggle-research/scripts/*.py skills/72-kaggle-research/kaggle-research/scripts/kaggle_runtime/*.py skills/72-kaggle-research/kaggle-research/tests/*.py
 
 # Full local gate: everything a PR should pass.
 check: validate python-compat test eval-harness eval-smoke benchmark-lint benchmark

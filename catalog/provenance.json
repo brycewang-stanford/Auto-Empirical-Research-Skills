@@ -1124,17 +1124,32 @@
       "source_url": "https://github.com/brycewang-stanford/lit-review-agent-tools",
       "sync": "manual",
       "vendored_commit": null
+    },
+    {
+      "commercial_use": "share-alike",
+      "id": "72-kaggle-research",
+      "last_aers_review": "2026-07-22",
+      "license": "CC-BY-SA-4.0 (repository default)",
+      "license_file": null,
+      "origin": "first-party AERS skill",
+      "path": "skills/72-kaggle-research",
+      "security_review": "SECURITY-SCAN-REPORT.md",
+      "skill_count": 1,
+      "source_confidence": "high",
+      "source_url": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills",
+      "sync": "manual",
+      "vendored_commit": null
     }
   ],
   "generated_by": "scripts/build-provenance.py",
   "scan_date": "2026-07-22",
   "schema_version": "1.0",
   "summary": {
-    "collections": 75,
+    "collections": 76,
     "commercial_use": {
       "allowed": 38,
       "restricted": 2,
-      "share-alike": 8,
+      "share-alike": 9,
       "unknown": 27
     },
     "licenses": {
@@ -1142,7 +1157,7 @@
       "Apache-2.0": 1,
       "CC-BY-NC-4.0 (non-commercial)": 1,
       "CC-BY-SA-4.0": 1,
-      "CC-BY-SA-4.0 (repository default)": 5,
+      "CC-BY-SA-4.0 (repository default)": 6,
       "CC0-1.0": 1,
       "GPL-3.0": 1,
       "MIT": 36,
@@ -1151,7 +1166,7 @@
       "UNKNOWN - check upstream": 25
     },
     "source_confidence": {
-      "high": 40,
+      "high": 41,
       "low": 10,
       "medium": 21,
       "unresolved": 4

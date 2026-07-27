@@ -45,17 +45,17 @@
 
 ## 先看這裡：整倉是一個 AERS Router Skill
 
-本倉庫支援把倉庫根目錄作為一個整體 skill 匯入 Codex、CodeBuddy、Claude Code 或類似 IDE。根目錄的 [`SKILL.md`](SKILL.md) 會註冊為 `auto-empirical-research-skills`，用途是依照研究任務路由到合適的 vendored 子 skill，而不是把 75 個合集、1,095 個 skill 一次性載入上下文。
+本倉庫支援把倉庫根目錄作為一個整體 skill 匯入 Codex、CodeBuddy、Claude Code 或類似 IDE。根目錄的 [`SKILL.md`](SKILL.md) 會註冊為 `auto-empirical-research-skills`，用途是依照研究任務路由到合適的 vendored 子 skill，而不是把 76 個合集、1,096 個 skill 一次性載入上下文。
 
 - **推薦整倉匯入**：選擇倉庫根目錄，使用 [`agents/openai.yaml`](agents/openai.yaml) 和根 [`SKILL.md`](SKILL.md) 註冊一個 catalog router；後續由 agent 先查 [`catalog/skills.json`](catalog/skills.json) 或 [`docs/SKILL_CATALOG.md`](docs/SKILL_CATALOG.md)，再只讀取目標子 skill。
-- **推薦單 skill 匯入**：如果 IDE 要求「一目錄一個 skill」，請複製那個直接包含 `SKILL.md` 的子目錄，例如 `skills/50-brycewang-aer-skills/skills/aer-workflow/`，不要把整倉誤當成 1,095 個獨立 skill 遞迴註冊。
+- **推薦單 skill 匯入**：如果 IDE 要求「一目錄一個 skill」，請複製那個直接包含 `SKILL.md` 的子目錄，例如 `skills/50-brycewang-aer-skills/skills/aer-workflow/`，不要把整倉誤當成 1,096 個獨立 skill 遞迴註冊。
 - **安裝細節**：見 [`docs/INSTALL.md`](docs/INSTALL.md)。簡體中文 README 是預設入口；英文入口保留在 [`README-en.md`](README-en.md)。
 
 ---
 
-## 全部 75 個 skill 合集一覽
+## 全部 76 個 skill 合集一覽
 
-> **打開倉庫 → 看見整座資料庫。** 全部 **75 個合集 · 1,095 個 skill**，編號 `00 → 71`，每一個都**自有進本倉庫**（不只是對外連結），並在 [`catalog/skills.json`](catalog/skills.json) 裡追蹤。**點任一列即可打開其資料夾。** **⭐ = 由 Stanford REAP × CoPaper.AI 團隊自研的旗艦 skill**；其餘皆為精選、經安全稽核的社群成果。
+> **打開倉庫 → 看見整座資料庫。** 全部 **76 個合集 · 1,096 個 skill**，編號 `00 → 72`，每一個都**自有進本倉庫**（不只是對外連結），並在 [`catalog/skills.json`](catalog/skills.json) 裡追蹤。**點任一列即可打開其資料夾。** **⭐ = 由 Stanford REAP × CoPaper.AI 團隊自研的旗艦 skill**；其餘皆為精選、經安全稽核的社群成果。
 >
 > **主題對照 ——** 🚀 全流程與調度器 · 🎯 因果推斷與計量 · 📚 文獻與研究設計 · ✍️ 寫作、編修與去 AIGC · 📑 引用、重現與同儕審稿 · 🛠️ 資料、工具與基礎設施
 
@@ -136,12 +136,13 @@
 | ⭐ **69** | **[Paper-WorkFlow](skills/69-Paper-WorkFlow/)** 🧭 | 串起整條社會科學流水線的元調度器 | 🚀 | 1 |
 | **70** | [ssci-polish](skills/70-ssci-polish/) | SSCI/SCI 英文論文語言潤色（語法、可讀性、學術語氣） | ✍️ | 1 |
 | ⭐ **71** | **[lit-review-agent-tools](skills/71-brycewang-lit-review-agent-tools/)** 🔍 | 文獻綜述工具選型 + 一鍵安裝執行（MinerU / PaperQA2 / ASReview / STORM / MCP 伺服器） | 📚 | 1 |
+| ⭐ **72** | **[Kaggle Research](skills/72-kaggle-research/)** 🧪 | 透過官方 CLI 安全、可稽核地檢索 Kaggle 並限界下載公開資料 | 🛠️ | 1 |
 
-> ⭐ **我們親手打造的主幹：** [StatsPAI](skills/00-Full-empirical-analysis-skill_StatsPAI/)（因果引擎） · 顯式的 [Python](skills/00.1-Full-empirical-analysis-skill_Python/) / [Stata](skills/00.2-Full-empirical-analysis-skill_Stata/) / [R](skills/00.3-Full-empirical-analysis-skill_R/) 全流程移植 · [AER-skills](skills/50-brycewang-aer-skills/)（Top-5 投稿棧） · [chinese-de-aigc](skills/48-copaper-ai-chinese-de-aigc/) · [Paper-WorkFlow](skills/69-Paper-WorkFlow/)（元調度器）。這些就是 AERS 的主幹 —— 完整對比見 [旗艦流水線 skills ↓](#旗艦流水線-skills)。想按用途瀏覽？參見 [同樣這 75 個、按用途分組 ↓](#75-個合集--按用途分組)。
+> ⭐ **我們親手打造的主幹：** [StatsPAI](skills/00-Full-empirical-analysis-skill_StatsPAI/)（因果引擎） · 顯式的 [Python](skills/00.1-Full-empirical-analysis-skill_Python/) / [Stata](skills/00.2-Full-empirical-analysis-skill_Stata/) / [R](skills/00.3-Full-empirical-analysis-skill_R/) 全流程移植 · [AER-skills](skills/50-brycewang-aer-skills/)（Top-5 投稿棧） · [chinese-de-aigc](skills/48-copaper-ai-chinese-de-aigc/) · [Paper-WorkFlow](skills/69-Paper-WorkFlow/)（元調度器）。這些就是 AERS 的主幹 —— 完整對比見 [旗艦流水線 skills ↓](#旗艦流水線-skills)。想按用途瀏覽？參見 [同樣這 76 個、按用途分組 ↓](#76-個合集--按用途分組)。
 
 ---
 
-**面向實證研究的專業級 Agent Skills 發行版。** 不是一份行銷清單 —— 本倉庫**自有並已編目 1,095 個 skill**，外加一套**數值基準 + 評測套件 + 安全稽核 + CI** 把品質焊死，再疊加一張涵蓋**生態 23,000+ skill / 119 個倉庫**的精選地圖。
+**面向實證研究的專業級 Agent Skills 發行版。** 不是一份行銷清單 —— 本倉庫**自有並已編目 1,096 個 skill**，外加一套**數值基準 + 評測套件 + 安全稽核 + CI** 把品質焊死，再疊加一張涵蓋**生態 23,000+ skill / 119 個倉庫**的精選地圖。
 
 AERS 同時是兩樣東西：(1) 一小撮**自研旗艦 skill**，能跑通完整實證流水線 —— 資料清洗 → 識別 → 估計 → 穩健性 → 表格圖形 → 可投稿初稿；(2) 一份**精選、安全可控的目錄**，按研究流程階段組織整個實證研究 skill 生態。我們的差異化不在數量，而在於：旗艦 skill 的行為是**對著已知答案驗證過的**，而不是嘴上聲稱的。
 
@@ -155,8 +156,8 @@ AERS 同時是兩樣東西：(1) 一小撮**自研旗艦 skill**，能跑通完�
 
 ## 目錄
 
-- [**全部 75 個 skill 合集一覽**（完整 `00 → 71` 索引）](#全部-75-個-skill-合集一覽)
-  - [75 個合集，按用途分組](#75-個合集--按用途分組)
+- [**全部 76 個 skill 合集一覽**（完整 `00 → 72` 索引）](#全部-76-個-skill-合集一覽)
+  - [76 個合集，按用途分組](#76-個合集--按用途分組)
 - [你究竟得到什麼（精確數字）](#你究竟得到什麼精確數字)
 - [2 分鐘自行驗證](#2-分鐘自行驗證)
 - [為什麼值得信任 —— 三層信用錨點](#為什麼值得信任--三層信用錨點)
@@ -175,9 +176,9 @@ AERS 同時是兩樣東西：(1) 一小撮**自研旗艦 skill**，能跑通完�
 
 ---
 
-## 75 個合集 · 按用途分組
+## 76 個合集 · 按用途分組
 
-> 與[頂部的順序索引 ↑](#全部-75-個-skill-合集一覽)相同的 **75 個合集 · 1,095 個 skill** —— 這裡**按研究用途**重新排序，方便你直接掃到正在進行的階段。**⭐ = 自研**（Stanford REAP × CoPaper.AI）；其餘皆為精選、經安全稽核的社群成果。
+> 與[頂部的順序索引 ↑](#全部-76-個-skill-合集一覽)相同的 **76 個合集 · 1,096 個 skill** —— 這裡**按研究用途**重新排序，方便你直接掃到正在進行的階段。**⭐ = 自研**（Stanford REAP × CoPaper.AI）；其餘皆為精選、經安全稽核的社群成果。
 
 **🚀 全流程旗艦與調度器** —— *一次呼叫，跑完整個實證閉環*
 
@@ -292,8 +293,8 @@ AERS 同時是兩樣東西：(1) 一小撮**自研旗艦 skill**，能跑通完�
 
 | 它是什麼 | 數量 | 事實來源 |
 |---|---:|---|
-| **本倉庫自有**並已編目的 skill | **1,095** | [`catalog/skills.json`](catalog/skills.json) |
-| 自有 **合集（collections）** | **75** | [`catalog/skills.json`](catalog/skills.json) · [全部 75 個一覽 ↑](#全部-75-個-skill-合集一覽) |
+| **本倉庫自有**並已編目的 skill | **1,096** | [`catalog/skills.json`](catalog/skills.json) |
+| 自有 **合集（collections）** | **76** | [`catalog/skills.json`](catalog/skills.json) · [全部 76 個一覽 ↑](#全部-76-個-skill-合集一覽) |
 | **自研旗艦**全流程 skill（StatsPAI DSL + 顯式 Python/Stata/R） | **4** | [`skills/00*`](skills/) |
 | 每次執行從資料**重算 gold 值**的數值基準任務 | **17** | [`benchmark/`](benchmark/) |
 | 行為級**評測場景 / rubric 條目** | **37 / 183** | [`eval-harness/`](eval-harness/) |
@@ -397,7 +398,7 @@ make check        # 仓库校验 + 单元测试 + eval lint + 数值基准
 | **數值基準** | 報告數字與真實資料重算真值不符 —— 樸素 DID 符號陷阱、缺第一階段 F 的弱 IV、交錯時點下的 TWFE 偏誤、RDD 趨勢混淆、後處理壞控制、被合併均值掩蓋的異質效應（CATE）、只看均值漏掉尾部的分位數效應、本地衝擊混淆的移位份額（Bartik）IV、把中介當控制變數導致直接效應翻號、依賴參照組的 Oaxaca 分解拆分、kink 處超額質量被樸素密度掩蓋的 bunching | [`benchmark/`](benchmark/) · 17 任務 |
 | **評測套件** | 散文級失誤：弱 IV 假性安心、交錯 DID 誤用 TWFE、編造引用、不安全的 `curl \| bash` 安裝、多重檢驗濫用、AER 合規缺口 | [`eval-harness/`](eval-harness/) · 37 場景 / 183 rubric |
 | **安全稽核** | pipe-to-shell、反向 shell、憑據外洩、prompt 注入等 13 類風險 —— 六階段，40+ hook 腳本人工核查 | [`SECURITY-SCAN-REPORT.md`](SECURITY-SCAN-REPORT.md) |
-| **來源與授權** | 未聲明來源、授權風險、1,095 個編目 skill 的衛生度漂移 | [`docs/LICENSE_AUDIT.md`](docs/LICENSE_AUDIT.md) · [`docs/SKILL_HYGIENE.md`](docs/SKILL_HYGIENE.md) |
+| **來源與授權** | 未聲明來源、授權風險、1,096 個編目 skill 的衛生度漂移 | [`docs/LICENSE_AUDIT.md`](docs/LICENSE_AUDIT.md) · [`docs/SKILL_HYGIENE.md`](docs/SKILL_HYGIENE.md) |
 | **CI 與相容性** | catalog 新鮮度、本機死連、GitHub Actions 政策、Python 3.9 **與** 3.12 語法基線 | [`.github/workflows/`](.github/workflows/) · 7 條 workflow |
 
 ```bash
@@ -412,7 +413,7 @@ make check       # 完整 gate：validate + Python 编译 + 单元测试 + eval 
 
 ## 瀏覽全景
 
-> 📚 完整的 **[75 個合集目錄 ↑](#全部-75-個-skill-合集一覽)** 在本 README 頂部 —— 本節按主題深入這個生態。
+> 📚 完整的 **[76 個合集目錄 ↑](#全部-76-個-skill-合集一覽)** 在本 README 頂部 —— 本節按主題深入這個生態。
 
 ### 按研究流程
 

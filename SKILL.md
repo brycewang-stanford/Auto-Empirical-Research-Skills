@@ -8,7 +8,7 @@ license: CC-BY-SA-4.0
 
 Use this root skill when the full AERS repository has been installed as a single skill folder. Treat it as a router and catalog, not as a request to load every vendored `SKILL.md`.
 
-The catalog holds **1,095 skills across 75 vendored collections**. Never read them all — route to one, then load only that skill's `SKILL.md`.
+The catalog holds **1,096 skills across 76 vendored collections**. Never read them all — route to one, then load only that skill's `SKILL.md`.
 
 ## Workflow
 
@@ -55,7 +55,7 @@ Match the user's identification strategy or task to a starting collection, then 
 | R analysis | `skills/00.3-Full-empirical-analysis-skill_R/`, `skills/55-ab604-claude-code-r-skills/` |
 | Game theory / theory papers | `skills/65-game-theory-paper-writer/` |
 | Qualitative / thematic analysis | `skills/53-keemanxp-thematic-analysis-skill/` |
-| Data acquisition (SEC filings, open data) | `skills/57-dgunning-edgartools/`, `skills/59-shiquda-openalex-skill/` |
+| Data acquisition (Kaggle, SEC filings, open data) | `skills/72-kaggle-research/`, `skills/57-dgunning-edgartools/`, `skills/59-shiquda-openalex-skill/` |
 | Literature review | `skills/36-taoyunudt-literature-review-skill/`, `skills/52-keemanxp-slr-prisma/`, `skills/59-shiquda-openalex-skill/` |
 | Lit-review tool selection / PDF→Markdown / cited Q&A over PDFs / PRISMA screening runners | `skills/71-brycewang-lit-review-agent-tools/` |
 | Citation checking | `skills/62-PHY041-claude-skill-citation-checker/` |

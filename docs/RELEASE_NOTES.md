@@ -8,8 +8,8 @@ Paste this snapshot into the GitHub release body and add a hand-written
 
 ## Catalog
 
-- Top-level collections: **75**
-- `SKILL.md` files: **1095**
+- Top-level collections: **76**
+- `SKILL.md` files: **1096**
 - Cataloged agent tools: **334** ([`tools/CATALOG.md`](../tools/CATALOG.md))
 
 ## Methodological rigor
@@ -54,7 +54,7 @@ Paste this snapshot into the GitHub release body and add a hand-written
 - Apache-2.0: 1
 - CC-BY-NC-4.0 (non-commercial): 1
 - CC-BY-SA-4.0: 1
-- CC-BY-SA-4.0 (repository default): 5
+- CC-BY-SA-4.0 (repository default): 6
 - CC0-1.0: 1
 - GPL-3.0: 1
 - MIT: 36

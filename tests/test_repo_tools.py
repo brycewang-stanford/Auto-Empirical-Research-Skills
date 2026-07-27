@@ -319,12 +319,33 @@ class TestLocalAndCiGates(unittest.TestCase):
         self.assertIn("make python-compat", text)
         self.assertIn("aers-tracked-file-hygiene", text)
         self.assertIn("python3 scripts/check-repo-hygiene.py", text)
+        self.assertIn("skills/72-kaggle-research/", text)
 
     def test_make_check_includes_python_compatibility_compile(self):
         text = (ROOT / "Makefile").read_text(encoding="utf-8")
         self.assertIn("python-compat:", text)
         self.assertIn("python3 -m py_compile scripts/*.py", text)
+        self.assertIn(
+            "skills/72-kaggle-research/kaggle-research/scripts/*.py",
+            text,
+        )
+        self.assertIn(
+            "skills/72-kaggle-research/kaggle-research/tests",
+            text,
+        )
         self.assertRegex(text, r"check:\s+validate\s+python-compat\s+test")
+
+    def test_kaggle_collection_has_first_party_provenance_override(self):
+        record = build_provenance.OVERRIDES["72-kaggle-research"]
+        self.assertEqual(
+            record["source_url"],
+            "https://github.com/brycewang-stanford/"
+            "Auto-Empirical-Research-Skills",
+        )
+        self.assertEqual(record["license"], "CC-BY-SA-4.0 (repository default)")
+        self.assertEqual(record["origin"], "first-party AERS skill")
+        self.assertEqual(record["sync"], "manual")
+        self.assertEqual(record["source_confidence"], "high")
 
     def test_maintainer_docs_point_to_full_local_gate(self):
         docs = [

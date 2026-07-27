@@ -18,13 +18,13 @@ repos:
         entry: python3 -m unittest discover -s tests -p "test_*.py"
         language: system
         pass_filenames: false
-        files: ^(tests/|eval-harness/|benchmark/|scripts/)
+        files: ^(tests/|eval-harness/|benchmark/|scripts/|skills/72-kaggle-research/)
       - id: aers-python-compat
         name: AERS Python tooling compile
         entry: make python-compat
         language: system
         pass_filenames: false
-        files: ^(tests/|eval-harness/|benchmark/|scripts/|Makefile)
+        files: ^(tests/|eval-harness/|benchmark/|scripts/|skills/72-kaggle-research/|Makefile)
       - id: aers-benchmark
         name: AERS benchmark (strict)
         entry: bash -c 'python3 benchmark/check_benchmark.py --lint >/dev/null && python3 benchmark/reference_pipeline.py --check >/dev/null && python3 benchmark/check_benchmark.py --strict --fail-on-partial --fail-on-orphan-results >/dev/null'

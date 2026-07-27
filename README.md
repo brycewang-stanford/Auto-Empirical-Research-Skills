@@ -10,7 +10,7 @@
 
 # Auto-Empirical Research Skills (AERS)
 
-> **📌 文档结构（2026-07-22 起）：** 本文件是**中文默认入口** —— banner + badges + 信任面 + 9 阶段流水线速览 + 75 行合集总表。
+> **📌 文档结构（2026-07-22 起）：** 本文件是**中文默认入口** —— banner + badges + 信任面 + 9 阶段流水线速览 + 76 行合集总表。
 > 每个合集的**完整描述、按用途分组、精确数字、验证方法**在 [`docs/CONTENT_ZH.md`](docs/CONTENT_ZH.md)（扩展正文，总表行内的 `→` 直接跳转到对应锚点）。
 >
 > English version: [`README-en.md`](README-en.md) · 中文扩展正文：[`docs/CONTENT_ZH.md`](docs/CONTENT_ZH.md) · [`README-zh-CN.md`](README-zh-CN.md) 已弃用（重定向占位）
@@ -46,9 +46,9 @@
   <br/>
 </div>
 
-> ### 🚀 New here? Open the **[Skill Search →](docs/search.html)** to filter all 1,095 skills by method, stage, language, and license. The 5-minute tour (`make quickstart`) prints the same picture in your terminal.
+> ### 🚀 New here? Open the **[Skill Search →](docs/search.html)** to filter all 1,096 skills by method, stage, language, and license. The 5-minute tour (`make quickstart`) prints the same picture in your terminal.
 >
-> ### 🇨🇳 **中文用户从本文件开始**（流水线速览 + 75 行总表），每个合集的完整描述见 [`docs/CONTENT_ZH.md`](docs/CONTENT_ZH.md)。📖 **English readers:** see [`README-en.md`](README-en.md).
+> ### 🇨🇳 **中文用户从本文件开始**（流水线速览 + 76 行总表），每个合集的完整描述见 [`docs/CONTENT_ZH.md`](docs/CONTENT_ZH.md)。📖 **English readers:** see [`README-en.md`](README-en.md).
 
 ---
 
@@ -67,7 +67,7 @@
 
 中文内容分两级维护，各司其职：
 
-- **本文件（README.md，GitHub 默认入口）**：banner、badges、信任面、9 阶段流水线速览、75 行合集总表。
+- **本文件（README.md，GitHub 默认入口）**：banner、badges、信任面、9 阶段流水线速览、76 行合集总表。
 - **[`docs/CONTENT_ZH.md`](docs/CONTENT_ZH.md)（扩展正文）**：每个合集的完整描述（`#skill-NN` 锚点）、按用途分组、精确数字、2 分钟验证、三层信任、旗舰流水线详解、贡献与引用。总表行内的 `→` 直接跳到对应锚点。
 - **其他语言**：[`README-en.md`](README-en.md) · [`README-zh-TW.md`](README-zh-TW.md) · [`README-ja.md`](README-ja.md) · [`README-ko.md`](README-ko.md)
 
@@ -82,7 +82,7 @@
 
 ## 🚀 从一个 idea 到一篇论文：社科实证研究 · 端到端流水线（全自动、可介入）
 
-> **AERS 不只是 75 个散装 skill —— 它能陪你走完一篇论文。** 从模糊 idea → 选题精炼 → 文献综述 → 数据获取 → 识别策略 → 估计建模 → 稳健性审计 → 出版级表格 / 图形 → 写作与同行评审 → 降 AIGC → 投稿。**端到端、全自动、每一步都可被人介入**（中间任何一步你都可以接过去手工改方法、补变量、加稳健性，再让流水线自动接上跑）。
+> **AERS 不只是 76 个散装 skill —— 它能陪你走完一篇论文。** 从模糊 idea → 选题精炼 → 文献综述 → 数据获取 → 识别策略 → 估计建模 → 稳健性审计 → 出版级表格 / 图形 → 写作与同行评审 → 降 AIGC → 投稿。**端到端、全自动、每一步都可被人介入**（中间任何一步你都可以接过去手工改方法、补变量、加稳健性，再让流水线自动接上跑）。
 
 ### 9 阶段流水线 · 每一步都覆盖到具体 skill
 
@@ -131,15 +131,15 @@
 
 **为什么挑这 7 个？因为它们的行为都被基准钉死了** —— 不是营销口径，是对着已知答案反复跑过验证过的（[17 项数值 benchmark + 37 项行为评测 ↗](docs/CONTENT_ZH.md#你究竟得到什么精确数字)）。
 
-### 看到这里 —— 完整 75 行合集目录
+### 看到这里 —— 完整 76 行合集目录
 
-[↴ 直跳到下方 75 行总表（每个合集带 `#skill-NN` 锚点）](#-75-个核心-skills-合集一览00--71编号连续无空缺)。如果你更关心"这些 skill **怎么用**"而不是"有哪些 skill"，看 [📘 中文唯一权威正文](docs/CONTENT_ZH.md) 里的「按用途分组」与「旗舰流水线」两节。
+[↴ 直跳到下方 76 行总表（每个合集带 `#skill-NN` 锚点）](#-76-个核心-skills-合集一览00--72编号连续无空缺)。如果你更关心"这些 skill **怎么用**"而不是"有哪些 skill"，看 [📘 中文唯一权威正文](docs/CONTENT_ZH.md) 里的「按用途分组」与「旗舰流水线」两节。
 
 ---
 
-## 🧰 75 个核心 Skills 合集一览（`00 → 71`，编号连续无空缺）
+## 🧰 76 个核心 Skills 合集一览（`00 → 72`，编号连续无空缺）
 
-> **打开仓库 → 看见整座库。** 全部 **75 个合集 · 1,095 个 skill**，每一个都已 vendor 进本仓库，由 [`catalog/skills.json`](catalog/skills.json) 跟踪。**⭐ = Stanford REAP × CoPaper.AI 团队自研的 skill**；其余为精选、经安全审计的社区作品。
+> **打开仓库 → 看见整座库。** 全部 **76 个合集 · 1,096 个 skill**，每一个都已 vendor 进本仓库，由 [`catalog/skills.json`](catalog/skills.json) 跟踪。**⭐ = Stanford REAP × CoPaper.AI 团队自研的 skill**；其余为精选、经安全审计的社区作品。
 >
 > **主题图例 —** 🚀 全流程与编排器 · 🎯 因果推断与计量经济学 · 📚 文献与研究设计 · ✍️ 写作 / 编辑 / 去 AIGC · 📑 引用 / 复现 / 同行评审 · 🛠️ 数据 / 工具 / 基础设施
 >
@@ -222,6 +222,7 @@
 | ⭐ [69](skills/69-Paper-WorkFlow/) | **Paper-WorkFlow** 🧭 | 元编排器，串起整个社会科学论文流水线 | [→](docs/CONTENT_ZH.md#skill-69) |
 | [70](skills/70-ssci-polish/) | ssci-polish ✍️ | SSCI / SCI 英文论文语言润色（语法、可读性、学术语气） | [→](docs/CONTENT_ZH.md#skill-70) |
 | ⭐ [71](skills/71-brycewang-lit-review-agent-tools/) | **lit-review-agent-tools** 🔍 | 文献综述工具选型 + 一键安装运行（MinerU / PaperQA2 / ASReview / STORM / MCP 服务器） | [→](docs/CONTENT_ZH.md#skill-71) |
+| ⭐ [72](skills/72-kaggle-research/) | **Kaggle Research** 🧪 | 通过官方 CLI 安全检索 Kaggle 资源、限界下载公开数据并保留审计证据 | [→](docs/CONTENT_ZH.md#skill-72) |
 
 > **想看更详细的描述（主题分类、字段、统计）？** 见 [`docs/CONTENT_ZH.md`](docs/CONTENT_ZH.md) 中标注 `#skill-NN` 锚点的同一张表 —— 它是每个合集的完整描述所在的扩展正文。
 

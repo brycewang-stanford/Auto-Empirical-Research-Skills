@@ -6,10 +6,10 @@ Scan date: 2026-07-22.
 
 ## Summary
 
-- Collections audited: 75
-- License buckets: AGPL-3.0=1, Apache-2.0=1, CC-BY-NC-4.0 (non-commercial)=1, CC-BY-SA-4.0=1, CC-BY-SA-4.0 (repository default)=5, CC0-1.0=1, GPL-3.0=1, MIT=36, MIT Non-Commercial=1, Mixed (per-skill; see folder)=2, UNKNOWN - check upstream=25
-- Commercial-use buckets: allowed=38, restricted=2, share-alike=8, unknown=27
-- Source-confidence buckets: high=40, low=10, medium=21, unresolved=4
+- Collections audited: 76
+- License buckets: AGPL-3.0=1, Apache-2.0=1, CC-BY-NC-4.0 (non-commercial)=1, CC-BY-SA-4.0=1, CC-BY-SA-4.0 (repository default)=6, CC0-1.0=1, GPL-3.0=1, MIT=36, MIT Non-Commercial=1, Mixed (per-skill; see folder)=2, UNKNOWN - check upstream=25
+- Commercial-use buckets: allowed=38, restricted=2, share-alike=9, unknown=27
+- Source-confidence buckets: high=41, low=10, medium=21, unresolved=4
 
 ## Interpretation
 
@@ -97,3 +97,4 @@ Scan date: 2026-07-22.
 | [`69-Paper-WorkFlow`](../skills/69-Paper-WorkFlow/) | [source](https://github.com/brycewang-stanford/Paper-WorkFlow) | medium | MIT | allowed | manual vendor snapshot |
 | [`70-ssci-polish`](../skills/70-ssci-polish/) | [source](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills) | high | CC-BY-SA-4.0 (repository default) | share-alike | manual |
 | [`71-brycewang-lit-review-agent-tools`](../skills/71-brycewang-lit-review-agent-tools/) | [source](https://github.com/brycewang-stanford/lit-review-agent-tools) | high | CC0-1.0 | allowed | manual |
+| [`72-kaggle-research`](../skills/72-kaggle-research/) | [source](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills) | high | CC-BY-SA-4.0 (repository default) | share-alike | manual |
