@@ -166,13 +166,11 @@ def _doctor(namespace: argparse.Namespace) -> int:
 
 
 def _run(namespace: argparse.Namespace) -> int:
-    result = _runner(namespace).execute(request_from_namespace(namespace))
-    record = build_audit_record(
-        result,
-        capture_limit=result.arguments and 16_384 or 0,
-    )
+    request = request_from_namespace(namespace)
+    result = _runner(namespace).execute(request)
+    record = build_audit_record(result, capture_limit=request.capture_limit)
     if namespace.audit is not None:
-        write_audit(result, namespace.audit)
+        write_audit(result, namespace.audit, capture_limit=request.capture_limit)
     print(json.dumps(record, ensure_ascii=False, indent=2))
     return 0 if result.ok else 1
 
