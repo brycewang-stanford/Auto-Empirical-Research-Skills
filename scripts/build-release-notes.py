@@ -60,7 +60,20 @@ CANONICAL_REPO_SLUG = (
 
 
 def _repo_slug() -> str:
-    """Return the canonical upstream slug, independent of a contributor fork."""
+    """Return the canonical upstream slug for the 'GitHub releases' link.
+
+    Deliberately a constant rather than `git remote get-url origin`. The
+    generated HTML is committed and gated by `--check`, so any input that
+    varies per clone makes the generator non-deterministic: a contributor
+    working in a fork would rewrite the release links and trip the freshness
+    gate for reasons unrelated to their change.
+
+    The trade-off is that this constant does not follow the remote if the
+    repository is ever renamed or transferred. CITATION.cff carries the same
+    URL, and test_repo_slug_matches_citation_metadata pins the two together,
+    so a move that updates the citation metadata will fail the suite here
+    until this constant is updated too.
+    """
     return CANONICAL_REPO_SLUG
 
 

@@ -161,6 +161,15 @@ def iter_skill_files() -> list[Path]:
         for filename in filenames:
             if filename == "SKILL.md":
                 paths.append(Path(dirpath) / filename)
+    # Sort on path *components*, never on the joined path. A bare
+    # `sorted(paths)` compares the full path string, so the separator itself
+    # participates: "a/nested-code/SKILL.md" sorts before "a/nested/SKILL.md"
+    # because "-" (0x2d) < "/" (0x2f), and on Windows the case-folded
+    # comparison reorders parent-vs-nested differently again. Comparing
+    # `.parts` makes catalog order identical on every platform. No collection
+    # currently has sibling directories where one name prefixes another, so
+    # this is invariant-preserving today -- do not "simplify" it back.
+    # Guarded by TestCrossPlatformSkillOrdering in tests/test_repo_tools.py.
     return sorted(paths, key=lambda path: path.relative_to(SKILLS_DIR).parts)
 
 

@@ -12,6 +12,7 @@ release notes).
 
 from __future__ import annotations
 
+import re
 import subprocess
 import sys
 import unittest
@@ -41,6 +42,26 @@ class TestGeneratorFreshness(unittest.TestCase):
             build_release_notes._repo_slug(),
             "brycewang-stanford/Auto-Empirical-Research-Skills",
         )
+
+    def test_repo_slug_matches_citation_metadata(self):
+        """The hardcoded slug cannot follow a repo rename on its own.
+
+        CITATION.cff is the in-repo record of the canonical URL, so pin the
+        two together: renaming or transferring the repository updates the
+        citation metadata and this assertion then forces the generator
+        constant to be updated in the same commit, instead of leaving the
+        release page pointing at a stale owner/repo.
+        """
+        citation = (ROOT / "CITATION.cff").read_text(encoding="utf-8")
+        match = re.search(
+            r'^repository-code:\s*"?https://github\.com/([^"\s]+?)/?"?\s*$',
+            citation,
+            re.MULTILINE,
+        )
+        self.assertIsNotNone(
+            match, "CITATION.cff must declare a github.com repository-code URL"
+        )
+        self.assertEqual(build_release_notes._repo_slug(), match.group(1))
 
     def test_generators_pass_check_mode_against_committed_tree(self):
         for cmd in CHECKABLE:

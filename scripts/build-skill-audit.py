@@ -35,6 +35,10 @@ def iter_skill_like_files() -> list[Path]:
         for filename in filenames:
             if filename.lower() == "skill.md":
                 paths.append(Path(dirpath) / filename)
+    # Component-wise sort, matching build-catalog.py's iter_skill_files(). See
+    # the comment there for why the joined-path comparison a bare `sorted()`
+    # would do is platform-dependent. The two orderings must stay in lockstep:
+    # TestCrossPlatformSkillOrdering asserts both against the same walk.
     return sorted(paths, key=lambda path: path.relative_to(SKILLS_DIR).parts)
 
 
