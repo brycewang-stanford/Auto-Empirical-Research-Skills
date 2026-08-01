@@ -54,13 +54,57 @@ np.random.seed(SEED)
 DATA_URL = "https://vincentarelbundock.github.io/Rdatasets/csv/MatchIt/lalonde.csv"
 DATA_LOCAL = Path("_lalonde_data.csv")
 
-# Try loading from pre-downloaded local copy first, fallback to URL
-if DATA_LOCAL.exists():
-    DATA_SOURCE = str(DATA_LOCAL)
-    print(f"Using local data: {DATA_LOCAL}")
-else:
-    DATA_SOURCE = DATA_URL
-    print(f"Using remote data: {DATA_URL}")
+# Raw schema every tier is normalised to, so the analysis frame is identical
+# no matter which tier resolved.
+RAW_COLS = ["treat", "age", "educ", "race", "married",
+            "nodegree", "re74", "re75", "re78"]
+
+
+def load_raw_lalonde():
+    """Resolve the MatchIt::lalonde extract (N=614), offline first.
+
+    Tiers, in order: the pre-downloaded local CSV, the copy bundled with
+    StatsPAI, then the Rdatasets mirror. All three are the same n=614
+    extract and agree on every column in RAW_COLS, so the tier that wins
+    changes no number downstream.
+
+    The bundled tier is what keeps the pipeline off the network. Without
+    it, a reset connection here left ``df`` undefined and cascaded a
+    ``NameError: name 'df' is not defined`` into every later cell.
+
+    Returns
+    -------
+    (pandas.DataFrame, str)
+        The raw frame restricted to RAW_COLS, and a provenance label.
+    """
+    if DATA_LOCAL.exists():
+        return pd.read_csv(DATA_LOCAL)[RAW_COLS], f"local CSV ({DATA_LOCAL})"
+    try:
+        bundled = sp.datasets.nsw_lalonde(simulated=False)
+    except Exception as exc:
+        # Not fatal on its own — the mirror below is still worth trying, and
+        # if that also fails the read_csv raises loudly with the real cause.
+        print(f"Bundled StatsPAI copy unavailable ({exc!r}); trying {DATA_URL}")
+    else:
+        return bundled[RAW_COLS], "bundled sp.datasets.nsw_lalonde(simulated=False)"
+    return pd.read_csv(DATA_URL)[RAW_COLS], f"Rdatasets mirror ({DATA_URL})"
+
+
+def require_df():
+    """Abort with an actionable message if §0.1 never built the analysis frame.
+
+    Guards the first consumer so a single upstream failure reports itself
+    once, instead of surfacing as a wall of identical NameErrors.
+    """
+    if "df" not in globals():
+        raise RuntimeError(
+            "§0.1 sample construction did not complete, so `df` was never "
+            "created and nothing downstream can run. Fix §0.1 (historically a "
+            "data-download failure) and re-run from there. Every "
+            "`NameError: name 'df' is not defined` in later cells is a "
+            "consequence of this one failure, not a separate bug."
+        )
+
 
 # Output directories
 OUT_ROOT = Path("_statspai_pipeline_outputs_v2")
@@ -112,11 +156,12 @@ print(f"Wrote {OUT_ART / 'pap_power.json'}")
 # §0.1 Sample-construction log (AER footnote 4)
 sample_log = []
 
-raw = pd.read_csv(DATA_SOURCE)
-sample_log.append(("0. raw rdatasets csv", len(raw)))
+raw, DATA_PROVENANCE = load_raw_lalonde()
+print(f"Raw data resolved from: {DATA_PROVENANCE}")
+sample_log.append((f"0. raw lalonde [{DATA_PROVENANCE}]", len(raw)))
 
-df0 = raw.drop(columns=["rownames"], errors="ignore").dropna()
-sample_log.append(("1. drop rownames + dropna", len(df0)))
+df0 = raw.dropna()
+sample_log.append(("1. dropna", len(df0)))
 
 # Recode race -> black/hispan dummies
 df1 = df0.copy()
@@ -137,6 +182,8 @@ for stage, n in sample_log:
 
 # %%
 # §0.2 Data contract (5 checks — cross-section version, no panel check)
+require_df()  # stop here with one clear message if §0.1 failed
+
 covariates = ["age", "educ", "black", "hispan", "married", "nodegree", "re74", "re75"]
 analysis_vars = ["treat", "re78"] + covariates
 
@@ -156,6 +203,7 @@ def data_contract(df, *, y, treatment, covariates):
     return c
 
 contract = data_contract(df, y="re78", treatment="treat", covariates=covariates)
+contract["data_source"] = DATA_PROVENANCE
 assert contract["n_obs"] > 0
 assert all(v == 0 for v in contract["n_missing"].values())
 assert contract["treatment_levels"] == [0, 1]
@@ -295,8 +343,12 @@ strategy_md = (
 (OUT_ART / "empirical_strategy.md").write_text(strategy_md)
 print(f"\nWrote {OUT_ART / 'empirical_strategy.md'}")
 
-# Now estimate
-result_causal = question.estimate()
+# Now estimate.
+# seed=SEED is load-bearing: the plan resolves to cross-fitted AIPW, whose
+# default seed=None makes the point estimate irreproducible run to run (it
+# moved over a ~800 range on fixed data here — wider than the effect itself).
+# §4.2 already pins sp.aipw(..., seed=SEED); this keeps §2 consistent with it.
+result_causal = question.estimate(seed=SEED)
 print("\n=== question.estimate() result ===")
 print(result_causal.summary() if hasattr(result_causal, "summary") else result_causal)
 
@@ -487,15 +539,38 @@ slices = {
     "(8) re74 > 0":         df[df["re74"].gt(0)],
 }
 
+
+def slice_formula(sub, y="re78", treat="treat", controls=covariates):
+    """Formula for a subgroup, minus any control that is constant in it.
+
+    Slicing on a dummy makes that dummy constant inside the slice, so it is
+    perfectly collinear with the intercept and the coefficient is not
+    identified — sp.regress raises NumericalInstability rather than silently
+    returning a rank-deficient fit. Dropping it costs nothing: a variable
+    with no within-slice variation explains no within-slice outcome
+    variation, and beta on `treat` is unchanged.
+    """
+    keep = [c for c in controls if sub[c].nunique() > 1]
+    dropped = [c for c in controls if c not in keep]
+    return f"{y} ~ {treat} + " + " + ".join(keep), dropped
+
+
 slice_models = []
+slice_dropped = {}
 for name, sub in slices.items():
     if len(sub) < 30 or sub["treat"].nunique() < 2:
         slice_models.append(None)
         continue
-    slice_models.append(sp.regress(
-        "re78 ~ treat + age + educ + black + hispan + married + nodegree + re74 + re75",
-        sub, robust="HC1",
-    ))
+    formula, dropped = slice_formula(sub)
+    if dropped:
+        slice_dropped[name] = dropped
+    slice_models.append(sp.regress(formula, sub, robust="HC1"))
+
+if slice_dropped:
+    print("Controls dropped for lack of within-slice variation:")
+    for name, dropped in slice_dropped.items():
+        print(f"  {name:<18s} dropped {', '.join(dropped)}")
+    print()
 
 valid = [(lab, m) for lab, m in zip(slices, slice_models) if m is not None]
 labels_v = [lab for lab, _ in valid]
