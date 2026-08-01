@@ -685,18 +685,33 @@ else:
 # §7.7 Unified sensitivity dashboard
 baseline = M5
 try:
+    # term="treat" is required, not decorative: M5 has nine non-intercept
+    # coefficients, and without it the dashboard used to analyse the
+    # Intercept while reading as a statement about the training effect.
     sens = sp.unified_sensitivity(
         baseline,
+        term="treat",
         r2_treated=0.05,
         r2_controlled=0.10,
         include_oster=True,
+        # Oster needs the short-regression coefficient; M1 is exactly that
+        # (re78 ~ treat, no controls). Sensemakr needs the estimation data,
+        # which no result object carries. Supplying both turns two "skipped"
+        # notes into actual robustness evidence.
+        beta_uncontrolled=float(M1.params["treat"]),
+        data=df,
+        y="re78",
+        treat="treat",
+        controls=covariates,
     )
     print(sens.summary() if hasattr(sens, "summary") else sens)
 except Exception as exc:
     print(f"unified_sensitivity: {exc!r}")
 
 try:
-    dash2 = sp.sensitivity_dashboard(baseline)
+    # data= is what lets the stability dimensions re-estimate on perturbed
+    # samples; without it every dimension drops out and the grade is "?".
+    dash2 = sp.sensitivity_dashboard(baseline, data=df, verbose=False)
     print(dash2.summary())
 except Exception as exc:
     print(f"sensitivity_dashboard: {exc!r}")
