@@ -691,14 +691,13 @@ try:
     sens = sp.unified_sensitivity(
         baseline,
         term="treat",
-        r2_treated=0.05,
-        r2_controlled=0.10,
         include_oster=True,
-        # Oster needs the short-regression coefficient; M1 is exactly that
-        # (re78 ~ treat, no controls). Sensemakr needs the estimation data,
-        # which no result object carries. Supplying both turns two "skipped"
-        # notes into actual robustness evidence.
-        beta_uncontrolled=float(M1.params["treat"]),
+        # data/y/treat/controls do three jobs at once: they standardise the
+        # coefficient so the E-value is on the risk-ratio scale it is
+        # defined for, they let Oster derive its R² from this exact
+        # specification (so §7.7's delta* equals §7.5's rather than
+        # disagreeing with it), and they feed Sensemakr, which no result
+        # object can carry on its own.
         data=df,
         y="re78",
         treat="treat",
