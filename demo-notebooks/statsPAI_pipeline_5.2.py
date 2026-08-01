@@ -137,9 +137,37 @@ print("─" * 72)
 sample_log = []
 
 import io
-_r = _requests.get(DATA_URL, verify=_certifi.where(), timeout=30)
-raw = pd.read_csv(io.StringIO(_r.text))
-sample_log.append(("0. raw Rdatasets CSV", len(raw)))
+
+DATA_LOCAL = Path("_lalonde_data.csv")
+RAW_COLS = ["treat", "age", "educ", "race", "married",
+            "nodegree", "re74", "re75", "re78"]
+
+
+def load_raw_lalonde():
+    """Resolve the MatchIt::lalonde extract (N=614), offline first.
+
+    Tiers: the pre-downloaded local CSV, the copy bundled with StatsPAI,
+    then the Rdatasets mirror over HTTPS. All three are the same extract
+    and agree on every column in RAW_COLS, so the winning tier changes no
+    number. The bundled tier is what keeps this off the network — a reset
+    connection here used to leave `df` undefined and cascade NameErrors
+    through the rest of the script.
+    """
+    if DATA_LOCAL.exists():
+        return pd.read_csv(DATA_LOCAL)[RAW_COLS], f"local CSV ({DATA_LOCAL})"
+    try:
+        bundled = sp.datasets.nsw_lalonde(simulated=False)
+    except Exception as exc:
+        print(f"Bundled StatsPAI copy unavailable ({exc!r}); trying {DATA_URL}")
+    else:
+        return bundled[RAW_COLS], "bundled sp.datasets.nsw_lalonde(simulated=False)"
+    _r = _requests.get(DATA_URL, verify=_certifi.where(), timeout=30)
+    return pd.read_csv(io.StringIO(_r.text))[RAW_COLS], f"Rdatasets mirror ({DATA_URL})"
+
+
+raw, DATA_PROVENANCE = load_raw_lalonde()
+print(f"Raw data resolved from: {DATA_PROVENANCE}")
+sample_log.append((f"0. raw lalonde [{DATA_PROVENANCE}]", len(raw)))
 
 df0 = raw.drop(columns=["rownames"], errors="ignore").dropna()
 sample_log.append(("1. drop rownames + dropna", len(df0)))
