@@ -6,6 +6,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from pathlib import PurePosixPath, PureWindowsPath
 from unittest.mock import patch
 
 from _helpers import ROOT, load_module
@@ -81,6 +82,37 @@ class TestCrossPlatformSkillOrdering(unittest.TestCase):
 
         self.assertEqual(catalog_paths, expected)
         self.assertEqual(audit_paths, expected)
+
+    def test_sort_key_is_normalization_free_so_windows_matches_posix(self):
+        """Pin *why* the builders key on `.parts` instead of sorting Paths.
+
+        The assertion above cannot fail on posix: `PurePath.__lt__` compares
+        case-normalized parts, and PosixPath does not casefold, so a bare
+        `sorted(paths)` produces the same order there. The divergence only
+        appears on a Windows checkout, which this repo's CI does not cover.
+
+        Reproduce that flavour explicitly with PureWindowsPath so a future
+        "simplification" back to `sorted(paths)` is caught from Linux/macOS:
+        casefolding sorts "skill.md" after "nested", silently reordering the
+        committed catalog for anyone generating it on Windows.
+        """
+        names = ["t/SKILL.md", "t/nested/SKILL.md", "t/nested-code/SKILL.md"]
+        windows = [PureWindowsPath(name) for name in names]
+
+        self.assertEqual(
+            [path.as_posix() for path in sorted(windows)],
+            ["t/nested/SKILL.md", "t/nested-code/SKILL.md", "t/SKILL.md"],
+            "guard is stale: PureWindowsPath no longer casefolds when sorting",
+        )
+        posix_order = [
+            path.as_posix()
+            for path in sorted(PurePosixPath(name) for name in names)
+        ]
+        self.assertEqual(
+            [path.as_posix() for path in sorted(windows, key=lambda p: p.parts)],
+            posix_order,
+            "the `.parts` key must reproduce posix order under the Windows flavour",
+        )
 
 
 class TestGeneratedArtifactsAreCurrent(unittest.TestCase):
