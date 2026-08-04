@@ -73,7 +73,7 @@ Scan date: 2026-07-22.
 | [`45-stephenturner-skill-deslop`](../skills/45-stephenturner-skill-deslop/) | [source](https://github.com/stephenturner/skill-deslop) | medium | MIT | allowed | manual vendor snapshot |
 | [`46-hardikpandya-stop-slop`](../skills/46-hardikpandya-stop-slop/) | [source](https://github.com/hardikpandya/stop-slop) | low | MIT | allowed | manual vendor snapshot |
 | [`47-conorbronsdon-avoid-ai-writing`](../skills/47-conorbronsdon-avoid-ai-writing/) | [source](https://github.com/conorbronsdon/avoid-ai-writing) | medium | MIT | allowed | manual vendor snapshot |
-| [`48-copaper-ai-chinese-de-aigc`](../skills/48-copaper-ai-chinese-de-aigc/) | [source](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills) | high | CC-BY-SA-4.0 (repository default) | share-alike | manual |
+| [`48-de-AIGC-skills`](../skills/48-de-AIGC-skills/) | [source](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills) | high | CC-BY-SA-4.0 (repository default) | share-alike | manual |
 | [`49-voidborne-d-humanize-chinese`](../skills/49-voidborne-d-humanize-chinese/) | UNKNOWN | unresolved | MIT Non-Commercial | restricted | manual vendor snapshot |
 | [`50-brycewang-aer-skills`](../skills/50-brycewang-aer-skills/) | [source](https://github.com/brycewang-stanford/AER-skills) | high | MIT | allowed | weekly GitHub Actions sync |
 | [`51-pymc-labs-CausalPy`](../skills/51-pymc-labs-CausalPy/) | [source](https://github.com/pymc-labs/CausalPy) | high | Apache-2.0 | allowed | manual vendor snapshot |

@@ -71,7 +71,7 @@ Use when: Chinese thesis, journal manuscript, grant proposal, or policy report n
 
 Primary skills:
 
-- [`chinese-de-aigc`](../skills/48-copaper-ai-chinese-de-aigc/SKILL.md)
+- [`de-aigc-skills`](../skills/48-de-AIGC-skills/SKILL.md)
 - [`humanize-chinese`](../skills/49-voidborne-d-humanize-chinese/SKILL.md)
 
 Prompt:

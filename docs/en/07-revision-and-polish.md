@@ -20,7 +20,7 @@
 
 | Collection | What it does | How to use it at this stage |
 |------|----------|---------------|
-| [⭐ `48` chinese-de-aigc](../../skills/48-copaper-ai-chinese-de-aigc/) | Chinese de-AIGC (CNKI / Wanfang / Turnitin-CN) | De-AI Chinese papers; respond to domestic plagiarism checks |
+| [⭐ `48` de-aigc-skills](../../skills/48-de-AIGC-skills/) | Bilingual (EN+ZH) academic de-AIGC (Turnitin AI / GPTZero / CNKI / Wanfang) | De-AI empirical papers in either language; respond to plagiarism and AI checks |
 | [`49` humanize-chinese](../../skills/49-voidborne-d-humanize-chinese/) | Detect and humanise AI-generated Chinese | Polish Chinese paragraphs to remove machine tone |
 | [`44` humanizer_academic](../../skills/44-matsuikentaro1-humanizer_academic/) | De-AI medical / academic manuscripts (23 patterns) | Remove AI traces from English academic manuscripts |
 | [`45` deslop](../../skills/45-stephenturner-skill-deslop/) | Remove AI-writing clichés (5-dimensional scoring) | Quantify and remove AI boilerplate |
@@ -192,14 +192,14 @@ AI-generated text has statistically detectable patterns — "LLMs use statistica
 | Attribute | Description |
 |------|------|
 | **Source** | voidborne-d/humanize-chinese (local vendor snapshot; upstream URL did not pass the 2026-05-31 outbound-link sweep) |
-| **Form** | **Provides both SKILL.md and a standalone Python CLI/library** — the repo root contains SKILL.md (with frontmatter, topics tagged `claude-code-skill`), directly loadable inside Claude Code / OpenClaw / Hermes and similar agents; also a zero-third-party-dependency Python library that can be `pip install`-ed and run in any pipeline / CI / server for batch jobs. This entry focuses on the CLI/library form; agent-internal usage can refer to the chinese-de-aigc workflow positioning |
+| **Form** | **Provides both SKILL.md and a standalone Python CLI/library** — the repo root contains SKILL.md (with frontmatter, topics tagged `claude-code-skill`), directly loadable inside Claude Code / OpenClaw / Hermes and similar agents; also a zero-third-party-dependency Python library that can be `pip install`-ed and run in any pipeline / CI / server for batch jobs. This entry focuses on the CLI/library form; agent-internal usage can refer to the de-aigc-skills workflow positioning |
 | **Function** | Chinese AI-text detection and rewriting: 17 detection features + 7 style rewriters (academic / novel / blog / casual / Xiaohongshu / WeChat / literary), tuned on CNKI / Wanfang / VIP / Turnitin Chinese-edition benchmarks |
 | **Install** | `pip install humanize-chinese` or use the local copy in this repo [`skills/49`](../../skills/49-voidborne-d-humanize-chinese/) |
 | **License** | **MIT (Non-Commercial)** — non-standard modified MIT, **commercial use explicitly prohibited** (no SaaS / paid API / integration into commercial products / paid content-rewriting services). Personal use, academic research, educational use, and non-commercial derivative open-source projects are allowed. Commercial downstream use requires separate authorisation from the author; it cannot be used under standard MIT terms |
 
-**Comparison with chinese-de-aigc / humanizer_academic (focused on the CLI/library form's complementarity)**:
+**Comparison with de-aigc-skills / humanizer_academic (focused on the CLI/library form's complementarity)**:
 
-| Dimension | chinese-de-aigc | humanizer_academic | humanize-chinese (CLI/library form) |
+| Dimension | de-aigc-skills | humanizer_academic | humanize-chinese (CLI/library form) |
 |------|------------------|--------------------|-------------------------------|
 | Primary form | Markdown SKILL.md (inside the agent) | Markdown SKILL.md (inside the agent) | Python CLI + library (pipeline-callable, also ships SKILL.md) |
 | Language | Chinese academic | English academic | Chinese academic (incl. novel / blog / general) |
@@ -216,9 +216,9 @@ AI-generated text has statistically detectable patterns — "LLMs use statistica
 **Usage recommendations**:
 
 - Chinese paper batch processing (CI / server, outside Claude Code) → humanize-chinese CLI
-- Agent-internal interactive rewriting → chinese-de-aigc Skill (or humanize-chinese's SKILL.md)
+- Agent-internal interactive rewriting → de-aigc-skills Skill (or humanize-chinese's SKILL.md)
 - Bilingual Chinese-English papers → humanize-chinese (Chinese sections) + humanizer_academic (English sections)
-- Commercial use → humanize-chinese is NOT allowed (license restriction); use chinese-de-aigc / humanizer_academic / stop-slop (standard MIT)
+- Commercial use → humanize-chinese is NOT allowed (license restriction); use de-aigc-skills / humanizer_academic / stop-slop (standard MIT)
 
 ---
 

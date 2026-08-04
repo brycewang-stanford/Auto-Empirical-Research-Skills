@@ -23,7 +23,7 @@ Regression prompts for flagship AERS skills. These are not model-specific scores
 | `aer-identification-staggered-did-audit` | identification_review | [`SKILL.md`](../skills/50-brycewang-aer-skills/skills/aer-identification/SKILL.md) | `AER`, `DID`, `identification`, `review` |
 | `aer-replication-package-audit` | replication | [`SKILL.md`](../skills/50-brycewang-aer-skills/skills/aer-replication/SKILL.md) | `AER`, `replication`, `AEA`, `data_code` |
 | `aer-submission-preflight` | submission | [`SKILL.md`](../skills/50-brycewang-aer-skills/skills/aer-submission/SKILL.md) | `AER`, `submission`, `preflight`, `journal` |
-| `chinese-de-aigc-academic-rewrite` | writing | [`SKILL.md`](../skills/48-copaper-ai-chinese-de-aigc/SKILL.md) | `Chinese`, `writing`, `de_AIGC`, `academic_style` |
+| `chinese-de-aigc-academic-rewrite` | writing | [`SKILL.md`](../skills/48-de-AIGC-skills/SKILL.md) | `Chinese`, `writing`, `de_AIGC`, `academic_style` |
 | `python-lalonde-observational-pipeline` | empirical_pipeline | [`SKILL.md`](../skills/00.1-Full-empirical-analysis-skill_Python/SKILL.md) | `Python`, `LaLonde`, `matching`, `observational_study` |
 | `r-lalonde-quarto-report` | empirical_pipeline | [`SKILL.md`](../skills/00.3-Full-empirical-analysis-skill_R/SKILL.md) | `R`, `Quarto`, `LaLonde`, `reproducible_report` |
 | `stata-lalonde-replication-do` | empirical_pipeline | [`SKILL.md`](../skills/00.2-Full-empirical-analysis-skill_Stata/SKILL.md) | `Stata`, `LaLonde`, `do_file`, `replication` |
@@ -117,7 +117,7 @@ Failure modes:
 
 - ID: `chinese-de-aigc-academic-rewrite`
 - Category: `writing`
-- Skill: [`skills/48-copaper-ai-chinese-de-aigc/SKILL.md`](../skills/48-copaper-ai-chinese-de-aigc/SKILL.md)
+- Skill: [`skills/48-de-AIGC-skills/SKILL.md`](../skills/48-de-AIGC-skills/SKILL.md)
 
 Prompt:
 

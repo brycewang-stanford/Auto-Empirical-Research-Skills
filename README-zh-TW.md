@@ -112,7 +112,7 @@
 | **45** | [deslop](skills/45-stephenturner-skill-deslop/) | 移除 AI 寫作模式（5 維評分） | ✍️ | 1 |
 | **46** | [stop-slop](skills/46-hardikpandya-stop-slop/) | 3 層 AI 痕跡偵測與改寫 | ✍️ | 1 |
 | **47** | [avoid-ai-writing](skills/47-conorbronsdon-avoid-ai-writing/) | 稽核 → 改寫 → 複稽 AI 腔（留痕） | ✍️ | 1 |
-| ⭐ **48** | **[chinese-de-aigc](skills/48-copaper-ai-chinese-de-aigc/)** 🇨🇳 | 面向知網 / 萬方 / Turnitin 中文版的中文去 AIGC | ✍️ | 1 |
+| ⭐ **48** | **[de-AIGC-skills](skills/48-de-AIGC-skills/)** 🇨🇳🇬🇧 | 中英雙語學術降 AIGC（Turnitin AI / GPTZero / 知網 / 萬方） | ✍️ | 1 |
 | **49** | [humanize-chinese](skills/49-voidborne-d-humanize-chinese/) | 偵測並擬人化 AI 生成的中文文字 | ✍️ | 1 |
 | ⭐ **50** | **[AER-skills](skills/50-brycewang-aer-skills/)** 📕 | Top-5 經濟學投稿棧：識別 → 穩健性 → R&R | 🚀 | 9 |
 | **51** | [CausalPy](skills/51-pymc-labs-CausalPy/) | 貝氏準實驗（PyMC Labs） | 🎯 | 3 |
@@ -138,7 +138,7 @@
 | ⭐ **71** | **[lit-review-agent-tools](skills/71-brycewang-lit-review-agent-tools/)** 🔍 | 文獻綜述工具選型 + 一鍵安裝執行（MinerU / PaperQA2 / ASReview / STORM / MCP 伺服器） | 📚 | 1 |
 | ⭐ **72** | **[Kaggle Research](skills/72-kaggle-research/)** 🧪 | 透過官方 CLI 安全、可稽核地檢索 Kaggle 並限界下載公開資料 | 🛠️ | 1 |
 
-> ⭐ **我們親手打造的主幹：** [StatsPAI](skills/00-Full-empirical-analysis-skill_StatsPAI/)（因果引擎） · 顯式的 [Python](skills/00.1-Full-empirical-analysis-skill_Python/) / [Stata](skills/00.2-Full-empirical-analysis-skill_Stata/) / [R](skills/00.3-Full-empirical-analysis-skill_R/) 全流程移植 · [AER-skills](skills/50-brycewang-aer-skills/)（Top-5 投稿棧） · [chinese-de-aigc](skills/48-copaper-ai-chinese-de-aigc/) · [Paper-WorkFlow](skills/69-Paper-WorkFlow/)（元調度器）。這些就是 AERS 的主幹 —— 完整對比見 [旗艦流水線 skills ↓](#旗艦流水線-skills)。想按用途瀏覽？參見 [同樣這 76 個、按用途分組 ↓](#76-個合集--按用途分組)。
+> ⭐ **我們親手打造的主幹：** [StatsPAI](skills/00-Full-empirical-analysis-skill_StatsPAI/)（因果引擎） · 顯式的 [Python](skills/00.1-Full-empirical-analysis-skill_Python/) / [Stata](skills/00.2-Full-empirical-analysis-skill_Stata/) / [R](skills/00.3-Full-empirical-analysis-skill_R/) 全流程移植 · [AER-skills](skills/50-brycewang-aer-skills/)（Top-5 投稿棧） · [de-AIGC-skills](skills/48-de-AIGC-skills/) · [Paper-WorkFlow](skills/69-Paper-WorkFlow/)（元調度器）。這些就是 AERS 的主幹 —— 完整對比見 [旗艦流水線 skills ↓](#旗艦流水線-skills)。想按用途瀏覽？參見 [同樣這 76 個、按用途分組 ↓](#76-個合集--按用途分組)。
 
 ---
 
@@ -251,7 +251,7 @@ AERS 同時是兩樣東西：(1) 一小撮**自研旗艦 skill**，能跑通完�
 | [`45` · deslop](skills/45-stephenturner-skill-deslop/) | 移除 AI 寫作模式（5 維評分） | 1 |
 | [`46` · stop-slop](skills/46-hardikpandya-stop-slop/) | 3 層 AI 痕跡偵測與改寫 | 1 |
 | [`47` · avoid-ai-writing](skills/47-conorbronsdon-avoid-ai-writing/) | 稽核 → 改寫 → 複稽 AI 腔（留痕） | 1 |
-| ⭐ **[`48` · chinese-de-aigc](skills/48-copaper-ai-chinese-de-aigc/)** 🇨🇳 | 面向知網 / 萬方 / Turnitin 中文版的中文去 AIGC | 1 |
+| ⭐ **[`48` · de-AIGC-skills](skills/48-de-AIGC-skills/)** 🇨🇳🇬🇧 | 中英雙語學術降 AIGC（Turnitin AI / GPTZero / 知網 / 萬方） | 1 |
 | [`70` · ssci-polish](skills/70-ssci-polish/) | SSCI/SCI 英文論文語言潤色 | 1 |
 | [`49` · humanize-chinese](skills/49-voidborne-d-humanize-chinese/) | 偵測並擬人化 AI 生成的中文文字 | 1 |
 | [`56` · econ-writing-skill](skills/56-hanlulong-econ-writing-skill/) | 綜合 50+ 頂級指南的經濟學寫作 | 1 |
@@ -349,7 +349,7 @@ make check        # 仓库校验 + 单元测试 + eval lint + 数值基准
 | **[Full Empirical Analysis — Stata](skills/00.2-Full-empirical-analysis-skill_Stata/SKILL.md)** 📊 | 社群事實標準：`reghdfe` · `ivreg2` · `csdid` · `did_imputation` · `sdid` · `rdrobust` · `synth` · `psmatch2` · `boottest` · `esttab` | 審稿人或合作者只接受 Stata 重現包時（AER/QJE/JPE/ReStud 風格） |
 | **[Full Empirical Analysis — R](skills/00.3-Full-empirical-analysis-skill_R/SKILL.md)** 📗 | 現代 tidyverse：`fixest` · `did` · `synthdid` · `HonestDiD` · `rdrobust` · `grf` · `DoubleML` · `marginaleffects` · **Quarto** | 單個 `.qmd` 一鍵算繪 PDF/HTML/Word 的一體化重現報告 |
 | **[AER-Skills](skills/50-brycewang-aer-skills/)** 📕 | 9 個 skill：選題路由 → 識別稽核 → 穩健性 → 引言 → 表圖 → 重現 → 投稿 → R&R → 總調度 | Top-5 經濟學（AER / AER:Insights / AEJ）投稿：**識別優先** —— 設計若脆，再多 prose 也救不回來 |
-| **[chinese-de-aigc](skills/48-copaper-ai-chinese-de-aigc/SKILL.md)** 🇨🇳 | 17 類中文 AI 痕跡模式庫，五步「定位→診斷→改寫→自評→複查」閉環 | 降低知網 / 萬方 / 維普 / Turnitin 中文版的 AI 寫作訊號 |
+| **[de-aigc-skills](skills/48-de-AIGC-skills/SKILL.md)** 🇨🇳🇬🇧 | 中英雙模式庫（英 22 + 中 17），六步「接件→審計→主張-證據→改寫→自評→複查」閉環 | 降低 Turnitin AI / GPTZero 與知網 / 萬方 / 維普的 AI 寫作訊號 |
 | **[Paper-WorkFlow](skills/69-Paper-WorkFlow/README.md)** 🧭 | **元調度器**，串起 Stage 0–9 —— 選題 → 設計 → 資料 → 估計 → 表格/圖形 → 初稿 → 潤色 → 去 AIGC → 模擬審稿 → 投稿 —— 透過調度既有 skill 與並行子代理，並以可續跑的 `workflow_state.json` 記錄狀態 | 端到端自動跑完一篇完整的實證社會科學論文 |
 
 > **為什麼既要 DSL 又要顯式三件套？** 信任一鍵 DSL 時用 StatsPAI；做教學、稽核、或要逐個替換診斷時用 00.1/00.2/00.3。AER-skills 再把一份正確的分析推到錄取門檻 —— 它們解決的是*不同*問題，可以組合。
@@ -376,7 +376,7 @@ make check        # 仓库校验 + 单元测试 + eval lint + 数值基准
 | 先審頂刊識別策略 | [`aer-identification`](skills/50-brycewang-aer-skills/skills/aer-identification/SKILL.md) |
 | 準備 AER / AEJ 投稿 | [`aer-workflow`](skills/50-brycewang-aer-skills/skills/aer-workflow/SKILL.md) |
 | 整理 AEA 合規的重現包 | [`aer-replication`](skills/50-brycewang-aer-skills/skills/aer-replication/SKILL.md) |
-| 降低中文初稿的 AI 寫作痕跡 | [`chinese-de-aigc`](skills/48-copaper-ai-chinese-de-aigc/SKILL.md) |
+| 降低實證論文初稿（中英文）的 AI 寫作痕跡 | [`de-aigc-skills`](skills/48-de-AIGC-skills/SKILL.md) |
 
 **更多入口：**
 
@@ -498,14 +498,14 @@ make check       # 完整 gate：validate + Python 编译 + 单元测试 + eval 
 
 | 套件 | 核心特色 | 最適合 | 本機 |
 |------|---------|--------|------|
-| **chinese-de-aigc** 🇨🇳 | CoPaper.AI **原創**中文學術去 AIGC；17 類中文痕跡模式庫、五步閉環、分章節策略、五維評分。目前 GitHub 上唯一面向中文學術去 AIGC 的 skill | 知網 / 萬方 / 維普 / Turnitin 中文版 | [`48`](skills/48-copaper-ai-chinese-de-aigc/) |
+| **de-AIGC-skills** 🇨🇳🇬🇧 | CoPaper.AI **原創**中英雙語學術降 AIGC；英 22 + 中 17 類模式、含主張-證據審計的六步閉環、分章節策略、五維評分，面向經管社科實證論文 | Turnitin AI / GPTZero / 知網 / 萬方 / 維普 | [`48`](skills/48-de-AIGC-skills/) |
 | [voidborne-d/humanize-chinese](skills/49-voidborne-d-humanize-chinese/) 🇨🇳 | 同時提供 SKILL.md 與獨立 Python CLI；17 類偵測 + 7 風格改寫器，LR ensemble 程序化打分。**License: MIT（非商用修改版）** | 中文學位論文 / 長篇 / 批量 pipeline | [`49`](skills/49-voidborne-d-humanize-chinese/) |
 | [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) | 學術專用；23 類 AI 寫作模式；保留合法學術過渡詞 | 醫學、生命科學、自然科學論文 | [`44`](skills/44-matsuikentaro1-humanizer_academic/) |
 | [stephenturner/skill-deslop](https://github.com/stephenturner/skill-deslop) | 智慧區分合法學科慣例 vs AI 痕跡；5 維評分 | 科學論文、技術部落格 | [`45`](skills/45-stephenturner-skill-deslop/) |
 | [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) | 三層偵測 + 五維評分；禁用短語、結構套路、句級規則 | 通用散文、部落格、報告 | [`46`](skills/46-hardikpandya-stop-slop/) |
 | [conorbronsdon/avoid-ai-writing](https://github.com/conorbronsdon/avoid-ai-writing) | 結構化稽核 + 重寫 + 二次稽核；可稽核、可追溯 | 需要留痕的修改流程 | [`47`](skills/47-conorbronsdon-avoid-ai-writing/) |
 
-> **組合建議：** 🇨🇳 中文（知網/萬方/維普）→ chinese-de-aigc · 🇬🇧 英文 → humanizer_academic · 需要稽核留痕 → avoid-ai-writing · 通用散文 → stop-slop。
+> **組合建議：** 實證論文（中英文）→ de-aigc-skills · 醫學英文 → humanizer_academic · 需要稽核留痕 → avoid-ai-writing · 通用散文 → stop-slop。
 
 ### 工具目錄（tools/）：自動化實證與因果推斷工具
 

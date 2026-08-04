@@ -9440,14 +9440,14 @@
       "path": "skills/47-conorbronsdon-avoid-ai-writing/SKILL.md"
     },
     {
-      "collection": "48-copaper-ai-chinese-de-aigc",
+      "collection": "48-de-AIGC-skills",
       "exact_case": true,
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 159,
-      "name": "chinese-de-aigc",
-      "path": "skills/48-copaper-ai-chinese-de-aigc/SKILL.md"
+      "line_count": 261,
+      "name": "de-aigc-skills",
+      "path": "skills/48-de-AIGC-skills/SKILL.md"
     },
     {
       "collection": "49-voidborne-d-humanize-chinese",

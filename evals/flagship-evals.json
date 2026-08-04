@@ -189,7 +189,7 @@
       "id": "chinese-de-aigc-academic-rewrite",
       "title": "Chinese Academic De-AIGC Rewrite",
       "category": "writing",
-      "skill_path": "skills/48-copaper-ai-chinese-de-aigc/SKILL.md",
+      "skill_path": "skills/48-de-AIGC-skills/SKILL.md",
       "prompt": "Rewrite a Chinese empirical-paper abstract and introduction paragraph to reduce formulaic AI-writing signals while preserving claims, variable definitions, identifying assumptions, and empirical results. Provide a before/after diagnostic table and a short note on what was changed.",
       "expected_artifacts": [
         "rewritten_text.md",

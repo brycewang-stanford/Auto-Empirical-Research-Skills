@@ -98,7 +98,7 @@ Use the matching first-party skill to pressure-test the output before you rely o
 | Is the **identification** valid? | [`aer-identification`](../skills/50-brycewang-aer-skills/skills/aer-identification/SKILL.md) |
 | Are the **robustness** checks the ones referees expect? | [`aer-robustness`](../skills/50-brycewang-aer-skills/skills/aer-robustness/SKILL.md) |
 | Is it **reproducible** enough for a data editor? | [`aer-replication`](../skills/50-brycewang-aer-skills/skills/aer-replication/SKILL.md) |
-| Does the **prose** read AI-generated? | [`avoid-ai-writing`](../skills/47-conorbronsdon-avoid-ai-writing/SKILL.md) · [`chinese-de-aigc`](../skills/48-copaper-ai-chinese-de-aigc/SKILL.md) |
+| Does the **prose** read AI-generated? | [`avoid-ai-writing`](../skills/47-conorbronsdon-avoid-ai-writing/SKILL.md) · [`de-aigc-skills`](../skills/48-de-AIGC-skills/SKILL.md) |
 
 ---
 

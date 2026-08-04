@@ -25,7 +25,7 @@ use [`search.html`](search.html); for the full tag index see
 | Write a **R&R / rebuttal** letter | [`aer-rebuttal`](../skills/50-brycewang-aer-skills/skills/aer-rebuttal/SKILL.md) | written against the *revised* manuscript |
 | Build a **replication package** | [`aer-replication`](../skills/50-brycewang-aer-skills/skills/aer-replication/SKILL.md) | AEA Data & Code Availability Policy, openICPSR-ready |
 | Get **causal-method code templates** | [`causal-inference-mixtape`](../skills/10-Jill0099-causal-inference-mixtape/SKILL.md) · [`MixtapeTools`](../skills/13-scunning1975-MixtapeTools/) | 10 designs, Python/R/Stata |
-| Lower the **AI-writing signal** of a Chinese draft | [`chinese-de-aigc`](../skills/48-copaper-ai-chinese-de-aigc/SKILL.md) | structural rewrite, facts preserved |
+| Lower the **AI-writing signal** of an empirical draft (EN / 中文) | [`de-aigc-skills`](../skills/48-de-AIGC-skills/SKILL.md) | bilingual structural rewrite, facts preserved |
 | De-slop **English** academic prose | [`avoid-ai-writing`](../skills/47-conorbronsdon-avoid-ai-writing/SKILL.md) · [`stop-slop`](../skills/46-hardikpandya-stop-slop/SKILL.md) | |
 | Run a **literature review** | [`literature-review`](../skills/36-taoyunudt-literature-review-skill/SKILL.md) | see also stage:`literature` in the taxonomy |
 
@@ -67,8 +67,8 @@ Do you have a dataset and need results?
    └─ reproducibility package  → aer-replication
 
 Polishing prose?
-├─ Chinese → chinese-de-aigc
-└─ English → avoid-ai-writing / stop-slop
+├─ Empirical paper (EN / 中文) → de-aigc-skills
+└─ General English prose → avoid-ai-writing / stop-slop
 ```
 
 ## See also

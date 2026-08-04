@@ -87,7 +87,7 @@ This is the safest first trial because it does not modify any runtime configurat
 | Referee-grade Stata replication | [`Full-empirical-analysis-skill-Stata`](../skills/00.2-Full-empirical-analysis-skill_Stata/SKILL.md) |
 | R + Quarto replication report | [`Full-empirical-analysis-skill-R`](../skills/00.3-Full-empirical-analysis-skill_R/SKILL.md) |
 | AER / AEJ manuscript pipeline | [`aer-workflow`](../skills/50-brycewang-aer-skills/skills/aer-workflow/SKILL.md) |
-| Chinese academic de-AIGC pass | [`chinese-de-aigc`](../skills/48-copaper-ai-chinese-de-aigc/SKILL.md) |
+| Academic de-AIGC pass (EN + 中文) | [`de-aigc-skills`](../skills/48-de-AIGC-skills/SKILL.md) |
 
 ## 6. License Check
 

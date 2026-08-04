@@ -5,6 +5,20 @@ This is the project's narrative changelog. `README.md` keeps only a short
 
 ## Unreleased
 
+- Renamed and rewrote collection 48: **`48-copaper-ai-chinese-de-aigc` →
+  [`48-de-AIGC-skills`](skills/48-de-AIGC-skills/)**, extending the
+  Chinese-only academic de-AIGC skill to **bilingual EN+ZH coverage** for
+  empirical papers in economics, management, and the social sciences. The v2
+  skill adds a 22-pattern English library (`references/patterns-en.md`, with a
+  preserve-list against over-correction), renumbers the Chinese library to
+  ZH01–ZH17, upgrades the five-step loop to a six-step loop with an explicit
+  **claim–evidence audit** (verb strength must match identification strength),
+  makes the section strategies and five-dimension rubric bilingual, and ships
+  8 new English before/after cases alongside the 12 Chinese ones. Design
+  references: the humanizer_academic / academic-humanizer / deslop / stop-slop
+  lineages. All six locale READMEs, the router, and the demo
+  ([`docs/demos/de-aigc.md`](docs/demos/de-aigc.md), renamed from
+  `chinese-de-aigc.md`) were updated to the new path.
 - Hardened the whole-repo skill encapsulation. The root router
   [`SKILL.md`](SKILL.md) now declares its `license` in frontmatter, warns
   that the two catalog JSON files are ~1 MB each and shows a copy-paste
@@ -226,7 +240,7 @@ manuals loaded on demand).
 
 ## 2026-04-13 — Original Chinese de-AIGC skill
 
-- **[chinese-de-aigc](skills/48-copaper-ai-chinese-de-aigc/)** — CoPaper.AI's
+- **[chinese-de-aigc](skills/48-de-AIGC-skills/)** — CoPaper.AI's
   original Chinese academic de-AIGC skill, targeting CNKI AMLC / Wanfang / VIP /
   Turnitin-Chinese detectors. 17-pattern Chinese-tell library, 5-step
   locate→diagnose→rewrite→self-score→review loop, per-section strategy, 5-dim

@@ -112,9 +112,11 @@ OVERRIDES: dict[str, dict[str, object]] = {
         "sync": "manual",
         "source_confidence": "high",
     },
-    "48-copaper-ai-chinese-de-aigc": {
+    "48-de-AIGC-skills": {
         "source_url": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills",
         "license": "CC-BY-SA-4.0 (repository default)",
+        # Renamed from 48-copaper-ai-chinese-de-aigc in the v2 rewrite that
+        # extended the Chinese-only skill to bilingual EN+ZH coverage.
         "origin": "first-party AERS skill",
         "sync": "manual",
         "source_confidence": "high",

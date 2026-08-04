@@ -1,6 +1,11 @@
-# 分章节差异化改写策略
+# 分章节差异化改写策略 · Section-by-section strategies
 
 不同章节的 AI 痕迹表现不同，修复力度也应不同。**方法章节的"AI 味"其实是学术规范；文献综述的"AI 味"才是真的失真**。
+
+本文件的症状描述以中文稿为主；英文稿的逐节对照见文末
+[English-manuscript notes](#english-manuscript-notes)，两套规则号
+（`patterns-zh.md` 的 ZH01–ZH17 与 `patterns-en.md` 的 EN01–EN22）在同一张
+章节表上通用——同一章节在两种语言里的高危程度是一致的。
 
 ---
 
@@ -215,3 +220,32 @@
 6. 其他章节
 
 > 原则：**AI 最容易写"好看但空洞"的段落，最应该改；AI 写得相对保守的段落（如方法、稳健性），反而可以少改**。
+
+---
+
+## English-manuscript notes
+
+Same sections, same risk ranking — the symptoms just wear English clothes.
+Rule IDs refer to `patterns-en.md`.
+
+| Section | Typical English AI symptoms | Key rules |
+|---|---|---|
+| Abstract | "This study comprehensively examines…", zero numbers, ends with "important implications" | EN01, EN12, EN16 |
+| Introduction | "In recent years, X has attracted increasing attention"; three numbered contributions restating the abstract | EN05, EN16, EN06 |
+| Literature review | citation dumps with no engagement; "Studies have shown" with no names; false consensus | EN17, EN04, EN07 |
+| Hypotheses | "significantly improves" in the hypothesis itself; mechanism triads | EN11, EN07 |
+| Data | "comprehensive dataset from various authoritative sources" | EN12, EN04 |
+| Empirical strategy | "serves as an ideal natural experiment"; identification asserted, not argued | EN13, EN10 |
+| Baseline results | "highly significant, demonstrating a strong effect" with no statistics; "-ing" tails after every table | EN11, EN02 |
+| Mechanisms | Moreover/Furthermore chains walking through a mediation triad | EN06, EN07 |
+| Heterogeneity | directions reported without magnitudes or explanations | EN01, EN11 |
+| Robustness | "extensive robustness checks confirm our findings" | EN12, EN10 |
+| Discussion | promotional framing of implications; no design-specific limitations | EN03, EN16, EN15 |
+| Conclusion | re-abstracts the abstract; generic "future research" boilerplate | EN22, EN16 |
+
+**Red lines that transfer directly** (see the Chinese sections above for detail):
+abstract needs ≥3 concrete numbers; introduction may not open with a
+recent-years formula; every literature claim gets an author-year; results
+sections report coefficients and test statistics instead of adjectives;
+conclusions must introduce new information rather than echo the abstract
+(EN22 = ZH17, the same echo-chamber check in both languages).

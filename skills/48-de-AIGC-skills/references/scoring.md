@@ -1,6 +1,21 @@
-# 中文降 AIGC 五维评分量表
+# 五维评分量表 · Five-dimension rubric
 
 每维 1-10 分，加权总分 ≤ 50。总分 ≥ 42 为通过线，< 35 建议重写。
+Score each dimension 1-10; weighted total out of 50. Pass at ≥ 42; below 35,
+go back and rewrite rather than patch.
+
+**量表对两种语言通用**，仅节奏维度的阈值不同：
+
+| 阈值 | 中文稿 | English manuscripts |
+|------|--------|---------------------|
+| 短句 short sentence | ≤ 15 字 | ≤ 8 words |
+| 长句 long sentence | ≥ 50 字 | ≥ 40 words |
+| 句长集中区（危险区）| 20-35 字 | 20-30 words |
+
+英文稿的 hedge 加分词：suggests, is consistent with, is associated with,
+may indicate, in our sample, we cannot rule out。英文稿的绝对化扣分词：
+prove(s), demonstrate(s), establish(es), clearly shows, undoubtedly
+（对应 `patterns-en.md` EN10/EN15；中文对应 ZH12/ZH14）。
 
 ---
 

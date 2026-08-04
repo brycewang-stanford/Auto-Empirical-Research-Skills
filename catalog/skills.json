@@ -871,13 +871,13 @@
       "commercial_use": "share-alike",
       "has_license": false,
       "has_readme": true,
-      "id": "48-copaper-ai-chinese-de-aigc",
+      "id": "48-de-AIGC-skills",
       "license": "CC-BY-SA-4.0 (repository default)",
-      "path": "skills/48-copaper-ai-chinese-de-aigc",
+      "path": "skills/48-de-AIGC-skills",
       "primary_skill": {
-        "description": "面向中文学术论文的降 AIGC 检测率 Skill。针对知网、万方、维普、Turnitin 中文版的检测机制，识别并消除中文大语言模型的 17 类结构化写作痕迹。采用\"定位 → 诊断 → 改写 → 自评 → 复查\"五步闭环工作流，分章节差异化策略（摘要/引言/文献综述/方法/结果/讨论/结论），保持学术严谨性前提下通过检测。",
-        "name": "chinese-de-aigc",
-        "path": "skills/48-copaper-ai-chinese-de-aigc/SKILL.md"
+        "description": "中英双语学术降 AIGC / bilingual academic de-AIGC skill. Removes AI-generated writing signatures from empirical papers in economics, management, and the social sciences — in both English and Chinese. Covers Turnitin AI, GPTZero, Originality.ai on the English side and 知网 AMLC, 万方, 维普 on the Chinese side. Uses a six-step loop (intake → audit → claim-evidence check → differentiated rewrite → five-dimension self-score → cold-reader recheck) with two pattern libraries (22 English + 17 Chinese patterns), section-by-section strategies for empirical papers, and hard protections that keep every number, coefficient, and citation intact.",
+        "name": "de-aigc-skills",
+        "path": "skills/48-de-AIGC-skills/SKILL.md"
       },
       "skill_count": 1,
       "source_confidence": "high",
@@ -16383,8 +16383,8 @@
       "qualified_name": "47-conorbronsdon-avoid-ai-writing::avoid-ai-writing"
     },
     {
-      "collection": "48-copaper-ai-chinese-de-aigc",
-      "description": "面向中文学术论文的降 AIGC 检测率 Skill。针对知网、万方、维普、Turnitin 中文版的检测机制，识别并消除中文大语言模型的 17 类结构化写作痕迹。采用\"定位 → 诊断 → 改写 → 自评 → 复查\"五步闭环工作流，分章节差异化策略（摘要/引言/文献综述/方法/结果/讨论/结论），保持学术严谨性前提下通过检测。",
+      "collection": "48-de-AIGC-skills",
+      "description": "中英双语学术降 AIGC / bilingual academic de-AIGC skill. Removes AI-generated writing signatures from empirical papers in economics, management, and the social sciences — in both English and Chinese. Covers Turnitin AI, GPTZero, Originality.ai on the English side and 知网 AMLC, 万方, 维普 on the Chinese side. Uses a six-step loop (intake → audit → claim-evidence check → differentiated rewrite → five-dimension self-score → cold-reader recheck) with two pattern libraries (22 English + 17 Chinese patterns), section-by-section strategies for empirical papers, and hard protections that keep every number, coefficient, and citation intact.",
       "frontmatter_fields": [
         "description",
         "name",
@@ -16393,10 +16393,10 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 159,
-      "name": "chinese-de-aigc",
-      "path": "skills/48-copaper-ai-chinese-de-aigc/SKILL.md",
-      "qualified_name": "48-copaper-ai-chinese-de-aigc::chinese-de-aigc"
+      "line_count": 261,
+      "name": "de-aigc-skills",
+      "path": "skills/48-de-AIGC-skills/SKILL.md",
+      "qualified_name": "48-de-AIGC-skills::de-aigc-skills"
     },
     {
       "collection": "49-voidborne-d-humanize-chinese",

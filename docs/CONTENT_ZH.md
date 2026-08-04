@@ -87,7 +87,7 @@
 | **45** | [deslop](../skills/45-stephenturner-skill-deslop/) | 去除 AI 写作痕迹（5 维评分） | ✍️ | 1 |
 | **46** | [stop-slop](../skills/46-hardikpandya-stop-slop/) | 三层 AI 痕迹检测与改写 | ✍️ | 1 |
 | **47** | [avoid-ai-writing](../skills/47-conorbronsdon-avoid-ai-writing/) | 审计 → 改写 → 二次审计 AI 味（留痕） | ✍️ | 1 |
-| ⭐ **48** | **[chinese-de-aigc](../skills/48-copaper-ai-chinese-de-aigc/)** 🇨🇳 | 面向知网 / 万方 / Turnitin 中文版的中文去 AIGC | ✍️ | 1 |
+| ⭐ **48** | **[de-AIGC-skills](../skills/48-de-AIGC-skills/)** 🇨🇳🇬🇧 | 中英双语学术降 AIGC（Turnitin AI / GPTZero / 知网 / 万方） | ✍️ | 1 |
 | **49** | [humanize-chinese](../skills/49-voidborne-d-humanize-chinese/) | 检测并人性化 AI 生成的中文文本 | ✍️ | 1 |
 | ⭐ **50** | **[AER-skills](../skills/50-brycewang-aer-skills/)** 📕 | Top-5 经济学投稿套件：识别 → 稳健性 → R&R | 🚀 | 9 |
 | **51** | [CausalPy](../skills/51-pymc-labs-CausalPy/) | 贝叶斯准实验（PyMC Labs） | 🎯 | 3 |
@@ -113,7 +113,7 @@
 | ⭐ **71** | **[lit-review-agent-tools](../skills/71-brycewang-lit-review-agent-tools/)** 🔍 | 文献综述工具选型 + 一键安装运行（MinerU / PaperQA2 / ASReview / STORM / MCP 服务器） | 📚 | 1 |
 | ⭐ **72** | **[Kaggle Research](../skills/72-kaggle-research/)** 🧪 | 通过官方 CLI 安全检索 Kaggle 资源、限界下载公开数据并保留审计证据 | 🛠️ | 1 |
 
-> ⭐ **我们亲手打造的主干：** [StatsPAI](../skills/00-Full-empirical-analysis-skill_StatsPAI/)（因果引擎）· 显式的 [Python](../skills/00.1-Full-empirical-analysis-skill_Python/) / [Stata](../skills/00.2-Full-empirical-analysis-skill_Stata/) / [R](../skills/00.3-Full-empirical-analysis-skill_R/) 全流程移植 · [AER-skills](../skills/50-brycewang-aer-skills/)（Top-5 投稿套件）· [chinese-de-aigc](../skills/48-copaper-ai-chinese-de-aigc/) · [Paper-WorkFlow](../skills/69-Paper-WorkFlow/)（元编排器）。它们是 AERS 的主干 —— 完整对比见 [旗舰流水线 skills ↓](#旗舰流水线-skills)。更想按用途浏览？见 [同样的 76 个，按用途分组 ↓](#76-个合集--按用途分组)。
+> ⭐ **我们亲手打造的主干：** [StatsPAI](../skills/00-Full-empirical-analysis-skill_StatsPAI/)（因果引擎）· 显式的 [Python](../skills/00.1-Full-empirical-analysis-skill_Python/) / [Stata](../skills/00.2-Full-empirical-analysis-skill_Stata/) / [R](../skills/00.3-Full-empirical-analysis-skill_R/) 全流程移植 · [AER-skills](../skills/50-brycewang-aer-skills/)（Top-5 投稿套件）· [de-AIGC-skills](../skills/48-de-AIGC-skills/) · [Paper-WorkFlow](../skills/69-Paper-WorkFlow/)（元编排器）。它们是 AERS 的主干 —— 完整对比见 [旗舰流水线 skills ↓](#旗舰流水线-skills)。更想按用途浏览？见 [同样的 76 个，按用途分组 ↓](#76-个合集--按用途分组)。
 | <a id="skill-00"></a>⭐ **00** | **[StatsPAI](../skills/00-Full-empirical-analysis-skill_StatsPAI/)** 🔥 | Agent-native Python **DSL** —— 一个 `sp.causal(...)` 跑完 DID/RD/IV/SCM/DML | 🚀 | 1 |
 | <a id="skill-00-1"></a>⭐ **00.1** | **[Full Empirical · Python](../skills/00.1-Full-empirical-analysis-skill_Python/)** 📘 | 显式栈：`pandas` · `statsmodels` · `linearmodels` · `pyfixest` | 🚀 | 1 |
 | <a id="skill-00-2"></a>⭐ **00.2** | **[Full Empirical · Stata](../skills/00.2-Full-empirical-analysis-skill_Stata/)** 📊 | `reghdfe` · `ivreg2` · `csdid` · `sdid` · `rdrobust` 复现包 | 🚀 | 1 |
@@ -165,7 +165,7 @@
 | <a id="skill-45"></a>**45** | [deslop](../skills/45-stephenturner-skill-deslop/) | 去除 AI 写作痕迹（5 维评分） | ✍️ | 1 |
 | <a id="skill-46"></a>**46** | [stop-slop](../skills/46-hardikpandya-stop-slop/) | 三层 AI 痕迹检测与改写 | ✍️ | 1 |
 | <a id="skill-47"></a>**47** | [avoid-ai-writing](../skills/47-conorbronsdon-avoid-ai-writing/) | 审计 → 改写 → 二次审计 AI 味（留痕） | ✍️ | 1 |
-| <a id="skill-48"></a>⭐ **48** | **[chinese-de-aigc](../skills/48-copaper-ai-chinese-de-aigc/)** 🇨🇳 | 面向知网 / 万方 / Turnitin 中文版的中文去 AIGC | ✍️ | 1 |
+| <a id="skill-48"></a>⭐ **48** | **[de-AIGC-skills](../skills/48-de-AIGC-skills/)** 🇨🇳🇬🇧 | 中英双语学术降 AIGC（Turnitin AI / GPTZero / 知网 / 万方） | ✍️ | 1 |
 | <a id="skill-49"></a>**49** | [humanize-chinese](../skills/49-voidborne-d-humanize-chinese/) | 检测并人性化 AI 生成的中文文本 | ✍️ | 1 |
 | <a id="skill-50"></a>⭐ **50** | **[AER-skills](../skills/50-brycewang-aer-skills/)** 📕 | Top-5 经济学投稿套件：识别 → 稳健性 → R&R | 🚀 | 9 |
 | <a id="skill-51"></a>**51** | [CausalPy](../skills/51-pymc-labs-CausalPy/) | 贝叶斯准实验（PyMC Labs） | 🎯 | 3 |
@@ -191,7 +191,7 @@
 | <a id="skill-71"></a>⭐ **71** | **[lit-review-agent-tools](../skills/71-brycewang-lit-review-agent-tools/)** 🔍 | 文献综述工具选型 + 一键安装运行：推荐最合适的开源工具（MinerU / PaperQA2 / ASReview / STORM / GPT Researcher / arXiv·Zotero MCP），并用内置 launcher 在隔离 venv 中装好直接跑 | 📚 | 1 |
 | <a id="skill-72"></a>⭐ **72** | **[Kaggle Research](../skills/72-kaggle-research/)** 🧪 | 官方 Kaggle CLI 的安全封装：资源检索、限界公开数据下载、SHA-256 清单、凭据脱敏审计与显式远程写入授权 | 🛠️ | 1 |
 
-> ⭐ **我们亲手打造的主干：** [StatsPAI](../skills/00-Full-empirical-analysis-skill_StatsPAI/)（因果引擎）· 显式的 [Python](../skills/00.1-Full-empirical-analysis-skill_Python/) / [Stata](../skills/00.2-Full-empirical-analysis-skill_Stata/) / [R](../skills/00.3-Full-empirical-analysis-skill_R/) 全流程移植 · [AER-skills](../skills/50-brycewang-aer-skills/)（Top-5 投稿套件）· [chinese-de-aigc](../skills/48-copaper-ai-chinese-de-aigc/) · [Paper-WorkFlow](../skills/69-Paper-WorkFlow/)（元编排器）。它们是 AERS 的主干 —— 完整对比见 [旗舰流水线 skills ↓](#旗舰流水线-skills)。更想按用途浏览？见 [同样的 76 个，按用途分组 ↓](#76-个合集--按用途分组)。
+> ⭐ **我们亲手打造的主干：** [StatsPAI](../skills/00-Full-empirical-analysis-skill_StatsPAI/)（因果引擎）· 显式的 [Python](../skills/00.1-Full-empirical-analysis-skill_Python/) / [Stata](../skills/00.2-Full-empirical-analysis-skill_Stata/) / [R](../skills/00.3-Full-empirical-analysis-skill_R/) 全流程移植 · [AER-skills](../skills/50-brycewang-aer-skills/)（Top-5 投稿套件）· [de-AIGC-skills](../skills/48-de-AIGC-skills/) · [Paper-WorkFlow](../skills/69-Paper-WorkFlow/)（元编排器）。它们是 AERS 的主干 —— 完整对比见 [旗舰流水线 skills ↓](#旗舰流水线-skills)。更想按用途浏览？见 [同样的 76 个，按用途分组 ↓](#76-个合集--按用途分组)。
 
 ---
 
@@ -305,7 +305,7 @@ AERS 同时是两样东西：(1) 一小撮**自研旗舰 skill**，能跑通完�
 | [`45` · deslop](../skills/45-stephenturner-skill-deslop/) | 去除 AI 写作痕迹（5 维评分） | 1 |
 | [`46` · stop-slop](../skills/46-hardikpandya-stop-slop/) | 三层 AI 痕迹检测与改写 | 1 |
 | [`47` · avoid-ai-writing](../skills/47-conorbronsdon-avoid-ai-writing/) | 审计 → 改写 → 二次审计 AI 味（留痕） | 1 |
-| ⭐ **[`48` · chinese-de-aigc](../skills/48-copaper-ai-chinese-de-aigc/)** 🇨🇳 | 面向知网 / 万方 / Turnitin 中文版的中文去 AIGC | 1 |
+| ⭐ **[`48` · de-AIGC-skills](../skills/48-de-AIGC-skills/)** 🇨🇳🇬🇧 | 中英双语学术降 AIGC（Turnitin AI / GPTZero / 知网 / 万方） | 1 |
 | [`70` · ssci-polish](../skills/70-ssci-polish/) | SSCI/SCI 英文论文语言润色 | 1 |
 | [`49` · humanize-chinese](../skills/49-voidborne-d-humanize-chinese/) | 检测并人性化 AI 生成的中文文本 | 1 |
 | [`56` · econ-writing-skill](../skills/56-hanlulong-econ-writing-skill/) | 综合 50+ 顶级指南的经济学写作 | 1 |
@@ -403,7 +403,7 @@ make check        # 仓库校验 + 单元测试 + eval lint + 数值基准
 | **[Full Empirical Analysis — Stata](../skills/00.2-Full-empirical-analysis-skill_Stata/SKILL.md)** 📊 | 社区事实标准：`reghdfe` · `ivreg2` · `csdid` · `did_imputation` · `sdid` · `rdrobust` · `synth` · `psmatch2` · `boottest` · `esttab` | 审稿人或合作者只接受 Stata 复现包时（AER/QJE/JPE/ReStud 风格） |
 | **[Full Empirical Analysis — R](../skills/00.3-Full-empirical-analysis-skill_R/SKILL.md)** 📗 | 现代 tidyverse：`fixest` · `did` · `synthdid` · `HonestDiD` · `rdrobust` · `grf` · `DoubleML` · `marginaleffects` · **Quarto** | 单个 `.qmd` 一键渲染 PDF/HTML/Word 的一体化复现报告 |
 | **[AER-Skills](../skills/50-brycewang-aer-skills/)** 📕 | 9 个 skill：选题路由 → 识别审计 → 稳健性 → 引言 → 表图 → 复现 → 投稿 → R&R → 总调度 | Top-5 经济学（AER / AER:Insights / AEJ）投稿：**识别优先** —— 设计若脆，再多 prose 也救不回来 |
-| **[chinese-de-aigc](../skills/48-copaper-ai-chinese-de-aigc/SKILL.md)** 🇨🇳 | 17 类中文 AI 痕迹模式库，五步「定位→诊断→改写→自评→复查」闭环 | 降低知网 / 万方 / 维普 / Turnitin 中文版的 AI 写作信号 |
+| **[de-aigc-skills](../skills/48-de-AIGC-skills/SKILL.md)** 🇨🇳🇬🇧 | 中英双模式库（英 22 + 中 17），六步「接件→审计→主张-证据→改写→自评→复查」闭环 | 降低 Turnitin AI / GPTZero 与知网 / 万方 / 维普的 AI 写作信号 |
 | **[Paper-WorkFlow](../skills/69-Paper-WorkFlow/README.md)** 🧭 | **元编排器**，串起 Stage 0–9 —— 选题 → 设计 → 数据 → 估计 → 表格图形 → 初稿 → 润色 → 去 AIGC → 模拟审稿 → 投稿 —— 通过调度已有 skill 与并行子代理，并用可续跑的 `workflow_state.json` 记录进度 | 端到端自动跑完一篇完整的实证社会科学论文 |
 
 > **为什么既要 DSL 又要显式三件套？** 信任一键 DSL 时用 StatsPAI；做教学、审计、或要逐个替换诊断时用 00.1/00.2/00.3。AER-skills 再把一份正确的分析推到录用门槛 —— 它们解决的是*不同*问题，可以组合。
@@ -430,7 +430,7 @@ make check        # 仓库校验 + 单元测试 + eval lint + 数值基准
 | 先审顶刊识别策略 | [`aer-identification`](../skills/50-brycewang-aer-skills/skills/aer-identification/SKILL.md) |
 | 准备 AER / AEJ 投稿 | [`aer-workflow`](../skills/50-brycewang-aer-skills/skills/aer-workflow/SKILL.md) |
 | 整理 AEA 合规的复现包 | [`aer-replication`](../skills/50-brycewang-aer-skills/skills/aer-replication/SKILL.md) |
-| 降低中文初稿的 AI 写作痕迹 | [`chinese-de-aigc`](../skills/48-copaper-ai-chinese-de-aigc/SKILL.md) |
+| 降低实证论文初稿（中英文）的 AI 写作痕迹 | [`de-aigc-skills`](../skills/48-de-AIGC-skills/SKILL.md) |
 
 **更多入口：**
 
@@ -554,14 +554,14 @@ make check       # 完整 gate：validate + Python 编译 + 单元测试 + eval 
 
 | 套件 | 核心特色 | 最适合 | 本地 |
 |------|---------|--------|------|
-| **chinese-de-aigc** 🇨🇳 | CoPaper.AI **原创**中文学术去 AIGC；17 类中文痕迹模式库、五步闭环、分章节策略、五维评分。目前 GitHub 上唯一面向中文学术去 AIGC 的 skill | 知网 / 万方 / 维普 / Turnitin 中文版 | [`48`](../skills/48-copaper-ai-chinese-de-aigc/) |
+| **de-AIGC-skills** 🇨🇳🇬🇧 | CoPaper.AI **原创**中英双语学术降 AIGC；英 22 + 中 17 类模式、含主张-证据审计的六步闭环、分章节策略、五维评分，面向经管社科实证论文 | Turnitin AI / GPTZero / 知网 / 万方 / 维普 | [`48`](../skills/48-de-AIGC-skills/) |
 | [voidborne-d/humanize-chinese](../skills/49-voidborne-d-humanize-chinese/) 🇨🇳 | 同时提供 SKILL.md 与独立 Python CLI；17 类检测 + 7 风格改写器，LR ensemble 程序化打分。**License: MIT（非商用修改版）** | 中文学位论文 / 长篇 / 批量 pipeline | [`49`](../skills/49-voidborne-d-humanize-chinese/) |
 | [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) | 学术专用；23 类 AI 写作模式；保留合法学术过渡词 | 医学、生命科学、自然科学论文 | [`44`](../skills/44-matsuikentaro1-humanizer_academic/) |
 | [stephenturner/skill-deslop](https://github.com/stephenturner/skill-deslop) | 智能区分合法学科惯例 vs AI 痕迹；5 维评分 | 科学论文、技术博客 | [`45`](../skills/45-stephenturner-skill-deslop/) |
 | [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) | 三层检测 + 五维评分；禁用短语、结构套路、句级规则 | 通用散文、博客、报告 | [`46`](../skills/46-hardikpandya-stop-slop/) |
 | [conorbronsdon/avoid-ai-writing](https://github.com/conorbronsdon/avoid-ai-writing) | 结构化审计 + 重写 + 二次审计；可审计、可追溯 | 需要留痕的修改流程 | [`47`](../skills/47-conorbronsdon-avoid-ai-writing/) |
 
-> **组合建议：** 🇨🇳 中文（知网/万方/维普）→ chinese-de-aigc · 🇬🇧 英文 → humanizer_academic · 需要审计留痕 → avoid-ai-writing · 通用散文 → stop-slop。
+> **组合建议：** 实证论文（中英文）→ de-aigc-skills · 医学英文 → humanizer_academic · 需要审计留痕 → avoid-ai-writing · 通用散文 → stop-slop。
 
 ### 工具目录（tools/）：自动化实证与因果推断工具
 

@@ -1,5 +1,5 @@
 id = "de-aigc-structural"
-skill = "skills/48-copaper-ai-chinese-de-aigc"
+skill = "skills/48-de-AIGC-skills"
 title = "Chinese de-AIGC rewrite must reduce AI-pattern markers without changing facts"
 category = "writing-style"
 severity = "medium"

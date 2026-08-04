@@ -409,22 +409,24 @@ rewrite.
 **Don't use for:** Chinese prose.
 **Use instead:** `44` / `45` / `46` for English; `48` / `49` for Chinese.
 
-## 48-copaper-ai-chinese-de-aigc
+## 48-de-AIGC-skills
 
-**Don't use for:** English prose. The detectors and rewrites are
-Chinese-trained; using them on English text wastes a round-trip and may
-silently break the meaning.
+**Don't use for:** non-academic prose (blogs, marketing copy, fiction) —
+the pattern libraries and section strategies assume an empirical-paper
+skeleton, in English or Chinese.
 **Don't use for:** empirical estimation.
-**Use instead:** `47-conorbronsdon-avoid-ai-writing` /
-`46-hardikpandya-stop-slop` for English; `49-voidborne-d-humanize-chinese`
-for a different Chinese humanizer.
+**Don't use for:** laundering fully AI-generated papers past detectors;
+the skill flags unsupported claims instead of hiding them.
+**Use instead:** `46-hardikpandya-stop-slop` / `45-stephenturner-skill-deslop`
+for general English prose; `49-voidborne-d-humanize-chinese` for general
+Chinese prose outside the academic register.
 
 ## 49-voidborne-d-humanize-chinese
 
 **Don't use for:** English prose. Chinese-only humanizer; running
 English through it is a waste.
 **Don't use for:** empirical estimation.
-**Use instead:** `47` / `46` / `45` for English; `48-copaper-ai-chinese-de-aigc`
+**Use instead:** `47` / `46` / `45` for English; `48-de-AIGC-skills`
 for a different Chinese humanizer.
 
 ## 50-brycewang-aer-skills (AER pipeline)

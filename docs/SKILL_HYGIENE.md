@@ -75,7 +75,7 @@ A skill can be **well-formed** (high hygiene) yet **untested for the traps an ap
 | `45-stephenturner-skill-deslop` | 1 | 100.0 | 100 | 0 | 0 |
 | `46-hardikpandya-stop-slop` | 1 | 100.0 | 100 | 0 | 0 |
 | `47-conorbronsdon-avoid-ai-writing` | 1 | 100.0 | 100 | 1 | 1 |
-| `48-copaper-ai-chinese-de-aigc` | 1 | 100.0 | 100 | 1 | 1 |
+| `48-de-AIGC-skills` | 1 | 100.0 | 100 | 1 | 1 |
 | `49-voidborne-d-humanize-chinese` | 1 | 100.0 | 100 | 0 | 0 |
 | `50-brycewang-aer-skills` | 15 | 100.0 | 100 | 6 | 10 |
 | `51-pymc-labs-CausalPy` | 3 | 100.0 | 100 | 1 | 1 |
@@ -144,7 +144,7 @@ A skill can be **well-formed** (high hygiene) yet **untested for the traps an ap
 | 1 | [`skills/40-py-econometrics-pyfixest/SKILL.md`](../skills/40-py-econometrics-pyfixest/SKILL.md) | 100 |
 | 1 | [`skills/41-sticerd-eee-sewage-econometrics-check/skills/audit-replication/SKILL.md`](../skills/41-sticerd-eee-sewage-econometrics-check/skills/audit-replication/SKILL.md) | 100 |
 | 1 | [`skills/47-conorbronsdon-avoid-ai-writing/SKILL.md`](../skills/47-conorbronsdon-avoid-ai-writing/SKILL.md) | 100 |
-| 1 | [`skills/48-copaper-ai-chinese-de-aigc/SKILL.md`](../skills/48-copaper-ai-chinese-de-aigc/SKILL.md) | 100 |
+| 1 | [`skills/48-de-AIGC-skills/SKILL.md`](../skills/48-de-AIGC-skills/SKILL.md) | 100 |
 | 1 | [`skills/50-brycewang-aer-skills/skills/aer-robustness/SKILL.md`](../skills/50-brycewang-aer-skills/skills/aer-robustness/SKILL.md) | 100 |
 | 1 | [`skills/50-brycewang-aer-skills/skills/aer-submission/SKILL.md`](../skills/50-brycewang-aer-skills/skills/aer-submission/SKILL.md) | 100 |
 | 1 | [`skills/50-brycewang-aer-skills/skills/aer-tables-figures/SKILL.md`](../skills/50-brycewang-aer-skills/skills/aer-tables-figures/SKILL.md) | 100 |

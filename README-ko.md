@@ -112,7 +112,7 @@
 | **45** | [deslop](skills/45-stephenturner-skill-deslop/) | AI 글쓰기 패턴 제거 (5차원 채점) | ✍️ | 1 |
 | **46** | [stop-slop](skills/46-hardikpandya-stop-slop/) | 3계층 AI 흔적 탐지 & 재작성 | ✍️ | 1 |
 | **47** | [avoid-ai-writing](skills/47-conorbronsdon-avoid-ai-writing/) | 감사 → 재작성 → 재감사 AI 흔적 (감사 추적) | ✍️ | 1 |
-| ⭐ **48** | **[chinese-de-aigc](skills/48-copaper-ai-chinese-de-aigc/)** 🇨🇳 | CNKI / Wanfang / Turnitin-중문을 위한 중국어 탈AIGC | ✍️ | 1 |
+| ⭐ **48** | **[de-AIGC-skills](skills/48-de-AIGC-skills/)** 🇨🇳🇬🇧 | 중·영 이중언어 학술 탈AIGC (Turnitin AI / GPTZero / CNKI / Wanfang) | ✍️ | 1 |
 | **49** | [humanize-chinese](skills/49-voidborne-d-humanize-chinese/) | AI 생성 중국어 텍스트 탐지 & 인간화 | ✍️ | 1 |
 | ⭐ **50** | **[AER-skills](skills/50-brycewang-aer-skills/)** 📕 | Top-5 경제학 투고 스택: 식별 → 강건성 → R&R | 🚀 | 9 |
 | **51** | [CausalPy](skills/51-pymc-labs-CausalPy/) | 베이지안 준실험 (PyMC Labs) | 🎯 | 3 |
@@ -138,7 +138,7 @@
 | ⭐ **71** | **[lit-review-agent-tools](skills/71-brycewang-lit-review-agent-tools/)** 🔍 | 문헌 리뷰 도구 선택 및 실행(MinerU / PaperQA2 / ASReview / STORM / MCP 서버) | 📚 | 1 |
 | ⭐ **72** | **[Kaggle Research](skills/72-kaggle-research/)** 🧪 | 공식 CLI 기반의 안전하고 감사 가능한 Kaggle 검색 및 제한된 공개 데이터 다운로드 | 🛠️ | 1 |
 
-> ⭐ **우리가 직접 구축한 척추:** [StatsPAI](skills/00-Full-empirical-analysis-skill_StatsPAI/) (인과 엔진) · 명시적 [Python](skills/00.1-Full-empirical-analysis-skill_Python/) / [Stata](skills/00.2-Full-empirical-analysis-skill_Stata/) / [R](skills/00.3-Full-empirical-analysis-skill_R/) 전체 파이프라인 포트 · [AER-skills](skills/50-brycewang-aer-skills/) (top-5 투고 스택) · [chinese-de-aigc](skills/48-copaper-ai-chinese-de-aigc/) · [Paper-WorkFlow](skills/69-Paper-WorkFlow/) (메타 오케스트레이터). 이들이 AERS의 척추입니다 — 전체 비교는 [플래그십 파이프라인 스킬 ↓](#플래그십-파이프라인-스킬)에서 확인하세요. 용도별로 둘러보고 싶으신가요? [동일한 76개를 하는 일별로 정리 ↓](#76개-컬렉션--용도별-분류)를 참고하세요.
+> ⭐ **우리가 직접 구축한 척추:** [StatsPAI](skills/00-Full-empirical-analysis-skill_StatsPAI/) (인과 엔진) · 명시적 [Python](skills/00.1-Full-empirical-analysis-skill_Python/) / [Stata](skills/00.2-Full-empirical-analysis-skill_Stata/) / [R](skills/00.3-Full-empirical-analysis-skill_R/) 전체 파이프라인 포트 · [AER-skills](skills/50-brycewang-aer-skills/) (top-5 투고 스택) · [de-AIGC-skills](skills/48-de-AIGC-skills/) · [Paper-WorkFlow](skills/69-Paper-WorkFlow/) (메타 오케스트레이터). 이들이 AERS의 척추입니다 — 전체 비교는 [플래그십 파이프라인 스킬 ↓](#플래그십-파이프라인-스킬)에서 확인하세요. 용도별로 둘러보고 싶으신가요? [동일한 76개를 하는 일별로 정리 ↓](#76개-컬렉션--용도별-분류)를 참고하세요.
 
 **실증 연구 전문가를 위한 에이전트 스킬 배포판.** 마케팅용 목록이 아닙니다 — 본 저장소에 **1,096개의 스킬을 직접 벤더링하고 카탈로그화**했으며, **수치 벤치마크, eval 하니스, 보안 감사, CI**로 감쌌고, 여기에 더 넓은 생태계의 **119개 저장소에 걸친 23,000개 이상의 스킬**을 정리한 큐레이션 지도를 더했습니다.
 
@@ -249,7 +249,7 @@ AERS는 두 가지를 동시에 제공합니다: (1) 완전한 실증 파이프�
 | [`45` · deslop](skills/45-stephenturner-skill-deslop/) | AI 글쓰기 패턴 제거 (5차원 채점) | 1 |
 | [`46` · stop-slop](skills/46-hardikpandya-stop-slop/) | 3계층 AI 흔적 탐지 & 재작성 | 1 |
 | [`47` · avoid-ai-writing](skills/47-conorbronsdon-avoid-ai-writing/) | 감사 → 재작성 → 재감사 AI 흔적 (감사 추적) | 1 |
-| ⭐ **[`48` · chinese-de-aigc](skills/48-copaper-ai-chinese-de-aigc/)** 🇨🇳 | CNKI / Wanfang / Turnitin-중문을 위한 중국어 탈AIGC | 1 |
+| ⭐ **[`48` · de-AIGC-skills](skills/48-de-AIGC-skills/)** 🇨🇳🇬🇧 | 중·영 이중언어 학술 탈AIGC (Turnitin AI / GPTZero / CNKI / Wanfang) | 1 |
 | [`70` · ssci-polish](skills/70-ssci-polish/) | SSCI/SCI 영어 논문 언어 폴리싱 | 1 |
 | [`49` · humanize-chinese](skills/49-voidborne-d-humanize-chinese/) | AI 생성 중국어 텍스트 탐지 & 인간화 | 1 |
 | [`56` · econ-writing-skill](skills/56-hanlulong-econ-writing-skill/) | 50개 이상 최고 가이드를 종합한 경제학 글쓰기 | 1 |
@@ -347,7 +347,7 @@ make check        # repo validation + unit tests + eval lint + numeric benchmark
 | **[Full Empirical Analysis — Stata](skills/00.2-Full-empirical-analysis-skill_Stata/SKILL.md)** 📊 | 커뮤니티 표준: `reghdfe` · `ivreg2` · `csdid` · `did_imputation` · `sdid` · `rdrobust` · `synth` · `psmatch2` · `boottest` · `esttab` | 심사위원이나 공저자가 Stata 재현 패키지를 요구할 때 (AER/QJE/JPE/ReStud 스타일) |
 | **[Full Empirical Analysis — R](skills/00.3-Full-empirical-analysis-skill_R/SKILL.md)** 📗 | 현대적 tidyverse: `fixest` · `did` · `synthdid` · `HonestDiD` · `rdrobust` · `grf` · `DoubleML` · `marginaleffects` · **Quarto** | 단일 `.qmd`로 한 번의 명령에 PDF/HTML/Word로 렌더링하는 재현성 보고서 |
 | **[AER-Skills](skills/50-brycewang-aer-skills/)** 📕 | 9개 스킬: 주제 라우팅 → 식별 감사 → 강건성 → 서론 → 표 → 재현 → 투고 → R&R → 오케스트레이터 | Top-5 경제학(AER / AER:Insights / AEJ) 투고: *식별 우선* — 설계가 취약하면 어떤 산문도 구해주지 못함 |
-| **[chinese-de-aigc](skills/48-copaper-ai-chinese-de-aigc/SKILL.md)** 🇨🇳 | 17개 패턴의 중국어 AI 흔적 라이브러리, 5단계 위치 파악→진단→재작성→채점→검토 루프 | CNKI / Wanfang / VIP / Turnitin-중문 투고를 위한 AI 글쓰기 신호 낮추기 |
+| **[de-aigc-skills](skills/48-de-AIGC-skills/SKILL.md)** 🇨🇳🇬🇧 | 이중언어 패턴 라이브러리(영어 22 + 중국어 17), 6단계 접수→감사→주장-증거→재작성→채점→재검토 루프 | Turnitin AI / GPTZero / CNKI / Wanfang / VIP 투고를 위한 AI 글쓰기 신호 낮추기 |
 | **[Paper-WorkFlow](skills/69-Paper-WorkFlow/README.md)** 🧭 | **메타 오케스트레이터** — Stage 0–9를 연결: 주제 → 설계 → 데이터 → 추정 → 표/그림 → 초안 → 다듬기 → 탈AIGC → 모의 심사 → 투고 — 기존 스킬과 병렬 서브 에이전트를 디스패치하며 재개 가능한 `workflow_state.json`을 사용 | 완전한 실증 사회과학 논문을 엔드투엔드로 자동 실행 |
 
 > **왜 DSL *과* 명시적 포트를 함께 두는가?** 원샷 DSL을 신뢰할 때는 StatsPAI를 사용하세요; 교육, 감사, 또는 모든 진단을 손수 교체해야 할 때는 00.1/00.2/00.3을 사용하세요. AER-skills는 그렇게 만든 올바른 분석을 합격선까지 끌어올립니다 — 이들은 *서로 다른* 문제를 풀며 조합 가능합니다.
@@ -374,7 +374,7 @@ make check        # repo validation + unit tests + eval lint + numeric benchmark
 | Top-5 식별 전략을 먼저 감사 | [`aer-identification`](skills/50-brycewang-aer-skills/skills/aer-identification/SKILL.md) |
 | AER / AEJ 투고 준비 | [`aer-workflow`](skills/50-brycewang-aer-skills/skills/aer-workflow/SKILL.md) |
 | AEA 기준에 맞는 재현 패키지 구축 | [`aer-replication`](skills/50-brycewang-aer-skills/skills/aer-replication/SKILL.md) |
-| 중국어 초안의 AI 글쓰기 신호 낮추기 | [`chinese-de-aigc`](skills/48-copaper-ai-chinese-de-aigc/SKILL.md) |
+| 실증 논문 초안(영어·중국어)의 AI 글쓰기 신호 낮추기 | [`de-aigc-skills`](skills/48-de-AIGC-skills/SKILL.md) |
 
 **더 많은 진입로:**
 
@@ -496,13 +496,13 @@ Replication → Submission → Peer Review Response → Defense
 
 | 스위트 | 핵심 특징 | 가장 적합한 경우 | 로컬 |
 |-------|-------------|----------|-------|
-| **chinese-de-aigc** 🇨🇳 | CoPaper.AI의 **오리지널** 중국어 학술 탈AIGC; 17개 패턴 중국어 흔적 라이브러리, 5단계 루프, 섹션별 전략, 5차원 채점. 중국어 학술 탈AIGC에 전념하는 유일한 GitHub 스킬 | CNKI / Wanfang / VIP / Turnitin-중문 | [`48`](skills/48-copaper-ai-chinese-de-aigc/) |
+| **de-AIGC-skills** 🇨🇳🇬🇧 | CoPaper.AI의 **오리지널** 중·영 이중언어 학술 탈AIGC; 영어 22 + 중국어 17 패턴, 주장-증거 감사를 포함한 6단계 루프, 섹션별 전략, 5차원 채점. 경제·경영·사회과학 실증 논문용 | Turnitin AI / GPTZero / CNKI / Wanfang / VIP | [`48`](skills/48-de-AIGC-skills/) |
 | [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) | 학술 특화; 23개 AI 글쓰기 패턴; 정당한 학술적 연결어는 보존 | 의학, 생명과학, 자연과학 논문 | [`44`](skills/44-matsuikentaro1-humanizer_academic/) |
 | [stephenturner/skill-deslop](https://github.com/stephenturner/skill-deslop) | 정당한 학문 관행과 AI 흔적을 구별; 5차원 채점 | 과학 논문, 기술 블로그 | [`45`](skills/45-stephenturner-skill-deslop/) |
 | [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) | 3단계 탐지 + 5차원 채점; 금지 문구, 구조적 클리셰, 문장 규칙 | 일반 산문, 블로그, 보고서 | [`46`](skills/46-hardikpandya-stop-slop/) |
 | [conorbronsdon/avoid-ai-writing](https://github.com/conorbronsdon/avoid-ai-writing) | 구조화된 감사 + 재작성 + 2차 감사; 감사 가능, 추적 가능 | 추적 기록이 필요한 워크플로 | [`47`](skills/47-conorbronsdon-avoid-ai-writing/) |
 
-> **조합:** 🇨🇳 중국어 (CNKI/Wanfang/VIP) → chinese-de-aigc · 🇬🇧 영어 → humanizer_academic · 감사 추적이 필요 → avoid-ai-writing · 일반 산문 → stop-slop.
+> **조합:** 실증 논문(영어·중국어) → de-aigc-skills · 의학 영어 → humanizer_academic · 감사 추적이 필요 → avoid-ai-writing · 일반 산문 → stop-slop.
 
 ### 도구 카탈로그 (`tools/`) — 자동화 실증 & 인과추론 도구
 
