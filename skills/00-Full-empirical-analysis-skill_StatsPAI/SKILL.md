@@ -2127,7 +2127,7 @@ sp.causal_text.llm_annotator_correct(
     annotations_llm=df["t_llm"],                                      # aligned pd.Series (all rows)
     annotations_human=df["t_true"],                                   # NaN where unlabelled
     outcome=df["y"], covariates=df[["age", "edu"]],
-    method="hausman")                                                 # Egami et al. 2024
+    method="hausman")                                                 # Egami et al. 2023
 ```
 
 ### Mechanisms / Decomposition
