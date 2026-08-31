@@ -11,7 +11,7 @@
 numpy>=1.26,<3
 pandas>=3.0.5,<4
 matplotlib>=3.11.1,<4
-statsmodels>=0.14,<1
+statsmodels>=0.15.0,<1
 # Floor raised 4.27 -> 7.0 (2026-08): the 5.x wheels are compiled against the
 # NumPy 1.x ABI, so pairing them with the numpy>=2 this file already allows
 # makes every import print "A module that was compiled using NumPy 1.x cannot
