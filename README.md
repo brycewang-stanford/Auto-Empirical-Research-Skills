@@ -154,7 +154,7 @@ cp -R skills/00.1-Full-empirical-analysis-skill_Python  ~/.claude/skills/ # 全�
 | 6️⃣ | **稳健性审计** — 复现包检查 · Honest-DiD · R&R 模拟 | · [41 sewage-econometrics-check](skills/41-sticerd-eee-sewage-econometrics-check/) · ⭐ [50 AER-skills](skills/50-brycewang-aer-skills/) · [21 AI-research-feedback](skills/21-claesbackman-AI-research-feedback/) |
 | 7️⃣ | **表格 & 图形** — 期刊出版级排版 · LaTeX 嵌入 | · ⭐ [00 StatsPAI](skills/00-Full-empirical-analysis-skill_StatsPAI/) · [07 AI-Research-SKILLs](skills/07-Orchestra-Research-AI-Research-SKILLs/) · [33 claude-scholar](skills/33-Galaxy-Dawn-claude-scholar/) · [08 latex-document-skill](skills/08-ndpvt-web-latex-document-skill/) |
 | 8️⃣ | **写作 & 同行评审** — LaTeX / Quarto · 仿审稿人 · 校对 | · [06 stats-paper-writing](skills/06-fuhaoda-stats-paper-writing/) · [04 scientific-writer](skills/04-K-Dense-AI-claude-scientific-writer/) · [22 christopherkenny-skills](skills/22-christopherkenny-skills/) · [38 academic-proofreader](skills/38-peternka-academic-proofreader/) · [56 econ-writing-skill](skills/56-hanlulong-econ-writing-skill/) · [16 clo-author](skills/16-hsantanna88-clo-author/) |
-| 9️⃣ | **降 AIGC & 投稿** — 知网 / 万方 / Turnitin / 23 类 AI 痕迹模式 | · ⭐ [48 de-AIGC-skills](skills/48-de-AIGC-skills/) 🇨🇳🇬🇧 · [44 humanizer_academic](skills/44-matsuikentaro1-humanizer_academic/) · [45 deslop](skills/45-stephenturner-skill-deslop/) · [46 stop-slop](skills/46-hardikpandya-stop-slop/) · [47 avoid-ai-writing](skills/47-conorbronsdon-avoid-ai-writing/) · [49 humanize-chinese](skills/49-voidborne-d-humanize-chinese/) |
+| 9️⃣ | **降 AIGC & 去水印 & 投稿** — 知网 / 万方 / Turnitin / 23 类 AI 痕迹模式 / 隐藏字符 · C2PA · docx 元数据清理 | · ⭐ [48 de-AIGC-skills](skills/48-de-AIGC-skills/) 🇨🇳🇬🇧 · [44 humanizer_academic](skills/44-matsuikentaro1-humanizer_academic/) · [45 deslop](skills/45-stephenturner-skill-deslop/) · [46 stop-slop](skills/46-hardikpandya-stop-slop/) · [47 avoid-ai-writing](skills/47-conorbronsdon-avoid-ai-writing/) · [49 humanize-chinese](skills/49-voidborne-d-humanize-chinese/) |
 
 ### 🎼 元编排：⭐ [69 Paper-WorkFlow](skills/69-Paper-WorkFlow/) —— 一键串起来
 
@@ -183,7 +183,7 @@ cp -R skills/00.1-Full-empirical-analysis-skill_Python  ~/.claude/skills/ # 全�
 | [00.1 Full Empirical · Python](skills/00.1-Full-empirical-analysis-skill_Python/) 📘 | 显式 Python 栈（pandas / statsmodels / linearmodels / pyfixest） |
 | [00.2 Full Empirical · Stata](skills/00.2-Full-empirical-analysis-skill_Stata/) 📊 | 显式 Stata 栈（reghdfe / ivreg2 / csdid / sdid / rdrobust） |
 | [00.3 Full Empirical · R](skills/00.3-Full-empirical-analysis-skill_R/) 📗 | 显式 R 栈（tidyverse / fixest / did / HonestDiD）+ Quarto 渲染 |
-| [48 de-AIGC-skills](skills/48-de-AIGC-skills/) 🇨🇳🇬🇧 | 中英双语学术降 AIGC（Turnitin AI / GPTZero / 知网 / 万方） |
+| [48 de-AIGC-skills](skills/48-de-AIGC-skills/) 🇨🇳🇬🇧 | 中英双语学术降 AIGC + 去水印层（Turnitin AI / GPTZero / 知网 / 万方 · 隐藏字符 / C2PA / docx 元数据） |
 | [50 AER-skills](skills/50-brycewang-aer-skills/) 📕 | Top-5 经济学投稿套件：识别 → 稳健性 → R&R |
 | [69 Paper-WorkFlow](skills/69-Paper-WorkFlow/) 🧭 | 元编排器，把上面 9 个阶段串成一键流水线 |
 
@@ -258,7 +258,7 @@ cp -R skills/00.1-Full-empirical-analysis-skill_Python  ~/.claude/skills/ # 全�
 | [45](skills/45-stephenturner-skill-deslop/) | deslop | 去除 AI 写作痕迹（5 维评分） | [→](docs/CONTENT_ZH.md#skill-45) | [stephenturner/skill-deslop](https://github.com/stephenturner/skill-deslop) |
 | [46](skills/46-hardikpandya-stop-slop/) | stop-slop | 三层 AI 痕迹检测与改写 | [→](docs/CONTENT_ZH.md#skill-46) | [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) |
 | [47](skills/47-conorbronsdon-avoid-ai-writing/) | avoid-ai-writing | 审计 → 改写 → 二次审计 AI 味（留痕） | [→](docs/CONTENT_ZH.md#skill-47) | [conorbronsdon/avoid-ai-writing](https://github.com/conorbronsdon/avoid-ai-writing) |
-| ⭐ [48](skills/48-de-AIGC-skills/) | **de-AIGC-skills** 🇨🇳🇬🇧 | 中英双语学术降 AIGC（Turnitin AI / GPTZero / 知网 / 万方） | [→](docs/CONTENT_ZH.md#skill-48) | [⭐ 本仓库](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills) |
+| ⭐ [48](skills/48-de-AIGC-skills/) | **de-AIGC-skills** 🇨🇳🇬🇧 | 中英双语学术降 AIGC + 去水印层（Turnitin AI / GPTZero / 知网 / 万方 · 隐藏字符 / C2PA / docx 元数据） | [→](docs/CONTENT_ZH.md#skill-48) | [⭐ 本仓库](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills) |
 | [49](skills/49-voidborne-d-humanize-chinese/) | humanize-chinese | 检测并人性化 AI 生成的中文文本 | [→](docs/CONTENT_ZH.md#skill-49) | [swaylq/humanize-chinese](https://github.com/swaylq/humanize-chinese) |
 | ⭐ [50](skills/50-brycewang-aer-skills/) | **AER-skills** 📕 | Top-5 经济学投稿套件：识别 → 稳健性 → R&R | [→](docs/CONTENT_ZH.md#skill-50) | [brycewang-stanford/AER-skills](https://github.com/brycewang-stanford/AER-skills) |
 | [51](skills/51-pymc-labs-CausalPy/) | CausalPy | 贝叶斯准实验（PyMC Labs） | [→](docs/CONTENT_ZH.md#skill-51) | [pymc-labs/CausalPy](https://github.com/pymc-labs/CausalPy) |
@@ -319,6 +319,7 @@ gitGraph TB:
    merge evidence
    commit id: "2026-08 结构估计 = 方法族 18"
    commit id: "2026-08 NSW 基准从引用变推导"
+   commit id: "2026-09 de-AIGC 去水印层"
 ```
 
 <div align="center">

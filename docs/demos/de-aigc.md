@@ -8,12 +8,15 @@ bilingual de-AIGC skill while preserving every technical claim.
 - Bilingual academic skill: [`de-aigc-skills`](../../skills/48-de-AIGC-skills/SKILL.md)
 - Chinese CLI-style complementary skill: [`humanize-chinese`](../../skills/49-voidborne-d-humanize-chinese/SKILL.md)
 - License note: `humanize-chinese` is MIT Non-Commercial; check [`LICENSE_AUDIT.md`](../LICENSE_AUDIT.md) before commercial use.
+- Provenance layer (去水印): [`references/watermarks.md`](../../skills/48-de-AIGC-skills/references/watermarks.md) + [`scripts/provenance_scrub.py`](../../skills/48-de-AIGC-skills/scripts/provenance_scrub.py) — run `inspect` on the file before the audit.
 
 ## Prompt
 
 ```text
 Run an academic de-AIGC pass on the following section (auto-detect English vs
-Chinese and use the matching pattern library). First produce the audit table of
+Chinese and use the matching pattern library). Start with the provenance-mark
+report (invisible-character carriers, docx / figure metadata; the statistical
+watermark is reported as unknown). Then produce the audit table of
 AI-writing signatures — do not edit yet. Then run the claim-evidence check:
 flag any verb stronger than the design supports. Then rewrite with varied
 sentence rhythm, concrete anchors, calibrated hedging, and implicit cohesion.
@@ -25,6 +28,7 @@ and technical terms. End with the five-dimension self-score and a change log.
 
 | Stage | What to inspect |
 |---|---|
+| Provenance report | Layer A carriers counted by code point (kept vs removed, with context); docx docProps / figure C2PA noted; ends with `B: unknown` — never "watermark-free" |
 | Audit table | EN rules (inflated significance, -ing tails, uniform rhythm) or ZH rules (四字套话、虚词堆叠、总分总), with severity |
 | Claim–evidence check | Overclaiming verbs flagged against the paper's actual design; no invented evidence |
 | Rewrite | Meaning preserved; rhythm varies; academic register intact in the manuscript's language |

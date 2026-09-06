@@ -18792,8 +18792,8 @@
       "name": "de-aigc-skills",
       "path": "skills/48-de-AIGC-skills/SKILL.md",
       "collection": "48-de-AIGC-skills",
-      "line_count": 261,
-      "description_effective": "中英双语学术降 AIGC / bilingual academic de-AIGC skill. Removes AI-generated writing signatures from empirical papers in economics, management, and the social sciences — in both English and Chinese. Covers Turnitin AI, GPTZero, Originality.ai on the English side and 知网 AMLC, 万方, 维普 on the Chinese side. Uses a six-step loop (intake → audit → claim-evidence check → differentiated rewrite → five-dimension self-score → cold-reader recheck) with two pattern libraries (22 English + 17 Chinese patterns), section-by-section strategies for empirical papers, and hard protections that keep every number, coefficient, and citation intact.",
+      "line_count": 355,
+      "description_effective": "中英双语学术降 AIGC / bilingual academic de-AIGC skill. Removes AI-generated writing signatures from empirical papers in economics, management, and the social sciences — in both English and Chinese. Covers Turnitin AI, GPTZero, Originality.ai on the English side and 知网 AMLC, 万方, 维普 on the Chinese side. Uses a six-step loop (intake → audit → claim-evidence check → differentiated rewrite → five-dimension self-score → cold-reader recheck) with two pattern libraries (22 English + 17 Chinese patterns), section-by-section strategies for empirical papers, and hard protections that keep every number, coefficient, and citation intact. Since 2026-08 it also carries a provenance layer (去水印): deterministic, CJK-safe cleaning of invisible-character carriers and file metadata (docx / png / jpg / svg / pdf, incl. C2PA), an honest account of Claude's statistical text watermark, and an author \"ownership pass\" — it never claims a text is watermark-free.",
       "description_source": "frontmatter",
       "has_references": true,
       "tags": {

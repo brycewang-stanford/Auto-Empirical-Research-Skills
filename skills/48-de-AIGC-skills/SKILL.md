@@ -1,6 +1,6 @@
 ---
 name: de-aigc-skills
-description: 中英双语学术降 AIGC / bilingual academic de-AIGC skill. Removes AI-generated writing signatures from empirical papers in economics, management, and the social sciences — in both English and Chinese. Covers Turnitin AI, GPTZero, Originality.ai on the English side and 知网 AMLC, 万方, 维普 on the Chinese side. Uses a six-step loop (intake → audit → claim-evidence check → differentiated rewrite → five-dimension self-score → cold-reader recheck) with two pattern libraries (22 English + 17 Chinese patterns), section-by-section strategies for empirical papers, and hard protections that keep every number, coefficient, and citation intact.
+description: 中英双语学术降 AIGC / bilingual academic de-AIGC skill. Removes AI-generated writing signatures from empirical papers in economics, management, and the social sciences — in both English and Chinese. Covers Turnitin AI, GPTZero, Originality.ai on the English side and 知网 AMLC, 万方, 维普 on the Chinese side. Uses a six-step loop (intake → audit → claim-evidence check → differentiated rewrite → five-dimension self-score → cold-reader recheck) with two pattern libraries (22 English + 17 Chinese patterns), section-by-section strategies for empirical papers, and hard protections that keep every number, coefficient, and citation intact. Since 2026-08 it also carries a provenance layer (去水印): deterministic, CJK-safe cleaning of invisible-character carriers and file metadata (docx / png / jpg / svg / pdf, incl. C2PA), an honest account of Claude's statistical text watermark, and an author "ownership pass" — it never claims a text is watermark-free.
 triggers:
   - de-AIGC
   - 降 AIGC
@@ -17,6 +17,14 @@ triggers:
   - GPTZero
   - humanize empirical paper
   - 人工化重写
+  - 去水印
+  - 去 AI 水印
+  - Claude 水印
+  - remove Claude watermark
+  - AI watermark
+  - 零宽字符 / invisible Unicode
+allowed-tools:
+  - Bash(python3 scripts/provenance_scrub.py:*)
 ---
 
 # De-AIGC Skills · 中英双语学术降 AIGC
@@ -49,6 +57,9 @@ and regression tables. Theory papers and pure humanities essays are out of scope
 - Grant proposals, working papers, and reports drafted with AI assistance
 - A human-written draft that detectors misclassify as AI (this happens often —
   formulaic academic prose looks like AI to n-gram detectors)
+- Cleaning a submission package before (double-blind) review: invisible
+  characters picked up through copy-paste, `.docx` author fields, C2PA
+  manifests on model-generated figures — the provenance layer below
 
 ## What does NOT work 无效做法
 
@@ -58,11 +69,40 @@ and regression tables. Theory papers and pure humanities essays are out of scope
    syntactic template intact.
 3. ❌ **Feeding the text to another AI for a "rewrite"** — swaps one AI's signature
    for another's. Paraphraser tools are the fastest way to a *higher* AI score.
+   Since 2026-08 it also *re-embeds* a statistical watermark: Claude's and
+   Gemini's marks live in the word choices, so a model paraphrase is a fresh mark.
 4. ❌ **Injecting typos or awkward grammar to "look human"** — human experts do not
    write badly; graders and reviewers notice, and modern detectors are not fooled.
+5. ❌ **Stripping invisible characters and calling the text "de-watermarked"** —
+   Claude's watermark is not made of characters (Anthropic: "there are no hidden
+   characters"). Character hygiene is still necessary — carriers split tokens in
+   n-gram scans and trip Turnitin's hidden-text flags — but it proves nothing
+   about the watermark.
 
 **What works**: targeted destruction of the *structural* signatures listed below,
 plus restoring the concrete, hedged, evidence-anchored voice of a real researcher.
+
+## Watermarks are not writing signatures 水印 ≠ 文风
+
+Three different things are called an "AI watermark" in 2026. The skill treats
+them differently, and every report says which layer was actually verified
+(full policy and code-point tables: `references/watermarks.md`):
+
+| Layer | What it is | Handled by |
+|---|---|---|
+| **A · character carriers** 隐藏字符 | zero-width characters, bidi controls, tag characters, stray variation selectors, exotic spaces, soft hyphens — *not* used by Claude, but common in copy-paste chains and third-party tools | `scripts/provenance_scrub.py` — deterministic and CJK-safe: keeps U+3000 indents, fullwidth punctuation, ideographic variation selectors in names, en dashes in ranges, R²; NFKC is not an option |
+| **B · statistical watermark** 统计水印 | Claude (models launched ≥ 2026-08-02) and Gemini bias *which words* are sampled; nothing is added to the string; survives copy, translation and light edits; no public detector | the **ownership pass** in Step 3 — the author writes the high-signal sentences; the agent's own rewrite is model output and does not count |
+| **C · container metadata** 容器元数据 | C2PA manifests on model-generated PNG / JPG / SVG, `.docx` docProps / comments / people.xml, PDF Info + XMP | `provenance_scrub.py clean` (docx / png / jpg / svg, lossless); report plus `exiftool` / `qpdf` commands for PDF; best of all, regenerate figures from the replication package |
+
+```bash
+python3 scripts/provenance_scrub.py inspect main.docx figures/*.png   # report only; exit 1 if anything is found
+python3 scripts/provenance_scrub.py clean   main.docx --lang zh        # writes main.clean.docx, docProps blanked
+python3 scripts/provenance_scrub.py clean   draft.md --diff            # carriers shown as ⟨U+200B⟩ in the diff
+python3 scripts/provenance_scrub.py self-test                          # 39 keep / strip fixtures
+```
+
+Every report ends with **`B: unknown`**. Nobody outside Anthropic can verify
+that a statistical watermark is gone, and this skill will not claim it.
 
 ## Structural signatures 结构性特征
 
@@ -99,6 +139,10 @@ highest-impact fix in either language — is **uniform sentence rhythm**.
    Recheck    ←    Self-score  ←     Rewrite
 ```
 
+Provenance layer, threaded through the loop: `inspect` before Step 1 (hidden
+characters split tokens and corrupt the pattern scan) · ownership pass inside
+Step 3 · package `clean` at Step 5.
+
 ### Step 0 · Intake & routing 定位路由
 
 Before touching the text:
@@ -115,6 +159,11 @@ Before touching the text:
 4. **Ask for a voice sample** (optional but powerful) — if the author has earlier
    *human-written* papers or paragraphs, match their sentence rhythm, connective
    habits, and hedging placement instead of a generic "human" style.
+5. **Scan for provenance marks** — `python3 scripts/provenance_scrub.py inspect
+   <files>` on the draft and any figures. Clean Layer A carriers *before* the
+   audit; note docx / figure metadata for Step 5. Ask whether the draft (or any
+   figure) came out of a model launched after 2026-08-02 — if so, the ownership
+   pass in Step 3 is mandatory for the high-signal sections, not optional.
 
 ### Step 1 · Audit scan 审计扫描
 
@@ -132,7 +181,9 @@ report — do not edit anything yet**. The author must see the whole picture fir
 ```
 
 Include a summary line: total hits per severity, the 3 worst sections, and the
-estimated rewrite depth (light polish / section rewrites / full-pass rewrite).
+estimated rewrite depth (light polish / section rewrites / full-pass rewrite) —
+and attach the provenance-mark report from Step 0 (Layer A counts by code point,
+docx / figure metadata found, `B: unknown`).
 
 ### Step 2 · Claim–evidence audit 主张-证据核对
 
@@ -176,6 +227,20 @@ in `references/sections.md`. Priorities, in order of impact:
    "We use X rather than Y because…" / "受限于数据，我们无法识别…". Admitting a
    limitation or a surprise is the hardest pattern for an LLM to fake.
 
+**Ownership pass 作者重述 (Layer B)** — the only thing that touches a statistical
+watermark, so it has to be said plainly: any sentence the agent writes is model
+output, and if the model carries a token-sampling watermark, so does its
+rewrite. For the high-signal sections (abstract, introduction, literature,
+hypotheses framing, discussion, conclusion) Step 3 therefore delivers a
+**brief**, not final copy: what the paragraph must say, which table /
+coefficient / citation anchors it, which rules fired, where the short and the
+long sentence go, plus a rewrite *marked as a suggestion*. The author writes the
+sentences from the brief with the suggestion out of view; the agent then checks
+fidelity and fluency and flags, but does not rewrite. Low-signal sections (data,
+model equations, table notes, robustness lists) may keep model polish. Label
+every paragraph in the change log: `author-voiced` · `model-suggested,
+author-accepted` · `untouched`. Details: `references/watermarks.md` §4.
+
 **Hard protections 硬性红线** — regardless of what the patterns say:
 
 - Never alter numbers, coefficients, standard errors, p-values, sample sizes,
@@ -187,6 +252,12 @@ in `references/sections.md`. Priorities, in order of impact:
   "Notably," / "Prior studies have shown that… (with citations)" / "在 1% 水平上
   显著" / "稳健性检验" — flag such phrases only when stacked or citation-free.
   Full preserve-list: top of `references/patterns-en.md`.
+- **Never ASCII-fold or NFKC-normalise.** En dashes in ranges (2014–2022),
+  minus signs (−0.043), R², β₁, fullwidth Chinese punctuation, 中文 `——` and
+  `……` are typography, not tells. `provenance_scrub.py` is built to leave them
+  alone; do not "fix" them by hand either.
+- **Never write "watermark-free", "无水印", "undetectable" or "过检".** Report
+  what was verified (Layers A and C) and what was not (B).
 
 ### Step 4 · Five-dimension self-score 五维自评
 
@@ -212,10 +283,16 @@ Re-read the full text as a stranger and run three final checks:
 3. **Consistency** — one voice throughout; no visible seam between rewritten and
    untouched paragraphs; for bilingual packages, EN and ZH parts must make the
    same claims at the same strength.
+4. **Package hygiene** — `provenance_scrub.py clean` on the final `.docx`,
+   `.md` / `.tex` and figures (lossless; docProps blanked); PDF via the
+   `exiftool` + `qpdf` commands it prints; comments, tracked changes and
+   `people.xml` are reported and must be cleared in Word. Re-run `inspect` and
+   keep the report. Double-blind venues require most of this anyway.
 
 Deliver: **final text + change log** (which sections changed, which rules fired,
-what was deliberately left alone) + any unresolved flags from Step 2 that need
-the author's judgment.
+what was deliberately left alone, which paragraphs are author-voiced) + the
+**provenance-mark report** (A and C verified, `B: unknown`) + any unresolved
+flags from Step 2 that need the author's judgment.
 
 ## Works well with 配合使用
 
@@ -230,6 +307,10 @@ the author's judgment.
   general Chinese humanizing beyond the academic register
 - [`70-ssci-polish`](../70-ssci-polish/) — SSCI-oriented English polish after
   de-AIGC is done
+- [guillaumemeyer/watermarks-remover](https://github.com/guillaumemeyer/watermarks-remover)
+  (MIT) — the heavier multi-format toolkit (audio / video / pixel-domain, HTTP
+  service) when a package goes beyond text, `.docx` and figures; its layer model
+  is what `references/watermarks.md` adapts for academic manuscripts
 - Draft first, de-AIGC last: run this skill on a *finished* draft, not during
   drafting — mid-draft humanizing fights the writing process.
 
@@ -244,6 +325,13 @@ the author's judgment.
 - `references/examples-en.md` — English before/after pairs across an empirical
   paper's sections
 - `references/examples-zh.md` — 12 组中文改写前后对照（覆盖实证论文各章节）
+- `references/watermarks.md` — the 2026 provenance layer: three kinds of marks
+  (statistical / character / metadata), what Anthropic states, the CJK-safe
+  code-point policy, the ownership pass, package hygiene, report format
+  （水印与溯源标记政策，中英对照）
+- `scripts/provenance_scrub.py` — stdlib Python 3.9+: `inspect` / `clean` for
+  text, `.docx`, `.png`, `.jpg`, `.svg`; `.pdf` report + commands; `self-test`
+  with 39 fixtures（隐藏字符与元数据扫描 / 清理脚本）
 
 ## Integrity statement 学术诚信声明
 
@@ -255,6 +343,12 @@ detection.
 - ✅ AI-assisted drafting + human revision, where the author owns every claim
 - ❌ A fully AI-generated paper the "author" hopes to pass off unread
 - ❌ Ghostwriting, plagiarism laundering, or data fabrication of any kind
+- ✅ Cleaning provenance marks on content you own — double-blind review demands
+  half of it, and Anthropic itself states the watermark "doesn't say anything
+  about ownership or authorship"
+- ❌ Using the provenance layer to hide model authorship of text the author
+  cannot defend, or to dodge a venue's generative-AI disclosure requirement —
+  where disclosure is asked for, disclose
 
 **Academic integrity outranks detection scores.** No rewrite may touch the
 research claims, the data, or the citations — and when a claim lacks evidence,

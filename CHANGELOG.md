@@ -5,6 +5,36 @@ This is the project's narrative changelog. `README.md` keeps only a short
 
 ## Unreleased
 
+### de-AIGC gets a provenance layer — 去水印 (skill 48)
+
+- **[`48-de-AIGC-skills`](skills/48-de-AIGC-skills/) now handles "AI watermarks"
+  without pretending.** Since 2026-08 Claude embeds a SynthID-style statistical
+  watermark in generated text (a bias in word choice; Anthropic: "there are no
+  hidden characters") and signs generated PNG / JPG / SVG files with C2PA. Within
+  days the open-source `watermarks-remover` skill (MIT) had thousands of stars,
+  and independent tests showed the general-purpose scrubbers damaging CJK text
+  and emoji. The skill now separates three things that share one name. **Layer
+  A** — [`scripts/provenance_scrub.py`](skills/48-de-AIGC-skills/scripts/provenance_scrub.py),
+  stdlib Python 3.9+, `inspect` / `clean` for text, `.docx` text runs and
+  lossless PNG / JPG / SVG metadata; context-aware so a Chinese thesis keeps its
+  U+3000 indents, fullwidth punctuation, ideographic variation selectors in
+  names, en dashes in year ranges and R², and NFKC does not exist as an option.
+  `inspect` exits non-zero on findings so it can gate a submission checklist;
+  39 built-in fixtures plus [`tests/test_de_aigc_provenance_scrub.py`](tests/test_de_aigc_provenance_scrub.py)
+  pin every keep / strip decision. **Layer B** — the statistical watermark has
+  no public detector and lives in the words, so the only honest answer is an
+  *author ownership pass*: Step 3 now delivers a brief for the high-signal
+  sections and the author writes the sentences; every report ends `B: unknown`
+  and the skill forbids the words "watermark-free" / "无水印" / "过检". **Layer
+  C** — package hygiene tied to double-blind review: docProps blanked, comments
+  / people.xml / tracked changes reported, PDF via the `exiftool` + `qpdf`
+  commands it prints, figures ideally regenerated from the replication package.
+  Policy and code-point tables: [`references/watermarks.md`](skills/48-de-AIGC-skills/references/watermarks.md);
+  sources credited in the skill README (Anthropic's explainer,
+  guillaumemeyer/watermarks-remover, growwithnouman/claude-watermark-remover).
+  The six-step loop, both pattern libraries and the existing eval scenario are
+  unchanged; the six locale READMEs and `docs/CONTENT_ZH.md` describe the layer.
+
 ### Opening the evidence chain (docs/PLAN-2026-09)
 
 - **`aers-score` — an outsider can now take the benchmark.** The numeric

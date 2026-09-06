@@ -9445,7 +9445,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 261,
+      "line_count": 355,
       "name": "de-aigc-skills",
       "path": "skills/48-de-AIGC-skills/SKILL.md"
     },

@@ -358,8 +358,8 @@
       "findings_untriaged": 0
     },
     "48-de-AIGC-skills": {
-      "files_scanned": 8,
-      "files_seen": 8,
+      "files_scanned": 10,
+      "files_seen": 10,
       "findings_total": 0,
       "findings_triaged_benign": 0,
       "findings_untriaged": 0

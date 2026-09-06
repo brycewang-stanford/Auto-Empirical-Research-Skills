@@ -90,7 +90,7 @@
 | <a id="skill-45"></a>**45** | [deslop](../skills/45-stephenturner-skill-deslop/) | 去除 AI 写作痕迹（5 维评分） | ✍️ | 1 | [stephenturner/skill-deslop](https://github.com/stephenturner/skill-deslop) |
 | <a id="skill-46"></a>**46** | [stop-slop](../skills/46-hardikpandya-stop-slop/) | 三层 AI 痕迹检测与改写 | ✍️ | 1 | [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) |
 | <a id="skill-47"></a>**47** | [avoid-ai-writing](../skills/47-conorbronsdon-avoid-ai-writing/) | 审计 → 改写 → 二次审计 AI 味（留痕） | ✍️ | 1 | [conorbronsdon/avoid-ai-writing](https://github.com/conorbronsdon/avoid-ai-writing) |
-| <a id="skill-48"></a>⭐ **48** | **[de-AIGC-skills](../skills/48-de-AIGC-skills/)** 🇨🇳🇬🇧 | 中英双语学术降 AIGC（Turnitin AI / GPTZero / 知网 / 万方） | ✍️ | 1 | [⭐ 本仓库](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills) |
+| <a id="skill-48"></a>⭐ **48** | **[de-AIGC-skills](../skills/48-de-AIGC-skills/)** 🇨🇳🇬🇧 | 中英双语学术降 AIGC + 去水印层（Turnitin AI / GPTZero / 知网 / 万方 · 隐藏字符 / C2PA / docx 元数据） | ✍️ | 1 | [⭐ 本仓库](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills) |
 | <a id="skill-49"></a>**49** | [humanize-chinese](../skills/49-voidborne-d-humanize-chinese/) | 检测并人性化 AI 生成的中文文本 | ✍️ | 1 | [swaylq/humanize-chinese](https://github.com/swaylq/humanize-chinese) |
 | <a id="skill-50"></a>⭐ **50** | **[AER-skills](../skills/50-brycewang-aer-skills/)** 📕 | Top-5 经济学投稿套件：识别 → 稳健性 → R&R | 🚀 | 9 | [brycewang-stanford/AER-skills](https://github.com/brycewang-stanford/AER-skills) |
 | <a id="skill-51"></a>**51** | [CausalPy](../skills/51-pymc-labs-CausalPy/) | 贝叶斯准实验（PyMC Labs） | 🎯 | 3 | [pymc-labs/CausalPy](https://github.com/pymc-labs/CausalPy) |
@@ -230,7 +230,7 @@ AERS 同时是两样东西：(1) 一小撮**自研旗舰 skill**，能跑通完�
 | [`45` · deslop](../skills/45-stephenturner-skill-deslop/) | 去除 AI 写作痕迹（5 维评分） | 1 |
 | [`46` · stop-slop](../skills/46-hardikpandya-stop-slop/) | 三层 AI 痕迹检测与改写 | 1 |
 | [`47` · avoid-ai-writing](../skills/47-conorbronsdon-avoid-ai-writing/) | 审计 → 改写 → 二次审计 AI 味（留痕） | 1 |
-| ⭐ **[`48` · de-AIGC-skills](../skills/48-de-AIGC-skills/)** 🇨🇳🇬🇧 | 中英双语学术降 AIGC（Turnitin AI / GPTZero / 知网 / 万方） | 1 |
+| ⭐ **[`48` · de-AIGC-skills](../skills/48-de-AIGC-skills/)** 🇨🇳🇬🇧 | 中英双语学术降 AIGC + 去水印层（Turnitin AI / GPTZero / 知网 / 万方 · 隐藏字符 / C2PA / docx 元数据） | 1 |
 | [`70` · ssci-polish](../skills/70-ssci-polish/) | SSCI/SCI 英文论文语言润色 | 1 |
 | [`49` · humanize-chinese](../skills/49-voidborne-d-humanize-chinese/) | 检测并人性化 AI 生成的中文文本 | 1 |
 | [`56` · econ-writing-skill](../skills/56-hanlulong-econ-writing-skill/) | 综合 50+ 顶级指南的经济学写作 | 1 |
@@ -331,7 +331,7 @@ make check        # 仓库校验 + 单元测试 + eval lint + 数值基准
 | **[Full Empirical Analysis — Stata](../skills/00.2-Full-empirical-analysis-skill_Stata/SKILL.md)** 📊 | 社区事实标准：`reghdfe` · `ivreg2` · `csdid` · `did_imputation` · `sdid` · `rdrobust` · `synth` · `psmatch2` · `boottest` · `esttab` | 审稿人或合作者只接受 Stata 复现包时（AER/QJE/JPE/ReStud 风格） |
 | **[Full Empirical Analysis — R](../skills/00.3-Full-empirical-analysis-skill_R/SKILL.md)** 📗 | 现代 tidyverse：`fixest` · `did` · `synthdid` · `HonestDiD` · `rdrobust` · `grf` · `DoubleML` · `marginaleffects` · **Quarto** | 单个 `.qmd` 一键渲染 PDF/HTML/Word 的一体化复现报告 |
 | **[AER-Skills](../skills/50-brycewang-aer-skills/)** 📕 | 9 个 skill：选题路由 → 识别审计 → 稳健性 → 引言 → 表图 → 复现 → 投稿 → R&R → 总调度 | Top-5 经济学（AER / AER:Insights / AEJ）投稿：**识别优先** —— 设计若脆，再多 prose 也救不回来 |
-| **[de-aigc-skills](../skills/48-de-AIGC-skills/SKILL.md)** 🇨🇳🇬🇧 | 中英双模式库（英 22 + 中 17），六步「接件→审计→主张-证据→改写→自评→复查」闭环 | 降低 Turnitin AI / GPTZero 与知网 / 万方 / 维普的 AI 写作信号 |
+| **[de-aigc-skills](../skills/48-de-AIGC-skills/SKILL.md)** 🇨🇳🇬🇧 | 中英双模式库（英 22 + 中 17），六步「接件→审计→主张-证据→改写→自评→复查」闭环，另加 2026 溯源层（CJK 安全的隐藏字符与 docx / 图片元数据清理；统计水印如实标注 unknown） | 降低 Turnitin AI / GPTZero 与知网 / 万方 / 维普的 AI 写作信号，并清理投稿包 |
 | **[Paper-WorkFlow](../skills/69-Paper-WorkFlow/README.md)** 🧭 | **元编排器**，串起 Stage 0–9 —— 选题 → 设计 → 数据 → 估计 → 表格图形 → 初稿 → 润色 → 去 AIGC → 模拟审稿 → 投稿 —— 通过调度已有 skill 与并行子代理，并用可续跑的 `workflow_state.json` 记录进度 | 端到端自动跑完一篇完整的实证社会科学论文 |
 
 > **为什么既要 DSL 又要显式三件套？** 信任一键 DSL 时用 StatsPAI；做教学、审计、或要逐个替换诊断时用 00.1/00.2/00.3。AER-skills 再把一份正确的分析推到录用门槛 —— 它们解决的是*不同*问题，可以组合。
@@ -358,7 +358,7 @@ make check        # 仓库校验 + 单元测试 + eval lint + 数值基准
 | 先审顶刊识别策略 | [`aer-identification`](../skills/50-brycewang-aer-skills/skills/aer-identification/SKILL.md) |
 | 准备 AER / AEJ 投稿 | [`aer-workflow`](../skills/50-brycewang-aer-skills/skills/aer-workflow/SKILL.md) |
 | 整理 AEA 合规的复现包 | [`aer-replication`](../skills/50-brycewang-aer-skills/skills/aer-replication/SKILL.md) |
-| 降低实证论文初稿（中英文）的 AI 写作痕迹 | [`de-aigc-skills`](../skills/48-de-AIGC-skills/SKILL.md) |
+| 降低实证论文初稿（中英文）的 AI 写作痕迹，并清理投稿包的溯源标记（隐藏字符 / C2PA / docx 元数据） | [`de-aigc-skills`](../skills/48-de-AIGC-skills/SKILL.md) |
 
 **更多入口：**
 
@@ -479,10 +479,12 @@ make check       # 完整 gate：validate + Python 编译 + 单元测试 + eval 
 ### 降 AIGC 检测率 & 学术去 AI 味
 
 > 2026 年学术写作最尖锐的痛点之一：论文 AIGC 率超标（Turnitin、GPTZero、知网）可被一票否决。下面这几个 skill 是目前最完整的开源方案 —— 全部 MIT，全部本地收录（`skills/44-49`）。
+>
+> **关于"去水印"（2026-08 起）：** Claude 新模型的文本水印是词选偏置的统计水印，**没有隐藏字符**，也没有公开检测器；只有作者自己重写才能去掉。48 的溯源层因此分三层如实处理：隐藏字符与 docx / 图片 / PDF 元数据可以确定性清理，统计水印只能走"作者重述"流程，报告一律标注 `B: unknown`，绝不宣称"无水印 / 过检"。
 
 | 套件 | 核心特色 | 最适合 | 本地 |
 |------|---------|--------|------|
-| **de-AIGC-skills** 🇨🇳🇬🇧 | CoPaper.AI **原创**中英双语学术降 AIGC；英 22 + 中 17 类模式、含主张-证据审计的六步闭环、分章节策略、五维评分，面向经管社科实证论文 | Turnitin AI / GPTZero / 知网 / 万方 / 维普 | [`48`](../skills/48-de-AIGC-skills/) |
+| **de-AIGC-skills** 🇨🇳🇬🇧 | CoPaper.AI **原创**中英双语学术降 AIGC；英 22 + 中 17 类模式、含主张-证据审计的六步闭环、分章节策略、五维评分，面向经管社科实证论文；**2026-09 新增溯源层（去水印）** —— CJK 安全的隐藏 Unicode + docx / PNG / JPG / SVG / PDF 元数据清理（stdlib 脚本 `scripts/provenance_scrub.py`）、针对统计水印的作者重述流程 | Turnitin AI / GPTZero / 知网 / 万方 / 维普 · 隐藏字符 / C2PA / docx 元数据 | [`48`](../skills/48-de-AIGC-skills/) |
 | [voidborne-d/humanize-chinese](../skills/49-voidborne-d-humanize-chinese/) 🇨🇳 | 同时提供 SKILL.md 与独立 Python CLI；17 类检测 + 7 风格改写器，LR ensemble 程序化打分。**License: MIT（非商用修改版）** | 中文学位论文 / 长篇 / 批量 pipeline | [`49`](../skills/49-voidborne-d-humanize-chinese/) |
 | [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) | 学术专用；23 类 AI 写作模式；保留合法学术过渡词 | 医学、生命科学、自然科学论文 | [`44`](../skills/44-matsuikentaro1-humanizer_academic/) |
 | [stephenturner/skill-deslop](https://github.com/stephenturner/skill-deslop) | 智能区分合法学科惯例 vs AI 痕迹；5 维评分 | 科学论文、技术博客 | [`45`](../skills/45-stephenturner-skill-deslop/) |

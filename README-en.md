@@ -120,7 +120,7 @@ This repository can be imported from its root as one skill in Codex, CodeBuddy, 
 | **45** | [deslop](skills/45-stephenturner-skill-deslop/) | Remove AI writing patterns (5-dim scoring) | ✍️ | 1 | [stephenturner/skill-deslop](https://github.com/stephenturner/skill-deslop) |
 | **46** | [stop-slop](skills/46-hardikpandya-stop-slop/) | 3-layer AI-tell detection & rewrite | ✍️ | 1 | [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) |
 | **47** | [avoid-ai-writing](skills/47-conorbronsdon-avoid-ai-writing/) | Audit → rewrite → re-audit AI-isms (paper trail) | ✍️ | 1 | [conorbronsdon/avoid-ai-writing](https://github.com/conorbronsdon/avoid-ai-writing) |
-| ⭐ **48** | **[de-AIGC-skills](skills/48-de-AIGC-skills/)** 🇨🇳🇬🇧 | Bilingual (EN+ZH) academic de-AIGC for Turnitin AI / GPTZero / CNKI / Wanfang | ✍️ | 1 | [⭐ this repo](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills) |
+| ⭐ **48** | **[de-AIGC-skills](skills/48-de-AIGC-skills/)** 🇨🇳🇬🇧 | Bilingual (EN+ZH) academic de-AIGC + provenance / de-watermark layer for Turnitin AI / GPTZero / CNKI / Wanfang (invisible Unicode, C2PA, docx metadata) | ✍️ | 1 | [⭐ this repo](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills) |
 | **49** | [humanize-chinese](skills/49-voidborne-d-humanize-chinese/) | Detect & humanize AI-generated Chinese text | ✍️ | 1 | [swaylq/humanize-chinese](https://github.com/swaylq/humanize-chinese) |
 | ⭐ **50** | **[AER-skills](skills/50-brycewang-aer-skills/)** 📕 | Top-5 econ submission stack: identification → robustness → R&R | 🚀 | 9 | [brycewang-stanford/AER-skills](https://github.com/brycewang-stanford/AER-skills) |
 | **51** | [CausalPy](skills/51-pymc-labs-CausalPy/) | Bayesian quasi-experiments (PyMC Labs) | 🎯 | 3 | [pymc-labs/CausalPy](https://github.com/pymc-labs/CausalPy) |
@@ -257,7 +257,7 @@ AERS is two things at once: (1) a small set of **first-party flagship skills** t
 | [`45` · deslop](skills/45-stephenturner-skill-deslop/) | Remove AI writing patterns (5-dim scoring) | 1 |
 | [`46` · stop-slop](skills/46-hardikpandya-stop-slop/) | 3-layer AI-tell detection & rewrite | 1 |
 | [`47` · avoid-ai-writing](skills/47-conorbronsdon-avoid-ai-writing/) | Audit → rewrite → re-audit AI-isms (paper trail) | 1 |
-| ⭐ **[`48` · de-AIGC-skills](skills/48-de-AIGC-skills/)** 🇨🇳🇬🇧 | Bilingual (EN+ZH) academic de-AIGC for Turnitin AI / GPTZero / CNKI / Wanfang | 1 |
+| ⭐ **[`48` · de-AIGC-skills](skills/48-de-AIGC-skills/)** 🇨🇳🇬🇧 | Bilingual (EN+ZH) academic de-AIGC + provenance / de-watermark layer for Turnitin AI / GPTZero / CNKI / Wanfang (invisible Unicode, C2PA, docx metadata) | 1 |
 | [`70` · ssci-polish](skills/70-ssci-polish/) | SSCI/SCI English academic-paper language polishing | 1 |
 | [`49` · humanize-chinese](skills/49-voidborne-d-humanize-chinese/) | Detect & humanize AI-generated Chinese text | 1 |
 | [`56` · econ-writing-skill](skills/56-hanlulong-econ-writing-skill/) | Econ writing synthesizing 50+ top guides | 1 |
@@ -359,7 +359,7 @@ Four parallel implementations of the **same 8-step empirical loop** — *data cl
 | **[Full Empirical Analysis — Stata](skills/00.2-Full-empirical-analysis-skill_Stata/SKILL.md)** 📊 | Community standard: `reghdfe` · `ivreg2` · `csdid` · `did_imputation` · `sdid` · `rdrobust` · `synth` · `psmatch2` · `boottest` · `esttab` | When a referee or co-author insists on a Stata replication pack (AER/QJE/JPE/ReStud style) |
 | **[Full Empirical Analysis — R](skills/00.3-Full-empirical-analysis-skill_R/SKILL.md)** 📗 | Modern tidyverse: `fixest` · `did` · `synthdid` · `HonestDiD` · `rdrobust` · `grf` · `DoubleML` · `marginaleffects` · **Quarto** | Single-`.qmd` reproducibility reports rendered to PDF/HTML/Word in one command |
 | **[AER-Skills](skills/50-brycewang-aer-skills/)** 📕 | 9 skills: topic routing → identification audit → robustness → intro → tables → replication → submission → R&R → orchestrator | Top-5 economics (AER / AER:Insights / AEJ) submission: *identification-first* — fragile design, no prose saves it |
-| **[de-aigc-skills](skills/48-de-AIGC-skills/SKILL.md)** 🇨🇳🇬🇧 | Bilingual pattern libraries (22 EN + 17 ZH), six-step intake→audit→claim-evidence→rewrite→score→recheck loop | Lowering AI-writing signal for Turnitin AI / GPTZero and CNKI / Wanfang / VIP submissions |
+| **[de-aigc-skills](skills/48-de-AIGC-skills/SKILL.md)** 🇨🇳🇬🇧 | Bilingual pattern libraries (22 EN + 17 ZH), six-step intake→audit→claim-evidence→rewrite→score→recheck loop, plus a 2026 provenance layer (CJK-safe invisible-character and docx / figure metadata cleaning; the statistical watermark is reported as unknown, never as removed) | Lowering AI-writing signal for Turnitin AI / GPTZero and CNKI / Wanfang / VIP submissions, and cleaning the submission package |
 | **[Paper-WorkFlow](skills/69-Paper-WorkFlow/README.md)** 🧭 | **Meta-orchestrator** chaining Stage 0–9 — topic → design → data → estimation → tables/figures → draft → polish → de-AIGC → mock review → submission — by dispatching existing skills and parallel subagents with a resumable `workflow_state.json` | Auto-running a full empirical social-science paper end to end |
 
 > **Why a DSL *and* explicit ports?** Reach for StatsPAI when you trust the one-shot DSL; reach for 00.1/00.2/00.3 when you are teaching, auditing, or must swap every diagnostic by hand. AER-skills then takes a correct analysis to acceptance threshold — these solve *different* problems and compose.
@@ -386,7 +386,7 @@ These three figures come straight from the committed [Card returns-to-schooling 
 | Audit a top-5 identification strategy first | [`aer-identification`](skills/50-brycewang-aer-skills/skills/aer-identification/SKILL.md) |
 | Prepare an AER / AEJ submission | [`aer-workflow`](skills/50-brycewang-aer-skills/skills/aer-workflow/SKILL.md) |
 | Build an AEA-ready replication package | [`aer-replication`](skills/50-brycewang-aer-skills/skills/aer-replication/SKILL.md) |
-| Lower the AI-writing signal of an empirical draft (EN or ZH) | [`de-aigc-skills`](skills/48-de-AIGC-skills/SKILL.md) |
+| Lower the AI-writing signal of an empirical draft (EN or ZH) and clean provenance marks from the submission package | [`de-aigc-skills`](skills/48-de-AIGC-skills/SKILL.md) |
 
 **More ways in:**
 
@@ -512,7 +512,7 @@ The first-party flagships ([StatsPAI](skills/00-Full-empirical-analysis-skill_St
 
 | Suite | Key features | Best for | Local |
 |-------|-------------|----------|-------|
-| **de-AIGC-skills** 🇨🇳🇬🇧 | **Original** bilingual academic de-AIGC by CoPaper.AI; 22 English + 17 Chinese patterns, six-step loop with a claim–evidence audit, per-section strategies, 5-dim scoring — built for empirical papers in econ / management / social science | Turnitin AI / GPTZero / CNKI / Wanfang / VIP | [`48`](skills/48-de-AIGC-skills/) |
+| **de-AIGC-skills** 🇨🇳🇬🇧 | **Original** bilingual academic de-AIGC by CoPaper.AI; 22 English + 17 Chinese patterns, six-step loop with a claim–evidence audit, per-section strategies, 5-dim scoring — built for empirical papers in econ / management / social science; **2026-09: provenance layer** — CJK-safe invisible-Unicode + docx / PNG / JPG / SVG / PDF metadata hygiene, an author ownership pass for statistical watermarks, never claims "watermark-free" | Turnitin AI / GPTZero / CNKI / Wanfang / VIP · invisible Unicode / C2PA / docx metadata | [`48`](skills/48-de-AIGC-skills/) |
 | [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) | Academic-specific; 23 AI-writing patterns; preserves legitimate academic transitions | Medical, life-science, natural-science papers | [`44`](skills/44-matsuikentaro1-humanizer_academic/) |
 | [stephenturner/skill-deslop](https://github.com/stephenturner/skill-deslop) | Distinguishes legitimate discipline conventions from AI tells; 5-dimension scoring | Scientific papers, technical blogs | [`45`](skills/45-stephenturner-skill-deslop/) |
 | [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) | 3-layer detection + 5-dim scoring; banned phrases, structural clichés, sentence rules | General prose, blogs, reports | [`46`](skills/46-hardikpandya-stop-slop/) |

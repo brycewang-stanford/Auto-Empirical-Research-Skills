@@ -168,6 +168,8 @@ python-compat:
 	# scripts; they belong on the compat matrix like everything else.
 	python3 -m py_compile demo-notebooks/*.py demo-notebooks/*/*.py
 	python3 -m py_compile skills/72-kaggle-research/kaggle-research/scripts/*.py skills/72-kaggle-research/kaggle-research/scripts/kaggle_runtime/*.py skills/72-kaggle-research/kaggle-research/tests/*.py
+	# The de-AIGC provenance scrubber is first-party, stdlib-only Python 3.9+.
+	python3 -m py_compile skills/48-de-AIGC-skills/scripts/*.py
 
 # Full local gate: everything a PR should pass.
 check: validate python-compat test eval-harness eval-smoke benchmark-lint benchmark
