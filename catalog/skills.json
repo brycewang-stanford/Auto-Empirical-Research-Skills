@@ -1307,7 +1307,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 2308,
+      "line_count": 2263,
       "name": "StatsPAI_skill",
       "path": "skills/00-Full-empirical-analysis-skill_StatsPAI/SKILL.md",
       "qualified_name": "00-Full-empirical-analysis-skill_StatsPAI::StatsPAI_skill"
