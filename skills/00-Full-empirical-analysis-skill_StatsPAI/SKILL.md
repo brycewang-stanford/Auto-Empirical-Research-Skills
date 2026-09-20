@@ -88,7 +88,7 @@ This skill drives StatsPAI through the **canonical pipeline of an applied AER em
 
 - **Source**: https://github.com/brycewang-stanford/StatsPAI
 - **Install**: `pip install "statspai[fixest,plotting]"` (API surface re-validated against **statspai 1.19.0** — every `sp.*` reference, signature, and result-object attribute claim in this skill is checked by `validate_api_claims.py` in this folder). The bare `pip install statspai` is **not enough** for the default pipeline — see the dependency matrix below.
-- **Paper**: JOSS submission under review; JSS materials in `Paper-JSS/README.md` and `docs/jss_source_audit_dossier.md`
+- **Paper**: Wang & Rozelle (2026), *Journal of Open Source Software* 11(125), 10604, <https://doi.org/10.21105/joss.10604>; JSS materials in `Paper-JSS/README.md` and `docs/jss_source_audit_dossier.md`
 
 > **Install the right extras or the documented calls will raise `ImportError`.** Several core functions live behind optional dependency groups (verified from `pyproject.toml`):
 >
@@ -2261,48 +2261,3 @@ result.to_latex("tables/did_results.tex")
 | Full AER-style robustness gauntlet from one package | ✅ Oster / honest_did / E-value / Conley / 2-way / spec_curve / placebo all in `sp.*` | manually wire 5+ packages |
 | **Epidemiology / public health** (target-trial emulation, IPTW + g-formula + TMLE triplet, MR, KM/AFT survival, E-value, STROBE/TRIPOD reporting) | ✅ `sp.target_trial.TargetTrialProtocol` + `sp.target_trial_emulate` + `sp.gformula` + `sp.msm` + `sp.tmle` + `sp.hal_tmle` + `sp.mendelian` (`sp.mr_ivw`/`sp.mr_egger`/`sp.mr_median`) + `sp.kaplan_meier` + `sp.aft` + `sp.evalue` + `sp.principal_strat` — see §A. | hand-stitched zEpid + lifelines + statsmodels + manual MR scripts |
 | **ML causal inference** (DML / S/T/X/R/DR-Learner / causal forest / Dragonnet / TARNet / CEVAE / BCF / matrix completion / policy learning / OPE / conformal CATE / fairness audit / DAG learning) | ✅ `sp.dml` + `sp.metalearner` + `sp.causal_forest` + `sp.dragonnet`/`tarnet`/`cevae` + `sp.bcf` + `sp.matrix_completion` + `sp.policy_tree` + `sp.offline_safe_policy` + `sp.ope.*` + `sp.conformal_causal.*` + `sp.fairness.fairness_audit` + `sp.causal_discovery`/`pc_algorithm`/`notears`/`llm_dag_propose`+`llm_dag_validate` — see §B. | EconML + DoWhy + CausalML + GRF + zEpid + dowhy-gcm assembled by hand |
-
----
-
-## Step 8.5 — Handoff to the manuscript (exit contract)
-
-This skill's remit still ends at Step 8. "Ends" should not mean "dead-ends", though:
-the writing stage needs a machine-readable contract, not a folder of loose files.
-Before you stop, emit two artifacts next to the tables and figures.
-
-**1. `exhibits_index.md`** — one row per numbered exhibit:
-
-| Exhibit | Files | Claim it supports | Produced by |
-|---|---|---|---|
-| Table 2 | `tables/table2_main.{tex,docx,xlsx}` | Main effect of the policy on log output | `analysis.py` §baseline |
-| Figure 2 | `figures/fig2_event_study.{png,pdf}` | No differential pre-trend | `analysis.py` §event-study |
-
-**2. `results_summary.json`** — every headline estimate as a flat record:
-
-```json
-{"baseline": {"coef": 0.1234, "se": 0.0412, "p": 0.0031, "n": 12345, "spec": "TWFE + region-year FE"}}
-```
-
-Why both, and why in these shapes:
-
-- The manuscript stage cites exhibits by **include directive**, never by retyped
-  numbers — `\input{tables/table2_main}` in LaTeX, `{{ include: table2_main }}` in
-  Markdown. The index is what tells the writer which file backs which claim.
-- Every number a paper prints must trace back to a result file at the precision it is
-  displayed. `results_summary.json` is what makes that checkable instead of trusted.
-  A coefficient that exists only inside a rendered table cannot be verified against
-  the prose that cites it.
-
-**Then hand off:**
-
-- **Full paper → Word `.docx` / LaTeX, end to end** → `skills/69-Paper-WorkFlow/`. It
-  orchestrates Stage 5–9 (draft → polish → de-AIGC → review → submission) and its
-  `scripts/assemble_manuscript_docx.py` assembles `09_submission/main.docx` — body,
-  every exhibit above, figures and reference list in one file — from exactly these two
-  artifacts. Pick the body format at its Stage 0: **Markdown when the deliverable is
-  Word** (Markdown → `.docx` is high fidelity; LaTeX → `.docx` is lossy), LaTeX when
-  the venue takes `.tex`.
-- **Prose drafting only** → the writing skills in this repo (`04-*-scientific-writer`,
-  `35-*-academic-writing-skills`).
-- **LaTeX / Quarto typesetting only** → `08-ndpvt-web-latex-document-skill`,
-  `60-regisely-superpapers`.
