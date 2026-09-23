@@ -5,6 +5,31 @@ This is the project's narrative changelog. `README.md` keeps only a short
 
 ## Unreleased
 
+### Routing: ranked catalog search, curation tiers, and a routing eval
+
+- **The size of the catalog no longer costs routing accuracy.** With 1,096
+  skills, grepping `catalog/skills.json` returned dozens of equal-looking hits
+  ("latex" matches 78 skills, "citation" 72) and seven copies of
+  `research-ideation`. Three additive pieces fix that without removing or
+  editing any vendored skill (counts are unchanged):
+  [`catalog/curation.json`](catalog/curation.json) (hand-curated: first-party
+  `core` collections, one preferred copy for each of the 47 duplicated names,
+  113 natural-science / CS guides from `43-wentorai` marked `out-of-domain`);
+  a `tier` field in `catalog/skills-enriched.json`; and
+  [`scripts/find-skill.py`](scripts/find-skill.py), a stdlib BM25 search over
+  name / tags / description that takes English or Chinese queries, folds
+  duplicate copies into their preferred one and ranks by tier. The root
+  `SKILL.md` router now calls it as its search step.
+- **Routing is measured, not assumed.** [`evals/routing-cases.json`](evals/routing-cases.json)
+  holds 51 bilingual task prompts with acceptable skills;
+  [`scripts/check-routing.py`](scripts/check-routing.py) scores three rankers
+  on them. hit@1 / hit@3: keyword grep 67% / 75%, BM25 without tiers
+  76% / 92%, tiered 92% / 100% (tuned on these cases, so read the tiered
+  numbers as an upper bound). `make validate` gates tiered hit@3 ≥ 85%.
+- INSTALL.md and the router now warn against flat-installing the whole
+  catalog: every registered description loads at session start (~64k tokens
+  for all 1,096) and long listings get truncated.
+
 ### de-AIGC gets a provenance layer — 去水印 (skill 48)
 
 - **[`48-de-AIGC-skills`](skills/48-de-AIGC-skills/) now handles "AI watermarks"

@@ -85,6 +85,7 @@ validate:
 	python3 scripts/check-ecosystem.py
 	python3 scripts/check-readme-stats.py
 	python3 scripts/check-catalog-coverage.py
+	python3 scripts/check-routing.py --min-hit3 0.85
 	python3 scripts/check-plugin-source-location.py
 	python3 scripts/check-mirror-sync.py
 	python3 scripts/scan-collections.py --check

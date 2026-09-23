@@ -38,6 +38,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SKILLS_JSON = ROOT / "catalog" / "skills.json"
 PROVENANCE_JSON = ROOT / "catalog" / "provenance.json"
 ENRICHED_JSON = ROOT / "catalog" / "skills-enriched.json"
+CURATION_JSON = ROOT / "catalog" / "curation.json"   # hand-curated routing tiers
 HYGIENE_MD = ROOT / "docs" / "SKILL_HYGIENE.md"     # primary structural-quality doc
 QUALITY_MD = ROOT / "docs" / "SKILL_QUALITY.md"     # historical redirect, kept for backward links
 TAXONOMY_MD = ROOT / "docs" / "TAXONOMY.md"
@@ -252,11 +253,61 @@ def score_skill(skill: dict, eff_desc: str, desc_source: str, refs: bool) -> tup
     return max(0, min(100, score)), flags
 
 
+TIERS = ("core", "extended", "duplicate", "out-of-domain")
+
+
+def load_curation(path: Path = CURATION_JSON) -> dict:
+    if not path.exists():
+        return {}
+    return load_json(path)
+
+
+def assign_tiers(skills: list[dict], curation: dict) -> tuple[dict[str, dict], list[str]]:
+    """Map each skill path to its routing tier from ``catalog/curation.json``.
+
+    Ranking-only metadata: nothing is removed from the catalog. Precedence is
+    out-of-domain > duplicate > core > extended, so a non-preferred copy of a
+    duplicated name is always ``duplicate`` even inside a core collection.
+    Returns ``(tiers_by_path, uncurated_duplicate_names)``; raises ValueError
+    when the curation file names a path that is not a cataloged skill of that
+    name, so a stale entry fails ``make validate`` instead of silently rotting.
+    """
+    by_path = {s["path"]: s for s in skills}
+    by_name: dict[str, list[str]] = defaultdict(list)
+    for s in skills:
+        by_name[s.get("name") or ""].append(s["path"])
+
+    canonical = {k: v for k, v in curation.get("canonical", {}).items() if not k.startswith("_")}
+    for name, path in canonical.items():
+        if by_path.get(path, {}).get("name") != name:
+            raise ValueError(f"catalog/curation.json: canonical[{name!r}] -> {path} is not a cataloged skill named {name!r}")
+    ood = tuple(curation.get("out_of_domain", {}).get("prefixes", []))
+    core = tuple(curation.get("core_prefixes", []))
+
+    out: dict[str, dict] = {}
+    for s in skills:
+        path, name = s["path"], s.get("name") or ""
+        info: dict = {"tier": "extended"}
+        pick = canonical.get(name)
+        if pick and pick != path:
+            info = {"tier": "duplicate", "duplicate_of": pick}
+        elif core and path.startswith(core):
+            info = {"tier": "core"}
+        if ood and path.startswith(ood):
+            info["tier"] = "out-of-domain"
+        if pick == path:
+            info["canonical_of"] = len(by_name[name])
+        out[path] = info
+    uncurated = sorted(n for n, paths in by_name.items() if n and len(paths) > 1 and n not in canonical)
+    return out, uncurated
+
+
 def build() -> dict:
     catalog = load_json(SKILLS_JSON)
     provenance = load_json(PROVENANCE_JSON)
     prov_by_id = {c["id"]: c for c in provenance.get("collections", [])}
     eval_coverage = load_eval_coverage()
+    tiers, uncurated_dups = assign_tiers(catalog.get("skills", []), load_curation())
 
     enriched = []
     facet_counts: dict[str, dict[str, int]] = {f: {} for f in TAXONOMY}
@@ -299,6 +350,8 @@ def build() -> dict:
             # Empty list is a strong signal of an under-tested skill, not "no
             # coverage" — see the per-collection table for context.
             "eval_coverage": eval_coverage.get(skill["path"], []),
+            # Routing tier from catalog/curation.json (ranking only; see assign_tiers).
+            **tiers.get(skill["path"], {"tier": "extended"}),
         })
 
     enriched.sort(key=lambda s: s["path"])
@@ -314,6 +367,8 @@ def build() -> dict:
         "with_eval_coverage": n_with_eval,
         "with_eval_coverage_pct": round(100 * n_with_eval / len(enriched), 1) if enriched else 0,
         "total_eval_scenarios": len(eval_coverage),
+        "tiers": {t: sum(1 for s in enriched if s["tier"] == t) for t in TIERS},
+        "uncurated_duplicate_names": uncurated_dups,
     }
     taxonomy = {f: dict(sorted(c.items(), key=lambda kv: (-kv[1], kv[0]))) for f, c in facet_counts.items()}
     return {

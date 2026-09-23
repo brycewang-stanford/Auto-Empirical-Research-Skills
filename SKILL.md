@@ -19,7 +19,16 @@ The catalog holds **1,096 skills across 76 vendored collections**. Never read th
    - Replication, citation, or peer review: use `docs/SKILL_CATALOG.md` and `docs/GOLDEN_WORKFLOWS.md` to choose a focused skill.
    - Academic de-AIGC (English or Chinese) or academic rewriting: start with `skills/48-de-AIGC-skills/` or nearby writing skills in the catalog.
 2. Read only the selected child skill's `SKILL.md`, then follow its progressive-disclosure instructions for `references/`, `scripts/`, `assets/`, or templates.
-3. If no child skill clearly matches, inspect `catalog/skills.json` first (has `path`, `name`, `description`, `line_count`, and a globally-unique `qualified_name`), then `docs/SKILL_CATALOG.md`. For richer filtering (topic `tags`, `quality_score`, `license`, `commercial_use`), use `catalog/skills-enriched.json`. Avoid broad recursive reads of `skills/`.
+3. If no child skill clearly matches, run the ranked catalog search first — it takes English or Chinese task text:
+
+     ```bash
+     python3 scripts/find-skill.py "staggered difference-in-differences event study"
+     python3 scripts/find-skill.py "降低中文论文 AIGC 率" -k 5
+     ```
+
+   It ranks by relevance, then by the routing tier in `catalog/curation.json`: first-party `core` skills first, a single preferred copy for each duplicated name (the other copies are folded away), and natural-science / CS guides (`out-of-domain`) last unless the query names them. Take the top result unless its description clearly misfits, then read only that `SKILL.md`. Its accuracy is measured by `python3 scripts/check-routing.py` against `evals/routing-cases.json`.
+
+   If you need raw data instead, `catalog/skills.json` has `path`, `name`, `description`, `line_count`, and a globally-unique `qualified_name`; `catalog/skills-enriched.json` adds `tier`, `tags`, `quality_score`, `license`, and `commercial_use`. Avoid broad recursive reads of `skills/`.
    - Both catalog JSON files are large (roughly 1 MB / 20k lines each) — query them instead of reading them whole. Example:
 
      ```bash
@@ -102,12 +111,15 @@ The orchestrator is **not** the right entry point for a single-task ask (e.g. "f
 - Whole-repo imports are supported by this root `SKILL.md` as a lightweight compatibility entry point.
 - Individual skill installs are still preferred when a runtime expects one folder per skill. Copy the folder that directly contains the target `SKILL.md`.
 - Do not copy the repository root into a runtime and expect every child skill to become individually registered unless that runtime explicitly supports recursive skill discovery.
-- **Name collisions:** the catalog contains 47 bare `name`s shared across collections (e.g. `data-analysis`, `lit-review`, `proofread`). When a runtime registers skills by flat name, install one collection at a time, or disambiguate with the globally-unique `qualified_name` field in `catalog/skills.json` (`<collection>::<name>`, e.g. `12-pedrohcgs-claude-code-my-workflow::data-analysis`), or the full `skills/<collection>/.../SKILL.md` path.
+- **Do not flat-install the whole catalog** (e.g. symlinking every child folder into `~/.claude/skills`). Every registered skill's description is loaded at session start — about 64k tokens for all 1,096 here — and runtimes truncate long skill listings, so matching gets *worse*, not better. Use a plugin, this router, or a handful of copied skills.
+- **Name collisions:** the catalog contains 47 bare `name`s shared across collections (e.g. `data-analysis`, `lit-review`, `proofread`); `catalog/curation.json` names one preferred copy of each, which `scripts/find-skill.py` returns. When a runtime registers skills by flat name, install one collection at a time, or disambiguate with the globally-unique `qualified_name` field in `catalog/skills.json` (`<collection>::<name>`, e.g. `12-pedrohcgs-claude-code-my-workflow::data-analysis`), or the full `skills/<collection>/.../SKILL.md` path.
 
 ## Key Files
 
 - `catalog/skills.json`: machine-readable list of vendored skills.
-- `catalog/skills-enriched.json`: same list plus `tags`, `quality_score`, `license`, and `commercial_use` for filtering.
+- `catalog/skills-enriched.json`: same list plus `tier`, `tags`, `quality_score`, `license`, and `commercial_use` for filtering.
+- `catalog/curation.json`: hand-curated routing tiers (core collections, the preferred copy of each duplicated name, out-of-domain prefixes). Ranking only — nothing is removed.
+- `scripts/find-skill.py`: ranked search over the catalog (the router's search step).
 - `docs/SKILL_CATALOG.md`: human-readable skill index.
 - `docs/TAXONOMY.md`: task and method taxonomy.
 - `docs/GOLDEN_WORKFLOWS.md`: ready-to-use empirical-research prompts.

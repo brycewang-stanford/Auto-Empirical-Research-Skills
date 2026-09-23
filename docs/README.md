@@ -30,6 +30,12 @@ and `make validate` will flag the staleness either way.
   pattern-scan record, written by `scripts/scan-collections.py` (`make
   security-scan`) and freshness-checked by `make validate`. The prose write-up
   lives in `../SECURITY-SCAN-REPORT.md`.
+- `../catalog/curation.json` (outside this dir) — hand-curated routing tiers
+  (core collections, preferred copy per duplicated skill name, out-of-domain
+  prefixes). Read by `scripts/build-catalog-enrich.py` and
+  `scripts/find-skill.py`; ranking only, never removes a skill.
+- `../evals/routing-cases.json` (outside this dir) — routing eval cases,
+  scored by `scripts/check-routing.py` (gated in `make validate`).
 - `SCOREBOARD_RULES.md` — who may submit to `EXTERNAL_SCOREBOARD.md` and how
   entries are ranked (the board itself is generated).
 - `TRUST.md`, `SCOREBOARD.md` (link hub — deliberately carries no numbers),
