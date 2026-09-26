@@ -15,16 +15,16 @@ Run `python3 scripts/quickstart.py --markdown` to refresh after `make catalog`.
 
 - analysis: 144
 - writing: 89
-- submission: 81
+- submission: 80
 - reproduction: 63
 - literature: 61
 
 ### Languages represented
 
-- latex: 89
-- python: 51
-- stata: 51
-- r: 23
+- latex: 88
+- python: 50
+- stata: 50
+- r: 22
 
 ### Top method tags
 

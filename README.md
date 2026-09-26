@@ -16,7 +16,7 @@
 > - 🤖 **面向 Agent 设计**：结构化结果对象 + 内置 MCP Server，Claude / Codex 等智能体可直接调用、诊断、审计与出表
 > - ⚡ **运行速度更快**：无需启动 Stata / R 会话，免许可证，纯 Python 流水线端到端提速
 >
-> 👉 **[github.com/brycewang-stanford/StatsPAI](https://github.com/brycewang-stanford/StatsPAI)** · `pip install statspai` · MIT 开源 · 欢迎 ⭐ Star
+> **[github.com/brycewang-stanford/StatsPAI](https://github.com/brycewang-stanford/StatsPAI)** · `pip install statspai` · MIT 开源 · 欢迎 ⭐ Star
 
 <div align="center">
 

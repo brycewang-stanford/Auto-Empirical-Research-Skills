@@ -505,8 +505,8 @@
       "findings_untriaged": 0
     },
     "69-Paper-WorkFlow": {
-      "files_scanned": 196,
-      "files_seen": 218,
+      "files_scanned": 198,
+      "files_seen": 220,
       "findings_total": 3,
       "findings_triaged_benign": 3,
       "findings_untriaged": 0

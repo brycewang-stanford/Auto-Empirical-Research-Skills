@@ -1232,7 +1232,7 @@
       "license": "MIT",
       "path": "skills/69-Paper-WorkFlow",
       "primary_skill": {
-        "description": "经管 / 社科实证论文全流程 meta-orchestrator：把选题、设计、数据、估计、方法闸门、 表图、写作、去 AI 味、质量门、修订、投稿与复盘编排成 Stage 0–9 可断点续跑流水线。 本 skill 不重复实现子能力，而是按阶段调用既有 skill 或并行 subagent，并在 Stage 3–4 路由 Python/StatsPAI、Stata、R 三种分析后端，Stage 9 交付**一份含正文+表+图+参考文献的 Word 全文定稿**（`09_submission/main.docx`，另可出 `.tex`）。触发：/paper-workflow、 帮我写一篇实证论文、从选题到投稿、端到端 empirical paper、从数据到 docx 论文全文、 出一份 Word 版全文、已有 proposal/数据/初稿要推进到投稿，或明确要求用 Stata / R/fixest / Python-StatsPAI 完整复现。 Parent-invoked with any trigger above: jump straight to Stage 0 Setup without re-asking.",
+        "description": "将社科实证研究从 idea、proposal、数据或已有结果推进到可复现分析和完整论文 DOCX。 支持研究设计、数据审计、估计、表图、写作与修订，以及按需准备投稿包；按证据完成阶段， 不承诺显著结果或录用。触发：/paper-workflow、从想法到论文、从数据到 docx、推进已有实证稿件。",
         "name": "paper-workflow",
         "path": "skills/69-Paper-WorkFlow/SKILL.md"
       },
@@ -19080,17 +19080,16 @@
     },
     {
       "collection": "69-Paper-WorkFlow",
-      "description": "经管 / 社科实证论文全流程 meta-orchestrator：把选题、设计、数据、估计、方法闸门、 表图、写作、去 AI 味、质量门、修订、投稿与复盘编排成 Stage 0–9 可断点续跑流水线。 本 skill 不重复实现子能力，而是按阶段调用既有 skill 或并行 subagent，并在 Stage 3–4 路由 Python/StatsPAI、Stata、R 三种分析后端，Stage 9 交付**一份含正文+表+图+参考文献的 Word 全文定稿**（`09_submission/main.docx`，另可出 `.tex`）。触发：/paper-workflow、 帮我写一篇实证论文、从选题到投稿、端到端 empirical paper、从数据到 docx 论文全文、 出一份 Word 版全文、已有 proposal/数据/初稿要推进到投稿，或明确要求用 Stata / R/fixest / Python-StatsPAI 完整复现。 Parent-invoked with any trigger above: jump straight to Stage 0 Setup without re-asking.",
+      "description": "将社科实证研究从 idea、proposal、数据或已有结果推进到可复现分析和完整论文 DOCX。 支持研究设计、数据审计、估计、表图、写作与修订，以及按需准备投稿包；按证据完成阶段， 不承诺显著结果或录用。触发：/paper-workflow、从想法到论文、从数据到 docx、推进已有实证稿件。",
       "frontmatter_fields": [
         "allowed-tools",
-        "argument-hint",
         "description",
         "name"
       ],
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 249,
+      "line_count": 244,
       "name": "paper-workflow",
       "path": "skills/69-Paper-WorkFlow/SKILL.md",
       "qualified_name": "69-Paper-WorkFlow::paper-workflow"

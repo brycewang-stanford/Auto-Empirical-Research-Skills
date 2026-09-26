@@ -7,7 +7,7 @@
     "with_frontmatter_description": 1107,
     "body_derived_description": 0,
     "no_description": 0,
-    "tagged": 566,
+    "tagged": 565,
     "with_eval_coverage": 21,
     "with_eval_coverage_pct": 1.9,
     "total_eval_scenarios": 22,
@@ -21,10 +21,10 @@
   },
   "taxonomy": {
     "language": {
-      "latex": 89,
-      "python": 51,
-      "stata": 51,
-      "r": 23
+      "latex": 88,
+      "python": 50,
+      "stata": 50,
+      "r": 22
     },
     "method": {
       "iv": 30,
@@ -49,7 +49,7 @@
     "stage": {
       "analysis": 144,
       "writing": 89,
-      "submission": 81,
+      "submission": 80,
       "reproduction": 63,
       "literature": 61,
       "citation": 49,
@@ -23830,21 +23830,11 @@
       "name": "paper-workflow",
       "path": "skills/69-Paper-WorkFlow/SKILL.md",
       "collection": "69-Paper-WorkFlow",
-      "line_count": 249,
-      "description_effective": "经管 / 社科实证论文全流程 meta-orchestrator：把选题、设计、数据、估计、方法闸门、 表图、写作、去 AI 味、质量门、修订、投稿与复盘编排成 Stage 0–9 可断点续跑流水线。 本 skill 不重复实现子能力，而是按阶段调用既有 skill 或并行 subagent，并在 Stage 3–4 路由 Python/StatsPAI、Stata、R 三种分析后端，Stage 9 交付**一份含正文+表+图+参考文献的 Word 全文定稿**（`09_submission/main.docx`，另可出 `.tex`）。触发：/paper-workflow、 帮我写一篇实证论文、从选题到投稿、端到端 empirical paper、从数据到 docx 论文全文、 出一份 Word 版全文、已有 proposal/数据/初稿要推进到投稿，或明确要求用 Stata / R/fixest / Python-StatsPAI 完整复现。 Parent-invoked with any trigger above: jump straight to Stage 0 Setup without re-asking.",
+      "line_count": 244,
+      "description_effective": "将社科实证研究从 idea、proposal、数据或已有结果推进到可复现分析和完整论文 DOCX。 支持研究设计、数据审计、估计、表图、写作与修订，以及按需准备投稿包；按证据完成阶段， 不承诺显著结果或录用。触发：/paper-workflow、从想法到论文、从数据到 docx、推进已有实证稿件。",
       "description_source": "frontmatter",
       "has_references": true,
-      "tags": {
-        "language": [
-          "latex",
-          "python",
-          "r",
-          "stata"
-        ],
-        "stage": [
-          "submission"
-        ]
-      },
+      "tags": {},
       "quality_score": 100,
       "quality_flags": [],
       "license": "MIT",
