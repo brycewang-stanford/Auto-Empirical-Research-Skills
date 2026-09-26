@@ -18,11 +18,6 @@
 >
 > 👉 **[github.com/brycewang-stanford/StatsPAI](https://github.com/brycewang-stanford/StatsPAI)** · `pip install statspai` · MIT 开源 · 欢迎 ⭐ Star
 
-> **📌 文档结构（2026-07-22 起）：** 本文件是**中文默认入口** —— banner + badges + 信任面 + 9 阶段流水线速览 + 77 行合集总表。
-> 每个合集的**完整描述、按用途分组、精确数字、验证方法**在 [`docs/CONTENT_ZH.md`](docs/CONTENT_ZH.md)（扩展正文，总表行内的 `→` 直接跳转到对应锚点）。
->
-> English version: [`README-en.md`](README-en.md) · 中文扩展正文：[`docs/CONTENT_ZH.md`](docs/CONTENT_ZH.md) · [`README-zh-CN.md`](README-zh-CN.md) 已弃用（重定向占位）
-
 <div align="center">
 
 **🌐 语言: [English](README-en.md) | 简体中文（默认） | [繁體中文](README-zh-TW.md) | [日本語](README-ja.md) | [한국어](README-ko.md)**
