@@ -1,0 +1,89 @@
+{
+  "name": "effect-panel-demo",
+  "design": "did",
+  "outcomes": [
+    "y",
+    "y_alt",
+    "y_rate"
+  ],
+  "treatment": "treat",
+  "controls_pool": [
+    "x1",
+    "x2",
+    "x3",
+    "x4"
+  ],
+  "control_policy": "all_subsets",
+  "fixed_effects": [
+    [],
+    [
+      "unit"
+    ],
+    [
+      "unit",
+      "year"
+    ],
+    [
+      "region",
+      "year"
+    ]
+  ],
+  "vcov": [
+    "hc1",
+    "cluster",
+    "twoway"
+  ],
+  "cluster": [
+    null,
+    "unit",
+    "region",
+    [
+      "unit",
+      "year"
+    ]
+  ],
+  "outcome_transforms": [
+    "level",
+    "log",
+    "std"
+  ],
+  "outlier_rules": [
+    "none",
+    "sd3",
+    "iqr1.5"
+  ],
+  "imputation": [
+    "listwise",
+    "mean"
+  ],
+  "subsamples": {
+    "early": "year < 2010",
+    "late": "year >= 2010"
+  },
+  "panel_unit": "unit",
+  "panel_time": "year",
+  "preregistered": {
+    "outcome": "y",
+    "controls": [
+      "x1",
+      "x2"
+    ],
+    "fe": [
+      "unit",
+      "year"
+    ],
+    "vcov": "cluster",
+    "cluster": "unit",
+    "y_transform": "level",
+    "outlier_rule": "none",
+    "imputation": "listwise",
+    "subsample": "full",
+    "weight": null
+  },
+  "weights": [
+    null,
+    "pop"
+  ],
+  "notes": "POSITIVE CONTROL: true effect = 0.3 by construction (generator scripts/make_null_data.py --effect). Used to check that the honest pipeline keeps its power.",
+  "direction": "+"
+}

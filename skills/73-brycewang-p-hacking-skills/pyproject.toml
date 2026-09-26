@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "phack"
+dynamic = ["version"]
+description = "A specification-search audit and p-hacking benchmark for econometric designs: every search leaves a complete, verifiable ledger and a null-calibrated honest p-value; realistic search procedures are replayed on null data; Stata / R / Python / StatsPAI runners over the same grid. For research and teaching about p-hacking, not for producing findings."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+authors = [{ name = "Bryce Wang" }]
+keywords = ["p-hacking", "specification search", "multiverse", "econometrics", "research integrity", "agent evaluation"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering",
+]
+dependencies = [
+  "numpy>=1.24",
+  "scipy>=1.10",
+  "pandas>=2.0",
+  "matplotlib>=3.7",
+]
+
+[project.optional-dependencies]
+formats = ["pyarrow>=14", "openpyxl>=3.1"]
+schema = ["jsonschema>=4"]
+dev = ["pytest>=7", "statsmodels>=0.14", "linearmodels>=6", "jsonschema>=4", "pyarrow>=14"]
+statspai = ["statspai>=1.20"]
+docs = ["mkdocs>=1.5", "mkdocs-material>=9"]
+
+[project.scripts]
+phack = "phack.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/brycewang-stanford/p-hacking-skills"
+Documentation = "https://brycewang-stanford.github.io/p-hacking-skills/"
+Changelog = "https://github.com/brycewang-stanford/p-hacking-skills/blob/main/CHANGELOG.md"
+
+[tool.setuptools]
+package-dir = { "" = "scripts" }
+packages = ["phack"]
+
+[tool.setuptools.dynamic]
+version = { attr = "phack.__version__" }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

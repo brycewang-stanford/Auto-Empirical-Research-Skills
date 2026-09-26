@@ -1,0 +1,426 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/brycewang-stanford/p-hacking-skills/schema/design-card.schema.json",
+  "title": "phack design card",
+  "description": "One axis per researcher degree of freedom; omit a key to fix that axis at its default. Requires `outcomes`, and `treatment` unless design is rdd (then `running`); iv needs `instruments_pool`.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "seed": {
+      "type": "integer"
+    },
+    "design": {
+      "type": "string",
+      "enum": [
+        "ols",
+        "rct",
+        "did",
+        "rdd",
+        "iv"
+      ],
+      "default": "ols"
+    },
+    "direction": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "+",
+        "-",
+        null
+      ]
+    },
+    "preregistered": {
+      "type": [
+        "object",
+        "string",
+        "null"
+      ],
+      "description": "axis -> value (any subset of grid.AXES), a 12-hex key, or a free-text note"
+    },
+    "outcomes": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "treatment": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "controls_pool": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "control_policy": {
+      "type": "string",
+      "enum": [
+        "none",
+        "nested",
+        "all_subsets",
+        "leave_one_out"
+      ]
+    },
+    "max_controls": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "fixed_effects": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "vcov": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "iid",
+          "hc0",
+          "hc1",
+          "hc2",
+          "hc3",
+          "cluster",
+          "twoway"
+        ]
+      }
+    },
+    "cluster": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "outcome_transforms": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "above_mean",
+          "asinh",
+          "inv",
+          "level",
+          "log",
+          "log1p",
+          "median_split",
+          "quartile_top",
+          "rank",
+          "sqrt",
+          "square",
+          "std",
+          "tercile_extremes",
+          "winsor1",
+          "winsor5"
+        ]
+      }
+    },
+    "treatment_transforms": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "above_mean",
+          "asinh",
+          "inv",
+          "level",
+          "log",
+          "log1p",
+          "median_split",
+          "quartile_top",
+          "rank",
+          "sqrt",
+          "square",
+          "std",
+          "tercile_extremes",
+          "winsor1",
+          "winsor5"
+        ]
+      }
+    },
+    "outlier_rules": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "iqr1.5",
+          "iqr3",
+          "mad3",
+          "none",
+          "pct1",
+          "pct5",
+          "sd2",
+          "sd2.5",
+          "sd3"
+        ]
+      }
+    },
+    "outlier_basis": {
+      "type": "string",
+      "enum": [
+        "outcome",
+        "treatment",
+        "residual"
+      ]
+    },
+    "imputation": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "listwise",
+          "mean",
+          "median",
+          "zero",
+          "ffill",
+          "interp"
+        ]
+      }
+    },
+    "subsamples": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "weights": {
+      "type": "array",
+      "items": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "interactions": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "lags": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "panel_unit": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "panel_time": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "did_estimators": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "twfe",
+          "did2s",
+          "stacked"
+        ]
+      }
+    },
+    "comparison_groups": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "all",
+          "drop_never_treated",
+          "drop_always_treated"
+        ]
+      }
+    },
+    "cohort": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "stack_window": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "event_windows": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "minItems": 2,
+        "maxItems": 2
+      }
+    },
+    "reference_periods": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    },
+    "event_estimands": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^(avg_post|avg_pre|lag[0-9]+)$"
+      }
+    },
+    "running": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "cutoff": {
+      "type": "number"
+    },
+    "bandwidth_selectors": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "rot",
+          "ik"
+        ]
+      }
+    },
+    "bandwidth_multipliers": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "exclusiveMinimum": 0
+      }
+    },
+    "bandwidths": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "number",
+        "exclusiveMinimum": 0
+      }
+    },
+    "kernels": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "epanechnikov",
+          "triangular",
+          "uniform"
+        ]
+      }
+    },
+    "poly_orders": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 4
+      }
+    },
+    "donuts": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": 0
+      }
+    },
+    "rdd_inference": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "conventional",
+          "bias_corrected",
+          "robust"
+        ]
+      }
+    },
+    "instruments_pool": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "instrument_policy": {
+      "type": "string",
+      "enum": [
+        "all",
+        "nested",
+        "all_subsets",
+        "leave_one_out"
+      ]
+    },
+    "iv_estimators": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "2sls",
+          "liml"
+        ]
+      }
+    }
+  },
+  "required": [
+    "outcomes"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,58 @@
+{
+  "null_panel.csv": {
+    "rows": 1200,
+    "sha1": "c0554f1a748188c194c0e872d953d0d7d62d2b50",
+    "effect": 0.0,
+    "generator": "panel",
+    "seed": 1
+  },
+  "null_staggered.csv": {
+    "rows": 1280,
+    "sha1": "986d2743157012389ec81e51344d5ed9a8a8b977",
+    "effect": 0.0,
+    "generator": "staggered",
+    "seed": 11
+  },
+  "null_rdd.csv": {
+    "rows": 2000,
+    "sha1": "dda2369e095d28ac55efd18f211115f9b0d9cb67",
+    "effect": 0.0,
+    "generator": "rdd",
+    "seed": 3
+  },
+  "null_iv.csv": {
+    "rows": 1500,
+    "sha1": "c82fd443791be89d9c2a8d6ea8a61a2be82f77be",
+    "effect": 0.0,
+    "generator": "iv",
+    "seed": 5
+  },
+  "effect_panel.csv": {
+    "rows": 1200,
+    "sha1": "7d3fc7f0fcfafb1d948527dcefd530837750c7c8",
+    "effect": 0.3,
+    "generator": "panel",
+    "seed": 1
+  },
+  "effect_staggered.csv": {
+    "rows": 1280,
+    "sha1": "1fdf4d361f63b24341c0cd2562430eb68ba19e35",
+    "effect": 0.3,
+    "generator": "staggered",
+    "seed": 11
+  },
+  "effect_rdd.csv": {
+    "rows": 2000,
+    "sha1": "4d2f3655a32dcf8ff94ba8f0eddf7087d28ddb15",
+    "effect": 0.3,
+    "generator": "rdd",
+    "seed": 3
+  },
+  "effect_iv.csv": {
+    "rows": 1500,
+    "sha1": "3909d17f87d0551a68f8c2d2a8e97f38f5814170",
+    "effect": 0.5,
+    "generator": "iv",
+    "seed": 5
+  }
+}

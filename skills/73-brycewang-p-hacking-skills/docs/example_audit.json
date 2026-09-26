@@ -1,0 +1,441 @@
+{
+ "direction": null,
+ "alpha": 0.05,
+ "n_specs_enumerated": 1000,
+ "n_specs_estimated": 1000,
+ "n_specs_failed": 0,
+ "n_specs_significant": 40,
+ "share_significant": 0.04,
+ "n_specs_flagged": 423,
+ "share_flagged_among_significant": 0.2,
+ "best_spec": {
+  "key": "af84474a7554",
+  "label": "y=y_rate:level | d=treat:level | ctl=3 | fe=region+year | se=hc1 | out=none | imp=listwise | sub=late | w=pop",
+  "coef": -0.3041598362570807,
+  "se": 0.0922887665588211,
+  "t": -3.2957406150099713,
+  "p": 0.0010413492579568707,
+  "n": 600,
+  "p_dir": 0.0010413492579568707,
+  "n_flags": 0,
+  "order": 917.0
+ },
+ "curve": {
+  "n": 1000,
+  "median_coef": -0.02432348221161747,
+  "mean_coef": -0.03439512170492958,
+  "min_coef": -0.32751468303109704,
+  "max_coef": 0.2284397669837663,
+  "iqr_coef": 0.07834643875719274,
+  "share_significant": 0.04,
+  "share_sig_dominant_sign": 0.04,
+  "share_sign_flips": 0.282,
+  "coef_range_over_median_se": 22.856696470430798
+ },
+ "bonferroni_p_of_best": 1.0,
+ "sidak_p_of_best": 0.6472133652065184,
+ "best_unflagged_spec": {
+  "key": "af84474a7554",
+  "label": "y=y_rate:level | d=treat:level | ctl=3 | fe=region+year | se=hc1 | out=none | imp=listwise | sub=late | w=pop",
+  "coef": -0.3041598362570807,
+  "se": 0.0922887665588211,
+  "t": -3.2957406150099713,
+  "p": 0.0010413492579568707,
+  "n": 600,
+  "p_dir": 0.0010413492579568707,
+  "n_flags": 0,
+  "order": 917.0
+ },
+ "preregistered": {
+  "key": "e88cbfc3e0e7",
+  "label": "y=y:level | d=treat:level | ctl=2 | fe=unit+year | se=cluster/unit | out=none | imp=listwise | sub=full",
+  "coef": -0.02432348221161747,
+  "se": 0.076339925756514,
+  "t": -0.31862072134045766,
+  "p": 0.7511393510738631,
+  "n": 1200,
+  "p_dir": 0.7511393510738631,
+  "n_flags": 0,
+  "order": 171.0
+ },
+ "coef_inflation_vs_prereg": 12.504781741810257,
+ "log10_p_gain": 2.858124102721261,
+ "prereg_percentile_in_curve": 0.501,
+ "nearest_significant": {
+  "distance": 4,
+  "axes_changed": [
+   "outcome",
+   "controls",
+   "fe",
+   "cluster"
+  ],
+  "changes": {
+   "outcome": {
+    "from": "y",
+    "to": "y_alt"
+   },
+   "controls": {
+    "from": [
+     "x1",
+     "x2"
+    ],
+    "to": []
+   },
+   "fe": {
+    "from": [
+     "unit",
+     "year"
+    ],
+    "to": [
+     "unit"
+    ]
+   },
+   "cluster": {
+    "from": "unit",
+    "to": "region"
+   }
+  },
+  "spec": {
+   "key": "795638442588",
+   "label": "y=y_alt:level | d=treat:level | ctl=0 | fe=unit | se=cluster/region | out=none | imp=listwise | sub=full",
+   "coef": -0.1491461323127334,
+   "se": 0.023409639916662683,
+   "t": -6.371141668290809,
+   "p": 0.003112576771825792,
+   "n": 1200,
+   "p_dir": 0.003112576771825792,
+   "n_flags": 1,
+   "order": 359.0
+  },
+  "n_significant_within_1_change": 0,
+  "reads": "distance 1 means a single defensible choice turns the null into a finding"
+ },
+ "axis_influence": {
+  "ranked_axes": [
+   "vcov",
+   "cluster",
+   "fe",
+   "outcome",
+   "weight",
+   "subsample",
+   "outlier_rule",
+   "controls",
+   "n_controls",
+   "y_transform",
+   "imputation"
+  ],
+  "axes": {
+   "vcov": {
+    "spread": 0.08,
+    "most_significant_level": "hc1",
+    "share_of_all_significant_at_that_level": 0.6,
+    "levels": {
+     "hc1": {
+      "n": 250,
+      "share_sig": 0.096,
+      "mean_abs_t": 0.951
+     },
+     "cluster": {
+      "n": 501,
+      "share_sig": 0.024,
+      "mean_abs_t": 0.748
+     },
+     "twoway": {
+      "n": 249,
+      "share_sig": 0.016,
+      "mean_abs_t": 0.685
+     }
+    }
+   },
+   "cluster": {
+    "spread": 0.08,
+    "most_significant_level": "None",
+    "share_of_all_significant_at_that_level": 0.6,
+    "levels": {
+     "None": {
+      "n": 250,
+      "share_sig": 0.096,
+      "mean_abs_t": 0.951
+     },
+     "region": {
+      "n": 250,
+      "share_sig": 0.028,
+      "mean_abs_t": 0.802
+     },
+     "unit": {
+      "n": 251,
+      "share_sig": 0.02,
+      "mean_abs_t": 0.694
+     },
+     "('unit', 'year')": {
+      "n": 249,
+      "share_sig": 0.016,
+      "mean_abs_t": 0.685
+     }
+    }
+   },
+   "fe": {
+    "spread": 0.056,
+    "most_significant_level": "region+year",
+    "share_of_all_significant_at_that_level": 0.375,
+    "levels": {
+     "region+year": {
+      "n": 251,
+      "share_sig": 0.06,
+      "mean_abs_t": 0.882
+     },
+     "unit": {
+      "n": 249,
+      "share_sig": 0.048,
+      "mean_abs_t": 0.751
+     },
+     "none": {
+      "n": 250,
+      "share_sig": 0.048,
+      "mean_abs_t": 0.86
+     },
+     "unit+year": {
+      "n": 250,
+      "share_sig": 0.004,
+      "mean_abs_t": 0.638
+     }
+    }
+   },
+   "outcome": {
+    "spread": 0.054,
+    "most_significant_level": "y_alt",
+    "share_of_all_significant_at_that_level": 0.5,
+    "levels": {
+     "y_alt": {
+      "n": 333,
+      "share_sig": 0.06,
+      "mean_abs_t": 0.955
+     },
+     "y_rate": {
+      "n": 332,
+      "share_sig": 0.054,
+      "mean_abs_t": 0.864
+     },
+     "y": {
+      "n": 335,
+      "share_sig": 0.006,
+      "mean_abs_t": 0.532
+     }
+    }
+   },
+   "weight": {
+    "spread": 0.054,
+    "most_significant_level": "None",
+    "share_of_all_significant_at_that_level": 0.825,
+    "levels": {
+     "None": {
+      "n": 488,
+      "share_sig": 0.068,
+      "mean_abs_t": 1.062
+     },
+     "pop": {
+      "n": 512,
+      "share_sig": 0.014,
+      "mean_abs_t": 0.517
+     }
+    }
+   },
+   "subsample": {
+    "spread": 0.051,
+    "most_significant_level": "late",
+    "share_of_all_significant_at_that_level": 0.5,
+    "levels": {
+     "late": {
+      "n": 333,
+      "share_sig": 0.06,
+      "mean_abs_t": 0.834
+     },
+     "full": {
+      "n": 335,
+      "share_sig": 0.051,
+      "mean_abs_t": 0.914
+     },
+     "early": {
+      "n": 332,
+      "share_sig": 0.009,
+      "mean_abs_t": 0.6
+     }
+    }
+   },
+   "outlier_rule": {
+    "spread": 0.036,
+    "most_significant_level": "none",
+    "share_of_all_significant_at_that_level": 0.5,
+    "levels": {
+     "none": {
+      "n": 334,
+      "share_sig": 0.06,
+      "mean_abs_t": 0.83
+     },
+     "iqr1.5": {
+      "n": 333,
+      "share_sig": 0.036,
+      "mean_abs_t": 0.744
+     },
+     "sd3": {
+      "n": 333,
+      "share_sig": 0.024,
+      "mean_abs_t": 0.775
+     }
+    }
+   },
+   "controls": {
+    "spread": 0.035,
+    "most_significant_level": "x1+x2+x3+x4",
+    "share_of_all_significant_at_that_level": 0.3,
+    "levels": {
+     "x1+x2+x3+x4": {
+      "n": 200,
+      "share_sig": 0.06,
+      "mean_abs_t": 0.836
+     },
+     "x1+x2+x3": {
+      "n": 201,
+      "share_sig": 0.05,
+      "mean_abs_t": 0.812
+     },
+     "none": {
+      "n": 199,
+      "share_sig": 0.035,
+      "mean_abs_t": 0.809
+     },
+     "x1": {
+      "n": 201,
+      "share_sig": 0.03,
+      "mean_abs_t": 0.705
+     },
+     "x1+x2": {
+      "n": 199,
+      "share_sig": 0.025,
+      "mean_abs_t": 0.754
+     }
+    }
+   },
+   "n_controls": {
+    "spread": 0.035,
+    "most_significant_level": "4",
+    "share_of_all_significant_at_that_level": 0.3,
+    "levels": {
+     "4": {
+      "n": 200,
+      "share_sig": 0.06,
+      "mean_abs_t": 0.836
+     },
+     "3": {
+      "n": 201,
+      "share_sig": 0.05,
+      "mean_abs_t": 0.812
+     },
+     "0": {
+      "n": 199,
+      "share_sig": 0.035,
+      "mean_abs_t": 0.809
+     },
+     "1": {
+      "n": 201,
+      "share_sig": 0.03,
+      "mean_abs_t": 0.705
+     },
+     "2": {
+      "n": 199,
+      "share_sig": 0.025,
+      "mean_abs_t": 0.754
+     }
+    }
+   },
+   "y_transform": {
+    "spread": 0.009,
+    "most_significant_level": "std",
+    "share_of_all_significant_at_that_level": 0.375,
+    "levels": {
+     "std": {
+      "n": 331,
+      "share_sig": 0.045,
+      "mean_abs_t": 0.798
+     },
+     "log": {
+      "n": 334,
+      "share_sig": 0.039,
+      "mean_abs_t": 0.788
+     },
+     "level": {
+      "n": 335,
+      "share_sig": 0.036,
+      "mean_abs_t": 0.763
+     }
+    }
+   },
+   "imputation": {
+    "spread": 0.004,
+    "most_significant_level": "listwise",
+    "share_of_all_significant_at_that_level": 0.525,
+    "levels": {
+     "listwise": {
+      "n": 500,
+      "share_sig": 0.042,
+      "mean_abs_t": 0.791
+     },
+     "mean": {
+      "n": 500,
+      "share_sig": 0.038,
+      "mean_abs_t": 0.775
+     }
+    }
+   }
+  }
+ },
+ "min_p_test": {
+  "reported_p": 0.0010413492579568707,
+  "honest_p": 0.6368159203980099,
+  "inflation_factor": 611.5296242179536,
+  "null_min_p_median": 0.0003210116618392421,
+  "null_min_p_q05": 8.214934790109008e-07,
+  "n_null_draws": 200
+ },
+ "min_p_test_unflagged": {
+  "reported_p": 0.0010413492579568707,
+  "honest_p": 0.5522388059701493,
+  "inflation_factor": 530.3108460015067,
+  "null_min_p_median": 0.0006760344795489991,
+  "null_min_p_q05": 8.214934790109008e-07,
+  "n_null_draws": 200,
+  "n_unflagged_specs": 577
+ },
+ "romano_wolf_p_of_best": 0.9154228855721394,
+ "n_specs_rw_survives": 0,
+ "effective_tests": 112.44,
+ "meff_adjusted_p_of_best": 0.110552,
+ "ssn_joint": {
+  "n_specs": 1000,
+  "n_null_draws": 200,
+  "dominant_sign": -1,
+  "median_effect": {
+   "observed": -0.02432348221161747,
+   "null_median": -0.006437002971625089,
+   "p_value": 0.2885572139303483
+  },
+  "share_significant": {
+   "observed": 0.04,
+   "null_median": 0.052,
+   "null_q95": 0.18519999999999992,
+   "p_value": 0.6517412935323383
+  },
+  "share_significant_dominant_sign": {
+   "observed": 0.04,
+   "null_median": 0.02,
+   "p_value": 0.3283582089552239
+  },
+  "stouffer_z": {
+   "observed": -16.697695907879417,
+   "p_value": 0.26865671641791045
+  },
+  "reads": "small p_value on share_significant with a large min-p honest p means the curve leans one way everywhere but no single specification is unusual; the reverse means one corner of the grid did all the work"
+ },
+ "ledger": "/private/tmp/claude-501/-Users-brycewang-Documents-GitHub-p-hacking-skills/ec5ee0bf-d7e6-4cb7-a1fc-f7a26b392545/scratchpad/full2/panel1000/ledger.csv",
+ "null_calibrated_on_specs": 1000
+}

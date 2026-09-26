@@ -1,0 +1,19 @@
+{
+  "name": "p-hacking-skills",
+  "version": "0.5.0",
+  "description": "Study p-hacking in econometric designs: map researcher degrees of freedom, audit a specification search with a complete ledger and null-calibrated honest p-values, replay realistic search procedures, detect p-hacking in a literature, immunise an analysis, and benchmark whether an AI agent p-hacks. Research and teaching use only.",
+  "author": {
+    "name": "Bryce Wang"
+  },
+  "homepage": "https://github.com/brycewang-stanford/p-hacking-skills",
+  "repository": "https://github.com/brycewang-stanford/p-hacking-skills",
+  "license": "MIT",
+  "keywords": [
+    "p-hacking",
+    "specification-search",
+    "multiverse",
+    "econometrics",
+    "research-integrity",
+    "evaluation"
+  ]
+}

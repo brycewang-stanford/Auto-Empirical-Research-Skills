@@ -1,0 +1,77 @@
+{
+  "name": "effect-rdd-demo",
+  "design": "rdd",
+  "running": "vote_share",
+  "cutoff": 0.0,
+  "outcomes": [
+    "share_detained",
+    "share_alt"
+  ],
+  "controls_pool": [
+    "w1"
+  ],
+  "control_policy": "nested",
+  "bandwidth_multipliers": [
+    0.5,
+    0.75,
+    1.0,
+    1.25,
+    1.5,
+    2.0
+  ],
+  "kernels": [
+    "triangular",
+    "uniform",
+    "epanechnikov"
+  ],
+  "poly_orders": [
+    1,
+    2
+  ],
+  "donuts": [
+    0.0,
+    0.02,
+    0.05
+  ],
+  "vcov": [
+    "hc1",
+    "cluster"
+  ],
+  "cluster": [
+    null,
+    "county"
+  ],
+  "outcome_transforms": [
+    "level",
+    "std"
+  ],
+  "outlier_rules": [
+    "none",
+    "sd3"
+  ],
+  "bandwidth_selectors": [
+    "rot",
+    "ik"
+  ],
+  "rdd_inference": [
+    "conventional",
+    "bias_corrected",
+    "robust"
+  ],
+  "preregistered": {
+    "outcome": "share_detained",
+    "controls": [],
+    "bandwidth": 1.0,
+    "bw_selector": "ik",
+    "kernel": "triangular",
+    "poly": 1,
+    "donut": 0.0,
+    "rdd_inference": "robust",
+    "vcov": "cluster",
+    "cluster": "county",
+    "y_transform": "level",
+    "outlier_rule": "none"
+  },
+  "notes": "POSITIVE CONTROL: true effect = 0.3 by construction (generator scripts/make_null_data.py --effect). Used to check that the honest pipeline keeps its power.",
+  "direction": "+"
+}

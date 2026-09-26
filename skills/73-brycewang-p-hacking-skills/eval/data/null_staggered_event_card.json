@@ -1,0 +1,78 @@
+{
+  "name": "null-staggered-event-demo",
+  "design": "did",
+  "outcomes": [
+    "y",
+    "y_alt"
+  ],
+  "treatment": "treat",
+  "controls_pool": [
+    "x1",
+    "x2"
+  ],
+  "control_policy": "nested",
+  "fixed_effects": [
+    [
+      "unit",
+      "year"
+    ]
+  ],
+  "vcov": [
+    "cluster"
+  ],
+  "cluster": [
+    "unit",
+    "region"
+  ],
+  "outcome_transforms": [
+    "level",
+    "std"
+  ],
+  "comparison_groups": [
+    "all",
+    "drop_never_treated"
+  ],
+  "event_windows": [
+    [
+      3,
+      3
+    ],
+    [
+      5,
+      5
+    ],
+    [
+      2,
+      6
+    ]
+  ],
+  "reference_periods": [
+    -1,
+    -2
+  ],
+  "event_estimands": [
+    "avg_post",
+    "lag0",
+    "lag1",
+    "avg_pre"
+  ],
+  "panel_unit": "unit",
+  "panel_time": "year",
+  "preregistered": {
+    "outcome": "y",
+    "controls": [
+      "x1",
+      "x2"
+    ],
+    "cluster": "unit",
+    "y_transform": "level",
+    "comparison_group": "all",
+    "ev_window": [
+      3,
+      3
+    ],
+    "ev_ref": -1,
+    "ev_estimand": "avg_post"
+  },
+  "notes": "Same null staggered panel; exercises the event-window, reference-period and estimand axes (strategy 19). avg_pre is the placebo and is flagged when reported as the effect."
+}

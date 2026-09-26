@@ -1,0 +1,8 @@
+numpy>=1.24
+scipy>=1.10
+pandas>=2.0
+matplotlib>=3.7
+pytest>=7
+# optional, used only by tests that cross-check against reference implementations
+statsmodels>=0.14
+linearmodels>=6

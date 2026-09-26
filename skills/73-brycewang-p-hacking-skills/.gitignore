@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+phack_out/
+probe_results/
+results/
+*.npy
+.DS_Store
+demo_out/
+build/
+*.egg-info/
+site/
+dist/
+.ipynb_checkpoints/

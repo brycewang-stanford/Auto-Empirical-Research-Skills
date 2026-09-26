@@ -1,0 +1,48 @@
+name: tests
+on: [push, pull_request]
+jobs:
+  python:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python: ["3.11", "3.12", "3.13"]
+        include:
+          - os: windows-latest
+            python: "3.12"
+    continue-on-error: ${{ matrix.os == 'windows-latest' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "${{ matrix.python }}" }
+      - run: pip install -e ".[dev]"
+      - run: python -m pytest tests -q
+      - name: catalog, schema and benchmark are consistent
+        run: |
+          python scripts/check_catalog.py
+          python -c "import json,sys; sys.path.insert(0,'scripts'); from phack import grid; assert json.load(open('schema/design-card.schema.json'))==grid.card_schema(), 'schema drifted: python -c \"...\" > schema/design-card.schema.json'"
+          phack bench check
+  r-runner:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - uses: r-lib/actions/setup-r@v2
+        with: { use-public-rspm: true }
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages: fixest, data.table, rdrobust, did2s
+      - run: pip install -e ".[dev]"
+      - run: python -m pytest tests/test_polyglot.py -q -k "r_runner or specs_table or null_columns"
+  docs:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions: { contents: write }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install mkdocs mkdocs-material
+      - run: mkdocs gh-deploy --force

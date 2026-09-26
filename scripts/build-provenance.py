@@ -159,6 +159,18 @@ OVERRIDES: dict[str, dict[str, object]] = {
         "sync": "manual",
         "source_confidence": "high",
     },
+    "73-brycewang-p-hacking-skills": {
+        # First-party team skill. Vendored snapshot of the whole upstream repo
+        # (upstream commit 73b6fe6, 2026-09-07) minus `.git/`: the eleven
+        # skills call the repo-root engine (`scripts/phack_cli.py`), the
+        # known-null data under `eval/data/` and `references/`, so the skill
+        # folders alone would not run.
+        "source_url": "https://github.com/brycewang-stanford/p-hacking-skills",
+        "license": "MIT",
+        "origin": "first-party team repo; vendored full-repo snapshot",
+        "sync": "manual",
+        "source_confidence": "high",
+    },
     "12-pedrohcgs-claude-code-my-workflow": {
         "source_url": "https://github.com/pedrohcgs/claude-code-my-workflow",
         "source_confidence": "high",

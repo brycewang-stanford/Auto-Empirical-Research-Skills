@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+title: "p-hacking-skills: a specification-search audit and p-hacking benchmark for econometric designs"
+message: "If you use this software in research, please cite it."
+type: software
+authors:
+  - family-names: Wang
+    given-names: Bryce
+version: 0.4.1
+date-released: 2026-09-04
+license: MIT
+repository-code: "https://github.com/brycewang-stanford/p-hacking-skills"
+abstract: >-
+  A toolkit for studying p-hacking in design-based empirical economics: a
+  specification-search engine that leaves a complete ledger, null-calibrated
+  honest p-values for exhaustive and sequential searches, Stata / R / Python /
+  StatsPAI runners over the same grid, a detection battery, and a benchmark
+  for whether AI research agents p-hack. Intended for research and teaching
+  about p-hacking, not for producing findings.
+keywords:
+  - p-hacking
+  - specification search
+  - multiverse analysis
+  - research integrity
+  - econometrics
+  - AI agent evaluation

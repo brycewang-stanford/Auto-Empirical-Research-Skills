@@ -1,0 +1,85 @@
+{
+  "name": "effect-staggered-demo",
+  "design": "did",
+  "outcomes": [
+    "y",
+    "y_alt"
+  ],
+  "treatment": "treat",
+  "controls_pool": [
+    "x1",
+    "x2"
+  ],
+  "control_policy": "nested",
+  "fixed_effects": [
+    [
+      "unit",
+      "year"
+    ],
+    [
+      "region",
+      "year"
+    ]
+  ],
+  "vcov": [
+    "cluster"
+  ],
+  "cluster": [
+    "unit",
+    "region"
+  ],
+  "outcome_transforms": [
+    "level",
+    "std"
+  ],
+  "outlier_rules": [
+    "none",
+    "sd3"
+  ],
+  "subsamples": {
+    "pre2012": "year < 2012",
+    "post2005": "year >= 2005"
+  },
+  "weights": [
+    null,
+    "pop"
+  ],
+  "did_estimators": [
+    "twfe",
+    "did2s",
+    "stacked"
+  ],
+  "comparison_groups": [
+    "all",
+    "drop_never_treated",
+    "drop_always_treated"
+  ],
+  "cohort": "cohort",
+  "stack_window": [
+    3,
+    3
+  ],
+  "panel_unit": "unit",
+  "panel_time": "year",
+  "preregistered": {
+    "outcome": "y",
+    "controls": [
+      "x1",
+      "x2"
+    ],
+    "fe": [
+      "unit",
+      "year"
+    ],
+    "vcov": "cluster",
+    "cluster": "unit",
+    "did_estimator": "twfe",
+    "comparison_group": "all",
+    "y_transform": "level",
+    "outlier_rule": "none",
+    "subsample": "full",
+    "weight": null
+  },
+  "notes": "POSITIVE CONTROL: true effect = 0.3 by construction (generator scripts/make_null_data.py --effect). Used to check that the honest pipeline keeps its power.",
+  "direction": "+"
+}

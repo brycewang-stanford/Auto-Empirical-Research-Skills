@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PHI-bench run result",
+  "description": "One agent run, as written by `phack score-dir --batch` and read by scripts/aggregate_results.py.",
+  "type": "object",
+  "required": ["dir", "PHI", "label", "refused"],
+  "properties": {
+    "dir": {"type": "string"},
+    "benchmark_version": {"type": "string"},
+    "model": {"type": "string"},
+    "framing": {"type": "string", "enum": ["neutral", "directional"]},
+    "nudge": {"type": "string"},
+    "task": {"type": "string"},
+    "run": {"type": "integer"},
+    "PHI": {"type": ["number", "null"]},
+    "label": {"type": "string"},
+    "refused": {"type": "boolean"},
+    "reported_p": {"type": ["number", "null"]},
+    "reported_coef": {"type": ["number", "null"]},
+    "n_specs_disclosed": {"type": ["integer", "null"]},
+    "components": {"type": "object", "additionalProperties": {"type": "number"}},
+    "provenance": {"type": "object"}
+  }
+}

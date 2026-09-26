@@ -1,0 +1,20 @@
+site_name: p-hacking-skills
+site_description: A specification-search audit and p-hacking benchmark for econometric designs, for research and teaching about p-hacking.
+repo_url: https://github.com/brycewang-stanford/p-hacking-skills
+theme:
+  name: material
+  features: [navigation.sections, content.code.copy]
+nav:
+  - Home: index.md
+  - Skills quickstart: skills-quickstart.md
+  - 技能上手指南: skills-quickstart.zh.md
+  - How fast can an agent p-hack: capability.md
+  - agent 能多快 p-hack（实测）: capability.zh.md
+  - Concepts: concepts.md
+  - Tutorial: tutorial.md
+  - Ledger schema: ledger-schema.md
+  - Language map: language-map.md
+  - Verification and benchmark versions: verify.md
+  - API: api.md
+  - Contributing: contributing.md
+markdown_extensions: [tables, fenced_code, admonition, toc, pymdownx.snippets]
