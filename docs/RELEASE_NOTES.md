@@ -8,8 +8,8 @@ Paste this snapshot into the GitHub release body and add a hand-written
 
 ## Catalog
 
-- Top-level collections: **76**
-- `SKILL.md` files: **1096**
+- Top-level collections: **77**
+- `SKILL.md` files: **1107**
 - Cataloged agent tools: **334** ([`tools/CATALOG.md`](../tools/CATALOG.md))
 
 ## Methodological rigor
@@ -20,10 +20,10 @@ Paste this snapshot into the GitHub release body and add a hand-written
 
 ### Method families (skills tagged)
 
-- `iv`: 28
-- `rdd`: 25
-- `panel-fe`: 19
-- `staggered-did`: 17
+- `iv`: 30
+- `rdd`: 28
+- `panel-fe`: 20
+- `staggered-did`: 19
 - `bayesian`: 13
 - `did`: 10
 - `event-study`: 10
@@ -35,6 +35,7 @@ Paste this snapshot into the GitHub release body and add a hand-written
 - `structural`: 6
 - `survival`: 3
 - `quantile`: 2
+- `bunching`: 1
 - `decomposition`: 1
 - `shift-share`: 1
 
@@ -58,7 +59,7 @@ Paste this snapshot into the GitHub release body and add a hand-written
 - CC-BY-SA-4.0 (repository default): 6
 - CC0-1.0: 1
 - GPL-3.0: 1
-- MIT: 36
+- MIT: 37
 - MIT Non-Commercial: 1
 - Mixed (per-skill; see folder): 2
 - UNKNOWN - check upstream: 25

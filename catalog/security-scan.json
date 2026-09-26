@@ -531,6 +531,13 @@
       "findings_total": 0,
       "findings_triaged_benign": 0,
       "findings_untriaged": 0
+    },
+    "73-brycewang-p-hacking-skills": {
+      "files_scanned": 137,
+      "files_seen": 138,
+      "findings_total": 1,
+      "findings_triaged_benign": 1,
+      "findings_untriaged": 0
     }
   },
   "note": "Pattern scan only \u2014 the same class of evidence as the 2026-07-15 addendum in SECURITY-SCAN-REPORT.md, and strictly weaker than the baseline's multi-agent content read. A clean result means no known-bad pattern matched, not 'reviewed and safe'. Every entry under 'triaged' was inspected in context; the reason records what was found there.",
@@ -542,6 +549,7 @@
     "long-base64-blob|skills/67-econfin-workflow-toolkit/marp-slides-creator/themes/beam.css|PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMjUwbW0iIGhlaWdodD0iNS4zNTQ2bW0iIHZlcnNpb249IjEuM...": "CSS background: an inline SVG data-URI (decorative graphic). Decodes to 399 bytes of SVG.",
     "long-base64-blob|skills/69-Paper-WorkFlow/did_demo.ipynb|iVBORw0KGgoAAAANSUhEUgAAA2QAAAHuCAYAAADwXM9fAAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjEwLjAsIGh0dHBzOi8vbWF0c...": "Committed matplotlib PNG output embedded in the notebook. Decodes to a PNG. Also triaged in the 2026-07-15 addendum.",
     "long-base64-blob|skills/69-Paper-WorkFlow/did_demo.ipynb|iVBORw0KGgoAAAANSUhEUgAAA5AAAAIECAYAAABvzMHFAAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjEwLjAsIGh0dHBzOi8vbWF0c...": "Committed matplotlib PNG output embedded in the notebook. Decodes to a PNG. Also triaged in the 2026-07-15 addendum.",
+    "long-base64-blob|skills/73-brycewang-p-hacking-skills/notebooks/quickstart.ipynb|iVBORw0KGgoAAAANSUhEUgAABnIAAAYwCAYAAABGKNFjAAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjExLjAsIGh0dHBzOi8vbWF0c...": "Committed matplotlib PNG output (specification-curve plot) embedded in the quickstart notebook's image/png cell output. Decodes to a PNG.",
     "obfuscated-python|skills/69-Paper-WorkFlow/scripts/check_demo_execution.py|exec(compile(": "The demo-execution gate runs the cells of the repo's own committed did_demo.ipynb in a temporary namespace, with no network IO. Standard nbconvert-style pattern. Also triaged in the 2026-07-15 addendum.",
     "pipe-to-shell|skills/03-K-Dense-AI-claude-scientific-skills/README-original.md|curl -LsSf https://astral.sh/uv/install.sh | sh": "Upstream README quoting Astral's official uv installer. Documentation only \u2014 the vendored skill never runs it.",
     "pipe-to-shell|skills/17-DAAF-Contribution-Community-daaf/CLAUDE.md|curl ... | bash": "A rule forbidding the pattern: 'You MUST NEVER pipe downloaded content to a shell'. The hit is the prohibition, not an instance.",

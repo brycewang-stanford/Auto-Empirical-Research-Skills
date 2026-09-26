@@ -8,7 +8,7 @@ license: CC-BY-SA-4.0
 
 Use this root skill when the full AERS repository has been installed as a single skill folder. Treat it as a router and catalog, not as a request to load every vendored `SKILL.md`.
 
-The catalog holds **1,096 skills across 76 vendored collections**. Never read them all — route to one, then load only that skill's `SKILL.md`.
+The catalog holds **1,107 skills across 77 vendored collections**. Never read them all — route to one, then load only that skill's `SKILL.md`.
 
 ## Workflow
 
@@ -56,6 +56,7 @@ This table is a shortcut to the most common starting points, **not a complete in
 | Regression discontinuity (RDD) | `skills/50-brycewang-aer-skills/`, `skills/10-Jill0099-causal-inference-mixtape/` |
 | Synthetic control (SCM) | `skills/50-brycewang-aer-skills/`, `skills/13-scunning1975-MixtapeTools/` |
 | Panel fixed effects | `skills/40-py-econometrics-pyfixest/`, `skills/39-vincentarelbundock-marginaleffects/` |
+| Specification search / multiverse / p-hacking audit, honest p-values, p-curve, pre-registration | `skills/73-brycewang-p-hacking-skills/` (start at `skills/00-phack-router/`; teaching & audit only) |
 | Matching / propensity scores | `skills/10-Jill0099-causal-inference-mixtape/`, `skills/11-James-Traina-compound-science/` |
 | Structural estimation | `skills/11-James-Traina-compound-science/`, `skills/14-luischanci-claude-code-research-starter/` |
 | Time series / forecasting | `skills/17-DAAF-Contribution-Community-daaf/`, `skills/43-wentorai-research-plugins/` |
@@ -111,7 +112,7 @@ The orchestrator is **not** the right entry point for a single-task ask (e.g. "f
 - Whole-repo imports are supported by this root `SKILL.md` as a lightweight compatibility entry point.
 - Individual skill installs are still preferred when a runtime expects one folder per skill. Copy the folder that directly contains the target `SKILL.md`.
 - Do not copy the repository root into a runtime and expect every child skill to become individually registered unless that runtime explicitly supports recursive skill discovery.
-- **Do not flat-install the whole catalog** (e.g. symlinking every child folder into `~/.claude/skills`). Every registered skill's description is loaded at session start — about 64k tokens for all 1,096 here — and runtimes truncate long skill listings, so matching gets *worse*, not better. Use a plugin, this router, or a handful of copied skills.
+- **Do not flat-install the whole catalog** (e.g. symlinking every child folder into `~/.claude/skills`). Every registered skill's description is loaded at session start — about 64k tokens for all 1,107 here — and runtimes truncate long skill listings, so matching gets *worse*, not better. Use a plugin, this router, or a handful of copied skills.
 - **Name collisions:** the catalog contains 47 bare `name`s shared across collections (e.g. `data-analysis`, `lit-review`, `proofread`); `catalog/curation.json` names one preferred copy of each, which `scripts/find-skill.py` returns. When a runtime registers skills by flat name, install one collection at a time, or disambiguate with the globally-unique `qualified_name` field in `catalog/skills.json` (`<collection>::<name>`, e.g. `12-pedrohcgs-claude-code-my-workflow::data-analysis`), or the full `skills/<collection>/.../SKILL.md` path.
 
 ## Key Files

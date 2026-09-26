@@ -114,7 +114,7 @@ a new Claude Code session and the skill auto-loads; Claude invokes it when your 
 matches its `description`.
 
 > **Copy a handful, not the whole catalog.** Every installed skill's `description` is
-> loaded into context at the start of every session. All 1,096 would cost about 64k tokens
+> loaded into context at the start of every session. All 1,107 would cost about 64k tokens
 > up front, and runtimes truncate long skill listings — so Claude would match requests
 > *less* reliably, not more. For breadth, use the plugins (method 1) or the one-skill root
 > router (method 2), which reads a single child skill on demand. To find the right folder

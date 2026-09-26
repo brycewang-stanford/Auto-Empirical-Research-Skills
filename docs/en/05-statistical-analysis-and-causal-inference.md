@@ -30,6 +30,7 @@
 | [`51` CausalPy](../../skills/51-pymc-labs-CausalPy/) | Bayesian quasi-experimental methods (PyMC Labs) | Bayesian DID/RD/SCM and uncertainty quantification |
 | [`64` mcp-stata](../../skills/64-tmonk-mcp-stata/) | 20 Stata causal-inference and replication skills | Full causal-analysis workflow for Stata users |
 | [⭐ `50` AER-skills](../../skills/50-brycewang-aer-skills/) | Top-5 submission stack: identification → robustness → R&R | Polish results to top-journal robustness standards |
+| [⭐ `73` p-hacking-skills](../../skills/73-brycewang-p-hacking-skills/) | Instrumented specification-search engine + 11 skills: forking paths, honest p-values, p-curve, pre-registration | Count the forking paths in your design and see what the "most significant specification" is worth after the search; audit robustness tables (teaching & audit only) |
 
 ---
 

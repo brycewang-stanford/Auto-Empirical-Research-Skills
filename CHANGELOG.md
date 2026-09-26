@@ -5,6 +5,25 @@ This is the project's narrative changelog. `README.md` keeps only a short
 
 ## Unreleased
 
+### New collection: p-hacking-skills (skill 73)
+
+- **`skills/73-brycewang-p-hacking-skills/` — first-party, 11 skills.** A
+  vendored snapshot of
+  [brycewang-stanford/p-hacking-skills](https://github.com/brycewang-stanford/p-hacking-skills)
+  (upstream `73b6fe6`, MIT): an instrumented specification-search engine for
+  OLS / DiD / staggered DiD / event study / RDD / IV, with skills for mapping
+  forking paths, search-adjusted honest p-values, p-curve detection, auditing
+  write-ups, and pre-registration. It is for teaching, methods research and
+  auditing, not for producing results in real papers. The whole repo is
+  vendored (minus `.git/`) because the skills call the repo-root engine and
+  the known-null data under `eval/data/`. The catalog goes from 76 collections
+  and 1,096 skills to 77 and 1,107.
+- The one scan finding (a matplotlib PNG embedded in the quickstart notebook)
+  is triaged in `catalog/security-scan.json`. `scripts/find-skill.py` gains
+  CJK aliases for the research-integrity vocabulary (规格 / 岔路 / 多重宇宙 /
+  p 曲线 / 预注册 …), and the routing eval gains an English and a Chinese
+  case for it (53 cases, tiered hit@3 100%).
+
 ### Routing: ranked catalog search, curation tiers, and a routing eval
 
 - **The size of the catalog no longer costs routing accuracy.** With 1,096

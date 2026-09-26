@@ -26,7 +26,7 @@ This roadmap is scoped to making AERS a high-quality, high-trust GitHub project 
 
 - Land the first genuinely third-party entry on [`EXTERNAL_SCOREBOARD.md`](EXTERNAL_SCOREBOARD.md). The machinery, the rules ([`SCOREBOARD_RULES.md`](SCOREBOARD_RULES.md)) and the tooling ([`aers-score`](../aers_score/README.md)) are live; what is missing is a submission from someone else, which is not something this repo can deliver on its own.
 - Cut the v2026.09 tag. Everything the plan called for is on `main`; only the tag and the GitHub release remain, and both are maintainer actions.
-- Push discrimination fixtures from `critical` out to `high` severity, and grow per-skill eval coverage the way the [2026-07 assessment](QUALITY_ASSESSMENT_2026-07.md) recommends. 19 method families are fully covered but only 22 of 1,096 skills have a behavioral scenario — family-level coverage is the sharp number, skill-level coverage is the flat one.
+- Push discrimination fixtures from `critical` out to `high` severity, and grow per-skill eval coverage the way the [2026-07 assessment](QUALITY_ASSESSMENT_2026-07.md) recommends. 19 method families are fully covered but only 22 of 1,107 skills have a behavioral scenario — family-level coverage is the sharp number, skill-level coverage is the flat one.
 - Enrich provenance metadata with exact vendored commits where upstream snapshots are known.
 - Add scheduled external-link triage notes to releases when weekly checks fail.
 - Convert the flagship eval prompts into executable scorecards where artifacts can be generated in CI without paid APIs.

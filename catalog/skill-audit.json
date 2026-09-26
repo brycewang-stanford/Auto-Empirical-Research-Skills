@@ -11188,16 +11188,126 @@
       "line_count": 86,
       "name": "kaggle-research",
       "path": "skills/72-kaggle-research/kaggle-research/SKILL.md"
+    },
+    {
+      "collection": "73-brycewang-p-hacking-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 100,
+      "name": "phack-router",
+      "path": "skills/73-brycewang-p-hacking-skills/skills/00-phack-router/SKILL.md"
+    },
+    {
+      "collection": "73-brycewang-p-hacking-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 55,
+      "name": "phack-taxonomy",
+      "path": "skills/73-brycewang-p-hacking-skills/skills/01-phack-taxonomy/SKILL.md"
+    },
+    {
+      "collection": "73-brycewang-p-hacking-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 165,
+      "name": "forking-paths",
+      "path": "skills/73-brycewang-p-hacking-skills/skills/02-forking-paths/SKILL.md"
+    },
+    {
+      "collection": "73-brycewang-p-hacking-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 222,
+      "name": "specification-search",
+      "path": "skills/73-brycewang-p-hacking-skills/skills/03-specification-search/SKILL.md"
+    },
+    {
+      "collection": "73-brycewang-p-hacking-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 100,
+      "name": "framing-attacks",
+      "path": "skills/73-brycewang-p-hacking-skills/skills/04-framing-attacks/SKILL.md"
+    },
+    {
+      "collection": "73-brycewang-p-hacking-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 136,
+      "name": "narrative-laundering",
+      "path": "skills/73-brycewang-p-hacking-skills/skills/05-narrative-laundering/SKILL.md"
+    },
+    {
+      "collection": "73-brycewang-p-hacking-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 174,
+      "name": "phack-detection",
+      "path": "skills/73-brycewang-p-hacking-skills/skills/06-phack-detection/SKILL.md"
+    },
+    {
+      "collection": "73-brycewang-p-hacking-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 153,
+      "name": "phack-immunization",
+      "path": "skills/73-brycewang-p-hacking-skills/skills/07-phack-immunization/SKILL.md"
+    },
+    {
+      "collection": "73-brycewang-p-hacking-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 142,
+      "name": "phack-eval-harness",
+      "path": "skills/73-brycewang-p-hacking-skills/skills/08-eval-harness/SKILL.md"
+    },
+    {
+      "collection": "73-brycewang-p-hacking-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 205,
+      "name": "search-procedures",
+      "path": "skills/73-brycewang-p-hacking-skills/skills/09-search-procedures/SKILL.md"
+    },
+    {
+      "collection": "73-brycewang-p-hacking-skills",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 123,
+      "name": "phack-polyglot",
+      "path": "skills/73-brycewang-p-hacking-skills/skills/10-phack-polyglot/SKILL.md"
     }
   ],
   "schema_version": "1.0",
   "summary": {
     "duplicate_skill_names": 47,
-    "exact_case_skill_files": 1096,
+    "exact_case_skill_files": 1107,
     "missing_description": 0,
     "missing_frontmatter": 0,
     "non_exact_case_skill_files": 0,
     "over_500_lines": 83,
-    "skill_like_files": 1096
+    "skill_like_files": 1107
   }
 }

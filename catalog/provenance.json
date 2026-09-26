@@ -1139,15 +1139,30 @@
       "source_url": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills",
       "sync": "manual",
       "vendored_commit": null
+    },
+    {
+      "commercial_use": "allowed",
+      "id": "73-brycewang-p-hacking-skills",
+      "last_aers_review": "2026-07-22",
+      "license": "MIT",
+      "license_file": "skills/73-brycewang-p-hacking-skills/LICENSE",
+      "origin": "first-party team repo; vendored full-repo snapshot",
+      "path": "skills/73-brycewang-p-hacking-skills",
+      "security_review": "SECURITY-SCAN-REPORT.md",
+      "skill_count": 11,
+      "source_confidence": "high",
+      "source_url": "https://github.com/brycewang-stanford/p-hacking-skills",
+      "sync": "manual",
+      "vendored_commit": null
     }
   ],
   "generated_by": "scripts/build-provenance.py",
   "scan_date": "2026-07-22",
   "schema_version": "1.0",
   "summary": {
-    "collections": 76,
+    "collections": 77,
     "commercial_use": {
-      "allowed": 38,
+      "allowed": 39,
       "restricted": 2,
       "share-alike": 9,
       "unknown": 27
@@ -1160,13 +1175,13 @@
       "CC-BY-SA-4.0 (repository default)": 6,
       "CC0-1.0": 1,
       "GPL-3.0": 1,
-      "MIT": 36,
+      "MIT": 37,
       "MIT Non-Commercial": 1,
       "Mixed (per-skill; see folder)": 2,
       "UNKNOWN - check upstream": 25
     },
     "source_confidence": {
-      "high": 44,
+      "high": 45,
       "low": 10,
       "medium": 22
     }

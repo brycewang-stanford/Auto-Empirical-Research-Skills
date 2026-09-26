@@ -6,10 +6,10 @@ Scan date: 2026-07-22.
 
 ## Summary
 
-- Collections audited: 76
-- License buckets: AGPL-3.0=1, Apache-2.0=1, CC-BY-NC-4.0 (non-commercial)=1, CC-BY-SA-4.0=1, CC-BY-SA-4.0 (repository default)=6, CC0-1.0=1, GPL-3.0=1, MIT=36, MIT Non-Commercial=1, Mixed (per-skill; see folder)=2, UNKNOWN - check upstream=25
-- Commercial-use buckets: allowed=38, restricted=2, share-alike=9, unknown=27
-- Source-confidence buckets: high=44, low=10, medium=22
+- Collections audited: 77
+- License buckets: AGPL-3.0=1, Apache-2.0=1, CC-BY-NC-4.0 (non-commercial)=1, CC-BY-SA-4.0=1, CC-BY-SA-4.0 (repository default)=6, CC0-1.0=1, GPL-3.0=1, MIT=37, MIT Non-Commercial=1, Mixed (per-skill; see folder)=2, UNKNOWN - check upstream=25
+- Commercial-use buckets: allowed=39, restricted=2, share-alike=9, unknown=27
+- Source-confidence buckets: high=45, low=10, medium=22
 
 ## Interpretation
 
@@ -98,3 +98,4 @@ Scan date: 2026-07-22.
 | [`70-ssci-polish`](../skills/70-ssci-polish/) | [source](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills) | high | CC-BY-SA-4.0 (repository default) | share-alike | manual |
 | [`71-brycewang-lit-review-agent-tools`](../skills/71-brycewang-lit-review-agent-tools/) | [source](https://github.com/brycewang-stanford/lit-review-agent-tools) | high | CC0-1.0 | allowed | manual |
 | [`72-kaggle-research`](../skills/72-kaggle-research/) | [source](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills) | high | CC-BY-SA-4.0 (repository default) | share-alike | manual |
+| [`73-brycewang-p-hacking-skills`](../skills/73-brycewang-p-hacking-skills/) | [source](https://github.com/brycewang-stanford/p-hacking-skills) | high | MIT | allowed | manual |

@@ -108,6 +108,10 @@
      "accept": ["skills/41-sticerd-eee-sewage-econometrics-check/", "skills/21-claesbackman-AI-research-feedback/Skills/review-paper-code/", "skills/66-zheng-siyao-empirical-research-skills/did-reviewer/", "skills/50-brycewang-aer-skills/skills/aer-identification/", "skills/12-pedrohcgs-claude-code-my-workflow/dot-claude/skills/review-r/"]},
     {"id": "cost-benefit", "query": "cost-benefit analysis for a policy brief",
      "accept": ["skills/58-charlescoverdale-econstack/"]},
+    {"id": "phack-audit", "query": "is this published result p-hacked? run a p-curve",
+     "accept": ["skills/73-brycewang-p-hacking-skills/"]},
+    {"id": "phack-audit-zh", "query": "数一数这个 DID 设计有多少条岔路，最显著的规格扣掉搜索后的诚实 p 值是多少",
+     "accept": ["skills/73-brycewang-p-hacking-skills/"]},
     {"id": "ood-chemistry", "query": "look up a compound in PubChem",
      "accept": ["skills/43-wentorai-research-plugins/skills/domains/chemistry/"]}
   ]

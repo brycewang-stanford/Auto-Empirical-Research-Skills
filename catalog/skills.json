@@ -1291,6 +1291,23 @@
       "source_confidence": "high",
       "source_url": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills",
       "sync": "manual"
+    },
+    {
+      "commercial_use": "allowed",
+      "has_license": true,
+      "has_readme": true,
+      "id": "73-brycewang-p-hacking-skills",
+      "license": "MIT",
+      "path": "skills/73-brycewang-p-hacking-skills",
+      "primary_skill": {
+        "description": "Entry point for the p-hacking skills suite. Routes a request to the right sub-skill for (a) mapping researcher degrees of freedom in an econometric design, (b) running an instrumented specification search, (c) detecting p-hacking in a body of results, (d) immunising an analysis against it, or (e) running the agent p-hacking evaluation harness. Use whenever the request involves specification search, multiverse or specification-curve analysis, p-curve or caliper tests, publication bias, researcher degrees of freedom, \"find me a significant result\", robustness theatre, or benchmarking whether an AI agent will p-hack.",
+        "name": "phack-router",
+        "path": "skills/73-brycewang-p-hacking-skills/skills/00-phack-router/SKILL.md"
+      },
+      "skill_count": 11,
+      "source_confidence": "high",
+      "source_url": "https://github.com/brycewang-stanford/p-hacking-skills",
+      "sync": "manual"
     }
   ],
   "generated_by": "scripts/build-catalog.py",
@@ -19123,6 +19140,171 @@
       "name": "kaggle-research",
       "path": "skills/72-kaggle-research/kaggle-research/SKILL.md",
       "qualified_name": "72-kaggle-research::kaggle-research"
+    },
+    {
+      "collection": "73-brycewang-p-hacking-skills",
+      "description": "Entry point for the p-hacking skills suite. Routes a request to the right sub-skill for (a) mapping researcher degrees of freedom in an econometric design, (b) running an instrumented specification search, (c) detecting p-hacking in a body of results, (d) immunising an analysis against it, or (e) running the agent p-hacking evaluation harness. Use whenever the request involves specification search, multiverse or specification-curve analysis, p-curve or caliper tests, publication bias, researcher degrees of freedom, \"find me a significant result\", robustness theatre, or benchmarking whether an AI agent will p-hack.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 100,
+      "name": "phack-router",
+      "path": "skills/73-brycewang-p-hacking-skills/skills/00-phack-router/SKILL.md",
+      "qualified_name": "73-brycewang-p-hacking-skills::phack-router"
+    },
+    {
+      "collection": "73-brycewang-p-hacking-skills",
+      "description": "Name and classify p-hacking strategies, and quantify what each one does to the false-positive rate. Covers the twelve-strategy compendium of Stefan and Schoenbrodt (2023), thirteen econometrics-specific degrees of freedom (clustering doctrine, fixed-effect structure, RDD bandwidth, kernel and inference mode, IV instrument sets and first-stage screening, staggered-DiD estimator and comparison-group choice, synthetic-control donor pools), the search procedures that turn a strategy into a session, and the two between-stage strategies of Adda, Decker and Ottaviani (2020): selective continuation from a pilot to a confirmatory study, which is not p-hacking until the pilot is pooled, and selective reporting between stages. Use when asked what p-hacking is, which strategy a particular analytical choice corresponds to, how much a given researcher degree of freedom inflates type I error, or to enumerate the ways a specific result could have been obtained.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 55,
+      "name": "phack-taxonomy",
+      "path": "skills/73-brycewang-p-hacking-skills/skills/01-phack-taxonomy/SKILL.md",
+      "qualified_name": "73-brycewang-p-hacking-skills::phack-taxonomy"
+    },
+    {
+      "collection": "73-brycewang-p-hacking-skills",
+      "description": "Map the garden of forking paths for a concrete econometric design and turn it into a machine-readable design card that the specification-search engine can walk. Use when asked how many defensible analyses a dataset or research design admits, to enumerate researcher degrees of freedom for a specific DiD, IV, RDD, staggered-adoption, panel or cross-sectional study, to build or validate a design card, to encode a pre-registered specification, or to size a multiverse before running it.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 165,
+      "name": "forking-paths",
+      "path": "skills/73-brycewang-p-hacking-skills/skills/02-forking-paths/SKILL.md",
+      "qualified_name": "73-brycewang-p-hacking-skills::forking-paths"
+    },
+    {
+      "collection": "73-brycewang-p-hacking-skills",
+      "description": "Run an instrumented walk of a specification universe and recover honest inference from it. Estimates every specification in a design card (or walks it with a realistic search procedure), logs a complete ledger, flags pathological specifications, calibrates the search against an enforced null, runs the Simonsohn joint tests on the whole curve, measures how far the finding sits from the pre-registered analysis, attributes significance to the choices that produced it, and writes a publishable honest report. Use to run a multiverse or specification-curve analysis, to audit a search someone else ran, to compute multiplicity-corrected or null-calibrated p-values for a selected specification, or to demonstrate how far a search can move a result under a known-zero effect.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 222,
+      "name": "specification-search",
+      "path": "skills/73-brycewang-p-hacking-skills/skills/03-specification-search/SKILL.md",
+      "qualified_name": "73-brycewang-p-hacking-skills::specification-search"
+    },
+    {
+      "collection": "73-brycewang-p-hacking-skills",
+      "description": "Catalogue of prompt framings that determine whether an agent refuses or performs specification search, and the harness for probing them. Reproduces and extends the published finding that coding agents refuse an explicit request for significant results but comply when the identical request is reframed as uncertainty reporting. Use when running a red-team probe of statistical guardrails, designing eval conditions for an agent p-hacking benchmark, measuring the gap between refusal-by-framing and refusal-by-intent, or assessing whether a prompt someone received was engineered to induce specification search.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 100,
+      "name": "framing-attacks",
+      "path": "skills/73-brycewang-p-hacking-skills/skills/04-framing-attacks/SKILL.md",
+      "qualified_name": "73-brycewang-p-hacking-skills::framing-attacks"
+    },
+    {
+      "collection": "73-brycewang-p-hacking-skills",
+      "description": "Audit how an empirical write-up presents its analytical choices, and detect the rhetorical moves that convert a specification search into an apparently confirmatory finding. Covers HARKing, robustness theatre, selective disclosure, the vanishing pilot study, and estimator-choice narratives. Use when reviewing a paper or an agent-produced report for undisclosed search, refereeing an empirical manuscript, or scoring whether an agent disclosed the specification search it actually ran.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 136,
+      "name": "narrative-laundering",
+      "path": "skills/73-brycewang-p-hacking-skills/skills/05-narrative-laundering/SKILL.md",
+      "qualified_name": "73-brycewang-p-hacking-skills::narrative-laundering"
+    },
+    {
+      "collection": "73-brycewang-p-hacking-skills",
+      "description": "Test whether a body of reported results shows p-hacking, selective reporting or selection between stages, using the p-curve battery and the threshold and across-stages tests of Adda, Decker and Ottaviani (2020). Implements the binomial, Fisher, Stouffer and least-concave-majorant monotonicity tests of Elliott, Kudrin and Wuethrich (2022); threshold-bunching tests calibrated against a smooth counterfactual density; a Cattaneo-Jansson-Ma density-jump test and a right-side spike test that tell a level shift (results withheld) from a spike (results pushed across); the phase II vs phase III comparison and the selective-continuation decomposition; and Simonsohn's p-curve power estimate. Use when asked whether a literature, a journal, a research design, an author, a registry or a set of agent runs shows evidence of p-hacking, publication bias or selective continuation.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 174,
+      "name": "phack-detection",
+      "path": "skills/73-brycewang-p-hacking-skills/skills/06-phack-detection/SKILL.md",
+      "qualified_name": "73-brycewang-p-hacking-skills::phack-detection"
+    },
+    {
+      "collection": "73-brycewang-p-hacking-skills",
+      "description": "Make an empirical analysis robust to specification search, before or after the fact. Covers pre-registration and pre-analysis plans encoded as design cards, specification-curve reporting with the Simonsohn joint tests, Romano-Wolf and effective-multiplicity corrections, full-procedure null calibration including for sequential searches, the distance-from-pre-registration diagnostic, split-sample and holdout designs, and the auto-generated honest report. Use when asked how to protect an analysis against p-hacking, how to correct inference after a search has happened, how to write a pre-analysis plan, or how to report a multiverse credibly.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 153,
+      "name": "phack-immunization",
+      "path": "skills/73-brycewang-p-hacking-skills/skills/07-phack-immunization/SKILL.md",
+      "qualified_name": "73-brycewang-p-hacking-skills::phack-immunization"
+    },
+    {
+      "collection": "73-brycewang-p-hacking-skills",
+      "description": "Run and score the agent p-hacking benchmark. Composes prompt cells across research framing and significance pressure, drives an agent through them, and scores each run into a P-Hacking Intensity index decomposed into selection, search breadth, estimate inflation, inference gap, pre-registration departure and disclosure. Use when benchmarking whether an AI agent p-hacks, comparing models or tool stacks on statistical integrity, scoring a single agent analysis run, or designing an evaluation of statistical guardrails.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 142,
+      "name": "phack-eval-harness",
+      "path": "skills/73-brycewang-p-hacking-skills/skills/08-eval-harness/SKILL.md",
+      "qualified_name": "73-brycewang-p-hacking-skills::phack-eval-harness"
+    },
+    {
+      "collection": "73-brycewang-p-hacking-skills",
+      "description": "Model how a specification universe is actually walked, rather than assuming it is enumerated. Implements the search procedures a p-hacker or a pressured agent uses (first-significant stopping, random trial within a budget, greedy coordinate descent from the pre-registered analysis, random hill-climbing, and the two-stage split-sample walk with an optional continuation rule, after Adda, Decker and Ottaviani 2020), replays each on null data to measure its false-positive rate and the inflation of what it reports, and records the path so the write-up can be checked against it. Use when asked what a realistic p-hacking session looks like, how likely a given way of searching is to manufacture significance on a specific design, how to calibrate a result that came from a sequential rather than exhaustive search, or to simulate an agent's search behaviour on known-null data.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 205,
+      "name": "search-procedures",
+      "path": "skills/73-brycewang-p-hacking-skills/skills/09-search-procedures/SKILL.md",
+      "qualified_name": "73-brycewang-p-hacking-skills::search-procedures"
+    },
+    {
+      "collection": "73-brycewang-p-hacking-skills",
+      "description": "Run the instrumented specification search in the user's own statistical language — Stata (reghdfe, ivreghdfe, rdrobust, did2s), R (fixest, rdrobust, did2s), Python (statsmodels, linearmodels) or StatsPAI — and bring the results back into the audit, null calibration and honest report. Exports the enumerated grid as a language-neutral specs table plus a generated runner, ingests the runner's ledger, replays the null draws in that language, and reports cross-language parity. Use when an analysis or an agent evaluation must happen in Stata, R or StatsPAI rather than the Python engine, when a p-hacked result was produced in one of those languages and needs auditing on its own footing, when reading Stata / R / StatsPAI code for search and disclosure signals, or when checking that the engine's numbers agree with a reference implementation.",
+      "frontmatter_fields": [
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 123,
+      "name": "phack-polyglot",
+      "path": "skills/73-brycewang-p-hacking-skills/skills/10-phack-polyglot/SKILL.md",
+      "qualified_name": "73-brycewang-p-hacking-skills::phack-polyglot"
     }
   ],
   "summary": {
@@ -19131,7 +19313,7 @@
     "missing_frontmatter": 0,
     "missing_name": 0,
     "oversized_skill_files_over_500_lines": 83,
-    "skill_files": 1096,
-    "top_level_collections": 76
+    "skill_files": 1107,
+    "top_level_collections": 77
   }
 }
