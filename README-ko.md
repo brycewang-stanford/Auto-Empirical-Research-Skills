@@ -5,6 +5,7 @@
 > - 🔁 **Stata / R 대체**: `reghdfe`, `csdid`, `rdrobust`, `synth`, `fixest`, `did` 등을 `import statspai as sp` 하나로 대체 (DID / RD / IV / SCM / DML / matching)
 > - 🤖 **에이전트 네이티브 설계**: 구조화된 결과 객체와 내장 MCP 서버로 Claude, Codex 등 에이전트가 직접 호출·진단·감사·표 작성까지 수행
 > - ⚡ **더 빠른 실행**: Stata / R 세션 구동도 라이선스도 필요 없는 순수 Python 파이프라인으로 엔드투엔드 가속
+> - 🏛️ **같은 팀이 유지보수**: StatsPAI는 AERS와 같은 팀(Stanford REAP × CoPaper.AI)이 개발·유지보수하며, 두 프로젝트는 긴밀하게 통합되어 함께 발전합니다
 >
 > 👉 **[github.com/brycewang-stanford/StatsPAI](https://github.com/brycewang-stanford/StatsPAI)** · `pip install statspai` · MIT 라이선스 · ⭐ Star 환영
 

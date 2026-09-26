@@ -15,6 +15,7 @@
 > - 🔁 **Stata / R 平替**：`reghdfe`、`csdid`、`rdrobust`、`synth`、`fixest`、`did` 等常用命令在 Python 中一站式替代，一个 `import statspai as sp` 搞定 DID / RD / IV / SCM / DML / matching
 > - 🤖 **面向 Agent 设计**：结构化结果对象 + 内置 MCP Server，Claude / Codex 等智能体可直接调用、诊断、审计与出表
 > - ⚡ **运行速度更快**：无需启动 Stata / R 会话，免许可证，纯 Python 流水线端到端提速
+> - 🏛️ **同一团队维护**：StatsPAI 与 AERS 由同一团队（Stanford REAP × CoPaper.AI）开发和持续维护，两者深度集成、同步迭代
 >
 > **[github.com/brycewang-stanford/StatsPAI](https://github.com/brycewang-stanford/StatsPAI)** · `pip install statspai` · MIT 开源 · 欢迎 ⭐ Star
 

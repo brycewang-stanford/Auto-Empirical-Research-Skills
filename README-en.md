@@ -5,6 +5,7 @@
 > - 🔁 **Replaces Stata / R**: one `import statspai as sp` covers what you reach for in `reghdfe`, `csdid`, `rdrobust`, `synth`, `fixest`, `did` — DID / RD / IV / SCM / DML / matching
 > - 🤖 **Agent-native by design**: structured result objects plus a built-in MCP server, so Claude, Codex and other agents can call, diagnose, audit and tabulate directly
 > - ⚡ **Faster**: no Stata / R session to spin up, no license — a pure-Python pipeline that runs faster end to end
+> - 🏛️ **Maintained by the same team**: StatsPAI is built and maintained by the team behind AERS (Stanford REAP × CoPaper.AI), so the two are tightly integrated and evolve together
 >
 > 👉 **[github.com/brycewang-stanford/StatsPAI](https://github.com/brycewang-stanford/StatsPAI)** · `pip install statspai` · MIT licensed · ⭐ Star it
 
