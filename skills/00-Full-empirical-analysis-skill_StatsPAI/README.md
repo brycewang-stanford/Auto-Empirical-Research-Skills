@@ -1,5 +1,12 @@
 # StatsPAI Skill for Claude Code
 
+> **Superseded (2026-09-28).** The maintained skill now ships inside the
+> package as `statspai-analysis` — a valid Claude Code skill (short
+> `SKILL.md` + `references/`, gate re-run against the installed version):
+> `pip install statspai && statspai skill install` puts it in
+> `~/.claude/skills/statspai-analysis`; `statspai skill validate` re-checks
+> it. This directory is kept unchanged as the JOSS-era archive artifact.
+
 This folder is a **Claude Code Skill** that teaches Claude (or any
 compatible agent harness) how to drive [StatsPAI](https://github.com/brycewang-stanford/StatsPAI)
 end-to-end through a full causal-inference / empirical analysis,
