@@ -119,7 +119,7 @@
 | **41** | [sewage-econometrics-check](skills/41-sticerd-eee-sewage-econometrics-check/) | 10 項目チェックのレプリケーションパッケージ監査 | 📑 | 22 | [sticerd-eee/sewage](https://github.com/sticerd-eee/sewage) |
 | **42** | [ARIS](skills/42-wanshuiyin-ARIS/) | 自律型「研究 in sleep」エージェント、エンドツーエンド | 🚀 | 42 | [wanshuiyin/Auto-claude-code-research-in-sleep](https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep) |
 | **43** | [research-plugins](skills/43-wentorai-research-plugins/) | 478 の研究プラグイン: データ可視化、ドメイン、インフラ | 🛠️ | 478 | [wentorai/research-plugins](https://github.com/wentorai/research-plugins) |
-| **44** | [humanizer_academic](skills/44-matsuikentaro1-humanizer_academic/) | 医学/学術原稿の脱 AI 化（23 パターン） | ✍️ | 1 | [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) |
+| **44** | [humanizer_academic](skills/44-matsuikentaro1-humanizer_academic/) | 医学/学術原稿の脱 AI 化（34 パターン） | ✍️ | 1 | [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) |
 | **45** | [deslop](skills/45-stephenturner-skill-deslop/) | AI 文章パターンの除去（5 次元採点） | ✍️ | 1 | [stephenturner/skill-deslop](https://github.com/stephenturner/skill-deslop) |
 | **46** | [stop-slop](skills/46-hardikpandya-stop-slop/) | 3 層の AI 痕跡検出 & 書き換え | ✍️ | 1 | [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) |
 | **47** | [avoid-ai-writing](skills/47-conorbronsdon-avoid-ai-writing/) | 監査 → 書き換え → 再監査の AI 痕跡対策（証跡付き） | ✍️ | 1 | [conorbronsdon/avoid-ai-writing](https://github.com/conorbronsdon/avoid-ai-writing) |
@@ -257,7 +257,7 @@ AERS は同時に二つの性格を持ちます。(1) 完全な実証パイプ�
 | [`22` · christopherkenny-skills](skills/22-christopherkenny-skills/) | Quarto（`.qmd`）向けの APSA スタイルチェッカー | 11 |
 | [`27` · my_claude_skills](skills/27-dariia-m-my_claude_skills/) | 経済学アブストラクトの執筆ガイド | 6 |
 | [`38` · academic-proofreader](skills/38-peternka-academic-proofreader/) | 学術校正 | 1 |
-| [`44` · humanizer_academic](skills/44-matsuikentaro1-humanizer_academic/) | 医学/学術原稿の脱 AI 化（23 パターン） | 1 |
+| [`44` · humanizer_academic](skills/44-matsuikentaro1-humanizer_academic/) | 医学/学術原稿の脱 AI 化（34 パターン） | 1 |
 | [`45` · deslop](skills/45-stephenturner-skill-deslop/) | AI 文章パターンの除去（5 次元採点） | 1 |
 | [`46` · stop-slop](skills/46-hardikpandya-stop-slop/) | 3 層の AI 痕跡検出 & 書き換え | 1 |
 | [`47` · avoid-ai-writing](skills/47-conorbronsdon-avoid-ai-writing/) | 監査 → 書き換え → 再監査の AI 痕跡対策（証跡付き） | 1 |
@@ -513,7 +513,7 @@ Replication → Submission → Peer Review Response → Defense
 | スイート | 主な特徴 | 最適な用途 | ローカル |
 |-------|-------------|----------|-------|
 | **de-AIGC-skills** 🇨🇳🇬🇧 | CoPaper.AI による**オリジナル**の中英バイリンガル学術脱 AIGC; 英 22 + 中 17 パターン、主張-証拠監査を含む 6 ステップループ、セクション別戦略、5 次元採点。経済・経営・社会科学の実証論文向け。**2026-09: 来歴レイヤー** — CJK に安全な不可視 Unicode + docx / PNG / JPG / SVG / PDF メタデータ衛生、統計的透かし向けの著者リライト手順、「透かしなし」とは決して主張しない | Turnitin AI / GPTZero / CNKI / Wanfang / VIP · 不可視 Unicode / C2PA / docx メタデータ | [`48`](skills/48-de-AIGC-skills/) |
-| [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) | 学術特化; 23 の AI 文章パターン; 正当な学術的接続表現を保持 | 医学、生命科学、自然科学の論文 | [`44`](skills/44-matsuikentaro1-humanizer_academic/) |
+| [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) | 学術特化; 34 の AI 文章パターン; 正当な学術的接続表現を保持 | 医学、生命科学、自然科学の論文 | [`44`](skills/44-matsuikentaro1-humanizer_academic/) |
 | [stephenturner/skill-deslop](https://github.com/stephenturner/skill-deslop) | 正当な分野の慣習と AI 痕跡を区別; 5 次元採点 | 科学論文、技術ブログ | [`45`](skills/45-stephenturner-skill-deslop/) |
 | [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) | 3 層検出 + 5 次元採点; 禁止フレーズ、構造的クリシェ、文ルール | 一般的な散文、ブログ、レポート | [`46`](skills/46-hardikpandya-stop-slop/) |
 | [conorbronsdon/avoid-ai-writing](https://github.com/conorbronsdon/avoid-ai-writing) | 構造化監査 + 書き換え + 2 回目の監査; 監査可能、追跡可能 | 証跡を必要とするワークフロー | [`47`](skills/47-conorbronsdon-avoid-ai-writing/) |

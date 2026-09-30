@@ -125,7 +125,7 @@ This repository can be imported from its root as one skill in Codex, CodeBuddy, 
 | **41** | [sewage-econometrics-check](skills/41-sticerd-eee-sewage-econometrics-check/) | 10-check replication-package audit | 📑 | 22 | [sticerd-eee/sewage](https://github.com/sticerd-eee/sewage) |
 | **42** | [ARIS](skills/42-wanshuiyin-ARIS/) | Autonomous "research-in-sleep" agent, end-to-end | 🚀 | 42 | [wanshuiyin/Auto-claude-code-research-in-sleep](https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep) |
 | **43** | [research-plugins](skills/43-wentorai-research-plugins/) | 478 research plugins: dataviz, domains, infra | 🛠️ | 478 | [wentorai/research-plugins](https://github.com/wentorai/research-plugins) |
-| **44** | [humanizer_academic](skills/44-matsuikentaro1-humanizer_academic/) | De-AI medical/academic manuscripts (23 patterns) | ✍️ | 1 | [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) |
+| **44** | [humanizer_academic](skills/44-matsuikentaro1-humanizer_academic/) | De-AI medical/academic manuscripts (34 patterns) | ✍️ | 1 | [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) |
 | **45** | [deslop](skills/45-stephenturner-skill-deslop/) | Remove AI writing patterns (5-dim scoring) | ✍️ | 1 | [stephenturner/skill-deslop](https://github.com/stephenturner/skill-deslop) |
 | **46** | [stop-slop](skills/46-hardikpandya-stop-slop/) | 3-layer AI-tell detection & rewrite | ✍️ | 1 | [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) |
 | **47** | [avoid-ai-writing](skills/47-conorbronsdon-avoid-ai-writing/) | Audit → rewrite → re-audit AI-isms (paper trail) | ✍️ | 1 | [conorbronsdon/avoid-ai-writing](https://github.com/conorbronsdon/avoid-ai-writing) |
@@ -263,7 +263,7 @@ AERS is two things at once: (1) a small set of **first-party flagship skills** t
 | [`22` · christopherkenny-skills](skills/22-christopherkenny-skills/) | APSA style checker for Quarto (`.qmd`) | 11 |
 | [`27` · my_claude_skills](skills/27-dariia-m-my_claude_skills/) | Economics-abstract writing guide | 6 |
 | [`38` · academic-proofreader](skills/38-peternka-academic-proofreader/) | Academic proofreading | 1 |
-| [`44` · humanizer_academic](skills/44-matsuikentaro1-humanizer_academic/) | De-AI medical/academic manuscripts (23 patterns) | 1 |
+| [`44` · humanizer_academic](skills/44-matsuikentaro1-humanizer_academic/) | De-AI medical/academic manuscripts (34 patterns) | 1 |
 | [`45` · deslop](skills/45-stephenturner-skill-deslop/) | Remove AI writing patterns (5-dim scoring) | 1 |
 | [`46` · stop-slop](skills/46-hardikpandya-stop-slop/) | 3-layer AI-tell detection & rewrite | 1 |
 | [`47` · avoid-ai-writing](skills/47-conorbronsdon-avoid-ai-writing/) | Audit → rewrite → re-audit AI-isms (paper trail) | 1 |
@@ -524,7 +524,7 @@ The first-party flagships ([StatsPAI](skills/00-Full-empirical-analysis-skill_St
 | Suite | Key features | Best for | Local |
 |-------|-------------|----------|-------|
 | **de-AIGC-skills** 🇨🇳🇬🇧 | **Original** bilingual academic de-AIGC by CoPaper.AI; 22 English + 17 Chinese patterns, six-step loop with a claim–evidence audit, per-section strategies, 5-dim scoring — built for empirical papers in econ / management / social science; **2026-09: provenance layer** — CJK-safe invisible-Unicode + docx / PNG / JPG / SVG / PDF metadata hygiene, an author ownership pass for statistical watermarks, never claims "watermark-free" | Turnitin AI / GPTZero / CNKI / Wanfang / VIP · invisible Unicode / C2PA / docx metadata | [`48`](skills/48-de-AIGC-skills/) |
-| [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) | Academic-specific; 23 AI-writing patterns; preserves legitimate academic transitions | Medical, life-science, natural-science papers | [`44`](skills/44-matsuikentaro1-humanizer_academic/) |
+| [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) | Academic-specific; 34 AI-writing patterns; preserves legitimate academic transitions | Medical, life-science, natural-science papers | [`44`](skills/44-matsuikentaro1-humanizer_academic/) |
 | [stephenturner/skill-deslop](https://github.com/stephenturner/skill-deslop) | Distinguishes legitimate discipline conventions from AI tells; 5-dimension scoring | Scientific papers, technical blogs | [`45`](skills/45-stephenturner-skill-deslop/) |
 | [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) | 3-layer detection + 5-dim scoring; banned phrases, structural clichés, sentence rules | General prose, blogs, reports | [`46`](skills/46-hardikpandya-stop-slop/) |
 | [conorbronsdon/avoid-ai-writing](https://github.com/conorbronsdon/avoid-ai-writing) | Structured audit + rewrite + second-pass audit; auditable, traceable | Workflows needing a paper trail | [`47`](skills/47-conorbronsdon-avoid-ai-writing/) |

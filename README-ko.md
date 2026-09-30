@@ -119,7 +119,7 @@
 | **41** | [sewage-econometrics-check](skills/41-sticerd-eee-sewage-econometrics-check/) | 10단계 점검 재현 패키지 감사 | 📑 | 22 | [sticerd-eee/sewage](https://github.com/sticerd-eee/sewage) |
 | **42** | [ARIS](skills/42-wanshuiyin-ARIS/) | 자율 "수면 중 연구" 에이전트, 엔드투엔드 | 🚀 | 42 | [wanshuiyin/Auto-claude-code-research-in-sleep](https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep) |
 | **43** | [research-plugins](skills/43-wentorai-research-plugins/) | 478개 연구 플러그인: 데이터 시각화, 도메인, 인프라 | 🛠️ | 478 | [wentorai/research-plugins](https://github.com/wentorai/research-plugins) |
-| **44** | [humanizer_academic](skills/44-matsuikentaro1-humanizer_academic/) | 의학/학술 원고 탈AI화 (23개 패턴) | ✍️ | 1 | [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) |
+| **44** | [humanizer_academic](skills/44-matsuikentaro1-humanizer_academic/) | 의학/학술 원고 탈AI화 (34개 패턴) | ✍️ | 1 | [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) |
 | **45** | [deslop](skills/45-stephenturner-skill-deslop/) | AI 글쓰기 패턴 제거 (5차원 채점) | ✍️ | 1 | [stephenturner/skill-deslop](https://github.com/stephenturner/skill-deslop) |
 | **46** | [stop-slop](skills/46-hardikpandya-stop-slop/) | 3계층 AI 흔적 탐지 & 재작성 | ✍️ | 1 | [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) |
 | **47** | [avoid-ai-writing](skills/47-conorbronsdon-avoid-ai-writing/) | 감사 → 재작성 → 재감사 AI 흔적 (감사 추적) | ✍️ | 1 | [conorbronsdon/avoid-ai-writing](https://github.com/conorbronsdon/avoid-ai-writing) |
@@ -257,7 +257,7 @@ AERS는 두 가지를 동시에 제공합니다: (1) 완전한 실증 파이프�
 | [`22` · christopherkenny-skills](skills/22-christopherkenny-skills/) | Quarto(`.qmd`)용 APSA 스타일 검사기 | 11 |
 | [`27` · my_claude_skills](skills/27-dariia-m-my_claude_skills/) | 경제학 초록 작성 가이드 | 6 |
 | [`38` · academic-proofreader](skills/38-peternka-academic-proofreader/) | 학술 교정 | 1 |
-| [`44` · humanizer_academic](skills/44-matsuikentaro1-humanizer_academic/) | 의학/학술 원고 탈AI화 (23개 패턴) | 1 |
+| [`44` · humanizer_academic](skills/44-matsuikentaro1-humanizer_academic/) | 의학/학술 원고 탈AI화 (34개 패턴) | 1 |
 | [`45` · deslop](skills/45-stephenturner-skill-deslop/) | AI 글쓰기 패턴 제거 (5차원 채점) | 1 |
 | [`46` · stop-slop](skills/46-hardikpandya-stop-slop/) | 3계층 AI 흔적 탐지 & 재작성 | 1 |
 | [`47` · avoid-ai-writing](skills/47-conorbronsdon-avoid-ai-writing/) | 감사 → 재작성 → 재감사 AI 흔적 (감사 추적) | 1 |
@@ -513,7 +513,7 @@ Replication → Submission → Peer Review Response → Defense
 | 스위트 | 핵심 특징 | 가장 적합한 경우 | 로컬 |
 |-------|-------------|----------|-------|
 | **de-AIGC-skills** 🇨🇳🇬🇧 | CoPaper.AI의 **오리지널** 중·영 이중언어 학술 탈AIGC; 영어 22 + 중국어 17 패턴, 주장-증거 감사를 포함한 6단계 루프, 섹션별 전략, 5차원 채점. 경제·경영·사회과학 실증 논문용. **2026-09: 출처 레이어** — CJK 안전 비가시 유니코드 + docx / PNG / JPG / SVG / PDF 메타데이터 위생, 통계적 워터마크용 저자 재작성 절차, '워터마크 없음'을 절대 주장하지 않음 | Turnitin AI / GPTZero / CNKI / Wanfang / VIP · 비가시 유니코드 / C2PA / docx 메타데이터 | [`48`](skills/48-de-AIGC-skills/) |
-| [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) | 학술 특화; 23개 AI 글쓰기 패턴; 정당한 학술적 연결어는 보존 | 의학, 생명과학, 자연과학 논문 | [`44`](skills/44-matsuikentaro1-humanizer_academic/) |
+| [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) | 학술 특화; 34개 AI 글쓰기 패턴; 정당한 학술적 연결어는 보존 | 의학, 생명과학, 자연과학 논문 | [`44`](skills/44-matsuikentaro1-humanizer_academic/) |
 | [stephenturner/skill-deslop](https://github.com/stephenturner/skill-deslop) | 정당한 학문 관행과 AI 흔적을 구별; 5차원 채점 | 과학 논문, 기술 블로그 | [`45`](skills/45-stephenturner-skill-deslop/) |
 | [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) | 3단계 탐지 + 5차원 채점; 금지 문구, 구조적 클리셰, 문장 규칙 | 일반 산문, 블로그, 보고서 | [`46`](skills/46-hardikpandya-stop-slop/) |
 | [conorbronsdon/avoid-ai-writing](https://github.com/conorbronsdon/avoid-ai-writing) | 구조화된 감사 + 재작성 + 2차 감사; 감사 가능, 추적 가능 | 추적 기록이 필요한 워크플로 | [`47`](skills/47-conorbronsdon-avoid-ai-writing/) |

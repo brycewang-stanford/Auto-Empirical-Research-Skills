@@ -19733,10 +19733,10 @@
       "name": "humanizer_academic",
       "path": "skills/44-matsuikentaro1-humanizer_academic/SKILL.md",
       "collection": "44-matsuikentaro1-humanizer_academic",
-      "line_count": 504,
-      "description_effective": "Remove signs of AI-generated writing from academic medical papers. Use when editing or reviewing manuscripts to make them sound more natural and professionally written. Based on Wikipedia's \"Signs of AI writing\" guide, adapted for medical literature. Detects and fixes patterns including: inflated significance claims, superficial -ing analyses, vague attributions, AI vocabulary words, copula avoidance, excessive hedging, generic conclusions, informal word choices (linked/beyond/via/where/yield), overly assertive causal claims, and artificially condensed expressions. Preserves legitimate academic transitions (Notably, Prior studies have shown, etc.).",
+      "line_count": 778,
+      "description_effective": "Remove signs of AI-generated writing from academic medical papers. Use when editing or reviewing manuscripts to make them sound more natural and professionally written. Based on Wikipedia's \"Signs of AI writing\" guide, adapted for medical literature.",
       "description_source": "frontmatter",
-      "has_references": false,
+      "has_references": true,
       "tags": {
         "stage": [
           "de-aigc",
@@ -19747,10 +19747,8 @@
           "scientific-writing"
         ]
       },
-      "quality_score": 92,
-      "quality_flags": [
-        "long-no-references"
-      ],
+      "quality_score": 100,
+      "quality_flags": [],
       "license": "MIT",
       "commercial_use": "allowed",
       "source_url": "https://github.com/matsuikentaro1/humanizer_academic",

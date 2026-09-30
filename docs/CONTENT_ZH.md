@@ -86,7 +86,7 @@
 | <a id="skill-41"></a>**41** | [sewage-econometrics-check](../skills/41-sticerd-eee-sewage-econometrics-check/) | 10 项复现包审计 | 📑 | 22 | [sticerd-eee/sewage](https://github.com/sticerd-eee/sewage) |
 | <a id="skill-42"></a>**42** | [ARIS](../skills/42-wanshuiyin-ARIS/) | 自主「research-in-sleep」代理，端到端 | 🚀 | 42 | [wanshuiyin/Auto-claude-code-research-in-sleep](https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep) |
 | <a id="skill-43"></a>**43** | [research-plugins](../skills/43-wentorai-research-plugins/) | 478 个研究插件：数据可视化、领域、基础设施 | 🛠️ | 478 | [wentorai/research-plugins](https://github.com/wentorai/research-plugins) |
-| <a id="skill-44"></a>**44** | [humanizer_academic](../skills/44-matsuikentaro1-humanizer_academic/) | 为医学/学术手稿去 AI 味（23 类模式） | ✍️ | 1 | [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) |
+| <a id="skill-44"></a>**44** | [humanizer_academic](../skills/44-matsuikentaro1-humanizer_academic/) | 为医学/学术手稿去 AI 味（34 类模式） | ✍️ | 1 | [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) |
 | <a id="skill-45"></a>**45** | [deslop](../skills/45-stephenturner-skill-deslop/) | 去除 AI 写作痕迹（5 维评分） | ✍️ | 1 | [stephenturner/skill-deslop](https://github.com/stephenturner/skill-deslop) |
 | <a id="skill-46"></a>**46** | [stop-slop](../skills/46-hardikpandya-stop-slop/) | 三层 AI 痕迹检测与改写 | ✍️ | 1 | [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) |
 | <a id="skill-47"></a>**47** | [avoid-ai-writing](../skills/47-conorbronsdon-avoid-ai-writing/) | 审计 → 改写 → 二次审计 AI 味（留痕） | ✍️ | 1 | [conorbronsdon/avoid-ai-writing](https://github.com/conorbronsdon/avoid-ai-writing) |
@@ -227,7 +227,7 @@ AERS 同时是两样东西：(1) 一小撮**自研旗舰 skill**，能跑通完�
 | [`22` · christopherkenny-skills](../skills/22-christopherkenny-skills/) | 面向 Quarto（`.qmd`）的 APSA 风格检查器 | 11 |
 | [`27` · my_claude_skills](../skills/27-dariia-m-my_claude_skills/) | 经济学摘要写作指南 | 6 |
 | [`38` · academic-proofreader](../skills/38-peternka-academic-proofreader/) | 学术校对 | ✍️ | 1 |
-| [`44` · humanizer_academic](../skills/44-matsuikentaro1-humanizer_academic/) | 为医学/学术手稿去 AI 味（23 类模式） | 1 |
+| [`44` · humanizer_academic](../skills/44-matsuikentaro1-humanizer_academic/) | 为医学/学术手稿去 AI 味（34 类模式） | 1 |
 | [`45` · deslop](../skills/45-stephenturner-skill-deslop/) | 去除 AI 写作痕迹（5 维评分） | 1 |
 | [`46` · stop-slop](../skills/46-hardikpandya-stop-slop/) | 三层 AI 痕迹检测与改写 | 1 |
 | [`47` · avoid-ai-writing](../skills/47-conorbronsdon-avoid-ai-writing/) | 审计 → 改写 → 二次审计 AI 味（留痕） | 1 |
@@ -488,7 +488,7 @@ make check       # 完整 gate：validate + Python 编译 + 单元测试 + eval 
 |------|---------|--------|------|
 | **de-AIGC-skills** 🇨🇳🇬🇧 | CoPaper.AI **原创**中英双语学术降 AIGC；英 22 + 中 17 类模式、含主张-证据审计的六步闭环、分章节策略、五维评分，面向经管社科实证论文；**2026-09 新增溯源层（去水印）** —— CJK 安全的隐藏 Unicode + docx / PNG / JPG / SVG / PDF 元数据清理（stdlib 脚本 `scripts/provenance_scrub.py`）、针对统计水印的作者重述流程 | Turnitin AI / GPTZero / 知网 / 万方 / 维普 · 隐藏字符 / C2PA / docx 元数据 | [`48`](../skills/48-de-AIGC-skills/) |
 | [voidborne-d/humanize-chinese](../skills/49-voidborne-d-humanize-chinese/) 🇨🇳 | 同时提供 SKILL.md 与独立 Python CLI；17 类检测 + 7 风格改写器，LR ensemble 程序化打分。**License: MIT（非商用修改版）** | 中文学位论文 / 长篇 / 批量 pipeline | [`49`](../skills/49-voidborne-d-humanize-chinese/) |
-| [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) | 学术专用；23 类 AI 写作模式；保留合法学术过渡词 | 医学、生命科学、自然科学论文 | [`44`](../skills/44-matsuikentaro1-humanizer_academic/) |
+| [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) | 学术专用；34 类 AI 写作模式；保留合法学术过渡词 | 医学、生命科学、自然科学论文 | [`44`](../skills/44-matsuikentaro1-humanizer_academic/) |
 | [stephenturner/skill-deslop](https://github.com/stephenturner/skill-deslop) | 智能区分合法学科惯例 vs AI 痕迹；5 维评分 | 科学论文、技术博客 | [`45`](../skills/45-stephenturner-skill-deslop/) |
 | [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) | 三层检测 + 五维评分；禁用短语、结构套路、句级规则 | 通用散文、博客、报告 | [`46`](../skills/46-hardikpandya-stop-slop/) |
 | [conorbronsdon/avoid-ai-writing](https://github.com/conorbronsdon/avoid-ai-writing) | 结构化审计 + 重写 + 二次审计；可审计、可追溯 | 需要留痕的修改流程 | [`47`](../skills/47-conorbronsdon-avoid-ai-writing/) |

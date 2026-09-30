@@ -330,8 +330,8 @@
       "findings_untriaged": 0
     },
     "44-matsuikentaro1-humanizer_academic": {
-      "files_scanned": 3,
-      "files_seen": 3,
+      "files_scanned": 4,
+      "files_seen": 5,
       "findings_total": 0,
       "findings_triaged_benign": 0,
       "findings_untriaged": 0

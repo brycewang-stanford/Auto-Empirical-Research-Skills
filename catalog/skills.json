@@ -807,7 +807,7 @@
       "license": "MIT",
       "path": "skills/44-matsuikentaro1-humanizer_academic",
       "primary_skill": {
-        "description": "Remove signs of AI-generated writing from academic medical papers. Use when editing or reviewing manuscripts to make them sound more natural and professionally written. Based on Wikipedia's \"Signs of AI writing\" guide, adapted for medical literature. Detects and fixes patterns including: inflated significance claims, superficial -ing analyses, vague attributions, AI vocabulary words, copula avoidance, excessive hedging, generic conclusions, informal word choices (linked/beyond/via/where/yield), overly assertive causal claims, and artificially condensed expressions. Preserves legitimate academic transitions (Notably, Prior studies have shown, etc.).",
+        "description": "Remove signs of AI-generated writing from academic medical papers. Use when editing or reviewing manuscripts to make them sound more natural and professionally written. Based on Wikipedia's \"Signs of AI writing\" guide, adapted for medical literature.",
         "name": "humanizer_academic",
         "path": "skills/44-matsuikentaro1-humanizer_academic/SKILL.md"
       },
@@ -16334,7 +16334,7 @@
     },
     {
       "collection": "44-matsuikentaro1-humanizer_academic",
-      "description": "Remove signs of AI-generated writing from academic medical papers. Use when editing or reviewing manuscripts to make them sound more natural and professionally written. Based on Wikipedia's \"Signs of AI writing\" guide, adapted for medical literature. Detects and fixes patterns including: inflated significance claims, superficial -ing analyses, vague attributions, AI vocabulary words, copula avoidance, excessive hedging, generic conclusions, informal word choices (linked/beyond/via/where/yield), overly assertive causal claims, and artificially condensed expressions. Preserves legitimate academic transitions (Notably, Prior studies have shown, etc.).",
+      "description": "Remove signs of AI-generated writing from academic medical papers. Use when editing or reviewing manuscripts to make them sound more natural and professionally written. Based on Wikipedia's \"Signs of AI writing\" guide, adapted for medical literature.",
       "frontmatter_fields": [
         "allowed-tools",
         "description",
@@ -16344,7 +16344,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 504,
+      "line_count": 778,
       "name": "humanizer_academic",
       "path": "skills/44-matsuikentaro1-humanizer_academic/SKILL.md",
       "qualified_name": "44-matsuikentaro1-humanizer_academic::humanizer_academic"

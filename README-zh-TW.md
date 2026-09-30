@@ -119,7 +119,7 @@
 | **41** | [sewage-econometrics-check](skills/41-sticerd-eee-sewage-econometrics-check/) | 10 項檢查的重現包稽核 | 📑 | 22 | [sticerd-eee/sewage](https://github.com/sticerd-eee/sewage) |
 | **42** | [ARIS](skills/42-wanshuiyin-ARIS/) | 自主「睡眠中做研究」代理，端到端 | 🚀 | 42 | [wanshuiyin/Auto-claude-code-research-in-sleep](https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep) |
 | **43** | [research-plugins](skills/43-wentorai-research-plugins/) | 478 個研究外掛：資料視覺化、領域、基礎設施 | 🛠️ | 478 | [wentorai/research-plugins](https://github.com/wentorai/research-plugins) |
-| **44** | [humanizer_academic](skills/44-matsuikentaro1-humanizer_academic/) | 去 AI 化醫學/學術手稿（23 種模式） | ✍️ | 1 | [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) |
+| **44** | [humanizer_academic](skills/44-matsuikentaro1-humanizer_academic/) | 去 AI 化醫學/學術手稿（34 種模式） | ✍️ | 1 | [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) |
 | **45** | [deslop](skills/45-stephenturner-skill-deslop/) | 移除 AI 寫作模式（5 維評分） | ✍️ | 1 | [stephenturner/skill-deslop](https://github.com/stephenturner/skill-deslop) |
 | **46** | [stop-slop](skills/46-hardikpandya-stop-slop/) | 3 層 AI 痕跡偵測與改寫 | ✍️ | 1 | [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) |
 | **47** | [avoid-ai-writing](skills/47-conorbronsdon-avoid-ai-writing/) | 稽核 → 改寫 → 複稽 AI 腔（留痕） | ✍️ | 1 | [conorbronsdon/avoid-ai-writing](https://github.com/conorbronsdon/avoid-ai-writing) |
@@ -259,7 +259,7 @@ AERS 同時是兩樣東西：(1) 一小撮**自研旗艦 skill**，能跑通完�
 | [`22` · christopherkenny-skills](skills/22-christopherkenny-skills/) | Quarto（`.qmd`）的 APSA 風格檢查器 | 11 |
 | [`27` · my_claude_skills](skills/27-dariia-m-my_claude_skills/) | 經濟學摘要寫作指南 | 6 |
 | [`38` · academic-proofreader](skills/38-peternka-academic-proofreader/) | 學術校對 | 1 |
-| [`44` · humanizer_academic](skills/44-matsuikentaro1-humanizer_academic/) | 去 AI 化醫學/學術手稿（23 種模式） | 1 |
+| [`44` · humanizer_academic](skills/44-matsuikentaro1-humanizer_academic/) | 去 AI 化醫學/學術手稿（34 種模式） | 1 |
 | [`45` · deslop](skills/45-stephenturner-skill-deslop/) | 移除 AI 寫作模式（5 維評分） | 1 |
 | [`46` · stop-slop](skills/46-hardikpandya-stop-slop/) | 3 層 AI 痕跡偵測與改寫 | 1 |
 | [`47` · avoid-ai-writing](skills/47-conorbronsdon-avoid-ai-writing/) | 稽核 → 改寫 → 複稽 AI 腔（留痕） | 1 |
@@ -516,7 +516,7 @@ make check       # 完整 gate：validate + Python 编译 + 单元测试 + eval 
 |------|---------|--------|------|
 | **de-AIGC-skills** 🇨🇳🇬🇧 | CoPaper.AI **原創**中英雙語學術降 AIGC；英 22 + 中 17 類模式、含主張-證據審計的六步閉環、分章節策略、五維評分，面向經管社科實證論文；**2026-09 新增溯源層** —— CJK 安全的隱藏 Unicode + docx / PNG / JPG / SVG / PDF 中繼資料清理、針對統計浮水印的作者重述流程，絕不宣稱「無浮水印」 | Turnitin AI / GPTZero / 知網 / 萬方 / 維普 · 隱藏字元 / C2PA / docx 中繼資料 | [`48`](skills/48-de-AIGC-skills/) |
 | [voidborne-d/humanize-chinese](skills/49-voidborne-d-humanize-chinese/) 🇨🇳 | 同時提供 SKILL.md 與獨立 Python CLI；17 類偵測 + 7 風格改寫器，LR ensemble 程序化打分。**License: MIT（非商用修改版）** | 中文學位論文 / 長篇 / 批量 pipeline | [`49`](skills/49-voidborne-d-humanize-chinese/) |
-| [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) | 學術專用；23 類 AI 寫作模式；保留合法學術過渡詞 | 醫學、生命科學、自然科學論文 | [`44`](skills/44-matsuikentaro1-humanizer_academic/) |
+| [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) | 學術專用；34 類 AI 寫作模式；保留合法學術過渡詞 | 醫學、生命科學、自然科學論文 | [`44`](skills/44-matsuikentaro1-humanizer_academic/) |
 | [stephenturner/skill-deslop](https://github.com/stephenturner/skill-deslop) | 智慧區分合法學科慣例 vs AI 痕跡；5 維評分 | 科學論文、技術部落格 | [`45`](skills/45-stephenturner-skill-deslop/) |
 | [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) | 三層偵測 + 五維評分；禁用短語、結構套路、句級規則 | 通用散文、部落格、報告 | [`46`](skills/46-hardikpandya-stop-slop/) |
 | [conorbronsdon/avoid-ai-writing](https://github.com/conorbronsdon/avoid-ai-writing) | 結構化稽核 + 重寫 + 二次稽核；可稽核、可追溯 | 需要留痕的修改流程 | [`47`](skills/47-conorbronsdon-avoid-ai-writing/) |

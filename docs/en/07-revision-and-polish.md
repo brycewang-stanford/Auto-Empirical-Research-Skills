@@ -22,7 +22,7 @@
 |------|----------|---------------|
 | [⭐ `48` de-aigc-skills](../../skills/48-de-AIGC-skills/) | Bilingual (EN+ZH) academic de-AIGC (Turnitin AI / GPTZero / CNKI / Wanfang) | De-AI empirical papers in either language; respond to plagiarism and AI checks |
 | [`49` humanize-chinese](../../skills/49-voidborne-d-humanize-chinese/) | Detect and humanise AI-generated Chinese | Polish Chinese paragraphs to remove machine tone |
-| [`44` humanizer_academic](../../skills/44-matsuikentaro1-humanizer_academic/) | De-AI medical / academic manuscripts (23 patterns) | Remove AI traces from English academic manuscripts |
+| [`44` humanizer_academic](../../skills/44-matsuikentaro1-humanizer_academic/) | De-AI medical / academic manuscripts (34 patterns) | Remove AI traces from English academic manuscripts |
 | [`45` deslop](../../skills/45-stephenturner-skill-deslop/) | Remove AI-writing clichés (5-dimensional scoring) | Quantify and remove AI boilerplate |
 | [`46` stop-slop](../../skills/46-hardikpandya-stop-slop/) | 3-layer AI-trace detection and rewrite | Detect → rewrite → recheck closed loop |
 | [`47` avoid-ai-writing](../../skills/47-conorbronsdon-avoid-ai-writing/) | Audit → rewrite → re-audit (leaves an edit trail) | Compliant polishing that preserves modification history |
@@ -139,23 +139,28 @@ Step 5b: Cross-validate (optional) — send pre- and post-revision text to Codex
 | Attribute | Description |
 |------|------|
 | **Source** | [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) |
-| **Function** | Detects and removes 23 patterns of AI-writing traces in academic papers; reduces AIGC-detection scores |
+| **Function** | Detects and removes 34 patterns of AI-writing traces in academic papers; reduces AIGC-detection scores |
 | **Install** | `git clone https://github.com/matsuikentaro1/humanizer_academic.git ~/.claude/skills/humanizer_academic` |
 
 **Problem it solves**:
 
 AI-generated text has statistically detectable patterns — "LLMs use statistical algorithms to guess the next most likely word, which converges toward the broadest statistically-most-probable outcome" (Wikipedia). This causes academic papers to show patterns of exaggerated importance, hollow transitions, em-dash overuse, and artificial three-item lists that are easily flagged by AIGC detectors.
 
-**23 detection patterns**:
+**34 detection patterns**:
 
 - **Content patterns (6)**: importance exaggeration, prominence claims, shallow analysis, promotional language, vague attribution, formulaic problem statements
-- **Language patterns (6)**: AI-preferred vocabulary ("pivotal"/"landscape"/"crucial"), avoidance of copular verbs, negative-coordinated parallelism ("not only…but also"), three-item lists, synonym rotation, false ranges
+- **Language patterns (6)**: AI-preferred vocabulary ("pivotal"/"landscape"/"crucial"), avoidance of copular verbs, negative-coordinated parallelism ("not only…but also"), three-item lists, synonym rotation and term consistency, false ranges
 - **Style patterns (3)**: zero tolerance for em-dashes, title-case norms, curly-quote markers
 - **Filler and hedging (3)**: redundant phrases ("in order to"→"to"), over-hedging, generalised conclusions
-- **Word choice (5)**: unnatural phrase substitution, forced compression of expressions, insufficient hedging adjustment
+- **LLM-specific word choice (8)**: informal "linked to", "beyond" / "via" / "where" / "yield", overly assertive causal claims, artificially condensed expressions, minor word-choice refinements
+- **Cohesion and connectives (7)**: preserved logical discourse markers, re-contextualised over-condensed links, ornamental -ly intensifiers, connective-preserving edits, paragraph cohesion, paraphrastic repetition, content-free evaluation sentences
+- **Sentence rhythm (1)**: burstiness (varied sentence lengths and openings) in the service of reader clarity
 
 **Highlights**:
 - Examples drawn from cardiovascular research (EMPA-REG OUTCOME trial), well-suited to medicine / natural science
+- Reader clarity first: restores omitted actors, comparisons and conditions instead of compressing prose (eight diagnostic examples in `references/reader-clarity.md`)
+- Two-pass draft-then-audit process with Voice Calibration and mandatory final checks (em dash, paragraph cohesion, rhythm)
+- Fidelity check: never inserts figures, named entities or citations that are not in the input; missing data become `[DATA NEEDED: ...]` placeholders
 - Preserves legitimate academic transitions ("Notably", "Furthermore")
 - Adapted from Wikipedia's "Signs of AI writing" guide
 
@@ -203,7 +208,7 @@ AI-generated text has statistically detectable patterns — "LLMs use statistica
 |------|------------------|--------------------|-------------------------------|
 | Primary form | Markdown SKILL.md (inside the agent) | Markdown SKILL.md (inside the agent) | Python CLI + library (pipeline-callable, also ships SKILL.md) |
 | Language | Chinese academic | English academic | Chinese academic (incl. novel / blog / general) |
-| Detection dimensions | 17 categories (agent self-check) | 23 categories (agent self-check) | 17 categories (programmatic scoring, logistic-regression ensemble) |
+| Detection dimensions | 17 categories (agent self-check) | 34 categories (agent self-check) | 17 categories (programmatic scoring, logistic-regression ensemble) |
 | Rewrite form | Agent five-step workflow | Agent pattern rewrite | 7 style rewriters, rule-based + best-of-n sampling, reproducible (seed=42) |
 | Long-form support | General | General | Auto-switch to long-form LR for ≥1500 chars; paragraph-level features (intra-paragraph sentence-length CV, paragraph-length CV, cross-paragraph 3-gram repetition) |
 

@@ -71,7 +71,7 @@ A skill can be **well-formed** (high hygiene) yet **untested for the traps an ap
 | `41-sticerd-eee-sewage-econometrics-check` | 22 | 100.0 | 100 | 1 | 1 |
 | `42-wanshuiyin-ARIS` | 42 | 98.9 | 85 | 0 | 0 |
 | `43-wentorai-research-plugins` | 478 | 100.0 | 95 | 0 | 0 |
-| `44-matsuikentaro1-humanizer_academic` | 1 | 92.0 | 92 | 0 | 0 |
+| `44-matsuikentaro1-humanizer_academic` | 1 | 100.0 | 100 | 0 | 0 |
 | `45-stephenturner-skill-deslop` | 1 | 100.0 | 100 | 0 | 0 |
 | `46-hardikpandya-stop-slop` | 1 | 100.0 | 100 | 0 | 0 |
 | `47-conorbronsdon-avoid-ai-writing` | 1 | 100.0 | 100 | 1 | 1 |
