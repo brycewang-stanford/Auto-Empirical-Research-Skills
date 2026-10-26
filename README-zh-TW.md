@@ -58,6 +58,7 @@
 
 - **推薦整倉匯入**：選擇倉庫根目錄，使用 [`agents/openai.yaml`](agents/openai.yaml) 和根 [`SKILL.md`](SKILL.md) 註冊一個 catalog router；後續由 agent 先查 [`catalog/skills.json`](catalog/skills.json) 或 [`docs/SKILL_CATALOG.md`](docs/SKILL_CATALOG.md)，再只讀取目標子 skill。
 - **推薦單 skill 匯入**：如果 IDE 要求「一目錄一個 skill」，請複製那個直接包含 `SKILL.md` 的子目錄，例如 `skills/50-brycewang-aer-skills/skills/aer-workflow/`，不要把整倉誤當成 1,108 個獨立 skill 遞迴註冊。
+- **最省事的安裝**：把本地倉庫資料夾的路徑複製給 Agent（Claude Code / Codex / WorkBuddy），讓它依照 [`INSTALL.md`](INSTALL.md) 方法 0 自己裝好。Codex 的使用者 skills 目錄是 `~/.agents/skills/`（舊版為 `~/.codex/skills/`），見 [`INSTALL.md`](INSTALL.md) 方法 2C。
 - **安裝細節**：見 [`docs/INSTALL.md`](docs/INSTALL.md)。簡體中文 README 是預設入口；英文入口保留在 [`README-en.md`](README-en.md)。
 
 ---

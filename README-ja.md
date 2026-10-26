@@ -58,6 +58,7 @@
 
 - **リポジトリ全体を取り込む場合**: リポジトリルートを選び、[`agents/openai.yaml`](agents/openai.yaml) とルート [`SKILL.md`](SKILL.md) で 1 つの catalog router を登録します。agent は [`catalog/skills.json`](catalog/skills.json) または [`docs/SKILL_CATALOG.md`](docs/SKILL_CATALOG.md) を確認してから、選んだ子 skill だけを読みます。
 - **単一 skill を取り込む場合**: IDE が「1 フォルダ = 1 skill」を期待するなら、対象の `SKILL.md` を直接含む子フォルダをコピーしてください。例: `skills/50-brycewang-aer-skills/skills/aer-workflow/`。IDE が明示的に再帰 discovery をサポートしない限り、ルート取り込みで 1,108 個の個別 skill が登録されるとは想定しないでください。
+- **いちばん簡単なインストール**: クローンしたフォルダのローカルパスを agent（Claude Code / Codex / WorkBuddy）に渡し、[`INSTALL.md`](INSTALL.md) の方法 0 に従ってインストールするよう頼んでください。Codex のユーザー skill ディレクトリは `~/.agents/skills/`（旧バージョンは `~/.codex/skills/`）です。詳細は [`INSTALL.md`](INSTALL.md) の 2C を参照。
 - **インストール詳細**: [`docs/INSTALL.md`](docs/INSTALL.md) を参照してください。デフォルト README は簡体中文の [`README.md`](README.md) で、英語版は [`README-en.md`](README-en.md) です。
 
 ---

@@ -64,6 +64,7 @@ This repository can be imported from its root as one skill in Codex, CodeBuddy, 
 
 - **Whole-repo import**: select the repository root and let [`agents/openai.yaml`](agents/openai.yaml) plus the root [`SKILL.md`](SKILL.md) register one catalog router. The agent should inspect [`catalog/skills.json`](catalog/skills.json) or [`docs/SKILL_CATALOG.md`](docs/SKILL_CATALOG.md), then read only the selected child skill.
 - **Single-skill import**: if an IDE expects one folder per skill, copy the child folder that directly contains the target `SKILL.md`, such as `skills/50-brycewang-aer-skills/skills/aer-workflow/`. Do not expect a recursive import of the repo root to register 1,108 separate skills unless the IDE explicitly supports that.
+- **Easiest install**: copy the local path of your clone to your agent (Claude Code / Codex / WorkBuddy) and ask it to install the skills by following [`INSTALL.md`](INSTALL.md) method 0. Codex reads user skills from `~/.agents/skills/` (older versions: `~/.codex/skills/`) — see [`INSTALL.md`](INSTALL.md) section 2C.
 - **Install details**: see [`docs/INSTALL.md`](docs/INSTALL.md). Simplified Chinese is now the default README at [`README.md`](README.md); this English version lives at [`README-en.md`](README-en.md).
 
 ---
