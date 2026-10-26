@@ -8,8 +8,8 @@ Paste this snapshot into the GitHub release body and add a hand-written
 
 ## Catalog
 
-- Top-level collections: **77**
-- `SKILL.md` files: **1107**
+- Top-level collections: **78**
+- `SKILL.md` files: **1108**
 - Cataloged agent tools: **334** ([`tools/CATALOG.md`](../tools/CATALOG.md))
 
 ## Methodological rigor
@@ -29,9 +29,9 @@ Paste this snapshot into the GitHub release body and add a hand-written
 - `event-study`: 10
 - `matching`: 10
 - `synthetic-control`: 10
+- `mediation`: 9
 - `cate`: 8
 - `dml`: 8
-- `mediation`: 8
 - `structural`: 6
 - `survival`: 3
 - `quantile`: 2
@@ -56,7 +56,7 @@ Paste this snapshot into the GitHub release body and add a hand-written
 - Apache-2.0: 1
 - CC-BY-NC-4.0 (non-commercial): 1
 - CC-BY-SA-4.0: 1
-- CC-BY-SA-4.0 (repository default): 6
+- CC-BY-SA-4.0 (repository default): 7
 - CC0-1.0: 1
 - GPL-3.0: 1
 - MIT: 37

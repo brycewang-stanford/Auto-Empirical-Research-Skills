@@ -538,6 +538,13 @@
       "findings_total": 1,
       "findings_triaged_benign": 1,
       "findings_untriaged": 0
+    },
+    "74-brycewang-spss-amos-sem": {
+      "files_scanned": 33,
+      "files_seen": 38,
+      "findings_total": 0,
+      "findings_triaged_benign": 0,
+      "findings_untriaged": 0
     }
   },
   "note": "Pattern scan only \u2014 the same class of evidence as the 2026-07-15 addendum in SECURITY-SCAN-REPORT.md, and strictly weaker than the baseline's multi-agent content read. A clean result means no known-bad pattern matched, not 'reviewed and safe'. Every entry under 'triaged' was inspected in context; the reason records what was found there.",

@@ -13,12 +13,12 @@ A skill can be **well-formed** (high hygiene) yet **untested for the traps an ap
 
 ## Summary
 
-- Skills scored: **1107**
+- Skills scored: **1108**
 - Mean hygiene score: **99.4/100**
 - Skills with at least one eval scenario: **21** (1.9% of catalog)
 - Total eval-harness scenarios that target a specific skill: **22**
-- Descriptions: 1107 from frontmatter, 0 body-derived, 0 none
-- Tagged with at least one taxonomy facet: 565
+- Descriptions: 1108 from frontmatter, 0 body-derived, 0 none
+- Tagged with at least one taxonomy facet: 566
 
 ## Per-collection: hygiene × eval coverage
 
@@ -101,6 +101,7 @@ A skill can be **well-formed** (high hygiene) yet **untested for the traps an ap
 | `71-brycewang-lit-review-agent-tools` | 1 | 100.0 | 100 | 0 | 0 |
 | `72-kaggle-research` | 1 | 100.0 | 100 | 0 | 0 |
 | `73-brycewang-p-hacking-skills` | 11 | 100.0 | 100 | 0 | 0 |
+| `74-brycewang-spss-amos-sem` | 1 | 100.0 | 100 | 0 | 0 |
 
 ## 25 lowest-hygiene skills (improvement targets)
 

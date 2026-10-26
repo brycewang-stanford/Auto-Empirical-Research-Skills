@@ -54,17 +54,17 @@
 
 ## 最初に読む: リポジトリ全体は 1 つの AERS Router Skill
 
-このリポジトリは、ルートディレクトリを Codex、CodeBuddy、Claude Code、または類似 IDE に 1 つの skill として取り込めます。ルートの [`SKILL.md`](SKILL.md) は `auto-empirical-research-skills` を登録し、77 コレクション・1,107 スキルを一度にコンテキストへ読み込むのではなく、実証研究タスクに合う vendored 子 skill へルーティングします。
+このリポジトリは、ルートディレクトリを Codex、CodeBuddy、Claude Code、または類似 IDE に 1 つの skill として取り込めます。ルートの [`SKILL.md`](SKILL.md) は `auto-empirical-research-skills` を登録し、78 コレクション・1,108 スキルを一度にコンテキストへ読み込むのではなく、実証研究タスクに合う vendored 子 skill へルーティングします。
 
 - **リポジトリ全体を取り込む場合**: リポジトリルートを選び、[`agents/openai.yaml`](agents/openai.yaml) とルート [`SKILL.md`](SKILL.md) で 1 つの catalog router を登録します。agent は [`catalog/skills.json`](catalog/skills.json) または [`docs/SKILL_CATALOG.md`](docs/SKILL_CATALOG.md) を確認してから、選んだ子 skill だけを読みます。
-- **単一 skill を取り込む場合**: IDE が「1 フォルダ = 1 skill」を期待するなら、対象の `SKILL.md` を直接含む子フォルダをコピーしてください。例: `skills/50-brycewang-aer-skills/skills/aer-workflow/`。IDE が明示的に再帰 discovery をサポートしない限り、ルート取り込みで 1,107 個の個別 skill が登録されるとは想定しないでください。
+- **単一 skill を取り込む場合**: IDE が「1 フォルダ = 1 skill」を期待するなら、対象の `SKILL.md` を直接含む子フォルダをコピーしてください。例: `skills/50-brycewang-aer-skills/skills/aer-workflow/`。IDE が明示的に再帰 discovery をサポートしない限り、ルート取り込みで 1,108 個の個別 skill が登録されるとは想定しないでください。
 - **インストール詳細**: [`docs/INSTALL.md`](docs/INSTALL.md) を参照してください。デフォルト README は簡体中文の [`README.md`](README.md) で、英語版は [`README-en.md`](README-en.md) です。
 
 ---
 
-## 全 77 スキルコレクション一覧
+## 全 78 スキルコレクション一覧
 
-> **リポジトリを開けば、ライブラリ全体が見渡せます。** **77 コレクション · 1,107 スキル**のすべてに `00 → 73` の番号が付き、いずれも（外部リンクではなく）**本リポジトリに取り込み（vendored）**、[`catalog/skills.json`](catalog/skills.json) で追跡されています。**どの行をクリックしてもそのフォルダが開きます。** **⭐ = Stanford REAP × StatsPAI チームが構築したファーストパーティスキル**。それ以外はすべて精選・セキュリティ監査済みのコミュニティ成果です。
+> **リポジトリを開けば、ライブラリ全体が見渡せます。** **78 コレクション · 1,108 スキル**のすべてに `00 → 74` の番号が付き、いずれも（外部リンクではなく）**本リポジトリに取り込み（vendored）**、[`catalog/skills.json`](catalog/skills.json) で追跡されています。**どの行をクリックしてもそのフォルダが開きます。** **⭐ = Stanford REAP × StatsPAI チームが構築したファーストパーティスキル**。それ以外はすべて精選・セキュリティ監査済みのコミュニティ成果です。
 >
 > **テーマ凡例 —** 🚀 全パイプライン & オーケストレーター · 🎯 因果推論 & 計量経済学 · 📚 文献 & 研究設計 · ✍️ 執筆・編集 & 脱 AIGC · 📑 引用・レプリケーション & 査読 · 🛠️ データ・ツール & インフラ
 >
@@ -149,10 +149,11 @@
 | ⭐ **71** | **[lit-review-agent-tools](skills/71-brycewang-lit-review-agent-tools/)** 🔍 | 文献レビューツールの選定と実行（MinerU / PaperQA2 / ASReview / STORM / MCP サーバー） | 📚 | 1 | [brycewang-stanford/lit-review-agent-tools](https://github.com/brycewang-stanford/lit-review-agent-tools) |
 | ⭐ **72** | **[Kaggle Research](skills/72-kaggle-research/)** 🧪 | 公式 CLI による安全・監査可能な Kaggle 検索と公開データの制限付き取得 | 🛠️ | 1 | [⭐ 本リポジトリ](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills) |
 | ⭐ **73** | **[p-hacking-skills](skills/73-brycewang-p-hacking-skills/)** 🔬 | 真の効果がゼロのデータ上で計測付き仕様探索 —— 分岐路マップ、探索を差し引いた「誠実な」p 値、p-curve 検出、事前登録による免疫化（教育・監査用） | 📑 | 11 | [brycewang-stanford/p-hacking-skills](https://github.com/brycewang-stanford/p-hacking-skills) |
+| ⭐ **74** | **[spss-amos-sem](skills/74-brycewang-spss-amos-sem/)** 📋 | 質問紙データの構造方程式モデリング（SPSS + AMOS）—— クリーニング、信頼性、EFA、CFA（CR / AVE / HTMT）、構造モデル、bootstrap 媒介分析、多母集団、PROCESS；SPSS シンタックス・AMOS プログラム・中国語の三線表を自動生成 | 📑 | 1 | [⭐ 本リポジトリ](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills) |
 
-> ⭐ **私たち自身が構築した背骨:** [StatsPAI](skills/00-Full-empirical-analysis-skill_StatsPAI/)（因果エンジン）· 明示的な [Python](skills/00.1-Full-empirical-analysis-skill_Python/) / [Stata](skills/00.2-Full-empirical-analysis-skill_Stata/) / [R](skills/00.3-Full-empirical-analysis-skill_R/) の全パイプライン移植版 · [AER-skills](skills/50-brycewang-aer-skills/)（トップ 5 投稿スタック）· [de-AIGC-skills](skills/48-de-AIGC-skills/) · [Paper-WorkFlow](skills/69-Paper-WorkFlow/)（メタオーケストレーター）。これらが AERS の背骨です —— 完全な比較は [旗艦パイプライン skills ↓](#旗艦パイプライン-skills) を参照。用途別に閲覧したいですか? [同じ 77 を用途別に整理したもの ↓](#77-コレクションを用途別に) をご覧ください。
+> ⭐ **私たち自身が構築した背骨:** [StatsPAI](skills/00-Full-empirical-analysis-skill_StatsPAI/)（因果エンジン）· 明示的な [Python](skills/00.1-Full-empirical-analysis-skill_Python/) / [Stata](skills/00.2-Full-empirical-analysis-skill_Stata/) / [R](skills/00.3-Full-empirical-analysis-skill_R/) の全パイプライン移植版 · [AER-skills](skills/50-brycewang-aer-skills/)（トップ 5 投稿スタック）· [de-AIGC-skills](skills/48-de-AIGC-skills/) · [Paper-WorkFlow](skills/69-Paper-WorkFlow/)（メタオーケストレーター）。これらが AERS の背骨です —— 完全な比較は [旗艦パイプライン skills ↓](#旗艦パイプライン-skills) を参照。用途別に閲覧したいですか? [同じ 78 を用途別に整理したもの ↓](#78-コレクションを用途別に) をご覧ください。
 
-**実証研究の専門家のための agent-skills ディストリビューション。** マーケティング用のリストではありません —— 本リポジトリには **1,107 個のスキルを取り込み（vendored）、カタログ化**したうえで、**数値ベンチマーク・評価ハーネス・セキュリティ監査・CI** で品質を固定し、さらに広域エコシステムの **119 リポジトリにまたがる 23,000+ スキル**を精選したマップを重ねています。
+**実証研究の専門家のための agent-skills ディストリビューション。** マーケティング用のリストではありません —— 本リポジトリには **1,108 個のスキルを取り込み（vendored）、カタログ化**したうえで、**数値ベンチマーク・評価ハーネス・セキュリティ監査・CI** で品質を固定し、さらに広域エコシステムの **119 リポジトリにまたがる 23,000+ スキル**を精選したマップを重ねています。
 
 AERS は同時に二つの性格を持ちます。(1) 完全な実証パイプライン — データクリーニング → 識別 → 推定 → 頑健性 → 表/図 → 投稿可能なドラフト — を回す、少数精鋭の**ファーストパーティ旗艦スキル**。そして (2) 実証研究スキルのエコシステムを、研究ワークフローの段階別に整理した**精選・セキュリティ配慮済みのカタログ**です。差別化の核心は数ではありません。旗艦の挙動が、口先で主張されたものではなく**既知の答えに対して検証されている**という点です。
 
@@ -166,8 +167,8 @@ AERS は同時に二つの性格を持ちます。(1) 完全な実証パイプ�
 
 ## 目次
 
-- [**全 77 スキルコレクション一覧**（`00 → 73` の完全インデックス）](#全-77-スキルコレクション一覧)
-  - [77 コレクションを用途別に](#77-コレクションを用途別に)
+- [**全 78 スキルコレクション一覧**（`00 → 74` の完全インデックス）](#全-78-スキルコレクション一覧)
+  - [78 コレクションを用途別に](#78-コレクションを用途別に)
 - [実際に得られるもの（数字を正確に）](#実際に得られるもの数字を正確に)
 - [2 分で自分で検証する](#2-分で自分で検証する)
 - [なぜ信頼できるのか — 3 つの層](#なぜ信頼できるのか--3-つの層)
@@ -186,9 +187,9 @@ AERS は同時に二つの性格を持ちます。(1) 完全な実証パイプ�
 
 ---
 
-## 77 コレクションを用途別に
+## 78 コレクションを用途別に
 
-> [冒頭の連番インデックス ↑](#全-77-スキルコレクション一覧) と同じ **77 コレクション · 1,107 スキル** を、ここでは**研究目的別**に並べ替えました。取り組んでいる段階までスキャンできます。**⭐ = ファーストパーティ**（Stanford REAP）。それ以外はすべて精選・セキュリティ監査済みのコミュニティ成果です。
+> [冒頭の連番インデックス ↑](#全-78-スキルコレクション一覧) と同じ **78 コレクション · 1,108 スキル** を、ここでは**研究目的別**に並べ替えました。取り組んでいる段階までスキャンできます。**⭐ = ファーストパーティ**（Stanford REAP）。それ以外はすべて精選・セキュリティ監査済みのコミュニティ成果です。
 
 **🚀 全パイプライン旗艦 & オーケストレーター** — *一度の呼び出しで、実証ループ全体*
 
@@ -280,6 +281,7 @@ AERS は同時に二つの性格を持ちます。(1) 完全な実証パイプ�
 | [`54` · open-science-skills](skills/54-scdenney-open-science-skills/) | 引用の整合性、DOI & 主張裏付けの監査 | 24 |
 | [`62` · citation-checker](skills/62-PHY041-claude-skill-citation-checker/) | CrossRef / S2 / OpenAlex に対して引用を検証 | 1 |
 | ⭐ **[`73` · p-hacking-skills](skills/73-brycewang-p-hacking-skills/)** 🔬 | 仕様探索の計測と監査：誠実な p 値、p-curve、事前登録 | 11 |
+| ⭐ **[`74` · spss-amos-sem](skills/74-brycewang-spss-amos-sem/)** 📋 | 質問紙 SEM（SPSS + AMOS）：信頼性・妥当性、CFA、媒介、PROCESS | 1 |
 
 **🛠️ データ・ツール & インフラ** — *パイプラインを支える配管*
 
@@ -304,8 +306,8 @@ AERS は同時に二つの性格を持ちます。(1) 完全な実証パイプ�
 
 | 内容 | 数 | 一次情報源 |
 |---|---:|---|
-| **本リポジトリに取り込み済み**でカタログ化されたスキル | **1,107** | [`catalog/skills.json`](catalog/skills.json) |
-| 取り込み済み **コレクション（collections）** | **77** | [`catalog/skills.json`](catalog/skills.json) · [全 77 を一覧 ↑](#全-77-スキルコレクション一覧) |
+| **本リポジトリに取り込み済み**でカタログ化されたスキル | **1,108** | [`catalog/skills.json`](catalog/skills.json) |
+| 取り込み済み **コレクション（collections）** | **78** | [`catalog/skills.json`](catalog/skills.json) · [全 78 を一覧 ↑](#全-78-スキルコレクション一覧) |
 | **ファーストパーティ旗艦**の全パイプラインスキル（StatsPAI DSL + 明示的な Python/Stata/R） | **4** | [`skills/00*`](skills/) |
 | 毎回データから gold 値を再計算する数値**ベンチマークタスク** | **19** | [`benchmark/`](benchmark/) |
 | 挙動レベルの**評価シナリオ / ルーブリック項目** | **42 / 217** | [`eval-harness/`](eval-harness/) |
@@ -412,7 +414,7 @@ make check        # repo validation + unit tests + eval lint + numeric benchmark
 | **数値ベンチマーク** | 実データから再計算された真値と一致しない報告数字 —— 素朴 DID の符号の罠、第一段階 F なしの弱 IV、staggered なタイミング下での TWFE バイアス、RDD のトレンド交絡、処置後のバッドコントロール、プールされた平均が隠す異質効果（CATE）、平均のみでは見逃す分位点効果、ローカルショックに交絡されたシフトシェア（Bartik）IV、媒介変数を統制して直接効果の符号が反転する罠、参照グループに依存する Oaxaca 分解、kink での超過質量を素朴密度が隠す bunching、内生的な価格を操作変数で扱わずに推定した需要システムと係数をそのまま弾力性として報告する誤り（構造推定）、処置ユニットを部分的に波及を受けた隣人と比較する誤り（干渉/スピルオーバー） | [`benchmark/`](benchmark/) · 19 タスク |
 | **評価ハーネス** | 文章レベルの失敗: 弱 IV の根拠なき安心、staggered-DID での TWFE 誤用、捏造引用、安全でない `curl \| bash` セットアップ、多重検定の濫用、AER 準拠のギャップ | [`eval-harness/`](eval-harness/) · 42 シナリオ / 217 ルーブリック項目 |
 | **セキュリティ監査** | pipe-to-shell、リバースシェル、認証情報の流出、13 のリスクカテゴリにわたるプロンプトインジェクション —— 6 フェーズ、40+ フックスクリプトを手作業でレビュー | [`SECURITY-SCAN-REPORT.md`](SECURITY-SCAN-REPORT.md) |
-| **来歴とライセンス** | 取り込まれていないソース、ライセンスリスク、1,107 個すべてのカタログ化スキルにわたる衛生のドリフト | [`docs/LICENSE_AUDIT.md`](docs/LICENSE_AUDIT.md) · [`docs/SKILL_HYGIENE.md`](docs/SKILL_HYGIENE.md) |
+| **来歴とライセンス** | 取り込まれていないソース、ライセンスリスク、1,108 個すべてのカタログ化スキルにわたる衛生のドリフト | [`docs/LICENSE_AUDIT.md`](docs/LICENSE_AUDIT.md) · [`docs/SKILL_HYGIENE.md`](docs/SKILL_HYGIENE.md) |
 | **CI と互換性** | カタログの鮮度、ローカルリンク切れ、GitHub Actions ポリシー、Python 3.9 **および** 3.12 の構文フロア | [`.github/workflows/`](.github/workflows/) · 7 ワークフロー |
 
 ```bash
@@ -427,7 +429,7 @@ make check       # full gate: validate + Python compile + unit tests + eval lint
 
 ## 全体像を眺める
 
-> 📚 完全な **[77 コレクションのディレクトリ ↑](#全-77-スキルコレクション一覧)** は本 README の冒頭にあります —— このセクションではエコシステムをテーマ別に掘り下げます。
+> 📚 完全な **[78 コレクションのディレクトリ ↑](#全-78-スキルコレクション一覧)** は本 README の冒頭にあります —— このセクションではエコシステムをテーマ別に掘り下げます。
 
 ### 研究段階別
 

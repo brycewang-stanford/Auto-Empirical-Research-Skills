@@ -15,7 +15,8 @@
     "skills/48-de-AIGC-skills/",
     "skills/50-brycewang-aer-skills/",
     "skills/69-Paper-WorkFlow/",
-    "skills/71-brycewang-lit-review-agent-tools/"
+    "skills/71-brycewang-lit-review-agent-tools/",
+    "skills/74-brycewang-spss-amos-sem/"
   ],
   "out_of_domain": {
     "_why": "Natural-science / CS / humanities guides vendored with 43-wentorai. Kept on disk and in the catalog, but ranked last for empirical-social-science routing. economics, finance, business, education, law and social-science stay in scope.",

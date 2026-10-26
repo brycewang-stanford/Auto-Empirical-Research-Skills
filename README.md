@@ -50,9 +50,9 @@
   <br/>
 </div>
 
-> ### 🚀 New here? Open the **[Skill Search →](docs/search.html)** to filter all 1,107 skills by method, stage, language, and license. The 5-minute tour (`make quickstart`) prints the same picture in your terminal.
+> ### 🚀 New here? Open the **[Skill Search →](docs/search.html)** to filter all 1,108 skills by method, stage, language, and license. The 5-minute tour (`make quickstart`) prints the same picture in your terminal.
 >
-> ### 🇨🇳 **中文用户从本文件开始**（流水线速览 + 77 行总表），每个合集的完整描述见 [`docs/CONTENT_ZH.md`](docs/CONTENT_ZH.md)。📖 **English readers:** see [`README-en.md`](README-en.md).
+> ### 🇨🇳 **中文用户从本文件开始**（流水线速览 + 78 行总表），每个合集的完整描述见 [`docs/CONTENT_ZH.md`](docs/CONTENT_ZH.md)。📖 **English readers:** see [`README-en.md`](README-en.md).
 
 ---
 
@@ -129,7 +129,7 @@ cp -R skills/00.1-Full-empirical-analysis-skill_Python  ~/.claude/skills/ # 全�
 
 中文内容分两级维护，各司其职：
 
-- **本文件（README.md，GitHub 默认入口）**：banner、badges、信任面、9 阶段流水线速览、77 行合集总表。
+- **本文件（README.md，GitHub 默认入口）**：banner、badges、信任面、9 阶段流水线速览、78 行合集总表。
 - **[`docs/CONTENT_ZH.md`](docs/CONTENT_ZH.md)（扩展正文）**：每个合集的完整描述（`#skill-NN` 锚点）、按用途分组、精确数字、2 分钟验证、三层信任、旗舰流水线详解、贡献与引用。总表行内的 `→` 直接跳到对应锚点。
 - **其他语言**：[`README-en.md`](README-en.md) · [`README-zh-TW.md`](README-zh-TW.md) · [`README-ja.md`](README-ja.md) · [`README-ko.md`](README-ko.md)
 
@@ -144,7 +144,7 @@ cp -R skills/00.1-Full-empirical-analysis-skill_Python  ~/.claude/skills/ # 全�
 
 ## 🚀 从一个 idea 到一篇论文：社科实证研究 · 端到端流水线（全自动、可介入）
 
-> **AERS 不只是 77 个散装 skill —— 它能陪你走完一篇论文。** 从模糊 idea → 选题精炼 → 文献综述 → 数据获取 → 识别策略 → 估计建模 → 稳健性审计 → 出版级表格 / 图形 → 写作与同行评审 → 降 AIGC → 投稿。**端到端、全自动、每一步都可被人介入**（中间任何一步你都可以接过去手工改方法、补变量、加稳健性，再让流水线自动接上跑）。
+> **AERS 不只是 78 个散装 skill —— 它能陪你走完一篇论文。** 从模糊 idea → 选题精炼 → 文献综述 → 数据获取 → 识别策略 → 估计建模 → 稳健性审计 → 出版级表格 / 图形 → 写作与同行评审 → 降 AIGC → 投稿。**端到端、全自动、每一步都可被人介入**（中间任何一步你都可以接过去手工改方法、补变量、加稳健性，再让流水线自动接上跑）。
 
 ### 9 阶段流水线 · 每一步都覆盖到具体 skill
 
@@ -154,7 +154,7 @@ cp -R skills/00.1-Full-empirical-analysis-skill_Python  ~/.claude/skills/ # 全�
 | 2️⃣ | **文献综述** — 检索 · 筛选 · PRISMA 流程 · 批判性阅读 · 主题分析 | · [36 literature-review-skill](skills/36-taoyunudt-literature-review-skill/) · [24 academic-research-skills](skills/24-Imbad0202-academic-research-skills/) · [59 openalex-skill](skills/59-shiquda-openalex-skill/) · [68 research-productivity-skills](skills/68-research-productivity-skills/) · [53 thematic-analysis](skills/53-keemanxp-thematic-analysis-skill/) |
 | 3️⃣ | **数据获取** — 公开数据库 · API · 网页抓取 · 数据清洗 | · [33 claude-scholar](skills/33-Galaxy-Dawn-claude-scholar/) · [68 research-productivity-skills](skills/68-research-productivity-skills/) · [32 stata-skill](skills/32-dylantmoore-stata-skill/) · [57 edgartools](skills/57-dgunning-edgartools/) |
 | 4️⃣ | **识别策略** — DiD / RD / IV / SCM / DML / matching 全覆盖 | · ⭐ [00 StatsPAI](skills/00-Full-empirical-analysis-skill_StatsPAI/) 🔥 · [10 causal-inference-mixtape](skills/10-Jill0099-causal-inference-mixtape/) · [13 MixtapeTools](skills/13-scunning1975-MixtapeTools/) · [51 CausalPy](skills/51-pymc-labs-CausalPy/) · [63 scientific-agent-skills](skills/63-tondevrel-scientific-agent-skills/) |
-| 5️⃣ | **估计建模** — Python / Stata / R 三栈，900+ 估计器 | · ⭐ [00.1 Full Empirical · Python](skills/00.1-Full-empirical-analysis-skill_Python/) · ⭐ [00.2 Full Empirical · Stata](skills/00.2-Full-empirical-analysis-skill_Stata/) · ⭐ [00.3 Full Empirical · R](skills/00.3-Full-empirical-analysis-skill_R/) · [40 pyfixest](skills/40-py-econometrics-pyfixest/) · [39 marginaleffects](skills/39-vincentarelbundock-marginaleffects/) · [09 awesome-econ-ai](skills/09-meleantonio-awesome-econ-ai-stuff/) |
+| 5️⃣ | **估计建模** — Python / Stata / R 三栈，900+ 估计器 | · ⭐ [00.1 Full Empirical · Python](skills/00.1-Full-empirical-analysis-skill_Python/) · ⭐ [00.2 Full Empirical · Stata](skills/00.2-Full-empirical-analysis-skill_Stata/) · ⭐ [00.3 Full Empirical · R](skills/00.3-Full-empirical-analysis-skill_R/) · [40 pyfixest](skills/40-py-econometrics-pyfixest/) · [39 marginaleffects](skills/39-vincentarelbundock-marginaleffects/) · [09 awesome-econ-ai](skills/09-meleantonio-awesome-econ-ai-stuff/) · ⭐ [74 SPSS + AMOS 问卷结构方程](skills/74-brycewang-spss-amos-sem/) |
 | 6️⃣ | **稳健性审计** — 复现包检查 · Honest-DiD · R&R 模拟 | · [41 sewage-econometrics-check](skills/41-sticerd-eee-sewage-econometrics-check/) · ⭐ [50 AER-skills](skills/50-brycewang-aer-skills/) · ⭐ [73 p-hacking-skills](skills/73-brycewang-p-hacking-skills/) · [21 AI-research-feedback](skills/21-claesbackman-AI-research-feedback/) |
 | 7️⃣ | **表格 & 图形** — 期刊出版级排版 · LaTeX 嵌入 | · ⭐ [00 StatsPAI](skills/00-Full-empirical-analysis-skill_StatsPAI/) · [07 AI-Research-SKILLs](skills/07-Orchestra-Research-AI-Research-SKILLs/) · [33 claude-scholar](skills/33-Galaxy-Dawn-claude-scholar/) · [08 latex-document-skill](skills/08-ndpvt-web-latex-document-skill/) |
 | 8️⃣ | **写作 & 同行评审** — LaTeX / Quarto · 仿审稿人 · 校对 | · [06 stats-paper-writing](skills/06-fuhaoda-stats-paper-writing/) · [04 scientific-writer](skills/04-K-Dense-AI-claude-scientific-writer/) · [22 christopherkenny-skills](skills/22-christopherkenny-skills/) · [38 academic-proofreader](skills/38-peternka-academic-proofreader/) · [56 econ-writing-skill](skills/56-hanlulong-econ-writing-skill/) · [16 clo-author](skills/16-hsantanna88-clo-author/) |
@@ -193,15 +193,15 @@ cp -R skills/00.1-Full-empirical-analysis-skill_Python  ~/.claude/skills/ # 全�
 
 **为什么挑这 7 个？因为它们的行为都被基准钉死了** —— 不是营销口径，是对着已知答案反复跑过验证过的（[17 项数值 benchmark + 37 项行为评测 ↗](docs/CONTENT_ZH.md#你究竟得到什么精确数字)）。
 
-### 看到这里 —— 完整 77 行合集目录
+### 看到这里 —— 完整 78 行合集目录
 
-[↴ 直跳到下方 77 行总表（每个合集带 `#skill-NN` 锚点）](#-77-个核心-skills-合集一览00--73编号连续无空缺)。如果你更关心"这些 skill **怎么用**"而不是"有哪些 skill"，看 [📘 中文唯一权威正文](docs/CONTENT_ZH.md) 里的「按用途分组」与「旗舰流水线」两节。
+[↴ 直跳到下方 78 行总表（每个合集带 `#skill-NN` 锚点）](#-78-个核心-skills-合集一览00--74编号连续无空缺)。如果你更关心"这些 skill **怎么用**"而不是"有哪些 skill"，看 [📘 中文唯一权威正文](docs/CONTENT_ZH.md) 里的「按用途分组」与「旗舰流水线」两节。
 
 ---
 
-## 🧰 77 个核心 Skills 合集一览（`00 → 73`，编号连续无空缺）
+## 🧰 78 个核心 Skills 合集一览（`00 → 74`，编号连续无空缺）
 
-> **打开仓库 → 看见整座库。** 全部 **77 个合集 · 1,107 个 skill**，每一个都已 vendor 进本仓库，由 [`catalog/skills.json`](catalog/skills.json) 跟踪。**⭐ = Stanford REAP × StatsPAI 团队自研的 skill**；其余为精选、经安全审计的社区作品。
+> **打开仓库 → 看见整座库。** 全部 **78 个合集 · 1,108 个 skill**，每一个都已 vendor 进本仓库，由 [`catalog/skills.json`](catalog/skills.json) 跟踪。**⭐ = Stanford REAP × StatsPAI 团队自研的 skill**；其余为精选、经安全审计的社区作品。
 >
 > **主题图例 —** 🚀 全流程与编排器 · 🎯 因果推断与计量经济学 · 📚 文献与研究设计 · ✍️ 写作 / 编辑 / 去 AIGC · 📑 引用 / 复现 / 同行评审 · 🛠️ 数据 / 工具 / 基础设施
 >
@@ -288,6 +288,7 @@ cp -R skills/00.1-Full-empirical-analysis-skill_Python  ~/.claude/skills/ # 全�
 | ⭐ [71](skills/71-brycewang-lit-review-agent-tools/) | **lit-review-agent-tools** 🔍 | 文献综述工具选型 + 一键安装运行（MinerU / PaperQA2 / ASReview / STORM / MCP 服务器） | [→](docs/CONTENT_ZH.md#skill-71) | [brycewang-stanford/lit-review-agent-tools](https://github.com/brycewang-stanford/lit-review-agent-tools) |
 | ⭐ [72](skills/72-kaggle-research/) | **Kaggle Research** 🧪 | 通过官方 CLI 安全检索 Kaggle 资源、限界下载公开数据并保留审计证据 | [→](docs/CONTENT_ZH.md#skill-72) | [⭐ 本仓库](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills) |
 | ⭐ [73](skills/73-brycewang-p-hacking-skills/) | **p-hacking-skills** 🔬 | p-hacking 体检室：在真实效应为零的数据上仪表化规格搜索，给出诚实 p 值、p 曲线检测与预注册免疫（教学与审计用） | [→](docs/CONTENT_ZH.md#skill-73) | [brycewang-stanford/p-hacking-skills](https://github.com/brycewang-stanford/p-hacking-skills) |
+| ⭐ [74](skills/74-brycewang-spss-amos-sem/) | **spss-amos-sem** 📋 | 问卷数据结构方程全流程（SPSS + AMOS）：清洗、信度、EFA、CFA（CR / AVE / HTMT）、结构模型、bootstrap 中介、多群组、PROCESS；自动生成 SPSS 语法、AMOS 程序与中文三线表 | [→](docs/CONTENT_ZH.md#skill-74) | [⭐ 本仓库](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills) |
 
 > **想看更详细的描述（主题分类、字段、统计）？** 见 [`docs/CONTENT_ZH.md`](docs/CONTENT_ZH.md) 中标注 `#skill-NN` 锚点的同一张表 —— 它是每个合集的完整描述所在的扩展正文。
 

@@ -5,6 +5,32 @@ This is the project's narrative changelog. `README.md` keeps only a short
 
 ## Unreleased
 
+### New collection: spss-amos-sem (skill 74)
+
+- **`skills/74-brycewang-spss-amos-sem/` — first-party, 1 skill.** The
+  questionnaire structural-equation workflow that Chinese management,
+  psychology, education, nursing and tourism theses use (SPSS for cleaning,
+  reliability and EFA; AMOS for CFA and the structural model; PROCESS for
+  moderation). One YAML spec card drives an R/lavaan engine set to AMOS
+  defaults (ML, first loading fixed, chi-square = (N - 1)F, bias-corrected
+  bootstrap) and writes runnable SPSS syntax, an Amos Graphics checklist with
+  the numbers each AMOS table should show, AMOS Program Editor VB.NET code
+  (syntax from the IBM Amos 28 User's Guide; not run in AMOS), user-defined
+  estimands for specific indirect effects, Chinese three-line tables in Word,
+  a results-chapter draft, a path diagram and a model-modification log that
+  checks each stated reason against the data. PROCESS models 1/4/6/7/8/14
+  are reproduced with OLS and percentile bootstrap. A simulated survey with a
+  known generating model and planted data problems ships as the demo, with a
+  48-check end-to-end test (`tests/test_demo.R`, needs R; not wired into
+  `make test`). The catalog goes from 77 collections and 1,107 skills to 78
+  and 1,108.
+- `scripts/find-skill.py` gains SEM aliases (`sem`, `cfa`, `efa`, `amos`) and
+  CJK aliases (结构方程 / 验证性因子 / 问卷 / 量表 / 信度 / 效度 / 共同方法偏差 /
+  中介 / 调节 / 测量不变性 …); before this, "结构方程模型" matched nothing and
+  "structural equation model CFA" ranked the structural-econometrics skill
+  first. The collection is a `core` tier, and the routing eval gains four
+  cases (57 cases, tiered hit@3 100%).
+
 ### New collection: p-hacking-skills (skill 73)
 
 - **`skills/73-brycewang-p-hacking-skills/` — first-party, 11 skills.** A
