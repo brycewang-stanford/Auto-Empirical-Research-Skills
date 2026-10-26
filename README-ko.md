@@ -230,6 +230,7 @@ AERS는 두 가지를 동시에 제공합니다: (1) 완전한 실증 파이프�
 | [`61` · research-methods](skills/61-phdemotions-research-methods/) | 사전 등록에 맞춘 확증적 검정 | 9 |
 | [`63` · scientific-agent-skills](skills/63-tondevrel-scientific-agent-skills/) | DoWhy 식별–추정–반증 프레임워크 | 2 |
 | [`64` · mcp-stata](skills/64-tmonk-mcp-stata/) | 20개 Stata 인과추론 & 재현 스킬 | 20 |
+| ⭐ **[`74` · spss-amos-sem](skills/74-brycewang-spss-amos-sem/)** 📋 | 설문 SEM(SPSS + AMOS): 신뢰도·타당도, CFA, 매개, PROCESS | 1 |
 
 **📚 문헌, 읽기 & 연구 설계** — *질문에서 근거 기반까지*
 
@@ -281,7 +282,6 @@ AERS는 두 가지를 동시에 제공합니다: (1) 완전한 실증 파이프�
 | [`54` · open-science-skills](skills/54-scdenney-open-science-skills/) | 인용 일치, DOI & 주장-근거 감사 | 24 |
 | [`62` · citation-checker](skills/62-PHY041-claude-skill-citation-checker/) | CrossRef / S2 / OpenAlex 대비 인용 검증 | 1 |
 | ⭐ **[`73` · p-hacking-skills](skills/73-brycewang-p-hacking-skills/)** 🔬 | 사양 탐색의 측정과 감사: 정직한 p값, p-curve, 사전등록 | 11 |
-| ⭐ **[`74` · spss-amos-sem](skills/74-brycewang-spss-amos-sem/)** 📋 | 설문 SEM(SPSS + AMOS): 신뢰도·타당도, CFA, 매개, PROCESS | 1 |
 
 **🛠️ 데이터, 도구 & 인프라** — *파이프라인 아래의 배관*
 

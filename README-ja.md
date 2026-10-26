@@ -230,6 +230,7 @@ AERS は同時に二つの性格を持ちます。(1) 完全な実証パイプ�
 | [`61` · research-methods](skills/61-phdemotions-research-methods/) | 事前登録に対応した確証的検定 | 9 |
 | [`63` · scientific-agent-skills](skills/63-tondevrel-scientific-agent-skills/) | DoWhy の identify–estimate–refute フレームワーク | 2 |
 | [`64` · mcp-stata](skills/64-tmonk-mcp-stata/) | 20 個の Stata 因果推論 & レプリケーションスキル | 20 |
+| ⭐ **[`74` · spss-amos-sem](skills/74-brycewang-spss-amos-sem/)** 📋 | 質問紙 SEM（SPSS + AMOS）：信頼性・妥当性、CFA、媒介、PROCESS | 1 |
 
 **📚 文献・読解 & 研究設計** — *課題からエビデンスベースへ*
 
@@ -281,7 +282,6 @@ AERS は同時に二つの性格を持ちます。(1) 完全な実証パイプ�
 | [`54` · open-science-skills](skills/54-scdenney-open-science-skills/) | 引用の整合性、DOI & 主張裏付けの監査 | 24 |
 | [`62` · citation-checker](skills/62-PHY041-claude-skill-citation-checker/) | CrossRef / S2 / OpenAlex に対して引用を検証 | 1 |
 | ⭐ **[`73` · p-hacking-skills](skills/73-brycewang-p-hacking-skills/)** 🔬 | 仕様探索の計測と監査：誠実な p 値、p-curve、事前登録 | 11 |
-| ⭐ **[`74` · spss-amos-sem](skills/74-brycewang-spss-amos-sem/)** 📋 | 質問紙 SEM（SPSS + AMOS）：信頼性・妥当性、CFA、媒介、PROCESS | 1 |
 
 **🛠️ データ・ツール & インフラ** — *パイプラインを支える配管*
 

@@ -232,6 +232,7 @@ AERS 同時是兩樣東西：(1) 一小撮**自研旗艦 skill**，能跑通完�
 | [`61` · research-methods](skills/61-phdemotions-research-methods/) | 與預註冊對齊的驗證性檢驗 | 9 |
 | [`63` · scientific-agent-skills](skills/63-tondevrel-scientific-agent-skills/) | DoWhy 識別–估計–反駁框架 | 2 |
 | [`64` · mcp-stata](skills/64-tmonk-mcp-stata/) | 20 個 Stata 因果推斷與重現 skill | 20 |
+| ⭐ **[`74` · spss-amos-sem](skills/74-brycewang-spss-amos-sem/)** 📋 | 問卷結構方程（SPSS + AMOS）：信效度、CFA、中介、PROCESS | 1 |
 
 **📚 文獻、閱讀與研究設計** —— *從問題到證據基礎*
 
@@ -283,7 +284,6 @@ AERS 同時是兩樣東西：(1) 一小撮**自研旗艦 skill**，能跑通完�
 | [`54` · open-science-skills](skills/54-scdenney-open-science-skills/) | 引用一致性、DOI 與主張佐證稽核 | 24 |
 | [`62` · citation-checker](skills/62-PHY041-claude-skill-citation-checker/) | 對照 CrossRef / S2 / OpenAlex 驗證引用 | 1 |
 | ⭐ **[`73` · p-hacking-skills](skills/73-brycewang-p-hacking-skills/)** 🔬 | 規格搜索的量測與稽核：誠實 p 值、p 曲線、預註冊 | 11 |
-| ⭐ **[`74` · spss-amos-sem](skills/74-brycewang-spss-amos-sem/)** 📋 | 問卷結構方程（SPSS + AMOS）：信效度、CFA、中介、PROCESS | 1 |
 
 **🛠️ 資料、工具與基礎設施** —— *流水線底下的管路*
 

@@ -236,6 +236,7 @@ AERS is two things at once: (1) a small set of **first-party flagship skills** t
 | [`61` · research-methods](skills/61-phdemotions-research-methods/) | Confirmatory testing matched to pre-registration | 9 |
 | [`63` · scientific-agent-skills](skills/63-tondevrel-scientific-agent-skills/) | DoWhy identify–estimate–refute framework | 2 |
 | [`64` · mcp-stata](skills/64-tmonk-mcp-stata/) | 20 Stata causal-inference & replication skills | 20 |
+| ⭐ **[`74` · spss-amos-sem](skills/74-brycewang-spss-amos-sem/)** 📋 | Questionnaire SEM with SPSS + AMOS: reliability, validity, CFA, mediation, PROCESS | 1 |
 
 **📚 Literature, reading & research design** — *from question to evidence base*
 
@@ -287,7 +288,6 @@ AERS is two things at once: (1) a small set of **first-party flagship skills** t
 | [`54` · open-science-skills](skills/54-scdenney-open-science-skills/) | Citation parity, DOI & claim-support audit | 24 |
 | [`62` · citation-checker](skills/62-PHY041-claude-skill-citation-checker/) | Verify citations vs CrossRef / S2 / OpenAlex | 1 |
 | ⭐ **[`73` · p-hacking-skills](skills/73-brycewang-p-hacking-skills/)** 🔬 | Measure & audit specification search: honest p-values, p-curve, pre-registration | 11 |
-| ⭐ **[`74` · spss-amos-sem](skills/74-brycewang-spss-amos-sem/)** 📋 | Questionnaire SEM with SPSS + AMOS: reliability, validity, CFA, mediation, PROCESS | 1 |
 
 **🛠️ Data, tooling & infrastructure** — *the plumbing under the pipeline*
 
