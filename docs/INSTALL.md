@@ -25,14 +25,20 @@ vendored child skill as a separate IDE skill.
 > `git clone --recurse-submodules` (or run `git submodule update --init`)
 > before copying, or the orchestrator folder will be empty.
 
-For a local Codex-style install:
+For a local Codex install (user skills live in `~/.agents/skills/`; older Codex
+versions read `~/.codex/skills/`). Full Codex steps, including Windows and
+project-scoped installs, are in [`../INSTALL.md`](../INSTALL.md) section 2C.
 
 ```bash
 # Run from the repository root.
-mkdir -p ~/.codex/skills/auto-empirical-research-skills
-rsync -a --exclude .git --exclude .pytest_cache --exclude __pycache__ --exclude '*.pyc' \
-  ./ ~/.codex/skills/auto-empirical-research-skills/
+mkdir -p ~/.agents/skills/auto-empirical-research-skills
+rsync -a --exclude .git --exclude .pytest_cache --exclude .DS_Store \
+  --exclude __pycache__ --exclude '*.pyc' \
+  ./ ~/.agents/skills/auto-empirical-research-skills/
 ```
+
+Easiest of all: copy this folder's local path to your agent (Claude Code / Codex /
+WorkBuddy) and ask it to install the skills by following `INSTALL.md` method 0.
 
 If an IDE asks for a GitHub path, use the repository root (`.`) and the skill
 name `auto-empirical-research-skills`.
@@ -42,9 +48,9 @@ name `auto-empirical-research-skills`.
 Most agent runtimes expect a folder that contains `SKILL.md`.
 
 ```bash
-# Example: install AER workflow locally for Codex-style skill discovery
-mkdir -p ~/.codex/skills
-cp -R skills/50-brycewang-aer-skills/skills/aer-workflow ~/.codex/skills/aer-workflow
+# Example: install AER workflow locally for Codex skill discovery
+mkdir -p ~/.agents/skills
+cp -R skills/50-brycewang-aer-skills/skills/aer-workflow ~/.agents/skills/aer-workflow
 ```
 
 For Claude Code-style local installs:
@@ -54,7 +60,7 @@ mkdir -p ~/.claude/skills
 cp -R skills/50-brycewang-aer-skills/skills/aer-workflow ~/.claude/skills/aer-workflow
 ```
 
-For Codex-style local installs:
+For older Codex versions that only read `~/.codex/skills/`:
 
 ```bash
 mkdir -p ~/.codex/skills

@@ -85,6 +85,7 @@ CJK_ALIASES = {
     "学位论文": "thesis dissertation",
     "模板": "template",
     "论文": "paper",
+    "实证": "empirical",
     "写作": "writing",
     "中文": "chinese",
     "数据清洗": "data cleaning",

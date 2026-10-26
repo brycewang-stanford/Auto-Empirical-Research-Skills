@@ -36,7 +36,7 @@ The catalog holds **1,108 skills across 78 vendored collections**. Never read th
      ```
 
      A plain `grep -in "synthetic control" catalog/skills.json` works too when a rough match is enough.
-4. For installation help, use `docs/INSTALL.md` for Codex-style copy installs and `INSTALL.md` for Claude Code marketplace/plugin installs.
+4. For installation help, use `INSTALL.md`: method 0 when the user hands you this folder's local path and asks you to install it, section 2C for Codex (`~/.agents/skills/`), method 1 for Claude Code marketplace/plugin installs. `docs/INSTALL.md` has the short copy-install reference.
 5. If editing this repository, keep parent and nested repos separate. In particular, inspect `git status` inside `skills/69-Paper-WorkFlow/` (a git submodule) before touching it.
 
 ## Method → where to start

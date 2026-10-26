@@ -1,7 +1,8 @@
 # Installation & Quick Start
 
-There are four ways to use the skills in this collection, from "one command" to
-"zero install". Pick the one that matches how you work.
+There are several ways to use the skills in this collection, from "let your agent do
+it" to "zero install". Pick the one that matches how you work. **If you are not sure,
+use method 0.**
 
 > **Requirements for the plugin path:** [Claude Code](https://code.claude.com/docs)
 > **v2.1+** (the `/plugin` marketplace commands). Run `claude --version` to check, and
@@ -13,7 +14,63 @@ There are four ways to use the skills in this collection, from "one command" to
 
 ---
 
-## 1. One-command install — first-party plugins (recommended)
+## 0. Easiest — hand your agent the local folder path and let it install
+
+No commands to remember, no per-tool skills directories to look up. Give the path of
+your local copy to the agent you already use (Claude Code / Codex / WorkBuddy …) and
+let it read this `INSTALL.md` and install itself.
+
+**Step 1 — get the folder and copy its path**
+
+```bash
+git clone --recurse-submodules https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills.git
+```
+
+(GitHub's *Download ZIP* works too, but it leaves the `skills/69-Paper-WorkFlow/`
+submodule empty.) Then copy the folder's full path:
+
+| OS | How to copy a path |
+|:--|:--|
+| macOS | Select the folder in Finder → `Option + Command + C` (or hold `Option` in the right-click menu → "Copy … as Pathname") |
+| Windows | `Shift` + right-click the folder → "Copy as path" |
+| Any | Drag the folder into the agent's input box / terminal — the path is filled in |
+
+**Step 2 — send the agent this message** (swap in your own path and tool):
+
+```text
+帮我安装这个本地 skills 包：/Users/<you>/Downloads/Auto-Empirical-Research-Skills
+我用的是 Codex（或 Claude Code / WorkBuddy），装到全局，所有项目都能用。
+请先读这个文件夹里的 INSTALL.md，按我这个软件的方式装好；
+装完告诉我装到了哪个目录、怎么确认已经生效。
+```
+
+(English: "Install the local skills package at <path> for Codex / Claude Code, globally.
+Read its INSTALL.md first, then tell me where it went and how to check it works.")
+
+**Step 3 — verify in a new session**
+
+```text
+用 auto-empirical-research-skills 帮我找一个做交错 DID 事件研究的 skill
+```
+
+If the agent names the skill it picked and the `SKILL.md` it read, the install worked.
+
+> **Install notes for the agent** (follow these when a user hands you this folder):
+> - Default to the **whole-repo router** (method 2 / 2C): install the folder as **one**
+>   skill named `auto-empirical-research-skills`; the root `SKILL.md` routes on demand
+>   to the 1,108 child skills.
+> - **Do not** flat-copy every folder under `skills/` into the skills directory — that
+>   loads ~64k tokens of descriptions at once and makes matching worse. Only copy
+>   individual skills (method 3) when the user names specific ones.
+> - Skip `.git`, `.pytest_cache`, `.DS_Store`, `__pycache__`, `*.pyc`. Afterwards, list the
+>   target directory and confirm `SKILL.md` sits at its top level.
+> - Target directory: Claude Code → `~/.claude/skills/`; Codex → `~/.agents/skills/`
+>   (older Codex: `~/.codex/skills/`); WorkBuddy / CodeBuddy and other IDEs → that tool's
+>   own skills directory or "import skill" flow — ask the user if unsure.
+
+---
+
+## 1. One-command install — first-party plugins (Claude Code)
 
 This repository ships a **Claude Code plugin marketplace** for its first-party,
 install-ready skill stacks. Add the marketplace once, then install any plugin from it.
@@ -68,18 +125,11 @@ claude plugin details aer-skills    # shows the skills + token cost of any insta
 
 Some IDEs ask you to pick a folder and validate it as one skill. This repo now
 supports that path with the root [`SKILL.md`](SKILL.md): importing the repository
-root registers **one lightweight AERS catalog router**, not 1,150 separate child
+root registers **one lightweight AERS catalog router**, not 1,108 separate child
 skills. The router chooses the right vendored skill and then reads only that
 child skill's `SKILL.md`.
 
-For local Codex-style discovery:
-
-```bash
-# Run from the repository root.
-mkdir -p ~/.codex/skills/auto-empirical-research-skills
-rsync -a --exclude .git --exclude .pytest_cache --exclude __pycache__ --exclude '*.pyc' \
-  ./ ~/.codex/skills/auto-empirical-research-skills/
-```
+For Codex, see **2C** below for the full steps.
 
 If your IDE has a GitHub import flow, select the repository root and name the
 skill `auto-empirical-research-skills`. If it asks for a path, use `.`.
@@ -87,6 +137,54 @@ skill `auto-empirical-research-skills`. If it asks for a path, use `.`.
 Use this mode when you want a browse-and-route entry point. If you want the IDE
 to register one specific skill directly, use method 3 and copy the exact folder
 that contains that skill's `SKILL.md`.
+
+### 2C. Codex (OpenAI Codex CLI / Codex app / IDE extension)
+
+Codex discovers skills in these directories ([docs](https://developers.openai.com/codex/skills)):
+
+| Scope | Directory | Notes |
+|:--|:--|:--|
+| **Global** (every project) | `~/.agents/skills/` | Recommended |
+| Global (older Codex) | `~/.codex/skills/` | Older releases only read this; use it if `~/.agents/skills/` has no effect |
+| **Project** (this repo only) | `<project root>/.agents/skills/` | Can be committed and shared with a team |
+
+**Whole repo as one router skill (recommended)** — run from the repository root (the
+level that holds `SKILL.md`):
+
+```bash
+# macOS / Linux: global install
+mkdir -p ~/.agents/skills/auto-empirical-research-skills
+rsync -a --exclude .git --exclude .pytest_cache --exclude .DS_Store \
+  --exclude __pycache__ --exclude '*.pyc' \
+  ./ ~/.agents/skills/auto-empirical-research-skills/
+
+# Project-only: swap the target for <project root>/.agents/skills/auto-empirical-research-skills/
+```
+
+```powershell
+# Windows PowerShell: global install
+$dst = "$HOME\.agents\skills\auto-empirical-research-skills"
+New-Item -ItemType Directory -Force $dst | Out-Null
+robocopy . $dst /E /XD .git .pytest_cache __pycache__ /XF .DS_Store *.pyc
+```
+
+**One skill only** — copy the folder that **directly contains** its `SKILL.md`:
+
+```bash
+mkdir -p ~/.agents/skills
+cp -R skills/50-brycewang-aer-skills/skills/aer-workflow ~/.agents/skills/aer-workflow
+```
+
+**Verify:** Codex usually picks up new skills automatically; restart it if not. Type `$`
+or `/skills` in Codex and look for `auto-empirical-research-skills`, or just ask:
+
+```text
+用 $auto-empirical-research-skills 帮我选一个做断点回归（RDD）的 skill
+```
+
+> [`agents/openai.yaml`](agents/openai.yaml) already sets the Codex display name
+> ("AERS Catalog Router") and default prompt — no edits needed. To disable a skill without
+> deleting it, use a `[[skills.config]]` entry in `~/.codex/config.toml`.
 
 ---
 
@@ -103,9 +201,9 @@ cp -R skills/00.1-Full-empirical-analysis-skill_Python  .claude/skills/empirical
 # Or global (every project sees it)
 cp -R skills/00.1-Full-empirical-analysis-skill_Python  ~/.claude/skills/empirical-python
 
-# Codex global skill folder
-mkdir -p ~/.codex/skills
-cp -R skills/00.1-Full-empirical-analysis-skill_Python  ~/.codex/skills/empirical-python
+# Codex global skill folder (older Codex: ~/.codex/skills)
+mkdir -p ~/.agents/skills
+cp -R skills/00.1-Full-empirical-analysis-skill_Python  ~/.agents/skills/empirical-python
 ```
 
 The folder you copy must contain a `SKILL.md` at its top level (some catalog skills nest
@@ -171,9 +269,10 @@ board itself: [`docs/EXTERNAL_SCOREBOARD.md`](docs/EXTERNAL_SCOREBOARD.md).
 
 | You want to… | Use |
 |--------------|-----|
+| Not remember any commands — let your agent (Claude Code / Codex / WorkBuddy) install it | **Method 0** (hand it the local path) |
 | Install a maintained, versioned skill stack and get updates | **Method 1** (marketplace) |
-| Import the whole repo into Codex, CodeBuddy, or another IDE | **Method 2** (root router skill) |
-| Grab one specific skill from the catalog and tweak it | **Method 3** (copy into `.claude/skills/` or `.codex/skills/`) |
+| Import the whole repo into Codex, CodeBuddy, or another IDE | **Method 2** (root router skill; Codex → **2C**) |
+| Grab one specific skill from the catalog and tweak it | **Method 3** (copy into `.claude/skills/` or `.agents/skills/`) |
 | Try a skill for one session without installing | **Method 3** (`--plugin-dir`) |
 | Get the result without installing anything | **Method 4** (CoPaper.AI) |
 | Benchmark your own agent against this repo's exam | **Method 5** (`aers-score`) |
@@ -198,6 +297,9 @@ board itself: [`docs/EXTERNAL_SCOREBOARD.md`](docs/EXTERNAL_SCOREBOARD.md).
 - **`aers-score` cannot find the exam** — it needs an AERS checkout. Set
   `export AERS_REPO=/path/to/Auto-Empirical-Research-Skills`, pass `--repo PATH`,
   or run from inside the checkout. `aers-score where` shows what it resolved.
+- **Codex doesn't list the skill** — restart Codex first; then check that
+  `~/.agents/skills/auto-empirical-research-skills/SKILL.md` exists (an extra nested
+  folder level is the most common mistake); on older Codex, install to `~/.codex/skills/`.
 - **Whole-repo import failed in Codex / CodeBuddy** — import the repository root
   as `auto-empirical-research-skills` so the root `SKILL.md` is the selected
   skill folder. Do not point a single-skill importer at `skills/` itself.

@@ -87,7 +87,17 @@
 |:--|:--|:--|
 | **目录**（当前会话临时用） | "只在当前目录用，不要全局安装" | 当前工作目录下的 `.claude/skills/` |
 | **项目**（团队共享，可提交进 git） | "装到本项目" | 项目根目录 `.claude/skills/` |
-| **全局**（所有项目可用） | "装到全局" | `~/.claude/skills/`（Codex 为 `~/.codex/skills/`） |
+| **全局**（所有项目可用） | "装到全局" | `~/.claude/skills/`（Codex 为 `~/.agents/skills/`，老版本 `~/.codex/skills/`） |
+
+**已经 clone / 下载到本地？** 把 `Auto-Empirical-Research-Skills` 文件夹的本地路径复制给 Agent，让它读 [`INSTALL.md`](INSTALL.md) 自己装：
+
+```text
+帮我安装这个本地 skills 包：/Users/你的用户名/Downloads/Auto-Empirical-Research-Skills
+我用的是 Codex（或 Claude Code / WorkBuddy），装到全局，所有项目都能用。
+请先读这个文件夹里的 INSTALL.md，按我这个软件的方式装好；装完告诉我装到了哪个目录、怎么确认已经生效。
+```
+
+> 复制路径：macOS 在访达选中文件夹按 `Option + Command + C`；Windows 按住 `Shift` 右键 →「复制为路径」；或者直接把文件夹拖进 Agent 输入框。详细步骤见 [`INSTALL.md`](INSTALL.md) 方法 0。
 
 ### 手动安装（两种，任选其一）
 
@@ -121,7 +131,7 @@ cp -R skills/00.1-Full-empirical-analysis-skill_Python  ~/.claude/skills/ # 全�
 用面板数据跑一个 Callaway–Sant'Anna 事件研究，并出 HonestDiD 稳健性和期刊级表格
 ```
 
-> 完整安装说明（Codex / CodeBuddy 整库导入、`--plugin-dir` 单次加载、常见故障排查）见 [`INSTALL.md`](INSTALL.md)。
+> 完整安装说明（Codex 安装见方法 2C、Codex / CodeBuddy 整库导入、`--plugin-dir` 单次加载、常见故障排查）见 [`INSTALL.md`](INSTALL.md)。
 
 ---
 
