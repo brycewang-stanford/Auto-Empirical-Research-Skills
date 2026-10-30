@@ -590,6 +590,7 @@ make check       # 完整 gate：validate + Python 编译 + 单元测试 + eval 
 
 敘事版更新日誌已遷至 [**CHANGELOG.md**](CHANGELOG.md)。近期要點：
 
+- **2026-10** —— 對照 **GitHub 星數前十的去 AI 味 skill** 與兩個文本去浮水印倉庫，升級自研 [**de-AIGC-skills**](skills/48-de-AIGC-skills/)（[來源與取捨](skills/48-de-AIGC-skills/references/lineage.md)）：英 30 + 中 28 類模式、只診斷 / 編輯 / 作者重述三種模式與分章節改動上限，新增 stdlib 腳本 [`aigc_audit.py`](skills/48-de-AIGC-skills/scripts/aigc_audit.py)——改寫若遺失或憑空新增數字、引用、表格引用即判失敗，並為浮水印的作者重述量測草稿保留率。依實測證據刪除舊的句長配額與所有無測量依據的檢測率說法；溯源清理新增形近字元、行尾空白隱寫、docx 內嵌圖片、壓縮 PDF 串流與投稿 zip。另新增 [**spss-amos-sem**](skills/74-brycewang-spss-amos-sem/)（合集 74）。
 - **2026-08** —— 把數值基準對外開放：[`aers-score`](aers_score/README.md) CLI 與 [`docs/EXTERNAL_SCOREBOARD.md`](docs/EXTERNAL_SCOREBOARD.md)——後者**用同一套評分器重算每份提交的原始 candidate**，而不是刊登提交者自報的數字。新增**結構需求估計**為方法族 18（價格內生性、彈性不是係數、邊際成本由 FOC 反演）；為自有的 Python/Stata/R 旗艦技能補上首批行為級 eval；把 vendored 合集的安全掃描改成「有合集從未掃過就讓門禁掛掉」的門。另加兩個端到端復現——含標準誤的 Card (1995)，以及 NSW 實驗（LaLonde 題所對照的 +$1,794 從此是**推導**出來的，不再只是引用）。
 - **2026-07** —— 發布首個 tagged release **v2026.07**；方法嚴謹性覆蓋圖擴到 **16 個方法族全閉環**（新增 CATE、分位數效應、Bartik 移位份額、因果中介、Oaxaca 分解，每族 eval 場景 + 數值基準雙覆蓋），基準擴到 **16 任務**、評測套件擴到 **29 場景 / 159 rubric**；上線機器生成的發布快照、rigor 覆蓋徽章與六語 README 數字一致性門。
 - **2026-05** —— 收錄 **AER-skills**（Top-5 經濟學投稿套件，9 個 skill）並設週更上游同步；數值基準擴到 **5 個因果復原任務**、評測套件擴到 **17 場景 / 95 rubric**。

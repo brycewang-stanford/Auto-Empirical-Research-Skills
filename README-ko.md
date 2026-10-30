@@ -587,6 +587,7 @@ Replication → Submission → Peer Review Response → Defense
 
 서술형 변경 이력은 [**CHANGELOG.md**](CHANGELOG.md)로 옮겨졌습니다. 최근 주요 사항:
 
+- **2026-10** — 자체 제작 [**de-AIGC-skills**](skills/48-de-AIGC-skills/)를 **GitHub 스타 상위 10개 humanizer skill**과 텍스트 워터마크 제거 도구 2개에 비추어 개정([출처와 취사](skills/48-de-AIGC-skills/references/lineage.md)): 영어 30 + 중국어 28 패턴, 진단 전용 / 편집 / 저자 재작성 3가지 모드와 섹션별 편집 상한, 재작성에서 숫자·인용·표 참조가 사라지거나 새로 생기면 실패하는 stdlib 스크립트 [`aigc_audit.py`](skills/48-de-AIGC-skills/scripts/aigc_audit.py)(워터마크 대응 저자 재작성을 위한 초안 잔존율 측정 포함). 근거 없는 문장 길이 할당량과 검출률 주장은 삭제. 출처 스크러버는 유사 문자, 공백 스테가노그래피, docx 내 그림, 압축 PDF 스트림, 투고 zip까지 처리. [**spss-amos-sem**](skills/74-brycewang-spss-amos-sem/)(합집 74)도 추가.
 - **2026-08** — 수치 벤치마크를 외부에 개방: [`aers-score`](aers_score/README.md) CLI와 [`docs/EXTERNAL_SCOREBOARD.md`](docs/EXTERNAL_SCOREBOARD.md) — 후자는 제출된 숫자를 싣는 대신 **제출된 원본 candidate를 같은 채점기로 다시 계산**합니다. 방법론 패밀리 18로 **구조적 수요 추정** 추가(가격 내생성, 탄력성은 계수가 아니다, 한계비용은 FOC에서 반전), 자체 Python/Stata/R 플래그십에 첫 행동 수준 eval 부여, 벤더링된 컬렉션 보안 스캔을 '스캔되지 않은 컬렉션이 있으면 실패하는' 게이트로 전환. 엔드투엔드 복제도 두 건 추가 — 표준오차를 포함한 Card (1995), 그리고 NSW 실험(LaLonde 과제가 대조하는 +$1,794를 인용이 아니라 **도출**).
 - **2026-07** — 첫 태그 릴리스 **v2026.07** 발행; 엄밀성 커버리지 맵을 **16개 방법론 패밀리 전체 폐쇄 루프**로 확장(CATE, 분위수 효과, Bartik 시프트-셰어, 인과 매개, Oaxaca 분해 추가 — 각 패밀리에 eval 시나리오와 수치 벤치마크 모두 제공), 벤치마크는 **16개 과제**, eval 하니스는 **29개 시나리오 / 159개 루브릭 항목**으로 확대; 기계 생성 릴리스 스냅숏, rigor 커버리지 배지, 6개 언어 README 숫자 일관성 게이트 도입.
 - **2026-05** — **AER-skills**(Top-5 경제학 투고 스택, 9개 스킬)를 매주 상류 동기화와 함께 벤더링; 수치 벤치마크를 **5개 인과 복원 과제**로, eval 하니스를 **17개 시나리오 / 95개 루브릭 항목**으로 확장.
