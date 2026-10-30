@@ -9,6 +9,17 @@ policy behind the provenance layer of `de-aigc-skills`: what each mark is, what
 can and cannot be done about it, and the exact code-point rules that
 `scripts/provenance_scrub.py` implements.
 
+**2026-10 update.** Compared against the two dedicated text-watermark removers
+on GitHub (Shreyan1/ai-text-watermark-remover "reweave", the most-starred at
+19★; cyzanfar/text-watermark-remover, MIT) and im-not-ai's watermark runbook,
+the provenance layer now also covers script-bound format characters, Latin
+look-alikes (report-first, math- and Cyrillic-safe), whitespace-pattern
+steganography, figures pasted *inside* a `.docx`, docx rsids / template paths /
+sensitivity labels, compressed PDF streams and pdfTeX figure info, `__MACOSX`
+entries in a submission zip, and macOS download-origin attributes — and gains
+a *draft-retention* measurement for the ownership pass (§4.1). Neither upstream
+repo has a detector that works on Claude or Gemini text (§7).
+
 2026 年 8 月起，"去 Claude 水印"成为 AI 辅助写作圈的高频需求。但被叫做"AI 水印"的其实是
 三种完全不同的东西。把它们混为一谈，要么白忙（找根本不存在的隐藏字符），要么伤稿
 （把合法的中文排版折叠成 ASCII）。本文件是本 skill 溯源层的政策依据。
@@ -82,6 +93,7 @@ variants, dashes). Hence the CJK-aware context rules below.
 | U+FE00–U+FE0D (VS1–14) | after a CJK ideograph, a math symbol (∅︀) or an emoji base | removed |
 | U+FE0E, U+FE0F (VS15/16) | after an emoji base, keycap base, CJK or math symbol (❤️, 1️⃣) | removed |
 | U+E0100–U+E01EF (ideographic variation selectors) | after a CJK ideograph — glyph variants in personal and place names (邊󠄀 / 邊) | removed |
+| U+0600–0605, 06DD, 0890–0891, 08E2 (Arabic number signs), U+070F (Syriac), U+17B4–17B5 (Khmer), U+110BD / 110CD (Kaithi), U+13430–1343F (Egyptian), U+1BCA0–1BCA3 (shorthand), U+1D173–1D17A (musical) | next to a letter of the same script. The ranges are hard-coded, not "any Cf", so the policy does not shift with the interpreter's Unicode version | removed |
 | U+180B–U+180F (Mongolian selectors) | adjacent to Mongolian letters | removed |
 | U+115F, U+1160, U+3164, U+FFA0 (Hangul fillers) | adjacent to Hangul | removed |
 
@@ -92,6 +104,15 @@ variants, dashes). Hence the CJK-aware context rules below.
 | U+2000–U+200A, U+202F, U+205F, U+1680 (exotic spaces) | → U+0020 | look-alike spaces are the most common carrier in 2026 tooling |
 | U+00A0 NBSP | → U+0020 (`--keep-nbsp` to preserve) | Word inserts NBSP deliberately ("Table 3"); the change is typographic, never semantic |
 | U+3000 ideographic space | **kept** in Chinese manuscripts or next to CJK; → U+0020 in English prose | 中文段首两个全角空格是排版规范，不是水印 |
+| Trailing spaces / tabs before a line break | removed in `.txt` `.tex` `.bib` `.html`; in Markdown exactly two trailing spaces (a hard break) are kept; **never** in `.csv` / `.tsv` (a trailing tab is an empty field) or inside docx runs | SNOW-style tools hide bits here. Three or more lines with trailing whitespace of different shapes, or a tab / space mix, raise a `whitespace_pattern` note. Double spaces *inside* a line are never collapsed (tables, alignment) |
+
+### 3.3a Look-alikes 形近字符
+
+| Code point(s) | Action | Why it is safe |
+|---|---|---|
+| U+037E → `;`, U+0387 → `·`, U+0374 → `ʹ`, U+1FEF → `` ` ``, U+1FFD → `´`, U+212A Kelvin → `K`, U+212B Ångström → `Å`, U+2126 Ohm → `Ω`, U+0340 / 0341 / 0343 → their canonical combining marks | → canonical | each is a *singleton* canonical decomposition: the fold is exactly what NFC does to that character and nothing else (the test suite checks this against `unicodedata`). Whole-text NFC is still never applied — it rewrites CJK compatibility ideographs (U+F900 → U+8C48) that appear in names |
+| Fullwidth Latin letters / digits (U+FF10–FF19, FF21–FF3A, FF41–FF5A) | → ASCII **only inside an otherwise-ASCII word in an English manuscript** ("ＴFP" → "TFP", "Table３" → "Table3") | a standalone "ＡＢ" is left alone, and Chinese text keeps fullwidth digits (GB/T 15835 prefers half-width, but that is the author's call) |
+| Cyrillic / Greek letters inside a Latin word ("Тhe" with Cyrillic Т; "rеform" with Cyrillic е) | **reported** as `review (homoglyph)`; folded only with `--fold-homoglyphs` | a word is flagged only if it has ≥ 2 ASCII letters and *every* non-ASCII letter in it is a known look-alike; words with no Latin letters (a Russian citation, a standalone β) are never touched; `$…$`, `\(…\)`, `\[…\]` and equation environments are skipped; μ, β, Δ and other Greek notation are not on the list. Upstream folds 25 letters with no context check and turns *Экономика России* into *Экoнoмикa Рoccии* |
 
 ### 3.4 Never touched 绝不改动
 
@@ -104,7 +125,7 @@ These are the places where a generic scrubber breaks an empirical paper:
 - **U+00B7 middle dot** in transliterated names (亚当·斯密) and U+30FB in Japanese.
 - **Curly quotes** — standard in Word manuscripts and in Chinese; converted to straight quotes only with `--typography`, only in English source files (`.md`, `.tex`).
 - **Em dashes in English** are counted and listed for the author (EN20 decides comma / parenthesis / period per case) — never auto-replaced.
-- **NFKC normalisation is never applied.** It would fold R² → R2, ½ → 1/2, ﬁ → fi, fullwidth ＡＢ → AB, and turn a Chinese manuscript's punctuation into ASCII. Upstream tools offer `--nfkc` as an option; here it does not exist.
+- **NFKC normalisation is never applied.** It would fold R² → R2, ½ → 1/2, ﬁ → fi, fullwidth ＡＢ → AB, and turn a Chinese manuscript's punctuation into ASCII. Upstream tools offer `--nfkc` as an option; here it does not exist. A simulation of reweave's scrubber on an econ manuscript turned `R²` into `R2`, `β₁` into `β1`, `−0.043` into `-0.043`, `（2014–2022）` into `(2014-2022)`, `——` into `--`, and deleted every Chinese paragraph indent; cyzanfar's "safe" mode turns U+3000 into a plain space.
 - **Code spans and fenced blocks** in Markdown / HTML are skipped, so a document *about* invisible characters keeps its examples.
 
 ### 3.5 Where Layer A runs in the loop
@@ -147,6 +168,42 @@ So Step 3 splits into two deliverables:
 
 Change-log labels, per paragraph: `author-voiced` · `model-suggested, author-accepted` · `untouched`.
 
+### 4.1 Draft retention — the one number available 草稿保留率
+
+There is no detector, but there is arithmetic. A SynthID-style mark scores each
+token against the few tokens before it, so only stretches that survive
+*verbatim* from the model draft still carry the bias. Run the author's text
+against the model draft:
+
+```bash
+python3 scripts/aigc_audit.py compare model_draft.md author_final.md --by author
+```
+
+| Metric | Formula | Reads as |
+|---|---|---|
+| `R_n` (n = 2–5 words; 3, 4, 6, 8 characters for Chinese) | Σ_g min(c_final(g), c_draft(g)) / Σ_g c_final(g) over n-grams g | share of the final text's n-grams that were already in the draft |
+| `V_k` (k = 8 words / 12 characters) | final-text tokens inside verbatim runs of ≥ k tokens ÷ final-text tokens | how much of the text is long copied stretches |
+| `longest_verbatim_run` | longest matching block | the single worst stretch |
+
+The report line reads `B: unknown · draft-retention R2=…, R3=…, R4=…, R5=…,
+V8=…`. What it can and cannot say:
+
+- High `R4` / `V8` → most of the draft's wording is still there; the paragraph
+  is not yet `author-voiced`, whatever the change log says.
+- Low numbers bound how much draft wording survives. They do **not** show
+  authorship: a paraphrase by another model also drives them down while
+  writing a fresh watermark (§4, "What does not work"). That is why the
+  labels stay with the author and the report still says `B: unknown`.
+- No threshold turns these into a verdict. reweave's own toy experiment
+  (a word-level SynthID with its own key) still detected the mark 99% of the
+  time after ~10% of words changed and about 8% of the time after half — the
+  direction is clear, the operating point for Claude is not public.
+
+The same command runs the fidelity gate (every number, citation, table
+reference and significance statement must survive the author's rewrite), so
+one call answers both "is it still the model's wording?" and "did the facts
+survive?".
+
 **What does not work — and why it is worse than nothing**
 
 | Attempt | Outcome |
@@ -173,7 +230,13 @@ C2PA on figures and generator strings in docProps.
 | `.pdf` | Info dictionary (`/Producer`, `/Creator`, `/Author`), XMP (`<x:xmpmeta>`), C2PA (`jumb`), incremental updates that keep old metadata alive | report only: `exiftool -all= -overwrite_original paper.pdf` then `qpdf --linearize paper.pdf paper.clean.pdf`; verify with `c2patool`. |
 | `.png` / `.jpg` figures | C2PA manifest (`caBX` chunk / APP11 JUMBF), EXIF, XMP, `tEXt Software`, IPTC | `clean` drops those chunks / segments **losslessly** (no re-encode; ICC profiles and JFIF/Adobe markers are kept). Verify with `c2patool fig.png`. Better: re-export from the plotting script. |
 | `.svg` figures | `<metadata>` (Inkscape RDF, matplotlib dates), generator comments, `c2pa` namespaces | `clean` removes `<metadata>` and comments; if `c2pa` strings remain, regenerate the figure. |
-| `.tex` / `.md` / `.bib` | Layer A carriers only | `clean` |
+| `.docx` (2026-10) | `docProps/custom.xml` sensitivity labels (`MSIP_Label_*`: owner e-mail, tenant id) and WPS stamps (`KSOProductBuildVer`, `ICV`); `w:rsid*` revision-session ids in every part; the attached-template path in `word/_rels/settings.xml.rels` (often `C:\Users\<name>\…\Normal.dotm`); figures pasted into the document (`word/media/*.png|jpg`) with their own C2PA / EXIF / XMP | `clean` removes the identifying custom properties (Zotero / Mendeley properties are **kept** — citations need them), strips rsids, reduces the template path to its file name, and cleans embedded figures losslessly |
+| `.pdf` (2026-10) | XMP and Info hidden in Flate-compressed object streams; pdfTeX's `/PTEX.FileName` / `/PTEX.InfoDict` (each included figure's own Info, e.g. Matplotlib); absolute paths (`/Users/<name>/…`) | `inspect` now inflates streams before scanning and prints the pdfLaTeX fix: `\pdfsuppressptexinfo=-1 \pdftrailerid{} \pdfinfoomitdate=1` |
+| `.zip` submission package | `__MACOSX/._*` AppleDouble entries (they carry each file's extended attributes, including the download URL), `.DS_Store`, `Thumbs.db`; every member of a known kind | `clean` drops the junk entries and cleans members in memory (docx / md / tex / png / jpg / svg) |
+| any file on macOS | `com.apple.quarantine`, `kMDItemWhereFroms` (download URL), `kMDItemDownloadedDate` | reported; `xattr -c FILE` |
+| file names | `claude_draft_v3.docx`, `gpt4-figure2.png` | reported — rename before submission |
+| source files | front matter `generator:` / `model:`, `<meta name="generator">`, `<!-- generated by … -->`, "Generated with ChatGPT" lines | reported, never auto-removed (front matter can be load-bearing) |
+| `.tex` / `.md` / `.bib` | Layer A carriers and trailing-whitespace patterns | `clean` |
 
 The right instinct for an empirical paper is stronger than any scrubber: every
 figure and table should come out of the replication package's own scripts.
@@ -215,6 +278,9 @@ Rules for the prose around it: name what was verified (A, C), name what was not
 - growwithnouman/claude-watermark-remover — report-only mode, optional typography layer — <https://github.com/growwithnouman/claude-watermark-remover>
 - Independent tests of the August 2026 remover tools (pasqualepillitteri.it; BleepingComputer, *AI "watermark removers" flood the web. Almost none can prove they work.*) — the CJK / emoji breakage and the "no public detector" caveat come from here
 - Turnitin, Similarity Report *Flags* (hidden text, replaced characters)
+- Shreyan1/ai-text-watermark-remover ("reweave"; no license file — ideas only, no code) — the blanket format-character list, homoglyph and metadata scrub lists, and the meaning-constraint checker (numbers, entities, negation, antonym polarity) that `aigc_audit.py compare` adapts for papers. Its headline claim to remove "SynthID-Text, KGW, Unigram" rests on a self-built word-level SynthID toy (KGW and Unigram are never run), and its "regenerate with an unwatermarked local model" stage is evasion by design — not adopted
+- cyzanfar/text-watermark-remover (MIT) — two-way constraint counting (lost *and* introduced numbers, citations, modality) and the honest labelling of its KGW / Unigram / SynthID adapters as uncalibrated integration fixtures that need an operator-supplied key; its `bias_inversion` / `adversarial` / `mitigate` modes search for the smallest edit that clears a detector — not adopted
+- epoko77-ai/im-not-ai, `docs/watermark-baseline-runbook.md` (MIT) — never market a feature as watermark removal; baselines are estimates
 
 ---
 

@@ -5,6 +5,56 @@ This is the project's narrative changelog. `README.md` keeps only a short
 
 ## Unreleased
 
+### de-AIGC upgraded against the ten most-starred humanizer skills (skill 48)
+
+- **[`48-de-AIGC-skills`](skills/48-de-AIGC-skills/) re-read against its
+  field.** The ten most-starred dedicated de-AI-tone skills on GitHub
+  (blader/humanizer, op7418/Humanizer-zh, hardikpandya/stop-slop,
+  epoko77-ai/im-not-ai, conorbronsdon/avoid-ai-writing,
+  larashero3-dotcom/lieflat-less-ai-tone, Nanako0129/sepia,
+  AIScientists-Dev/academic-humanizer, MrGeDiao/shuorenhua,
+  LifelongLazyLearner/qu-ai-wei) and the two dedicated text-watermark removers
+  were read at source. What was adopted, where it lives, what was left out and
+  under which licence is [`references/lineage.md`](skills/48-de-AIGC-skills/references/lineage.md);
+  lieflat is CC BY-NC, so only its published measurements are cited.
+  **Patterns** EN01–EN22 → EN01–EN30 (chatbot residue, generation artifacts,
+  novelty padding, takeaway closers, boilerplate emphasis, vague magnitudes,
+  arguing with no one, repeated openers; staged contrast and process narration
+  folded into EN08 / EN12) and ZH01–ZH17 → ZH01–ZH28 (否定对举, 结论提示冒号,
+  破折号密度, 翻译腔, 同义轮换, 升华套话, 限定词堆叠, 加粗标签, 相邻句同构,
+  黑话, 套路开篇), plus a protect-list of academic phrasing in each library.
+  **Corrections the upstream evidence forced**: the "one short + one long
+  sentence per 200 words" quota is withdrawn (sentence-length CV scores AUROC
+  0.521, and "vary sentence length" prompts made text easier to detect); ZH04 /
+  ZH08 / ZH11 are demoted on lieflat's measurements; ZH14's hedge injection,
+  the rubric's "≥ 10 numbers / ≥ 2 limitations" and the examples' added
+  citations become `[作者补：…]` placeholders, because every upstream forbids
+  adding facts; the unmeasured "70%+ → 15–25%" detector claims and the
+  detector-to-rule table are deleted; the English ✅ examples no longer break
+  our own em-dash and staged-contrast rules. **Three modes** (audit-only / edit
+  / author-voiced) and **per-section edit caps** (15 / 25 / 40%).
+  **[`scripts/aigc_audit.py`](skills/48-de-AIGC-skills/scripts/aigc_audit.py)
+  (new, stdlib)** — `audit` runs every regex-visible rule after masking
+  quotations, math, citations and tables and prints report-only metrics (no AI
+  probability); `compare` exits 1 when a number, citation or table reference
+  is lost or invented, warns on negation / direction / evidence-verb / hedge
+  drift and on change rate above the section cap, and reports **draft
+  retention** (n-gram containment, verbatim coverage) for the ownership pass —
+  `B: unknown` stays. On the skill's own examples it flags every English and
+  8 of 12 Chinese AI drafts and none of the 20 rewrites.
+  **[`provenance_scrub.py`](skills/48-de-AIGC-skills/scripts/provenance_scrub.py)
+  1.1** — script-bound format characters, canonical-singleton look-alikes,
+  fullwidth Latin inside English words, Cyrillic / Greek homoglyphs in Latin
+  words (reported; `--fold-homoglyphs` repairs; Russian citations, β and math
+  untouched), trailing-whitespace steganography (Markdown hard breaks and TSV
+  fields kept), figures pasted inside a `.docx`, rsids, template paths and
+  sensitivity labels (Zotero properties kept), Flate-compressed PDF streams and
+  pdfTeX figure info, `.zip` packages (members cleaned, `__MACOSX` dropped),
+  macOS download-origin xattrs, generator stamps and model names in file names.
+  The evasion stages of the upstream removers (regenerate through another
+  model, search for the smallest detector-clearing edit) are not adopted.
+  Fixtures 39 → 54, plus [`tests/test_de_aigc_audit.py`](tests/test_de_aigc_audit.py).
+
 ### New collection: spss-amos-sem (skill 74)
 
 - **`skills/74-brycewang-spss-amos-sem/` — first-party, 1 skill.** The

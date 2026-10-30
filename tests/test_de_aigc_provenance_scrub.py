@@ -287,6 +287,122 @@ class LayerCPdf(unittest.TestCase):
         self.assertFalse(report["c2pa"])
 
 
+class LayerAv11(unittest.TestCase):
+    """v1.1: script-bound format characters, look-alikes, trailing whitespace."""
+
+    def test_canonical_singletons_match_nfc(self):
+        import unicodedata
+        for cp, target in scrub.CANONICAL_SINGLETONS.items():
+            with self.subTest(cp=hex(cp)):
+                self.assertEqual(unicodedata.normalize("NFC", chr(cp)), target)
+
+    def test_homoglyphs_reported_by_default_folded_on_request(self):
+        src = "\u0422he r\u0435form in Россия and $\u0391x$; β₁ = 0.04"
+        out, findings, _ = scrub.clean_text(src, "en")
+        self.assertEqual(out, src)
+        self.assertIn((0x0422, "review (homoglyph)"), findings.counts)
+        out, _, _ = scrub.clean_text(src, "en", fold_homoglyphs=True)
+        self.assertEqual(out, "The reform in Россия and $\u0391x$; β₁ = 0.04")
+
+    def test_fullwidth_latin_only_folded_inside_ascii_words_in_english(self):
+        self.assertEqual(clean("\uff34FP and Table\uff13"), "TFP and Table3")
+        self.assertEqual(clean("ＡＢ alone"), "ＡＢ alone")
+        self.assertEqual(clean("表\uff13", "zh"), "表\uff13")
+
+    def test_trailing_whitespace_by_format(self):
+        self.assertEqual(scrub.clean_text("a \t\nb", "en")[0], "a\nb")
+        self.assertEqual(scrub.clean_text("a  \nb   \n", "en", fmt="markdown")[0], "a  \nb\n")
+        self.assertEqual(scrub.clean_text("x\t\ny\t\n", "en", trailing="keep")[0], "x\t\ny\t\n")
+        self.assertIsNotNone(scrub._whitespace_pattern("a \nb  \t\nc   \nd\n"))
+        self.assertIsNone(scrub._whitespace_pattern("a  \nb  \nc\n"))
+
+    def test_csv_trailing_tab_is_a_field_not_a_carrier(self):
+        with tempfile.TemporaryDirectory() as td:
+            f = Path(td) / "t.tsv"
+            f.write_text("a\tb\t\nc\td\t\n", encoding="utf-8")
+            run_cli(["clean", str(f)])
+            self.assertEqual((Path(td) / "t.clean.tsv").read_text(encoding="utf-8"), "a\tb\t\nc\td\t\n")
+
+
+class LayerCv11(unittest.TestCase):
+    def _docx(self) -> bytes:
+        data = _make_docx('<w:p w:rsidR="00A1B2C3" w:rsidRDefault="00D4E5F6"><w:r><w:t>Text</w:t></w:r></w:p>')
+        buf = io.BytesIO()
+        with zipfile.ZipFile(io.BytesIO(data)) as zin, zipfile.ZipFile(buf, "w") as z:
+            for n in zin.namelist():
+                z.writestr(n, zin.read(n))
+            z.writestr("word/settings.xml", '<w:settings><w:attachedTemplate r:id="rId1"/>'
+                       '<w:rsids><w:rsidRoot w:val="00A1B2C3"/></w:rsids></w:settings>')
+            z.writestr("word/_rels/settings.xml.rels", '<Relationships><Relationship Id="rId1" Type="http://schemas.'
+                       'openxmlformats.org/officeDocument/2006/relationships/attachedTemplate" '
+                       'Target="file:///C:\\Users\\jdoe\\Templates\\Normal.dotm" TargetMode="External"/></Relationships>')
+            z.writestr("docProps/custom.xml", '<Properties><property fmtid="x" pid="2" name="MSIP_Label_1_Owner">'
+                       '<vt:lpwstr>jdoe@uni.edu</vt:lpwstr></property><property fmtid="x" pid="3" name="ZOTERO_PREF_1">'
+                       '<vt:lpwstr>z</vt:lpwstr></property></Properties>')
+            z.writestr("word/media/image1.png", _make_png())
+        return buf.getvalue()
+
+    def test_docx_identifying_parts_reported_then_scrubbed(self):
+        data = self._docx()
+        _, _, meta, _ = scrub.process_docx(data, "en", keep_nbsp=False, keep_bidi=False, typography=False,
+                                           scrub_meta=True, do_clean=False)
+        self.assertEqual(meta["rsid_marks"], 3)
+        self.assertIn("jdoe", meta["attached_template"])
+        self.assertEqual(meta["custom_identifying"], ["MSIP_Label_1_Owner"])
+        self.assertEqual(meta["embedded_c2pa"], ["word/media/image1.png"])
+        new, _, meta, _ = scrub.process_docx(data, "en", keep_nbsp=False, keep_bidi=False, typography=False,
+                                             scrub_meta=True, do_clean=True)
+        z = zipfile.ZipFile(io.BytesIO(new))
+        self.assertNotIn("rsid", z.read("word/document.xml").decode())
+        self.assertNotIn("rsid", z.read("word/settings.xml").decode())
+        self.assertIn('Target="Normal.dotm"', z.read("word/_rels/settings.xml.rels").decode())
+        custom = z.read("docProps/custom.xml").decode()
+        self.assertNotIn("MSIP_Label", custom)
+        self.assertIn("ZOTERO_PREF_1", custom)  # citation-manager state survives
+        self.assertEqual(z.read("word/media/image1.png"), _make_png(with_meta=False))
+        entry = {"kind": "docx", "mode": "clean", "meta": meta, "findings": None}
+        c_part = scrub._verdict(entry).split("C: ")[1].split(" · ")[0]
+        self.assertIn("embedded_media", c_part)
+        self.assertTrue(c_part.endswith("still review has_comments"), c_part)  # only what clean cannot do
+
+    def test_pdf_compressed_streams_scanned(self):
+        body = zlib.compress(b"<x:xmpmeta/> /PTEX.FileName (/Users/jdoe/fig.pdf) /Producer (matplotlib)")
+        pdf = (b"%PDF-1.5\n1 0 obj << /Filter /FlateDecode >> stream\n" + body + b"\nendstream endobj\n%%EOF\n")
+        report = scrub.inspect_pdf(pdf)
+        self.assertTrue(report["xmp"])
+        self.assertEqual(report["ptex_figure_info"], 1)
+        self.assertEqual(report["absolute_paths"], ["/Users/jdoe"])
+        self.assertEqual(report["info"]["Producer"], "matplotlib")
+
+    def test_zip_package_members_cleaned_and_junk_dropped(self):
+        with tempfile.TemporaryDirectory() as td:
+            zp = Path(td) / "package.zip"
+            with zipfile.ZipFile(zp, "w") as z:
+                z.writestr("paper/main.md", "Entry\u200b rose.\n")
+                z.writestr("paper/fig1.png", _make_png())
+                z.writestr("__MACOSX/paper/._main.md", b"xattr")
+                z.writestr("paper/.DS_Store", b"x")
+            self.assertEqual(run_cli(["inspect", str(zp)])[0], 1)
+            self.assertEqual(run_cli(["clean", str(zp)])[0], 0)
+            out = zipfile.ZipFile(Path(td) / "package.clean.zip")
+            self.assertEqual(sorted(out.namelist()), ["paper/fig1.png", "paper/main.md"])
+            self.assertEqual(out.read("paper/main.md").decode(), "Entry rose.\n")
+            self.assertEqual(out.read("paper/fig1.png"), _make_png(with_meta=False))
+
+    def test_generator_stamps_and_vendor_file_names_reported(self):
+        with tempfile.TemporaryDirectory() as td:
+            f = Path(td) / "claude_draft.md"
+            f.write_text("---\ntitle: x\ngenerator: ChatGPT\n---\nBody.\n", encoding="utf-8")
+            rc, out = run_cli(["inspect", "--json", str(f)])
+            meta = json.loads(out)[0]["meta"]
+            self.assertEqual(rc, 1)
+            self.assertEqual(meta["file_name_mentions_model"], "claude_draft.md")
+            self.assertTrue(meta["generator_markers"])
+            g = Path(td) / "notes.md"
+            g.write_text("---\ntitle: x\n---\nThe model: OLS.\n", encoding="utf-8")
+            self.assertEqual(run_cli(["inspect", str(g)])[0], 0)
+
+
 class CommandLine(unittest.TestCase):
     def test_inspect_exit_codes_and_clean_output_file(self):
         with tempfile.TemporaryDirectory() as td:

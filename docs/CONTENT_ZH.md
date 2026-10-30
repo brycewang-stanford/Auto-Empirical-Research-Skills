@@ -336,7 +336,7 @@ make check        # 仓库校验 + 单元测试 + eval lint + 数值基准
 | **[Full Empirical Analysis — Stata](../skills/00.2-Full-empirical-analysis-skill_Stata/SKILL.md)** 📊 | 社区事实标准：`reghdfe` · `ivreg2` · `csdid` · `did_imputation` · `sdid` · `rdrobust` · `synth` · `psmatch2` · `boottest` · `esttab` | 审稿人或合作者只接受 Stata 复现包时（AER/QJE/JPE/ReStud 风格） |
 | **[Full Empirical Analysis — R](../skills/00.3-Full-empirical-analysis-skill_R/SKILL.md)** 📗 | 现代 tidyverse：`fixest` · `did` · `synthdid` · `HonestDiD` · `rdrobust` · `grf` · `DoubleML` · `marginaleffects` · **Quarto** | 单个 `.qmd` 一键渲染 PDF/HTML/Word 的一体化复现报告 |
 | **[AER-Skills](../skills/50-brycewang-aer-skills/)** 📕 | 9 个 skill：选题路由 → 识别审计 → 稳健性 → 引言 → 表图 → 复现 → 投稿 → R&R → 总调度 | Top-5 经济学（AER / AER:Insights / AEJ）投稿：**识别优先** —— 设计若脆，再多 prose 也救不回来 |
-| **[de-aigc-skills](../skills/48-de-AIGC-skills/SKILL.md)** 🇨🇳🇬🇧 | 中英双模式库（英 22 + 中 17），六步「接件→审计→主张-证据→改写→自评→复查」闭环，另加 2026 溯源层（CJK 安全的隐藏字符与 docx / 图片元数据清理；统计水印如实标注 unknown） | 降低 Turnitin AI / GPTZero 与知网 / 万方 / 维普的 AI 写作信号，并清理投稿包 |
+| **[de-aigc-skills](../skills/48-de-AIGC-skills/SKILL.md)** 🇨🇳🇬🇧 | 中英双模式库（英 30 + 中 28，2026-10 修订）、确定性审计与保真脚本，六步「接件→审计→主张-证据→改写→自评→复查」闭环，另加 2026 溯源层（CJK 安全的隐藏字符与 docx / 图片元数据清理；统计水印如实标注 unknown） | 降低 Turnitin AI / GPTZero 与知网 / 万方 / 维普的 AI 写作信号，并清理投稿包 |
 | **[Paper-WorkFlow](../skills/69-Paper-WorkFlow/README.md)** 🧭 | **元编排器**，串起 Stage 0–9 —— 选题 → 设计 → 数据 → 估计 → 表格图形 → 初稿 → 润色 → 去 AIGC → 模拟审稿 → 投稿 —— 通过调度已有 skill 与并行子代理，并用可续跑的 `workflow_state.json` 记录进度 | 端到端自动跑完一篇完整的实证社会科学论文 |
 
 > **为什么既要 DSL 又要显式三件套？** 信任一键 DSL 时用 StatsPAI；做教学、审计、或要逐个替换诊断时用 00.1/00.2/00.3。AER-skills 再把一份正确的分析推到录用门槛 —— 它们解决的是*不同*问题，可以组合。
@@ -489,7 +489,7 @@ make check       # 完整 gate：validate + Python 编译 + 单元测试 + eval 
 
 | 套件 | 核心特色 | 最适合 | 本地 |
 |------|---------|--------|------|
-| **de-AIGC-skills** 🇨🇳🇬🇧 | CoPaper.AI **原创**中英双语学术降 AIGC；英 22 + 中 17 类模式、含主张-证据审计的六步闭环、分章节策略、五维评分，面向经管社科实证论文；**2026-09 新增溯源层（去水印）** —— CJK 安全的隐藏 Unicode + docx / PNG / JPG / SVG / PDF 元数据清理（stdlib 脚本 `scripts/provenance_scrub.py`）、针对统计水印的作者重述流程 | Turnitin AI / GPTZero / 知网 / 万方 / 维普 · 隐藏字符 / C2PA / docx 元数据 | [`48`](../skills/48-de-AIGC-skills/) |
+| **de-AIGC-skills** 🇨🇳🇬🇧 | CoPaper.AI **原创**中英双语学术降 AIGC；英 30 + 中 28 类模式、含主张-证据审计的六步闭环（只诊断 / 编辑 / 作者重述三种模式）、分章节策略与改动上限、五维评分，面向经管社科实证论文；**2026-09 新增溯源层（去水印）** —— CJK 安全的隐藏 Unicode + docx / PNG / JPG / SVG / PDF 元数据清理（stdlib 脚本 `scripts/provenance_scrub.py`）、针对统计水印的作者重述流程；**2026-10 对照 GitHub 星数前十的去 AI 味 skill 升级** —— 新脚本 `scripts/aigc_audit.py`（确定性规则扫描 + 数字 / 引用 / 动词强度保真闸门 + 草稿保留率）、形近字符 / 行尾空白 / zip / docx 内嵌图片溯源检查、按实测数据修正节奏与"不得编造"规则，来源与取舍见 `references/lineage.md` | Turnitin AI / GPTZero / 知网 / 万方 / 维普 · 隐藏字符 / C2PA / docx 元数据 | [`48`](../skills/48-de-AIGC-skills/) |
 | [voidborne-d/humanize-chinese](../skills/49-voidborne-d-humanize-chinese/) 🇨🇳 | 同时提供 SKILL.md 与独立 Python CLI；17 类检测 + 7 风格改写器，LR ensemble 程序化打分。**License: MIT（非商用修改版）** | 中文学位论文 / 长篇 / 批量 pipeline | [`49`](../skills/49-voidborne-d-humanize-chinese/) |
 | [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) | 学术专用；34 类 AI 写作模式；保留合法学术过渡词 | 医学、生命科学、自然科学论文 | [`44`](../skills/44-matsuikentaro1-humanizer_academic/) |
 | [stephenturner/skill-deslop](https://github.com/stephenturner/skill-deslop) | 智能区分合法学科惯例 vs AI 痕迹；5 维评分 | 科学论文、技术博客 | [`45`](../skills/45-stephenturner-skill-deslop/) |

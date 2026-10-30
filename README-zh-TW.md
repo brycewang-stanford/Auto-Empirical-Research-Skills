@@ -368,7 +368,7 @@ make check        # 仓库校验 + 单元测试 + eval lint + 数值基准
 | **[Full Empirical Analysis — Stata](skills/00.2-Full-empirical-analysis-skill_Stata/SKILL.md)** 📊 | 社群事實標準：`reghdfe` · `ivreg2` · `csdid` · `did_imputation` · `sdid` · `rdrobust` · `synth` · `psmatch2` · `boottest` · `esttab` | 審稿人或合作者只接受 Stata 重現包時（AER/QJE/JPE/ReStud 風格） |
 | **[Full Empirical Analysis — R](skills/00.3-Full-empirical-analysis-skill_R/SKILL.md)** 📗 | 現代 tidyverse：`fixest` · `did` · `synthdid` · `HonestDiD` · `rdrobust` · `grf` · `DoubleML` · `marginaleffects` · **Quarto** | 單個 `.qmd` 一鍵算繪 PDF/HTML/Word 的一體化重現報告 |
 | **[AER-Skills](skills/50-brycewang-aer-skills/)** 📕 | 9 個 skill：選題路由 → 識別稽核 → 穩健性 → 引言 → 表圖 → 重現 → 投稿 → R&R → 總調度 | Top-5 經濟學（AER / AER:Insights / AEJ）投稿：**識別優先** —— 設計若脆，再多 prose 也救不回來 |
-| **[de-aigc-skills](skills/48-de-AIGC-skills/SKILL.md)** 🇨🇳🇬🇧 | 中英雙模式庫（英 22 + 中 17），六步「接件→審計→主張-證據→改寫→自評→複查」閉環，另加 2026 溯源層（CJK 安全的隱藏字元與 docx / 圖檔中繼資料清理；統計浮水印如實標註 unknown） | 降低 Turnitin AI / GPTZero 與知網 / 萬方 / 維普的 AI 寫作訊號，並清理投稿包 |
+| **[de-aigc-skills](skills/48-de-AIGC-skills/SKILL.md)** 🇨🇳🇬🇧 | 中英雙模式庫（英 30 + 中 28，2026-10 修訂）、確定性審計與保真腳本，六步「接件→審計→主張-證據→改寫→自評→複查」閉環，另加 2026 溯源層（CJK 安全的隱藏字元與 docx / 圖檔中繼資料清理；統計浮水印如實標註 unknown） | 降低 Turnitin AI / GPTZero 與知網 / 萬方 / 維普的 AI 寫作訊號，並清理投稿包 |
 | **[Paper-WorkFlow](skills/69-Paper-WorkFlow/README.md)** 🧭 | **元調度器**，串起 Stage 0–9 —— 選題 → 設計 → 資料 → 估計 → 表格/圖形 → 初稿 → 潤色 → 去 AIGC → 模擬審稿 → 投稿 —— 透過調度既有 skill 與並行子代理，並以可續跑的 `workflow_state.json` 記錄狀態 | 端到端自動跑完一篇完整的實證社會科學論文 |
 
 > **為什麼既要 DSL 又要顯式三件套？** 信任一鍵 DSL 時用 StatsPAI；做教學、稽核、或要逐個替換診斷時用 00.1/00.2/00.3。AER-skills 再把一份正確的分析推到錄取門檻 —— 它們解決的是*不同*問題，可以組合。
@@ -517,7 +517,7 @@ make check       # 完整 gate：validate + Python 编译 + 单元测试 + eval 
 
 | 套件 | 核心特色 | 最適合 | 本機 |
 |------|---------|--------|------|
-| **de-AIGC-skills** 🇨🇳🇬🇧 | CoPaper.AI **原創**中英雙語學術降 AIGC；英 22 + 中 17 類模式、含主張-證據審計的六步閉環、分章節策略、五維評分，面向經管社科實證論文；**2026-09 新增溯源層** —— CJK 安全的隱藏 Unicode + docx / PNG / JPG / SVG / PDF 中繼資料清理、針對統計浮水印的作者重述流程，絕不宣稱「無浮水印」 | Turnitin AI / GPTZero / 知網 / 萬方 / 維普 · 隱藏字元 / C2PA / docx 中繼資料 | [`48`](skills/48-de-AIGC-skills/) |
+| **de-AIGC-skills** 🇨🇳🇬🇧 | CoPaper.AI **原創**中英雙語學術降 AIGC；英 30 + 中 28 類模式、含主張-證據審計的六步閉環（只診斷 / 編輯 / 作者重述三種模式）、分章節策略與改動上限、五維評分，面向經管社科實證論文；**2026-09 新增溯源層** —— CJK 安全的隱藏 Unicode + docx / PNG / JPG / SVG / PDF 中繼資料清理、針對統計浮水印的作者重述流程，絕不宣稱「無浮水印」；**2026-10 對照 GitHub 星數前十的去 AI 味 skill 升級** —— 新腳本 `aigc_audit.py`（確定性規則掃描 + 數字 / 引用 / 動詞強度保真閘門 + 草稿保留率）、形近字元 / 行尾空白 / zip / 內嵌圖片溯源檢查、依實測資料修正節奏與「不得編造」規則 | Turnitin AI / GPTZero / 知網 / 萬方 / 維普 · 隱藏字元 / C2PA / docx 中繼資料 | [`48`](skills/48-de-AIGC-skills/) |
 | [voidborne-d/humanize-chinese](skills/49-voidborne-d-humanize-chinese/) 🇨🇳 | 同時提供 SKILL.md 與獨立 Python CLI；17 類偵測 + 7 風格改寫器，LR ensemble 程序化打分。**License: MIT（非商用修改版）** | 中文學位論文 / 長篇 / 批量 pipeline | [`49`](skills/49-voidborne-d-humanize-chinese/) |
 | [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) | 學術專用；34 類 AI 寫作模式；保留合法學術過渡詞 | 醫學、生命科學、自然科學論文 | [`44`](skills/44-matsuikentaro1-humanizer_academic/) |
 | [stephenturner/skill-deslop](https://github.com/stephenturner/skill-deslop) | 智慧區分合法學科慣例 vs AI 痕跡；5 維評分 | 科學論文、技術部落格 | [`45`](skills/45-stephenturner-skill-deslop/) |

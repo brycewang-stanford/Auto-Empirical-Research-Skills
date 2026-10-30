@@ -22,7 +22,7 @@
   "taxonomy": {
     "language": {
       "latex": 88,
-      "python": 50,
+      "python": 51,
       "stata": 50,
       "r": 22
     },
@@ -19838,11 +19838,14 @@
       "name": "de-aigc-skills",
       "path": "skills/48-de-AIGC-skills/SKILL.md",
       "collection": "48-de-AIGC-skills",
-      "line_count": 355,
-      "description_effective": "中英双语学术降 AIGC / bilingual academic de-AIGC skill. Removes AI-generated writing signatures from empirical papers in economics, management, and the social sciences — in both English and Chinese. Covers Turnitin AI, GPTZero, Originality.ai on the English side and 知网 AMLC, 万方, 维普 on the Chinese side. Uses a six-step loop (intake → audit → claim-evidence check → differentiated rewrite → five-dimension self-score → cold-reader recheck) with two pattern libraries (22 English + 17 Chinese patterns), section-by-section strategies for empirical papers, and hard protections that keep every number, coefficient, and citation intact. Since 2026-08 it also carries a provenance layer (去水印): deterministic, CJK-safe cleaning of invisible-character carriers and file metadata (docx / png / jpg / svg / pdf, incl. C2PA), an honest account of Claude's statistical text watermark, and an author \"ownership pass\" — it never claims a text is watermark-free.",
+      "line_count": 452,
+      "description_effective": "中英双语学术降 AIGC + 去水印 / bilingual academic de-AIGC and provenance skill for empirical papers in economics, management and the social sciences (Turnitin AI, GPTZero, 知网 AMLC, 万方, 维普). Six-step loop (intake → audit → claim-evidence check → rewrite → self-score → cold-reader recheck) in three modes (audit-only / edit / author-voiced), 30 English + 28 Chinese patterns revised in 2026-10 against the ten most-starred humanizer skills, a protect-list, per-section edit caps, and hard rules that keep every number, coefficient and citation intact and never invent anchors. Two stdlib scripts - aigc_audit.py (deterministic rule scan; fidelity gate for numbers, citations, negation and verb strength; draft-retention metrics) and provenance_scrub.py (CJK-safe invisible-character, look-alike and whitespace cleaning; docx / figure / PDF / zip metadata incl. C2PA). Claude's statistical watermark is handled by an author ownership pass and always reported as unknown; the skill never claims a text is watermark-free.",
       "description_source": "frontmatter",
       "has_references": true,
       "tags": {
+        "language": [
+          "python"
+        ],
         "stage": [
           "de-aigc"
         ]

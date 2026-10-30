@@ -22,7 +22,7 @@ Run `python3 scripts/quickstart.py --markdown` to refresh after `make catalog`.
 ### Languages represented
 
 - latex: 88
-- python: 50
+- python: 51
 - stata: 50
 - r: 22
 

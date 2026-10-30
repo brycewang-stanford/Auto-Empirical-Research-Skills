@@ -366,7 +366,7 @@ make check        # repo validation + unit tests + eval lint + numeric benchmark
 | **[Full Empirical Analysis — Stata](skills/00.2-Full-empirical-analysis-skill_Stata/SKILL.md)** 📊 | コミュニティ標準: `reghdfe` · `ivreg2` · `csdid` · `did_imputation` · `sdid` · `rdrobust` · `synth` · `psmatch2` · `boottest` · `esttab` | レフェリーや共著者が Stata のレプリケーションパックを求める場合（AER/QJE/JPE/ReStud スタイル） |
 | **[Full Empirical Analysis — R](skills/00.3-Full-empirical-analysis-skill_R/SKILL.md)** 📗 | モダンな tidyverse: `fixest` · `did` · `synthdid` · `HonestDiD` · `rdrobust` · `grf` · `DoubleML` · `marginaleffects` · **Quarto** | 単一の `.qmd` を一コマンドで PDF/HTML/Word にレンダリングする再現性レポート |
 | **[AER-Skills](skills/50-brycewang-aer-skills/)** 📕 | 9 スキル: トピックルーティング → 識別監査 → 頑健性 → イントロ → 表 → レプリケーション → 投稿 → R&R → オーケストレーター | トップ 5 経済学（AER / AER:Insights / AEJ）への投稿: *識別ファースト* — 設計が脆弱なら、どんな文章でも救えない |
-| **[de-aigc-skills](skills/48-de-AIGC-skills/SKILL.md)** 🇨🇳🇬🇧 | 中英 2 つのパターンライブラリ（英 22 + 中 17）、6 ステップの「受入→監査→主張と証拠→書き換え→採点→再確認」ループ、さらに 2026 年の来歴レイヤー（CJK に安全な不可視文字・docx / 図メタデータのクリーニング、統計的透かしは unknown と正直に報告） | Turnitin AI / GPTZero / CNKI / Wanfang / VIP 投稿向けの AI 文章シグナルの低減と投稿パッケージの衛生化 |
+| **[de-aigc-skills](skills/48-de-AIGC-skills/SKILL.md)** 🇨🇳🇬🇧 | 中英 2 つのパターンライブラリ（英 30 + 中 28、2026-10 改訂）、決定論的な監査・忠実性スクリプト、6 ステップの「受入→監査→主張と証拠→書き換え→採点→再確認」ループ、さらに 2026 年の来歴レイヤー（CJK に安全な不可視文字・docx / 図メタデータのクリーニング、統計的透かしは unknown と正直に報告） | Turnitin AI / GPTZero / CNKI / Wanfang / VIP 投稿向けの AI 文章シグナルの低減と投稿パッケージの衛生化 |
 | **[Paper-WorkFlow](skills/69-Paper-WorkFlow/README.md)** 🧭 | **メタオーケストレーター**: ステージ 0–9 — トピック → 設計 → データ → 推定 → 表/図 → ドラフト → 推敲 → 脱 AIGC → 模擬査読 → 投稿 — を、既存スキルと並列サブエージェントへディスパッチし、再開可能な `workflow_state.json` で連結 | 実証社会科学論文をエンドツーエンドで自動実行 |
 
 > **なぜ DSL *と*明示的な移植版の両方が必要なのか?** ワンショットの DSL を信頼するときは StatsPAI を。教育・監査・各診断を手作業で差し替えなければならないときは 00.1/00.2/00.3 を選んでください。AER-skills はそのうえで、正しい分析を採択ラインまで押し上げます —— これらは*異なる*問題を解決し、互いに組み合わさります。
@@ -515,7 +515,7 @@ Replication → Submission → Peer Review Response → Defense
 
 | スイート | 主な特徴 | 最適な用途 | ローカル |
 |-------|-------------|----------|-------|
-| **de-AIGC-skills** 🇨🇳🇬🇧 | CoPaper.AI による**オリジナル**の中英バイリンガル学術脱 AIGC; 英 22 + 中 17 パターン、主張-証拠監査を含む 6 ステップループ、セクション別戦略、5 次元採点。経済・経営・社会科学の実証論文向け。**2026-09: 来歴レイヤー** — CJK に安全な不可視 Unicode + docx / PNG / JPG / SVG / PDF メタデータ衛生、統計的透かし向けの著者リライト手順、「透かしなし」とは決して主張しない | Turnitin AI / GPTZero / CNKI / Wanfang / VIP · 不可視 Unicode / C2PA / docx メタデータ | [`48`](skills/48-de-AIGC-skills/) |
+| **de-AIGC-skills** 🇨🇳🇬🇧 | CoPaper.AI による**オリジナル**の中英バイリンガル学術脱 AIGC; 英 30 + 中 28 パターン、主張-証拠監査を含む 6 ステップループ（診断のみ / 編集 / 著者リライトの 3 モード）、セクション別戦略と編集上限、5 次元採点。経済・経営・社会科学の実証論文向け。**2026-09: 来歴レイヤー** — CJK に安全な不可視 Unicode + docx / PNG / JPG / SVG / PDF メタデータ衛生、統計的透かし向けの著者リライト手順、「透かしなし」とは決して主張しない。**2026-10: スター上位 10 の humanizer skill を参照して改訂** — 新スクリプト `aigc_audit.py`（決定論的ルール走査 + 数値・引用・動詞強度の忠実性ゲート + 草稿残存率）、形の似た文字 / 空白 / zip / 埋め込み図の来歴チェック | Turnitin AI / GPTZero / CNKI / Wanfang / VIP · 不可視 Unicode / C2PA / docx メタデータ | [`48`](skills/48-de-AIGC-skills/) |
 | [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) | 学術特化; 34 の AI 文章パターン; 正当な学術的接続表現を保持 | 医学、生命科学、自然科学の論文 | [`44`](skills/44-matsuikentaro1-humanizer_academic/) |
 | [stephenturner/skill-deslop](https://github.com/stephenturner/skill-deslop) | 正当な分野の慣習と AI 痕跡を区別; 5 次元採点 | 科学論文、技術ブログ | [`45`](skills/45-stephenturner-skill-deslop/) |
 | [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) | 3 層検出 + 5 次元採点; 禁止フレーズ、構造的クリシェ、文ルール | 一般的な散文、ブログ、レポート | [`46`](skills/46-hardikpandya-stop-slop/) |
