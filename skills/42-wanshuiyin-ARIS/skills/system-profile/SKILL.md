@@ -1,7 +1,7 @@
 ---
 name: system-profile
-description: Profile a target (script, process, GPU, memory, interconnect) using external tools and code instrumentation. Produces structured performance reports with actionable recommendations. Use when user says "profile", "benchmark", "bottleneck", or wants performance analysis.
-argument-hint: <target, e.g. "train.py", "gpu", "pid 1234", "vllm serving">
+description: "Profile a target (script, process, GPU, memory, interconnect) for performance analysis. Use when user says \"profile\", \"benchmark\", \"bottleneck\", or wants performance analysis."
+argument-hint: '<target, e.g. "train.py", "gpu", "pid 1234", "vllm serving">'
 ---
 
 # System Profile

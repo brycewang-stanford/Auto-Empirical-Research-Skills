@@ -2,7 +2,7 @@
 name: proof-writer
 description: Writes rigorous mathematical proofs for ML/AI theory. Use when asked to prove a theorem, lemma, proposition, or corollary, fill in missing proof steps, formalize a proof sketch, 补全证明, 写证明, 证明某个命题, or determine whether a claimed proof can actually be completed under the stated assumptions.
 argument-hint: "[theorem-statement-and-assumptions]"
-allowed-tools: Read, Write, Edit, Grep, Glob
+allowed-tools: Read, Write, Edit, Grep, Glob, Skill(lean-formalize)
 ---
 
 # Proof Write: Rigorous Theorem / Lemma Drafting
@@ -68,6 +68,19 @@ Identify:
 
 Preserve the user's original theorem statement unless a change is explicitly required.
 If you use a stronger normalization or cleaner internal formulation only to make the proof easier, keep that as an internal proof device rather than silently replacing the original claim.
+
+### Optional Lean proof route
+
+When the user requests Lean, or formalizing a specific proof obligation would
+materially help establish correctness, invoke
+[`/lean-formalize`](../lean-formalize/SKILL.md) with the original statement,
+current attempt, and known dependencies. It develops the proof as well as its
+formal implementation. Return the checked scope, exported theorem and remaining
+obligations to this proof package. A partial result closes only its corresponding
+obligation. When called by `lean-formalize` to develop a missing mathematical
+argument, return that argument and remaining gaps to the calling Lean run;
+do not invoke `lean-formalize` recursively. Ordinary proof drafting does not
+require Lean; difficulty alone does not trigger it.
 
 ### Step 3: Feasibility Triage
 Before writing a proof, classify the claim into exactly one status:

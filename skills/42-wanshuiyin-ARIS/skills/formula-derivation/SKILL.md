@@ -2,7 +2,7 @@
 name: formula-derivation
 description: Structures and derives research formulas when the user wants to 推导公式, build a theory line, organize assumptions, turn scattered equations into a coherent derivation, or rewrite theory notes into a paper-ready formula document. Use when the derivation target is not yet fully fixed, the main object still needs to be chosen, or the user needs a coherent derivation package rather than a finished theorem proof.
 argument-hint: "[problem-goal-current-formulas-or-notes]"
-allowed-tools: Read, Write, Edit, Grep, Glob
+allowed-tools: Read, Write, Edit, Grep, Glob, Skill(lean-formalize)
 ---
 
 # Formula Derivation: Research Theory Line Construction
@@ -261,6 +261,11 @@ Use `proof-writer` only after:
 - the assumptions are stable
 - the notation is settled
 - and the task is now to prove or refute that claim rigorously
+
+Once a precise claim and its hypotheses are available, use
+[`/lean-formalize`](../lean-formalize/SKILL.md) when the user requests Lean or a
+specific proof obligation benefits from formal implementation and checking;
+routine algebraic derivations do not require it.
 
 ## Chat Response
 

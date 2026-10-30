@@ -7,6 +7,8 @@ description: "Workflow 1 adaptation for robotics and embodied AI. Orchestrates r
 
 # Robotics Idea Discovery Pipeline
 
+> **Gemini overlay assurance:** `review_independence: cross-family` and `acceptance_status: accepted`.
+
 Orchestrate a robotics-specific idea discovery workflow for: **$ARGUMENTS**
 
 ## Overview
@@ -285,7 +287,7 @@ Update the report with the reviewer's minimum viable evidence package.
 
 ## Phase 6: Final Report
 
-Write or update `IDEA_REPORT.md` with a robotics-specific structure so it stays compatible with downstream workflows.
+Write or update `idea-stage/IDEA_REPORT.md` with a robotics-specific structure so it stays compatible with downstream workflows.
 
 ```markdown
 # Robotics Idea Discovery Report
@@ -331,6 +333,13 @@ Write or update `IDEA_REPORT.md` with a robotics-specific structure so it stays 
 - [ ] Run /novelty-check on the final idea wording
 - [ ] Only after approval: consider hardware validation
 ```
+
+## Output Protocols
+
+> Follow these shared protocols for all output files:
+> - **[Output Versioning Protocol](../../shared-references/output-versioning.md)** — write timestamped file first, then copy to fixed name
+> - **[Output Manifest Protocol](../../shared-references/output-manifest.md)** — log every output to MANIFEST.md
+> - **[Output Language Protocol](../../shared-references/output-language.md)** — respect the project's language setting
 
 ## Key Rules
 

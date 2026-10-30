@@ -1,8 +1,8 @@
 ---
 name: run-experiment
-description: Deploy and run ML experiments on local or remote GPU servers. Use when user says "run experiment", "deploy to server", "跑实验", or needs to launch training jobs.
+description: Deploy and run ML experiments on local, remote, Vast.ai, or Modal serverless GPU. Use when user says "run experiment", "deploy to server", "跑实验", or needs to launch training jobs.
 argument-hint: "[experiment-description]"
-allowed-tools: Bash(*), Read, Grep, Glob, Edit, Write, Agent
+allowed-tools: Bash(*), Read, Grep, Glob, Edit, Write, Skill(serverless-modal)
 ---
 
 # Run Experiment
@@ -18,6 +18,18 @@ Read the project's `CLAUDE.md` to determine the experiment environment:
 - **Local GPU** (`gpu: local`): Look for local CUDA/MPS setup info
 - **Remote server** (`gpu: remote`): Look for SSH alias, conda env, code directory
 - **Vast.ai** (`gpu: vast`): Check for `vast-instances.json` at project root — if a running instance exists, use it. Also check `CLAUDE.md` for a `## Vast.ai` section.
+- **Modal** (`gpu: modal`): Serverless GPU via Modal. No SSH, no Docker, auto scale-to-zero. Delegate to `/serverless-modal`.
+
+**Modal detection:** If `CLAUDE.md` has `gpu: modal` or a `## Modal` section, the entire deployment is handled by `/serverless-modal`. Jump to **Step 4: Deploy (Modal)** — Steps 2-3 are not needed (Modal handles code sync and GPU allocation automatically).
+
+**Environment contract** (`../shared-references/compute-env-contract.md`): before
+building or trusting any environment, read the provider's env ledger
+(`.aris/compute/<provider>.md`) — an unchanged spec hash means warm-reuse, a
+changed one means rebuild. New env → write the declarative spec first, render it
+for this provider's shape, and never declare it ready on import-success alone:
+run the seeded kernel witness, and after any rebuild/doc edit run the
+agent-follows-doc pass (a fresh subagent executes the documented invocation
+verbatim and reports doc-vs-reality divergence).
 
 **Vast.ai detection priority:**
 1. If `CLAUDE.md` has `gpu: vast` or a `## Vast.ai` section:
@@ -86,7 +98,14 @@ rsync -avz -e "ssh -p <PORT>" \
   ./ root@<HOST>:/workspace/project/
 ```
 
-If `requirements.txt` exists, install dependencies:
+Install dependencies per the env contract (ordered phases — pins first, one
+`pip install` per phase; see `../shared-references/compute-env-contract.md`):
+```bash
+ssh -p <PORT> root@<HOST> "pip install -q torch==<pinned>"       # phase 1: pins
+ssh -p <PORT> root@<HOST> "pip install -q <remaining packages>"  # phase 2+
+```
+Legacy fallback — `requirements.txt` only, no env spec: install as one phase,
+and treat any version fight as the signal to convert to ordered phases:
 ```bash
 scp -P <PORT> requirements.txt root@<HOST>:/workspace/
 ssh -p <PORT> root@<HOST> "pip install -q -r /workspace/requirements.txt"
@@ -155,6 +174,22 @@ ssh -p <PORT> root@<HOST> "screen -dmS <exp_name> bash -c '\
 
 After launching, update the `experiment` field in `vast-instances.json` for this instance.
 
+#### Modal (serverless)
+
+When `gpu: modal` is detected, delegate to `/serverless-modal`:
+
+1. **Analyze task** — determine VRAM needs, choose GPU, estimate cost
+2. **Generate launcher** — create a `modal_launcher.py` that wraps the training script using `modal.Mount.from_local_dir` for code and `modal.Volume` for results
+3. **Run** — `modal run modal_launcher.py` (runs locally, GPU executes remotely)
+4. **Collect results** — results return via Volume or stdout, no manual download needed
+
+Key Modal settings from `CLAUDE.md`:
+- `modal_gpu`: GPU override (default: auto-select based on VRAM analysis)
+- `modal_timeout`: Max seconds (default: 21600 = 6 hours)
+- `modal_volume`: Named volume for persistent results
+
+No SSH, no code sync, no screen sessions needed. Modal handles everything.
+
 #### Local
 
 ```bash
@@ -177,6 +212,12 @@ ssh <server> "screen -ls"
 **Remote (Vast.ai):**
 ```bash
 ssh -p <PORT> root@<HOST> "screen -ls"
+```
+
+**Modal:**
+```bash
+modal app list         # Check app is running
+modal app logs <app>   # Stream logs
 ```
 
 **Local:**
@@ -223,13 +264,14 @@ After the experiment completes (detected via `/monitor-experiment` or screen ses
 
 ## Key Rules
 
-- ALWAYS check GPU availability first — never blindly assign GPUs
+- ALWAYS check GPU availability first — never blindly assign GPUs (except Modal, which manages allocation automatically)
 - Each experiment gets its own screen session + GPU (remote) or background process (local)
 - Use `tee` to save logs for later inspection
 - Run deployment commands with `run_in_background: true` to keep conversation responsive
 - Report back: which GPU, which screen/process, what command, estimated time
 - If multiple experiments, launch them in parallel on different GPUs
 - **Vast.ai cost awareness**: When using `gpu: vast`, always report the running cost. If `auto_destroy: true`, destroy the instance as soon as all experiments on it complete
+- **Modal cost awareness**: Always estimate and display cost before running. Modal auto-scales to zero — no idle billing, no manual cleanup
 
 ## CLAUDE.md Example
 
@@ -252,6 +294,12 @@ Users should add their server info to their project's `CLAUDE.md`:
 - auto_destroy: true         # auto-destroy after experiment completes (default: true)
 - max_budget: 5.00           # optional: max total $ to spend per experiment
 
+## Modal
+- gpu: modal                 # serverless GPU via Modal (no SSH, auto scale-to-zero)
+- modal_gpu: A100-80GB       # optional: override GPU selection (default: auto-select)
+- modal_timeout: 21600       # optional: max seconds (default: 6 hours)
+- modal_volume: my-results   # optional: named volume for results persistence
+
 ## Local Environment
 - gpu: local                 # use local GPU
 - Mac MPS / Linux CUDA
@@ -259,5 +307,7 @@ Users should add their server info to their project's `CLAUDE.md`:
 ```
 
 > **Vast.ai setup**: Run `pip install vastai && vastai set api-key YOUR_KEY`. Upload your SSH public key at https://cloud.vast.ai/manage-keys/. Set `gpu: vast` in your `CLAUDE.md` — `/run-experiment` will automatically rent an instance, run the experiment, and destroy it when done.
+
+> **Modal setup**: Run `pip install modal && modal setup`. Bind a payment method at https://modal.com/settings (NEVER through CLI) to unlock the full $30/month free tier (without card: $5/month only). Set a workspace spending limit to prevent accidental charges. Set `gpu: modal` in your `CLAUDE.md` — ideal for users without a local GPU who need to debug code or run small-scale tests.
 
 > **W&B setup**: Run `wandb login` on your server once (or set `WANDB_API_KEY` env var). The skill reads project/entity from CLAUDE.md and adds `wandb.init()` + `wandb.log()` to your training scripts automatically. Dashboard: `https://wandb.ai/<entity>/<project>`.

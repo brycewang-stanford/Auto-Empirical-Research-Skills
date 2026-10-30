@@ -2,10 +2,20 @@
 name: auto-review-loop-minimax
 description: Autonomous multi-round research review loop using MiniMax API. Use when you want to use MiniMax instead of Codex MCP for external review. Trigger with "auto review loop minimax" or "minimax review".
 argument-hint: "[topic-or-scope]"
-allowed-tools: Bash(*), Read, Grep, Glob, Write, Edit, Agent, Skill
+allowed-tools: Bash(*), Read, Grep, Glob, Write, Edit, Skill
 ---
 
 # Auto Review Loop (MiniMax Version): Autonomous Research Improvement
+
+> 🔒 **Do not wrap this skill in `/loop`, `/schedule`, or `CronCreate`.** Like
+> `/auto-review-loop`, it already loops internally (review → fix → re-review),
+> feeding each round's prior-round summary into the next review prompt (the
+> backend is a stateless per-round API call, not a shared thread). An external
+> timer re-enters from the top each tick, dropping that accumulated context and
+> firing the verdict on wall-clock time instead of on artifact change — zero
+> new signal, full token cost. Schedule the *external wait that precedes it*,
+> not the verdict. See
+> [`shared-references/external-cadence.md`](../shared-references/external-cadence.md).
 
 Autonomously iterate: review → implement fixes → re-review, until the external reviewer gives a positive assessment or MAX_ROUNDS is reached.
 
@@ -14,8 +24,8 @@ Autonomously iterate: review → implement fixes → re-review, until the extern
 ## Constants
 
 - MAX_ROUNDS = 4
-- POSITIVE_THRESHOLD: score >= 6/10, or verdict contains "accept", "sufficient", "ready for submission"
-- REVIEW_DOC: `AUTO_REVIEW.md` in project root (cumulative log)
+- POSITIVE_THRESHOLD: score >= 6/10 **AND** verdict ∈ {"ready", "almost"} — **both** must hold, matching the operative STOP CONDITION below. Verdict vocabulary is {"ready", "almost", "not ready"}. (Earlier wording used `or` and a stale verdict set; the `AND` form is authoritative.)
+- REVIEW_DOC: `review-stage/AUTO_REVIEW.md` (cumulative log) *(fall back to `./AUTO_REVIEW.md` for legacy projects)*
 - REVIEWER_MODEL = `MiniMax-M3` — Model used via MiniMax API
 
 ## API Configuration
@@ -58,7 +68,7 @@ curl -s "https://api.minimax.io/v1/chat/completions" \
 
 ## State Persistence (Compact Recovery)
 
-Long-running loops may hit the context window limit, triggering automatic compaction. To survive this, persist state to `REVIEW_STATE.json` after each round:
+Long-running loops may hit the context window limit, triggering automatic compaction. To survive this, persist state to `review-stage/REVIEW_STATE.json` after each round:
 
 ```json
 {
@@ -79,13 +89,13 @@ Long-running loops may hit the context window limit, triggering automatic compac
 
 ### Initialization
 
-1. **Check for `REVIEW_STATE.json`** in project root:
-   - If it does not exist: **fresh start** (normal case)
+1. **Check for `review-stage/REVIEW_STATE.json`** *(fall back to `./REVIEW_STATE.json` if not found — legacy path)*:
+   - If neither path exists: **fresh start** (normal case)
    - If it exists AND `status` is `"completed"`: **fresh start** (previous loop finished normally)
    - If it exists AND `status` is `"in_progress"` AND `timestamp` is older than 24 hours: **fresh start** (stale state from a killed/abandoned run — delete the file and start over)
    - If it exists AND `status` is `"in_progress"` AND `timestamp` is within 24 hours: **resume**
      - Read the state file to recover `round`, `last_score`, `pending_experiments`
-     - Read `AUTO_REVIEW.md` to restore full context of prior rounds
+     - Read `review-stage/AUTO_REVIEW.md` to restore full context of prior rounds *(fall back to `./AUTO_REVIEW.md`)*
      - If `pending_experiments` is non-empty, check if they have completed (e.g., check screen sessions)
      - Resume from the next round (round = saved round + 1)
      - Log: "Recovered from context compaction. Resuming at Round N."
@@ -93,7 +103,7 @@ Long-running loops may hit the context window limit, triggering automatic compac
 3. Read recent experiment results (check output directories, logs)
 4. Identify current weaknesses and open TODOs from prior reviews
 5. Initialize round counter = 1 (unless recovered from state file)
-6. Create/update `AUTO_REVIEW.md` with header and timestamp
+6. Create/update `review-stage/AUTO_REVIEW.md` with header and timestamp
 
 ### Loop (repeat up to MAX_ROUNDS)
 
@@ -143,7 +153,7 @@ Then extract structured fields:
 - **Verdict** ("ready" / "almost" / "not ready")
 - **Action items** (ranked list of fixes)
 
-**STOP CONDITION**: If score >= 6 AND verdict contains "ready" or "almost" → stop loop, document final state.
+**STOP CONDITION**: If score >= 6 AND verdict ∈ {"ready", "almost"} (exact match — "not ready" does NOT qualify) → stop loop, document final state.
 
 #### Phase C: Implement Fixes (if not stopping)
 
@@ -168,7 +178,7 @@ If experiments were launched:
 
 #### Phase E: Document Round
 
-Append to `AUTO_REVIEW.md`:
+Append to `review-stage/AUTO_REVIEW.md`:
 
 ```markdown
 ## Round N (timestamp)
@@ -198,7 +208,7 @@ This is the authoritative record. Do NOT truncate or paraphrase.]
 - [continuing to round N+1 / stopping]
 ```
 
-**Write `REVIEW_STATE.json`** with current round, score, verdict, and any pending experiments.
+**Write `review-stage/REVIEW_STATE.json`** with current round, score, verdict, and any pending experiments.
 
 Increment round counter → back to Phase A.
 
@@ -206,8 +216,8 @@ Increment round counter → back to Phase A.
 
 When loop ends (positive assessment or max rounds):
 
-1. Update `REVIEW_STATE.json` with `"status": "completed"`
-2. Write final summary to `AUTO_REVIEW.md`
+1. Update `review-stage/REVIEW_STATE.json` with `"status": "completed"`
+2. Write final summary to `review-stage/AUTO_REVIEW.md`
 3. Update project notes with conclusions
 4. If stopped at max rounds without positive assessment:
    - List remaining blockers
@@ -283,3 +293,10 @@ curl -s "https://api.minimax.io/v1/chat/completions" \
     "max_tokens": 4096
   }'
 ```
+
+## Output Protocols
+
+> Follow these shared protocols for all output files:
+> - **[Output Versioning Protocol](../shared-references/output-versioning.md)** — write timestamped file first, then copy to fixed name
+> - **[Output Manifest Protocol](../shared-references/output-manifest.md)** — log every output to MANIFEST.md
+> - **[Output Language Protocol](../shared-references/output-language.md)** — respect the project's language setting

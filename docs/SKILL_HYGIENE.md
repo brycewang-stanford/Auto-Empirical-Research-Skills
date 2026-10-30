@@ -13,12 +13,12 @@ A skill can be **well-formed** (high hygiene) yet **untested for the traps an ap
 
 ## Summary
 
-- Skills scored: **1108**
+- Skills scored: **1151**
 - Mean hygiene score: **99.4/100**
-- Skills with at least one eval scenario: **21** (1.9% of catalog)
+- Skills with at least one eval scenario: **21** (1.8% of catalog)
 - Total eval-harness scenarios that target a specific skill: **22**
-- Descriptions: 1108 from frontmatter, 0 body-derived, 0 none
-- Tagged with at least one taxonomy facet: 566
+- Descriptions: 1151 from frontmatter, 0 body-derived, 0 none
+- Tagged with at least one taxonomy facet: 583
 
 ## Per-collection: hygiene × eval coverage
 
@@ -69,7 +69,7 @@ A skill can be **well-formed** (high hygiene) yet **untested for the traps an ap
 | `39-vincentarelbundock-marginaleffects` | 1 | 100.0 | 100 | 1 | 1 |
 | `40-py-econometrics-pyfixest` | 1 | 100.0 | 100 | 1 | 1 |
 | `41-sticerd-eee-sewage-econometrics-check` | 22 | 100.0 | 100 | 1 | 1 |
-| `42-wanshuiyin-ARIS` | 42 | 98.9 | 85 | 0 | 0 |
+| `42-wanshuiyin-ARIS` | 85 | 98.2 | 85 | 0 | 0 |
 | `43-wentorai-research-plugins` | 478 | 100.0 | 95 | 0 | 0 |
 | `44-matsuikentaro1-humanizer_academic` | 1 | 100.0 | 100 | 0 | 0 |
 | `45-stephenturner-skill-deslop` | 1 | 100.0 | 100 | 0 | 0 |
@@ -123,15 +123,15 @@ A skill can be **well-formed** (high hygiene) yet **untested for the traps an ap
 | 85 | [`skills/26-Data-Wise-scholar/skills/writing/methods-paper-writer/SKILL.md`](../skills/26-Data-Wise-scholar/skills/writing/methods-paper-writer/SKILL.md) | very-long-no-references | — |
 | 85 | [`skills/30-zirui-song-claude-skills/coding-guidelines/SKILL.md`](../skills/30-zirui-song-claude-skills/coding-guidelines/SKILL.md) | very-long-no-references | — |
 | 85 | [`skills/33-Galaxy-Dawn-claude-scholar/skills/uv-package-manager/SKILL.md`](../skills/33-Galaxy-Dawn-claude-scholar/skills/uv-package-manager/SKILL.md) | very-long-no-references | — |
-| 85 | [`skills/42-wanshuiyin-ARIS/skills/paper-poster/SKILL.md`](../skills/42-wanshuiyin-ARIS/skills/paper-poster/SKILL.md) | very-long-no-references | — |
+| 85 | [`skills/42-wanshuiyin-ARIS/skills/auto-review-loop/SKILL.md`](../skills/42-wanshuiyin-ARIS/skills/auto-review-loop/SKILL.md) | very-long-no-references | — |
+| 85 | [`skills/42-wanshuiyin-ARIS/skills/paper-writing/SKILL.md`](../skills/42-wanshuiyin-ARIS/skills/paper-writing/SKILL.md) | very-long-no-references | — |
+| 85 | [`skills/42-wanshuiyin-ARIS/skills/proof-checker/SKILL.md`](../skills/42-wanshuiyin-ARIS/skills/proof-checker/SKILL.md) | very-long-no-references | — |
 | 85 | [`skills/55-ab604-claude-code-r-skills/skills/tdd-workflow/SKILL.md`](../skills/55-ab604-claude-code-r-skills/skills/tdd-workflow/SKILL.md) | very-long-no-references | — |
 | 85 | [`skills/63-tondevrel-scientific-agent-skills/dowhy/SKILL.md`](../skills/63-tondevrel-scientific-agent-skills/dowhy/SKILL.md) | very-long-no-references | — |
 | 85 | [`skills/67-econfin-workflow-toolkit/China-CF-study/SKILL.md`](../skills/67-econfin-workflow-toolkit/China-CF-study/SKILL.md) | very-long-no-references | — |
 | 85 | [`skills/67-econfin-workflow-toolkit/Foreign-CF-study/SKILL.md`](../skills/67-econfin-workflow-toolkit/Foreign-CF-study/SKILL.md) | very-long-no-references | — |
 | 85 | [`skills/67-econfin-workflow-toolkit/chinese-ppt/SKILL.md`](../skills/67-econfin-workflow-toolkit/chinese-ppt/SKILL.md) | very-long-no-references | — |
 | 92 | [`skills/04-K-Dense-AI-claude-scientific-writer/literature-review/SKILL.md`](../skills/04-K-Dense-AI-claude-scientific-writer/literature-review/SKILL.md) | long-no-references | — |
-| 92 | [`skills/04-K-Dense-AI-claude-scientific-writer/peer-review/SKILL.md`](../skills/04-K-Dense-AI-claude-scientific-writer/peer-review/SKILL.md) | long-no-references | — |
-| 92 | [`skills/04-K-Dense-AI-claude-scientific-writer/scientific-critical-thinking/SKILL.md`](../skills/04-K-Dense-AI-claude-scientific-writer/scientific-critical-thinking/SKILL.md) | long-no-references | — |
 
 ## Top 15 skills by eval coverage (the "tested and tidy" leaders)
 

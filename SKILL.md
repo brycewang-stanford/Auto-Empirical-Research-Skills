@@ -8,7 +8,7 @@ license: CC-BY-SA-4.0
 
 Use this root skill when the full AERS repository has been installed as a single skill folder. Treat it as a router and catalog, not as a request to load every vendored `SKILL.md`.
 
-The catalog holds **1,108 skills across 78 vendored collections**. Never read them all — route to one, then load only that skill's `SKILL.md`.
+The catalog holds **1,151 skills across 78 vendored collections**. Never read them all — route to one, then load only that skill's `SKILL.md`.
 
 ## Workflow
 
@@ -113,8 +113,8 @@ The orchestrator is **not** the right entry point for a single-task ask (e.g. "f
 - Whole-repo imports are supported by this root `SKILL.md` as a lightweight compatibility entry point.
 - Individual skill installs are still preferred when a runtime expects one folder per skill. Copy the folder that directly contains the target `SKILL.md`.
 - Do not copy the repository root into a runtime and expect every child skill to become individually registered unless that runtime explicitly supports recursive skill discovery.
-- **Do not flat-install the whole catalog** (e.g. symlinking every child folder into `~/.claude/skills`). Every registered skill's description is loaded at session start — about 64k tokens for all 1,108 here — and runtimes truncate long skill listings, so matching gets *worse*, not better. Use a plugin, this router, or a handful of copied skills.
-- **Name collisions:** the catalog contains 47 bare `name`s shared across collections (e.g. `data-analysis`, `lit-review`, `proofread`); `catalog/curation.json` names one preferred copy of each, which `scripts/find-skill.py` returns. When a runtime registers skills by flat name, install one collection at a time, or disambiguate with the globally-unique `qualified_name` field in `catalog/skills.json` (`<collection>::<name>`, e.g. `12-pedrohcgs-claude-code-my-workflow::data-analysis`), or the full `skills/<collection>/.../SKILL.md` path.
+- **Do not flat-install the whole catalog** (e.g. symlinking every child folder into `~/.claude/skills`). Every registered skill's description is loaded at session start — about 68k tokens for all 1,151 here — and runtimes truncate long skill listings, so matching gets *worse*, not better. Use a plugin, this router, or a handful of copied skills.
+- **Name collisions:** the catalog contains 48 bare `name`s shared across collections (e.g. `data-analysis`, `lit-review`, `proofread`); `catalog/curation.json` names one preferred copy of each, which `scripts/find-skill.py` returns. When a runtime registers skills by flat name, install one collection at a time, or disambiguate with the globally-unique `qualified_name` field in `catalog/skills.json` (`<collection>::<name>`, e.g. `12-pedrohcgs-claude-code-my-workflow::data-analysis`), or the full `skills/<collection>/.../SKILL.md` path.
 
 ## Key Files
 

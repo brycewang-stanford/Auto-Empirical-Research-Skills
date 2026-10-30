@@ -67,6 +67,19 @@ Identify:
 Preserve the user's original theorem statement unless a change is explicitly required.
 If you use a stronger normalization or cleaner internal formulation only to make the proof easier, keep that as an internal proof device rather than silently replacing the original claim.
 
+### Optional Lean proof route
+
+When the user requests Lean, or formalizing a specific proof obligation would
+materially help establish correctness, invoke
+[`/lean-formalize`](../lean-formalize/SKILL.md) with the original statement,
+current attempt, and known dependencies. It develops the proof as well as its
+formal implementation. Return the checked scope, exported theorem and remaining
+obligations to this proof package. A partial result closes only its corresponding
+obligation. When called by `lean-formalize` to develop a missing mathematical
+argument, return that argument and remaining gaps to the calling Lean run;
+do not invoke `lean-formalize` recursively. Ordinary proof drafting does not
+require Lean; difficulty alone does not trigger it.
+
 ### Step 3: Feasibility Triage
 Before writing a proof, classify the claim into exactly one status:
 - `PROVABLE AS STATED`

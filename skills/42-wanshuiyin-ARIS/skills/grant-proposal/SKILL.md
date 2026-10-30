@@ -1,11 +1,22 @@
 ---
 name: grant-proposal
 description: "Draft a structured grant proposal from research ideas and literature. Supports KAKENHI (Japan), NSF (US), NSFC (China, including 面上/青年/优青/杰青/海外优青/重点), ERC (EU), DFG (Germany), SNSF (Switzerland), ARC (Australia), NWO (Netherlands), and generic formats. Use when user says \"write grant\", \"grant proposal\", \"申請書\", \"write KAKENHI\", \"科研費\", \"基金申请\", \"写基金\", \"NSF proposal\", or wants to turn research ideas into a funding application."
-argument-hint: "[research-direction — grant-type]"
-allowed-tools: Bash(*), Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, Agent, Skill, mcp__codex__codex, mcp__codex__codex-reply
+argument-hint: "[research-direction — grant-type] [— style-ref: <source>]"
+allowed-tools: Bash(*), Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, Skill, mcp__codex__codex, mcp__codex__codex-reply, mcp__antigravity__antigravity, mcp__antigravity__antigravity-reply, mcp__grok__grok, mcp__grok__grok-reply, mcp__claude-review__review, mcp__claude-review__review_reply, mcp__claude-review__review_start, mcp__claude-review__review_reply_start, mcp__claude-review__review_status
 ---
 
 # Grant Proposal: From Research Ideas to Fundable Application
+
+> **Before each reviewer slot**, follow [Selectable Reviewers](../shared-references/reviewer-backends.md):
+> resolve invocation → `.aris/reviewer.json` → Claude Code default (Codex MCP)
+> with `reviewer_route.py` through the canonical helper resolver, preserving this
+> slot's tier, fresh contexts, source/image inputs and deterministic gates.
+> Codex examples/pins below apply only to `backend=codex`; other routes use their
+> own first-call/reply contract. Save the route and actual returned identity;
+> unavailable selections are `REVIEW_UNAVAILABLE`. Classify acceptance from actual
+> families/completion/scope. Forward invocation reviewer/model/effort overrides
+> to reviewer-bearing children. Generation workers are unchanged.
+
 
 Draft a grant proposal based on: **$ARGUMENTS**
 
@@ -34,7 +45,7 @@ Grant proposals argue for **future work** (feasibility + potential), not complet
 
 - **GRANT_TYPE = `KAKENHI`** — Default grant type. Supported: `KAKENHI`, `NSF`, `NSFC`, `ERC`, `DFG`, `SNSF`, `ARC`, `NWO`, `GENERIC`. Override via argument (e.g., `/grant-proposal "topic — NSF"`).
 - **GRANT_SUBTYPE = `auto`** — Sub-type within the grant agency. Examples: KAKENHI `Start-up`/`Wakate`/`Kiban-B`; NSFC `Youth`/`Excellent-Youth`/`Distinguished`/`Overseas`/`Key`; NSF `CAREER`/`CRII`/`Standard`. Auto-detected from argument or defaults to the most common sub-type.
-- **REVIEWER_MODEL = `gpt-5.4`** — Model used via Codex MCP for proposal review. Must be an OpenAI model (e.g., `gpt-5.4`, `o3`, `gpt-4o`).
+- **REVIEWER_MODEL = `gpt-6-astra`** — Model used via Codex MCP for proposal review. For `backend=codex`, use an OpenAI model (e.g., `gpt-6-astra`, `o3`, `gpt-4o`).
 - **OUTPUT_FORMAT = `markdown`** — Output format. Supported: `markdown`, `latex`. LaTeX uses grant-specific templates when available.
 - **MAX_REVIEW_ROUNDS = 2** — Maximum external review-revise cycles before finalizing.
 - **OUTPUT_DIR = `grant-proposal/`** — Directory for generated proposal files.
@@ -42,6 +53,50 @@ Grant proposals argue for **future work** (feasibility + potential), not complet
 - **AUTO_PROCEED = false** — At each checkpoint, **always wait for explicit user confirmation** before proceeding. Grant proposals require PI-specific judgment at every stage. Set `true` only if user explicitly requests fully autonomous mode.
 
 > 💡 These are defaults. Override by telling the skill, e.g., `/grant-proposal "topic — NSF CAREER, latex output"` or `/grant-proposal "topic — NSFC Youth, language: English"`.
+
+## Optional: Style reference (`— style-ref: <source>`, opt-in)
+
+Lets the PI steer the proposal's **structural** layout (section order tendency, paragraph length, figure density, citation style) toward a successful past proposal or paper they'd like to mirror. **Default OFF — when the user does not pass `— style-ref`, do nothing differently from before.**
+
+Only when `— style-ref: <source>` appears in `$ARGUMENTS`, run the helper FIRST, before drafting:
+
+```bash
+# Resolve $STYLE_HELPER via the canonical strict-safe chain (see
+# shared-references/integration-contract.md §2). Policy A — gate:
+# unresolved helper means --style-ref cannot be satisfied, so abort.
+cd "$(git rev-parse --show-toplevel 2>/dev/null || pwd)" || exit 1
+if [ -z "${ARIS_REPO:-}" ] && [ -f .aris/installed-skills.txt ]; then
+    ARIS_REPO=$(awk -F'\t' '$1=="repo_root"{print $2; exit}' .aris/installed-skills.txt 2>/dev/null) || true
+fi
+if [ -z "${ARIS_REPO:-}" ] && [ -f "$HOME/.aris/repo" ]; then
+    ARIS_REPO=$(cat "$HOME/.aris/repo" 2>/dev/null) || true
+fi
+STYLE_HELPER=".aris/tools/extract_paper_style.py"
+[ -f "$STYLE_HELPER" ] || STYLE_HELPER="tools/extract_paper_style.py"
+[ -f "$STYLE_HELPER" ] || { [ -n "${ARIS_REPO:-}" ] && STYLE_HELPER="$ARIS_REPO/tools/extract_paper_style.py"; }
+[ -f "$STYLE_HELPER" ] || {
+  echo "ERROR: extract_paper_style.py not resolved at .aris/tools/, tools/, \$ARIS_REPO/tools/, or via ~/.aris/repo." >&2
+  echo "       Fix: rerun bash tools/install_aris.sh or smart_update.sh (refreshes ~/.aris/repo), export ARIS_REPO, or copy the helper to tools/." >&2
+  echo "       --style-ref cannot be satisfied; aborting." >&2
+  exit 1
+}
+STYLE_STATUS=0
+CACHE=$(python3 "$STYLE_HELPER" --source "<source>") || STYLE_STATUS=$?
+case "$STYLE_STATUS" in
+  0) ;;                                       # use $CACHE/style_profile.md as structural guidance
+  2) echo "warning: style-ref skipped (missing optional dep)" >&2 ;;
+  3) echo "error: --style-ref source failed; aborting proposal" >&2 ; exit 1 ;;
+  *) echo "error: helper failed unexpectedly; aborting proposal" >&2 ; exit 1 ;;
+esac
+```
+
+Sources accepted: local TeX dir / file, local PDF, arXiv id, http(s) URL. Overleaf URLs/IDs are rejected — clone the project locally first and pass the local path.
+
+**Strict rules** (full contract in `tools/extract_paper_style.py` docstring):
+
+- Use `style_profile.md` to align paragraph length tendency, figure budget, and citation density. Grant-type-mandated section order (KAKENHI 研究目的 → 研究計画・方法 → 準備状況, NSF Intellectual Merit → Broader Impacts, etc.) **always takes precedence** — the agency template wins, the style ref only refines secondary structure.
+- **Never copy proposal prose, claims, vision statements, or budget items** from anything reachable through the cache. The reference might be someone else's funded proposal; reproducing language risks plagiarism.
+- **Never pass `— style-ref` (or the cache contents) to the GPT-6-Astra reviewer sub-agent** when it scores the draft — the proposal must be judged on its own merits.
 
 ## Grant Type Specifications
 
@@ -163,10 +218,10 @@ Parse `$ARGUMENTS` to extract:
 
 Then gather context from the project directory:
 
-1. Read `IDEA_REPORT.md` if it exists (from `/idea-discovery`)
+1. Read `idea-stage/IDEA_REPORT.md` if it exists (from `/idea-discovery`); fall back to `./IDEA_REPORT.md` if not found
 2. Read `refine-logs/FINAL_PROPOSAL.md` if it exists (from `/research-refine`)
 3. Read `refine-logs/EXPERIMENT_PLAN.md` if it exists (from `/experiment-plan`)
-4. Read `AUTO_REVIEW.md` if it exists (from `/auto-review-loop` — prior review feedback is gold for grants)
+4. Read `review-stage/AUTO_REVIEW.md` if it exists (from `/auto-review-loop` — prior review feedback is gold for grants); fall back to `./AUTO_REVIEW.md` if not found
 5. Read `NARRATIVE_REPORT.md` or `STORY.md` if they exist
 6. Read any existing literature notes or survey documents
 7. Scan for the user's publication list (e.g., `publications.md`, `cv.md`, `bio.md`, `CV.pdf`)
@@ -176,7 +231,7 @@ If insufficient context exists:
 - No research idea at all → suggest running `/idea-discovery` first
 - No literature survey → will invoke `/research-lit` inline in Phase 1
 - No publication list → leave PI qualification section with `[TODO: Add publications]` placeholders
-- Has AUTO_REVIEW.md → extract reviewer feedback and use it to strengthen the feasibility narrative
+- Has review-stage/AUTO_REVIEW.md → extract reviewer feedback and use it to strengthen the feasibility narrative
 
 ### Phase 1: Literature & Landscape Positioning
 
@@ -290,7 +345,7 @@ Timeline: [timeline]
 ```
 
 **What this does:**
-- GPT-5.4 xhigh acts as a grant review panelist (not a paper reviewer)
+- GPT-6-Astra xhigh acts as a grant review panelist (not a paper reviewer)
 - Evaluates aims independence, narrative arc, risk identification, timeline realism
 - Identifies the single biggest reviewer concern
 - Provides actionable fixes ranked by severity
@@ -306,7 +361,7 @@ Apply structural feedback before proceeding to drafting.
 - Aim 2: [title] — Risk: MEDIUM
 - Aim 3: [title] — Risk: LOW
 - Timeline: [summary]
-- Reviewer feedback: [key points from GPT-5.4]
+- Reviewer feedback: [key points from GPT-6-Astra]
 
 Proceed to section drafting? Or adjust the structure?
 ```
@@ -327,7 +382,7 @@ Draft each section according to the grant type template. Write **complete prose*
 
 **What this does:**
 - Writes all required sections in the agency-specific language and tone
-- Pulls content from IDEA_REPORT.md, FINAL_PROPOSAL.md, and literature notes
+- Pulls content from idea-stage/IDEA_REPORT.md, FINAL_PROPOSAL.md, and literature notes
 - Uses `/paper-illustration` for figure generation (if user requests)
 - Leaves `[TODO]` only for PI-specific information, `[AMOUNT]` for budget figures
 - Outputs `grant-proposal/GRANT_PROPOSAL.md`
@@ -404,7 +459,7 @@ Which should I generate? (e.g., "1 and 3", "all", "skip")
 
 #### For Each Section
 
-1. **Pull relevant content** from IDEA_REPORT.md, FINAL_PROPOSAL.md, literature notes
+1. **Pull relevant content** from idea-stage/IDEA_REPORT.md, FINAL_PROPOSAL.md, literature notes
 2. **Write complete prose** — no `[TODO]` except for PI-specific information
 3. **Include figure/table placeholders** where appropriate (e.g., `[Figure 1: System architecture]`)
 4. **Cite references properly** — use citation keys, will build bibliography later
@@ -415,27 +470,41 @@ Which should I generate? (e.g., "1 and 3", "all", "skip")
 Invoke `/research-review` on the complete draft for grant-type-specific evaluation:
 
 ```
-/research-review "Complete [GRANT_TYPE] [GRANT_SUBTYPE] proposal draft. Evaluate as a [GRANT_TYPE] review panelist using official criteria. [PASTE FULL PROPOSAL TEXT]"
+/research-review "Read the grant review bundle at grant-proposal/codex_panel_review_bundle_round_1.md and evaluate it as a [GRANT_TYPE] [GRANT_SUBTYPE] review panelist using the official criteria."
 ```
 
 **What this does:**
-- GPT-5.4 xhigh acts as a grant review panelist
+- GPT-6-Astra xhigh acts as a grant review panelist
 - Scores each section 1-5 using agency-specific criteria
 - Identifies fatal flaws and recommends funding/revisions/rejection
 - Provides ranked action items for improvement
 - All feedback saved to `grant-proposal/GRANT_REVIEW.md`
 
-> ⚠️ **Codex MCP fallback**: If `mcp__codex__codex` is not available (no OpenAI API key), skip external review. Note "External review skipped — no Codex MCP available. Consider running `/auto-review-loop-llm` separately." in GRANT_REVIEW.md. The proposal is still usable without external review.
+> If the selected reviewer is unavailable, record `REVIEW_UNAVAILABLE` in `GRANT_REVIEW.md`. The proposal remains an explicitly unreviewed draft; do not switch providers automatically.
 
 If `/research-review` is invoked (preferred), it handles the Codex call internally. If calling Codex directly (e.g., to maintain thread context from Phase 2):
 
 #### Round 1 (full draft review):
 
+Write `grant-proposal/codex_panel_review_bundle_round_1.md` containing the
+criteria below plus the absolute path to `grant-proposal/GRANT_PROPOSAL.md`,
+then keep the Codex MCP prompt short:
+
+> Resolve this reviewer slot first; the following is the `backend=codex` example.
+
 ```
 mcp__codex__codex-reply:
   threadId: [from Phase 2]
-  config: {"model_reasoning_effort": "xhigh"}
+  # inherits the thread's model/effort — do not re-send
   prompt: |
+    Read the grant review bundle at <absolute path to
+    grant-proposal/codex_panel_review_bundle_round_1.md> and follow all
+    instructions in it.
+```
+
+Bundle contents:
+
+```
     Review this complete [GRANT_TYPE] [GRANT_SUBTYPE] proposal draft.
 
     Act as a [GRANT_TYPE] review panelist. Evaluate using the official criteria:
@@ -453,18 +522,34 @@ mcp__codex__codex-reply:
     - Single most impactful change to improve funding chances?
     - Any fatal flaws?
 
-    [PASTE FULL PROPOSAL TEXT]
+    Proposal draft path (read this file yourself): <absolute path to
+    grant-proposal/GRANT_PROPOSAL.md>
 ```
 
 #### Round 2+ (after revisions):
 
 If MAX_REVIEW_ROUNDS > 1 and revisions were applied:
 
+Write `grant-proposal/codex_panel_review_bundle_round_N.md` containing the
+change log, any raw diff / changed-file paths worth inspecting, and the
+absolute path to the current `grant-proposal/GRANT_PROPOSAL.md`, then reuse the
+same short MCP prompt pattern:
+
+> Resolve this reviewer slot first; the following is the `backend=codex` example.
+
 ```
 mcp__codex__codex-reply:
   threadId: [saved from Round 1]
-  config: {"model_reasoning_effort": "xhigh"}
+  # inherits the thread's model/effort — do not re-send
   prompt: |
+    Read the grant review bundle at <absolute path to
+    grant-proposal/codex_panel_review_bundle_round_N.md> and follow all
+    instructions in it.
+```
+
+Bundle contents:
+
+```
     [Round N review of revised [GRANT_TYPE] [GRANT_SUBTYPE] proposal]
 
     Since your last review, I have applied the following changes:
@@ -475,7 +560,8 @@ mcp__codex__codex-reply:
     Please re-evaluate. Same format: section scores, overall assessment, remaining weaknesses.
     Focus on whether the CRITICAL and MAJOR issues from Round 1 have been adequately addressed.
 
-    [PASTE REVISED PROPOSAL TEXT]
+    Revised proposal path (read this file yourself): <absolute path to
+    grant-proposal/GRANT_PROPOSAL.md>
 ```
 
 ### Phase 5: Revision & Output
@@ -541,7 +627,7 @@ Before declaring done:
 - Language: [language]
 - Aims: [N] aims covering [summary]
 - Timeline: [N] years
-- Review score: [summary from GPT-5.4]
+- Review score: [summary from GPT-6-Astra]
 - Output: grant-proposal/GRANT_PROPOSAL.md
 
 Files saved to grant-proposal/. Please review and customize:
@@ -587,7 +673,7 @@ Parameters can be passed inline with `—` separator. They flow to sub-skills wh
 | `max review rounds` | 2 | External review cycles | — |
 | `sources` | all | Literature sources | → `/research-lit` |
 | `arxiv download` | false | Download arXiv PDFs | → `/research-lit` |
-| `reviewer model` | gpt-5.4 | Codex review model | → Codex MCP |
+| `reviewer model` | gpt-6-astra | Codex review model | → Codex MCP |
 | `auto proceed` | false | Skip checkpoints | — |
 
 ## Composing with Other Skills
@@ -618,3 +704,10 @@ Parameters can be passed inline with `—` separator. They flow to sub-skills wh
 ```
 /idea-discovery → /experiment-bridge → /auto-review-loop → /paper-writing → submit
 ```
+
+## Output Protocols
+
+> Follow these shared protocols for all output files:
+> - **[Output Versioning Protocol](../shared-references/output-versioning.md)** — write timestamped file first, then copy to fixed name
+> - **[Output Manifest Protocol](../shared-references/output-manifest.md)** — log every output to MANIFEST.md
+> - **[Output Language Protocol](../shared-references/output-language.md)** — respect the project's language setting

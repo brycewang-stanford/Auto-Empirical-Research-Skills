@@ -2,12 +2,31 @@
 name: training-check
 description: Periodically check WandB metrics during training to catch problems early (NaN, loss divergence, idle GPUs). Avoids wasting GPU hours on broken runs. Use when training is running and you want automated health checks.
 argument-hint: "[wandb-run-path]"
-allowed-tools: Bash(*), Read, Grep, Glob, Write, Edit, mcp__codex__codex, mcp__codex__codex-reply
+allowed-tools: Bash(*), Read, Grep, Glob, Write, Edit, mcp__codex__codex, mcp__codex__codex-reply, mcp__antigravity__antigravity, mcp__antigravity__antigravity-reply, mcp__grok__grok, mcp__grok__grok-reply, mcp__claude-review__review, mcp__claude-review__review_reply, mcp__claude-review__review_start, mcp__claude-review__review_reply_start, mcp__claude-review__review_status
 ---
 
 # Training Check
 
+> **Before each reviewer slot**, follow [Selectable Reviewers](../shared-references/reviewer-backends.md):
+> resolve invocation → `.aris/reviewer.json` → Claude Code default (Codex MCP)
+> with `reviewer_route.py` through the canonical helper resolver, preserving this
+> slot's tier, fresh contexts, source/image inputs and deterministic gates.
+> Codex examples/pins below apply only to `backend=codex`; other routes use their
+> own first-call/reply contract. Save the route and actual returned identity;
+> unavailable selections are `REVIEW_UNAVAILABLE`. Classify acceptance from actual
+> families/completion/scope. Forward invocation reviewer/model/effort overrides
+> to reviewer-bearing children. Generation workers are unchanged.
+
+
 Periodically read WandB metrics during training to catch problems early. Do not wait until training finishes to discover it was a waste of GPU time.
+
+> ⏱ This skill is **correctly** cron-wired (see below): it polls
+> machine-checkable training health (NaN / divergence / idle GPU) — the additive
+> external-wait shape in
+> [`shared-references/external-cadence.md`](../shared-references/external-cadence.md).
+> The occasional Codex call for an ambiguous metric is a **one-shot** check per
+> tick, not a multi-round verdict loop, so it stays additive — it never grows
+> into a wrapped verdict skill.
 
 ## Context: $ARGUMENTS
 
@@ -15,7 +34,7 @@ Periodically read WandB metrics during training to catch problems early. Do not 
 
 - WANDB_ENTITY and WANDB_PROJECT: read from CLAUDE.md or passed as argument (format: `entity/project/run_id`)
 - CHECK_INTERVAL: starts at 10 minutes, then gradually increases if consistently healthy: 10 min → 20 min → 30 min → 60 min (cap)
-- REVIEWER_MODEL = `gpt-5.4` — used via Codex MCP for ambiguous cases only
+- REVIEWER_MODEL = `gpt-6-astra` — used via Codex MCP for ambiguous cases only
 
 ## When to Use
 
@@ -63,9 +82,12 @@ Check these signals:
 
 Only escalate to Codex when the signal is ambiguous. For clearly good or clearly bad signals, act directly.
 
+> Resolve this reviewer slot first; the following is the `backend=codex` example.
+
 ```
 mcp__codex__codex:
-  config: {"model_reasoning_effort": "high"}
+  model: gpt-6-astra
+  config: {"model_reasoning_effort": "xhigh"}
   prompt: |
     TRAINING HEALTH CHECK — need your judgment on ambiguous metrics.
 

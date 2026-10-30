@@ -12,8 +12,8 @@ Autonomously iterate: review → implement fixes → re-review, until the extern
 ## Constants
 
 - MAX_ROUNDS = 4
-- POSITIVE_THRESHOLD: score >= 6/10, or verdict contains "accept", "sufficient", "ready for submission"
-- REVIEW_DOC: `AUTO_REVIEW.md` in project root (cumulative log)
+- POSITIVE_THRESHOLD: score >= 6/10 AND verdict ∈ {"ready", "almost"} — both must hold, matching the operative STOP CONDITION below. Verdict vocabulary is {"ready", "almost", "not ready"}. (Earlier wording used "or" + a stale verdict set; the AND form is authoritative.)
+- REVIEW_DOC: `review-stage/AUTO_REVIEW.md` (cumulative log) *(fall back to `./AUTO_REVIEW.md` for legacy projects)*
 
 ## LLM Configuration
 
@@ -82,7 +82,7 @@ curl -s "${LLM_BASE_URL}/chat/completions" \
 
 ## State Persistence (Compact Recovery)
 
-Persist state to `REVIEW_STATE.json` after each round:
+Persist state to `review-stage/REVIEW_STATE.json` after each round:
 
 ```json
 {
@@ -103,7 +103,7 @@ Persist state to `REVIEW_STATE.json` after each round:
 
 ### Initialization
 
-1. **Check `REVIEW_STATE.json`** for recovery
+1. **Check `review-stage/REVIEW_STATE.json`** for recovery *(fall back to `./REVIEW_STATE.json` if not found — legacy path)*
 2. Read project context and prior reviews
 3. Initialize round counter
 
@@ -151,7 +151,7 @@ curl -s "${LLM_BASE_URL}/chat/completions" \
 - **Verdict** ("ready" / "almost" / "not ready")
 - **Action items** (ranked list of fixes)
 
-**STOP**: If score >= 6 AND verdict contains "ready/almost"
+**STOP**: If score >= 6 AND verdict ∈ {"ready", "almost"} (exact — "not ready" does NOT qualify)
 
 #### Phase C: Implement Fixes
 
@@ -163,7 +163,7 @@ Monitor remote experiments
 
 #### Phase E: Document Round
 
-Append to `AUTO_REVIEW.md`:
+Append to `review-stage/AUTO_REVIEW.md`:
 
 ```markdown
 ## Round N (timestamp)
@@ -192,11 +192,11 @@ Append to `AUTO_REVIEW.md`:
 - [continuing to round N+1 / stopping]
 ```
 
-**Write `REVIEW_STATE.json`** with current state.
+**Write `review-stage/REVIEW_STATE.json`** with current state.
 
 ### Termination
 
-1. Set `REVIEW_STATE.json` status to "completed"
+1. Set `review-stage/REVIEW_STATE.json` status to "completed"
 2. Write final summary
 
 ## Key Rules
@@ -238,3 +238,10 @@ mcp__llm-chat__chat:
     Be brutally honest. If the work is ready, say so clearly.
 ```
 
+
+## Output Protocols
+
+> Follow these shared protocols for all output files:
+> - **[Output Versioning Protocol](../../shared-references/output-versioning.md)** — write timestamped file first, then copy to fixed name
+> - **[Output Manifest Protocol](../../shared-references/output-manifest.md)** — log every output to MANIFEST.md
+> - **[Output Language Protocol](../../shared-references/output-language.md)** — respect the project's language setting

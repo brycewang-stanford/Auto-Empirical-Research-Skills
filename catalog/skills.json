@@ -766,18 +766,18 @@
       "sync": "manual vendor snapshot"
     },
     {
-      "commercial_use": "unknown",
-      "has_license": false,
+      "commercial_use": "allowed",
+      "has_license": true,
       "has_readme": true,
       "id": "42-wanshuiyin-ARIS",
-      "license": "UNKNOWN - check upstream",
+      "license": "MIT",
       "path": "skills/42-wanshuiyin-ARIS",
       "primary_skill": {
-        "description": "Use when main results pass result-to-claim (claim_supported=yes or partial) and ablation studies are needed for paper submission. Codex designs ablations from a reviewer's perspective, CC reviews feasibility and implements.",
+        "description": "Use when main results pass result-to-claim (claim_supported=yes or partial) and ablation studies are needed for paper submission.",
         "name": "ablation-planner",
         "path": "skills/42-wanshuiyin-ARIS/skills/ablation-planner/SKILL.md"
       },
-      "skill_count": 42,
+      "skill_count": 85,
       "source_confidence": "medium",
       "source_url": "https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep",
       "sync": "manual vendor snapshot"
@@ -7986,7 +7986,7 @@
     },
     {
       "collection": "42-wanshuiyin-ARIS",
-      "description": "Use when main results pass result-to-claim (claim_supported=yes or partial) and ablation studies are needed for paper submission. Codex designs ablations from a reviewer's perspective, CC reviews feasibility and implements.",
+      "description": "Use when main results pass result-to-claim (claim_supported=yes or partial) and ablation studies are needed for paper submission.",
       "frontmatter_fields": [
         "allowed-tools",
         "argument-hint",
@@ -7996,10 +7996,27 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 122,
+      "line_count": 123,
       "name": "ablation-planner",
       "path": "skills/42-wanshuiyin-ARIS/skills/ablation-planner/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::ablation-planner"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Quick single-paper lookup via AlphaXiv LLM-optimized summaries with tiered source fallback. Use when user says \"explain this paper\", \"summarize paper\", pastes an arXiv/AlphaXiv URL, or provides a bare arXiv ID for quick understanding - not for broad literature search.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 196,
+      "name": "alphaxiv",
+      "path": "skills/42-wanshuiyin-ARIS/skills/alphaxiv/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::alphaxiv"
     },
     {
       "collection": "42-wanshuiyin-ARIS",
@@ -8030,14 +8047,14 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 203,
+      "line_count": 248,
       "name": "arxiv",
       "path": "skills/42-wanshuiyin-ARIS/skills/arxiv/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::arxiv"
     },
     {
       "collection": "42-wanshuiyin-ARIS",
-      "description": "Autonomously improve a generated paper via GPT-5.4 xhigh review → implement fixes → recompile, for 2 rounds. Use when user says \\\"改论文\\\", \\\"improve paper\\\", \\\"论文润色循环\\\", \\\"auto improve\\\", or wants to iteratively polish a generated paper.",
+      "description": "Autonomously improve a generated paper via GPT-6-Astra xhigh review → implement fixes → recompile, for 2 rounds. Use when user says \\\"改论文\\\", \\\"improve paper\\\", \\\"论文润色循环\\\", \\\"auto improve\\\", or wants to iteratively polish a generated paper.",
       "frontmatter_fields": [
         "allowed-tools",
         "argument-hint",
@@ -8047,14 +8064,14 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 322,
+      "line_count": 710,
       "name": "auto-paper-improvement-loop",
       "path": "skills/42-wanshuiyin-ARIS/skills/auto-paper-improvement-loop/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::auto-paper-improvement-loop"
     },
     {
       "collection": "42-wanshuiyin-ARIS",
-      "description": "Autonomous multi-round research review loop. Repeatedly reviews via Codex MCP, implements fixes, and re-reviews until positive assessment or max rounds reached. Use when user says \"auto review loop\", \"review until it passes\", or wants autonomous iterative improvement.",
+      "description": "Autonomous multi-round research review loop. In Copilot CLI it defaults to the native complementary rubber-duck subagent with host-event model evidence; elsewhere it uses Codex, while explicit external reviewer overrides remain available. Implements fixes and re-reviews until a policy-approved positive assessment or max rounds is reached.",
       "frontmatter_fields": [
         "allowed-tools",
         "argument-hint",
@@ -8064,7 +8081,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 256,
+      "line_count": 1211,
       "name": "auto-review-loop",
       "path": "skills/42-wanshuiyin-ARIS/skills/auto-review-loop/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::auto-review-loop"
@@ -8081,7 +8098,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 242,
+      "line_count": 259,
       "name": "auto-review-loop-llm",
       "path": "skills/42-wanshuiyin-ARIS/skills/auto-review-loop-llm/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::auto-review-loop-llm"
@@ -8098,14 +8115,65 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 285,
+      "line_count": 302,
       "name": "auto-review-loop-minimax",
       "path": "skills/42-wanshuiyin-ARIS/skills/auto-review-loop-minimax/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::auto-review-loop-minimax"
     },
     {
       "collection": "42-wanshuiyin-ARIS",
-      "description": "Communications-domain literature review with Claude-style knowledge-base-first retrieval. Use when the task is about communications, wireless, networking, satellite/NTN, Wi-Fi, cellular, transport protocols, congestion control, routing, scheduling, MAC/PHY, rate adaptation, channel estimation, beamforming, or communication-system research and the user wants papers, related work, a survey, or a landscape summary. Search Zotero, Obsidian, and local paper folders first when available, then search IEEE Xplore, ScienceDirect, ACM Digital Library, and broader web in that order.",
+      "description": "Zero-context verification that every bibliographic entry in the paper is real, correctly attributed, and used in a context the cited paper actually supports — catching hallucinated authors, wrong years, fabricated venues, version mismatches, and wrong-context citations. Use when user says \\\"审查引用\\\", \\\"check citations\\\", \\\"citation audit\\\", \\\"verify references\\\", \\\"引用核对\\\", or before submission to ensure bibliography integrity.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 515,
+      "name": "citation-audit",
+      "path": "skills/42-wanshuiyin-ARIS/skills/citation-audit/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::citation-audit"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Double-blind bibliographic cross-check: one agent extracts each cited entry verbatim from the local .bib, a second independently re-fetches the same paper's record from the web while blind to the .bib, and a third extractor emits a mechanical field-by-field delta to catch dropped/re-ordered authors, wrong years, wrong venues, and bad DOIs/arXiv ids. The main agent (never a shard) assigns the MATCH/MINOR/MISMATCH verdict per reference, and exports a side-by-side spreadsheet. Use when user says \\\"citation crosscheck\\\", \\\"double-blind citation check\\\", \\\"verify bib against scholar\\\", \\\"bib field audit\\\", \\\"引用交叉核对\\\", or before submission when bibliography FIELD accuracy (not just existence) must be certified.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 531,
+      "name": "citation-crosscheck",
+      "path": "skills/42-wanshuiyin-ARIS/skills/citation-crosscheck/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::citation-crosscheck"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Draft patent claims for an invention. Use when user says \\\"撰写权利要求\\\", \\\"draft claims\\\", \\\"写权利要求书\\\", \\\"claim drafting\\\", or wants to create patent claims. The core skill of the patent pipeline.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 240,
+      "name": "claims-drafting",
+      "path": "skills/42-wanshuiyin-ARIS/skills/claims-drafting/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::claims-drafting"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Communications-domain literature review with Claude-style knowledge-base-first retrieval. Use when the task is about communications, wireless, networking, satellite/NTN, Wi-Fi, cellular, transport protocols, congestion control, routing, scheduling, MAC/PHY, rate adaptation, channel estimation, beamforming, or communication-system research and the user wants papers, related work, a survey, or a landscape summary.",
       "frontmatter_fields": [
         "allowed-tools",
         "description",
@@ -8115,9 +8183,26 @@
       "has_frontmatter": true,
       "has_name": true,
       "line_count": 297,
-      "name": "comm-lit-review-claude-single",
+      "name": "comm-lit-review",
       "path": "skills/42-wanshuiyin-ARIS/skills/comm-lit-review/SKILL.md",
-      "qualified_name": "42-wanshuiyin-ARIS::comm-lit-review-claude-single"
+      "qualified_name": "42-wanshuiyin-ARIS::comm-lit-review"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Search and progressively read open-access academic papers through DeepXiv. Use when the user wants layered paper access, section-level reading, trending papers, or DeepXiv-backed literature retrieval.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 263,
+      "name": "deepxiv",
+      "path": "skills/42-wanshuiyin-ARIS/skills/deepxiv/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::deepxiv"
     },
     {
       "collection": "42-wanshuiyin-ARIS",
@@ -8131,10 +8216,61 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 278,
+      "line_count": 296,
       "name": "dse-loop",
       "path": "skills/42-wanshuiyin-ARIS/skills/dse-loop/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::dse-loop"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Write detailed embodiment descriptions for patent specifications. Use when user says \\\"撰写实施例\\\", \\\"write embodiment\\\", \\\"实施例描述\\\", \\\"detailed description\\\", or wants to describe how to practice an invention.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 129,
+      "name": "embodiment-description",
+      "path": "skills/42-wanshuiyin-ARIS/skills/embodiment-description/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::embodiment-description"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "AI-powered web search via Exa with content extraction. Use when user says \"exa search\", \"web search with content\", \"find similar pages\", or needs broad web results beyond academic databases (arXiv, Semantic Scholar).",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 205,
+      "name": "exa-search",
+      "path": "skills/42-wanshuiyin-ARIS/skills/exa-search/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::exa-search"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Audit experiment integrity before claiming results. Uses cross-model review (external reviewer backend) to check for fake ground truth, score normalization fraud, phantom results, and insufficient scope. Use when user says \\\"审计实验\\\", \\\"check experiment integrity\\\", \\\"audit results\\\", \\\"实验诚实度\\\", or after experiments complete before writing claims.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 322,
+      "name": "experiment-audit",
+      "path": "skills/42-wanshuiyin-ARIS/skills/experiment-audit/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::experiment-audit"
     },
     {
       "collection": "42-wanshuiyin-ARIS",
@@ -8148,7 +8284,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 309,
+      "line_count": 389,
       "name": "experiment-bridge",
       "path": "skills/42-wanshuiyin-ARIS/skills/experiment-bridge/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::experiment-bridge"
@@ -8164,14 +8300,31 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 242,
+      "line_count": 249,
       "name": "experiment-plan",
       "path": "skills/42-wanshuiyin-ARIS/skills/experiment-plan/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::experiment-plan"
     },
     {
       "collection": "42-wanshuiyin-ARIS",
-      "description": "Send notifications to Feishu/Lark. Internal utility used by other skills, or manually via /feishu-notify. Supports push-only (webhook) and interactive (bidirectional) modes. Use when user says \\\"发飞书\\\", \\\"notify feishu\\\", or other skills need to send status updates.",
+      "description": "SSH job queue for multi-seed/multi-config ML experiments with OOM-aware retry, stale-screen cleanup, and wave-transition race prevention. Use when user says \"batch experiments\", \"队列实验\", \"run grid\", \"multi-seed sweep\", \"auto-chain experiments\", or when /run-experiment is insufficient for 10+ jobs that need orchestration.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 431,
+      "name": "experiment-queue",
+      "path": "skills/42-wanshuiyin-ARIS/skills/experiment-queue/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::experiment-queue"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Send notifications to Feishu/Lark. Internal utility used by other skills, or manually via /feishu-notify. Use when user says \\\"发飞书\\\", \\\"notify feishu\\\", or other skills need to send status updates.",
       "frontmatter_fields": [
         "allowed-tools",
         "argument-hint",
@@ -8188,6 +8341,40 @@
     },
     {
       "collection": "42-wanshuiyin-ARIS",
+      "description": "Process user-provided patent figures and generate formal drawing descriptions. Use when user says \\\"附图处理\\\", \\\"figure description\\\", \\\"附图说明\\\", \\\"drawings description\\\", or wants to describe patent figures with reference numerals.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 138,
+      "name": "figure-description",
+      "path": "skills/42-wanshuiyin-ARIS/skills/figure-description/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::figure-description"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Generate deterministic publication-quality architecture, workflow, and pipeline diagrams from structured JSON (FigureSpec) into editable SVG. Use when user says \\\"架构图\\\", \\\"workflow 图\\\", \\\"pipeline 图\\\", \\\"确定性矢量图\\\", \\\"figure spec\\\", \\\"draw architecture\\\", or needs precise, editable, publication-ready vector diagrams. Preferred over AI illustration for formal architecture/workflow figures.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 275,
+      "name": "figure-spec",
+      "path": "skills/42-wanshuiyin-ARIS/skills/figure-spec/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::figure-spec"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
       "description": "Structures and derives research formulas when the user wants to 推导公式, build a theory line, organize assumptions, turn scattered equations into a coherent derivation, or rewrite theory notes into a paper-ready formula document. Use when the derivation target is not yet fully fixed, the main object still needs to be chosen, or the user needs a coherent derivation package rather than a finished theorem proof.",
       "frontmatter_fields": [
         "allowed-tools",
@@ -8198,10 +8385,27 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 280,
+      "line_count": 285,
       "name": "formula-derivation",
       "path": "skills/42-wanshuiyin-ARIS/skills/formula-derivation/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::formula-derivation"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Search research papers via Gemini for broad literature discovery. Use when user says \"gemini search\", \"gemini papers\", \"search with gemini\", or wants AI-powered literature discovery beyond arXiv/Semantic Scholar indexes.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 231,
+      "name": "gemini-search",
+      "path": "skills/42-wanshuiyin-ARIS/skills/gemini-search/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::gemini-search"
     },
     {
       "collection": "42-wanshuiyin-ARIS",
@@ -8215,7 +8419,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 620,
+      "line_count": 713,
       "name": "grant-proposal",
       "path": "skills/42-wanshuiyin-ARIS/skills/grant-proposal/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::grant-proposal"
@@ -8232,14 +8436,14 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 235,
+      "line_count": 610,
       "name": "idea-creator",
       "path": "skills/42-wanshuiyin-ARIS/skills/idea-creator/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::idea-creator"
     },
     {
       "collection": "42-wanshuiyin-ARIS",
-      "description": "Workflow 1: Full idea discovery pipeline. Orchestrates research-lit → idea-creator → novelty-check → research-review to go from a broad research direction to validated, pilot-tested ideas. Use when user says \\\"找idea全流程\\\", \\\"idea discovery pipeline\\\", \\\"从零开始找方向\\\", or wants the complete idea exploration workflow.",
+      "description": "Workflow 1: Full idea discovery pipeline to go from a broad research direction to validated, pilot-tested ideas. Use when user says \\\"找idea全流程\\\", \\\"idea discovery pipeline\\\", \\\"从零开始找方向\\\", or wants the complete idea exploration workflow.",
       "frontmatter_fields": [
         "allowed-tools",
         "argument-hint",
@@ -8249,7 +8453,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 323,
+      "line_count": 538,
       "name": "idea-discovery",
       "path": "skills/42-wanshuiyin-ARIS/skills/idea-discovery/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::idea-discovery"
@@ -8266,14 +8470,116 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 356,
+      "line_count": 374,
       "name": "idea-discovery-robot",
       "path": "skills/42-wanshuiyin-ARIS/skills/idea-discovery-robot/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::idea-discovery-robot"
     },
     {
       "collection": "42-wanshuiyin-ARIS",
-      "description": "Generate Mermaid diagrams from user requirements. Saves .mmd and .md files to figures/ directory with syntax verification. Supports flowcharts, sequence diagrams, class diagrams, ER diagrams, Gantt charts, and 18 more diagram types.",
+      "description": "Run the Anti-Autoresearch integrity-forensics sweep (span-anchored evidence ledger → GPT auditors propose findings → a rules-only reporter that lists every proposal with what the auditor said about it) against a paper via a SHA-pinned thin launcher — then convert the verdict into a typed policy gate (BLOCK/WARN/NO_NEW_BLOCKER) and an append-only obligations ledger. Use when user says \\\"integrity forensics\\\", \\\"forensic audit this paper\\\", \\\"投稿前自查诚信\\\", \\\"审这篇论文的诚信\\\", or says \\\"anti-autoresearch\\\" when the upstream repo's own skills are not installed. Also invoked by /paper-writing (submission self-forensics, default ON), /peer-review (forensic appendix), /resubmit-pipeline.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 284,
+      "name": "integrity-forensics",
+      "path": "skills/42-wanshuiyin-ARIS/skills/integrity-forensics/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::integrity-forensics"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Generate a long-form Chinese interview-prep cheat sheet on a specific ML/LLM topic — formulas with derivations, from-scratch PyTorch code, comparison tables, and 25 高频面试题 (L1 必会 / L2 进阶 / L3 顶级 lab). Use when the user says '写面试 cheat sheet', '写一份 X 教程', '帮我准备 Y 面试题', '出一份 X 速查', or wants a 600-1000 line Chinese tutorial on a specific ML topic.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 256,
+      "name": "interview-cheatsheet",
+      "path": "skills/42-wanshuiyin-ARIS/skills/interview-cheatsheet/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::interview-cheatsheet"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Structure a raw invention idea into a formal invention disclosure. Use when user says \\\"构建发明\\\", \\\"structure invention\\\", \\\"发明构建\\\", \\\"invention disclosure\\\", or wants to formalize a rough idea into a patent-ready structure.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 201,
+      "name": "invention-structuring",
+      "path": "skills/42-wanshuiyin-ARIS/skills/invention-structuring/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::invention-structuring"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Compile patent application into jurisdiction-specific filing format. Use when user says \\\"格式转换\\\", \\\"jurisdiction format\\\", \\\"国家格式\\\", \\\"compile patent\\\", or wants formatted patent documents for CN/US/EP filing.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 192,
+      "name": "jurisdiction-format",
+      "path": "skills/42-wanshuiyin-ARIS/skills/jurisdiction-format/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::jurisdiction-format"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Two-thread adversarial review: a fresh reviewer constructs the strongest 200-word rejection memo, then a second fresh reviewer defends the paper point-by-point and surfaces still-unresolved critical issues. Use when user says \\\"kill argument\\\", \\\"adversarial review\\\", \\\"hostile review\\\", \\\"rebuttal preparation\\\", \\\"reviewer-2 simulation\\\", or before submitting a theory paper that has already passed standard review rounds.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 452,
+      "name": "kill-argument",
+      "path": "skills/42-wanshuiyin-ARIS/skills/kill-argument/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::kill-argument"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Develop and verify a mathematical proof in Lean, continue an incomplete Lean project, or audit whether it proves the original statement. Connect actual inputs to intermediate lemmas, assemble the target theorem, check its transitive axioms, and provide a reproducible handoff. Use when Lean is requested or a specific proof obligation benefits from formal verification; use proof-writer for ordinary mathematical drafting.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 376,
+      "name": "lean-formalize",
+      "path": "skills/42-wanshuiyin-ARIS/skills/lean-formalize/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::lean-formalize"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Generate Mermaid diagrams from user requirements. Supports flowcharts, sequence diagrams, class diagrams, ER diagrams, Gantt charts, and 18 more diagram types.",
       "frontmatter_fields": [
         "allowed-tools",
         "argument-hint",
@@ -8290,6 +8596,40 @@
     },
     {
       "collection": "42-wanshuiyin-ARIS",
+      "description": "Privileged applier that LANDS meta-optimize / corpus-audit patches the user approved — the ONLY skill permitted to mutate the skill corpus from a self-modification proposal, with cross-model jury and human approval at landing. Use when the user says \\\"meta apply\\\", \\\"/meta-apply\\\", \\\"land the staged patches\\\", \\\"应用优化\\\", after a /meta-optimize run.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 152,
+      "name": "meta-apply",
+      "path": "skills/42-wanshuiyin-ARIS/skills/meta-apply/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::meta-apply"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Analyze ARIS usage logs and propose optimizations to SKILL.md files, reviewer prompts, and workflow defaults. Outer-loop harness optimization inspired by Meta-Harness (Lee et al., 2026). Use when user says \\\"优化技能\\\", \\\"meta optimize\\\", \\\"improve skills\\\", \\\"分析使用记录\\\", or wants to optimize ARIS's own harness components based on accumulated experience.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 450,
+      "name": "meta-optimize",
+      "path": "skills/42-wanshuiyin-ARIS/skills/meta-optimize/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::meta-optimize"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
       "description": "Monitor running experiments, check progress, collect results. Use when user says \"check results\", \"is it done\", \"monitor\", or wants experiment output.",
       "frontmatter_fields": [
         "allowed-tools",
@@ -8300,7 +8640,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 123,
+      "line_count": 140,
       "name": "monitor-experiment",
       "path": "skills/42-wanshuiyin-ARIS/skills/monitor-experiment/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::monitor-experiment"
@@ -8317,10 +8657,61 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 86,
+      "line_count": 155,
       "name": "novelty-check",
       "path": "skills/42-wanshuiyin-ARIS/skills/novelty-check/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::novelty-check"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Search academic papers via OpenAlex API for open citation data, institutional affiliations, and funding information. Use when user says \"openalex search\", \"search openalex\", \"open citation graph\", or wants comprehensive academic metadata beyond arXiv/Semantic Scholar.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 237,
+      "name": "openalex",
+      "path": "skills/42-wanshuiyin-ARIS/skills/openalex/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::openalex"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Two-way sync between a local paper directory and an Overleaf project, so ARIS audit/edit workflows stay on the local copy while collaborators edit in the Overleaf web UI. Use when user says \\\"同步 overleaf\\\", \\\"overleaf sync\\\", \\\"推送到 overleaf\\\", \\\"connect overleaf\\\", \\\"Overleaf 桥接\\\", \\\"pull overleaf\\\", \\\"push overleaf\\\", or wants to bridge their ARIS paper directory with an Overleaf project.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 220,
+      "name": "overleaf-sync",
+      "path": "skills/42-wanshuiyin-ARIS/skills/overleaf-sync/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::overleaf-sync"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Zero-context verification that every number, comparison, and scope claim in the paper matches raw result files. Uses a fresh cross-model reviewer with NO prior context to prevent confirmation bias. Use when user says \\\"审查论文数据\\\", \\\"check paper claims\\\", \\\"verify numbers\\\", \\\"论文数字核对\\\", or before submission to ensure paper-to-evidence fidelity.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 361,
+      "name": "paper-claim-audit",
+      "path": "skills/42-wanshuiyin-ARIS/skills/paper-claim-audit/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::paper-claim-audit"
     },
     {
       "collection": "42-wanshuiyin-ARIS",
@@ -8334,7 +8725,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 254,
+      "line_count": 266,
       "name": "paper-compile",
       "path": "skills/42-wanshuiyin-ARIS/skills/paper-compile/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::paper-compile"
@@ -8351,7 +8742,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 280,
+      "line_count": 325,
       "name": "paper-figure",
       "path": "skills/42-wanshuiyin-ARIS/skills/paper-figure/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::paper-figure"
@@ -8368,10 +8759,27 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 692,
+      "line_count": 736,
       "name": "paper-illustration",
       "path": "skills/42-wanshuiyin-ARIS/skills/paper-illustration/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::paper-illustration"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Generate publication-quality academic illustrations through a local Codex app-server bridge that uses Codex native image generation. This is a separate experimental alternative to `paper-illustration`, intended for Claude Code users who want a GPT-image-style renderer without modifying the original skill.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 401,
+      "name": "paper-illustration-image2",
+      "path": "skills/42-wanshuiyin-ARIS/skills/paper-illustration-image2/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::paper-illustration-image2"
     },
     {
       "collection": "42-wanshuiyin-ARIS",
@@ -8385,14 +8793,14 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 284,
+      "line_count": 399,
       "name": "paper-plan",
       "path": "skills/42-wanshuiyin-ARIS/skills/paper-plan/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::paper-plan"
     },
     {
       "collection": "42-wanshuiyin-ARIS",
-      "description": "Generate a conference poster (article + tcbposter LaTeX → A0/A1 PDF + editable PPTX + SVG) from a compiled paper. Use when user says \\\"做海报\\\", \\\"制作海报\\\", \\\"conference poster\\\", \\\"make poster\\\", \\\"生成poster\\\", \\\"poster session\\\", or wants to create a poster for a conference presentation.",
+      "description": "DEPRECATED — superseded by /paper-poster-html. Kept only as a redirect for muscle memory; do not use for new posters.",
       "frontmatter_fields": [
         "allowed-tools",
         "argument-hint",
@@ -8402,10 +8810,27 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 1097,
+      "line_count": 19,
       "name": "paper-poster",
       "path": "skills/42-wanshuiyin-ARIS/skills/paper-poster/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::paper-poster"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "DEFAULT poster pipeline — build an academic conference poster (ICML/NeurIPS/ICLR/CVPR/...) as a single HTML/CSS file with measurement-driven hard gates, real paper figures, a two-hue design-token system, and print-ready PDF via headless Chromium. Use when the user says \\\"做海报\\\", \\\"poster\\\", \\\"conference poster\\\", \\\"paper poster\\\", or asks to design/redo a research poster. Supersedes the retired LaTeX /paper-poster.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 334,
+      "name": "paper-poster-html",
+      "path": "skills/42-wanshuiyin-ARIS/skills/paper-poster-html/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::paper-poster-html"
     },
     {
       "collection": "42-wanshuiyin-ARIS",
@@ -8419,10 +8844,27 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 570,
+      "line_count": 648,
       "name": "paper-slides",
       "path": "skills/42-wanshuiyin-ARIS/skills/paper-slides/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::paper-slides"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "End-to-end conference talk pipeline: paper → slide outline → Beamer + PPTX → per-page polish → assurance checks (claim / citation / anonymity) → final export and report. Default-good for academic conference talks (NeurIPS / ICML / ICLR / VALSE / 投稿 talks). Trigger phrases: \\\"做 talk\\\", \\\"做 PPT 全流程\\\", \\\"talk pipeline\\\", \\\"end-to-end slides\\\", \\\"做演讲\\\", \\\"conference talk full workflow\\\". Use when the user wants the complete talk artifact, not just a slide deck.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 392,
+      "name": "paper-talk",
+      "path": "skills/42-wanshuiyin-ARIS/skills/paper-talk/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::paper-talk"
     },
     {
       "collection": "42-wanshuiyin-ARIS",
@@ -8436,14 +8878,14 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 377,
+      "line_count": 695,
       "name": "paper-write",
       "path": "skills/42-wanshuiyin-ARIS/skills/paper-write/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::paper-write"
     },
     {
       "collection": "42-wanshuiyin-ARIS",
-      "description": "Workflow 3: Full paper writing pipeline. Orchestrates paper-plan → paper-figure → paper-write → paper-compile → auto-paper-improvement-loop to go from a narrative report to a polished, submission-ready PDF. Use when user says \\\"写论文全流程\\\", \\\"write paper pipeline\\\", \\\"从报告到PDF\\\", \\\"paper writing\\\", or wants the complete paper generation workflow.",
+      "description": "Workflow 3: Full paper writing pipeline that goes from a narrative report to a polished, submission-ready PDF. Use when user says \\\"写论文全流程\\\", \\\"write paper pipeline\\\", \\\"从报告到PDF\\\", \\\"paper writing\\\", or wants the complete paper generation workflow.",
       "frontmatter_fields": [
         "allowed-tools",
         "argument-hint",
@@ -8453,10 +8895,61 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 275,
+      "line_count": 942,
       "name": "paper-writing",
       "path": "skills/42-wanshuiyin-ARIS/skills/paper-writing/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::paper-writing"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Assess patent novelty and non-obviousness against prior art. Use when user says \\\"专利查新\\\", \\\"patent novelty\\\", \\\"可专利性评估\\\", \\\"patentability check\\\", or wants to evaluate if an invention is patentable.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 166,
+      "name": "patent-novelty-check",
+      "path": "skills/42-wanshuiyin-ARIS/skills/patent-novelty-check/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::patent-novelty-check"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Full patent drafting pipeline from invention description to jurisdiction-formatted filing documents. Supports CN (CNIPA), US (USPTO), EP (EPO). Supports invention patents and utility models. Use when user says \\\"写专利\\\", \\\"patent pipeline\\\", \\\"专利申请\\\", \\\"draft patent\\\", \\\"写权利要求书\\\", or wants to draft a complete patent application.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 355,
+      "name": "patent-pipeline",
+      "path": "skills/42-wanshuiyin-ARIS/skills/patent-pipeline/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::patent-pipeline"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Get an external patent examiner review of a patent application. Use when user says \\\"专利审查\\\", \\\"patent review\\\", \\\"审查意见\\\", \\\"examiner review\\\", or wants critical feedback on patent claims and specification.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 218,
+      "name": "patent-review",
+      "path": "skills/42-wanshuiyin-ARIS/skills/patent-review/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::patent-review"
     },
     {
       "collection": "42-wanshuiyin-ARIS",
@@ -8477,6 +8970,56 @@
     },
     {
       "collection": "42-wanshuiyin-ARIS",
+      "description": "Search patent databases and academic literature for prior art relevant to an invention. Use when user says \\\"现有技术检索\\\", \\\"prior art search\\\", \\\"专利检索\\\", \\\"check patents\\\", or wants to find relevant prior art.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 146,
+      "name": "prior-art-search",
+      "path": "skills/42-wanshuiyin-ARIS/skills/prior-art-search/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::prior-art-search"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Rigorous mathematical proof verification and fixing workflow. Reads a LaTeX proof, identifies gaps via cross-model review (external reviewer backend, ultra reasoning), fixes each gap with full derivations, re-reviews, and generates an audit report. Use when user says \"检查证明\", \"verify proof\", \"proof check\", \"审证明\", \"check this proof\", or wants rigorous mathematical verification of a theory paper.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 900,
+      "name": "proof-checker",
+      "path": "skills/42-wanshuiyin-ARIS/skills/proof-checker/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::proof-checker"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Manage a stateful, run-directory-based proof project: continuation across runs, run-local source bookkeeping, manual GPT Pro handoff packages when a local attempt stalls, and an optional DeepSeek second opinion as additional evidence only. Use when the user asks for proof-run orchestration, a GPT Pro handoff, or cross-run proof continuation — use /proof-writer for ordinary proof drafting and /proof-checker for rigorous verification or submission acceptance.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 255,
+      "name": "proof-orchestrator",
+      "path": "skills/42-wanshuiyin-ARIS/skills/proof-orchestrator/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::proof-orchestrator"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
       "description": "Writes rigorous mathematical proofs for ML/AI theory. Use when asked to prove a theorem, lemma, proposition, or corollary, fill in missing proof steps, formalize a proof sketch, 补全证明, 写证明, 证明某个命题, or determine whether a claimed proof can actually be completed under the stated assumptions.",
       "frontmatter_fields": [
         "allowed-tools",
@@ -8487,10 +9030,27 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 223,
+      "line_count": 236,
       "name": "proof-writer",
       "path": "skills/42-wanshuiyin-ARIS/skills/proof-writer/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::proof-writer"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Manage GPU compute jobs on the Qizhi (启智) platform using qzcli — a kubectl-style CLI tool. Use when user says \"qzcli\", \"启智平台\", \"submit job\", \"stop job\", \"查计算组\", \"avail\", \"list jobs\", \"batch submit\", or needs to manage distributed training jobs on a Qizhi instance.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 324,
+      "name": "qzcli",
+      "path": "skills/42-wanshuiyin-ARIS/skills/qzcli/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::qzcli"
     },
     {
       "collection": "42-wanshuiyin-ARIS",
@@ -8504,10 +9064,44 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 246,
+      "line_count": 389,
       "name": "rebuttal",
       "path": "skills/42-wanshuiyin-ARIS/skills/rebuttal/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::rebuttal"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Render an ARIS Markdown / JSON artifact (IDEA_REPORT, AUTO_REVIEW, KILL_ARGUMENT, PAPER_PLAN, research-wiki state, etc.) into a single-file HTML view designed for human reading. Use when the user says \\\"渲染 HTML\\\", \\\"出一份 HTML 报告\\\", \\\"render html\\\", \\\"make this readable\\\", \\\"export to html\\\", or wants a polished web-rendered view of a Markdown artifact.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 327,
+      "name": "render-html",
+      "path": "skills/42-wanshuiyin-ARIS/skills/render-html/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::render-html"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Build a working artifact from a plain \\\"implement X for me\\\" request: a running end-to-end spine first, then one feature per rung, with every under-determined decision written to an assumption ledger BEFORE the code that depends on it and a cross-model sweep for the ones that slipped through undeclared. Use when user says \\\"给我实现\\\", \\\"implement X\\\", \\\"帮我做一个能跑的\\\", \\\"先搭个原型再加功能\\\", \\\"build this feature\\\", \\\"prototype then extend\\\", or hands over a capability description rather than an experiment plan.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 594,
+      "name": "research-implement-feature",
+      "path": "skills/42-wanshuiyin-ARIS/skills/research-implement-feature/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::research-implement-feature"
     },
     {
       "collection": "42-wanshuiyin-ARIS",
@@ -8521,14 +9115,14 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 220,
+      "line_count": 784,
       "name": "research-lit",
       "path": "skills/42-wanshuiyin-ARIS/skills/research-lit/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::research-lit"
     },
     {
       "collection": "42-wanshuiyin-ARIS",
-      "description": "Full research pipeline: Workflow 1 (idea discovery) → implementation → Workflow 2 (auto review loop). Goes from a broad research direction all the way to a submission-ready paper. Use when user says \\\"全流程\\\", \\\"full pipeline\\\", \\\"从找idea到投稿\\\", \\\"end-to-end research\\\", or wants the complete autonomous research lifecycle.",
+      "description": "Full end-to-end research pipeline: from a broad research direction through idea discovery, experiments, and review all the way to a polished paper PDF. Use when user says \\\"全流程\\\", \\\"full pipeline\\\", \\\"从找idea到投稿\\\", \\\"end-to-end research\\\", or wants the complete autonomous research lifecycle.",
       "frontmatter_fields": [
         "allowed-tools",
         "argument-hint",
@@ -8538,14 +9132,14 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 176,
+      "line_count": 413,
       "name": "research-pipeline",
       "path": "skills/42-wanshuiyin-ARIS/skills/research-pipeline/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::research-pipeline"
     },
     {
       "collection": "42-wanshuiyin-ARIS",
-      "description": "Turn a vague research direction into a problem-anchored, elegant, frontier-aware, implementation-oriented method plan via iterative GPT-5.4 review. Use when the user says \"refine my approach\", \"帮我细化方案\", \"decompose this problem\", \"打磨idea\", \"refine research plan\", \"细化研究方案\", or wants a concrete research method that stays simple, focused, and top-venue ready instead of a vague or overbuilt idea.",
+      "description": "Turn a vague research direction into a problem-anchored, elegant, frontier-aware, implementation-oriented method plan via iterative GPT-6-Astra review. Use when the user says \"refine my approach\", \"帮我细化方案\", \"decompose this problem\", \"打磨idea\", \"refine research plan\", \"细化研究方案\", or wants a concrete research method that stays simple, focused, and top-venue ready instead of a vague or overbuilt idea.",
       "frontmatter_fields": [
         "allowed-tools",
         "description",
@@ -8554,7 +9148,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 735,
+      "line_count": 785,
       "name": "research-refine",
       "path": "skills/42-wanshuiyin-ARIS/skills/research-refine/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::research-refine"
@@ -8570,14 +9164,14 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 179,
+      "line_count": 197,
       "name": "research-refine-pipeline",
       "path": "skills/42-wanshuiyin-ARIS/skills/research-refine-pipeline/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::research-refine-pipeline"
     },
     {
       "collection": "42-wanshuiyin-ARIS",
-      "description": "Get a deep critical review of research from GPT via Codex MCP. Use when user says \"review my research\", \"help me review\", \"get external review\", or wants critical feedback on research ideas, papers, or experimental results.",
+      "description": "Get a deep critical review of research from a selected reviewer (Codex by default, Gemini, Grok, Claude Code, or manual). Use when user says \"review my research\", \"help me review\", \"get external review\", or wants critical feedback on research ideas, papers, or experimental results.",
       "frontmatter_fields": [
         "allowed-tools",
         "argument-hint",
@@ -8587,10 +9181,44 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 106,
+      "line_count": 235,
       "name": "research-review",
       "path": "skills/42-wanshuiyin-ARIS/skills/research-review/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::research-review"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Persistent research knowledge base that accumulates papers, ideas, experiments, claims, and their relationships across the entire research lifecycle. Inspired by Karpathy's LLM Wiki pattern. Use when user says \\\"知识库\\\", \\\"research wiki\\\", \\\"add paper\\\", \\\"wiki query\\\", \\\"查知识库\\\", or wants to build/query a persistent field map.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 461,
+      "name": "research-wiki",
+      "path": "skills/42-wanshuiyin-ARIS/skills/research-wiki/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::research-wiki"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Workflow 5: orchestrate a text-only resubmit of a polished paper to a different venue under hard constraints (no new experiments, no bib edits, no framework changes, never overwrite prior submissions). Use when user says \\\"resubmit pipeline\\\", \\\"重投流程\\\", \\\"port paper to <new venue>\\\", \\\"resubmit to <venue>\\\", \\\"tighten paper for resubmission\\\", or has a rejected/withdrawn paper to move to a different top venue under tight time budget.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 458,
+      "name": "resubmit-pipeline",
+      "path": "skills/42-wanshuiyin-ARIS/skills/resubmit-pipeline/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::resubmit-pipeline"
     },
     {
       "collection": "42-wanshuiyin-ARIS",
@@ -8604,14 +9232,14 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 122,
+      "line_count": 324,
       "name": "result-to-claim",
       "path": "skills/42-wanshuiyin-ARIS/skills/result-to-claim/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::result-to-claim"
     },
     {
       "collection": "42-wanshuiyin-ARIS",
-      "description": "Deploy and run ML experiments on local or remote GPU servers. Use when user says \"run experiment\", \"deploy to server\", \"跑实验\", or needs to launch training jobs.",
+      "description": "Deploy and run ML experiments on local, remote, Vast.ai, or Modal serverless GPU. Use when user says \"run experiment\", \"deploy to server\", \"跑实验\", or needs to launch training jobs.",
       "frontmatter_fields": [
         "allowed-tools",
         "argument-hint",
@@ -8621,7 +9249,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 263,
+      "line_count": 313,
       "name": "run-experiment",
       "path": "skills/42-wanshuiyin-ARIS/skills/run-experiment/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::run-experiment"
@@ -8638,14 +9266,65 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 179,
+      "line_count": 236,
       "name": "semantic-scholar",
       "path": "skills/42-wanshuiyin-ARIS/skills/semantic-scholar/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::semantic-scholar"
     },
     {
       "collection": "42-wanshuiyin-ARIS",
-      "description": "Profile a target (script, process, GPU, memory, interconnect) using external tools and code instrumentation. Produces structured performance reports with actionable recommendations. Use when user says \"profile\", \"benchmark\", \"bottleneck\", or wants performance analysis.",
+      "description": "Run GPU workloads on Modal — training, fine-tuning, inference, batch processing. Zero-config serverless: no SSH, no Docker, auto scale-to-zero. Use when user says \\\"modal run\\\", \\\"modal training\\\", \\\"modal inference\\\", \\\"deploy to modal\\\", \\\"need a GPU\\\", \\\"run on modal\\\", \\\"serverless GPU\\\", or needs remote GPU compute.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 335,
+      "name": "serverless-modal",
+      "path": "skills/42-wanshuiyin-ARIS/skills/serverless-modal/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::serverless-modal"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Per-page Codex review + targeted python-pptx / Beamer fixes for academic talk slides. Use AFTER /paper-slides (or any externally generated PPTX/Beamer) when the deck looks 'mostly OK' but the user wants a final pass that aligns visual weight with a reference, bumps PPTX fonts to projector-readable size, kills italic style leaks, fixes text-frame overflow, and catches per-slide layout drift. Trigger phrases: \\\"polish slides\\\", \\\"slides 排版不对\\\", \\\"PPTX 字体太小\\\", \\\"和 Beamer 比一下\\\", \\\"per-page review\\\", \\\"和 codex 一页一页过\\\".",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 580,
+      "name": "slides-polish",
+      "path": "skills/42-wanshuiyin-ARIS/skills/slides-polish/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::slides-polish"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Write the full patent specification from claims and invention disclosure. Use when user says \\\"撰写说明书\\\", \\\"write specification\\\", \\\"写说明书\\\", \\\"patent description\\\", or wants to draft the complete patent specification.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 224,
+      "name": "specification-writing",
+      "path": "skills/42-wanshuiyin-ARIS/skills/specification-writing/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::specification-writing"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Profile a target (script, process, GPU, memory, interconnect) for performance analysis. Use when user says \\\"profile\\\", \\\"benchmark\\\", \\\"bottleneck\\\", or wants performance analysis.",
       "frontmatter_fields": [
         "argument-hint",
         "description",
@@ -8671,7 +9350,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 123,
+      "line_count": 145,
       "name": "training-check",
       "path": "skills/42-wanshuiyin-ARIS/skills/training-check/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::training-check"
@@ -8688,10 +9367,61 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 380,
+      "line_count": 394,
       "name": "vast-gpu",
       "path": "skills/42-wanshuiyin-ARIS/skills/vast-gpu/SKILL.md",
       "qualified_name": "42-wanshuiyin-ARIS::vast-gpu"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Search GitHub, Stack Exchange, Chinese technical communities, official documentation, and general developer web sources for software errors, compatibility problems, API usage questions, and real-world workarounds. Use for debugging and discovery only; results are not paper-citation evidence.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 334,
+      "name": "web-debug-search",
+      "path": "skills/42-wanshuiyin-ARIS/skills/web-debug-search/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::web-debug-search"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Fill in the per-paper TODO sections of research-wiki/papers/<slug>.md pages that literature-ingest skills leave as bare scaffolds. Use when user says 'enrich wiki', 'fill paper TODOs', 'wiki body 補完', '把 paper 摘要寫進 wiki', 'research-wiki 自動填', or after a batch ingest that left papers/ as TODO scaffolds.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 257,
+      "name": "wiki-enrich",
+      "path": "skills/42-wanshuiyin-ARIS/skills/wiki-enrich/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::wiki-enrich"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "description": "Paragraph-level structural blueprint for 10-12 page systems papers targeting OSDI, SOSP, ASPLOS, NSDI, and EuroSys. Provides page allocation, paragraph templates, and writing patterns. Use when user says \\\"写系统论文\\\", \\\"systems paper structure\\\", \\\"OSDI paper\\\", \\\"SOSP paper\\\", or wants fine-grained structural guidance for a systems conference submission.",
+      "frontmatter_fields": [
+        "allowed-tools",
+        "argument-hint",
+        "description",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 184,
+      "name": "writing-systems-papers",
+      "path": "skills/42-wanshuiyin-ARIS/skills/writing-systems-papers/SKILL.md",
+      "qualified_name": "42-wanshuiyin-ARIS::writing-systems-papers"
     },
     {
       "collection": "43-wentorai-research-plugins",
@@ -19340,12 +20070,12 @@
     }
   ],
   "summary": {
-    "duplicate_bare_names": 47,
+    "duplicate_bare_names": 48,
     "missing_description": 0,
     "missing_frontmatter": 0,
     "missing_name": 0,
-    "oversized_skill_files_over_500_lines": 83,
-    "skill_files": 1108,
+    "oversized_skill_files_over_500_lines": 94,
+    "skill_files": 1151,
     "top_level_collections": 78
   }
 }

@@ -7,8 +7,8 @@ Scan date: 2026-07-22.
 ## Summary
 
 - Collections audited: 78
-- License buckets: AGPL-3.0=1, Apache-2.0=1, CC-BY-NC-4.0 (non-commercial)=1, CC-BY-SA-4.0=1, CC-BY-SA-4.0 (repository default)=7, CC0-1.0=1, GPL-3.0=1, MIT=37, MIT Non-Commercial=1, Mixed (per-skill; see folder)=2, UNKNOWN - check upstream=25
-- Commercial-use buckets: allowed=39, restricted=2, share-alike=10, unknown=27
+- License buckets: AGPL-3.0=1, Apache-2.0=1, CC-BY-NC-4.0 (non-commercial)=1, CC-BY-SA-4.0=1, CC-BY-SA-4.0 (repository default)=7, CC0-1.0=1, GPL-3.0=1, MIT=38, MIT Non-Commercial=1, Mixed (per-skill; see folder)=2, UNKNOWN - check upstream=24
+- Commercial-use buckets: allowed=40, restricted=2, share-alike=10, unknown=26
 - Source-confidence buckets: high=46, low=10, medium=22
 
 ## Interpretation
@@ -67,7 +67,7 @@ Scan date: 2026-07-22.
 | [`39-vincentarelbundock-marginaleffects`](../skills/39-vincentarelbundock-marginaleffects/) | [source](https://github.com/vincentarelbundock/marginaleffects) | high | UNKNOWN - check upstream | unknown | manual vendor snapshot |
 | [`40-py-econometrics-pyfixest`](../skills/40-py-econometrics-pyfixest/) | [source](https://github.com/py-econometrics/pyfixest) | high | UNKNOWN - check upstream | unknown | manual vendor snapshot |
 | [`41-sticerd-eee-sewage-econometrics-check`](../skills/41-sticerd-eee-sewage-econometrics-check/) | [source](https://github.com/sticerd-eee/sewage) | high | UNKNOWN - check upstream | unknown | manual vendor snapshot |
-| [`42-wanshuiyin-ARIS`](../skills/42-wanshuiyin-ARIS/) | [source](https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep) | medium | UNKNOWN - check upstream | unknown | manual vendor snapshot |
+| [`42-wanshuiyin-ARIS`](../skills/42-wanshuiyin-ARIS/) | [source](https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep) | medium | MIT | allowed | manual vendor snapshot |
 | [`43-wentorai-research-plugins`](../skills/43-wentorai-research-plugins/) | [source](https://github.com/wentorai/research-plugins) | medium | MIT | allowed | manual vendor snapshot |
 | [`44-matsuikentaro1-humanizer_academic`](../skills/44-matsuikentaro1-humanizer_academic/) | [source](https://github.com/matsuikentaro1/humanizer_academic) | high | MIT | allowed | manual vendor snapshot |
 | [`45-stephenturner-skill-deslop`](../skills/45-stephenturner-skill-deslop/) | [source](https://github.com/stephenturner/skill-deslop) | medium | MIT | allowed | manual vendor snapshot |

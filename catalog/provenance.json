@@ -676,15 +676,15 @@
       "vendored_commit": null
     },
     {
-      "commercial_use": "unknown",
+      "commercial_use": "allowed",
       "id": "42-wanshuiyin-ARIS",
       "last_aers_review": "2026-07-22",
-      "license": "UNKNOWN - check upstream",
-      "license_file": null,
-      "origin": "vendored upstream snapshot. The upstream skills-codex / skills-codex-*-review runtime ports (OpenAI Codex CLI variants of the same skills) remain on disk but are excluded from skill discovery since 2026-07-22 (see scripts/skill_discovery.py). The four auto-review-loop SKILL.md files carry the MiniMax-M2.7 -> MiniMax-M3 reviewer-model rename ahead of this snapshot (PR #69, 2026-08-31; M2.7 was retired on 2026-05-31). Upstream has since adopted MiniMax-M3 (checked 2026-10-20), so the next resync removes this divergence; drop this note then.",
+      "license": "MIT",
+      "license_file": "skills/42-wanshuiyin-ARIS/LICENSE",
+      "origin": "vendored upstream snapshot. The upstream skills-codex / skills-codex-*-review runtime ports (OpenAI Codex CLI variants of the same skills) remain on disk but are excluded from skill discovery since 2026-07-22 (see scripts/skill_discovery.py). Resynced 2026-10-20 to upstream commit 5854b99 (skills/, README.md as README-original.md, LICENSE); no local content edits remain (the earlier MiniMax-M3 rename, PR #69, and argument-hint quoting, PR #53, are both upstream now).",
       "path": "skills/42-wanshuiyin-ARIS",
       "security_review": "SECURITY-SCAN-REPORT.md",
-      "skill_count": 42,
+      "skill_count": 85,
       "source_confidence": "medium",
       "source_url": "https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep",
       "sync": "manual vendor snapshot",
@@ -1177,10 +1177,10 @@
   "summary": {
     "collections": 78,
     "commercial_use": {
-      "allowed": 39,
+      "allowed": 40,
       "restricted": 2,
       "share-alike": 10,
-      "unknown": 27
+      "unknown": 26
     },
     "licenses": {
       "AGPL-3.0": 1,
@@ -1190,10 +1190,10 @@
       "CC-BY-SA-4.0 (repository default)": 7,
       "CC0-1.0": 1,
       "GPL-3.0": 1,
-      "MIT": 37,
+      "MIT": 38,
       "MIT Non-Commercial": 1,
       "Mixed (per-skill; see folder)": 2,
-      "UNKNOWN - check upstream": 25
+      "UNKNOWN - check upstream": 24
     },
     "source_confidence": {
       "high": 46,

@@ -7,6 +7,8 @@ description: "Turn a vague research direction into a problem-anchored, elegant, 
 
 # Research Refine: Problem-Anchored, Elegant, Frontier-Aware Plan Refinement
 
+> **Gemini overlay assurance:** `review_independence: cross-family` and `acceptance_status: accepted`.
+
 Refine and concretize: **$ARGUMENTS**
 
 ## Overview
@@ -621,6 +623,13 @@ Full report: refine-logs/REFINEMENT_REPORT.md
 Final proposal: refine-logs/FINAL_PROPOSAL.md
 Suggested next step: /experiment-plan
 ```
+
+## Output Protocols
+
+> Follow these shared protocols for all output files:
+> - **[Output Versioning Protocol](../../shared-references/output-versioning.md)** — write timestamped file first, then copy to fixed name
+> - **[Output Manifest Protocol](../../shared-references/output-manifest.md)** — log every output to MANIFEST.md
+> - **[Output Language Protocol](../../shared-references/output-language.md)** — respect the project's language setting
 
 ## Key Rules
 

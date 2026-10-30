@@ -7,6 +7,8 @@ description: "Workflow 3: Full paper writing pipeline. Orchestrates paper-plan \
 
 # Workflow 3: Paper Writing Pipeline
 
+> **Gemini overlay assurance:** `review_independence: cross-family` and `acceptance_status: accepted`.
+
 Orchestrate a complete paper writing workflow for: **$ARGUMENTS**
 
 ## Overview
@@ -122,6 +124,17 @@ If the paper plan includes architecture diagrams, pipeline figures, or method il
 [If all auto]: Shall I proceed with LaTeX writing?
 ```
 
+> **Writing invariant (every drafting and revision step):** calibrate each
+> claim to its evidence and state it directly; generic caveats live in the
+> Limitations section only; writing instructions are never manuscript content
+> ("do not mention X" means omit X, not "we do not address X"); tone edits
+> never change what the paper knows; the paper is a launch, not a progress
+> report — organize around the strongest advantage, give every experiment an
+> argumentative duty, keep unfavorable numbers in the tables and explain them
+> as tradeoffs only where the evidence supports that, never narrating
+> defeats. `/paper-write` carries the full CONFIDENT PROSE, HONEST LIMITS
+> contract.
+
 ### Phase 3: LaTeX Writing
 
 Invoke `/paper-write` to generate section-by-section LaTeX:
@@ -195,18 +208,32 @@ Invoke `/auto-paper-improvement-loop` to polish the paper:
 
 **Round 1:** Gemini reviews the full paper → identifies CRITICAL/MAJOR/MINOR issues → Codex implements fixes → recompile → save `main_round1.pdf`
 
-**Round 2:** Gemini re-reviews with conversation context → identifies remaining issues → Codex implements fixes → recompile → save `main_round2.pdf`
+**Round 2:** Gemini re-reviews the recompiled draft cold (fresh review — no fix summaries, no conversation carry-over) → identifies remaining issues → Codex implements fixes → recompile → save `main_round2.pdf`
 
-**Typical improvements:**
+**Typical improvements (calibration cuts both ways):**
 - Fix assumption-model mismatches
-- Soften overclaims to match evidence
+- Narrow genuine overclaims to the supported scope — and state supported claims
+  directly, removing redundant hedges
+- Consolidate scattered generic caveats into Limitations
 - Add missing interpretations and notation
-- Strengthen limitations section
+- Make Limitations more specific (only when a material limit is missing — never pad)
 - Add theory-aligned experiments if needed
 
 **Output:** Three PDFs for comparison + `PAPER_IMPROVEMENT_LOG.md`.
 
 **Format check** (included in improvement loop Step 8): After final recompilation, auto-detect and fix overfull hboxes (content exceeding margins), verify page count vs venue limit, and ensure compact formatting. Any overfull > 10pt is fixed before generating the final PDF.
+
+### Phase 5.9: Integrity Forensics (opt-in — Codex executor rules apply)
+
+Same contract as the base Codex pack (`skills-codex/paper-writing` Phase 5.9,
+which this overlay does not change): the executor here is Codex, so only
+upstream's **deterministic-only slice** of `/integrity-forensics` is runnable
+(numeric core + rules-only reporter — it can flag, it can never say
+CLEAN), OFF unless the CURRENT `$ARGUMENTS` contains `— self_forensics:
+true`. If opted in: run the launcher on `paper/` (absolute path), then before
+the Final Report require `python3 "$GATE_HELPER" fresh --paper-dir paper/
+--anti-ar-commit "$ANTI_AR_COMMIT"` exit 0 — an opted-in run without a fresh gate is **incomplete, not
+skippable**; gate `BLOCK` refuses the Final Report.
 
 ### Phase 6: Final Report
 
@@ -215,6 +242,7 @@ Invoke `/auto-paper-improvement-loop` to polish the paper:
 
 **Input**: [NARRATIVE_REPORT.md or topic]
 **Venue**: [ICLR/NeurIPS/ICML]
+**Forensics**: [NO_NEW_BLOCKER | WARN: <n> open obligations (listed below) | BLOCK | n/a (opt-in, not requested)]
 **Date**: [today]
 
 ## Pipeline Summary
@@ -249,6 +277,14 @@ Invoke `/auto-paper-improvement-loop` to polish the paper:
 - [ ] Add any missing manual figures
 - [ ] Submit to [venue] via OpenReview / CMT / HotCRP
 ```
+
+## Output Protocols
+
+> Follow these shared protocols for all output files:
+> - **[Output Versioning Protocol](../../shared-references/output-versioning.md)** — write timestamped file first, then copy to fixed name
+> - **[Output Manifest Protocol](../../shared-references/output-manifest.md)** — log every output to MANIFEST.md
+> - **[Output Language Protocol](../../shared-references/output-language.md)** — respect the project's language setting
+> - Note: paper content is always written in English regardless of project language setting.
 
 ## Key Rules
 

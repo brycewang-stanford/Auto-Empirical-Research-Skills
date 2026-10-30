@@ -1,0 +1,167 @@
+# Assurance Contract
+
+ARIS audits emit machine-readable verdicts. The `assurance` axis decides whether those verdicts are advisory in draft mode or load-bearing gates in submission mode.
+
+This contract is referenced by `paper-writing`, `paper-claim-audit`, `citation-audit`, `proof-checker`, and the external verifier (canonical name `verify_paper_audits.sh`; callers resolve the actual path via `integration-contract.md` §2).
+
+Reviewer selection and actual-model evidence follow
+[reviewer-backends.md](reviewer-backends.md) and
+[reviewer-routing.md](reviewer-routing.md). The Codex host default remains a
+fresh native Codex reviewer with same-family/provisional assurance. Selecting
+Antigravity, Grok or local Claude Code changes the transport, not the audit
+obligations or acceptance threshold.
+
+## Why a separate axis from `effort`
+
+`effort` controls depth and cost. `assurance` controls audit strictness.
+
+| Axis | Controls | Default |
+|------|----------|---------|
+| `effort` | depth/cost, papers, rounds, ideation | `balanced` |
+| `assurance` | audit strictness, silent-skip allowed vs verdict required | derived from `effort` |
+
+Override either independently. For example, `— effort: balanced, assurance: submission` means normal depth but every audit must emit a verdict before finalization.
+
+## Assurance Levels
+
+### `draft`
+
+- Audits run only if their content detector matches.
+- Silent skip is allowed.
+- `paper-writing` can produce a final report without the submission verifier.
+- Use for rapid iteration and early drafts.
+
+### `submission`
+
+- All mandatory audits must emit a verdict.
+- Silent skip is forbidden.
+- `paper-writing` runs `verify_paper_audits.sh` (resolved per `integration-contract.md` §2).
+- A non-zero verifier exit blocks the Final Report.
+- The Final Report marks `submission-ready: yes/no` from verifier output.
+
+## Default Mapping
+
+| `effort` | implied `assurance` |
+|----------|---------------------|
+| `lite` | `draft` |
+| `balanced` | `draft` |
+| `max` | `submission` |
+| `beast` | `submission` |
+
+Users who want strict audits at lower depth should pass `— assurance: submission`.
+
+## Verdict State Machine
+
+Every mandatory audit must emit exactly one of these verdicts:
+
+| Verdict | Meaning | Submission-blocking? |
+|---------|---------|----------------------|
+| `PASS` | All checks passed | No |
+| `WARN` | Issues found, none disqualifying | No |
+| `FAIL` | Disqualifying issues found | Yes |
+| `NOT_APPLICABLE` | Detector negative; nothing to audit | No |
+| `BLOCKED` | Audit should apply but prerequisites are missing | Yes |
+| `ERROR` | Audit invocation failed | Yes |
+
+`NOT_APPLICABLE` means the audit phase ran and wrote an artifact documenting that there was nothing to verify. It is not the same as a silent skip.
+
+`BLOCKED` means the audit should have run but could not, such as numeric claims with no raw result files.
+
+## Required Audit Artifact Schema
+
+Every mandatory audit must write a JSON artifact, and may also write a Markdown sibling:
+
+```json
+{
+  "audit_skill": "paper-claim-audit",
+  "verdict": "PASS",
+  "reason_code": "all_numbers_match",
+  "summary": "Verified 23 numeric claims against 4 result files; no mismatches.",
+  "audited_input_hashes": {
+    "main.tex": "sha256:a3f8...",
+    "sections/5_evidence.tex": "sha256:b2d1..."
+  },
+  "trace_path": ".aris/traces/paper-claim-audit/2026-04-21_run01/",
+  "agent_id": "019dae73-fc12-4ab8-...",
+  "executor_model": "codex-gpt-6-astra",
+  "executor_family": "openai",
+  "reviewer_model": "gpt-6-astra",
+  "reviewer_family": "openai",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "reviewer_reasoning": "xhigh",
+  "generated_at": "2026-04-21T14:23:01Z",
+  "details": {}
+}
+```
+
+Field rules:
+
+- `audit_skill` identifies the child audit skill.
+- `verdict` is one of the six allowed verdicts.
+- `audited_input_hashes` contains SHA256 hashes for every file consumed by the audit.
+- In-paper paths are relative to the paper directory passed to the verifier.
+- Files outside the paper directory may use absolute paths.
+- `trace_path` points to the saved reviewer trace.
+- `agent_id` is the Codex reviewer id when a reviewer agent was used;
+  `thread_id` identifies a selected MCP reviewer session. At least one is required.
+- `reviewer_model` records the actual returned model, not the requested alias or
+  bridge name; `reviewer_reasoning` records observed reasoning effort, or null
+  when it is unavailable. The reasoning key remains required even when null;
+  this does not relax model-identity checks. Preserve the evidence source in the trace. Claude
+  Code may run DeepSeek and Antigravity may run Claude, so derive executor and
+  reviewer families from actual model identities.
+- `review_independence` is `same-family`, `cross-family`, or `deterministic`.
+  `deterministic` is valid ONLY for what a process can actually decide
+  (compilation, schema validity, hash freshness, test suites) — the audit
+  aggregator REJECTS a deterministic label on the four semantic paper audits
+  (proof / claims / citations / attack); only a cross-family model review can
+  accept those.
+- `acceptance_status` is `provisional` for the same-family Codex default. For
+  selectable MCP routes, a positive result can be `accepted` only after successful
+  completion within the required scope and with known different actual model
+  families. A same-family positive review can stop a drive loop provisionally.
+  Selection of a provider or installation of a legacy overlay never grants
+  acceptance by itself. Missing identity, errors and incomplete or negative new
+  route outcomes remain provisional; keep their substantive blocking verdicts.
+  A deterministic verifier can record accepted only for what it actually checks,
+  subject to the semantic-audit restriction above.
+- `generated_at` is UTC ISO-8601.
+
+For cross-family `PASS`/`WARN` artifacts, `acceptance_status` must be
+`accepted`; same-family artifacts always require `provisional`. Cross-family
+`FAIL`, `ERROR` and `BLOCKED` artifacts may record `provisional` for new routes,
+or retain the historical `accepted` classification of review evidence. Both
+forms are schema-readable and still block submission by their substantive
+verdict. Unknown model identity remains blocking regardless of that label.
+
+## Verifier Contract
+
+`verify_paper_audits.sh <paper-dir>` (canonical name; resolved per `integration-contract.md` §2) is the single source of truth for mandatory audit completeness. It must:
+
+1. Locate expected audit artifacts.
+2. Validate JSON required fields.
+3. Verify each verdict is allowed.
+4. Recompute `audited_input_hashes` and flag stale artifacts.
+5. Verify `trace_path` exists when required.
+6. Exit 0 only when all mandatory audits are green.
+
+The report emits `overall_assurance: blocked | provisional | accepted`.
+A per-call trace classification is evidence for the audit, not a replacement for
+this aggregate verifier or the audit's substantive verdict.
+Provisional remains exit 0 so the Final Report can be generated, but the report
+must say `submission-ready: provisional`, never `yes`.
+
+At `assurance: submission`, `paper-writing` must treat verifier exit 1 as blocking.
+
+## Subskill Contract
+
+Child audit skills follow this contract:
+
+- Always emit a verdict artifact, even on detector-negative or error paths.
+- Never decide final submission readiness themselves.
+- The parent skill and verifier decide whether a verdict blocks finalization.
+
+## Backward Compatibility
+
+The default `effort: balanced` maps to `assurance: draft`, preserving normal draft behavior. `effort: max` and `effort: beast` imply `assurance: submission` unless the user explicitly overrides with `assurance: draft`.

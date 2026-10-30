@@ -1,11 +1,22 @@
 ---
 name: paper-writing
-description: "Workflow 3: Full paper writing pipeline. Orchestrates paper-plan → paper-figure → paper-write → paper-compile → auto-paper-improvement-loop to go from a narrative report to a polished, submission-ready PDF. Use when user says \"写论文全流程\", \"write paper pipeline\", \"从报告到PDF\", \"paper writing\", or wants the complete paper generation workflow."
-argument-hint: "[narrative-report-path-or-topic]"
-allowed-tools: Bash(*), Read, Write, Edit, Grep, Glob, Agent, Skill, mcp__codex__codex, mcp__codex__codex-reply
+description: "Workflow 3: Full paper writing pipeline that goes from a narrative report to a polished, submission-ready PDF. Use when user says \"写论文全流程\", \"write paper pipeline\", \"从报告到PDF\", \"paper writing\", or wants the complete paper generation workflow."
+argument-hint: "[narrative-report-path-or-topic] [— style-ref: <source>]"
+allowed-tools: Bash(*), Read, Write, Edit, Grep, Glob, Skill, mcp__codex__codex, mcp__codex__codex-reply, mcp__antigravity__antigravity, mcp__antigravity__antigravity-reply, mcp__grok__grok, mcp__grok__grok-reply, mcp__claude-review__review, mcp__claude-review__review_reply, mcp__claude-review__review_start, mcp__claude-review__review_reply_start, mcp__claude-review__review_status
 ---
 
 # Workflow 3: Paper Writing Pipeline
+
+> **Before each reviewer slot**, follow [Selectable Reviewers](../shared-references/reviewer-backends.md):
+> resolve invocation → `.aris/reviewer.json` → Claude Code default (Codex MCP)
+> with `reviewer_route.py` through the canonical helper resolver, preserving this
+> slot's tier, fresh contexts, source/image inputs and deterministic gates.
+> Codex examples/pins below apply only to `backend=codex`; other routes use their
+> own first-call/reply contract. Save the route and actual returned identity;
+> unavailable selections are `REVIEW_UNAVAILABLE`. Classify acceptance from actual
+> families/completion/scope. Forward invocation reviewer/model/effort overrides
+> to reviewer-bearing children. Generation workers are unchanged.
+
 
 Orchestrate a complete paper writing workflow for: **$ARGUMENTS**
 
@@ -26,11 +37,12 @@ In this hybrid pack, the pipeline itself is unchanged, but `paper-plan` and `pap
 
 - **VENUE = `ICLR`** — Target venue. Options: `ICLR`, `NeurIPS`, `ICML`, `CVPR`, `ACL`, `AAAI`, `ACM`, `IEEE_JOURNAL` (IEEE Transactions / Letters), `IEEE_CONF` (IEEE conferences). Affects style file, page limit, citation format.
 - **MAX_IMPROVEMENT_ROUNDS = 2** — Number of review→fix→recompile rounds in the improvement loop.
-- **REVIEWER_MODEL = `gpt-5.4`** — Model used via Codex MCP for plan review, figure review, writing review, and improvement loop.
+- **REVIEWER_MODEL = `gpt-6-astra`** — Model used via Codex MCP for plan review, figure review, writing review, and improvement loop.
 - **AUTO_PROCEED = true** — Auto-continue between phases. Set `false` to pause and wait for user approval after each phase.
 - **HUMAN_CHECKPOINT = false** — When `true`, the improvement loop (Phase 5) pauses after each round's review to let you see the score and provide custom modification instructions. When `false` (default), the loop runs fully autonomously. Passed through to `/auto-paper-improvement-loop`.
+- **ILLUSTRATION = `figurespec`** — Architecture/illustration generator for Phase 2b: `figurespec` (default, deterministic JSON→SVG via `/figure-spec`, best for architecture/workflow/topology), `gemini` (AI-generated via `/paper-illustration`, best for qualitative method illustrations; needs `GEMINI_API_KEY`), `codex-image2` (AI-generated via `/paper-illustration-image2` through the local Codex native image bridge — no external API key, uses your ChatGPT Plus/Pro quota; experimental), `mermaid` (Mermaid syntax via `/mermaid-diagram`, free, best for flowcharts), or `false` (skip Phase 2b, manual only).
 
-> Override inline: `/paper-writing "NARRATIVE_REPORT.md" — venue: NeurIPS, human checkpoint: true`
+> Override inline: `/paper-writing "NARRATIVE_REPORT.md" — venue: NeurIPS, illustration: gemini, human checkpoint: true`
 > IEEE example: `/paper-writing "NARRATIVE_REPORT.md" — venue: IEEE_JOURNAL`
 
 ## Inputs
@@ -39,11 +51,105 @@ This pipeline accepts one of:
 
 1. **`NARRATIVE_REPORT.md`** (best) — structured research narrative with claims, experiments, results, figures
 2. **Research direction + experiment results** — the skill will help draft the narrative first
-3. **Existing `PAPER_PLAN.md`** — skip Phase 1, start from Phase 2
+3. **Existing `PAPER_PLAN.md`** — skip Phase 1, start from **Phase 1.5** (the contract negotiation still runs; only resuming a genuine pre-1.5 legacy run may skip it, and then Phase 6.0's row 0 records "no contract")
 
 The more detailed the input (especially figure descriptions and quantitative results), the better the output.
 
+## Optional: Style reference (`— style-ref: <source>`, opt-in)
+
+Lets the user steer **structural** style (section ordering, theorem density, sentence cadence, figure density, bibliography style) of the generated paper toward a reference paper they admire. **Default OFF — when the user does not pass `— style-ref`, do nothing differently from before.**
+
+When `— style-ref: <source>` is in `$ARGUMENTS`, run the helper FIRST, before Phase 1 (paper-plan):
+
+```bash
+# Resolve $STYLE_HELPER via the canonical strict-safe chain (see
+# shared-references/integration-contract.md §2). Policy A — gate:
+# unresolved helper means --style-ref cannot be satisfied, so abort.
+cd "$(git rev-parse --show-toplevel 2>/dev/null || pwd)" || exit 1
+if [ -z "${ARIS_REPO:-}" ] && [ -f .aris/installed-skills.txt ]; then
+    ARIS_REPO=$(awk -F'\t' '$1=="repo_root"{print $2; exit}' .aris/installed-skills.txt 2>/dev/null) || true
+fi
+if [ -z "${ARIS_REPO:-}" ] && [ -f "$HOME/.aris/repo" ]; then
+    ARIS_REPO=$(cat "$HOME/.aris/repo" 2>/dev/null) || true
+fi
+STYLE_HELPER=".aris/tools/extract_paper_style.py"
+[ -f "$STYLE_HELPER" ] || STYLE_HELPER="tools/extract_paper_style.py"
+[ -f "$STYLE_HELPER" ] || { [ -n "${ARIS_REPO:-}" ] && STYLE_HELPER="$ARIS_REPO/tools/extract_paper_style.py"; }
+[ -f "$STYLE_HELPER" ] || {
+  echo "ERROR: extract_paper_style.py not resolved at .aris/tools/, tools/, \$ARIS_REPO/tools/, or via ~/.aris/repo." >&2
+  echo "       Fix: rerun bash tools/install_aris.sh or smart_update.sh (refreshes ~/.aris/repo), export ARIS_REPO, or copy the helper to tools/." >&2
+  echo "       --style-ref cannot be satisfied; aborting." >&2
+  exit 1
+}
+STYLE_STATUS=0
+CACHE=$(python3 "$STYLE_HELPER" --source "<source>") || STYLE_STATUS=$?
+case "$STYLE_STATUS" in
+  0) ;;                                       # share $CACHE/style_profile.md with downstream WRITER phases only
+  2) echo "warning: style-ref skipped (missing optional dep)" >&2 ;;
+  3) echo "error: --style-ref source failed; aborting pipeline" >&2 ; exit 1 ;;
+  *) echo "error: helper failed unexpectedly; aborting pipeline" >&2 ; exit 1 ;;
+esac
+```
+
+Then forward `— style-ref: <source>` only to the **writer-side** sub-skills:
+- `/paper-plan` (Phase 1) — outline structure
+- `/paper-write` (Phase 3) — section-by-section prose
+- `/paper-illustration` (Phase 2b) — figure structural matching, optional
+
+Sources accepted: local TeX dir / file, local PDF, arXiv id, http(s) URL. Overleaf URLs/IDs are rejected — clone via `/overleaf-sync setup <id>` first and pass the local clone path.
+
+**Strict rules** (full contract in `tools/extract_paper_style.py` docstring):
+
+- Use `style_profile.md` as **structural** guidance only. Match section-count tendency, theorem density, caption-length distribution, sentence cadence, math display ratio, citation style.
+- **Never copy prose, claims, examples, or terminology** from anything reachable through the cache.
+- **Never pass `— style-ref` (or the cache contents) to reviewer / auditor sub-skills** — Phase 4.5 (`/proof-checker`), Phase 4.7 / 5.5 (`/paper-claim-audit`), Phase 5 (`/auto-paper-improvement-loop` reviewer), Phase 5.8 (`/citation-audit`) MUST run on the artifact alone. Cross-model review independence (`../shared-references/reviewer-independence.md`).
+
 ## Pipeline
+
+### Phase 0: Assurance Setup
+
+Resolve the active `assurance` level and persist it so Phase 6's external
+verifier reads the same value. **Run once at pipeline start, before Phase 1.**
+
+**Resolution order** (first match wins):
+
+1. Explicit `— assurance: draft | submission` in `$ARGUMENTS`
+2. Derived from `— effort:`
+   - `lite` / `balanced` → `draft` (default, **zero change from current behavior**)
+   - `max` / `beast` → `submission`
+3. Default: `draft`
+
+**Action:**
+
+```bash
+mkdir -p paper/.aris
+echo "<resolved-level>" > paper/.aris/assurance.txt   # draft or submission
+```
+
+**What each level does downstream:**
+
+- **`draft`** — Existing behavior. Audits run only when their content detector
+  matches (Phase 4.5 / 4.7 / 5.5 / 5.8). Missing artifacts are non-blocking.
+  Silent-skip allowed.
+- **`submission`** — The four mandatory audits (proof-checker,
+  paper-claim-audit, citation-audit, kill-argument) are treated as load-bearing gates. Each
+  sub-audit must emit its JSON artifact (PASS / WARN / FAIL / NOT_APPLICABLE /
+  BLOCKED / ERROR) — never silent-skip. Phase 6 runs
+  `verify_paper_audits.sh` (canonical name; resolved per
+  [`shared-references/integration-contract.md`](../shared-references/integration-contract.md) §2);
+  a non-zero exit blocks the Final Report.
+
+**Escape hatch:** a user wanting the old "beast = depth-only, no audit gate"
+can pass `— effort: beast, assurance: draft` explicitly. Legal but
+discouraged for actual submissions. See
+`shared-references/assurance-contract.md` for the full contract.
+
+**Announce the resolved level in-line before Phase 1:**
+
+```
+📋 Assurance: <level> (derived from effort: <effort>)
+   <either "current behavior, no audit gate" OR "mandatory audits gated by verify_paper_audits.sh (resolved per integration-contract §2)">
+```
 
 ### Phase 1: Paper Plan
 
@@ -53,13 +159,15 @@ Invoke `/paper-plan` to create the structural outline:
 /paper-plan "$ARGUMENTS"
 ```
 
+If `— style-ref: <source>` was passed in `$ARGUMENTS` and the helper succeeded above, append `— style-ref: <source>` to the invocation: `/paper-plan "<topic> — style-ref: <source>"`. (Writer-side phase — forwarding is allowed; reviewer/auditor phases below must not see the style ref.)
+
 **What this does:**
 - Parse NARRATIVE_REPORT.md for claims, evidence, and figure descriptions
 - Build a **Claims-Evidence Matrix** — every claim maps to evidence, every experiment supports a claim
 - Design section structure (5-8 sections depending on paper type)
 - Plan figure/table placement with data sources
 - Scaffold citation structure
-- GPT-5.4 reviews the plan for completeness
+- GPT-6-Astra reviews the plan for completeness
 
 **Output:** `PAPER_PLAN.md` with section plan, figure plan, citation scaffolding.
 
@@ -75,10 +183,108 @@ Invoke `/paper-plan` to create the structural outline:
 Shall I proceed with figure generation?
 ```
 
-- **User approves** (or AUTO_PROCEED=true) → proceed to Phase 2.
+- **User approves** (or AUTO_PROCEED=true) → proceed to Phase 1.5.
 - **User requests changes** → adjust plan and re-present.
 
+### Phase 1.5: Negotiated Acceptance Contract (before any writing)
+
+The plan says what the paper will contain; the CONTRACT says what "done" means
+— a checklist of testable assertions, negotiated ADVERSARIALLY before the first
+section is written, and graded at the end. (The plan is the boundary; the
+contract is what gets graded.)
+
+1. **Executor proposes.** From `PAPER_PLAN.md` + `NARRATIVE_REPORT.md`, draft
+   `PAPER_ACCEPTANCE_CONTRACT.md`: **10–20 testable assertions** covering —
+   every headline claim has a named evidence source (file/table); every
+   number in the abstract traces to a results file; scope qualifiers the title
+   /abstract must carry; figures that must exist and what each must show;
+   section-level completeness (e.g. "limitations names ≥2 real limitations,
+   not hedges"); venue constraints (page limit, anonymization). Each assertion
+   must be CHECKABLE by reading the final PDF + results files — no vibes
+   ("writing is clear" is not an assertion; "every acronym is defined at first
+   use" is). Fewer than ~10 assertions and the gate rubber-stamps; beyond ~20
+   the negotiation stalls on trivia.
+
+2. **Reviewer pushes back** (fresh thread — the negotiation is adversarial):
+
+   > Resolve this reviewer slot first; the following is the `backend=codex` example.
+
+   ```
+   mcp__codex__codex:
+     model: gpt-6-astra
+     config: {"model_reasoning_effort": "xhigh"}
+     prompt: |
+       You are negotiating the acceptance contract for a paper BEFORE it is
+       written. Read these files directly:
+       - Plan: <abs path>/PAPER_PLAN.md
+       - Proposed contract: <abs path>/PAPER_ACCEPTANCE_CONTRACT.md
+       - Evidence inventory: <abs path>/NARRATIVE_REPORT.md (+ results/ paths)
+
+       Push back on the contract, not the plan: (a) assertions that are
+       untestable or vibes — demand a checkable rewrite; (b) missing
+       assertions — claims in the plan that no assertion covers, numbers with
+       no traceability assertion, foreseeable overclaim risks with no scope
+       assertion; (c) assertions the evidence inventory cannot possibly
+       satisfy — flag now, not after writing. End with exactly one line:
+       CONTRACT_ACCEPTED: yes    or    CONTRACT_ACCEPTED: no
+       followed by your numbered revision demands if no.
+
+       === SCOPE LIMITS (these bound what you PROPOSE, never what you look for) ===
+       Report anything that is actually wrong here — including a rare-looking case, if
+       this repo actually produces it. Then keep the fix in scope:
+       1. This is a RESEARCH-WORKFLOW tool, not a security paper. Verification is
+          welcome; over-defense is not. Assume a cooperating operator on their own
+          machine — a malicious local user is NOT in the threat model.
+       2. Do NOT propose SHA / hash / content-fingerprint / digest-binding schemes.
+          Reporting a real defect in hashing code that already exists is fine.
+       3. NO speculative machinery: do not add feature flags, migration frameworks,
+          compat layers, wrappers, pins, or similar mechanisms unless evidence shows
+          a current repo defect they fix or an explicit existing invariant they must
+          preserve. "Load-bearing", "compatibility", and "not scaffolding" are labels,
+          not evidence. Point to the failing path/artifact or invariant, and check the
+          proposal's factual premises, such as whether a named package version exists.
+       4. NO corner-case obsession: exotic encodings, symlink races, RTL text and
+          millisecond races are out of scope unless you can show the case arises here.
+       5. Where a rubric or checklist is genuinely needed, do not over-mechanize
+          judgement. A clear sentence a human reads beats a scored table nobody
+          maintains.
+       Exception: code that runs remote commands, starts a network service, or installs
+       an MCP server runs on the user's machine with their credentials — trust-boundary
+       findings there are in scope and the default is strict.
+       Say plainly when something is correct. Do not manufacture findings.
+   ```
+
+   A reply with a missing or malformed `CONTRACT_ACCEPTED:` line is treated as
+   `no`; request a corrected verdict via `codex-reply` — that correction
+   exchange does not consume a negotiation round.
+
+3. **Iterate.** On `no`, revise the contract per the demands and resubmit via
+   `mcp__codex__codex-reply` (same thread — the negotiation is one
+   conversation). **Max 3 rounds.**
+
+4. **Fallback — never stall the pipeline.** If round 3 still ends in `no`:
+   record the unresolved demands verbatim in a "## Disputed" section of the
+   contract and mark it `status: contested`. A contested contract is precisely
+   the "insert a human when the CONTRACT is wrong" trigger, so it OVERRIDES
+   `AUTO_PROCEED` for this one decision: pause and present the dispute for a
+   human tie-break. If no human responds (unattended/overnight run), proceed —
+   but a contested contract caps the outcome: Phase 6.0 gates on the UNDISPUTED
+   assertions and the Final Report must set `Submission-ready: no` with the
+   dispute reproduced verbatim; the tie-break happens when the human returns.
+
+**Output:** `PAPER_ACCEPTANCE_CONTRACT.md` (`status: accepted | contested`,
+round count, reviewer thread id). The contract is FROZEN once accepted —
+Phases 2–5 implement against it; they do not edit it. If writing reveals an
+assertion is genuinely wrong (not merely inconvenient), that is a contract
+question: surface it at a checkpoint, don't silently rewrite.
+
+**Boundary:** `/paper-claim-audit` (Phases 4.7, 5.5) stays zero-context — the
+contract is a WRITER-side gate and is never passed to the claim auditor (its
+independence is the point; two different nets).
+
 ### Phase 2: Figure Generation
+
+If `— style-ref: <source>` was passed in `$ARGUMENTS` and the helper succeeded above, append `— style-ref: <source>` to every writer-side sub-skill invocation in this pipeline (Phases 1, 2b, 3, 5). Do **not** append it to reviewer/auditor invocations (Phases 4.5, 4.7, 5.5, 5.8).
 
 Invoke `/paper-figure` to generate data-driven plots and tables:
 
@@ -91,23 +297,91 @@ Invoke `/paper-figure` to generate data-driven plots and tables:
 - Generate matplotlib/seaborn plots from JSON/CSV data
 - Generate LaTeX comparison tables
 - Create `figures/latex_includes.tex` for easy insertion
-- GPT-5.4 reviews figure quality and captions
+- GPT-6-Astra reviews figure quality and captions
 
 **Output:** `figures/` directory with PDFs, generation scripts, and LaTeX snippets.
 
-> **Scope:** Auto-generates ~60% of figures (data plots, comparison tables). Architecture diagrams, pipeline figures, and qualitative result grids must be created manually and placed in `figures/` before proceeding. See `/paper-figure` SKILL.md for details.
+> **Scope:** `paper-figure` covers data plots and comparison tables. Architecture diagrams, pipeline figures, and method illustrations are handled in Phase 2b below.
+
+#### Phase 2b: Architecture & Illustration Generation
+
+**Skip this step entirely if `illustration: false`.**
+
+If the paper plan includes architecture diagrams, pipeline figures, audit cascades, or method illustrations, invoke the appropriate generator based on the `illustration` parameter:
+
+**When `illustration: figurespec`** (default) — invoke `/figure-spec`:
+```
+/figure-spec "[architecture/workflow description from PAPER_PLAN.md]"
+```
+- Deterministic JSON → SVG vector rendering (editable, reproducible)
+- Best for: system architecture, workflow pipelines, audit cascades, layered topology
+- Output: `figures/*.svg` + `figures/*.pdf` (via rsvg-convert) + `figures/specs/*.json`
+- No external API, runs fully local
+
+If `— style-ref: <source>` was passed and the helper succeeded above, append `— style-ref: <source>` to the invocation below as well.
+
+**When `illustration: gemini`** — invoke `/paper-illustration`:
+```
+/paper-illustration "[method description from PAPER_PLAN.md or NARRATIVE_REPORT.md]"
+```
+- Claude plans → Gemini optimizes → Nano Banana Pro renders → Claude reviews (score ≥ 9)
+- Best for: qualitative method illustrations, natural-style diagrams, result grids
+- Output: `figures/ai_generated/*.png`
+- Requires `GEMINI_API_KEY` environment variable
+
+**When `illustration: mermaid`** — invoke `/mermaid-diagram`:
+```
+/mermaid-diagram "[method description from PAPER_PLAN.md]"
+```
+- Generates Mermaid syntax diagrams (flowchart, sequence, class, state, etc.)
+- Best for: lightweight flowcharts, state machines, simple sequence diagrams
+- Output: `figures/*.mmd` + `figures/*.png`
+- Free, no API key needed
+
+**When `illustration: codex-image2`** — invoke `/paper-illustration-image2`:
+```
+/paper-illustration-image2 "[method description from PAPER_PLAN.md or NARRATIVE_REPORT.md]"
+```
+- Claude plans → Codex native image generation renders → Claude reviews (same multi-stage workflow as `gemini`, different renderer)
+- Best for: users who want a GPT-image-style renderer without needing `GEMINI_API_KEY`; uses your existing Codex / ChatGPT Plus/Pro quota
+- Output: `figures/ai_generated/figure_final.png` + `latex_include.tex` + `review_log.json` (emitted via the `/paper-illustration-image2` SKILL's `finalize` step, which delegates to the canonical `paper_illustration_image2.py` helper resolved per [integration-contract §2](../shared-references/integration-contract.md#2-canonical-helper--one-implementation-not-copy-pasted))
+- **Prerequisites** (beyond ARIS's standard Claude Code + Codex coexistence): the local Codex app-server must be signed in (`codex debug app-server send-message-v2 "ping"` succeeds), and the dedicated MCP bridge must be registered — see `mcp-servers/codex-image2/README.md` for the one-time `claude mcp add` command. Delegate the preflight to `/paper-illustration-image2` (which resolves the helper via the canonical chain), or invoke the helper directly via the shim at `tools/paper_illustration_image2.py preflight --workspace .` to confirm before relying on this path.
+- **Experimental**: this renderer shells through the Codex debug app-server, which Codex documents as an unstable surface. Prefer `figurespec` or `gemini` for production submission flows until `codex-image2` stabilizes.
+
+**When `illustration: false`** — skip entirely. All non-data figures must be created manually (draw.io, Figma, TikZ) and placed in `figures/` before Phase 3.
+
+**Choosing the right mode:**
+- Formal architecture / workflow / topology figures → `figurespec` (default)
+- Method concept illustrations with natural style, have `GEMINI_API_KEY` → `gemini`
+- Method concept illustrations, prefer ChatGPT Plus/Pro quota over Gemini key → `codex-image2`
+- Quick flowchart / state machine → `mermaid`
+- Full manual control → `false`
+
+These are complementary, not mutually exclusive: you can run multiple generators for different figures in the same paper by re-invoking with different `illustration` overrides.
 
 **Checkpoint:** List generated vs manual figures.
 
 ```
 📊 Figures complete:
-- Auto-generated: [list]
+- Data plots (auto, Phase 2): [list]
+- Architecture/illustrations (auto, Phase 2b, mode=<illustration>): [list]
 - Manual (need your input): [list]
 - LaTeX snippets: figures/latex_includes.tex
 
 [If manual figures needed]: Please add them to figures/ before I proceed.
 [If all auto]: Shall I proceed with LaTeX writing?
 ```
+
+> **Writing invariant (every drafting and revision step):** calibrate each
+> claim to its evidence and state it directly; generic caveats live in the
+> Limitations section only; writing instructions are never manuscript content
+> ("do not mention X" means omit X, not "we do not address X"); tone edits
+> never change what the paper knows; the paper is a launch, not a progress
+> report — organize around the strongest advantage, give every experiment an
+> argumentative duty, keep unfavorable numbers in the tables and explain them
+> as tradeoffs only where the evidence supports that, never narrating
+> defeats. `/paper-write` carries the full CONFIDENT PROSE, HONEST LIMITS
+> contract.
 
 ### Phase 3: LaTeX Writing
 
@@ -117,6 +391,8 @@ Invoke `/paper-write` to generate section-by-section LaTeX:
 /paper-write "PAPER_PLAN.md"
 ```
 
+If `— style-ref: <source>` was passed in `$ARGUMENTS` and the helper succeeded above, append `— style-ref: <source>` to the invocation: `/paper-write "PAPER_PLAN.md — style-ref: <source>"`.
+
 **What this does:**
 - Write each section following the plan, with proper LaTeX formatting
 - Insert figure/table references from `figures/latex_includes.tex`
@@ -124,7 +400,7 @@ Invoke `/paper-write` to generate section-by-section LaTeX:
 - Clean stale files from previous section structures
 - Automated bib cleaning (remove uncited entries)
 - De-AI polish (remove "delve", "pivotal", "landscape"...)
-- GPT-5.4 reviews each section for quality
+- GPT-6-Astra reviews each section for quality
 
 **Output:** `paper/` directory with `main.tex`, `sections/*.tex`, `references.bib`, `math_commands.tex`.
 
@@ -170,6 +446,46 @@ Invoke `/paper-compile` to build the PDF:
 Shall I proceed with the improvement loop?
 ```
 
+### Phase 4.5: Proof Verification (theory papers only)
+
+**Skip this phase if the paper contains no theorems, lemmas, or proofs.**
+
+```
+if paper contains \begin{theorem} or \begin{lemma} or \begin{proof}:
+    Run /proof-checker "paper/"
+    This invokes GPT-6-Astra xhigh to:
+    - Verify all proof steps (hypothesis discharge, interchange justification, etc.)
+    - Check for logic gaps, quantifier errors, missing domination conditions
+    - Attempt counterexamples on key lemmas
+    - Generate PROOF_AUDIT.md with issue list + severity
+
+    If FATAL or CRITICAL issues found:
+        Fix before proceeding to improvement loop
+    If only MAJOR/MINOR:
+        Proceed, improvement loop may address remaining issues
+else:
+    skip — no proofs, no action
+```
+
+### Phase 4.7: Paper Claim Audit
+
+**Skip if no result files exist (e.g., survey/position papers with no experiments).**
+
+```
+if results/*.json or results/*.csv or outputs/*.json exist:
+    Run /paper-claim-audit "paper/"
+    Fresh zero-context reviewer compares every number in the paper
+    against raw result files. Catches rounding inflation, best-seed
+    cherry-pick, config mismatch, delta errors.
+
+    If FAIL:
+        Fix mismatched numbers before improvement loop
+    If WARN:
+        Proceed, but flag for manual verification
+else:
+    skip — no experimental results to verify
+```
+
 ### Phase 5: Auto Improvement Loop
 
 Invoke `/auto-paper-improvement-loop` to polish the paper:
@@ -178,41 +494,381 @@ Invoke `/auto-paper-improvement-loop` to polish the paper:
 /auto-paper-improvement-loop "paper/"
 ```
 
+If `— style-ref: <source>` was passed in `$ARGUMENTS` and the helper succeeded above, append `— style-ref: <source>` to the invocation: `/auto-paper-improvement-loop "paper/ — style-ref: <source>"`. The improvement loop's reviewer sub-agent will still NOT see the style ref (the loop's own SKILL forbids it); only the fix-implementation phase consumes it.
+
 **What this does (2 rounds):**
 
-**Round 1:** GPT-5.4 xhigh reviews the full paper → identifies CRITICAL/MAJOR/MINOR issues → Claude Code implements fixes → recompile → save `main_round1.pdf`
+**Round 1:** GPT-6-Astra xhigh reviews the full paper → identifies CRITICAL/MAJOR/MINOR issues → Claude Code implements fixes → recompile → save `main_round1.pdf`
 
-**Round 2:** GPT-5.4 xhigh re-reviews with conversation context → identifies remaining issues → Claude Code implements fixes → recompile → save `main_round2.pdf`
+**Round 2:** GPT-6-Astra xhigh re-reviews the recompiled draft cold (fresh review — no fix summaries, no conversation carry-over) → identifies remaining issues → Claude Code implements fixes → recompile → save `main_round2.pdf`
 
-**Typical improvements:**
+**Typical improvements (calibration cuts both ways):**
 - Fix assumption-model mismatches
-- Soften overclaims to match evidence
+- Narrow genuine overclaims to the supported scope — and state supported claims
+  directly, removing redundant hedges
+- Consolidate scattered generic caveats into Limitations
 - Add missing interpretations and notation
-- Strengthen limitations section
+- Make Limitations more specific (only when a material limit is missing — never pad)
 - Add theory-aligned experiments if needed
 
 **Output:** Three PDFs for comparison + `PAPER_IMPROVEMENT_LOG.md`.
 
-**Format check** (included in improvement loop Step 8): After final recompilation, auto-detect and fix overfull hboxes (content exceeding margins), verify page count vs venue limit, and ensure compact formatting. Any overfull > 10pt is fixed before generating the final PDF.
+**Format check** (included in improvement loop Step 8): After final recompilation, auto-detect and fix overfull hboxes (content exceeding margins), verify page count vs venue limit, and ensure compact formatting. Location-aware thresholds: any main-body overfull blocks completion regardless of size; appendix overfulls block only if >10pt; bibliography overfulls block only if >20pt.
+
+### Phase 5.5: Final Paper Claim Audit (MANDATORY submission gate)
+
+After `/auto-paper-improvement-loop` finishes, **rerun** `/paper-claim-audit` before the final report whenever the paper contains numeric claims and machine-readable raw result files exist.
+
+Use the same detectors as Phase 4.7:
+- numeric-claim regex over `paper/main.tex` and `paper/sections/*.tex`
+- raw-evidence file search in `results/`, `outputs/`, `experiments/`, and `figures/` for `.json`, `.jsonl`, `.csv`, `.tsv`, `.yaml`, or `.yml`
+
+This phase is **mandatory** if both detectors are positive. It blocks the final report.
+If numeric claims exist but no raw result files are found, stop and warn the user before declaring the paper complete.
+If no numeric claims exist, skip.
+
+```bash
+NUMERIC_CLAIMS=$(rg -n -e '[0-9]+(\.[0-9]+)?\s*(%|\\%|±|\\pm|x|×)' \
+  -e '(accuracy|BLEU|F1|AUC|mAP|top-1|top-5|error|loss|perplexity|speedup|improvement)' \
+  paper/main.tex paper/sections 2>/dev/null || true)
+
+RAW_RESULT_FILES=$(find results outputs experiments figures -type f \
+  \( -name '*.json' -o -name '*.jsonl' -o -name '*.csv' -o -name '*.tsv' -o -name '*.yaml' -o -name '*.yml' \) 2>/dev/null | head -200)
+
+if [ -n "$NUMERIC_CLAIMS" ] && [ -n "$RAW_RESULT_FILES" ]; then
+    Run /paper-claim-audit "paper/"
+    If FAIL:
+        Fix mismatched numbers before the final report
+elif [ -n "$NUMERIC_CLAIMS" ]; then
+    Stop and warn: the paper contains numeric claims but no raw evidence files were found
+fi
+```
+
+**Empirical motivation:** in a real submission run, the final paper claimed a narrower experiment grid than the raw JSON actually contained, and a tolerance value was rounded down past the actual relative error. Both were caught only after manual `paper-claim-audit` invocation in the final round; the improvement loop did not detect them.
+
+### Phase 5.6: Kill-Argument Adversarial Review (theory / scope-heavy papers)
+
+After Phase 5.5 (claim audit) passes, run `/kill-argument` whenever the paper is theory-heavy or makes explicit scope/generality claims in the title or abstract. This is a final adversarial check that complements the claim/citation/proof audits: those verify *local correctness* (numbers match, cites resolve, theorems prove); kill-argument tests *headline-level* survival — whether the paper as a whole answers the worst rejection paragraph a senior area chair would write.
+
+```bash
+THEORY_ENV_COUNT=$(rg -c '\\begin\{(theorem|lemma|proposition|corollary)\}' paper/main.tex paper/sections 2>/dev/null | awk -F: '{s+=$2} END {print s+0}')
+SCOPE_HINT=$(rg -i 'general(ization)?|broad|universal|across|any [A-Za-z]+ model|holds for' paper/sections/0*abstract* 2>/dev/null | head -1)
+
+if [ "$THEORY_ENV_COUNT" -ge 5 ] || [ -n "$SCOPE_HINT" ]; then
+    /kill-argument "paper/"
+    KILL_VERDICT=$(jq -r '.verdict' paper/KILL_ARGUMENT.json)
+    KILL_REASON=$(jq -r '.reason_code' paper/KILL_ARGUMENT.json)
+fi
+```
+
+**Gating** (depends on the resolved `assurance` level from Phase 0):
+
+| Assurance level | THEORY/SCOPE detected | Behavior |
+|---|---|---|
+| `submission` | yes | **MANDATORY**. `FAIL` blocks the final report; `WARN` requires explicit user acknowledgment; `BLOCKED`/`ERROR` blocks the final report (cannot ship without an adversarial pass). |
+| `submission` | no | Skip — `KILL_ARGUMENT.json` is written with `verdict: NOT_APPLICABLE, reason_code: not_theory_or_scope_paper` so the submission verifier sees a record. |
+| `internal` / `draft` | yes | **Advisory**. Run if the user passed `— kill-argument: true`; otherwise skip. `WARN`/`FAIL` is logged but does not block. |
+| `internal` / `draft` | no | Skip. |
+
+`/kill-argument` itself never edits the paper; it writes `KILL_ARGUMENT.{md,json}`. If `still_unresolved critical` points are surfaced, queue them for the next `/auto-paper-improvement-loop` round (Step 5.5 of that skill auto-merges the findings into its fix list).
+
+**Why this is the right place:** Phase 5 (loop) optimizes for score, Phase 5.5 (claim audit) verifies numbers, Phase 5.8 (citation audit) verifies cites — none of these catches the case where every local component is correct but the paper still oversells what it actually proves. Kill-argument is the dedicated headline-scope check.
+
+### Phase 5.8: Citation Audit (submission gate)
+
+After the final paper-claim-audit passes, run `/citation-audit` to verify every `\cite{...}` along three axes: existence, metadata correctness, and context appropriateness. This is the fourth and final layer of the evidence-and-claim assurance stack (`experiment-audit` → `result-to-claim` → `paper-claim-audit` → `citation-audit`).
+
+```
+if paper/references.bib (or paper.bib) exists and contains entries cited from sec/*.tex:
+    Run /citation-audit "paper/"
+    Fresh cross-family reviewer (gpt-6-astra via Codex MCP) with web/DBLP/arXiv lookup
+    verifies each entry:
+      (i)   EXISTENCE — paper resolves at claimed arXiv ID / DOI / venue
+      (ii)  METADATA — author names, year, venue, title match canonical sources
+      (iii) CONTEXT — cited paper actually establishes the claim it supports
+
+    Output:
+      - CITATION_AUDIT.md (human-readable per-entry verdict report)
+      - CITATION_AUDIT.json (machine-readable verdict ledger)
+      - Per-entry verdicts: KEEP / FIX / REPLACE / REMOVE
+
+    If any REPLACE or REMOVE verdicts:
+        Surface to user for human approval — never auto-modify content claims
+    If only FIX verdicts (metadata corrections):
+        Apply with user confirmation, then recompile
+    If all KEEP:
+        Pass — bibliography clean for submission
+else:
+    skip — no bib file or no citations
+```
+
+**Why this is the most diagnostic of the four audit layers:** wildly fake citations are easy to spot. The dangerous failure mode is a real paper used to support a claim it does not actually establish (wrong-context citations) — these slip past metadata-only checks and damage submission credibility. Run cost is wall-clock heavy (web lookup per entry); run once per submission, not per save.
+
+**Empirical motivation:** in a real submission run, several real papers were cited in contexts they did not actually support, and at least one bib entry shipped with `author = "Anonymous"` because the metadata had not been resolved. None were caught by the improvement loop or numeric claim audit; only fresh web-lookup review surfaced them.
+
+### Phase 5.9: Integrity Forensics (submission self-audit — default ON)
+
+Run the [`/integrity-forensics`](../integrity-forensics/SKILL.md) launcher on
+`paper/` (ABSOLUTE path): the SHA-pinned Anti-Autoresearch sweep — evidence
+ledger, nine auditor dimensions, deterministic adjudication — followed by the
+typed policy gate and the append-only obligations ledger. Self-auditing runs
+at whatever observability the artifacts allow (with `code/` + `results/`
+present that is L2 — stricter than anything an external reviewer can run).
+
+**When it runs** (re-derive here — do NOT trust `.aris/assurance.txt` alone;
+a resumed run whose Phase 0 never executed, or whose file went stale, must
+not silently skip the default-ON gate):
+
+1. Re-derive the assurance level from `$ARGUMENTS` with the **same rule as
+   Phase 0 / Phase 6.0** (explicit `— assurance:` wins; else `max`/`beast` →
+   `submission`; else `draft`).
+2. Parse `$ARGUMENTS` for `— self_forensics: true | false`.
+3. Then:
+   - `submission` → **ON by default**. Opt out only with an explicit
+     `— self_forensics: false` — persist the receipt as a record:
+     `mkdir -p paper/.aris/forensics && echo "opted-out: — self_forensics: false in \$ARGUMENTS" > paper/.aris/forensics/opt_out.txt`
+     (recorded in the Final Report as `Forensics: skipped (opted out)`).
+     The receipt documents THIS run's decision; it does not authorize any
+     later run to skip — Phase 6.0 re-parses `$ARGUMENTS` itself.
+   - `draft` → off unless `— self_forensics: true`.
+
+**Gate handling** (exit 1 = `BLOCK`: upstream `HARD_FLAGS`,
+`REVIEW_UNAVAILABLE`, or an OPEN critical obligation):
+- Refuse the Final Report — same discipline as a verifier `FAIL`. Surface the
+  upstream `REPORT.md` and the obligations verbatim; never paraphrase-soften.
+- Route each obligation to its repair door (the family table in
+  `/integrity-forensics` Step 3): numeric → recompute from result files;
+  citations → `/citation-audit`; proof → `/proof-checker`; scope/baseline/
+  eval-design → `/auto-review-loop` as reviewer input, or the human.
+- Close obligations ONLY via `forensics_gate.py resolve` (typed, hashed
+  evidence) or a human `waive`. Since 2026-08 upstream reports every proposal an
+  auditor made rather than deciding which ones do not count, so expect more
+  obligations and expect some to be proposals you judge wrong — `waive` with a
+  reason is the normal disposition for those, not a last resort. **Never edit the
+  paper with the objective "make the sweep stop flagging"** — a
+  vanished-but-unresolved finding keeps the gate closed
+  (`UNRESOLVED_DISAPPEARANCE`).
+- `WARN` (SOFT_FLAGS / open non-critical obligations): proceed, but the Final
+  Report must list them under `Forensics` — including the dimensions the sweep
+  never ran, which `evaluate` and `fresh` both print. A WARN can sit on top of an
+  incomplete sweep: upstream folds incompleteness into the verdict only when it
+  would otherwise read clean.
+- Zero-weight AIS style impressions: FYI only — may feed
+  `/auto-paper-improvement-loop` context, never gate.
 
 ### Phase 6: Final Report
+
+**Phase 6.0 — Submission Gate**
+
+Before writing the Final Report, resolve the active assurance level. This
+uses the **same derivation rule as Phase 0** so a run where Phase 0 was
+skipped or its write failed cannot silently downgrade a `beast` / `max` /
+`— assurance: submission` invocation back to draft.
+
+**Resolution at the gate** (re-derive; do not trust `.aris/assurance.txt`
+alone):
+
+1. Parse `$ARGUMENTS` for an explicit `— assurance: draft | submission` or
+   an `— effort: lite | balanced | max | beast` directive.
+2. Derive the expected level:
+   - explicit `assurance:` wins
+   - else `lite` / `balanced` → `draft`, `max` / `beast` → `submission`
+   - else `draft`
+3. Read `paper/.aris/assurance.txt`. If the file is missing, write it now
+   with the derived level.
+4. If the file's value **disagrees** with the derived level (e.g. file
+   says `draft` but `$ARGUMENTS` says `beast`), **overwrite** the file
+   with the derived level and surface a one-line warning in-chat:
+   `⚠️ .aris/assurance.txt was draft but $ARGUMENTS says submission; overriding.`
+5. Use the re-derived level as authoritative for the rest of Phase 6.
+
+```bash
+# Final authoritative value, written and read from the same source
+ASSURANCE=<derived-from-$ARGUMENTS>        # draft | submission
+mkdir -p paper/.aris
+echo "$ASSURANCE" > paper/.aris/assurance.txt
+```
+
+If `ASSURANCE=draft`, skip directly to the Final Report template below —
+**current behavior, no change** for the default `balanced` user.
+
+If `ASSURANCE=submission`, run the pre-flight checklist below, then the
+verifier. The verifier's exit code is the source of truth — do NOT
+self-declare "audits complete" based on conversation memory.
+
+#### Submission pre-flight checklist
+
+Print this checklist verbatim at the start of Phase 6.0 and confirm each row
+before proceeding. This resists the common failure mode of the model
+skipping audits while claiming to have run them.
+
+```
+📋 Submission audits required before Final Report:
+   [ ] 0. PAPER_ACCEPTANCE_CONTRACT.md (Phase 1.5): re-read every assertion
+          against the final PDF + results files; each → satisfied / violated /
+          disputed-at-negotiation. ANY violated undisputed assertion blocks the
+          Final Report until fixed or the human explicitly waives it (waivers
+          recorded in the contract file). Contract absent (pre-1.5 run) → mark
+          "no contract" and continue.
+   [ ] 1. /proof-checker        → paper/PROOF_AUDIT.json
+   [ ] 2. /paper-claim-audit    → paper/PAPER_CLAIM_AUDIT.json
+   [ ] 3. /citation-audit       → paper/CITATION_AUDIT.json
+   [ ] 4. Resolve $AUDIT_VERIFIER per integration-contract.md §2 (Policy A),
+          then: bash "$AUDIT_VERIFIER" paper/ --assurance submission
+   [ ] 5. Integrity forensics (Phase 5.9, default ON at submission). FIRST
+          re-parse the CURRENT $ARGUMENTS — an opt_out.txt receipt left by a
+          PREVIOUS run never carries over; it is a record for the report line,
+          not an authorization.
+          - current $ARGUMENTS has `— self_forensics: false` → skipping is
+            legal; write/refresh paper/.aris/forensics/opt_out.txt.
+          - otherwise the whole check is ONE command:
+            `python3 "$GATE_HELPER" fresh --paper-dir paper/ --anti-ar-commit
+            "$ANTI_AR_COMMIT"` (the pin constant from /integrity-forensics;
+            an old-pin gate must be re-audited) — exit 0 ⟺ a
+            gate exists ∧ no paper file changed after it ∧ it matches the
+            current obligations ledger ∧ its decision is pass-capable (an
+            ALLOWLIST: WARN / NO_NEW_BLOCKER — an unknown or missing token
+            never passes). Exit 1 → the sweep never saw this text (or the
+            gate is BLOCK): run Phase 5.9 NOW, before the Final Report —
+            BLOCK is blocked, same as a verifier FAIL.
+   [ ] 6. Block Final Report iff verifier exit code != 0 OR row 0 found a
+          violated undisputed assertion OR row 5 is red. (THREE separate
+          gates: row 0 is graded by instruction against the contract; the
+          verifier checks audit JSONs only — verify_paper_audits.sh does NOT
+          read the contract; row 5 reads the forensics gate artifact.)
+```
+
+> The resolver in "Running the verifier" below tries
+> `.aris/tools/verify_paper_audits.sh` (created by `install_aris.sh`),
+> then `tools/verify_paper_audits.sh` (in-repo run), then
+> `$ARIS_REPO/tools/verify_paper_audits.sh` (env-var-set or manifest-derived
+> path), then the same `$ARIS_REPO/tools/verify_paper_audits.sh` resolved via
+> the global pointer file `~/.aris/repo` (#366). The chain always tries
+> layers 1 → 2 → 3 → 4 in order; setting `export ARIS_REPO=~/…` only ensures
+> layer 3 has a valid target if layers 1 and 2 are absent, and layer 4 only
+> fires when neither the env var nor the project manifest set `ARIS_REPO`.
+
+#### Invoking the four audits
+
+Each sub-audit runs in a **fresh Codex thread** (never `codex-reply`,
+never pass prior audit output as context — this preserves reviewer
+independence per `shared-references/reviewer-independence.md`).
+
+Each sub-audit **always** emits its JSON artifact, even when the content
+detector is negative. A detector-negative run emits verdict
+`NOT_APPLICABLE`; a silent skip is forbidden. See the "Submission artifact
+emission" section of each audit's SKILL.md.
+
+Order:
+
+1. `/proof-checker "paper/"` → writes `paper/PROOF_AUDIT.json` (emits
+   `NOT_APPLICABLE` if the paper contains no theorems / lemmas / proofs)
+2. `/paper-claim-audit "paper/"` → writes `paper/PAPER_CLAIM_AUDIT.json`
+   (emits `NOT_APPLICABLE` if the paper has no numeric claims; emits
+   `BLOCKED` if numeric claims exist but raw result files are missing)
+3. `/citation-audit "paper/"` → writes `paper/CITATION_AUDIT.json`
+   (emits `NOT_APPLICABLE` if no `.bib` file or no `\cite{...}` usage)
+4. `paper/KILL_ARGUMENT.json` was already written in Phase 5.6 (including the
+   `NOT_APPLICABLE` record for non-theory papers) — the verifier requires all four.
+
+#### Running the verifier
+
+Resolve `$AUDIT_VERIFIER` via the canonical strict-safe chain (see
+[`shared-references/integration-contract.md`](../shared-references/integration-contract.md)
+§2, Policy A — gate). Under `assurance: submission` the verifier is
+load-bearing: if the helper is unresolved the SKILL aborts the Final
+Report rather than producing an unverified `submission-ready` claim.
+
+```bash
+# Resolve the audit verifier (Policy A — gate).
+cd "$(git rev-parse --show-toplevel 2>/dev/null || pwd)" || exit 1
+if [ -z "${ARIS_REPO:-}" ] && [ -f .aris/installed-skills.txt ]; then
+    ARIS_REPO=$(awk -F'\t' '$1=="repo_root"{print $2; exit}' .aris/installed-skills.txt 2>/dev/null) || true
+fi
+if [ -z "${ARIS_REPO:-}" ] && [ -f "$HOME/.aris/repo" ]; then
+    ARIS_REPO=$(cat "$HOME/.aris/repo" 2>/dev/null) || true
+fi
+AUDIT_VERIFIER=".aris/tools/verify_paper_audits.sh"
+[ -f "$AUDIT_VERIFIER" ] || AUDIT_VERIFIER="tools/verify_paper_audits.sh"
+[ -f "$AUDIT_VERIFIER" ] || { [ -n "${ARIS_REPO:-}" ] && AUDIT_VERIFIER="$ARIS_REPO/tools/verify_paper_audits.sh"; }
+[ -f "$AUDIT_VERIFIER" ] || {
+  echo "ERROR: verify_paper_audits.sh not resolved at .aris/tools/, tools/, \$ARIS_REPO/tools/, or via ~/.aris/repo." >&2
+  echo "       assurance=submission requires the verifier; aborting Final Report." >&2
+  echo "       Fix: rerun bash tools/install_aris.sh or smart_update.sh (refreshes ~/.aris/repo), export ARIS_REPO, or copy the helper to tools/." >&2
+  exit 1
+}
+
+bash "$AUDIT_VERIFIER" paper/ --assurance submission
+```
+
+- **Exit 0** — All mandatory audits present, JSON schema-valid, hashes fresh,
+  no blocking verdicts. **Before writing the Final Report, read
+  `overall_assurance` from `paper/.aris/audit-verifier-report.json`** — exit 0
+  covers BOTH `accepted` (cross-family/independent review) and `provisional`
+  (same-family or legacy review that may proceed but must not claim
+  independent acceptance). The Final Report's Submission-ready line comes from
+  that field, never from the exit code alone.
+- **Exit 1** — Surface `paper/.aris/audit-verifier-report.json` to the user
+  verbatim, **refuse to generate the Final Report**, and list the specific
+  remediation for each failing row:
+  - `MISSING` → rerun that audit
+  - `STALE` → paper files edited after the audit ran; rerun the affected audit
+  - `BLOCKING_VERDICT` (FAIL / BLOCKED / ERROR) → fix the underlying issue,
+    then rerun the audit
+  - `SCHEMA_INVALID` → audit artifact malformed; rerun the audit
+
+The verifier is cheap to rerun (< 1 s). After fixing any issue, rerun it
+before claiming green.
+
+#### Optional hardening (not default)
+
+Teams that want hook-level enforcement — i.e., the harness physically
+prevents a Stop event while the verifier is red — can register a Stop hook
+in `~/.claude/settings.json`:
+
+```json
+{
+  "hooks": {
+    "Stop": [
+      {"command": "bash <ARIS_REPO>/tools/verify_paper_audits.sh paper/ --assurance submission"}
+    ]
+  }
+}
+```
+
+This is documented here, not required. Phase 6.0's verifier-as-truth
+pattern is the default repo behavior.
+
+---
+
+**Phase 6.1 — Final Report** (runs only after the submission gate is green,
+or directly if `assurance=draft`)
 
 ```markdown
 # Paper Writing Pipeline Report
 
 **Input**: [NARRATIVE_REPORT.md or topic]
 **Venue**: [ICLR/NeurIPS/ICML/CVPR/ACL/AAAI/ACM/IEEE_JOURNAL/IEEE_CONF]
+**Assurance**: [draft | submission]
+**Submission-ready**: [yes | provisional | no]   <!-- yes iff assurance=submission AND verifier exit 0 AND overall_assurance=accepted; provisional iff exit 0 with overall_assurance=provisional (same-family/legacy review — do NOT present as independently accepted); no otherwise -->
+**Forensics**: [NO_NEW_BLOCKER | WARN: <n> open obligations | BLOCK | skipped (opted out) | skipped (draft)]   <!-- from .aris/forensics/gate.json — upstream verdict verbatim in parentheses; NO_NEW_BLOCKER means "no flag found", never an acquittal -->
 **Date**: [today]
 
 ## Pipeline Summary
 
 | Phase | Status | Output |
 |-------|--------|--------|
+| 0. Assurance Setup | ✅ | paper/.aris/assurance.txt = [draft\|submission] |
 | 1. Paper Plan | ✅ | PAPER_PLAN.md |
+| 1.5 Acceptance Contract | [accepted\|contested\|no contract] ([N] rounds) | PAPER_ACCEPTANCE_CONTRACT.md |
 | 2. Figures | ✅ | figures/ ([N] auto + [M] manual) |
 | 3. LaTeX Writing | ✅ | paper/sections/*.tex ([N] sections, [M] citations) |
 | 4. Compilation | ✅ | paper/main.pdf ([X] pages) |
 | 5. Improvement | ✅ | [score0]/10 → [score2]/10 |
+| 4.5 Proof Audit | [PASS\|WARN\|FAIL\|NOT_APPLICABLE\|BLOCKED\|ERROR] | PROOF_AUDIT.{md,json} |
+| 5.5 Paper Claim Audit | [PASS\|WARN\|FAIL\|NOT_APPLICABLE\|BLOCKED\|ERROR] | PAPER_CLAIM_AUDIT.{md,json} |
+| 5.8 Citation Audit | [PASS\|WARN\|FAIL\|NOT_APPLICABLE\|BLOCKED\|ERROR] | CITATION_AUDIT.{md,json} |
+| 6.0 Assurance Verifier | [OK\|STALE\|BLOCKING_VERDICT\|HAS_ISSUES\|SCHEMA_INVALID\|MISSING] per audit; exit [0\|1] overall (N/A if draft) | .aris/audit-verifier-report.json |
 
 ## Improvement Scores
 | Round | Score | Key Changes |
@@ -227,6 +883,10 @@ Invoke `/auto-paper-improvement-loop` to polish the paper:
 - paper/main_round1.pdf — After round 1
 - paper/main_round2.pdf — After round 2
 - paper/PAPER_IMPROVEMENT_LOG.md — Full review log
+- paper/PROOF_AUDIT.{md,json} — Proof-obligation verification (always emitted at `assurance=submission`; `NOT_APPLICABLE` when no theorems)
+- paper/PAPER_CLAIM_AUDIT.{md,json} — Numerical claim verification (always emitted at `assurance=submission`; `NOT_APPLICABLE` when no numeric claims; omitted in `draft` mode if Phase 5.5 detector was negative)
+- paper/CITATION_AUDIT.{md,json} — Bibliography verification (always emitted at `assurance=submission`; `NOT_APPLICABLE` when no `.bib` or no `\cite{...}`; omitted in `draft` mode if Phase 5.8 detector was negative)
+- paper/.aris/audit-verifier-report.json — External verifier report (submission only)
 
 ## Remaining Issues (if any)
 - [items from final review that weren't addressed]
@@ -236,6 +896,13 @@ Invoke `/auto-paper-improvement-loop` to polish the paper:
 - [ ] Add any missing manual figures
 - [ ] Submit to [venue] via OpenReview / CMT / HotCRP
 ```
+
+## Output Protocols
+
+> Follow these shared protocols for all output files:
+> - **[Output Versioning Protocol](../shared-references/output-versioning.md)** — write timestamped file first, then copy to fixed name
+> - **[Output Manifest Protocol](../shared-references/output-manifest.md)** — log every output to MANIFEST.md
+> - **[Output Language Protocol](../shared-references/output-language.md)** — note: paper-writing always outputs English LaTeX for venue submission
 
 ## Key Rules
 

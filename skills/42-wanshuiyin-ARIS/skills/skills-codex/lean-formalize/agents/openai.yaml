@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lean Formalization"
+  short_description: "Connect mathematical claims to checked Lean proofs"
+  default_prompt: "Use $lean-formalize to connect the original mathematical statement to a checked Lean theorem and a reproducible audit."

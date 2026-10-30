@@ -5,6 +5,17 @@ description: "Draft a structured grant proposal from research ideas and literatu
 
 # Grant Proposal: From Research Ideas to Fundable Application
 
+> **Before each reviewer slot**, follow [Selectable Reviewers](../shared-references/reviewer-backends.md):
+> resolve invocation → `.aris/reviewer.json` → Codex default (fresh native reviewer)
+> with `reviewer_route.py` through the canonical helper resolver, preserving this
+> slot's tier, fresh contexts, source/image inputs and deterministic gates.
+> Codex examples/pins below apply only to `backend=codex`; other routes use their
+> own first-call/reply contract. Save the route and actual returned identity;
+> unavailable selections are `REVIEW_UNAVAILABLE`. Classify acceptance from actual
+> families/completion/scope. Forward invocation reviewer/model/effort overrides
+> to reviewer-bearing children. Generation workers are unchanged.
+
+
 Draft a grant proposal based on: **$ARGUMENTS**
 
 ## Overview
@@ -32,7 +43,7 @@ Grant proposals argue for **future work** (feasibility + potential), not complet
 
 - **GRANT_TYPE = `KAKENHI`** — Default grant type. Supported: `KAKENHI`, `NSF`, `NSFC`, `ERC`, `DFG`, `SNSF`, `ARC`, `NWO`, `GENERIC`. Override via argument (e.g., `/grant-proposal "topic — NSF"`).
 - **GRANT_SUBTYPE = `auto`** — Sub-type within the grant agency. Examples: KAKENHI `Start-up`/`Wakate`/`Kiban-B`; NSFC `Youth`/`Excellent-Youth`/`Distinguished`/`Overseas`/`Key`; NSF `CAREER`/`CRII`/`Standard`. Auto-detected from argument or defaults to the most common sub-type.
-- **REVIEWER_MODEL = `gpt-5.4`** — Model used via a secondary Codex agent for proposal review. Must be an OpenAI model (e.g., `gpt-5.4`, `o3`, `gpt-4o`).
+- **REVIEWER_MODEL = `gpt-6-astra`** — Model used via a secondary Codex agent for proposal review. For `backend=codex`, use an OpenAI model (e.g., `gpt-6-astra`, `o3`, `gpt-4o`).
 - **OUTPUT_FORMAT = `markdown`** — Output format. Supported: `markdown`, `latex`. LaTeX uses grant-specific templates when available.
 - **MAX_REVIEW_ROUNDS = 2** — Maximum external review-revise cycles before finalizing.
 - **OUTPUT_DIR = `grant-proposal/`** — Directory for generated proposal files.
@@ -161,10 +172,10 @@ Parse `$ARGUMENTS` to extract:
 
 Then gather context from the project directory:
 
-1. Read `IDEA_REPORT.md` if it exists (from `/idea-discovery`)
+1. Read `idea-stage/IDEA_REPORT.md` if it exists (from `/idea-discovery`); fall back to `./IDEA_REPORT.md` if not found
 2. Read `refine-logs/FINAL_PROPOSAL.md` if it exists (from `/research-refine`)
 3. Read `refine-logs/EXPERIMENT_PLAN.md` if it exists (from `/experiment-plan`)
-4. Read `AUTO_REVIEW.md` if it exists (from `/auto-review-loop` — prior review feedback is gold for grants)
+4. Read `review-stage/AUTO_REVIEW.md` if it exists (from `/auto-review-loop` — prior review feedback is gold for grants); fall back to `./AUTO_REVIEW.md` if not found
 5. Read `NARRATIVE_REPORT.md` or `STORY.md` if they exist
 6. Read any existing literature notes or survey documents
 7. Scan for the user's publication list (e.g., `publications.md`, `cv.md`, `bio.md`, `CV.pdf`)
@@ -174,7 +185,7 @@ If insufficient context exists:
 - No research idea at all → suggest running `/idea-discovery` first
 - No literature survey → will invoke `/research-lit` inline in Phase 1
 - No publication list → leave PI qualification section with `[TODO: Add publications]` placeholders
-- Has AUTO_REVIEW.md → extract reviewer feedback and use it to strengthen the feasibility narrative
+- Has review-stage/AUTO_REVIEW.md → extract reviewer feedback and use it to strengthen the feasibility narrative
 
 ### Phase 1: Literature & Landscape Positioning
 
@@ -288,7 +299,7 @@ Timeline: [timeline]
 ```
 
 **What this does:**
-- GPT-5.4 xhigh acts as a grant review panelist (not a paper reviewer)
+- GPT-6-Astra xhigh acts as a grant review panelist (not a paper reviewer)
 - Evaluates aims independence, narrative arc, risk identification, timeline realism
 - Identifies the single biggest reviewer concern
 - Provides actionable fixes ranked by severity
@@ -304,7 +315,7 @@ Apply structural feedback before proceeding to drafting.
 - Aim 2: [title] — Risk: MEDIUM
 - Aim 3: [title] — Risk: LOW
 - Timeline: [summary]
-- Reviewer feedback: [key points from GPT-5.4]
+- Reviewer feedback: [key points from GPT-6-Astra]
 
 Proceed to section drafting? Or adjust the structure?
 ```
@@ -325,7 +336,7 @@ Draft each section according to the grant type template. Write **complete prose*
 
 **What this does:**
 - Writes all required sections in the agency-specific language and tone
-- Pulls content from IDEA_REPORT.md, FINAL_PROPOSAL.md, and literature notes
+- Pulls content from idea-stage/IDEA_REPORT.md, FINAL_PROPOSAL.md, and literature notes
 - Uses `/paper-illustration` for figure generation (if user requests)
 - Leaves `[TODO]` only for PI-specific information, `[AMOUNT]` for budget figures
 - Outputs `grant-proposal/GRANT_PROPOSAL.md`
@@ -402,7 +413,7 @@ Which should I generate? (e.g., "1 and 3", "all", "skip")
 
 #### For Each Section
 
-1. **Pull relevant content** from IDEA_REPORT.md, FINAL_PROPOSAL.md, literature notes
+1. **Pull relevant content** from idea-stage/IDEA_REPORT.md, FINAL_PROPOSAL.md, literature notes
 2. **Write complete prose** — no `[TODO]` except for PI-specific information
 3. **Include figure/table placeholders** where appropriate (e.g., `[Figure 1: System architecture]`)
 4. **Cite references properly** — use citation keys, will build bibliography later
@@ -417,20 +428,23 @@ Invoke `/research-review` on the complete draft for grant-type-specific evaluati
 ```
 
 **What this does:**
-- GPT-5.4 xhigh acts as a grant review panelist
+- GPT-6-Astra xhigh acts as a grant review panelist
 - Scores each section 1-5 using agency-specific criteria
 - Identifies fatal flaws and recommends funding/revisions/rejection
 - Provides ranked action items for improvement
 - All feedback saved to `grant-proposal/GRANT_REVIEW.md`
 
-> ⚠️ **External review fallback**: If reviewer agents are unavailable, skip external review. Note "External review skipped — no reviewer agent available. Consider running `/auto-review-loop-llm` separately." in `GRANT_REVIEW.md`. The proposal is still usable without external review.
+> If the selected reviewer is unavailable, record `REVIEW_UNAVAILABLE` in `GRANT_REVIEW.md`. The proposal remains an explicitly unreviewed draft; do not switch providers automatically.
 
 If `/research-review` is invoked (preferred), it handles the external review internally. If you run the reviewer directly, use `spawn_agent` for Round 1 and `send_input` for follow-up rounds.
 
 #### Round 1 (full draft review):
 
+> Resolve this reviewer slot first; the following is the `backend=codex` example.
+
 ```
 spawn_agent:
+  model: gpt-6-astra
   reasoning_effort: xhigh
   message: |
     Review this complete [GRANT_TYPE] [GRANT_SUBTYPE] proposal draft.
@@ -459,9 +473,11 @@ Save the returned reviewer agent id in `GRANT_STATE.json` if you want to continu
 
 If MAX_REVIEW_ROUNDS > 1 and revisions were applied:
 
+> Resolve this reviewer slot first; the following is the `backend=codex` example.
+
 ```
 send_input:
-  agent_id: [saved from Round 1]
+  target: [saved from Round 1]
   message: |
     [Round N review of revised [GRANT_TYPE] [GRANT_SUBTYPE] proposal]
 
@@ -539,7 +555,7 @@ Before declaring done:
 - Language: [language]
 - Aims: [N] aims covering [summary]
 - Timeline: [N] years
-- Review score: [summary from GPT-5.4]
+- Review score: [summary from GPT-6-Astra]
 - Output: grant-proposal/GRANT_PROPOSAL.md
 
 Files saved to grant-proposal/. Please review and customize:
@@ -585,7 +601,7 @@ Parameters can be passed inline with `—` separator. They flow to sub-skills wh
 | `max review rounds` | 2 | External review cycles | — |
 | `sources` | all | Literature sources | → `/research-lit` |
 | `arxiv download` | false | Download arXiv PDFs | → `/research-lit` |
-| `reviewer model` | gpt-5.4 | Codex review model | → reviewer agent |
+| `reviewer model` | gpt-6-astra | Codex review model | → reviewer agent |
 | `auto proceed` | false | Skip checkpoints | — |
 
 ## Composing with Other Skills
@@ -616,3 +632,10 @@ Parameters can be passed inline with `—` separator. They flow to sub-skills wh
 ```
 /idea-discovery → /experiment-bridge → /auto-review-loop → /paper-writing → submit
 ```
+
+## Output Protocols
+
+> Follow these shared protocols for all output files:
+> - **[Output Versioning Protocol](../../shared-references/output-versioning.md)** — write timestamped file first, then copy to fixed name
+> - **[Output Manifest Protocol](../../shared-references/output-manifest.md)** — log every output to MANIFEST.md
+> - **[Output Language Protocol](../../shared-references/output-language.md)** — respect the project's language setting

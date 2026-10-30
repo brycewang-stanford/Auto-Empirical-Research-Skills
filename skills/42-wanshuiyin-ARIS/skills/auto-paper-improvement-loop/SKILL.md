@@ -1,11 +1,33 @@
 ---
 name: auto-paper-improvement-loop
-description: "Autonomously improve a generated paper via GPT-5.4 xhigh review → implement fixes → recompile, for 2 rounds. Use when user says \"改论文\", \"improve paper\", \"论文润色循环\", \"auto improve\", or wants to iteratively polish a generated paper."
-argument-hint: "[paper-directory]"
-allowed-tools: Bash(*), Read, Write, Edit, Grep, Glob, Agent, mcp__codex__codex, mcp__codex__codex-reply
+description: "Autonomously improve a generated paper via GPT-6-Astra xhigh review → implement fixes → recompile, for 2 rounds. Use when user says \"改论文\", \"improve paper\", \"论文润色循环\", \"auto improve\", or wants to iteratively polish a generated paper."
+argument-hint: "[paper-directory] [— style-ref: <source>] [— edit-whitelist <path>]"
+allowed-tools: Bash(*), Read, Write, Edit, Grep, Glob, Skill, mcp__codex__codex, mcp__codex__codex-reply, mcp__antigravity__antigravity, mcp__antigravity__antigravity-reply, mcp__grok__grok, mcp__grok__grok-reply, mcp__claude-review__review, mcp__claude-review__review_reply, mcp__claude-review__review_start, mcp__claude-review__review_reply_start, mcp__claude-review__review_status
 ---
 
 # Auto Paper Improvement Loop: Review → Fix → Recompile
+
+> **Before each reviewer slot**, follow [Selectable Reviewers](../shared-references/reviewer-backends.md):
+> resolve invocation → `.aris/reviewer.json` → Claude Code default (Codex MCP)
+> with `reviewer_route.py` through the canonical helper resolver, preserving this
+> slot's tier, fresh contexts, source/image inputs and deterministic gates.
+> Codex examples/pins below apply only to `backend=codex`; other routes use their
+> own first-call/reply contract. Save the route and actual returned identity;
+> unavailable selections are `REVIEW_UNAVAILABLE`. Classify acceptance from actual
+> families/completion/scope. Forward invocation reviewer/model/effort overrides
+> to reviewer-bearing children. Generation workers are unchanged.
+
+
+> 🔒 **Do not wrap this skill in `/loop`, `/schedule`, or `CronCreate`.** It
+> already loops internally (review → fix → recompile) with its own round
+> structure and a deliberate fresh-reviewer bias guard each round (no
+> `codex-reply`). Re-asking it to "improve the paper" on a
+> wall-clock timer produces no new signal — quality changes when the *review*
+> changes, not when the clock ticks — and a timed re-run that also accepts its
+> own output to decide when to stop crosses into self-acquittal
+> (`acceptance-gate.md`). Schedule the *external wait that precedes it*, not the
+> improvement loop. See
+> [`shared-references/external-cadence.md`](../shared-references/external-cadence.md).
 
 Autonomously improve the paper at: **$ARGUMENTS**
 
@@ -18,11 +40,163 @@ Unlike `/auto-review-loop` (which iterates on **research** — running experimen
 ## Constants
 
 - **MAX_ROUNDS = 2** — Two rounds of review→fix→recompile. Empirically, Round 1 catches structural issues (4→6/10), Round 2 catches remaining presentation issues (6→7/10). Diminishing returns beyond 2 rounds for writing-only improvements.
-- **REVIEWER_MODEL = `gpt-5.4`** — Model used via Codex MCP for paper review.
+- **REVIEWER_MODEL = `gpt-6-astra`** — Model used via Codex MCP for paper review.
+- **REVIEWER_BIAS_GUARD = true** — When `true`, every review round uses a fresh `mcp__codex__codex` thread with no prior review context. Never use `mcp__codex__codex-reply` for review rounds. Set to `false` only for deliberate debugging of the legacy behavior. **Empirical evidence:** running the same paper with `codex-reply` + "since last round we did X" prompts inflated scores from real 3/10 → fake 8/10 across multiple rounds; switching to fresh threads recovered the true 3/10 assessment.
 - **REVIEW_LOG = `PAPER_IMPROVEMENT_LOG.md`** — Cumulative log of all rounds, stored in paper directory.
 - **HUMAN_CHECKPOINT = false** — When `true`, pause after each round's review and present score + weaknesses to the user. The user can approve fixes, provide custom modification instructions, skip specific fixes, or stop early. When `false` (default), runs fully autonomously.
+- **EDIT_WHITELIST = `null`** — Optional path to a YAML/JSON whitelist file constraining which paths and operations the fix-implementation step may touch. When `null` (default), all edits proceed unconstrained. When set via `— edit-whitelist <path>` (also accepts `— edit_whitelist <path>`), the loop loads the file at startup and consults it before each edit; rejected edits are logged to `PAPER_IMPROVEMENT_LOG.md` rather than silently dropped. See "Optional: Edit Whitelist" below.
 
 > 💡 Override: `/auto-paper-improvement-loop "paper/" — human checkpoint: true`
+
+## Optional: Style reference (`— style-ref: <source>`, opt-in)
+
+Lets the user steer **structural fixes only** during improvement (section reordering hints, paragraph length nudges, figure density adjustments) toward a reference paper. **Default OFF — when the user does not pass `— style-ref`, do nothing differently from before.**
+
+Only when `— style-ref: <source>` appears in `$ARGUMENTS`, run the helper FIRST, before the loop starts:
+
+```bash
+# Resolve $STYLE_HELPER via the canonical strict-safe chain (see
+# shared-references/integration-contract.md §2). Policy A — gate:
+# unresolved helper means --style-ref cannot be satisfied, so abort.
+cd "$(git rev-parse --show-toplevel 2>/dev/null || pwd)" || exit 1
+if [ -z "${ARIS_REPO:-}" ] && [ -f .aris/installed-skills.txt ]; then
+    ARIS_REPO=$(awk -F'\t' '$1=="repo_root"{print $2; exit}' .aris/installed-skills.txt 2>/dev/null) || true
+fi
+if [ -z "${ARIS_REPO:-}" ] && [ -f "$HOME/.aris/repo" ]; then
+    ARIS_REPO=$(cat "$HOME/.aris/repo" 2>/dev/null) || true
+fi
+STYLE_HELPER=".aris/tools/extract_paper_style.py"
+[ -f "$STYLE_HELPER" ] || STYLE_HELPER="tools/extract_paper_style.py"
+[ -f "$STYLE_HELPER" ] || { [ -n "${ARIS_REPO:-}" ] && STYLE_HELPER="$ARIS_REPO/tools/extract_paper_style.py"; }
+[ -f "$STYLE_HELPER" ] || {
+  echo "ERROR: extract_paper_style.py not resolved at .aris/tools/, tools/, \$ARIS_REPO/tools/, or via ~/.aris/repo." >&2
+  echo "       Fix: rerun bash tools/install_aris.sh or smart_update.sh (refreshes ~/.aris/repo), export ARIS_REPO, or copy the helper to tools/." >&2
+  echo "       --style-ref cannot be satisfied; aborting." >&2
+  exit 1
+}
+STYLE_STATUS=0
+CACHE=$(python3 "$STYLE_HELPER" --source "<source>") || STYLE_STATUS=$?
+case "$STYLE_STATUS" in
+  0) ;;                                       # use $CACHE/style_profile.md as structural guidance for the FIX phase only
+  2) echo "warning: style-ref skipped (missing optional dep)" >&2 ;;
+  3) echo "error: --style-ref source failed; aborting loop" >&2 ; exit 1 ;;
+  *) echo "error: helper failed unexpectedly; aborting loop" >&2 ; exit 1 ;;
+esac
+```
+
+Sources accepted: local TeX dir / file, local PDF, arXiv id, http(s) URL. Overleaf URLs/IDs are rejected — clone via `/overleaf-sync setup <id>` first and pass the local clone path.
+
+**Strict rules** (full contract in `tools/extract_paper_style.py` docstring):
+
+- Use `style_profile.md` only during the **fix-implementation** phase, to nudge structural choices when applying reviewer feedback. Reviewer feedback always takes precedence; style ref is tie-breaker for *how* to apply a fix, not *whether* to apply it.
+- **Never copy prose, claims, examples, or terminology** from anything reachable through the cache when implementing fixes.
+- **Never pass `— style-ref` (or the cache contents) to the GPT-6-Astra reviewer sub-agent.** The Reviewer Independence Protocol below requires reviewers see only the artifact and the user's prompt — leaking the style ref would contaminate the review with author-side context. **This is the most critical invariant in this skill.**
+
+## Optional: Edit Whitelist (`— edit-whitelist <path>`, opt-in)
+
+Lets the caller hard-constrain which files and operations the **fix-implementation** step (Step 3 / Step 6) is allowed to touch. **Default OFF — when the user does not pass `— edit-whitelist` (or the alias `— edit_whitelist`), the loop applies all reviewer-driven edits without restriction, exactly as before.**
+
+This is the parameter that upstream pipelines (e.g. `/resubmit-pipeline` Phase 2) use to enforce text-only resubmit microedits: no `.bib` mutations, no `.sty` / `.bst` mutations, no edits to prior-submission directories, no new `\cite{...}`, no new theorem environments, no new numerical claims.
+
+### Schema
+
+The whitelist file is YAML or JSON. All four sections are optional:
+
+```yaml
+allowed_paths:
+  - sec/*.tex
+  - main.tex
+  - figures/*.tex
+forbidden_paths:
+  - "**/*.bib"
+  - "**/*.sty"
+  - "**/*.bst"
+  - "../OldSubmission/**"
+forbidden_operations:
+  - new_cite              # blocks \cite{...}, \citep{...}, \citet{...}, \citeauthor{...} additions
+  - new_bibitem           # blocks \bibitem{...} additions
+  - new_theorem_env       # blocks \begin{theorem|lemma|proposition|corollary} additions
+  - numerical_claim       # blocks adding new numbers / percentages / metrics
+forbidden_deletions:      # operations that block REMOVALS, not additions
+  - delete_existing_cite  # blocks removal of \cite{...} from the body (use citation-audit --soft-only instead)
+  - delete_theorem_env    # blocks removal of an existing \begin{theorem|...} block
+requires_user_approval_for:  # operations that don't auto-reject but pause for explicit user OK
+  - rewrite_abstract      # paraphrasing the entire abstract triggers a checkpoint
+  - rewrite_intro_first_para
+  - delete_section
+max_edits_per_round: 30   # hard cap on number of accepted edits per round (rejections are not counted; if cap is hit, remaining proposed edits are deferred to the next round with a warning)
+rationale: "Resubmit mode: text-only microedits, paper structure frozen by user constraint."
+```
+
+### Resolution rules
+
+- **`allowed_paths` empty AND `forbidden_paths` empty** → whitelist is a no-op (advisory: the file is loaded and `rationale` echoed to the log, but no path filtering is applied).
+- **`allowed_paths` empty, `forbidden_paths` non-empty** → all paths NOT matched by `forbidden_paths` are mutable.
+- **`allowed_paths` non-empty, `forbidden_paths` empty** → only paths matching `allowed_paths` are mutable.
+- **Both non-empty** → an edit is allowed iff the target matches `allowed_paths` AND does NOT match `forbidden_paths`. `forbidden_paths` always wins on overlap.
+- **`forbidden_operations` missing or empty** → no operation-level guard; only path-level filtering applies.
+
+### Glob semantics
+
+Use bash `extglob` / Python `fnmatch.fnmatch` semantics. `**` matches any depth (zero or more directory segments). Patterns are matched against the path **relative to the paper directory** (e.g. `paper/sec/intro.tex` matches `sec/*.tex` when paper-directory is `paper/`).
+
+### Forbidden-operation detectors
+
+For each candidate edit's diff (the new lines being added — deletions are exempt), the loop runs these regex checks and rejects if any forbidden operation matches:
+
+| Operation | Detector (added lines only) |
+|-----------|------------------------------|
+| `new_cite` | `\\cite[a-zA-Z]*\{[^}]+\}` (catches `\cite`, `\citep`, `\citet`, `\citeauthor`, `\citeyear`, `\citealp`, etc.) |
+| `new_bibitem` | `\\bibitem\{[^}]+\}` |
+| `new_theorem_env` | `\\begin\{(theorem|lemma|proposition|corollary)\*?\}` |
+| `numerical_claim` | New token matching `\b\d+(\.\d+)?%?\b` that did NOT appear in the deleted/replaced lines (i.e. genuinely new numbers, not edits to existing ones) |
+
+### Behavior at loop start (before Round 1 fix-implementation)
+
+1. If `— edit-whitelist <path>` is present in `$ARGUMENTS`, set `EDIT_WHITELIST = <path>`.
+2. Load the file (`yaml.safe_load`; if it fails, fall back to `json.loads`). On load failure, abort the loop with a clear error — do NOT silently proceed unconstrained.
+3. Echo `rationale` (if present) into `PAPER_IMPROVEMENT_LOG.md` under a new "Edit Whitelist" preamble section so the audit trail records why edits were constrained.
+
+### Behavior during fix-implementation (Steps 3 and 6)
+
+Before applying each proposed edit:
+
+1. Resolve target file path relative to the paper directory.
+2. Path check: if `allowed_paths` is non-empty, target must match at least one pattern. Then if `forbidden_paths` is non-empty, target must NOT match any pattern. If either fails → reject as `path` violation.
+3. Operation check: build the unified diff (or just the set of newly-added lines) for the proposed edit. For each entry in `forbidden_operations`, run its detector on the added lines. If any detector matches → reject as `operation` violation.
+4. If all checks pass, apply the edit normally.
+5. If rejected, append an entry to `PAPER_IMPROVEMENT_LOG.md` under a `## Rejected by edit_whitelist (Round N)` heading with this schema:
+   ```
+   - file: <relative path>
+     reason: path | operation
+     pattern: <the offending forbidden_path glob, OR the offending forbidden_operation name + the matched substring>
+     reviewer_concern: <the original Round-N weakness that motivated this edit>
+   ```
+6. Continue with the remaining edits in the round. Do NOT abort the whole round on a single rejection.
+
+### End-of-round surfacing
+
+At the end of each round (after the recompile, before moving to the next round), if any edits were rejected during that round's fix step:
+
+- Print a one-line summary to the round's checkpoint output: `Edit whitelist rejected N edits this round (M path, K operation). See PAPER_IMPROVEMENT_LOG.md "Rejected by edit_whitelist (Round N)".`
+- If `HUMAN_CHECKPOINT = true`, include the rejection list in the checkpoint shown to the user before they approve next-round fixes.
+
+### Example invocations
+
+```bash
+# Resubmit-pipeline Phase 2 caller (text-only mode):
+/auto-paper-improvement-loop "paper/" — edit-whitelist .resubmit/edit_whitelist.yaml
+
+# Aliased form is accepted:
+/auto-paper-improvement-loop "paper/" — edit_whitelist .resubmit/edit_whitelist.yaml
+
+# Combined with other flags:
+/auto-paper-improvement-loop "paper/" — human checkpoint: true — edit-whitelist constraints.yaml
+```
+
+### Rationale
+
+Without a whitelist, the loop's reviewer-driven fix step is free to add citations, introduce new theorem environments, or tweak numerical claims — all of which are reasonable for first-submission polish but **forbidden** in resubmit / camera-ready / rebuttal-only modes where the paper structure is frozen by external constraint. Routing those constraints through a first-class parameter (rather than relying on the LLM to "remember" not to do them) makes the constraint enforceable, auditable via `PAPER_IMPROVEMENT_LOG.md`, and visible to the user at each round's checkpoint.
 
 ## Inputs
 
@@ -47,6 +221,20 @@ If the context window fills up mid-loop, Claude Code auto-compacts. To recover, 
 
 **After each round**: overwrite the state file. **On completion**: set `"status": "completed"`.
 
+## Reviewer Independence Protocol
+
+The reviewer must be context-naive on every round. Prior-round summaries, fix lists, and executor explanations are not evidence; they are a source of confirmation bias. If the reviewer is told what changed, scores tend to drift upward even when the manuscript itself has not materially improved.
+
+Rules:
+- Every round starts with `mcp__codex__codex`, not `mcp__codex__codex-reply`.
+- Never pass a prior threadId into the next review prompt.
+- Never include "since last round", "we fixed", "after applying", or any fix summary in the reviewer prompt.
+- The only acceptable evidence of improvement is the current `.tex` source and compiled PDF.
+- If a fix cannot be observed in the files, the reviewer should not be told it happened.
+- If recovery metadata is needed, store the returned threadId for crash recovery only; do not use it to preserve review context.
+
+Set `REVIEWER_BIAS_GUARD = false` only if you explicitly want the legacy, context-carrying behavior for debugging.
+
 ## Workflow
 
 ### Step 0: Preserve Original
@@ -69,17 +257,40 @@ done > /tmp/paper_full_text.txt
 
 ### Step 2: Round 1 Review
 
-Send the full paper text to GPT-5.4 xhigh:
+Send the full paper text AND compiled PDF to GPT-6-Astra xhigh:
+
+> Resolve this reviewer slot first; the following is the `backend=codex` example.
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
+  model: gpt-6-astra
   config: {"model_reasoning_effort": "xhigh"}
   prompt: |
     You are reviewing a [VENUE] paper. Please provide a detailed, structured review.
 
-    ## Full Paper Text:
-    [paste concatenated sections]
+    Judge claim calibration in BOTH directions. Recommend narrowing only when the
+    current scope or modality exceeds the evidence; do not ask for extra hedges
+    around a supported result. Flag stacked hedges, self-defence ("we do not
+    claim"), instruction confessions ("we do not address X"), and generic caveats
+    outside Limitations as writing defects to remove. Tone fixes must never alter
+    facts, negation, modality, scope, comparison direction, or numbers.
+    Also flag narrative defects: a progress-report structure ("we first tried
+    A, then B"), a story built on a metric the method loses, results narrated
+    as defeats ("underperforms", "fails to surpass") instead of explained as a
+    goal difference or tradeoff, experiments with no argumentative duty, an
+    abstract or introduction that opens on background or implementation
+    instead of problem -> gap -> idea -> strongest result, and a conclusion
+    that ends on new self-negation. The fix is reframing and cutting where
+    the evidence supports the reframing; a genuine weakness is stated
+    neutrally and kept in Limitations. Never delete unfavorable numbers from
+    tables, and never dress a weakness as a tradeoff.
+
+    ## Paper Files:
+    - LaTeX source: [list all section .tex files]
+    - Compiled PDF: paper/main.pdf
+    - Figures: [list figure files]
+
+    Read BOTH the LaTeX source (for content/logic) AND the compiled PDF (for visual presentation).
 
     ## Review Instructions
     Please act as a senior ML reviewer ([VENUE] level). Provide:
@@ -89,10 +300,16 @@ mcp__codex__codex:
     4. **Weaknesses** (bullet list, ranked: CRITICAL > MAJOR > MINOR)
     5. **For each CRITICAL/MAJOR weakness**: A specific, actionable fix
     6. **Missing References** (if any)
-    7. **Verdict**: Ready for submission? Yes / Almost / No
+    7. **Visual Review** (from the PDF):
+       - Figure quality: readable? labels legible? colors distinguishable in grayscale?
+       - Figure-caption alignment: does each caption match its figure?
+       - Layout: orphaned headers, awkward page breaks, figures far from references?
+       - Table formatting: aligned columns, consistent decimals, bold for best results?
+       - Visual consistency: same color scheme across all figures?
+    8. **Verdict**: Ready for submission? Yes / Almost / No
 
     Focus on: theoretical rigor, claims vs evidence alignment, writing clarity,
-    self-containedness, notation consistency.
+    self-containedness, notation consistency, AND visual presentation quality.
 ```
 
 Save the threadId for Round 2.
@@ -126,17 +343,31 @@ Parse the review and implement fixes by severity:
 2. MAJOR fixes (overclaims, missing content, notation issues)
 3. MINOR fixes (if time permits)
 
+**Edit-whitelist gate (if set):** If `EDIT_WHITELIST` is set, before applying each proposed edit, check the target path against `allowed_paths` / `forbidden_paths` and the new-lines diff against `forbidden_operations` per the "Optional: Edit Whitelist" section. Rejections are logged to `PAPER_IMPROVEMENT_LOG.md` under `## Rejected by edit_whitelist (Round 1)` with file, reason (`path` or `operation`), the offending pattern, and the original reviewer concern. The loop continues with remaining edits — a rejection never aborts the round. Surface a rejection summary at the end of the round.
+
+**Before applying any fix:** calibrate claims to evidence and state them
+directly; generic caveats belong in Limitations only; writing instructions are
+never manuscript content; tone edits never change what the paper knows.
+
 **Common fix patterns:**
 
 | Issue | Fix Pattern |
 |-------|-------------|
 | Assumption-model mismatch | Rewrite assumption to match the model, add formal proposition bridging the gap |
-| Overclaims | Soften language: "validate" → "demonstrate practical relevance", "comparable" → "qualitatively competitive" |
+| Genuine overclaim | Narrow the claim itself to the supported scope/modality — never substitute a softer-sounding synonym for fixing scope, comparison, or aggregation |
+| Supported claim wrapped in caution | Remove the redundant hedges; keep any scope qualifier that makes the claim true |
+| Scattered generic caveats | Consolidate into Limitations and delete the duplicates |
+| Story built on a losing metric, or results narrated as defeats | Reframe around the contest the paper wins; explain the gap as a goal difference or tradeoff when the evidence supports that, otherwise state it neutrally and narrow the claim; keep every number in the table |
+| Experiment with no argumentative duty | Cut, shorten, move to the appendix, or redesign it so it proves the method, the mechanism, the target-scenario value, or rules out an alternative |
 | Missing metrics | Add quantitative table with honest parameter counts and caveats |
 | Theorem not self-contained | Add "Interpretation" paragraph listing all dependencies |
 | Notation confusion | Rename conflicting symbols globally, add Notation paragraph |
 | Missing references | Add to `references.bib`, cite in appropriate locations |
 | Theory-practice gap | Explicitly frame theory as idealized; add synthetic validation subsection |
+| Proof gap (theory papers) | Run `/proof-checker` if PROOF_AUDIT.md doesn't exist yet; fix FATAL/CRITICAL issues |
+| Writing clutter / passive voice | Apply sciwrite 5-pass audit: clutter extraction → active voice → sentence architecture → keyword consistency → numerical integrity. See `paper-write` Step 5 |
+| Number mismatch (paper vs results) | Run `/paper-claim-audit` if PAPER_CLAIM_AUDIT.md doesn't exist; fix any `number_mismatch` or `aggregation_mismatch` claims |
+| Keyword inconsistency | The "Banana Rule": if Methods says "obese group", Results must not say "heavier group". Extract key terms, verify consistency across all sections |
 
 ### Step 4: Recompile Round 1
 
@@ -147,26 +378,143 @@ cp main.pdf main_round1.pdf
 
 Verify: 0 undefined references, 0 undefined citations.
 
+### Step 4.5: Restatement Regression Test
+
+After every recompilation, rerun a theorem-statement consistency check so fix rounds cannot reintroduce appendix drift. **Run this after Step 4 and again after Step 7 before the final format check.**
+
+**Scope**
+- Compare only theorem/lemma/proposition/corollary statements, not proof bodies.
+- Classify files by `main.tex` input order: files before `\appendix` are main body; files after `\appendix` are appendix.
+
+**Normalized comparison logic**
+- Strip comments, `\label{...}`, `\ref{...}`, `\eqref{...}`, `\cite...{...}`, and whitespace-only differences.
+- Collapse formatting-only macros such as `\emph{}`, `\textbf{}`, `\textit{}`, `\mathrm{}`, `\mathbf{}`, `\mathcal{}`, and `\operatorname{}` to their contents.
+- Preserve quantifiers, case splits, assumptions, and the literal names of defined objects.
+- Compare by theorem label when available; otherwise compare by theorem type and order.
+- Flag any change in hypotheses, case splits, quantifier order, or terminology (`stationary` vs `terminal`) as regression drift.
+
+```bash
+python3 - <<'PY'
+import re
+def normalize(s):
+    s = re.sub(r'%.*', '', s)
+    s = re.sub(r'\\label\{[^}]*\}', '', s)
+    s = re.sub(r'\\(?:ref|eqref|cref|Cref|cite[a-zA-Z]*)\{[^}]*\}', '', s)
+    s = re.sub(r'\\(?:emph|textbf|textit|mathrm|mathbf|mathsf|mathcal|operatorname)\{([^{}]*)\}', r'\1', s)
+    s = re.sub(r'\\begin\{[^}]+\}|\\end\{[^}]+\}', '', s)
+    s = re.sub(r'\s+', ' ', s)
+    return s.strip().lower()
+# Compare normalized theorem blocks from the current main-body files
+# against their appendix restatements. Any mismatch blocks completion.
+PY
+```
+
+**Empirical motivation:** in a real submission run, a key theorem had a multi-case split in the main text but a single-case statement in the appendix; a key variable was named one way in main and another in appendix. These drifted multiple times across fix rounds because no automated check caught regression.
+
+**Optional deeper check: `/proof-checker --restatement-check`**
+
+The inline Python check above is the default and is sufficient for routine main-vs-appendix consistency. For broader coverage, you may additionally invoke `/proof-checker --restatement-check` (added in PR #189), which extends the comparison to:
+
+- Restatements in summary tables, abstract, "Key Contributions" lists, and discussion sections (not just main vs appendix).
+- Six named drift signatures classified by reviewer: `conditional_loss`, `scope_change`, `quantifier_loss`, `regime_envelope_change`, `constant_change`, `variable_rename`.
+- Structured findings emitted as `details.restatement_drift[]` in `PROOF_AUDIT.json`, suitable for downstream tooling or audit trails.
+
+This is advisory only — the inline Step 4.5 check remains the default and continues to run on every loop round. Consider invoking `/proof-checker --restatement-check` when (a) you suspect cross-location drift outside the main↔appendix axis (e.g., abstract overclaim relative to theorem statement), or (b) you want reviewer-graded drift signatures rather than raw string mismatches. Running both is supported and they are independent: the inline check fails fast on string drift, the proof-checker pass surfaces semantic-class drift.
+
 ### Step 5: Round 2 Review
 
-Use `mcp__codex__codex-reply` with the saved threadId:
+If `REVIEWER_BIAS_GUARD = true` (default), use a **fresh** `mcp__codex__codex` thread for Round 2. Do not reuse the Round 1 threadId for prompting. Save the returned threadId only for recovery bookkeeping.
+
+> Resolve this reviewer slot first; the following is the `backend=codex` example.
 
 ```
-mcp__codex__codex-reply:
-  threadId: [saved from Round 1]
-  model: gpt-5.4
+mcp__codex__codex:
+  model: gpt-6-astra
   config: {"model_reasoning_effort": "xhigh"}
   prompt: |
-    [Round 2 update]
+    You are reviewing a [VENUE] paper. This is a fresh, zero-context review.
 
-    Since your last review, we have implemented:
-    1. [Fix 1]: [description]
-    2. [Fix 2]: [description]
-    ...
+    Judge claim calibration in BOTH directions. Recommend narrowing only when the
+    current scope or modality exceeds the evidence; do not ask for extra hedges
+    around a supported result. Flag stacked hedges, self-defence ("we do not
+    claim"), instruction confessions ("we do not address X"), and generic caveats
+    outside Limitations as writing defects to remove. Tone fixes must never alter
+    facts, negation, modality, scope, comparison direction, or numbers.
+    Also flag narrative defects: a progress-report structure ("we first tried
+    A, then B"), a story built on a metric the method loses, results narrated
+    as defeats ("underperforms", "fails to surpass") instead of explained as a
+    goal difference or tradeoff, experiments with no argumentative duty, an
+    abstract or introduction that opens on background or implementation
+    instead of problem -> gap -> idea -> strongest result, and a conclusion
+    that ends on new self-negation. The fix is reframing and cutting where
+    the evidence supports the reframing; a genuine weakness is stated
+    neutrally and kept in Limitations. Never delete unfavorable numbers from
+    tables, and never dress a weakness as a tradeoff.
+    Ignore any prior review rounds, prior fix lists, or executor explanations.
+    Judge the paper only from the current LaTeX source and compiled PDF.
 
-    Please re-score and re-assess. Same format:
-    Score, Summary, Strengths, Weaknesses, Actionable fixes, Verdict.
+    ## Paper Files:
+    - LaTeX source: [list all section .tex files]
+    - Compiled PDF: paper/main.pdf
+    - Figures: [list figure files]
+
+    Read BOTH the LaTeX source (for content/logic) AND the compiled PDF (for visual presentation).
+
+    ## Review Instructions
+    Please act as a senior ML reviewer ([VENUE] level). Provide:
+    1. **Overall Score** (1-10, where 6 = weak accept, 7 = accept)
+    2. **Summary** (2-3 sentences)
+    3. **Strengths** (bullet list, ranked)
+    4. **Weaknesses** (bullet list, ranked: CRITICAL > MAJOR > MINOR)
+    5. **For each CRITICAL/MAJOR weakness**: A specific, actionable fix
+    6. **Missing References** (if any)
+    7. **Visual Review** (from the PDF):
+       - Figure quality: readable? labels legible? colors distinguishable in grayscale?
+       - Figure-caption alignment: does each caption match its figure?
+       - Layout: orphaned headers, awkward page breaks, figures far from references?
+       - Table formatting: aligned columns, consistent decimals, bold for best results?
+       - Visual consistency: same color scheme across all figures?
+    8. **Verdict**: Ready for submission? Yes / Almost / No
+
+    Focus on: theoretical rigor, claims vs evidence alignment, writing clarity,
+    self-containedness, notation consistency, and visual presentation quality.
 ```
+
+If `REVIEWER_BIAS_GUARD = false` (legacy debugging only), use `mcp__codex__codex-reply` with the saved threadId; this is **not** the recommended path.
+
+### Step 5.5: Kill Argument Exercise (theory / scope-heavy papers only)
+
+Run this only if the paper is theory-heavy (≥5 `\begin{theorem}|\begin{lemma}|\begin{proposition}|\begin{corollary}` environments in the source) or has explicit scope/generality claims in title/abstract, and only on the final scheduled round (`current_round == MAX_ROUNDS`).
+
+**Delegate to `/kill-argument`** — the canonical implementation lives at `skills/kill-argument/SKILL.md` (extracted in May 2026). This step does NOT re-implement the Attack-and-Adjudication prompt template; instead, invoke the skill and read its output:
+
+```bash
+# Invoke the canonical adversarial-review primitive on the current paper.
+# /kill-argument runs two fresh-thread codex gpt-6-astra ultra calls and writes
+# KILL_ARGUMENT.{md,json} into the paper directory. It is detect-only —
+# it never edits the paper itself.
+/kill-argument "$PAPER_DIR"
+
+# Read the structured verdict.
+KILL_VERDICT=$(jq -r '.verdict' "$PAPER_DIR/KILL_ARGUMENT.json")
+KILL_REASON=$(jq -r '.reason_code' "$PAPER_DIR/KILL_ARGUMENT.json")
+```
+
+**Merge rule** (auto-loop's responsibility — `/kill-argument` itself is detect-only):
+
+- Read `details.decomposed_points` from `KILL_ARGUMENT.json`.
+- For each point with `verdict == "still_unresolved"` or `verdict == "partially_answered"` at `severity_if_unresolved == "critical"`:
+  - Dedupe against the Round 2 weakness list by semantic overlap (~85% similarity threshold).
+  - If novel, append it to the Step 6 fix list with the recommended_fix as the action description.
+- If the adjudication shows the issue is `answered_by_current_text`, only downgrade an existing weakness item after verifying the cited file:line evidence yourself.
+- Record both `KILL_ARGUMENT.md` and the merge decision in `PAPER_IMPROVEMENT_LOG.md`.
+- If `HUMAN_CHECKPOINT = true`, include the merged findings in the checkpoint summary before asking the user to proceed.
+
+This phase feeds directly into Step 6. The merged findings must land before the final recompile.
+
+If `/kill-argument` returns `verdict: NOT_APPLICABLE` (paper isn't theory- or scope-heavy enough to need this check), skip Step 5.5 entirely and proceed to Step 6. If it returns `BLOCKED` or `ERROR`, log the reason in `PAPER_IMPROVEMENT_LOG.md` and proceed without merging — the loop should not stall on an adversarial check that cannot run.
+
+**Empirical motivation:** in a real submission run, after several rounds of standard improvement (score 7-8/10), the kill-argument exercise surfaced framing weaknesses that no prior review caught (e.g., a setting being mostly conditional rather than truly general, or a baseline being irrelevant to real systems). Author rebuttal forced explicit scope qualifications in abstract and discussion.
 
 ### Step 5b: Human Checkpoint (if enabled)
 
@@ -176,9 +524,13 @@ mcp__codex__codex-reply:
 
 Same process as Step 3. Typical Round 2 fixes:
 - Add controlled synthetic experiments validating theory
-- Further soften any remaining overclaims
+- Re-check calibration in both directions: narrow genuine overclaims, state
+  supported claims directly, consolidate scattered generic caveats into
+  Limitations — and do not re-soften claims the evidence already supports
 - Formalize informal arguments (e.g., truncation → formal proposition)
-- Strengthen limitations section
+- Make Limitations more specific only when a material limit is missing
+
+**Edit-whitelist gate (if set):** Same as Step 3 — if `EDIT_WHITELIST` is set, run the path + forbidden-operation checks before applying each proposed edit. Rejections are logged to `PAPER_IMPROVEMENT_LOG.md` under `## Rejected by edit_whitelist (Round 2)` and the loop continues. Surface a rejection summary at the end of the round.
 
 ### Step 7: Recompile Round 2
 
@@ -189,37 +541,68 @@ cp main.pdf main_round2.pdf
 
 ### Step 8: Format Check
 
-After the final recompilation, run a format compliance check:
+After the final recompilation, run a **location-aware** format compliance check.
+
+```bash
+# If the log lacks file/line data, rerun the final compile once with -file-line-error.
+cd paper && latexmk -pdf -file-line-error -interaction=nonstopmode -halt-on-error main.tex
+```
 
 ```bash
 # 1. Page count vs venue limit
 PAGES=$(pdfinfo paper/main.pdf | grep Pages | awk '{print $2}')
 echo "Pages: $PAGES (limit: 9 main body for ICLR/NeurIPS)"
 
-# 2. Overfull hbox warnings (content exceeding margins)
-OVERFULL=$(grep -c "Overfull" paper/main.log 2>/dev/null || echo 0)
-echo "Overfull hbox warnings: $OVERFULL"
-grep "Overfull" paper/main.log 2>/dev/null | head -10
+# 2. Duplicate labels: HARD BLOCK
+DUP_LABELS=$(grep -Rho "\\\\label{[^}]*}" paper/main.tex paper/sections 2>/dev/null | sort | uniq -d || true)
+if [ -n "$DUP_LABELS" ]; then
+    echo "Duplicate labels found (BLOCKING):"
+    echo "$DUP_LABELS"
+fi
 
-# 3. Underfull hbox warnings (loose spacing)
-UNDERFULL=$(grep -c "Underfull" paper/main.log 2>/dev/null || echo 0)
-echo "Underfull hbox warnings: $UNDERFULL"
+# 3. Overfull warnings with location classification
+OVERFULLS=$(grep -n "Overfull \\\\hbox" paper/main.log 2>/dev/null || true)
 
-# 4. Bad boxes summary
-grep -c "badness" paper/main.log 2>/dev/null || echo "0 badness warnings"
+# Main body = source files before \appendix in main.tex.
+# Appendix = source files after \appendix, or files whose path contains "appendix".
+# Bibliography = paper.bbl, references.bib, or bibliography-generated output.
+MAIN_BODY_OVERFULL=$(echo "$OVERFULLS" | grep -v -E 'appendix|paper\.bbl|references\.bib' || true)
+APPENDIX_OVERFULL=$(echo "$OVERFULLS" | grep -E 'appendix' || true)
+BIB_OVERFULL=$(echo "$OVERFULLS" | grep -E 'paper\.bbl|references\.bib' || true)
+
+echo "Main-body overfulls (any size BLOCKS):"
+echo "$MAIN_BODY_OVERFULL"
+echo "Appendix overfulls (>10pt blocks):"
+echo "$APPENDIX_OVERFULL"
+echo "Bibliography overfulls (>20pt blocks):"
+echo "$BIB_OVERFULL"
 ```
 
-**Auto-fix patterns:**
+**Stop criteria:**
+- Any duplicate label blocks completion.
+- Any overfull in the main body blocks completion, regardless of size.
+- Appendix overfulls block completion only if they exceed 10pt or are visibly clipping.
+- Bibliography overfulls block completion only if they exceed 20pt or are visibly clipping.
+- Underfull hboxes remain warnings unless they create obvious layout damage.
+
+**Auto-fix patterns (location-aware):**
 
 | Issue | Fix |
 |-------|-----|
-| Overfull hbox in equation | Wrap in `\resizebox` or split with `\split`/`aligned` |
-| Overfull hbox in table | Reduce font (`\small`/`\footnotesize`) or use `\resizebox{\linewidth}{!}{...}` |
-| Overfull hbox in text | Rephrase sentence or add `\allowbreak` / `\-` hints |
+| Main-body overfull in equation | Split with `aligned` / `split` / `multline`, or shorten notation |
+| Main-body overfull in table | Reduce font, resize table, or break table across rows |
+| Main-body overfull in text | Rephrase; do not hide it with global `\sloppy` |
+| Appendix overfull ≤ 10pt | Warn only unless visibly clipping |
+| Appendix overfull > 10pt | Apply the same fix if the spill is visible |
+| Bibliography overfull ≤ 20pt | Warn only unless caused by malformed entry or clipping |
+| Bibliography overfull > 20pt | Fix malformed entry, URL, or DOI formatting |
 | Over page limit | Move content to appendix, compress tables, reduce figure sizes |
-| Underfull hbox (loose) | Rephrase for better line filling or add `\looseness=-1` |
 
-If any overfull hbox > 10pt is found, fix it and recompile before documenting.
+**Location-aware interpretation:**
+- Classify by the source file reported in the `-file-line-error` log.
+- If a warning cannot be classified, treat it as main body and fix it.
+
+**Empirical motivation:** in a real submission run, dozens of overfull hbox warnings (the largest well over 100pt in an appendix proof) survived multiple improvement rounds because the previous blanket "overfull > 10pt blocks" rule was too lax and treated all locations equally.
 
 ### Step 9: Document Results
 
@@ -239,7 +622,7 @@ Create `PAPER_IMPROVEMENT_LOG.md` in the paper directory:
 ## Round 1 Review & Fixes
 
 <details>
-<summary>GPT-5.4 xhigh Review (Round 1)</summary>
+<summary>GPT-6-Astra xhigh Review (Round 1)</summary>
 
 [Full raw review text, verbatim]
 
@@ -253,7 +636,7 @@ Create `PAPER_IMPROVEMENT_LOG.md` in the paper directory:
 ## Round 2 Review & Fixes
 
 <details>
-<summary>GPT-5.4 xhigh Review (Round 2)</summary>
+<summary>GPT-6-Astra xhigh Review (Round 2)</summary>
 
 [Full raw review text, verbatim]
 
@@ -301,16 +684,17 @@ paper/
 - **Large file handling**: If the Write tool fails due to file size, immediately retry using Bash (`cat << 'EOF' > file`) to write in chunks. Do NOT ask the user for permission — just do it silently.
 
 - **Preserve all PDF versions** — user needs to compare progression
-- **Save FULL raw review text** — do not summarize or truncate GPT-5.4 responses
-- **Use `mcp__codex__codex-reply`** for Round 2 to maintain conversation context
+- **Save FULL raw review text** — do not summarize or truncate GPT-6-Astra responses
+- **Reviewer independence (Round 2+)**: when `REVIEWER_BIAS_GUARD = true` (default), use a **fresh** `mcp__codex__codex` thread for every review round; never use `mcp__codex__codex-reply` and never include "since last round" / fix summaries in the prompt. See the Reviewer Independence Protocol section above.
 - **Always recompile after fixes** — verify 0 errors before proceeding
 - **Do not fabricate experimental results** — synthetic validation must describe methodology, not invent numbers
-- **Respect the paper's claims** — soften overclaims rather than adding unsupported new claims
-- **Global consistency** — when renaming notation or softening claims, check ALL files (abstract, intro, method, experiments, theory sections, conclusion, tables, figure captions)
+- **Respect the paper's claims** — narrow genuine overclaims rather than adding unsupported new claims, and state supported claims directly rather than wrapping them in fresh hedges
+- **Global consistency** — when renaming notation or changing a claim's scope, keep every restatement semantically consistent across ALL files (abstract, intro, method, experiments, theory sections, conclusion, tables, figure captions); consistency means matching scope, not copying disclaimer sentences everywhere
+- **Edit-whitelist rejections are LOGGED, not silently dropped** — when `EDIT_WHITELIST` is set and an edit is rejected for a path or forbidden-operation violation, the rejection MUST be appended to `PAPER_IMPROVEMENT_LOG.md` with file, reason, offending pattern, and the original reviewer concern. The loop reports a rejection summary at the end of every round (and in the checkpoint, if `HUMAN_CHECKPOINT = true`). Never silently swallow a whitelist rejection — the audit trail is the whole point of the parameter.
 
 ## Typical Score Progression
 
-Based on end-to-end testing on a 9-page ICLR 2026 theory paper:
+Based on end-to-end testing on a real theory-paper run:
 
 | Round | Score | Key Improvements |
 |-------|-------|-----------------|
@@ -319,4 +703,8 @@ Based on end-to-end testing on a 9-page ICLR 2026 theory paper:
 | Round 2 | 7/10 (content) | Added synthetic validation, formal truncation proposition, stronger limitations |
 | Round 3 | 5→8.5/10 (format) | Removed hero fig, appendix, compressed conclusion, fixed overfull hbox |
 
-**+4.5 points across 3 rounds** (2 content + 1 format) is typical for a well-structured but rough first draft. Final: 8 pages main body, 0 overfull hbox, ICLR-compliant.
+**+4.5 points across 3 rounds** (2 content + 1 format) is typical for a well-structured but rough first draft. Final state at submission: clean overfull-hbox count and venue-format-compliant length.
+
+## Review Tracing
+
+After each `mcp__codex__codex` or `mcp__codex__codex-reply` reviewer call, save the trace following `shared-references/review-tracing.md` (Policy C — forensic; never silently skip). Use `save_trace.sh` (resolved per the chain in `shared-references/integration-contract.md` §2) or write files directly to `.aris/traces/<skill>/<date>_run<NN>/`. Respect the `--- trace:` parameter (default: `full`).

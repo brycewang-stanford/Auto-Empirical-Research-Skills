@@ -120,6 +120,8 @@ For each error:
 3. Apply the fix
 4. Recompile
 
+**Stuck after 2 attempts?** If Codex plugin is installed, invoke `/codex:rescue` — Codex can independently read the LaTeX source and `compile.log` to spot issues Claude missed (e.g., conflicting packages, encoding problems, subtle macro errors). If not installed, continue with Claude's own diagnosis.
+
 ### Step 5: Post-Compilation Checks
 
 After successful compilation, verify the output:
@@ -133,6 +135,16 @@ pdfinfo main.pdf | grep Pages
 # macOS: open for visual inspection
 # open main.pdf
 ```
+
+**Visual review (automated):**
+If the compiled PDF exists, read it directly to check visual presentation:
+- Figure quality: readable labels, legible text, distinguishable colors
+- Layout: no orphaned section headers, no awkward page breaks
+- Figures appear near their first text reference (not pages away)
+- Tables: aligned columns, consistent decimal precision
+- No overfull content visibly extending past margins
+
+This is a quick visual scan, not a full review — the improvement loop does deeper visual review.
 
 **Automated checks:**
 

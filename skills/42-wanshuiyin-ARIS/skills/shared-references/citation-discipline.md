@@ -10,6 +10,10 @@ This is an intentionally longer reference. It is not meant to replace the main w
 - you need to verify that a specific factual claim really comes from the cited paper,
 - or you need to clean and standardize a bibliography in a more disciplined way.
 
+> **Quick map**: pre-search filter → `Pre-Search Verification Protocol` (this
+> file); submission-time bibliography audit → [`/citation-audit`](../citation-audit/SKILL.md);
+> numerical-claim audit → [`/paper-claim-audit`](../paper-claim-audit/SKILL.md).
+
 ## Contents
 
 - [Why Citation Verification Matters](#why-citation-verification-matters)
@@ -97,6 +101,133 @@ Google Scholar is not the default verification backbone here. Do not treat “I 
 4. VALIDATE -> confirm the claim you cite is really supported by the paper
 5. ADD      -> add the entry to the bibliography with clean keys and formatting
 ```
+
+### Pre-Search Verification Protocol
+
+This is the **fast filter** that runs between Step 1 (SEARCH) and Step 2 (full
+VERIFY). It catches LLM-hallucinated references at search time — before
+fabricated arXiv IDs / DOIs / titles propagate into idea-creator, novelty-check,
+landscape surveys, or downstream writing.
+
+The protocol is implemented by `verify_papers.py` (canonical name; helper
+path resolved per `integration-contract.md` §2, Policy D1). The script is
+called by `/research-lit` (Step 1.5, mandatory), and is referenced by
+`/idea-creator` and `/novelty-check` as a required filter on cited papers.
+
+**Three-layer fallback:**
+
+1. **arXiv API batch verify** — `arxiv.org/api/query?id_list=...` confirms up
+   to 40 arXiv IDs per request. Cheapest, most authoritative; always run first
+   when arXiv IDs are present.
+2. **CrossRef DOI lookup** — `api.crossref.org/works/{doi}` confirms the DOI
+   resolves. Run when arXiv ID is absent or arXiv check returned `unverified`.
+3. **Semantic Scholar fuzzy title search** — `api.semanticscholar.org/graph/v1/paper/search`
+   with normalized fuzzy match (default threshold 0.6 word overlap, max(words1, words2)).
+   Run only when no arXiv ID and (no DOI **or** DOI failed verification).
+
+**Per-paper status (one of four):**
+
+- `verified` — at least one layer confirmed existence
+- `unverified` — all applicable layers ran cleanly and found no match
+- `verify_pending` — any layer hit a transient failure (timeout, 5xx, rate
+  limit) and no earlier layer verified; **do NOT count against hallucination
+  rate**
+- `error` — the input entry itself was malformed (no arXiv, no DOI, no title)
+
+**Top-level verdict** (aligns loosely with `assurance-contract.md`):
+
+- `PASS` — hallucination rate ≤ threshold (default 0.20) and no pending
+- `WARN` — hallucination rate > threshold or any pending
+- `BLOCKED` — input/output/cache prerequisites missing
+- `ERROR` — tool itself crashed
+
+**Retention rule (over silent removal).** Unverified papers must remain in
+downstream output tagged `[UNVERIFIED]` so the user can audit what was
+filtered. Silent removal hides search-quality problems. Verified papers are
+tagged `✅` with the verification method (`arxiv` / `crossref` / `s2` /
+`s2_fallback_from_doi`).
+
+**High-hallucination warning.** When more than 20 % of terminal results
+(verified + unverified, excluding pending) come back `unverified`, surface
+`high_hallucination_rate` to the user. This is a signal that the search query
+or upstream source is producing fabricated entries — re-run with narrower
+terms before continuing.
+
+**Caching.** Default cache scope is per-project at
+`<project>/.aris/cache/verify_papers.json` with 30-day TTL. Cache keys use
+canonical identifier priority: `arxiv:{id_without_version}` →
+`doi:{lowercase}` → `title:{sha1_of_normalized_title}[:16]`. The cache value
+preserves all known identifiers so the same paper found through different
+search paths reconciles correctly.
+
+**CrossRef User-Agent.** Set `ARIS_VERIFY_EMAIL` to your institutional email
+to reduce CrossRef rate-limit risk. Default is a placeholder
+(`aris-research@anonymous.local`) — fine for low-volume use, but CrossRef
+prefers a real contact for higher polite-pool throughput.
+
+**When NOT to use this protocol.** This is search-time filtering, not
+submission-time auditing. It does not replace `/citation-audit` (which checks
+already-written `.bib` entries against DBLP/CrossRef metadata + cite-context)
+or `/paper-claim-audit` (which verifies numerical claims against raw result
+files). Run pre-search verification on candidate lists; run the audit skills
+before submission.
+
+**Invocation contract** (callers — `/research-lit`, `/idea-creator`,
+`/novelty-check` — must follow). Resolve `$VERIFY_PAPERS` via the
+canonical chain in `integration-contract.md` §2, then invoke under
+the Policy D1 fallback. The full copy-safe snippet:
+
+```bash
+# 1. Resolve $VERIFY_PAPERS via the canonical strict-safe chain (§2).
+cd "$(git rev-parse --show-toplevel 2>/dev/null || pwd)" || exit 1
+if [ -z "${ARIS_REPO:-}" ] && [ -f .aris/installed-skills.txt ]; then
+    ARIS_REPO=$(awk -F'\t' '$1=="repo_root"{print $2; exit}' .aris/installed-skills.txt 2>/dev/null) || true
+fi
+if [ -z "${ARIS_REPO:-}" ] && [ -f "$HOME/.aris/repo" ]; then
+    ARIS_REPO=$(cat "$HOME/.aris/repo" 2>/dev/null) || true
+fi
+VERIFY_PAPERS=".aris/tools/verify_papers.py"
+[ -f "$VERIFY_PAPERS" ] || VERIFY_PAPERS="tools/verify_papers.py"
+[ -f "$VERIFY_PAPERS" ] || { [ -n "${ARIS_REPO:-}" ] && VERIFY_PAPERS="$ARIS_REPO/tools/verify_papers.py"; }
+[ -f "$VERIFY_PAPERS" ] || VERIFY_PAPERS=""
+
+# 2. Invoke (Policy D1 fallback wraps invocation failure too).
+verify_ok=false
+if [ -n "$VERIFY_PAPERS" ]; then
+  if python3 "$VERIFY_PAPERS" --input candidate_papers.json --output verified_papers.json; then
+    verify_ok=true
+  fi
+fi
+if [ "$verify_ok" = "false" ]; then
+  command -v python3 >/dev/null 2>&1 || { echo "ERROR: python3 unavailable; BLOCKED." >&2; exit 1; }
+  echo "WARN: verify_papers.py unresolved or invocation failed; emitting [UNVERIFIED] fallback." >&2
+  python3 - <<'PY'
+import json
+cands = json.load(open('candidate_papers.json'))
+out = {
+  'verdict': 'WARN',
+  'reason_code': 'verify_papers_unavailable',
+  'summary': 'verify_papers.py helper unresolved or invocation failed; all candidates tagged [UNVERIFIED] for audit visibility.',
+  'papers': [dict(p, status='unverified', method='none') for p in cands],
+}
+with open('verified_papers.json', 'w') as f:
+  json.dump(out, f, indent=2)
+PY
+fi
+```
+
+`candidate_papers.json` schema:
+
+```json
+[
+  {"id": "p1", "arxiv_id": "2307.03172", "doi": null, "title": "Lost in the Middle"},
+  {"id": "p2", "arxiv_id": null, "doi": "10.1145/...", "title": null},
+  {"id": "p3", "arxiv_id": null, "doi": null, "title": "Some Paper Title"}
+]
+```
+
+`verified_papers.json` schema (top-level `verdict` + per-paper `status` —
+see helper docstring for the full envelope).
 
 ### Step 1: Search
 
@@ -425,6 +556,27 @@ Before treating a citation as complete, verify:
 - [ ] the citation key matches the project style,
 - [ ] the specific claim you cite is actually supported by the paper,
 - [ ] any unresolved uncertainty is marked with `[VERIFY]` or an explicit placeholder.
+
+## Output Discipline: Verification Lives in the Trace, Not in Prose
+
+Two rules on how verification shows up in what the reader sees (adapted from
+Anthropic's Claude Science `literature-review` skill, Apache-2.0):
+
+- **Never write a "citations verified" line in the output.** Not as an opener,
+  not as a footer, not as a subtitle — "All DOIs verified", "no retraction
+  flags", "bibliography checked" are process narration. Verification is
+  something that happens in your tool trace (the `verify_papers` run, the DBLP
+  lookups, the audit JSON); the reader infers it from citations that resolve
+  and claims that hold up. A reply or section whose content is "I verified
+  things" is not content. (ARIS-specific: the machine-readable verification
+  record belongs in the audit artifact — `CITATION_AUDIT.json`, traces — never
+  as reassurance prose in the paper or report body.)
+- **A style/consistency lint runs ONCE, as a lint — not as a loop-until-clean
+  gate.** Run it on the full draft, fix what it lists in a single editing
+  pass, and move on; do not re-run until it returns clean. A lint that becomes
+  a convergence loop burns rounds polishing cosmetics while real
+  (cross-model-review) gates wait. Quality/correctness convergence belongs to
+  the reviewer loops, not to lints.
 
 ## Bottom Line
 

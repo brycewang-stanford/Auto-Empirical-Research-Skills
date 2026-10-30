@@ -1,5 +1,7 @@
 # skills-codex-claude-review 说明
 
+> **已冻结的旧 partial overlay。** 保留目录和已有安装链接，不再同步完整包的新功能，也不再从基座重新生成。新安装和迁移请使用完整 `skills-codex` 包及 reviewer 选择；[安全迁移说明](../skills-codex/README_CN.md#迁移已冻结的-partial-overlay)。下文保留旧安装与协议资料；其中通道名称或旧 assurance 声明不能替代实际模型身份、完成状态和验收证据。
+
 这是一个**薄覆盖层**，适用于想采用以下组合的用户：
 
 - **Codex** 作为主执行者
@@ -7,6 +9,10 @@
 - 用本地 `claude-review` MCP bridge 替代“第二个 Codex reviewer”
 
 它不是新造一套完整技能包，而是叠加在上游已有的 `skills/skills-codex/` 之上。
+
+由于执行者是 Codex、审稿人是 Claude，本 overlay 的 trace/audit 记录
+`review_independence: cross-family` 与 `acceptance_status: accepted`；最终仍由
+审计汇总器确认所有必需阶段是否都达到 accepted。
 
 ## 这个包包含什么
 
@@ -27,17 +33,16 @@
 
 ## 安装方式
 
-1. 先安装上游原生 Codex 技能包：
+1. 先安装上游原生 Codex 基座：
 
 ```bash
-mkdir -p ~/.codex/skills
-cp -a skills/skills-codex/* ~/.codex/skills/
+bash ~/aris_repo/tools/install_aris_codex.sh ~/your-project
 ```
 
-2. 再安装这个 Claude-review 覆盖层：
+2. 再用 Claude overlay 重跑一次：
 
 ```bash
-cp -a skills/skills-codex-claude-review/* ~/.codex/skills/
+bash ~/aris_repo/tools/install_aris_codex.sh ~/your-project --reconcile --with-claude-review-overlay
 ```
 
 3. 注册本地 reviewer bridge：

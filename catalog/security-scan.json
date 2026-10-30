@@ -316,10 +316,10 @@
       "findings_untriaged": 0
     },
     "42-wanshuiyin-ARIS": {
-      "files_scanned": 153,
-      "files_seen": 153,
-      "findings_total": 1,
-      "findings_triaged_benign": 1,
+      "files_scanned": 364,
+      "files_seen": 364,
+      "findings_total": 0,
+      "findings_triaged_benign": 0,
       "findings_untriaged": 0
     },
     "43-wentorai-research-plugins": {
@@ -550,7 +550,6 @@
   "note": "Pattern scan only \u2014 the same class of evidence as the 2026-07-15 addendum in SECURITY-SCAN-REPORT.md, and strictly weaker than the baseline's multi-agent content read. A clean result means no known-bad pattern matched, not 'reviewed and safe'. Every entry under 'triaged' was inspected in context; the reason records what was found there.",
   "schema_version": "1.0",
   "triaged": {
-    "credential-path|skills/42-wanshuiyin-ARIS/README-original.md|~/.ssh/id_ed25519": "ssh-keygen walkthrough for renting a Vast.ai instance; the command shown reads the .pub half to paste into their console. No private key is read or transmitted.",
     "destructive-rm|skills/17-DAAF-Contribution-Community-daaf/dot-claude/settings.json|rm -rf *": "Entry in the settings 'deny' list \u2014 a permission rule that blocks the command.",
     "destructive-rm|skills/33-Galaxy-Dawn-claude-scholar/skills/hook-development/references/advanced.md|rm -rf /": "Test fixture for a bash-validation hook: the string is the input fed to the validator to assert it BLOCKS the command.",
     "long-base64-blob|skills/67-econfin-workflow-toolkit/marp-slides-creator/themes/beam.css|PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMjUwbW0iIGhlaWdodD0iNS4zNTQ2bW0iIHZlcnNpb249IjEuM...": "CSS background: an inline SVG data-URI (decorative graphic). Decodes to 399 bytes of SVG.",

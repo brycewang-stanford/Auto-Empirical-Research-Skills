@@ -128,6 +128,10 @@
       "skills/42-wanshuiyin-ARIS/skills/novelty-check/SKILL.md",
       "skills/67-econfin-workflow-toolkit/novelty-check/SKILL.md"
     ],
+    "openalex": [
+      "skills/42-wanshuiyin-ARIS/skills/openalex/SKILL.md",
+      "skills/59-shiquda-openalex-skill/openalex/SKILL.md"
+    ],
     "paper-writing": [
       "skills/42-wanshuiyin-ARIS/skills/paper-writing/SKILL.md",
       "skills/60-regisely-superpapers/skills/paper-writing/SKILL.md"
@@ -4205,9 +4209,19 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 122,
+      "line_count": 123,
       "name": "ablation-planner",
       "path": "skills/42-wanshuiyin-ARIS/skills/ablation-planner/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 196,
+      "name": "alphaxiv",
+      "path": "skills/42-wanshuiyin-ARIS/skills/alphaxiv/SKILL.md"
     },
     {
       "collection": "42-wanshuiyin-ARIS",
@@ -4225,7 +4239,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 203,
+      "line_count": 248,
       "name": "arxiv",
       "path": "skills/42-wanshuiyin-ARIS/skills/arxiv/SKILL.md"
     },
@@ -4235,7 +4249,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 322,
+      "line_count": 710,
       "name": "auto-paper-improvement-loop",
       "path": "skills/42-wanshuiyin-ARIS/skills/auto-paper-improvement-loop/SKILL.md"
     },
@@ -4245,7 +4259,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 256,
+      "line_count": 1211,
       "name": "auto-review-loop",
       "path": "skills/42-wanshuiyin-ARIS/skills/auto-review-loop/SKILL.md"
     },
@@ -4255,7 +4269,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 242,
+      "line_count": 259,
       "name": "auto-review-loop-llm",
       "path": "skills/42-wanshuiyin-ARIS/skills/auto-review-loop-llm/SKILL.md"
     },
@@ -4265,7 +4279,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 285,
+      "line_count": 302,
       "name": "auto-review-loop-minimax",
       "path": "skills/42-wanshuiyin-ARIS/skills/auto-review-loop-minimax/SKILL.md"
     },
@@ -4275,8 +4289,38 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
+      "line_count": 515,
+      "name": "citation-audit",
+      "path": "skills/42-wanshuiyin-ARIS/skills/citation-audit/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 531,
+      "name": "citation-crosscheck",
+      "path": "skills/42-wanshuiyin-ARIS/skills/citation-crosscheck/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 240,
+      "name": "claims-drafting",
+      "path": "skills/42-wanshuiyin-ARIS/skills/claims-drafting/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
       "line_count": 297,
-      "name": "comm-lit-review-claude-single",
+      "name": "comm-lit-review",
       "path": "skills/42-wanshuiyin-ARIS/skills/comm-lit-review/SKILL.md"
     },
     {
@@ -4285,7 +4329,17 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 278,
+      "line_count": 263,
+      "name": "deepxiv",
+      "path": "skills/42-wanshuiyin-ARIS/skills/deepxiv/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 296,
       "name": "dse-loop",
       "path": "skills/42-wanshuiyin-ARIS/skills/dse-loop/SKILL.md"
     },
@@ -4295,7 +4349,37 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 309,
+      "line_count": 129,
+      "name": "embodiment-description",
+      "path": "skills/42-wanshuiyin-ARIS/skills/embodiment-description/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 205,
+      "name": "exa-search",
+      "path": "skills/42-wanshuiyin-ARIS/skills/exa-search/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 322,
+      "name": "experiment-audit",
+      "path": "skills/42-wanshuiyin-ARIS/skills/experiment-audit/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 389,
       "name": "experiment-bridge",
       "path": "skills/42-wanshuiyin-ARIS/skills/experiment-bridge/SKILL.md"
     },
@@ -4305,9 +4389,19 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 242,
+      "line_count": 249,
       "name": "experiment-plan",
       "path": "skills/42-wanshuiyin-ARIS/skills/experiment-plan/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 431,
+      "name": "experiment-queue",
+      "path": "skills/42-wanshuiyin-ARIS/skills/experiment-queue/SKILL.md"
     },
     {
       "collection": "42-wanshuiyin-ARIS",
@@ -4325,7 +4419,27 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 280,
+      "line_count": 138,
+      "name": "figure-description",
+      "path": "skills/42-wanshuiyin-ARIS/skills/figure-description/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 275,
+      "name": "figure-spec",
+      "path": "skills/42-wanshuiyin-ARIS/skills/figure-spec/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 285,
       "name": "formula-derivation",
       "path": "skills/42-wanshuiyin-ARIS/skills/formula-derivation/SKILL.md"
     },
@@ -4335,7 +4449,17 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 620,
+      "line_count": 231,
+      "name": "gemini-search",
+      "path": "skills/42-wanshuiyin-ARIS/skills/gemini-search/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 713,
       "name": "grant-proposal",
       "path": "skills/42-wanshuiyin-ARIS/skills/grant-proposal/SKILL.md"
     },
@@ -4345,7 +4469,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 235,
+      "line_count": 610,
       "name": "idea-creator",
       "path": "skills/42-wanshuiyin-ARIS/skills/idea-creator/SKILL.md"
     },
@@ -4355,7 +4479,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 323,
+      "line_count": 538,
       "name": "idea-discovery",
       "path": "skills/42-wanshuiyin-ARIS/skills/idea-discovery/SKILL.md"
     },
@@ -4365,9 +4489,69 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 356,
+      "line_count": 374,
       "name": "idea-discovery-robot",
       "path": "skills/42-wanshuiyin-ARIS/skills/idea-discovery-robot/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 284,
+      "name": "integrity-forensics",
+      "path": "skills/42-wanshuiyin-ARIS/skills/integrity-forensics/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 256,
+      "name": "interview-cheatsheet",
+      "path": "skills/42-wanshuiyin-ARIS/skills/interview-cheatsheet/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 201,
+      "name": "invention-structuring",
+      "path": "skills/42-wanshuiyin-ARIS/skills/invention-structuring/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 192,
+      "name": "jurisdiction-format",
+      "path": "skills/42-wanshuiyin-ARIS/skills/jurisdiction-format/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 452,
+      "name": "kill-argument",
+      "path": "skills/42-wanshuiyin-ARIS/skills/kill-argument/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 376,
+      "name": "lean-formalize",
+      "path": "skills/42-wanshuiyin-ARIS/skills/lean-formalize/SKILL.md"
     },
     {
       "collection": "42-wanshuiyin-ARIS",
@@ -4385,7 +4569,27 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 123,
+      "line_count": 152,
+      "name": "meta-apply",
+      "path": "skills/42-wanshuiyin-ARIS/skills/meta-apply/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 450,
+      "name": "meta-optimize",
+      "path": "skills/42-wanshuiyin-ARIS/skills/meta-optimize/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 140,
       "name": "monitor-experiment",
       "path": "skills/42-wanshuiyin-ARIS/skills/monitor-experiment/SKILL.md"
     },
@@ -4395,7 +4599,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 86,
+      "line_count": 155,
       "name": "novelty-check",
       "path": "skills/42-wanshuiyin-ARIS/skills/novelty-check/SKILL.md"
     },
@@ -4405,7 +4609,37 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 254,
+      "line_count": 237,
+      "name": "openalex",
+      "path": "skills/42-wanshuiyin-ARIS/skills/openalex/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 220,
+      "name": "overleaf-sync",
+      "path": "skills/42-wanshuiyin-ARIS/skills/overleaf-sync/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 361,
+      "name": "paper-claim-audit",
+      "path": "skills/42-wanshuiyin-ARIS/skills/paper-claim-audit/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 266,
       "name": "paper-compile",
       "path": "skills/42-wanshuiyin-ARIS/skills/paper-compile/SKILL.md"
     },
@@ -4415,7 +4649,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 280,
+      "line_count": 325,
       "name": "paper-figure",
       "path": "skills/42-wanshuiyin-ARIS/skills/paper-figure/SKILL.md"
     },
@@ -4425,7 +4659,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 692,
+      "line_count": 736,
       "name": "paper-illustration",
       "path": "skills/42-wanshuiyin-ARIS/skills/paper-illustration/SKILL.md"
     },
@@ -4435,7 +4669,17 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 284,
+      "line_count": 401,
+      "name": "paper-illustration-image2",
+      "path": "skills/42-wanshuiyin-ARIS/skills/paper-illustration-image2/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 399,
       "name": "paper-plan",
       "path": "skills/42-wanshuiyin-ARIS/skills/paper-plan/SKILL.md"
     },
@@ -4445,7 +4689,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 1097,
+      "line_count": 19,
       "name": "paper-poster",
       "path": "skills/42-wanshuiyin-ARIS/skills/paper-poster/SKILL.md"
     },
@@ -4455,7 +4699,17 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 570,
+      "line_count": 334,
+      "name": "paper-poster-html",
+      "path": "skills/42-wanshuiyin-ARIS/skills/paper-poster-html/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 648,
       "name": "paper-slides",
       "path": "skills/42-wanshuiyin-ARIS/skills/paper-slides/SKILL.md"
     },
@@ -4465,7 +4719,17 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 377,
+      "line_count": 392,
+      "name": "paper-talk",
+      "path": "skills/42-wanshuiyin-ARIS/skills/paper-talk/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 695,
       "name": "paper-write",
       "path": "skills/42-wanshuiyin-ARIS/skills/paper-write/SKILL.md"
     },
@@ -4475,9 +4739,39 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 275,
+      "line_count": 942,
       "name": "paper-writing",
       "path": "skills/42-wanshuiyin-ARIS/skills/paper-writing/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 166,
+      "name": "patent-novelty-check",
+      "path": "skills/42-wanshuiyin-ARIS/skills/patent-novelty-check/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 355,
+      "name": "patent-pipeline",
+      "path": "skills/42-wanshuiyin-ARIS/skills/patent-pipeline/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 218,
+      "name": "patent-review",
+      "path": "skills/42-wanshuiyin-ARIS/skills/patent-review/SKILL.md"
     },
     {
       "collection": "42-wanshuiyin-ARIS",
@@ -4495,7 +4789,37 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 223,
+      "line_count": 146,
+      "name": "prior-art-search",
+      "path": "skills/42-wanshuiyin-ARIS/skills/prior-art-search/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 900,
+      "name": "proof-checker",
+      "path": "skills/42-wanshuiyin-ARIS/skills/proof-checker/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 255,
+      "name": "proof-orchestrator",
+      "path": "skills/42-wanshuiyin-ARIS/skills/proof-orchestrator/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 236,
       "name": "proof-writer",
       "path": "skills/42-wanshuiyin-ARIS/skills/proof-writer/SKILL.md"
     },
@@ -4505,7 +4829,17 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 246,
+      "line_count": 324,
+      "name": "qzcli",
+      "path": "skills/42-wanshuiyin-ARIS/skills/qzcli/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 389,
       "name": "rebuttal",
       "path": "skills/42-wanshuiyin-ARIS/skills/rebuttal/SKILL.md"
     },
@@ -4515,7 +4849,27 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 220,
+      "line_count": 327,
+      "name": "render-html",
+      "path": "skills/42-wanshuiyin-ARIS/skills/render-html/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 594,
+      "name": "research-implement-feature",
+      "path": "skills/42-wanshuiyin-ARIS/skills/research-implement-feature/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 784,
       "name": "research-lit",
       "path": "skills/42-wanshuiyin-ARIS/skills/research-lit/SKILL.md"
     },
@@ -4525,7 +4879,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 176,
+      "line_count": 413,
       "name": "research-pipeline",
       "path": "skills/42-wanshuiyin-ARIS/skills/research-pipeline/SKILL.md"
     },
@@ -4535,7 +4889,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 735,
+      "line_count": 785,
       "name": "research-refine",
       "path": "skills/42-wanshuiyin-ARIS/skills/research-refine/SKILL.md"
     },
@@ -4545,7 +4899,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 179,
+      "line_count": 197,
       "name": "research-refine-pipeline",
       "path": "skills/42-wanshuiyin-ARIS/skills/research-refine-pipeline/SKILL.md"
     },
@@ -4555,7 +4909,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 106,
+      "line_count": 235,
       "name": "research-review",
       "path": "skills/42-wanshuiyin-ARIS/skills/research-review/SKILL.md"
     },
@@ -4565,7 +4919,27 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 122,
+      "line_count": 461,
+      "name": "research-wiki",
+      "path": "skills/42-wanshuiyin-ARIS/skills/research-wiki/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 458,
+      "name": "resubmit-pipeline",
+      "path": "skills/42-wanshuiyin-ARIS/skills/resubmit-pipeline/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 324,
       "name": "result-to-claim",
       "path": "skills/42-wanshuiyin-ARIS/skills/result-to-claim/SKILL.md"
     },
@@ -4575,7 +4949,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 263,
+      "line_count": 313,
       "name": "run-experiment",
       "path": "skills/42-wanshuiyin-ARIS/skills/run-experiment/SKILL.md"
     },
@@ -4585,9 +4959,39 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 179,
+      "line_count": 236,
       "name": "semantic-scholar",
       "path": "skills/42-wanshuiyin-ARIS/skills/semantic-scholar/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 335,
+      "name": "serverless-modal",
+      "path": "skills/42-wanshuiyin-ARIS/skills/serverless-modal/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 580,
+      "name": "slides-polish",
+      "path": "skills/42-wanshuiyin-ARIS/skills/slides-polish/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 224,
+      "name": "specification-writing",
+      "path": "skills/42-wanshuiyin-ARIS/skills/specification-writing/SKILL.md"
     },
     {
       "collection": "42-wanshuiyin-ARIS",
@@ -4605,7 +5009,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 123,
+      "line_count": 145,
       "name": "training-check",
       "path": "skills/42-wanshuiyin-ARIS/skills/training-check/SKILL.md"
     },
@@ -4615,9 +5019,39 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 380,
+      "line_count": 394,
       "name": "vast-gpu",
       "path": "skills/42-wanshuiyin-ARIS/skills/vast-gpu/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 334,
+      "name": "web-debug-search",
+      "path": "skills/42-wanshuiyin-ARIS/skills/web-debug-search/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 257,
+      "name": "wiki-enrich",
+      "path": "skills/42-wanshuiyin-ARIS/skills/wiki-enrich/SKILL.md"
+    },
+    {
+      "collection": "42-wanshuiyin-ARIS",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 184,
+      "name": "writing-systems-papers",
+      "path": "skills/42-wanshuiyin-ARIS/skills/writing-systems-papers/SKILL.md"
     },
     {
       "collection": "43-wentorai-research-plugins",
@@ -11312,12 +11746,12 @@
   ],
   "schema_version": "1.0",
   "summary": {
-    "duplicate_skill_names": 47,
-    "exact_case_skill_files": 1108,
+    "duplicate_skill_names": 48,
+    "exact_case_skill_files": 1151,
     "missing_description": 0,
     "missing_frontmatter": 0,
     "non_exact_case_skill_files": 0,
-    "over_500_lines": 83,
-    "skill_like_files": 1108
+    "over_500_lines": 94,
+    "skill_like_files": 1151
   }
 }

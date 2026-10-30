@@ -7,6 +7,8 @@ description: "Generate publication-quality figures and tables from experiment re
 
 # Paper Figure: Publication-Quality Plots from Experiment Data
 
+> **Gemini overlay assurance:** `review_independence: cross-family` and `acceptance_status: accepted`.
+
 Generate all figures and tables for a paper based on: **$ARGUMENTS**
 
 ## Scope: What This Skill Can and Cannot Do
@@ -248,6 +250,13 @@ figures/
 ├── latex_includes.tex           # LaTeX snippets for all figures
 └── TABLE_*.tex                  # standalone table LaTeX files
 ```
+
+## Output Protocols
+
+> Follow these shared protocols for all output files:
+> - **[Output Versioning Protocol](../../shared-references/output-versioning.md)** — write timestamped file first, then copy to fixed name
+> - **[Output Manifest Protocol](../../shared-references/output-manifest.md)** — log every output to MANIFEST.md
+> - **[Output Language Protocol](../../shared-references/output-language.md)** — respect the project's language setting
 
 ## Key Rules
 

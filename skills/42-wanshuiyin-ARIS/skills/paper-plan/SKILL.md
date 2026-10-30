@@ -1,29 +1,40 @@
 ---
 name: paper-plan
 description: "Generate a structured paper outline from review conclusions and experiment results. Use when user says \"写大纲\", \"paper outline\", \"plan the paper\", \"论文规划\", or wants to create a paper plan before writing."
-argument-hint: "[topic-or-narrative-doc]"
-allowed-tools: Bash(*), Read, Write, Edit, Grep, Glob, Agent, WebSearch, WebFetch, mcp__codex__codex, mcp__codex__codex-reply
+argument-hint: "[topic-or-narrative-doc] [— style-ref: <source>]"
+allowed-tools: Bash(*), Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, Skill, mcp__codex__codex, mcp__codex__codex-reply, mcp__antigravity__antigravity, mcp__antigravity__antigravity-reply, mcp__grok__grok, mcp__grok__grok-reply, mcp__claude-review__review, mcp__claude-review__review_reply, mcp__claude-review__review_start, mcp__claude-review__review_reply_start, mcp__claude-review__review_status
 ---
 
 # Paper Plan: From Review Conclusions to Paper Outline
+
+> **Before each reviewer slot**, follow [Selectable Reviewers](../shared-references/reviewer-backends.md):
+> resolve invocation → `.aris/reviewer.json` → Claude Code default (Codex MCP)
+> with `reviewer_route.py` through the canonical helper resolver, preserving this
+> slot's tier, fresh contexts, source/image inputs and deterministic gates.
+> Codex examples/pins below apply only to `backend=codex`; other routes use their
+> own first-call/reply contract. Save the route and actual returned identity;
+> unavailable selections are `REVIEW_UNAVAILABLE`. Classify acceptance from actual
+> families/completion/scope. Forward invocation reviewer/model/effort overrides
+> to reviewer-bearing children. Generation workers are unchanged.
+
 
 Generate a structured, section-by-section paper outline from: **$ARGUMENTS**
 
 ## Constants
 
-- **REVIEWER_MODEL = `gpt-5.4`** — Model used via Codex MCP for outline review. Must be an OpenAI model.
+- **REVIEWER_MODEL = `gpt-6-astra`** — Model used via Codex MCP for outline review. For `backend=codex`, use an OpenAI model.
 - **TARGET_VENUE = `ICLR`** — Default venue. User can override (e.g., `/paper-plan "topic" — venue: NeurIPS`). Supported: `ICLR`, `NeurIPS`, `ICML`, `CVPR`, `ACL`, `AAAI`, `ACM`, `IEEE_JOURNAL` (IEEE Transactions / Letters), `IEEE_CONF` (IEEE conferences).
-- **MAX_PAGES** — Page limit. For ML conferences: main body to Conclusion end (excluding references, appendix). ICLR=9, NeurIPS=9, ICML=8. **For IEEE venues: references ARE included in page count.** IEEE journal Transactions ≈ 12-14 pages total, Letters ≈ 4-5 pages total; IEEE conference ≈ 5-8 pages total (including references).
+- **MAX_PAGES** — Page limit. For ML conferences: main body to Conclusion end (excluding references, appendix). ICLR=9, NeurIPS=9, ICML=8, AAAI=7 technical-content pages plus references unless the current AAAI CFP says otherwise. **For IEEE venues: references ARE included in page count.** IEEE journal Transactions ≈ 12-14 pages total, Letters ≈ 4-5 pages total; IEEE conference ≈ 5-8 pages total (including references).
 
 ## Inputs
 
 The skill expects one or more of these in the project directory:
 
 1. **NARRATIVE_REPORT.md** or **STORY.md** — research narrative with claims and evidence
-2. **GPT54_AUTO_REVIEW.md** — auto-review loop conclusions
+2. **review-stage/AUTO_REVIEW.md** — auto-review loop conclusions *(fall back to `./AUTO_REVIEW.md` if not found)*
 3. **Experiment results** — JSON files in `figures/`, screen logs, tables
-4. **IDEA_REPORT.md** — from idea-discovery pipeline (if applicable)
-5. **Compact files** (if available): `IDEA_CANDIDATES.md`, `findings.md`, `EXPERIMENT_LOG.md` — preferred over full files when present, saves context window
+4. **idea-stage/IDEA_REPORT.md** — from idea-discovery pipeline (if applicable) *(fall back to `./IDEA_REPORT.md` if not found)*
+5. **Compact files** (if available): `idea-stage/IDEA_CANDIDATES.md` *(fall back to `./IDEA_CANDIDATES.md` if not found)*, `findings.md`, `EXPERIMENT_LOG.md` — preferred over full files when present, saves context window
 
 If none exist, ask the user to describe the paper's contribution in 3-5 sentences.
 
@@ -35,11 +46,106 @@ Keep the existing `insleep` workflow and outputs, but use the shared references 
 - Read `../shared-references/venue-checklists.md` before freezing the outline for a specific venue.
 - Only load these references when needed; do not paste their full contents into the working draft.
 
+## Optional: Style reference (`— style-ref: <source>`, opt-in)
+
+Lets the user steer the **structural** layout of the outline (section ordering, subsection density, theorem-environment density, figure budget, citation style) toward a reference paper. **Default OFF — when the user does not pass `— style-ref`, do nothing differently from before.**
+
+Only when `— style-ref: <source>` appears in `$ARGUMENTS`, run the helper FIRST, before drafting the outline:
+
+```bash
+# Resolve $STYLE_HELPER via the canonical strict-safe chain (see
+# shared-references/integration-contract.md §2). Policy A — gate:
+# unresolved helper means --style-ref cannot be satisfied, so abort.
+cd "$(git rev-parse --show-toplevel 2>/dev/null || pwd)" || exit 1
+if [ -z "${ARIS_REPO:-}" ] && [ -f .aris/installed-skills.txt ]; then
+    ARIS_REPO=$(awk -F'\t' '$1=="repo_root"{print $2; exit}' .aris/installed-skills.txt 2>/dev/null) || true
+fi
+if [ -z "${ARIS_REPO:-}" ] && [ -f "$HOME/.aris/repo" ]; then
+    ARIS_REPO=$(cat "$HOME/.aris/repo" 2>/dev/null) || true
+fi
+STYLE_HELPER=".aris/tools/extract_paper_style.py"
+[ -f "$STYLE_HELPER" ] || STYLE_HELPER="tools/extract_paper_style.py"
+[ -f "$STYLE_HELPER" ] || { [ -n "${ARIS_REPO:-}" ] && STYLE_HELPER="$ARIS_REPO/tools/extract_paper_style.py"; }
+[ -f "$STYLE_HELPER" ] || {
+  echo "ERROR: extract_paper_style.py not resolved at .aris/tools/, tools/, \$ARIS_REPO/tools/, or via ~/.aris/repo." >&2
+  echo "       Fix: rerun bash tools/install_aris.sh or smart_update.sh (refreshes ~/.aris/repo), export ARIS_REPO, or copy the helper to tools/." >&2
+  echo "       --style-ref cannot be satisfied; aborting." >&2
+  exit 1
+}
+STYLE_STATUS=0
+CACHE=$(python3 "$STYLE_HELPER" --source "<source>") || STYLE_STATUS=$?
+case "$STYLE_STATUS" in
+  0) ;;                                       # use $CACHE/style_profile.md as structural guidance
+  2) echo "warning: style-ref skipped (missing optional dep)" >&2 ;;
+  3) echo "error: --style-ref source failed; aborting outline" >&2 ; exit 1 ;;
+  *) echo "error: helper failed unexpectedly; aborting outline" >&2 ; exit 1 ;;
+esac
+```
+
+Sources accepted: local TeX dir / file, local PDF, arXiv id (`2501.12345` or `arxiv:2501.12345`), http(s) URL. Overleaf URLs and project IDs are rejected — clone via `/overleaf-sync setup <id>` first and pass the local clone path.
+
+**Strict rules** (full contract in `tools/extract_paper_style.py` docstring):
+
+- Use `style_profile.md` as **structural** guidance only when proposing the outline's section list, subsection counts, theorem density, figure budget.
+- **Never copy prose, claims, examples, section names verbatim, or terminology** from anything reachable through the cache. The user's narrative is the only source of substance.
+- **Never pass `— style-ref` (or the cache contents) to reviewer / auditor sub-agents.** Cross-model review independence (`../shared-references/reviewer-independence.md`) requires reviewers see only the artifact and the user's prompt.
+
+### Gap Report (`GAP_REPORT.md`, auto-emitted when style-ref is on)
+
+When `— style-ref:` succeeded AND any of `figures/`, `results/`, `data/`, `tables/`, `sec/`, `NARRATIVE_REPORT.md`, `CLAIMS_FROM_RESULTS.md` exists in the project, **also** emit a gap report before drafting the outline. The gap report maps the exemplar's section topology + density requirements (from `style_profile.md`) against the user's actual assets, surfacing structural slots where the user has **no evidence to fill**. It is the contract by which `/paper-write` decides when to emit `<!-- DATA_NEEDED -->` markers instead of fabricating content.
+
+Procedure:
+
+1. Read `$CACHE/style_profile.md` for exemplar's section list + per-section feature counts (figures, theorems, tables, citations, sentences per section).
+2. Inventory user assets: `figures/*` filenames, `results/*` evidence files, `sec/*.tex` existing prose, `NARRATIVE_REPORT.md`, `CLAIMS_FROM_RESULTS.md` (if `/result-to-claim` ran), `references.bib` for citation density.
+3. For each section slot the exemplar implies (ablation table, scaling experiment, failure-case analysis, proof block, …), classify as `covered` / `partial` / `missing`.
+4. Emit `<output-dir>/GAP_REPORT.md`:
+
+```markdown
+# GAP_REPORT — exemplar vs user assets
+
+- **Exemplar source:** <source identifier (file path, arXiv ID, URL)>
+- **Generated:** <UTC ISO-8601>
+- **Style profile:** <relative path to style_profile.md>
+
+## Section topology gaps
+
+| Exemplar slot | Exemplar feature | User evidence | Status | Slot ID |
+|---|---|---|---|---|
+| §5 Experiments | ablation table (3 axes × 4 levels) | `results/` has no ablation file | missing | `GAP_S5_ABLATION` |
+| §5.3 Scaling | log-N scaling curve | `figures/scaling.pdf` not found | missing | `GAP_S5_SCALING` |
+| §6 Discussion | failure-case analysis | not present in `NARRATIVE_REPORT.md` | missing | `GAP_S6_FAILURE` |
+| §2 Related | citation density ≥ 60 | `references.bib` has 35 entries | partial | `GAP_S2_CITES` |
+
+## Coverage summary
+
+- covered: N
+- partial: M
+- missing: K
+
+## Used by
+
+- `/paper-write` reads this file and emits `<!-- DATA_NEEDED: <Slot ID> — <one-line description> -->` placeholders for `missing` slots instead of fabricating content.
+- `/paper-claim-audit` can use Slot IDs to flag claims that cite sections with `missing` evidence.
+```
+
+Slot ID format: `GAP_<SECTION>_<FEATURE>`, all-caps, stable across regenerations unless user assets change.
+
+**Rules** (hard):
+
+- **Do not** infer, fill, or hallucinate evidence to "close" gaps. Missing is missing.
+- **Do not** propose specific experiment commands to fill gaps — that is `/experiment-bridge`'s job. Gap Report just surfaces deficits.
+- **Do not** include exemplar prose / claim text / author names / quantitative figures from the exemplar.
+- If `style_profile.md` extraction failed or the user has no project assets, skip Gap Report (no error; just do not emit the file).
+- The gap report is **also subject to reviewer isolation** — never passed to reviewer / auditor sub-agents (same rule as `style_profile.md`).
+
+Original idea: @zhangpelf in [#217](https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep/issues/217).
+
 ## Workflow
 
 ### Step 1: Extract Claims and Evidence
 
-**First check for `CLAIMS_FROM_RESULTS.md`** — if it exists (generated by `/result-to-claim` at the end of Workflow 2), use it as the starting point for claims. This file contains validated claims already mapped to experiment evidence. Merge with any additional claims from the narrative documents below.
+**First check for `CLAIMS_FROM_RESULTS.md`** — if its first line is `verdict: REVIEW_UNAVAILABLE`, treat the file as ABSENT for claim extraction (fall through to the narrative documents below) and then: under `— assurance: submission` (`shared-references/assurance-contract.md`; implied by `— effort: max|beast`) STOP — the claims were never adjudicated, rerun `/result-to-claim` first; under `assurance: draft` continue but tag every claim `[unadjudicated]` in the claims matrix. Otherwise, if it exists (generated by `/result-to-claim` at the end of Workflow 2), use it as the starting point for claims. This file contains validated claims already mapped to experiment evidence. Merge with any additional claims from the narrative documents below.
 
 If `CLAIMS_FROM_RESULTS.md` does not exist, extract claims from scratch:
 
@@ -207,11 +313,13 @@ For each section, list required citations:
 
 ### Step 6: Cross-Review with REVIEWER_MODEL
 
-Send the complete outline to GPT-5.4 xhigh for feedback:
+Send the complete outline to GPT-6-Astra xhigh for feedback:
+
+> Resolve this reviewer slot first; the following is the `backend=codex` example.
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
+  model: gpt-6-astra
   config: {"model_reasoning_effort": "xhigh"}
   prompt: |
     Review this paper outline for a [VENUE] submission.
@@ -272,7 +380,7 @@ Save the final outline to `PAPER_PLAN.md` in the project root:
 - **Do NOT generate author information** — leave author block as placeholder or anonymous
 - **Be honest about evidence gaps** — mark claims as "needs experiment" rather than overclaiming
 - **Page budget is hard** — if content exceeds MAX_PAGES, suggest what to move to appendix
-- **MAX_PAGES counting differs by venue** — ML conferences: main body to Conclusion end, references/appendix NOT counted. **IEEE venues: references ARE counted toward the page limit.**
+- **MAX_PAGES counting differs by venue** — ML conferences: main body to Conclusion end, references/appendix NOT counted; AAAI main track is typically 7 technical-content pages plus references. **IEEE venues: references ARE counted toward the page limit.**
 - **Venue-specific norms** — ML conferences (ICLR/NeurIPS/ICML) use `natbib` (`\citep`/`\citet`); **IEEE venues use `cite` package (`\cite{}`, numeric style)**
 - **Claims-Evidence Matrix is the backbone** — every claim must map to evidence, every experiment must support a claim
 - **Front-load the story** — the outline should make the contribution clear in the title, abstract, introduction, and hero figure before the reader reaches the full method
@@ -282,3 +390,10 @@ Save the final outline to `PAPER_PLAN.md` in the project root:
 ## Acknowledgements
 
 Outline methodology inspired by [Research-Paper-Writing-Skills](https://github.com/Master-cai/Research-Paper-Writing-Skills) (claim-evidence mapping), [claude-scholar](https://github.com/Galaxy-Dawn/claude-scholar) (citation verification), and [Imbad0202/academic-research-skills](https://github.com/Imbad0202/academic-research-skills) (claim verification protocol). The writing-framing overlay in this hybrid pack is adapted from Orchestra Research's paper-writing guidance.
+
+## Output Protocols
+
+> Follow these shared protocols for all output files:
+> - **[Output Versioning Protocol](../shared-references/output-versioning.md)** — write timestamped file first, then copy to fixed name
+> - **[Output Manifest Protocol](../shared-references/output-manifest.md)** — log every output to MANIFEST.md
+> - **[Output Language Protocol](../shared-references/output-language.md)** — respect the project's language setting

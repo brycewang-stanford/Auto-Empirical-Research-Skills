@@ -5,6 +5,17 @@ description: "Workflow 1.5: Bridge between idea discovery and auto review. Reads
 
 # Workflow 1.5: Experiment Bridge
 
+> **Before each reviewer slot**, follow [Selectable Reviewers](../shared-references/reviewer-backends.md):
+> resolve invocation → `.aris/reviewer.json` → Codex default (fresh native reviewer)
+> with `reviewer_route.py` through the canonical helper resolver, preserving this
+> slot's tier, fresh contexts, source/image inputs and deterministic gates.
+> Codex examples/pins below apply only to `backend=codex`; other routes use their
+> own first-call/reply contract. Save the route and actual returned identity;
+> unavailable selections are `REVIEW_UNAVAILABLE`. Classify acceptance from actual
+> families/completion/scope. Forward invocation reviewer/model/effort overrides
+> to reviewer-bearing children. Generation workers are unchanged.
+
+
 Implement and deploy experiments from plan: **$ARGUMENTS**
 
 ## Overview
@@ -21,10 +32,13 @@ refine-logs/FINAL_PROPOSAL.md
 ## Constants
 
 - **AUTO_DEPLOY = true** — Automatically deploy experiments after implementation. Set `false` to review code before deploying.
+- **CODE_REVIEW = true** — Secondary Codex reviewer with xhigh reasoning reviews experiment code before deployment. Catches logic bugs before wasting GPU hours. Set `false` to skip.
 - **SANITY_FIRST = true** — Run the sanity-stage experiment first (smallest, fastest) before launching the rest. Catches setup bugs early.
 - **MAX_PARALLEL_RUNS = 4** — Maximum number of experiments to deploy in parallel (limited by available GPUs).
 - **BASE_REPO = false** — GitHub repo URL to use as a base codebase. When set, clone it first and implement experiments on top of it.
-- **COMPACT = false** — When `true`, prefer `IDEA_CANDIDATES.md` over the full `IDEA_REPORT.md`, and append completed runs to `EXPERIMENT_LOG.md`.
+- **COMPACT = false** — When `true`, prefer `idea-stage/IDEA_CANDIDATES.md` over the full `idea-stage/IDEA_REPORT.md`, and append completed runs to `EXPERIMENT_LOG.md`.
+- **BACKENDS = local | ssh | vast | modal** — Preserve the Claude mainline backend lifecycle. Vast.ai and Modal routes are first-class when configured; do not silently fall back to local execution if the user requested either backend.
+- **RESCUE_ON_FAILURE = true** — If sanity or deployment fails, run a Codex-native rescue / second opinion review before abandoning the experiment plan.
 
 > Override: `/experiment-bridge "EXPERIMENT_PLAN.md" — compact: true, base repo: https://github.com/org/project`
 
@@ -35,8 +49,8 @@ This skill expects one or more of:
 1. **`refine-logs/EXPERIMENT_PLAN.md`** (best) — claim-driven experiment roadmap from `/experiment-plan`
 2. **`refine-logs/EXPERIMENT_TRACKER.md`** — run-by-run execution table
 3. **`refine-logs/FINAL_PROPOSAL.md`** — method description for implementation context
-4. **`IDEA_CANDIDATES.md`** — compact idea summary (preferred when `COMPACT = true`)
-5. **`IDEA_REPORT.md`** — fallback if refine-logs don't exist
+4. **`idea-stage/IDEA_CANDIDATES.md`** — compact idea summary (preferred when `COMPACT = true`) *(fall back to `./IDEA_CANDIDATES.md` if not found)*
+5. **`idea-stage/IDEA_REPORT.md`** — fallback if refine-logs don't exist *(fall back to `./IDEA_REPORT.md` if not found)*
 
 If none exist, ask the user what experiments to implement.
 
@@ -69,6 +83,11 @@ Present a brief summary:
 Proceeding to implementation.
 ```
 
+**Research-contract fallback**: if `idea-stage/docs/research_contract.md` does
+not exist yet, create it now from `templates/RESEARCH_CONTRACT_TEMPLATE.md`
+using the selected idea + claims from the experiment plan — downstream
+`/result-to-claim` and `/ablation-planner` read it as the claims source.
+
 ### Phase 2: Implement Experiment Code
 
 **If `BASE_REPO` is set** — clone the repo first:
@@ -99,6 +118,69 @@ For each milestone (in order), write the experiment scripts:
    - Does the code match FINAL_PROPOSAL.md's method description?
    - **CRITICAL**: does evaluation compare predictions against dataset ground truth, never another model's output?
 
+### Phase 2.5: Fresh-Agent Code Review (same-family provisional; when CODE_REVIEW = true)
+
+Skip this step if `CODE_REVIEW` is `false`.
+
+Before deploying, send the experiment code to a secondary Codex reviewer with xhigh reasoning:
+
+> Resolve this reviewer slot first; the following is the `backend=codex` example.
+
+```text
+spawn_agent:
+  model: gpt-6-astra
+  reasoning_effort: xhigh
+  message: |
+    Review the following experiment implementation for correctness.
+
+    ## Experiment Plan
+    [paste key sections from EXPERIMENT_PLAN.md]
+
+    ## Method Description
+    [paste from FINAL_PROPOSAL.md]
+
+    ## Implementation
+    [paste the experiment scripts or exact file paths plus relevant snippets]
+
+    Check for:
+    1. Does the code correctly implement the method described in the proposal?
+    2. Are all hyperparameters from the plan reflected in the code?
+    3. Are there logic bugs: wrong loss, wrong data split, missing eval, leakage, metric mismatch?
+    4. Is the evaluation metric computed against ground truth, not another model's output?
+    5. Are seeds, result paths, logging, and failure handling sufficient for reproducible experiments?
+
+    Output:
+    - BLOCKING issues that must be fixed before deployment
+    - NON-BLOCKING issues that can wait
+    - Suggested patches or checks
+
+    === SCOPE LIMITS (these bound what you PROPOSE, never what you look for) ===
+    Report anything that is actually wrong here — including a rare-looking case, if
+    this repo actually produces it. Then keep the fix in scope:
+    1. This is a RESEARCH-WORKFLOW tool, not a security paper. Verification is
+       welcome; over-defense is not. Assume a cooperating operator on their own
+       machine — a malicious local user is NOT in the threat model.
+    2. Do NOT propose SHA / hash / content-fingerprint / digest-binding schemes.
+       Reporting a real defect in hashing code that already exists is fine.
+    3. NO speculative machinery: do not add feature flags, migration frameworks,
+       compat layers, wrappers, pins, or similar mechanisms unless evidence shows
+       a current repo defect they fix or an explicit existing invariant they must
+       preserve. "Load-bearing", "compatibility", and "not scaffolding" are labels,
+       not evidence. Point to the failing path/artifact or invariant, and check the
+       proposal's factual premises, such as whether a named package version exists.
+    4. NO corner-case obsession: exotic encodings, symlink races, RTL text and
+       millisecond races are out of scope unless you can show the case arises here.
+    5. Where a rubric or checklist is genuinely needed, do not over-mechanize
+       judgement. A clear sentence a human reads beats a scored table nobody
+       maintains.
+    Exception: code that runs remote commands, starts a network service, or installs
+    an MCP server runs on the user's machine with their credentials — trust-boundary
+    findings there are in scope and the default is strict.
+    Say plainly when something is correct. Do not manufacture findings.
+```
+
+If BLOCKING issues are found, fix them and re-run this review once before Phase 3. Save the reviewer response and any fixes in `refine-logs/EXPERIMENT_CODE_REVIEW.md`. If reviewer delegation is unavailable, run the same checklist locally and mark the review `[local-only]`.
+
 ### Phase 3: Sanity Check (if SANITY_FIRST = true)
 
 Before deploying the full experiment suite, run the sanity-stage experiment:
@@ -113,20 +195,46 @@ Wait for completion. Verify:
 - GPU memory usage is within bounds
 - Output format matches expectations
 
-If sanity fails → fix the code, re-run. Do not proceed to full deployment with broken code.
+If sanity fails → READ the traceback/stderr/logs first, then fix the code and
+re-run — never re-run unchanged hoping for a different outcome. (The same
+read-the-primary-artifact discipline applies to surprising REVIEWER verdicts:
+see `shared-references/review-tracing.md` § *Debugging With Traces*.) After 1–2
+failed patches on the same failure, **discard and reimplement the failing
+script cleanly from the plan** — a peer move to another patch, not a last
+resort; delete only the attempt's own code, never the plan / tracker / data /
+results (per [`external-cadence.md`](../shared-references/external-cadence.md), "Let a broken attempt restart, not
+just patch"). Two clean reimplements failing the same way put the plan or the
+environment in question — report that explicitly. Do not proceed to full
+deployment with broken code.
+
+If the same sanity failure repeats, trigger a second opinion: summarize the plan, code diff, command, logs, backend, and failure, then ask a fresh Codex reviewer agent for a rescue diagnosis. Apply only concrete fixes grounded in the logs.
 
 ### Phase 4: Deploy Full Experiments
 
-Deploy experiments following the plan's milestone order:
+Deploy experiments following the plan's milestone order. Route by job count and dependencies:
 
 ```
 /run-experiment [experiment commands]
 ```
 
+For large batches (≥10 jobs), multi-seed sweeps, or teacher→student phase dependencies, use the queue scheduler:
+
+```
+/experiment-queue [grid spec or manifest]
+```
+
+Auto-routing rule: if any milestone in `EXPERIMENT_PLAN.md` declares ≥10 jobs or declares phase dependencies, route that milestone to `/experiment-queue`; otherwise use `/run-experiment`. `/experiment-queue` adds OOM-aware retry with backoff, stale-screen cleanup, wave-transition race prevention, phase dependency enforcement, and crash-safe state persistence in `queue_state.json`.
+
 For each milestone:
-1. Deploy experiments in parallel (up to MAX_PARALLEL_RUNS)
-2. Use `/monitor-experiment` to track progress
+1. Deploy experiments in parallel (up to MAX_PARALLEL_RUNS for `/run-experiment`, or `max_parallel` from the queue manifest for `/experiment-queue`)
+2. Use `/monitor-experiment` to track progress; if `/experiment-queue` is active, monitor `queue_state.json`
 3. Collect results as experiments complete
+
+Backend lifecycle rules:
+- **Vast.ai**: record instance id, SSH endpoint, mounted data/checkpoints, estimated hourly cost, and cleanup policy. If `auto_destroy` is configured, write the exact cleanup command before launch.
+- **Modal**: verify app/function, image/dependencies, secrets, volumes, and output persistence before launch.
+- **Local/SSH**: verify GPU availability, environment activation, log path, and result path before launching.
+- If a backend is unreachable or misconfigured, stop with a configuration issue instead of silently switching backend.
 
 **🚦 Checkpoint (if AUTO_DEPLOY = false):**
 
@@ -229,6 +337,13 @@ Tracker: refine-logs/EXPERIMENT_TRACKER.md
 Ready for Workflow 2:
 → /auto-review-loop "[topic]"
 ```
+
+## Output Protocols
+
+> Follow these shared protocols for all output files:
+> - **[Output Versioning Protocol](../../shared-references/output-versioning.md)** — write timestamped file first, then copy to fixed name
+> - **[Output Manifest Protocol](../../shared-references/output-manifest.md)** — log every output to MANIFEST.md
+> - **[Output Language Protocol](../../shared-references/output-language.md)** — respect the project's language setting
 
 ## Key Rules
 

@@ -13,7 +13,11 @@ Search topic or arXiv paper ID: $ARGUMENTS
 
 - **PAPER_DIR** - Local directory to save downloaded PDFs. Default: `papers/` in the current project directory.
 - **MAX_RESULTS = 10** - Default number of search results.
-- **FETCH_SCRIPT** - `tools/arxiv_fetch.py` relative to the ARIS install, or the same path relative to the current project. Fall back to inline Python if not found.
+- **ARXIV_FETCHER** — canonical name `arxiv_fetch.py`, resolved per
+  [`shared-references/integration-contract.md`](../shared-references/integration-contract.md) §2
+  (Policy D1 — primary + fallback cascade). If unresolved (canonical
+  chain exhausted), fall back to the inline Python alternative
+  documented in Step 2.
 
 > Overrides (append to arguments):
 > - `/arxiv "attention mechanism" - max: 20` - return up to 20 results
@@ -37,29 +41,30 @@ If the argument matches an arXiv ID pattern (`YYMM.NNNNN` or `category/NNNNNNN`)
 
 ### Step 2: Search arXiv
 
-Locate the fetch script:
+Resolve `$ARXIV_FETCHER` via the canonical strict-safe chain (see
+[`shared-references/integration-contract.md`](../shared-references/integration-contract.md) §2):
 
 ```bash
-SCRIPT=$(python3 -c "
-import pathlib
-candidates = [
-    pathlib.Path('tools/arxiv_fetch.py'),
-    pathlib.Path.home() / '.claude' / 'skills' / 'arxiv' / 'arxiv_fetch.py',
-]
-for p in candidates:
-    if p.exists():
-        print(p)
-        break
-" 2>/dev/null)
+cd "$(git rev-parse --show-toplevel 2>/dev/null || pwd)" || exit 1
+if [ -z "${ARIS_REPO:-}" ] && [ -f .aris/installed-skills.txt ]; then
+    ARIS_REPO=$(awk -F'\t' '$1=="repo_root"{print $2; exit}' .aris/installed-skills.txt 2>/dev/null) || true
+fi
+if [ -z "${ARIS_REPO:-}" ] && [ -f "$HOME/.aris/repo" ]; then
+    ARIS_REPO=$(cat "$HOME/.aris/repo" 2>/dev/null) || true
+fi
+ARXIV_FETCHER=".aris/tools/arxiv_fetch.py"
+[ -f "$ARXIV_FETCHER" ] || ARXIV_FETCHER="tools/arxiv_fetch.py"
+[ -f "$ARXIV_FETCHER" ] || { [ -n "${ARIS_REPO:-}" ] && ARXIV_FETCHER="$ARIS_REPO/tools/arxiv_fetch.py"; }
+[ -f "$ARXIV_FETCHER" ] || ARXIV_FETCHER=""
 ```
 
-**If SCRIPT is found**, run:
+**If `$ARXIV_FETCHER` is non-empty**, run:
 
 ```bash
-python3 "$SCRIPT" search "QUERY" --max MAX_RESULTS
+python3 "$ARXIV_FETCHER" search "QUERY" --max MAX_RESULTS
 ```
 
-**If SCRIPT is not found**, fall back to inline Python:
+**If `$ARXIV_FETCHER` is empty** (Policy D1 cascade), fall back to inline Python:
 
 ```bash
 python3 - <<'PYEOF'
@@ -110,7 +115,7 @@ Present results as a table:
 When a single paper ID is requested (either directly or from Step 2):
 
 ```bash
-python3 "$SCRIPT" search "id:ARXIV_ID" --max 1
+python3 "$ARXIV_FETCHER" search "id:ARXIV_ID" --max 1
 # or fallback:
 python3 -c "
 import urllib.request, xml.etree.ElementTree as ET
@@ -130,7 +135,7 @@ When download is requested, for each paper ID to download:
 
 ```bash
 # Using fetch script:
-python3 "$SCRIPT" download ARXIV_ID --dir PAPER_DIR
+python3 "$ARXIV_FETCHER" download ARXIV_ID --dir PAPER_DIR
 
 # Fallback:
 mkdir -p PAPER_DIR && python3 -c "
@@ -177,12 +182,52 @@ For each paper (downloaded or fetched by API):
 - **Local PDF**: papers/[ID].pdf (if downloaded)
 ```
 
-### Step 6: Final Output
+### Step 6: Update Research Wiki (if active)
+
+**Required when `research-wiki/` exists in the project**; skip silently
+otherwise. When the wiki dir exists, resolve `$WIKI_SCRIPT` per the
+canonical chain at
+[`shared-references/wiki-helper-resolution.md`](../shared-references/wiki-helper-resolution.md)
+(Variant B — warn-and-skip), then ingest every paper returned by this
+invocation:
+
+```bash
+if [ -d research-wiki/ ]; then
+  cd "$(git rev-parse --show-toplevel 2>/dev/null || pwd)" || exit 1
+  ARIS_REPO="${ARIS_REPO:-$(awk -F'\t' '$1=="repo_root"{print $2; exit}' .aris/installed-skills.txt 2>/dev/null)}"
+  if [ -z "${ARIS_REPO:-}" ] && [ -f "$HOME/.aris/repo" ]; then
+    ARIS_REPO=$(cat "$HOME/.aris/repo" 2>/dev/null) || true
+  fi
+  WIKI_SCRIPT=".aris/tools/research_wiki.py"
+  [ -f "$WIKI_SCRIPT" ] || WIKI_SCRIPT="tools/research_wiki.py"
+  [ -f "$WIKI_SCRIPT" ] || { [ -n "${ARIS_REPO:-}" ] && WIKI_SCRIPT="$ARIS_REPO/tools/research_wiki.py"; }
+  [ -f "$WIKI_SCRIPT" ] || {
+    echo "WARN: research_wiki.py not found; arxiv results delivered, wiki ingest skipped. Fix: bash tools/install_aris.sh or smart_update.sh (refreshes ~/.aris/repo), export ARIS_REPO, or cp <ARIS-repo>/tools/research_wiki.py tools/." >&2
+    WIKI_SCRIPT=""
+  }
+  if [ -n "$WIKI_SCRIPT" ]; then
+    for each arxiv_id in results:
+        python3 "$WIKI_SCRIPT" ingest_paper research-wiki/ \
+            --arxiv-id "<arxiv_id>"
+  fi
+fi
+```
+
+The helper handles metadata fetch, slug, dedup, page creation, index
+rebuild, and log append in a single call — **do not handwrite
+`papers/<slug>.md`**. See
+[`shared-references/integration-contract.md`](../shared-references/integration-contract.md)
+for the canonical-helper rule. Missed ingests can be backfilled later
+with `python3 "$WIKI_SCRIPT" sync research-wiki/ --arxiv-ids <id1>,<id2>,...`
+after resolving `$WIKI_SCRIPT` as above.
+
+### Step 7: Final Output
 
 Summarize what was done:
 
 - `Found N papers for "query"`
 - `Downloaded: papers/2301.07041.pdf (842 KB)` (for each download)
+- `Wiki-ingested N papers` (if `research-wiki/` was present)
 - Any warnings (rate limit hit, file too small, already exists)
 
 Suggest follow-up skills:

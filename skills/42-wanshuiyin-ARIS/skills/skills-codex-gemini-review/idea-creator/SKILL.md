@@ -7,11 +7,13 @@ description: "Generate and rank research ideas given a broad direction. Use when
 
 # Research Idea Creator
 
+> **Gemini overlay assurance:** `review_independence: cross-family` and `acceptance_status: accepted`.
+
 Generate publishable research ideas for: $ARGUMENTS
 
 ## Overview
 
-Given a broad research direction from the user, systematically generate, validate, and rank concrete research ideas. This skill composes with `/research-lit`, `/novelty-check`, and `/research-review` to form a complete idea discovery pipeline.
+Given a broad research direction from the user, systematically generate, validate, and rank concrete research ideas. Standalone, Phase 1's landscape survey is **inline** (WebSearch — it does not invoke `/research-lit`); Phases 4-5 invoke `/novelty-check`, `/run-experiment`, and `/monitor-experiment` for validation and pilots. For the full sub-skill pipeline (`/research-lit` → idea generation → `/novelty-check` → `/research-review`), run `/idea-discovery` (Workflow 1), which orchestrates this skill.
 
 ## Constants
 
@@ -20,6 +22,8 @@ Given a broad research direction from the user, systematically generate, validat
 - **MAX_PILOT_IDEAS = 3** — Pilot at most 3 ideas in parallel. Additional ideas are validated on paper only.
 - **MAX_TOTAL_GPU_HOURS = 8** — Total GPU budget for all pilots combined.
 - **REVIEWER_MODEL = `gemini-review`** — Gemini reviewer invoked through the local `gemini-review` MCP bridge for brainstorming and critique. Set `GEMINI_REVIEW_MODEL` if you need a specific Gemini model override.
+
+- **OUTPUT_DIR = `idea-stage/`** — Directory for idea output files.
 
 > 💡 Override via argument, e.g., `/idea-creator "topic" — pilot budget: 4h per idea, 20h total`.
 
@@ -78,31 +82,57 @@ mcp__gemini-review__review_start:
     Prioritize ideas that are:
     - Testable with moderate compute (8x RTX 3090 or less)
     - Likely to produce a clear positive OR negative result (both are publishable)
-    - Not "apply X to Y" unless the application reveals genuinely surprising insights
-    - Differentiated from the 10-15 papers above
+    - Simple at the core: one mechanism, few moving parts — an idea a colleague
+      could restate after hearing it once. If the novelty only appears once a
+      second module or an extra gate is added, that is packaging, not novelty.
+    - Aware of the 10-15 papers above — awareness, not avoidance. Differentiation
+      is the novelty check's job later, not a constraint on brainstorming.
 
-    Be creative but grounded. A great idea is one where the answer matters regardless of which way it goes.
+    "Apply X to Y" is legitimate when the application would reveal something
+    non-obvious — judge it by what it reveals, not by the template. A direct,
+    well-executed attack on a central problem is a valid idea when nobody has
+    executed it well; do not steer around crowded areas — proximity to strong
+    work is a sign the problem matters, not that it is taken.
+
+    Be genuinely creative: surprising connections, inverted assumptions,
+    questions nobody thought to ask. Creativity is a new angle on a problem
+    that matters — not an obscure corner nobody visits, and not extra modules
+    stacked until something looks new. Generate first, filter later — the
+    filters come after you, and they are strict enough. A bold, creative idea
+    with a named risk beats a hedged, complicated one with none. A great idea
+    is one where the answer matters regardless of which way it goes.
 ```
 
 After this start call, immediately save the returned `jobId` and poll `mcp__gemini-review__review_status` with a bounded `waitSeconds` until `done=true`. Treat the completed status payload's `response` as the brainstorm output, and save the completed `threadId` for follow-up critique in Phase 4.
 
-### Phase 3: First-Pass Filtering
+### Phase 3: Mechanical consolidation + objective feasibility gate
 
-For each generated idea, quickly evaluate:
+> This phase does NOT judge idea quality, novelty, or impact — those are the
+> job of the Phase-4 cross-model reviewer (a different model family). Dropping
+> ideas here on a same-family novelty or impact call would pre-filter the
+> reviewer's input with same-family judgment — the opposite of why ARIS uses a
+> cross-model reviewer at all. Phase 3 only (a) clusters near-duplicate ideas
+> and (b) drops ideas that are OBJECTIVELY out of budget; everything else
+> passes through ANNOTATED, not eliminated.
 
-1. **Feasibility check**: Can we actually run this experiment with available resources?
-   - Compute requirements (estimate GPU-hours)
-   - Data availability
-   - Implementation complexity
-   - Skip ideas requiring > 1 week of GPU time or unavailable datasets
+1. **Objective feasibility gate (safe to gate here)**: drop an idea ONLY on a
+   mechanical, budget-based fact — estimated compute > 1 week of available GPU
+   time, OR a dataset that is provably unavailable. Do NOT drop on
+   "implementation looks complex" — annotate complexity instead.
 
-2. **Novelty quick-check**: For each idea, do 2-3 targeted searches to see if it's already been done. Full `/novelty-check` comes later for survivors.
+2. **Novelty signal — ANNOTATE, do not eliminate**: do 2-3 targeted searches
+   and attach a `prior_work` note (what looks related, with links). This is
+   input for the Phase-4 reviewer, not a filter; full `/novelty-check` runs in
+   Phase 4. Do NOT drop an idea here because it "might already be done."
 
-3. **Impact estimation**: Would a reviewer care about the result?
-   - "So what?" test: if the experiment succeeds, does it change how people think?
-   - Is the finding actionable or just interesting?
+3. **Impact signal — ANNOTATE, do not eliminate**: attach a one-line `so_what`
+   note (why the result would matter either way). Do NOT drop on a same-family
+   "a reviewer wouldn't care" call — that is exactly what the Phase-4
+   cross-model reviewer is for.
 
-Eliminate ideas that fail any of these. Typically 8-12 ideas reduce to 4-6.
+Every feasible, non-duplicate idea — with its `prior_work` and `so_what`
+annotations — proceeds to Phase 4, where the cross-model reviewer does the
+quality/novelty narrowing.
 
 ### Phase 4: Deep Validation (for top ideas)
 
@@ -118,11 +148,20 @@ For each surviving idea, run a deeper evaluation:
        Here are our top ideas after filtering:
        [paste surviving ideas with novelty check results]
 
-       For each, play devil's advocate:
+       For each, make the strongest case both ways:
+       - What is the best case FOR it — what would make this the paper people cite?
        - What's the strongest objection a reviewer would raise?
        - What's the most likely failure mode?
-       - How would you rank these for a top venue submission?
+       - Rank by expected information and upside within the pilot budget — which results would matter most, whichever way they come out?
        - Which 2-3 would you actually work on?
+
+       Rank; do not rewrite. An objection is answered or recorded as a named
+       risk on the idea — never absorbed by adding a module, a gate, or a
+       qualifier. A bold idea with a named risk outranks a hedged idea with
+       none, and complexity added since the brainstorm is a red flag, not
+       progress. And do not let your picks be uniformly the safest — if
+       the top set is all LOW-risk, name the high-upside idea that most
+       deserves a pilot slot and what result would convince you.
    ```
 
    After this start call, immediately save the returned `jobId` and poll `mcp__gemini-review__review_status` with a bounded `waitSeconds` until `done=true`. Treat the completed status payload's `response` as the follow-up critique.
@@ -137,7 +176,7 @@ Before committing to a full research effort, run cheap pilot experiments to get 
    - Single seed, small scale (e.g., small dataset subset, fewer epochs)
    - Target: 30 min - PILOT_MAX_HOURS per pilot on 1 GPU
    - **Estimate GPU-hours BEFORE launching.** If estimated time > PILOT_MAX_HOURS, reduce scale (fewer epochs, smaller subset) or flag as "needs manual pilot"
-   - Clear success metric defined upfront (e.g., "if metric improves by > 1%, signal is positive")
+   - Decision criterion defined upfront — including what a positive, negative, and null outcome would each teach. Metric improvement is not required for a diagnostic contribution.
 
 2. **Deploy in parallel**: Use `/run-experiment` to launch pilots on different GPUs simultaneously:
    ```
@@ -149,7 +188,7 @@ Before committing to a full research effort, run cheap pilot experiments to get 
 
 3. **Collect results**: Use `/monitor-experiment` to check progress. If any pilot exceeds PILOT_TIMEOUT_HOURS, kill it and collect partial results. Once all pilots complete (or timeout), compare:
    - Which ideas showed positive signal?
-   - Which showed null/negative results? (eliminate or deprioritize)
+   - Which showed null/negative results? Classify each: core-hypothesis refuted, informative negative (often publishable), or underpowered pilot — do not eliminate by sign alone.
    - Any surprising findings that suggest a pivot?
    - Total GPU-hours consumed (track against MAX_TOTAL_GPU_HOURS budget)
 
@@ -159,7 +198,9 @@ Note: Skip this phase if the ideas are purely theoretical or if no GPU is availa
 
 ### Phase 6: Output — Ranked Idea Report
 
-Write a structured report to `IDEA_REPORT.md` in the project root:
+Write a structured report to `idea-stage/IDEA_REPORT.md`:
+
+**Lead every recommended idea with its method, in plain language.** Before any hypothesis, novelty score, or claim, state in 2–4 concrete steps what we actually build / train / run — no jargon, no claim-IDs. The reader must understand *what we do* before *what we claim*; claims (hypothesis, validation, expected outcome) come after and read as the method's acceptance criteria.
 
 ```markdown
 # Research Idea Report
@@ -174,6 +215,7 @@ Write a structured report to `IDEA_REPORT.md` in the project root:
 ## Recommended Ideas (ranked)
 
 ### Idea 1: [title]
+- **Method (what we actually do)**: [2–4 concrete steps in plain language — what we build / train / run. No jargon, no claim-IDs, no hypothesis yet. Lead with this so the reader grasps the approach first.]
 - **Hypothesis**: [one sentence]
 - **Minimum experiment**: [concrete description]
 - **Expected outcome**: [what success/failure looks like]
@@ -203,7 +245,7 @@ Write a structured report to `IDEA_REPORT.md` in the project root:
 | Idea 3 | GPU 2 | 1.5 hr | +0.8% CE | WEAK POSITIVE |
 
 ## Suggested Execution Order
-1. Start with Idea 1 (positive pilot signal, lowest risk)
+1. Start with Idea 1 (highest decision value after the pilot)
 2. Idea 3 as backup (weak signal, may need larger scale to confirm)
 3. Idea 2 eliminated by pilot — negative result documented
 
@@ -212,18 +254,25 @@ Write a structured report to `IDEA_REPORT.md` in the project root:
 - [ ] If confirmed, invoke /auto-review-loop for full iteration
 ```
 
+## Output Protocols
+
+> Follow these shared protocols for all output files:
+> - **[Output Versioning Protocol](../../shared-references/output-versioning.md)** — write timestamped file first, then copy to fixed name
+> - **[Output Manifest Protocol](../../shared-references/output-manifest.md)** — log every output to MANIFEST.md
+> - **[Output Language Protocol](../../shared-references/output-language.md)** — respect the project's language setting
+
 ## Key Rules
 
 - **Large file handling**: If the Write tool fails due to file size, immediately retry using Bash (`cat << 'EOF' > file`) to write in chunks. Do NOT ask the user for permission — just do it silently.
 
 - The user provides a DIRECTION, not an idea. Your job is to generate the ideas.
-- Quantity first, quality second: brainstorm broadly, then filter ruthlessly.
+- Quantity first, quality second: brainstorm broadly, then narrow only to allocate pilot budget — annotate the rest, don't paper-kill them.
 - A good negative result is just as publishable as a positive one. Prioritize ideas where the answer matters regardless of direction.
-- Don't fall in love with any idea before validating it. Be willing to kill ideas.
+- Don't fall in love with any idea before validating it — but let evidence do the killing, not anticipated objections.
 - Always estimate compute cost. An idea that needs 1000 GPU-hours is not actionable for most researchers.
-- "Apply X to Y" is the lowest form of research idea. Push for deeper questions.
+- "Apply X to Y" is legitimate when Y can reveal a non-obvious interaction, failure mode, or finding — judge the revelation, not the template.
 - Include eliminated ideas in the report — they save future time by documenting dead ends.
-- **If the user's direction is too broad (e.g., "NLP", "computer vision", "reinforcement learning"), STOP and ask them to narrow it.** A good direction is 1-2 sentences specifying the problem, domain, and constraint — e.g., "factorized gap in discrete diffusion LMs" or "sample efficiency of offline RL with image observations". Without sufficient specificity, generated ideas will be too vague to run experiments on.
+- **If the user's direction is broad (e.g., "NLP"), use Phase 1 to derive 2-3 concrete frames and generate across them — ask the user only when a missing constraint would materially change the pilot slate.** A good direction is 1-2 sentences specifying the problem, domain, and constraint — e.g., "factorized gap in discrete diffusion LMs" or "sample efficiency of offline RL with image observations". Without sufficient specificity, generated ideas will be too vague to run experiments on.
 
 ## Composing with Other Skills
 

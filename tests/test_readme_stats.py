@@ -141,7 +141,7 @@ class TestCollectionCoverage(unittest.TestCase):
 
         rows = "\n".join(
             f"| [{cid}](skills/{cid}/) |" for cid in sorted(self.catalog_ids)
-        ) + "\n| skills | **1,151** | [`catalog/skills.json`](catalog/skills.json) |"
+        ) + f"\n| skills | **{self.total + 1:,}** | [`catalog/skills.json`](catalog/skills.json) |"
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "README-test.md"
             path.write_text(rows, encoding="utf-8")

@@ -58,9 +58,9 @@ If the agent names the skill it picked and the `SKILL.md` it read, the install w
 > **Install notes for the agent** (follow these when a user hands you this folder):
 > - Default to the **whole-repo router** (method 2 / 2C): install the folder as **one**
 >   skill named `auto-empirical-research-skills`; the root `SKILL.md` routes on demand
->   to the 1,108 child skills.
+>   to the 1,151 child skills.
 > - **Do not** flat-copy every folder under `skills/` into the skills directory — that
->   loads ~64k tokens of descriptions at once and makes matching worse. Only copy
+>   loads ~68k tokens of descriptions at once and makes matching worse. Only copy
 >   individual skills (method 3) when the user names specific ones.
 > - Skip `.git`, `.pytest_cache`, `.DS_Store`, `__pycache__`, `*.pyc`. Afterwards, list the
 >   target directory and confirm `SKILL.md` sits at its top level.
@@ -125,7 +125,7 @@ claude plugin details aer-skills    # shows the skills + token cost of any insta
 
 Some IDEs ask you to pick a folder and validate it as one skill. This repo now
 supports that path with the root [`SKILL.md`](SKILL.md): importing the repository
-root registers **one lightweight AERS catalog router**, not 1,108 separate child
+root registers **one lightweight AERS catalog router**, not 1,151 separate child
 skills. The router chooses the right vendored skill and then reads only that
 child skill's `SKILL.md`.
 
@@ -212,7 +212,7 @@ a new Claude Code session and the skill auto-loads; Claude invokes it when your 
 matches its `description`.
 
 > **Copy a handful, not the whole catalog.** Every installed skill's `description` is
-> loaded into context at the start of every session. All 1,108 would cost about 64k tokens
+> loaded into context at the start of every session. All 1,151 would cost about 68k tokens
 > up front, and runtimes truncate long skill listings — so Claude would match requests
 > *less* reliably, not more. For breadth, use the plugins (method 1) or the one-skill root
 > router (method 2), which reads a single child skill on demand. To find the right folder

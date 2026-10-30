@@ -5,6 +5,17 @@ description: "Workflow 1 adaptation for robotics and embodied AI. Orchestrates r
 
 # Robotics Idea Discovery Pipeline
 
+> **Before each reviewer slot**, follow [Selectable Reviewers](../shared-references/reviewer-backends.md):
+> resolve invocation → `.aris/reviewer.json` → Codex default (fresh native reviewer)
+> with `reviewer_route.py` through the canonical helper resolver, preserving this
+> slot's tier, fresh contexts, source/image inputs and deterministic gates.
+> Codex examples/pins below apply only to `backend=codex`; other routes use their
+> own first-call/reply contract. Save the route and actual returned identity;
+> unavailable selections are `REVIEW_UNAVAILABLE`. Classify acceptance from actual
+> families/completion/scope. Forward invocation reviewer/model/effort overrides
+> to reviewer-bearing children. Generation workers are unchanged.
+
+
 Orchestrate a robotics-specific idea discovery workflow for: **$ARGUMENTS**
 
 ## Overview
@@ -37,7 +48,7 @@ The goal is not to produce flashy demos. The goal is to produce ideas that are:
 - **PILOT_MODE = `sim-first`** — Prefer simulation or offline-log pilots before any hardware execution
 - **REAL_ROBOT_PILOTS = `explicit approval only`** — Never assume physical robot access or approval
 - **AUTO_PROCEED = true** — If user does not respond at checkpoints, proceed with the best sim-first option
-- **REVIEWER_MODEL = `gpt-5.4`** — External reviewer model via a secondary Codex agent
+- **REVIEWER_MODEL = `gpt-6-astra`** — External reviewer model via a secondary Codex agent
 - **TARGET_VENUES = CoRL, RSS, ICRA, IROS, RA-L** — Default novelty and reviewer framing
 
 > Override inline, e.g. `/idea-discovery-robot "bimanual manipulation" — only sim ideas, no real robot` or `/idea-discovery-robot "drone navigation" — focus on CoRL/RSS, 2 pilot ideas max`
@@ -283,7 +294,7 @@ Update the report with the reviewer's minimum viable evidence package.
 
 ## Phase 6: Final Report
 
-Write or update `IDEA_REPORT.md` with a robotics-specific structure so it stays compatible with downstream workflows.
+Write or update `idea-stage/IDEA_REPORT.md` with a robotics-specific structure so it stays compatible with downstream workflows.
 
 ```markdown
 # Robotics Idea Discovery Report
@@ -352,4 +363,11 @@ implement sim-first pilot
 ```
 
 If no simulator or benchmark is available yet, stop at the report and ask the user to choose whether to build infrastructure or pivot to a more executable idea.
+
+## Output Protocols
+
+> Follow these shared protocols for all output files:
+> - **[Output Versioning Protocol](../../shared-references/output-versioning.md)** — write timestamped file first, then copy to fixed name
+> - **[Output Manifest Protocol](../../shared-references/output-manifest.md)** — log every output to MANIFEST.md
+> - **[Output Language Protocol](../../shared-references/output-language.md)** — respect the project's language setting
 

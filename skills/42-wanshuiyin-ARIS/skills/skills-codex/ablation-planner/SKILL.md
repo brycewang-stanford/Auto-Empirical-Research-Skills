@@ -1,7 +1,7 @@
 ---
 name: ablation-planner
 description: "Use when main results pass result-to-claim (`claim_supported = yes` or `partial`) and ablation studies are needed for paper submission. A secondary Codex agent designs ablations from a reviewer's perspective; the local executor reviews feasibility and implements."
-allowed-tools: Bash(*), Read, Grep, Glob, Write, Edit, Agent
+allowed-tools: Bash(*), Read, Grep, Glob, Write, Edit
 ---
 
 # Ablation Planner
@@ -9,10 +9,6 @@ allowed-tools: Bash(*), Read, Grep, Glob, Write, Edit, Agent
 Systematically design ablation studies that answer the questions reviewers will ask. The reviewer agent leads the design; the local executor reviews feasibility and implements.
 
 ## Context: $ARGUMENTS
-
-## Constants
-
-- **REVIEWER_MODEL = `gpt-5.4`** - Used via a secondary Codex agent for reviewer-style ablation design.
 
 ## When to Use
 
@@ -26,16 +22,16 @@ Systematically design ablation studies that answer the questions reviewers will 
 
 Read available project files to build the full picture:
 
-- Method description and components (from `docs/research_contract.md`, project notes, or method docs)
+- Method description and components (from `idea-stage/docs/research_contract.md`, legacy `docs/research_contract.md`, project notes, or method docs)
 - Current experiment results (from `EXPERIMENT_LOG.md`, `EXPERIMENT_TRACKER.md`, or W&B)
 - Confirmed and intended claims (from `/result-to-claim` output or project notes)
 - Available compute resources (from server notes, run configs, or user-provided budget)
 
-### Step 2: Secondary Codex Designs Ablations
+### Step 2: Codex Designs Ablations
 
 ```text
 spawn_agent:
-  model: REVIEWER_MODEL
+  model: gpt-6-astra
   reasoning_effort: xhigh
   message: |
     You are a rigorous ML reviewer planning ablation studies.
@@ -102,9 +98,9 @@ Normalize the response into a structured format:
 [Total GPU-hours]
 ```
 
-### Step 4: Review Feasibility
+### Step 4: CC Reviews Feasibility
 
-Before running anything, check:
+Before running anything, the local executor checks:
 
 - Compute budget - Can you afford all ablations with available GPUs?
 - Code changes - Which ablations need code modifications vs config-only changes?

@@ -19,7 +19,7 @@
     "skills/74-brycewang-spss-amos-sem/"
   ],
   "out_of_domain": {
-    "_why": "Natural-science / CS / humanities guides vendored with 43-wentorai. Kept on disk and in the catalog, but ranked last for empirical-social-science routing. economics, finance, business, education, law and social-science stay in scope.",
+    "_why": "Natural-science / CS / humanities guides vendored with 43-wentorai, plus the patent-drafting and ML-interview-prep skills vendored with 42-wanshuiyin-ARIS (added by the 2026-10-20 resync). Kept on disk and in the catalog, but ranked last for empirical-social-science routing. economics, finance, business, education, law and social-science stay in scope.",
     "prefixes": [
       "skills/43-wentorai-research-plugins/skills/domains/ai-ml/",
       "skills/43-wentorai-research-plugins/skills/domains/biomedical/",
@@ -30,12 +30,24 @@
       "skills/43-wentorai-research-plugins/skills/domains/humanities/",
       "skills/43-wentorai-research-plugins/skills/domains/math/",
       "skills/43-wentorai-research-plugins/skills/domains/pharma/",
-      "skills/43-wentorai-research-plugins/skills/domains/physics/"
+      "skills/43-wentorai-research-plugins/skills/domains/physics/",
+      "skills/42-wanshuiyin-ARIS/skills/claims-drafting/",
+      "skills/42-wanshuiyin-ARIS/skills/embodiment-description/",
+      "skills/42-wanshuiyin-ARIS/skills/figure-description/",
+      "skills/42-wanshuiyin-ARIS/skills/interview-cheatsheet/",
+      "skills/42-wanshuiyin-ARIS/skills/invention-structuring/",
+      "skills/42-wanshuiyin-ARIS/skills/jurisdiction-format/",
+      "skills/42-wanshuiyin-ARIS/skills/patent-novelty-check/",
+      "skills/42-wanshuiyin-ARIS/skills/patent-pipeline/",
+      "skills/42-wanshuiyin-ARIS/skills/patent-review/",
+      "skills/42-wanshuiyin-ARIS/skills/prior-art-search/",
+      "skills/42-wanshuiyin-ARIS/skills/specification-writing/"
     ]
   },
   "canonical": {
     "_why": "One preferred copy per duplicated bare skill name. Rule of thumb: the upstream original of a forked template (12-pedrohcgs for the claude-code-my-workflow family forked by 14/28/41; 09-meleantonio over its byte-identical mirror in 31; K-Dense 03 over 04), otherwise the dedicated / economics-specific collection. Every other copy becomes tier `duplicate` (still searchable, ranked below).",
     "research-ideation": "skills/09-meleantonio-awesome-econ-ai-stuff/_skills/ideation/research-ideation/SKILL.md",
+    "openalex": "skills/59-shiquda-openalex-skill/openalex/SKILL.md",
     "lit-review": "skills/12-pedrohcgs-claude-code-my-workflow/dot-claude/skills/lit-review/SKILL.md",
     "proofread": "skills/12-pedrohcgs-claude-code-my-workflow/dot-claude/skills/proofread/SKILL.md",
     "review-paper": "skills/12-pedrohcgs-claude-code-my-workflow/dot-claude/skills/review-paper/SKILL.md",
