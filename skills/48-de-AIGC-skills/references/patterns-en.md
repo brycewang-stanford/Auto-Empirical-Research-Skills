@@ -1,4 +1,4 @@
-# English AI-signature pattern library (EN01–EN22)
+# English AI-signature pattern library (EN01–EN30)
 
 For English-language empirical papers in economics, management, and the social
 sciences. Severity: 🔴 must fix · 🟡 should fix · 🟢 optional.
@@ -6,7 +6,16 @@ sciences. Severity: 🔴 must fix · 🟡 should fix · 🟢 optional.
 Sources: adapted from Wikipedia's *Signs of AI writing* (WikiProject AI Cleanup),
 the `humanizer_academic` and `academic-humanizer` skill lineages, and observed
 LLM output on econ/management drafts — with all examples recast for empirical
-social-science writing.
+social-science writing. EN23–EN30 and the EN08 / EN12 / EN19 revisions
+(2026-10) come from a read of the most-starred English humanizer skills —
+blader/humanizer, hardikpandya/stop-slop, conorbronsdon/avoid-ai-writing,
+AIScientists-Dev/academic-humanizer and Nanako0129/sepia (all MIT); what was
+taken and what was deliberately left out is in `lineage.md`.
+
+**Deterministic subset**: `python3 scripts/aigc_audit.py audit draft.md` runs
+every rule a regex can see (EN01–06, 08, 10–12, 14, 16–17, 23–29) after masking
+quotations, math, `\cite{}` and tables, and prints the rest as "left to the
+model". A hit is a place to look, not a verdict.
 
 ---
 
@@ -23,6 +32,11 @@ reads as over-corrected. Keep, unless stacked (3+ in a paragraph) or citation-fr
 - Evidence-tied hedges: "suggests", "is consistent with", "may indicate"
 - First-person plural "we" — standard in modern empirical writing
 - Passive voice in methods sections ("Data were collected from…")
+- "is associated with" for correlational evidence — the *correct* verb (Step 2),
+  even though general-prose humanizers flag it as vague
+- The roadmap paragraph ("Section 2 describes…") — a convention, not padding
+- "robust", "comprehensive" in their technical senses ("robust standard
+  errors", "comprehensive income")
 
 **Rule of thumb**: a phrase followed by a citation, a number, or a test statistic
 is legitimate academic writing.
@@ -123,6 +137,17 @@ third. Vary list lengths across the paper.
 - ✅ "The reform reduced entry costs. Competition effects appear only in
   downstream markets (Table 6)."
 
+**Staged contrast** (same family, the tell upstream ranks highest): a contrast
+split across two sentences ("This does not mean X. It means Y."), "The
+question is not X; it is Y", a run of negations before the real claim.
+
+- ❌ "The effect is not driven by demand. It is driven by credit."
+- ✅ "Effects concentrate where pre-reform rejection rates were high (Table 6,
+  col. 3)."
+
+**Keep** a contrast that rules out a *named* alternative channel with evidence
+("Demand-side explanations predict X; Table 5 shows the opposite").
+
 ### EN09 · Elegant variation 🟡
 
 **Watch for**: cycling synonyms for one concept — firms/enterprises/companies/
@@ -166,6 +191,10 @@ range of, multifaceted, holistic
   specifications."
 - ✅ "Four concerns could threaten identification; we address each in turn
   (Section 6)."
+
+**Process narration** (same family): "meticulously cleaned", "rigorously
+verified to ensure accuracy", "carefully constructed". Say what was done:
+"We drop 312 firm-years with negative assets and winsorize at 1%."
 
 ### EN13 · Copula avoidance 🟢
 
@@ -231,20 +260,30 @@ by restated results, "fills a gap in the literature"
 
 ## Style and rhythm patterns
 
-### EN19 · Uniform sentence rhythm (burstiness) 🔴 — highest impact
+### EN19 · Uniform sentence rhythm 🔴
 
-**Detection**: 5+ consecutive sentences of 20–30 words; low variance in sentence
-length across a paragraph.
+**Detection**: 4+ consecutive sentences within ±15% of each other's length;
+evidence chains chopped into medium-length sentences. `aigc_audit.py` reports
+`similar_length_runs_4plus`, `long_share` and `short_share` — report only.
 
-**Why first**: practitioner reports on academic humanizer skills consistently
-find rhythm repair delivers the large majority of achievable AI-score reduction —
-more than all vocabulary fixes combined.
+**What the evidence says (2026-10 revision).** The old rule here ("per 200
+words, force one ≤8-word and one ≥40-word sentence") is withdrawn:
 
-**Fix**: per ~200 words, force at least one ≤8-word sentence and one ≥40-word
-sentence. Short sentences ask questions or land conclusions ("The data say
-otherwise."); long sentences carry evidence chains with subordinate clauses.
-Vary paragraph lengths too — a two-sentence paragraph after two long ones reads
-human.
+- No study supports a fixed spread threshold. At a 1% false-positive rate, the
+  sentence-length coefficient of variation catches 2.5% of machine text
+  (AUROC 0.521; sepia `research/rhythm-syntax.md`).
+- Recent models write too *few short* sentences (1–4% vs 32–33% for humans)
+  and run longer on average, so "add a ≥40-word sentence" pushes the wrong way.
+- Prompting a model to "vary sentence length" *raised* detector accuracy
+  (sepia, BAIDYA-2026). Mechanical alternation is worse than no edit.
+
+**Fix**: let length follow content. Merge adjacent sentences that make one
+point into a single sentence that carries the evidence chain; split a
+sentence that makes two claims. Do not manufacture slogan sentences ("The data
+say otherwise.") or a rhetorical question answered in the next breath — both
+are tells in their own right (EN26, stop-slop `structures.md`). Where an author
+sample exists, match *its* long/short mix; otherwise use 3–5 recent papers in
+the target journal as the baseline.
 
 ### EN20 · Typographic tells 🔴
 
@@ -279,14 +318,137 @@ would settle what this one cannot. Limitations must be *this paper's* limitation
 
 ---
 
+## 2026-10 additions (EN23–EN30)
+
+### EN23 · Chatbot and drafting residue 🔴
+
+**Watch for**: chat wrappers ("Certainly! Here is a revised…", "I hope this
+helps", "Let me know if…"); flattery ("Great question", "You're absolutely
+right"); knowledge-cutoff talk ("as of my last update", "based on available
+information"); tour-guide openers ("Let's dive in", "Here's what you need to
+know"). An author's own dated statement ("as of 2023, 41 provinces…") is fine.
+
+- ❌ "Certainly! Below is the revised results section. Table 3 shows… I hope
+  this helps!"
+- ✅ Keep only the Table 3 sentences.
+
+Source: blader/humanizer §4, §22, §23; avoid-ai-writing P0 tier.
+
+### EN24 · Generation artifacts 🔴
+
+**Watch for**: Markdown leaking into `.tex` / `.docx` (`**bold**`, `##`,
+bold-label bullets "- **Key finding:** …"); citation-markup leaks
+(`[oaicite:2]`, `【4†source】`, `turn0search3`, `utm_source=chatgpt.com` in a
+reference URL); unfilled placeholders ("[Author, 20XX]", "XX%", "[insert
+coefficient]").
+
+**Fix**: remove the markup; strip tracking parameters from URLs; **flag
+placeholders for the author — never fill them in**.
+
+Source: blader §19; avoid-ai-writing `detector/CATEGORIES.md`.
+
+### EN25 · Novelty padding 🟡 (🔴 if stacked)
+
+**Watch for**: "to the best of our knowledge" + "first to"; "for the first
+time"; "novel" more than once per section; universal gap claims ("no study
+has examined…").
+
+- ❌ "To our knowledge, this is the first paper to use a novel dataset to
+  examine…"
+- ✅ "Aaronson et al. (2018) use county aggregates; establishment-level
+  registrations let us separate entry from relocation."
+
+Source: academic-humanizer; stop-slop `structures.md`.
+
+### EN26 · Takeaway closers 🟡
+
+**Watch for**: a paragraph-final sentence that tells the reader what the
+numbers "show" ("This finding underscores the critical role of…", "Taken
+together, these results highlight…"); one-sentence paragraphs restating the
+previous one; the same closer after every subsection.
+
+- ❌ "…0.043 (s.e. 0.011). This underscores the critical role of credit."
+- ✅ Cut it, or replace it with a fact the table does not show.
+
+Source: blader §2; stop-slop; sepia `discourse-pass.md` (the key line always
+closing the paragraph is a position tell that survives paraphrase).
+
+### EN27 · Boilerplate emphasis and filler 🟡
+
+**Watch for**: "It is worth noting that", "It should be emphasized that", "It
+is important to note", "in order to", "At its core", "When it comes to". A
+single "Notably," stays (preserve-list).
+
+- ❌ "It is worth noting that, in order to address endogeneity, we…"
+- ✅ "To address endogeneity, we…"
+
+### EN28 · Vague-magnitude hedges 🟡 (🔴 in abstract / results)
+
+**Watch for**: somewhat, relatively, fairly, to some extent, quite, "large" /
+"substantial" with no number in the sentence; "The implications are
+significant."
+
+- ❌ "Treated firms perform relatively better."
+- ✅ "Treated firms' ROA rises 1.2 pp (Table 4, col. 2) on a pre-period mean of
+  6.1%."
+
+Prefer a comparison to the strongest prior estimate over a bare adjective
+(academic-humanizer). The number must already be in the paper.
+
+### EN29 · Arguing with no one 🟡
+
+**Watch for**: "One might argue…", "Some may argue", "This is not to say",
+"To be clear" — when the objection is never answered with evidence. A real
+referee concern answered with a test is the opposite of this tell.
+
+- ❌ "One might argue the results reflect chance; this is unlikely given our
+  robustness."
+- ✅ "Randomly reassigned reform years give estimates ≥ 0.043 in 7 of 1,000
+  draws (Figure 5)."
+
+### EN30 · Repeated openers 🟢
+
+**Watch for**: three or more consecutive sentences with the same subject ("We…
+We… We…"); the same section-transition formula every time ("Turning to…").
+
+**Fix**: merge, or lead with the result instead of the actor.
+
+---
+
 ## Severity priorities
 
 **Must fix (🔴)**: EN01, EN02, EN04, EN05, EN06, EN10, EN11, EN15, EN16, EN19,
-EN20, EN22
-**Should fix (🟡)**: EN03, EN07, EN08, EN09, EN12, EN14, EN17, EN21
-**Optional (🟢)**: EN13, EN18
+EN20, EN22, EN23, EN24
+**Should fix (🟡)**: EN03, EN07, EN08, EN09, EN12, EN14, EN17, EN21, EN25, EN26,
+EN27, EN28, EN29
+**Optional (🟢)**: EN13, EN18, EN30
 
-Fix order: EN19 (rhythm) first, then the remaining 🔴 set, then 🟡 as time allows.
-Empirical observation across the humanizer-skill lineage: repairing rhythm plus
-the 🔴 set moves mainstream English detectors from 70%+ AI probability into the
-ambiguous-to-human band; 🟡 fixes buy polish more than score.
+Fix order: EN23 / EN24 first (residue and artifacts are unambiguous and cheap),
+then the claim-level 🔴 set (EN10, EN11, EN15, EN16 — these change what a
+referee believes), then EN19 by merging and splitting, then 🟡 as time allows.
+
+**No detector promise.** Earlier versions of this file said the 🔴 set "moves
+mainstream detectors from 70%+ into the human band". No measurement backs that
+sentence, so it is gone. avoid-ai-writing measured its own composite score at
+paragraph-level ROC-AUC 0.501 (`PROOF.md`); a cleaner manuscript is the goal,
+not a number.
+
+---
+
+## Not adopted from general-prose humanizers
+
+These are good rules for blog posts and wrong for papers:
+
+- stop-slop's blanket bans — "kill all adverbs", "no hedges", "no passive",
+  "two items beat three". They destroy calibrated hedging (EN15) and methods
+  passives.
+- Flagging "associated with" as vague (blader §14) — it is the correct verb
+  for correlational evidence.
+- Removing en dashes (blader §8) — breaks ranges like 2014–2022.
+- Deleting every "Notably," (academic-humanizer 2.10) — on our preserve-list.
+- Splitting every sentence over 30 words (academic-humanizer 2.11) —
+  conflicts with letting length follow content.
+- "False agency" for "the market rewards…" (stop-slop) — ordinary economics.
+- Personality / opinion / humour voice profiles — not a register any journal
+  accepts. blader §26 ("lead with the decision") does fit **referee response
+  letters**; use it there.

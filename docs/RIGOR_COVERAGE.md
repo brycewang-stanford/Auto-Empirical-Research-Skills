@@ -27,7 +27,7 @@ A family is **covered** when it has both an eval scenario and a benchmark task, 
 | Heterogeneous effects (CATE) | 8 | `statspai-heterogeneous-effects` (high) | `cate-recovery` | covered |
 | Quantile / distributional effects | 2 | `statspai-quantile-effects` (high) | `qte-recovery` | covered |
 | Shift-share / Bartik IV | 1 | `aer-shiftshare-identification` (high) | `bartik-recovery` | covered |
-| Causal mediation | 8 | `statspai-mediation-assumptions` (high) | `mediation-recovery` | covered |
+| Causal mediation | 9 | `statspai-mediation-assumptions` (high) | `mediation-recovery` | covered |
 | Decomposition (Oaxaca-Blinder) | 1 | `statspai-decomposition` (high) | `decomposition-recovery` | covered |
 | Bunching | 1 | `statspai-bunching` (high) | `bunching-recovery` | covered |
 | Structural estimation (demand / IO) | 6 | `statspai-structural-demand` (high) | `structural-demand-recovery` | covered |

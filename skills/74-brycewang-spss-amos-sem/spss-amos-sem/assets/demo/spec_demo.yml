@@ -1,0 +1,55 @@
+# 演示设定卡：移动支付 App 持续使用意愿（TAM + 信任 + 满意度）
+# 跑法：Rscript scripts/run_sem.R assets/demo/spec_demo.yml --out /tmp/sem_demo
+project: 移动支付 App 持续使用意愿研究
+data: questionnaire_demo.sav          # 相对本文件的路径；支持 .sav / .csv / .xlsx / .dta
+id: id
+scale_points: 5                       # 李克特点数（反向计分用 scale_points + 1 - x）
+reverse_items: [PEOU4]
+missing: listwise                     # listwise（AMOS 默认需要完整数据）| fiml
+drop_straightliners: true             # 剔除所有题目同一个答案的问卷
+demographics: [gender, age, edu, use_years]
+
+constructs:                           # 构念代码 ≤ 6 个字母（PROCESS 的变量名限制）
+  PEOU: {label: 感知易用性, items: [PEOU1, PEOU2, PEOU3, PEOU4]}
+  PU:   {label: 感知有用性, items: [PU1, PU2, PU3, PU4]}
+  TR:   {label: 信任, items: [TR1, TR2, TR3, TR4]}
+  SAT:  {label: 满意度, items: [SAT1, SAT2, SAT3]}
+  CI:   {label: 持续使用意愿, items: [CI1, CI2, CI3]}
+
+structural:                           # 因变量: [自变量, ...]，只支持递归模型（无环）
+  PU:  [PEOU]
+  SAT: [PU, PEOU, TR]
+  CI:  [SAT, PU, TR]
+
+hypotheses:                           # 不写就按 structural 的顺序自动编号
+  H1: PEOU -> PU
+  H2: PU -> SAT
+  H3: PEOU -> SAT
+  H4: TR -> SAT
+  H5: SAT -> CI
+  H6: PU -> CI
+  H7: TR -> CI
+
+indirect:                             # 具体间接效应（链上相邻两个构念必须有结构路径）
+  H8: PU -> SAT -> CI
+  H9: PEOU -> PU -> SAT
+  H10: PEOU -> PU -> SAT -> CI
+
+multigroup: gender                    # 可选：测量不变性 + 路径的组间差异
+
+process:                              # 可选：用维度均值复现 PROCESS
+  - {model: 4, x: PU, m: [SAT], y: CI}
+  - {model: 7, x: PU, m: [SAT], y: CI, w: TR}
+
+modifications:                        # 只有写在这里的修正才会生效；每条都必须写理由
+  - type: drop_item
+    item: TR4
+    reason: 标准化载荷 0.3 左右，远低于 0.5；题干「关注新闻报道」与信任的内涵不一致
+  - type: error_cov
+    items: [SAT1, SAT2]
+    reason: 同一构念内的两题都在问使用时的情绪体验（满意、愉快），题干措辞相近，且 MI 提示两题误差相关
+
+bootstrap: 2000                       # SEM 间接效应的 bootstrap 次数（AMOS 常用 2000）
+process_bootstrap: 5000               # PROCESS 默认 5000
+seed: 20261027
+efa_rotation: varimax

@@ -9879,7 +9879,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 355,
+      "line_count": 452,
       "name": "de-aigc-skills",
       "path": "skills/48-de-AIGC-skills/SKILL.md"
     },
@@ -11732,16 +11732,26 @@
       "line_count": 123,
       "name": "phack-polyglot",
       "path": "skills/73-brycewang-p-hacking-skills/skills/10-phack-polyglot/SKILL.md"
+    },
+    {
+      "collection": "74-brycewang-spss-amos-sem",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 155,
+      "name": "spss-amos-sem",
+      "path": "skills/74-brycewang-spss-amos-sem/spss-amos-sem/SKILL.md"
     }
   ],
   "schema_version": "1.0",
   "summary": {
     "duplicate_skill_names": 48,
-    "exact_case_skill_files": 1150,
+    "exact_case_skill_files": 1151,
     "missing_description": 0,
     "missing_frontmatter": 0,
     "non_exact_case_skill_files": 0,
     "over_500_lines": 94,
-    "skill_like_files": 1150
+    "skill_like_files": 1151
   }
 }

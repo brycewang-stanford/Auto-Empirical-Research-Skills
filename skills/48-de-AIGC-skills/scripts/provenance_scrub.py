@@ -8,14 +8,23 @@ says so instead of pretending.
 
   Layer A  invisible-character carriers inside text
            (zero-width characters, bidi controls, tag characters, stray
-           variation selectors, exotic spaces, soft hyphens, C0/C1 controls)
+           variation selectors, script-bound format characters, exotic
+           spaces, soft hyphens, C0/C1 controls, trailing-whitespace
+           patterns) plus look-alike characters (Cyrillic / Greek letters
+           inside Latin words, canonical-singleton punctuation, fullwidth
+           Latin inside English words)
            -> .txt .md .qmd .Rmd .tex .bib .html .csv and the text runs of .docx
 
   Layer C  container metadata on the submission package
-           (.docx docProps / comments / people.xml / customXml,
-            .png / .jpg C2PA + EXIF + XMP, .svg <metadata>, .pdf Info + XMP)
+           (.docx docProps / custom.xml labels / rsids / template path /
+            comments / people.xml / customXml / figures pasted into the
+            document, .png / .jpg C2PA + EXIF + XMP, .svg <metadata>,
+            .pdf Info + XMP incl. compressed streams and pdfTeX figure info,
+            .zip __MACOSX AppleDouble entries, macOS download-origin xattrs,
+            generator stamps in source files, model names in file names)
            -> reported for every format; lossless cleaning for docx / png / jpg
-              / svg; report + exact commands for pdf
+              / svg / zip (members cleaned in place); report + exact commands
+              for pdf and xattrs
 
   Layer B  statistical token-sampling watermarks (Claude since 2026-08,
            Gemini SynthID) live in the *word choices*. No characters are added,
@@ -34,7 +43,8 @@ Usage
     python3 provenance_scrub.py clean    FILE [FILE ...] [--lang auto|zh|en]
                                          [-o OUT] [--in-place] [--keep-nbsp]
                                          [--keep-bidi] [--typography]
-                                         [--keep-meta] [--diff] [--json]
+                                         [--keep-meta] [--fold-homoglyphs]
+                                         [--diff] [--json]
     python3 provenance_scrub.py self-test
     cat draft.md | python3 provenance_scrub.py clean - > draft.clean.md
 
@@ -51,6 +61,7 @@ import io
 import json
 import re
 import struct
+import subprocess
 import sys
 import unicodedata
 import zipfile
@@ -59,7 +70,7 @@ from collections import Counter, OrderedDict
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional, Tuple
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 # --------------------------------------------------------------------------- #
 # Code-point policy (mirrors references/watermarks.md §3)
@@ -112,6 +123,53 @@ SPACE_HOMOGLYPHS = {0x1680, 0x202F, 0x205F} | set(_r(0x2000, 0x200A))
 NBSP = 0x00A0
 IDEOGRAPHIC_SPACE = 0x3000
 
+# Script-bound format characters (the rest of Unicode's Cf category, hard-coded
+# so the policy does not drift with the interpreter's Unicode version). Each is
+# legitimate only next to letters of its own script; elsewhere it is a carrier.
+SCRIPT_FORMAT: List[Tuple[set, List[range]]] = [
+    (set(_r(0x0600, 0x0605)) | {0x06DD, 0x08E2} | set(_r(0x0890, 0x0891)),
+     [_r(0x0600, 0x06FF), _r(0x0750, 0x077F), _r(0x0870, 0x08FF)]),   # Arabic number signs
+    ({0x070F}, [_r(0x0700, 0x074F)]),                                   # Syriac abbreviation mark
+    ({0x17B4, 0x17B5}, [_r(0x1780, 0x17FF)]),                           # Khmer inherent vowels
+    ({0x110BD, 0x110CD}, [_r(0x11080, 0x110CF)]),                       # Kaithi number signs
+    (set(_r(0x13430, 0x1343F)), [_r(0x13000, 0x1345F)]),                # Egyptian hieroglyph format
+    (set(_r(0x1BCA0, 0x1BCA3)), [_r(0x1BC00, 0x1BCAF)]),                # shorthand format controls
+    (set(_r(0x1D173, 0x1D17A)), [_r(0x1D100, 0x1D1FF)]),                # musical symbol format
+]
+SCRIPT_FORMAT_ALL = set().union(*(s for s, _ in SCRIPT_FORMAT))
+
+# Look-alike code points whose canonical (NFC) form is a single other code
+# point. Folding them is exactly what NFC would do to these characters and
+# nothing else, so it is lossless; whole-text NFC is still never applied
+# (it would rewrite CJK compatibility ideographs used in personal names).
+CANONICAL_SINGLETONS = {0x037E: ";", 0x0387: "·", 0x0374: "ʹ", 0x1FEF: "`", 0x1FFD: "´",
+                        0x212A: "K", 0x212B: "Å", 0x2126: "Ω",
+                        0x0340: "̀", 0x0341: "́", 0x0343: "̓"}
+
+# Fullwidth Latin letters and digits (folded only inside an otherwise-ASCII
+# word of an English manuscript: "ＴFP" -> "TFP", "Table３" -> "Table3").
+FULLWIDTH_ALNUM = set(_r(0xFF10, 0xFF19)) | set(_r(0xFF21, 0xFF3A)) | set(_r(0xFF41, 0xFF5A))
+
+# Cyrillic / Greek letters that render like Latin ones. Only a word that mixes
+# them with >= 2 ASCII letters is flagged ("Тhе" with Cyrillic Т and е); a word
+# with no Latin letters (a Russian citation, a standalone β) is never touched.
+HOMOGLYPHS = {
+    # Cyrillic
+    "а": "a", "е": "e", "о": "o", "р": "p", "с": "c", "у": "y", "х": "x", "і": "i", "ј": "j",
+    "һ": "h", "ѕ": "s", "ԁ": "d", "ӏ": "l", "ԛ": "q", "ԝ": "w",
+    "А": "A", "В": "B", "Е": "E", "К": "K", "М": "M", "Н": "H", "О": "O", "Р": "P", "С": "C",
+    "Т": "T", "У": "Y", "Х": "X", "І": "I", "Ј": "J", "Ѕ": "S",
+    # Greek (capitals plus omicron; μ, β, Δ and friends are notation, not look-alikes)
+    "Α": "A", "Β": "B", "Ε": "E", "Ζ": "Z", "Η": "H", "Ι": "I", "Κ": "K", "Μ": "M", "Ν": "N",
+    "Ο": "O", "Ρ": "P", "Τ": "T", "Υ": "Y", "Χ": "X", "ο": "o",
+}
+_HOMO_WORD = re.compile(r"[A-Za-zͰ-ϿЀ-ԯ]+")
+_MATH_SPANS = re.compile(r"\$\$.*?\$\$|\$[^$\n]+\$|\\\(.*?\\\)|\\\[.*?\\\]"
+                         r"|\\begin\{(equation|align|gather|multline|eqnarray)\*?\}.*?\\end\{\1\*?\}", re.S)
+
+# Model vendors that show up in exported file names ("claude_draft_v2.docx").
+_VENDOR_NAME = re.compile(r"(?i)chat-?gpt|claude|gemini|deepseek|kimi|qwen|doubao|copilot|grok|\bgpt-?\d|perplexity")
+
 # Script ranges used for the context rules.
 RTL_RANGES = [_r(0x0590, 0x05FF), _r(0x0600, 0x06FF), _r(0x0700, 0x074F), _r(0x0750, 0x077F),
               _r(0x0780, 0x07BF), _r(0x07C0, 0x07FF), _r(0x0800, 0x083F), _r(0x08A0, 0x08FF),
@@ -155,6 +213,10 @@ def cp_name(cp: int) -> str:
             return "UNASSIGNED / NONCHARACTER"
         if cp in CONTROLS:
             return "CONTROL"
+        if cp in SCRIPT_FORMAT_ALL:
+            return "SCRIPT FORMAT CHARACTER"
+        if cp == 0x09:
+            return "CHARACTER TABULATION"
         return "UNNAMED"
 
 
@@ -272,8 +334,14 @@ def _line_has_rtl(line: str) -> bool:
 
 
 def clean_segment(text: str, lang: str, findings: Findings, *, keep_nbsp: bool = False,
-                  keep_bidi: bool = False, typography: bool = False, line_offset: int = 1) -> str:
-    """Clean one prose segment. `lang` is 'zh' or 'en' (already resolved)."""
+                  keep_bidi: bool = False, typography: bool = False, line_offset: int = 1,
+                  fold_homoglyphs: bool = False, trailing: str = "keep") -> str:
+    """Clean one prose segment. `lang` is 'zh' or 'en' (already resolved).
+
+    trailing: what to do with spaces / tabs before a line break — 'keep'
+    (docx runs, csv / tsv where a trailing tab is an empty field), 'strip', or
+    'markdown' (strip, except exactly two spaces after text = a hard break).
+    """
     out: List[str] = []
     line_no = line_offset
     line_start = 0
@@ -297,6 +365,17 @@ def clean_segment(text: str, lang: str, findings: Findings, *, keep_nbsp: bool =
             findings.add(cp, action, _context(text, i), line_no)
 
         if ch == "\n":
+            if trailing != "keep":
+                k = len(out)
+                while k > 0 and out[k - 1] in (" ", "\t"):
+                    k -= 1
+                tail = out[k:]
+                hard_break = (trailing == "markdown" and tail == [" ", " "]
+                              and not (k > 0 and out[k - 1] == "\n"))
+                if tail and not hard_break:
+                    for t in tail:
+                        findings.add(ord(t), "trailing → removed", _context(text, i), line_no)
+                    del out[k:]
             out.append(ch)
             line_no += 1
             line_start = i + 1
@@ -409,6 +488,35 @@ def clean_segment(text: str, lang: str, findings: Findings, *, keep_nbsp: bool =
             i += 1
             continue
 
+        # --- script-bound format characters -------------------------------- #
+        if cp in SCRIPT_FORMAT_ALL:
+            p, q = _neighbors(text, i)
+            ranges = next(rs for s, rs in SCRIPT_FORMAT if cp in s)
+            if (p is not None and _in(p, ranges)) or (q is not None and _in(q, ranges)):
+                record("kept")
+                out.append(ch)
+            else:
+                record("removed")
+            i += 1
+            continue
+
+        # --- canonical look-alikes (lossless, NFC-equivalent) -------------- #
+        if cp in CANONICAL_SINGLETONS:
+            record("→ canonical")
+            out.append(CANONICAL_SINGLETONS[cp])
+            i += 1
+            continue
+
+        # --- fullwidth Latin inside an ASCII word (EN only) ---------------- #
+        if lang == "en" and cp in FULLWIDTH_ALNUM:
+            p = text[i - 1] if i > 0 else ""
+            q = text[i + 1] if i + 1 < n else ""
+            if (p.isascii() and p.isalnum()) or (q.isascii() and q.isalnum()):
+                record("→ ASCII")
+                out.append(chr(cp - 0xFEE0))
+                i += 1
+                continue
+
         # --- spaces --------------------------------------------------------- #
         if cp in SPACE_HOMOGLYPHS:
             record("→ U+0020")
@@ -457,6 +565,31 @@ def clean_segment(text: str, lang: str, findings: Findings, *, keep_nbsp: bool =
         out.append(ch)
         i += 1
 
+    return _homoglyph_pass("".join(out), findings, fold_homoglyphs, line_offset)
+
+
+def _homoglyph_pass(text: str, findings: Findings, fold: bool, line_offset: int = 1) -> str:
+    """Flag (and with `fold`, repair) Latin words carrying Cyrillic / Greek
+    look-alike letters. Math spans are skipped so notation survives."""
+    if not any(ch in HOMOGLYPHS for ch in text):
+        return text
+    masked = [(m.start(), m.end()) for m in _MATH_SPANS.finditer(text)]
+    out = list(text)
+    for m in _HOMO_WORD.finditer(text):
+        if any(a <= m.start() < b for a, b in masked):
+            continue
+        word = m.group(0)
+        latin = sum(1 for c in word if c.isascii())
+        foreign = [c for c in word if not c.isascii()]
+        if latin < 2 or not foreign or any(c not in HOMOGLYPHS for c in foreign):
+            continue
+        line_no = line_offset + text.count("\n", 0, m.start())
+        for k, c in enumerate(word):
+            if c in HOMOGLYPHS:
+                findings.add(ord(c), "→ Latin (homoglyph)" if fold else "review (homoglyph)",
+                             _context(text, m.start() + k), line_no)
+                if fold:
+                    out[m.start() + k] = HOMOGLYPHS[c]
     return "".join(out)
 
 
@@ -465,15 +598,21 @@ _HTML_CODE = re.compile(r"(<pre\b.*?</pre>|<code\b.*?</code>|<script\b.*?</scrip
 
 
 def clean_text(text: str, lang: str = "auto", *, fmt: str = "text", keep_nbsp: bool = False,
-               keep_bidi: bool = False, typography: bool = False) -> Tuple[str, Findings, str]:
+               keep_bidi: bool = False, typography: bool = False, fold_homoglyphs: bool = False,
+               trailing: Optional[str] = None) -> Tuple[str, Findings, str]:
     """Clean a whole document. Returns (cleaned, findings, resolved_lang).
 
     fmt: 'text' | 'markdown' | 'html'. Code spans/blocks are left untouched in
     markdown and html so that a document *about* invisible characters keeps
-    its own examples.
+    its own examples. `trailing` defaults to 'markdown' for markdown and
+    'strip' otherwise; callers pass 'keep' for csv / tsv.
     """
     resolved = detect_lang(text) if lang == "auto" else lang
     findings = Findings()
+    if trailing is None:
+        trailing = "markdown" if fmt == "markdown" else "strip"
+    opts = dict(keep_nbsp=keep_nbsp, keep_bidi=keep_bidi, typography=typography,
+                fold_homoglyphs=fold_homoglyphs, trailing=trailing)
     if fmt == "markdown":
         splitter = _MD_CODE
     elif fmt == "html":
@@ -482,8 +621,7 @@ def clean_text(text: str, lang: str = "auto", *, fmt: str = "text", keep_nbsp: b
         splitter = None
 
     if splitter is None:
-        cleaned = clean_segment(text, resolved, findings, keep_nbsp=keep_nbsp,
-                                keep_bidi=keep_bidi, typography=typography)
+        cleaned = clean_segment(text, resolved, findings, **opts)
         return cleaned, findings, resolved
 
     parts = splitter.split(text)
@@ -493,9 +631,7 @@ def clean_text(text: str, lang: str = "auto", *, fmt: str = "text", keep_nbsp: b
         if k % 2 == 1:  # a code span / block captured by the splitter
             out.append(part)
         else:
-            out.append(clean_segment(part, resolved, findings, keep_nbsp=keep_nbsp,
-                                     keep_bidi=keep_bidi, typography=typography,
-                                     line_offset=line_no))
+            out.append(clean_segment(part, resolved, findings, line_offset=line_no, **opts))
         line_no += part.count("\n")
     return "".join(out), findings, resolved
 
@@ -519,7 +655,8 @@ def _decode_target_ncrs(xml: str) -> str:
         cp = int(m.group(1), 16) if m.group(1) else int(m.group(2))
         if (cp in STRIP_ALWAYS or cp in BIDI or cp in TAGS or cp in VS_TEXT or cp in VS_EMOJI
                 or cp in IVS or cp in SPACE_HOMOGLYPHS or cp in (ZWSP, ZWNJ, ZWJ, NBSP, IDEOGRAPHIC_SPACE)
-                or cp in HANGUL_FILLERS or cp in MONGOLIAN_FVS or cp in LINE_SEPARATORS):
+                or cp in HANGUL_FILLERS or cp in MONGOLIAN_FVS or cp in LINE_SEPARATORS
+                or cp in SCRIPT_FORMAT_ALL or cp in CANONICAL_SINGLETONS):
             try:
                 return chr(cp)
             except (ValueError, OverflowError):
@@ -541,14 +678,30 @@ def _blank_xml_field(xml: str, tag: str) -> Tuple[str, Optional[str]]:
     return new, old
 
 
+_RSID_ATTR = re.compile(r'\s+w:rsid[A-Za-z]*="[0-9A-Fa-f]{8}"')
+_RSIDS_BLOCK = re.compile(r"<w:rsids>.*?</w:rsids>", re.S)
+_RSID_PARTS = re.compile(r"^word/(document|styles|numbering|footnotes|endnotes|comments|settings|header\d*|footer\d*)\.xml$")
+_MEDIA = re.compile(r"^(?:word|ppt|xl)/media/[^/]+\.(png|jpe?g)$", re.I)
+_TEMPLATE_REL = re.compile(r'(<Relationship\b[^>]*Type="[^"]*/attachedTemplate"[^>]*Target=")([^"]*)(")')
+_CUSTOM_PROP = re.compile(r'<property\b[^>]*\bname="([^"]*)"[^>]*>.*?</property>', re.S)
+# Custom properties that identify a person or tenant and do nothing for the
+# manuscript: Microsoft sensitivity labels (owner e-mail, tenant id) and WPS
+# build stamps. Zotero / Mendeley properties are kept — citations need them.
+_CUSTOM_DROP = re.compile(r"^(MSIP_Label_|KSOProductBuildVer$|ICV$)")
+
+
 def process_docx(data: bytes, lang: str, *, keep_nbsp: bool, keep_bidi: bool, typography: bool,
-                 scrub_meta: bool, do_clean: bool) -> Tuple[bytes, Findings, dict, str]:
+                 scrub_meta: bool, do_clean: bool, fold_homoglyphs: bool = False
+                 ) -> Tuple[bytes, Findings, dict, str]:
     """Inspect or clean a .docx. Returns (new_bytes, text_findings, meta_report, lang)."""
     findings = Findings()
     meta: "OrderedDict[str, object]" = OrderedDict()
     zin = zipfile.ZipFile(io.BytesIO(data))
     names = zin.namelist()
     replacements: Dict[str, bytes] = {}
+
+    def current(name: str) -> str:
+        return replacements[name].decode("utf-8") if name in replacements else zin.read(name).decode("utf-8")
 
     # Resolve language from all text runs first.
     if lang == "auto":
@@ -565,8 +718,8 @@ def process_docx(data: bytes, lang: str, *, keep_nbsp: bool, keep_bidi: bool, ty
             part_findings = Findings()
 
             def sub(m: "re.Match[str]", _pf: Findings = part_findings) -> str:
-                cleaned = clean_segment(m.group(2), lang, _pf, keep_nbsp=keep_nbsp,
-                                        keep_bidi=keep_bidi, typography=typography)
+                cleaned = clean_segment(m.group(2), lang, _pf, keep_nbsp=keep_nbsp, keep_bidi=keep_bidi,
+                                        typography=typography, fold_homoglyphs=fold_homoglyphs)
                 return m.group(1) + cleaned + m.group(3)
 
             new_xml = _WT.sub(sub, xml)
@@ -604,6 +757,65 @@ def process_docx(data: bytes, lang: str, *, keep_nbsp: bool, keep_bidi: bool, ty
             if new_app != app:
                 replacements["docProps/app.xml"] = new_app.encode("utf-8")
                 meta["app_scrubbed"] = [t for t in _APP_FIELDS if fields.get(t)]
+    if "docProps/custom.xml" in names:
+        custom = zin.read("docProps/custom.xml").decode("utf-8")
+        props = [m.group(1) for m in _CUSTOM_PROP.finditer(custom)]
+        meta["custom_properties"] = props
+        drop = [p for p in props if _CUSTOM_DROP.match(p)]
+        meta["custom_identifying"] = drop
+        if do_clean and scrub_meta and drop:
+            new_custom = _CUSTOM_PROP.sub(lambda m: "" if _CUSTOM_DROP.match(m.group(1)) else m.group(0), custom)
+            replacements["docProps/custom.xml"] = new_custom.encode("utf-8")
+            meta["custom_scrubbed"] = drop
+
+    # Revision-session ids: stable per editing session and per machine, so they
+    # can link an anonymised submission to the author's other files.
+    rsid_count = 0
+    for name in names:
+        if _RSID_PARTS.match(name):
+            xml = current(name)
+            n_attr = len(_RSID_ATTR.findall(xml))
+            n_block = len(_RSIDS_BLOCK.findall(xml))
+            rsid_count += n_attr + n_block
+            if do_clean and scrub_meta and (n_attr or n_block):
+                replacements[name] = _RSIDS_BLOCK.sub("", _RSID_ATTR.sub("", xml)).encode("utf-8")
+    meta["rsid_marks"] = rsid_count
+    if do_clean and scrub_meta and rsid_count:
+        meta["rsid_scrubbed"] = rsid_count
+
+    # Attached template path, e.g. C:\Users\<name>\AppData\...\Normal.dotm.
+    rels = "word/_rels/settings.xml.rels"
+    if rels in names:
+        xml = zin.read(rels).decode("utf-8")
+        m = _TEMPLATE_REL.search(xml)
+        if m and re.search(r"[\\/]", m.group(2)):
+            meta["attached_template"] = m.group(2)
+            if do_clean and scrub_meta:
+                base = re.split(r"[\\/]", m.group(2))[-1]
+                replacements[rels] = _TEMPLATE_REL.sub(lambda mm: mm.group(1) + base + mm.group(3), xml).encode("utf-8")
+                meta["attached_template_scrubbed"] = base
+
+    # Figures pasted into the document keep their own C2PA / EXIF / XMP.
+    media: "OrderedDict[str, List[str]]" = OrderedDict()
+    for name in names:
+        mm = _MEDIA.match(name)
+        if not mm:
+            continue
+        blob = zin.read(name)
+        try:
+            if mm.group(1).lower() == "png":
+                new_blob, rep = process_png(blob, do_clean=do_clean and scrub_meta)
+            else:
+                new_blob, rep = process_jpeg(blob, do_clean=do_clean and scrub_meta)
+        except ValueError:
+            continue
+        if rep.get("metadata_found"):
+            media[name] = rep["metadata_found"]
+            if do_clean and scrub_meta and new_blob != blob:
+                replacements[name] = new_blob
+                meta["embedded_media_scrubbed"] = sorted(set(meta.get("embedded_media_scrubbed", [])) | {name})
+    meta["embedded_media_metadata"] = media
+    meta["embedded_c2pa"] = [k for k, v in media.items() if any(x.startswith("C2PA") for x in v)]
 
     meta["custom_xml_parts"] = sorted(n for n in names if n.startswith("customXml/") and n.endswith(".xml"))
     meta["has_comments"] = "word/comments.xml" in names
@@ -767,9 +979,34 @@ def process_svg(text: str, *, do_clean: bool) -> Tuple[str, dict]:
 _PDF_INFO = re.compile(rb"/(Producer|Creator|Author|Title|Subject|Keywords|CreationDate|ModDate)\s*(\((?:\\.|[^\\)]){0,300}\)|<[0-9A-Fa-f\s]{0,600}>)")
 
 
+_PDF_STREAM = re.compile(rb"stream\r?\n(.*?)\r?\nendstream", re.S)
+_PDF_PTEX = re.compile(rb"/PTEX\.(FileName|InfoDict|PageNumber)")
+_PDF_ABS_PATH = re.compile(rb"(?:/Users/|/home/|[A-Za-z]:\\\\?Users\\\\?)[^\s()<>/\\\\]{1,40}")
+
+
+def _pdf_inflated(data: bytes, max_streams: int = 4000, max_out: int = 64 << 20) -> bytes:
+    """Concatenate every Flate stream that inflates cleanly. Object streams and
+    compressed XMP hide metadata from a raw-byte scan; this is the cheap fix."""
+    parts: List[bytes] = []
+    total = 0
+    for k, m in enumerate(_PDF_STREAM.finditer(data)):
+        if k >= max_streams or total >= max_out:
+            break
+        try:
+            d = zlib.decompressobj()
+            chunk = d.decompress(m.group(1), max_out - total)
+        except zlib.error:
+            continue
+        parts.append(chunk)
+        total += len(chunk)
+    return b"\n".join(parts)
+
+
 def inspect_pdf(data: bytes) -> dict:
+    inflated = _pdf_inflated(data)
+    scan = data + b"\n" + inflated
     info: Dict[str, str] = OrderedDict()
-    for key, val in _PDF_INFO.findall(data):
+    for key, val in _PDF_INFO.findall(scan):
         k = key.decode()
         if k in info:
             continue
@@ -777,12 +1014,16 @@ def inspect_pdf(data: bytes) -> dict:
             info[k] = val[1:-1].decode("latin-1", "replace")[:120]
         else:
             info[k] = "<hex string>"
+    paths = sorted({p.decode("latin-1", "replace") for p in _PDF_ABS_PATH.findall(scan)})
     return {
         "format": "pdf",
         "info": info,
-        "xmp": b"<x:xmpmeta" in data or b"/Type /Metadata" in data or b"/Type/Metadata" in data,
-        "c2pa": b"c2pa" in data.lower() or b"jumb" in data,
+        "xmp": b"<x:xmpmeta" in scan or b"/Type /Metadata" in scan or b"/Type/Metadata" in scan,
+        "c2pa": b"c2pa" in scan.lower() or b"jumb" in scan,
         "incremental_updates": data.count(b"%%EOF") - 1 if data.count(b"%%EOF") > 1 else 0,
+        "compressed_bytes_scanned": len(inflated),
+        "ptex_figure_info": len(_PDF_PTEX.findall(scan)),
+        "absolute_paths": paths[:5],
     }
 
 
@@ -790,6 +1031,10 @@ PDF_COMMANDS = [
     "exiftool -all= -overwrite_original {f}      # drops Info dictionary + XMP",
     "qpdf --linearize {f} {stem}.clean.pdf         # rewrites the file so old metadata is not left in an incremental update",
     "c2patool {stem}.clean.pdf                     # verify no C2PA manifest remains (official CAI tool)",
+]
+PDFTEX_COMMANDS = [
+    "% pdfLaTeX preamble, then recompile — stops figures' own Info / file names riding along:",
+    "\\pdfsuppressptexinfo=-1  \\pdftrailerid{}  \\pdfinfoomitdate=1",
 ]
 IMAGE_VERIFY_COMMANDS = [
     "c2patool {f}                                  # confirm no manifest remains",
@@ -831,6 +1076,10 @@ def render_report(entry: dict) -> str:
         L.append("  (plain text: nothing to report)")
     else:
         for k, v in meta.items():
+            if k == "members":
+                for name, verdict in v.items():
+                    L.append(f"  member {name}: {verdict}")
+                continue
             if isinstance(v, dict):
                 v = {kk: vv for kk, vv in v.items() if vv not in (None, "", [], {})}
             if v in (None, [], {}, "", 0, False):
@@ -846,27 +1095,54 @@ def render_report(entry: dict) -> str:
     return "\n".join(L)
 
 
+def _is_review(action: str) -> bool:
+    return action.startswith("review")
+
+
+def _docx_flags(meta: dict) -> List[str]:
+    flagged = [k for k in ("has_comments", "has_people", "custom_xml_parts", "thumbnail",
+                           "custom_identifying", "embedded_c2pa", "attached_template") if meta.get(k)]
+    if meta.get("tracked_changes"):
+        flagged.append("tracked_changes")
+    if meta.get("rsid_marks"):
+        flagged.append("rsid_marks")
+    if meta.get("embedded_media_metadata") and not meta.get("embedded_c2pa"):
+        flagged.append("embedded_media_metadata")
+    return flagged
+
+
 def _verdict(entry: dict) -> str:
     a = entry.get("findings")
-    a_changed = sum(r["count"] for r in a["rows"] if r["action"] not in ("kept", "review")) if a else 0
-    a_review = sum(r["count"] for r in a["rows"] if r["action"] == "review") if a else 0
+    a_changed = sum(r["count"] for r in a["rows"] if r["action"] != "kept" and not _is_review(r["action"])) if a else 0
+    a_dash = sum(r["count"] for r in a["rows"] if r["action"] == "review") if a else 0
+    a_homo = sum(r["count"] for r in a["rows"] if r["action"] == "review (homoglyph)") if a else 0
     parts = []
     if entry["mode"] == "inspect":
         parts.append(f"A: {a_changed} carrier(s) to clean" if a_changed else "A: clean")
     else:
         parts.append(f"A: {a_changed} carrier(s) cleaned" if a_changed else "A: nothing to clean")
-    if a_review:
-        parts.append(f"{a_review} em dash(es) left for EN20 review")
+    if a_dash:
+        parts.append(f"{a_dash} em dash(es) left for EN20 review")
+    if a_homo:
+        parts.append(f"{a_homo} look-alike letter(s) in Latin words — review, or re-run with --fold-homoglyphs")
     meta = entry.get("meta") or {}
     if entry["kind"] == "docx":
-        flagged = [k for k in ("has_comments", "has_people", "custom_xml_parts", "thumbnail") if meta.get(k)]
-        if meta.get("tracked_changes"):
-            flagged.append("tracked_changes")
+        flagged = _docx_flags(meta)
         core = meta.get("core") or {}
         app = meta.get("app") or {}
         props_present = any(core.get(k) for k in _CORE_FIELDS) or any(app.get(k) for k in _APP_FIELDS)
         if entry["mode"] == "clean":
-            head = "docProps scrubbed" if (meta.get("core_scrubbed") or meta.get("app_scrubbed")) else "docProps already clean"
+            done = [k for k in ("core_scrubbed", "app_scrubbed", "custom_scrubbed", "rsid_scrubbed",
+                                "attached_template_scrubbed", "embedded_media_scrubbed") if meta.get(k)]
+            head = "scrubbed " + ", ".join(d.replace("_scrubbed", "") for d in done) if done else "docProps already clean"
+            # what clean already handled is not left for review
+            handled = {flag for flag, done_key in (("custom_identifying", "custom_scrubbed"),
+                                                   ("rsid_marks", "rsid_scrubbed"),
+                                                   ("attached_template", "attached_template_scrubbed"),
+                                                   ("embedded_c2pa", "embedded_media_scrubbed"),
+                                                   ("embedded_media_metadata", "embedded_media_scrubbed"))
+                       if meta.get(done_key)}
+            flagged = [k for k in flagged if k not in handled]
         else:
             head = "docProps carry author / generator fields" if props_present else "docProps clean"
         parts.append("C: " + head + ("; still review " + ", ".join(flagged) if flagged else ""))
@@ -878,6 +1154,20 @@ def _verdict(entry: dict) -> str:
                      + (" — c2pa string present" if meta.get("c2pa") else ""))
     elif entry["kind"] == "pdf":
         parts.append("C: report only — run the listed commands")
+    elif entry["kind"] == "zip":
+        junk = meta.get("junk_removed") if entry["mode"] == "clean" else len(meta.get("junk_entries") or [])
+        word = "removed" if entry["mode"] == "clean" else "found"
+        bits = [f"{junk} __MACOSX / .DS_Store entr(ies) {word}"] if junk else []
+        bits.append(f"{len(meta.get('members_with_findings') or [])} member(s) with findings")
+        parts.append("C: " + "; ".join(bits))
+    elif meta.get("generator_markers") or meta.get("whitespace_pattern"):
+        parts.append("C: " + "; ".join(x for x in (
+            "generator stamp(s) in the source — remove by hand" if meta.get("generator_markers") else "",
+            "trailing-whitespace pattern" if meta.get("whitespace_pattern") else "") if x))
+    if meta.get("file_name_mentions_model"):
+        parts.append("file name names a model vendor — rename before submission")
+    if meta.get("macos_xattrs"):
+        parts.append("macOS xattrs (download origin) — xattr -c")
     parts.append("B: unknown")
     return " · ".join(parts)
 
@@ -890,6 +1180,8 @@ def _kind_of(path: Path, data: bytes) -> str:
     suf = path.suffix.lower()
     if suf == ".docx":
         return "docx"
+    if suf == ".zip":
+        return "zip"
     if suf == ".png" or data.startswith(PNG_SIG):
         return "png"
     if suf in (".jpg", ".jpeg") or data.startswith(b"\xff\xd8"):
@@ -905,11 +1197,119 @@ def _kind_of(path: Path, data: bytes) -> str:
     return "text"
 
 
+# Generator stamps left in source files by export tools and chat UIs. Reported,
+# never auto-removed: front matter may be load-bearing for the build.
+_GEN_MARKERS = [
+    re.compile(r"(?mi)\A---[ \t]*\n(?:(?!---).*\n)*?[ \t]*(generator|model|llm|ai_generated|ai-generated|created_by)[ \t]*:.*$"),
+    re.compile(r"(?i)<meta\s+name=[\"']generator[\"'][^>]*>"),
+    re.compile(r"(?i)<!--\s*(?:generated|created|written)\s+(?:by|with)\b[^>]{0,80}-->"),
+    re.compile(r"(?im)^\s*(?:%|#|//)?\s*(?:generated|created|written|drafted)\s+(?:by|with|using)\s+"
+               r"(?:chat-?gpt|claude|gemini|deepseek|kimi|qwen|doubao|copilot|gpt-?\d)[^\n]{0,60}$"),
+]
+
+
+def _generator_markers(text: str) -> List[str]:
+    hits: List[str] = []
+    for rx in _GEN_MARKERS:
+        for m in rx.finditer(text):
+            hits.append(m.group(0).strip().splitlines()[-1][:100])
+    return hits[:5]
+
+
+def _whitespace_pattern(text: str) -> Optional[str]:
+    """SNOW-style steganography hides bits in trailing spaces / tabs. One or two
+    stray trailing spaces are ordinary; many of varying length, or a tab / space
+    mix, are a pattern worth a human look."""
+    tails = [m.group(0) for m in re.finditer(r"[ \t]+(?=\n)", text)]
+    tails = [t for t in tails if t != "  "]  # markdown hard breaks
+    if len(tails) >= 3 and (len(set(tails)) >= 2 or any("\t" in t for t in tails)):
+        return (f"{len(tails)} lines end in spaces / tabs of {len(set(tails))} different shapes — "
+                "possible whitespace steganography (SNOW-style); cleaned by `clean`")
+    return None
+
+
+def _xattrs(path: Path) -> List[str]:
+    """macOS extended attributes such as kMDItemWhereFroms (the download URL)
+    and com.apple.quarantine. Report only; `xattr -c` removes them."""
+    if sys.platform != "darwin" or not path.is_file():
+        return []
+    try:
+        out = subprocess.run(["xattr", str(path)], capture_output=True, text=True, timeout=5)
+    except (OSError, subprocess.SubprocessError):
+        return []
+    keep = ("com.apple.quarantine", "com.apple.metadata:kMDItemWhereFroms",
+            "com.apple.metadata:kMDItemDownloadedDate", "com.apple.metadata:kMDItemCreator")
+    return [a for a in out.stdout.split() if a in keep]
+
+
+_ZIP_JUNK = re.compile(r"(^|/)(__MACOSX/|\.DS_Store$|Thumbs\.db$|desktop\.ini$)")
+
+
+def process_zip(data: bytes, mode: str, args: argparse.Namespace) -> Tuple[bytes, dict]:
+    """A submission package. AppleDouble entries (__MACOSX/._*) carry the
+    extended attributes — including the download URL — of every file; members
+    of a known kind are inspected / cleaned in memory like standalone files."""
+    zin = zipfile.ZipFile(io.BytesIO(data))
+    junk = [n for n in zin.namelist() if _ZIP_JUNK.search(n)]
+    members: "OrderedDict[str, str]" = OrderedDict()
+    flagged: List[str] = []
+    replacements: Dict[str, bytes] = {}
+    for info in zin.infolist():
+        name = info.filename
+        if name.endswith("/") or name in junk:
+            continue
+        p = Path(name)
+        if _kind_of(p, b"") == "text" and p.suffix.lower() not in TEXT_SUFFIXES:
+            continue
+        try:
+            entry, new_bytes = process_bytes(p, zin.read(name), mode, args, label=name)
+        except (ValueError, zipfile.BadZipFile, UnicodeDecodeError):
+            continue
+        members[name] = entry["verdict"]
+        if _has_findings(entry):
+            flagged.append(name)
+        if mode == "clean" and new_bytes is not None and new_bytes != zin.read(name):
+            replacements[name] = new_bytes
+    meta: "OrderedDict[str, object]" = OrderedDict()
+    meta["format"] = "zip"
+    meta["junk_entries"] = junk[:10] + (["…"] if len(junk) > 10 else [])
+    meta["members_with_findings"] = flagged
+    meta["members"] = members
+    if mode != "clean":
+        return data, meta
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w") as zout:
+        for info in zin.infolist():
+            if info.filename in junk:
+                continue
+            payload = replacements.get(info.filename, zin.read(info.filename))
+            new_info = zipfile.ZipInfo(info.filename, date_time=info.date_time)
+            new_info.compress_type = info.compress_type
+            new_info.external_attr = info.external_attr
+            zout.writestr(new_info, payload)
+    meta["junk_removed"] = len(junk)
+    return buf.getvalue(), meta
+
+
 def process_path(path: Path, mode: str, args: argparse.Namespace) -> Tuple[dict, Optional[bytes]]:
     data = sys.stdin.buffer.read() if str(path) == "-" else path.read_bytes()
+    entry, new_bytes = process_bytes(path, data, mode, args)
+    if str(path) != "-":
+        attrs = _xattrs(path)
+        if attrs:
+            entry["meta"] = entry.get("meta") or OrderedDict()
+            entry["meta"]["macos_xattrs"] = attrs
+            entry.setdefault("commands", []).append(f"xattr -c {path.name}   # drop download URL / quarantine stamps")
+            entry["verdict"] = _verdict(entry)
+    return entry, new_bytes
+
+
+def process_bytes(path: Path, data: bytes, mode: str, args: argparse.Namespace,
+                  label: Optional[str] = None) -> Tuple[dict, Optional[bytes]]:
     kind = _kind_of(path, data) if str(path) != "-" else "text"
     do_clean = mode == "clean"
-    entry: dict = {"file": str(path), "kind": kind, "mode": mode}
+    fold = getattr(args, "fold_homoglyphs", False)
+    entry: dict = {"file": label or str(path), "kind": kind, "mode": mode}
     new_bytes: Optional[bytes] = None
 
     if kind in ("text", "markdown", "html", "svg"):
@@ -922,13 +1322,22 @@ def process_path(path: Path, mode: str, args: argparse.Namespace) -> Tuple[dict,
                 entry["commands"] = [c.format(f=path.name) for c in IMAGE_VERIFY_COMMANDS]
             new_bytes = cleaned.encode("utf-8") if do_clean else None
         else:
+            trailing = "keep" if path.suffix.lower() in (".csv", ".tsv") else None
             cleaned, findings, lang = clean_text(text, args.lang, fmt=kind, keep_nbsp=args.keep_nbsp,
-                                                 keep_bidi=args.keep_bidi, typography=args.typography)
+                                                 keep_bidi=args.keep_bidi, typography=args.typography,
+                                                 fold_homoglyphs=fold, trailing=trailing)
             entry["lang"] = lang
-            entry["findings"] = findings.to_dict()
             if data[:3] == b"\xef\xbb\xbf":
                 findings.add(0xFEFF, "removed (leading BOM)")
-                entry["findings"] = findings.to_dict()
+            entry["findings"] = findings.to_dict()
+            meta = OrderedDict()
+            markers = _generator_markers(text)
+            if markers:
+                meta["generator_markers"] = markers
+            ws = _whitespace_pattern(text) if trailing is None else None
+            if ws:
+                meta["whitespace_pattern"] = ws
+            entry["meta"] = meta or None
             if do_clean and getattr(args, "diff", False):
                 entry["diff"] = "\n".join(difflib.unified_diff(
                     [_show(l) for l in text.splitlines()], [_show(l) for l in cleaned.splitlines()],
@@ -937,9 +1346,14 @@ def process_path(path: Path, mode: str, args: argparse.Namespace) -> Tuple[dict,
     elif kind == "docx":
         new_data, findings, meta, lang = process_docx(
             data, args.lang, keep_nbsp=args.keep_nbsp, keep_bidi=args.keep_bidi,
-            typography=args.typography, scrub_meta=not args.keep_meta, do_clean=do_clean)
+            typography=args.typography, scrub_meta=not args.keep_meta, do_clean=do_clean,
+            fold_homoglyphs=fold)
         entry["lang"] = lang
         entry["findings"] = findings.to_dict()
+        entry["meta"] = meta
+        new_bytes = new_data if do_clean else None
+    elif kind == "zip":
+        new_data, meta = process_zip(data, mode, args)
         entry["meta"] = meta
         new_bytes = new_data if do_clean else None
     elif kind == "png":
@@ -955,7 +1369,12 @@ def process_path(path: Path, mode: str, args: argparse.Namespace) -> Tuple[dict,
     elif kind == "pdf":
         entry["meta"] = inspect_pdf(data)
         entry["commands"] = [c.format(f=path.name, stem=path.stem) for c in PDF_COMMANDS]
+        if entry["meta"].get("ptex_figure_info") or entry["meta"].get("absolute_paths"):
+            entry["commands"] += PDFTEX_COMMANDS
         new_bytes = None
+    if _VENDOR_NAME.search(path.name):
+        entry["meta"] = entry.get("meta") or OrderedDict()
+        entry["meta"]["file_name_mentions_model"] = path.name
     entry["verdict"] = _verdict(entry)
     return entry, new_bytes
 
@@ -980,20 +1399,24 @@ def _has_findings(entry: dict) -> bool:
     if f and any(r["action"] not in ("kept",) for r in f["rows"]):
         return True
     meta = entry.get("meta") or {}
+    if meta.get("file_name_mentions_model") or meta.get("macos_xattrs"):
+        return True
     if entry["kind"] == "docx":
         core = meta.get("core") or {}
         app = meta.get("app") or {}
         if any(core.get(k) for k in _CORE_FIELDS) or any(app.get(k) for k in _APP_FIELDS):
             return True
-        return bool(meta.get("has_comments") or meta.get("has_people") or meta.get("custom_xml_parts")
-                    or meta.get("tracked_changes") or meta.get("thumbnail"))
+        return bool(_docx_flags(meta))
     if entry["kind"] in ("png", "jpeg"):
         return bool(meta.get("metadata_found"))
     if entry["kind"] == "svg":
         return bool(meta.get("metadata_blocks") or meta.get("comments") or meta.get("c2pa"))
     if entry["kind"] == "pdf":
-        return bool(meta.get("info") or meta.get("xmp") or meta.get("c2pa"))
-    return False
+        return bool(meta.get("info") or meta.get("xmp") or meta.get("c2pa") or meta.get("ptex_figure_info")
+                    or meta.get("absolute_paths"))
+    if entry["kind"] == "zip":
+        return bool(meta.get("junk_entries") or meta.get("members_with_findings"))
+    return bool(meta.get("generator_markers") or meta.get("whitespace_pattern"))
 
 
 def main(argv: Optional[List[str]] = None) -> int:
@@ -1011,6 +1434,8 @@ def main(argv: Optional[List[str]] = None) -> int:
         p.add_argument("--typography", action="store_true",
                        help="EN only: curly quotes -> straight, ellipsis -> ... (dashes are never touched)")
         p.add_argument("--keep-meta", action="store_true", help="do not scrub docx docProps / image metadata")
+        p.add_argument("--fold-homoglyphs", action="store_true",
+                       help="repair Cyrillic / Greek look-alike letters inside Latin words (default: report only)")
         p.add_argument("--json", action="store_true", help="machine-readable report on stdout")
 
     pi = sub.add_parser("inspect", help="report only; exit 1 if anything is found")
@@ -1120,6 +1545,20 @@ FIXTURES: List[Tuple[str, str, str, str]] = [
     ("bom removed", "en", "﻿Abstract", "Abstract"),
     ("control removed", "en", "a\x07b", "ab"),
     ("thai zwsp kept", "en", "สวัสดี​ครับ", "สวัสดี​ครับ"),
+    # v1.1 — script-bound format characters, look-alikes, trailing whitespace
+    ("arabic number sign kept", "en", "؀١٢", "؀١٢"),
+    ("arabic number sign stripped in latin", "en", "a؀b", "ab"),
+    ("khmer inherent vowel stripped in latin", "en", "a឴b", "ab"),
+    ("greek question mark -> semicolon", "en", "Why;", "Why;"),
+    ("kelvin sign -> K", "en", "300 K", "300 K"),
+    ("ohm sign -> omega", "en", "Ω = 2", "Ω = 2"),
+    ("fullwidth letter inside ascii word folded", "en", "ＴFP", "TFP"),
+    ("fullwidth digit after ascii word folded", "en", "Table３", "Table3"),
+    ("fullwidth digits kept in chinese", "zh", "表３", "表３"),
+    ("russian citation untouched", "en", "Экономика России (2019)", "Экономика России (2019)"),
+    ("greek notation untouched", "en", "β = 0.04, Δy and μ", "β = 0.04, Δy and μ"),
+    ("homoglyph word reported, not folded by default", "en", "Тhe reform", "Тhe reform"),
+    ("trailing spaces and tabs stripped", "en", "line \t \nnext", "line\nnext"),
 ]
 
 
@@ -1150,7 +1589,17 @@ def self_test() -> int:
     ok = got == "ＡＢ ½ ﬁ"
     failures += 0 if ok else 1
     print(f"[{'PASS' if ok else 'FAIL'}] no NFKC folding (fullwidth, fractions, ligatures survive)")
-    print(f"\n{len(FIXTURES) + 4 - failures} passed, {failures} failed")
+    # homoglyph folding is opt-in and skips math
+    got, _, _ = clean_text("Тhe rеform and $Αx$", "en", fold_homoglyphs=True)
+    ok = got == "The reform and $Αx$"
+    failures += 0 if ok else 1
+    print(f"[{'PASS' if ok else 'FAIL'}] --fold-homoglyphs repairs Latin words, leaves math alone")
+    # markdown hard break (exactly two trailing spaces) survives; other trailing runs go
+    got, _, _ = clean_text("a  \nb   \nc", "en", fmt="markdown")
+    ok = got == "a  \nb\nc"
+    failures += 0 if ok else 1
+    print(f"[{'PASS' if ok else 'FAIL'}] markdown hard breaks kept, other trailing whitespace removed")
+    print(f"\n{len(FIXTURES) + 6 - failures} passed, {failures} failed")
     return 1 if failures else 0
 
 

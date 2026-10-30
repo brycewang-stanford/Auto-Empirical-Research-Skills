@@ -42,7 +42,7 @@ tension replaces "important implications".
 ### ✅ Rewritten
 
 > Acemoglu and Restrepo published two QJE papers on AI and labor within three
-> years — and reached opposite emphases. The 2020 paper stresses displacement;
+> years, and they reached opposite emphases. The 2020 paper stresses displacement;
 > the 2022 paper, reinstatement. Which force dominates is an empirical question,
 > and it is the question this paper takes to Chinese manufacturing data.
 
@@ -131,16 +131,17 @@ is a distinctly human move.
 
 ### ✅ Rewritten
 
-> What drives the entry response? Registration costs fall mechanically — the
-> reform cut required capital to zero — but that alone cannot explain why entry
-> rose most in credit-scarce counties. Column (3) of Table 6 shows the
-> interaction: entry effects are 2.1 times larger where pre-reform loan
-> rejection rates were above the median. Credit access, not paperwork, appears
-> to be the binding margin.
+> Registration costs fell mechanically, since the reform cut required capital
+> to zero, but that alone cannot explain why entry rose most in credit-scarce
+> counties. Column (3) of Table 6 shows the interaction: entry effects are 2.1
+> times larger where pre-reform loan rejection rates were above the median.
+> Credit access appears to be the binding margin.
 
 **Fixes**: ordinal triad dissolved into an argued comparison (EN07); Moreover/
-Furthermore deleted (EN06); a question opens the paragraph and a short verdict
-sentence closes it (EN19).
+Furthermore deleted (EN06); the paragraph opens on the mechanical channel and
+the evidence against it rather than on a rhetorical question, and the evidence
+chain runs in one long sentence before a short verdict (EN19). No "X, not Y"
+contrast and no "-ing" tail: the table column does the arguing.
 
 ---
 
@@ -155,8 +156,8 @@ sentence closes it (EN19).
 ### ✅ Rewritten
 
 > Two limitations bound what these estimates can say. Our eight-year window
-> cannot distinguish permanent entry gains from intertemporal displacement —
-> firms that would have entered in 2024 entering in 2019 instead. And because
+> cannot distinguish permanent entry gains from intertemporal displacement
+> (firms that would have entered in 2024 entering in 2019 instead). And because
 > the reform bundled registration and capital rules, we cannot fully separate
 > their contributions; the credit-interaction results favor the capital channel
 > but do not settle it. Matched firm-bank data could; ours end in 2022.
@@ -178,21 +179,27 @@ hedge each (EN15).
 
 ### ✅ Rewritten
 
-> Entry barriers, not credit supply alone, were the binding constraint on
-> Chinese firm creation — that is the reading our evidence supports. It leaves
-> open a harder question: whether the marginal entrants create jobs or churn.
+> Our evidence supports one reading: entry barriers were a binding constraint
+> on Chinese firm creation, and credit supply alone does not account for the
+> entry response. That reading leaves open a harder question: whether the
+> marginal entrants create jobs or churn.
 > Our registry data see entry, not survival. Linking the reform to five-year
 > exit and employment records is, to us, the natural next step, and one this
 > pilot's staggered rollout makes feasible.
 
-**Fixes**: no re-abstracting (EN22); introduces genuinely new content — an open
-question, a data limitation, a concrete next design; "to us" is a researcher-
-voice marker no template produces.
+**Fixes**: no re-abstracting (EN22); introduces genuinely new content (an open
+question, a data limitation, a concrete next design); "to us" is a researcher-
+voice marker no template produces. Every sentence here restates something the
+paper already shows; a rewrite that needs a new fact gets an `[author: …]`
+placeholder instead.
 
 ---
 
 ## Usage notes
 
-- Do not transplant these sentences into your paper. The *moves* transfer —
-  the numbers, citations, and tensions must come from your own research.
+- Do not transplant these sentences into your paper. The *moves* transfer; the
+  numbers, citations, and tensions must come from your own research.
+- Zero em dashes, no "not X but Y" staging, no rhetorical question answered in
+  the next breath: the ✅ texts are checked against EN08, EN20 and EN26 with
+  `python3 scripts/aigc_audit.py audit` (they fire no rule).
 - After rewriting, self-score with `scoring.md` (English thresholds at the top).

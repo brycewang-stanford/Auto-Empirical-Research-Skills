@@ -875,7 +875,7 @@
       "license": "CC-BY-SA-4.0 (repository default)",
       "path": "skills/48-de-AIGC-skills",
       "primary_skill": {
-        "description": "中英双语学术降 AIGC / bilingual academic de-AIGC skill. Removes AI-generated writing signatures from empirical papers in economics, management, and the social sciences — in both English and Chinese. Covers Turnitin AI, GPTZero, Originality.ai on the English side and 知网 AMLC, 万方, 维普 on the Chinese side. Uses a six-step loop (intake → audit → claim-evidence check → differentiated rewrite → five-dimension self-score → cold-reader recheck) with two pattern libraries (22 English + 17 Chinese patterns), section-by-section strategies for empirical papers, and hard protections that keep every number, coefficient, and citation intact. Since 2026-08 it also carries a provenance layer (去水印): deterministic, CJK-safe cleaning of invisible-character carriers and file metadata (docx / png / jpg / svg / pdf, incl. C2PA), an honest account of Claude's statistical text watermark, and an author \"ownership pass\" — it never claims a text is watermark-free.",
+        "description": "中英双语学术降 AIGC + 去水印 / bilingual academic de-AIGC and provenance skill for empirical papers in economics, management and the social sciences (Turnitin AI, GPTZero, 知网 AMLC, 万方, 维普). Six-step loop (intake → audit → claim-evidence check → rewrite → self-score → cold-reader recheck) in three modes (audit-only / edit / author-voiced), 30 English + 28 Chinese patterns revised in 2026-10 against the ten most-starred humanizer skills, a protect-list, per-section edit caps, and hard rules that keep every number, coefficient and citation intact and never invent anchors. Two stdlib scripts - aigc_audit.py (deterministic rule scan; fidelity gate for numbers, citations, negation and verb strength; draft-retention metrics) and provenance_scrub.py (CJK-safe invisible-character, look-alike and whitespace cleaning; docx / figure / PDF / zip metadata incl. C2PA). Claude's statistical watermark is handled by an author ownership pass and always reported as unknown; the skill never claims a text is watermark-free.",
         "name": "de-aigc-skills",
         "path": "skills/48-de-AIGC-skills/SKILL.md"
       },
@@ -1307,6 +1307,23 @@
       "skill_count": 11,
       "source_confidence": "high",
       "source_url": "https://github.com/brycewang-stanford/p-hacking-skills",
+      "sync": "manual"
+    },
+    {
+      "commercial_use": "share-alike",
+      "has_license": false,
+      "has_readme": true,
+      "id": "74-brycewang-spss-amos-sem",
+      "license": "CC-BY-SA-4.0 (repository default)",
+      "path": "skills/74-brycewang-spss-amos-sem",
+      "primary_skill": {
+        "description": "Questionnaire structural equation modeling in the SPSS + AMOS workflow that Chinese management, psychology, education, nursing and tourism theses use — data cleaning of an SPSS .sav file, reverse coding, straight-lining, demographics, Harman common-method-bias test, Cronbach's alpha / CITC reliability, EFA (KMO, Bartlett), CFA convergent validity (standardized loadings, CR, AVE), discriminant validity (Fornell-Larcker, HTMT), model fit (chi2/df, CFI, TLI, RMSEA, SRMR), structural paths and hypothesis tests, bootstrap mediation with specific indirect effects, multi-group measurement invariance, and Hayes PROCESS models 1/4/6/7/8/14. One spec card drives an R/lavaan engine set to AMOS defaults and writes ready-to-run SPSS syntax (.sps), AMOS Program Editor VB.NET code, AMOS user-defined estimands, an AMOS drawing checklist with the numbers AMOS should show, Chinese three-line tables in Word, a results-chapter draft and a transparent model-modification log. Use when the user mentions SPSS, AMOS, SEM, structural equation model, CFA, confirmatory factor analysis, questionnaire / survey / Likert scale data, reliability and validity, CR / AVE, HTMT, common method bias, mediation, moderation, PROCESS, bootstrap indirect effect, multi-group analysis, measurement invariance, or Chinese terms 结构方程, 结构方程模型, 验证性因子分析, 探索性因子分析, 问卷, 量表, 信度, 效度, 收敛效度, 区分效度, 组合信度, 共同方法偏差, 中介效应, 调节效应, 有调节的中介, 多群组, 测量不变性, 模型拟合, 修正指数, 毕业论文问卷分析.",
+        "name": "spss-amos-sem",
+        "path": "skills/74-brycewang-spss-amos-sem/spss-amos-sem/SKILL.md"
+      },
+      "skill_count": 1,
+      "source_confidence": "high",
+      "source_url": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills",
       "sync": "manual"
     }
   ],
@@ -17131,7 +17148,7 @@
     },
     {
       "collection": "48-de-AIGC-skills",
-      "description": "中英双语学术降 AIGC / bilingual academic de-AIGC skill. Removes AI-generated writing signatures from empirical papers in economics, management, and the social sciences — in both English and Chinese. Covers Turnitin AI, GPTZero, Originality.ai on the English side and 知网 AMLC, 万方, 维普 on the Chinese side. Uses a six-step loop (intake → audit → claim-evidence check → differentiated rewrite → five-dimension self-score → cold-reader recheck) with two pattern libraries (22 English + 17 Chinese patterns), section-by-section strategies for empirical papers, and hard protections that keep every number, coefficient, and citation intact. Since 2026-08 it also carries a provenance layer (去水印): deterministic, CJK-safe cleaning of invisible-character carriers and file metadata (docx / png / jpg / svg / pdf, incl. C2PA), an honest account of Claude's statistical text watermark, and an author \"ownership pass\" — it never claims a text is watermark-free.",
+      "description": "中英双语学术降 AIGC + 去水印 / bilingual academic de-AIGC and provenance skill for empirical papers in economics, management and the social sciences (Turnitin AI, GPTZero, 知网 AMLC, 万方, 维普). Six-step loop (intake → audit → claim-evidence check → rewrite → self-score → cold-reader recheck) in three modes (audit-only / edit / author-voiced), 30 English + 28 Chinese patterns revised in 2026-10 against the ten most-starred humanizer skills, a protect-list, per-section edit caps, and hard rules that keep every number, coefficient and citation intact and never invent anchors. Two stdlib scripts - aigc_audit.py (deterministic rule scan; fidelity gate for numbers, citations, negation and verb strength; draft-retention metrics) and provenance_scrub.py (CJK-safe invisible-character, look-alike and whitespace cleaning; docx / figure / PDF / zip metadata incl. C2PA). Claude's statistical watermark is handled by an author ownership pass and always reported as unknown; the skill never claims a text is watermark-free.",
       "frontmatter_fields": [
         "allowed-tools",
         "description",
@@ -17141,7 +17158,7 @@
       "has_description": true,
       "has_frontmatter": true,
       "has_name": true,
-      "line_count": 355,
+      "line_count": 452,
       "name": "de-aigc-skills",
       "path": "skills/48-de-AIGC-skills/SKILL.md",
       "qualified_name": "48-de-AIGC-skills::de-aigc-skills"
@@ -20034,6 +20051,22 @@
       "name": "phack-polyglot",
       "path": "skills/73-brycewang-p-hacking-skills/skills/10-phack-polyglot/SKILL.md",
       "qualified_name": "73-brycewang-p-hacking-skills::phack-polyglot"
+    },
+    {
+      "collection": "74-brycewang-spss-amos-sem",
+      "description": "Questionnaire structural equation modeling in the SPSS + AMOS workflow that Chinese management, psychology, education, nursing and tourism theses use — data cleaning of an SPSS .sav file, reverse coding, straight-lining, demographics, Harman common-method-bias test, Cronbach's alpha / CITC reliability, EFA (KMO, Bartlett), CFA convergent validity (standardized loadings, CR, AVE), discriminant validity (Fornell-Larcker, HTMT), model fit (chi2/df, CFI, TLI, RMSEA, SRMR), structural paths and hypothesis tests, bootstrap mediation with specific indirect effects, multi-group measurement invariance, and Hayes PROCESS models 1/4/6/7/8/14. One spec card drives an R/lavaan engine set to AMOS defaults and writes ready-to-run SPSS syntax (.sps), AMOS Program Editor VB.NET code, AMOS user-defined estimands, an AMOS drawing checklist with the numbers AMOS should show, Chinese three-line tables in Word, a results-chapter draft and a transparent model-modification log. Use when the user mentions SPSS, AMOS, SEM, structural equation model, CFA, confirmatory factor analysis, questionnaire / survey / Likert scale data, reliability and validity, CR / AVE, HTMT, common method bias, mediation, moderation, PROCESS, bootstrap indirect effect, multi-group analysis, measurement invariance, or Chinese terms 结构方程, 结构方程模型, 验证性因子分析, 探索性因子分析, 问卷, 量表, 信度, 效度, 收敛效度, 区分效度, 组合信度, 共同方法偏差, 中介效应, 调节效应, 有调节的中介, 多群组, 测量不变性, 模型拟合, 修正指数, 毕业论文问卷分析.",
+      "frontmatter_fields": [
+        "description",
+        "license",
+        "name"
+      ],
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 155,
+      "name": "spss-amos-sem",
+      "path": "skills/74-brycewang-spss-amos-sem/spss-amos-sem/SKILL.md",
+      "qualified_name": "74-brycewang-spss-amos-sem::spss-amos-sem"
     }
   ],
   "summary": {
@@ -20042,7 +20075,7 @@
     "missing_frontmatter": 0,
     "missing_name": 0,
     "oversized_skill_files_over_500_lines": 94,
-    "skill_files": 1150,
-    "top_level_collections": 77
+    "skill_files": 1151,
+    "top_level_collections": 78
   }
 }

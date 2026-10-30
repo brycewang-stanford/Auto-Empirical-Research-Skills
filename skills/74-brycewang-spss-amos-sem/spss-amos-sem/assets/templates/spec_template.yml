@@ -1,0 +1,50 @@
+# 设定卡模板：复制一份，按自己的问卷改。# 后面是说明，可以删掉。
+# 跑法：Rscript scripts/run_sem.R spec.yml [--out 输出文件夹] [--quick]
+
+project: 研究题目                       # 出现在表格和段落标题里
+data: 我的问卷.sav                      # 相对本文件的路径；.sav/.zsav/.dta/.csv/.xlsx/.xls
+id: id                                 # 可选：问卷编号变量
+scale_points: 5                        # 李克特点数（5 或 7）；超出 1..点数 的值一律视为缺失
+reverse_items: []                      # 反向题，例如 [A3, C2]；反向 = 点数 + 1 − 原值
+missing: listwise                      # listwise（默认，AMOS 要完整数据）| fiml
+drop_straightliners: true              # 剔除所有题目选同一选项的问卷（反向计分之前判断）
+demographics: [gender, age, edu]       # 人口统计变量（有 SPSS 值标签最好）
+controls: []                           # 可选：数值型控制变量，会指向每个内生构念
+
+constructs:                            # 代码 ≤ 6 个字母，不能和任何题项同名
+  X:  {label: 自变量中文名, items: [X1, X2, X3, X4]}
+  M:  {label: 中介变量中文名, items: [M1, M2, M3]}
+  W:  {label: 调节变量中文名, items: [W1, W2, W3]}
+  Y:  {label: 因变量中文名, items: [Y1, Y2, Y3]}
+
+structural:                            # 因变量: [自变量, ...]；只支持无环（递归）模型
+  M: [X, W]
+  Y: [M, X]
+
+hypotheses:                            # 可选；必须和 structural 里的路径一一对应
+  H1: X -> M
+  H2: W -> M
+  H3: M -> Y
+  H4: X -> Y
+
+indirect:                              # 可选：具体间接效应，可以多级（X -> M1 -> M2 -> Y）
+  H5: X -> M -> Y
+
+# multigroup: gender                   # 可选：2 组的分组变量，做测量不变性和路径组间差异
+
+process:                               # 可选：基于构念均值的 PROCESS 模型（1/4/6/7/8/14）
+  - {model: 4, x: X, m: [M], y: Y}
+  - {model: 7, x: X, m: [M], y: Y, w: W}
+  # - {model: 6, x: X, m: [M1, M2], y: Y}            # 链式中介，m 的顺序就是链的顺序
+  # - {model: 1, x: X, y: Y, w: W}                    # 简单调节，含 Johnson-Neyman
+  # - {model: 14, x: X, m: [M], y: Y, w: W, covariates: [age], center: true}
+
+modifications: []                      # 先空着跑一遍，看 模型修正记录.md 再决定；例如：
+  # - {type: drop_item, item: X4, reason: 标准化载荷 0.38 < 0.5，题干与构念定义不符}
+  # - {type: error_cov, items: [M1, M2], reason: 同一构念内两题题干措辞相近，MI 较大}
+
+bootstrap: 2000                        # SEM 中介的 bootstrap 次数
+process_bootstrap: 5000                # PROCESS 的 bootstrap 次数（宏的默认值）
+seed: 20261027
+efa_rotation: varimax                  # varimax（SPSS 最大方差法）| promax
+loading_cutoff: 0.5                    # 低于这个标准化载荷的题会在修正记录里标出来

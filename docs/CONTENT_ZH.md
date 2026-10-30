@@ -12,7 +12,7 @@
 
 > 完整 README 见 [README.md](../README.md)（GitHub 默认入口，已迁出中文正文到本文件）。
 > 英文版见 [README-en.md](../README-en.md)。
-> 顶部 banner / search.html 入口 / badges / 底部脚注保留在 README.md；本文件包含"先看这里"段、77 合集一览、目录与所有正文。
+> 顶部 banner / search.html 入口 / badges / 底部脚注保留在 README.md；本文件包含"先看这里"段、78 合集一览、目录与所有正文。
 >
 > 最后同步：2026-07-06。本文件由 P2.2 重构抽出，未来内容更新请优先修改本文件。
 
@@ -20,18 +20,19 @@
 
 ## 先看这里：整仓是一个 AERS Router Skill
 
-本仓库支持把仓库根目录作为一个整体 skill 导入 Codex、CodeBuddy、Claude Code 或类似 IDE。根目录的 [`SKILL.md`](../SKILL.md) 会注册为 `auto-empirical-research-skills`，作用是根据你的研究任务路由到合适的 vendored 子 skill，而不是把 77 个合集、1,150 个 skill 一次性加载进上下文。
+本仓库支持把仓库根目录作为一个整体 skill 导入 Codex、CodeBuddy、Claude Code 或类似 IDE。根目录的 [`SKILL.md`](../SKILL.md) 会注册为 `auto-empirical-research-skills`，作用是根据你的研究任务路由到合适的 vendored 子 skill，而不是把 78 个合集、1,151 个 skill 一次性加载进上下文。
 
 - **推荐整仓导入**：选择仓库根目录，使用 [`agents/openai.yaml`](../agents/openai.yaml) 和根 [`SKILL.md`](../SKILL.md) 注册一个 catalog router；后续由 agent 先查 [`catalog/skills.json`](../catalog/skills.json) 或 [`SKILL_CATALOG.md`](SKILL_CATALOG.md)，再只读取目标子 skill。
-- **推荐单 skill 导入**：如果 IDE 要求"一目录一个 skill"，请复制那个直接包含 `SKILL.md` 的子目录，例如 `skills/50-brycewang-aer-skills/skills/aer-workflow/`，不要把整仓误当成 1,150 个独立 skill 递归注册。
+- **推荐单 skill 导入**：如果 IDE 要求"一目录一个 skill"，请复制那个直接包含 `SKILL.md` 的子目录，例如 `skills/50-brycewang-aer-skills/skills/aer-workflow/`，不要把整仓误当成 1,151 个独立 skill 递归注册。
+- **最省事的安装**：把本地仓库文件夹的路径复制给 Agent（Claude Code / Codex / WorkBuddy），让它按 [`INSTALL.md`](../INSTALL.md) 方法 0 自己装好。Codex 的用户 skills 目录是 `~/.agents/skills/`（老版本为 `~/.codex/skills/`），见 [`INSTALL.md`](../INSTALL.md) 方法 2C。
 - **安装细节**：见 [`INSTALL.md`](INSTALL.md)。中文 README 是默认入口；英文入口保留在 [`README-en.md`](../README-en.md)。
 
 ---
 
 
-## 全部 77 个 skill 合集一览
+## 全部 78 个 skill 合集一览
 
-> **打开仓库 → 看见整座库。** 全部 **77 个合集（`00 → 73` 编号连续无空缺） · 1,150 个 skill**，每一个都**已 vendor 进本仓库**（不仅是外链），并由 [`catalog/skills.json`](../catalog/skills.json) 跟踪。**点击任意一行即可打开其文件夹；点击锚点列 # 可跳转到本节对应的行。** **⭐ = 由 Stanford REAP × CoPaper.AI 团队自研的 skill**；其余均为精选、经安全审计的社区作品。
+> **打开仓库 → 看见整座库。** 全部 **78 个合集（`00 → 74` 编号连续无空缺） · 1,151 个 skill**，每一个都**已 vendor 进本仓库**（不仅是外链），并由 [`catalog/skills.json`](../catalog/skills.json) 跟踪。**点击任意一行即可打开其文件夹；点击锚点列 # 可跳转到本节对应的行。** **⭐ = 由 Stanford REAP × StatsPAI 团队自研的 skill**；其余均为精选、经安全审计的社区作品。
 >
 > **主题图例 —** 🚀 全流程与编排器 · 🎯 因果推断与计量经济学 · 📚 文献与研究设计 · ✍️ 写作、编辑与去 AIGC · 📑 引用、复现与同行评审 · 🛠️ 数据、工具与基础设施
 >
@@ -116,12 +117,13 @@
 | <a id="skill-71"></a>⭐ **71** | **[lit-review-agent-tools](../skills/71-brycewang-lit-review-agent-tools/)** 🔍 | 文献综述工具选型 + 一键安装运行：推荐最合适的开源工具（MinerU / PaperQA2 / ASReview / STORM / GPT Researcher / arXiv·Zotero MCP），并用内置 launcher 在隔离 venv 中装好直接跑 | 📚 | 1 | [brycewang-stanford/lit-review-agent-tools](https://github.com/brycewang-stanford/lit-review-agent-tools) |
 | <a id="skill-72"></a>⭐ **72** | **[Kaggle Research](../skills/72-kaggle-research/)** 🧪 | 官方 Kaggle CLI 的安全封装：资源检索、限界公开数据下载、SHA-256 清单、凭据脱敏审计与显式远程写入授权 | 🛠️ | 1 | [⭐ 本仓库](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills) |
 | <a id="skill-73"></a>⭐ **73** | **[p-hacking-skills](../skills/73-brycewang-p-hacking-skills/)** 🔬 | 实证结果体检室：11 个 agent 技能驱动一台仪表化规格搜索引擎（OLS / DID / 交错 DID / 事件研究 / RDD / IV；Stata · R · Python · StatsPAI 四种 runner）。映射研究者自由度（岔路花园）、跑完整个规格宇宙并给出扣除搜索后的诚实 p 值、用 p 曲线检测已发表结果、审计稳健性表格的叙事洗白、用预注册设定卡免疫；内置真实效应精确为零的数据集。**仅用于教学、方法论研究与结果审计**，每次搜索都留下可 `phack verify` 核验的账本 | 📑 | 11 | [brycewang-stanford/p-hacking-skills](https://github.com/brycewang-stanford/p-hacking-skills) |
+| <a id="skill-74"></a>⭐ **74** | **[spss-amos-sem](../skills/74-brycewang-spss-amos-sem/)** 📋 | 问卷数据结构方程全流程（SPSS + AMOS）：一张设定卡驱动 R/lavaan 引擎（按 AMOS 默认设置：ML、首载荷固定为 1、χ² = (N−1)F、偏差校正 bootstrap），完成数据清洗（反向计分、规律作答、缺失）、人口统计、Harman 共同方法偏差、Cronbach α / CITC、EFA、CFA 收敛效度（CR / AVE）、区分效度（Fornell-Larcker / HTMT）、模型拟合、路径与假设检验、具体间接效应、多群组测量不变性与 PROCESS 模型 1/4/6/7/8/14；同时生成可直接运行的 SPSS 语法、AMOS 画图清单（附预期数值）与 VB.NET 程序、自定义估计量、中文三线表 Word、结果章节初稿、路径图和逐步核对理由的模型修正记录 | 📑 | 1 | [⭐ 本仓库](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills) |
 
-> ⭐ **我们亲手打造的主干：** [StatsPAI](../skills/00-Full-empirical-analysis-skill_StatsPAI/)（因果引擎）· 显式的 [Python](../skills/00.1-Full-empirical-analysis-skill_Python/) / [Stata](../skills/00.2-Full-empirical-analysis-skill_Stata/) / [R](../skills/00.3-Full-empirical-analysis-skill_R/) 全流程移植 · [AER-skills](../skills/50-brycewang-aer-skills/)（Top-5 投稿套件）· [de-AIGC-skills](../skills/48-de-AIGC-skills/) · [Paper-WorkFlow](../skills/69-Paper-WorkFlow/)（元编排器）。它们是 AERS 的主干 —— 完整对比见 [旗舰流水线 skills ↓](#旗舰流水线-skills)。更想按用途浏览？见 [同样的 77 个，按用途分组 ↓](#77-个合集--按用途分组)。
+> ⭐ **我们亲手打造的主干：** [StatsPAI](../skills/00-Full-empirical-analysis-skill_StatsPAI/)（因果引擎）· 显式的 [Python](../skills/00.1-Full-empirical-analysis-skill_Python/) / [Stata](../skills/00.2-Full-empirical-analysis-skill_Stata/) / [R](../skills/00.3-Full-empirical-analysis-skill_R/) 全流程移植 · [AER-skills](../skills/50-brycewang-aer-skills/)（Top-5 投稿套件）· [de-AIGC-skills](../skills/48-de-AIGC-skills/) · [Paper-WorkFlow](../skills/69-Paper-WorkFlow/)（元编排器）。它们是 AERS 的主干 —— 完整对比见 [旗舰流水线 skills ↓](#旗舰流水线-skills)。更想按用途浏览？见 [同样的 78 个，按用途分组 ↓](#78-个合集--按用途分组)。
 
 ---
 
-**面向实证研究的专业级 Agent Skills 发行版。** 不是一份营销清单 —— 本仓库**自有并已编目 1,150 个 skill**，外加一套**数值基准 + 评测套件 + 安全审计 + CI** 把质量焊死，再叠加一张覆盖**生态 23,000+ skill / 119 个仓库**的精选地图。
+**面向实证研究的专业级 Agent Skills 发行版。** 不是一份营销清单 —— 本仓库**自有并已编目 1,151 个 skill**，外加一套**数值基准 + 评测套件 + 安全审计 + CI** 把质量焊死，再叠加一张覆盖**生态 23,000+ skill / 119 个仓库**的精选地图。
 
 AERS 同时是两样东西：(1) 一小撮**自研旗舰 skill**，能跑通完整实证流水线 —— 数据清洗 → 识别 → 估计 → 稳健性 → 表格图形 → 可投稿初稿；(2) 一份**精选、安全可控的目录**，按研究流程阶段组织整个实证研究 skill 生态。我们的差异化不在数量，而在于：旗舰 skill 的行为是**对着已知答案验证过的**，而不是嘴上声称的。
 
@@ -135,8 +137,8 @@ AERS 同时是两样东西：(1) 一小撮**自研旗舰 skill**，能跑通完�
 
 ## 目录
 
-- [**全部 77 个 skill 合集一览**（完整的 `00 → 73` 索引）](#全部-77-个-skill-合集一览)
-  - [77 个合集 · 按用途分组](#77-个合集--按用途分组)
+- [**全部 78 个 skill 合集一览**（完整的 `00 → 74` 索引）](#全部-78-个-skill-合集一览)
+  - [78 个合集 · 按用途分组](#78-个合集--按用途分组)
 - [你究竟得到什么（精确数字）](#你究竟得到什么精确数字)
 - [2 分钟自行验证](#2-分钟自行验证)
 - [为什么值得信任 —— 三层信用锚点](#为什么值得信任--三层信用锚点)
@@ -156,9 +158,9 @@ AERS 同时是两样东西：(1) 一小撮**自研旗舰 skill**，能跑通完�
 ---
 
 
-## 77 个合集 · 按用途分组
+## 78 个合集 · 按用途分组
 
-> 与[顶部的顺序索引 ↑](#全部-77-个-skill-合集一览)同样是 **77 个合集 · 1,150 个 skill** —— 这里**按研究用途**重新排序，方便你直接跳到当前所处的阶段。**⭐ = 自研**（Stanford REAP × CoPaper.AI）；其余均为精选、经安全审计的社区作品。
+> 与[顶部的顺序索引 ↑](#全部-78-个-skill-合集一览)同样是 **78 个合集 · 1,151 个 skill** —— 这里**按研究用途**重新排序，方便你直接跳到当前所处的阶段。**⭐ = 自研**（Stanford REAP）；其余均为精选、经安全审计的社区作品。
 
 **🚀 全流程旗舰与编排器** —— *一次调用，跑通整个实证闭环*
 
@@ -199,6 +201,7 @@ AERS 同时是两样东西：(1) 一小撮**自研旗舰 skill**，能跑通完�
 | [`61` · research-methods](../skills/61-phdemotions-research-methods/) | 与预注册匹配的验证性检验 | 9 |
 | [`63` · scientific-agent-skills](../skills/63-tondevrel-scientific-agent-skills/) | DoWhy 识别–估计–反驳框架 | 2 |
 | [`64` · mcp-stata](../skills/64-tmonk-mcp-stata/) | 20 个 Stata 因果推断与复现 skill | 20 |
+| ⭐ **[`74` · spss-amos-sem](../skills/74-brycewang-spss-amos-sem/)** 📋 | 问卷结构方程（SPSS + AMOS）：信效度、CFA、中介、PROCESS | 1 |
 
 **📚 文献、阅读与研究设计** —— *从问题到证据基础*
 
@@ -274,8 +277,8 @@ AERS 同时是两样东西：(1) 一小撮**自研旗舰 skill**，能跑通完�
 
 | 它是什么 | 数量 | 事实来源 |
 |---|---:|---|
-| **本仓库自有**并已编目的 skill | **1,150** | [`catalog/skills.json`](../catalog/skills.json) |
-| 自有 **合集（collections）** | **77** | [`catalog/skills.json`](../catalog/skills.json) · [全部 77 个一览 ↑](#全部-77-个-skill-合集一览) |
+| **本仓库自有**并已编目的 skill | **1,151** | [`catalog/skills.json`](../catalog/skills.json) |
+| 自有 **合集（collections）** | **78** | [`catalog/skills.json`](../catalog/skills.json) · [全部 78 个一览 ↑](#全部-78-个-skill-合集一览) |
 | **自研旗舰**全流程 skill（StatsPAI DSL + 显式 Python/Stata/R） | **4** | [`skills/00*`](../skills/) |
 | 每次运行从数据**重算 gold 值**的数值基准任务 | **19** | [`benchmark/`](../benchmark/) |
 | 行为级**评测场景 / rubric 条目** | **42 / 217** | [`eval-harness/`](../eval-harness/) |
@@ -333,7 +336,7 @@ make check        # 仓库校验 + 单元测试 + eval lint + 数值基准
 | **[Full Empirical Analysis — Stata](../skills/00.2-Full-empirical-analysis-skill_Stata/SKILL.md)** 📊 | 社区事实标准：`reghdfe` · `ivreg2` · `csdid` · `did_imputation` · `sdid` · `rdrobust` · `synth` · `psmatch2` · `boottest` · `esttab` | 审稿人或合作者只接受 Stata 复现包时（AER/QJE/JPE/ReStud 风格） |
 | **[Full Empirical Analysis — R](../skills/00.3-Full-empirical-analysis-skill_R/SKILL.md)** 📗 | 现代 tidyverse：`fixest` · `did` · `synthdid` · `HonestDiD` · `rdrobust` · `grf` · `DoubleML` · `marginaleffects` · **Quarto** | 单个 `.qmd` 一键渲染 PDF/HTML/Word 的一体化复现报告 |
 | **[AER-Skills](../skills/50-brycewang-aer-skills/)** 📕 | 9 个 skill：选题路由 → 识别审计 → 稳健性 → 引言 → 表图 → 复现 → 投稿 → R&R → 总调度 | Top-5 经济学（AER / AER:Insights / AEJ）投稿：**识别优先** —— 设计若脆，再多 prose 也救不回来 |
-| **[de-aigc-skills](../skills/48-de-AIGC-skills/SKILL.md)** 🇨🇳🇬🇧 | 中英双模式库（英 22 + 中 17），六步「接件→审计→主张-证据→改写→自评→复查」闭环，另加 2026 溯源层（CJK 安全的隐藏字符与 docx / 图片元数据清理；统计水印如实标注 unknown） | 降低 Turnitin AI / GPTZero 与知网 / 万方 / 维普的 AI 写作信号，并清理投稿包 |
+| **[de-aigc-skills](../skills/48-de-AIGC-skills/SKILL.md)** 🇨🇳🇬🇧 | 中英双模式库（英 30 + 中 28，2026-10 修订）、确定性审计与保真脚本，六步「接件→审计→主张-证据→改写→自评→复查」闭环，另加 2026 溯源层（CJK 安全的隐藏字符与 docx / 图片元数据清理；统计水印如实标注 unknown） | 降低 Turnitin AI / GPTZero 与知网 / 万方 / 维普的 AI 写作信号，并清理投稿包 |
 | **[Paper-WorkFlow](../skills/69-Paper-WorkFlow/README.md)** 🧭 | **元编排器**，串起 Stage 0–9 —— 选题 → 设计 → 数据 → 估计 → 表格图形 → 初稿 → 润色 → 去 AIGC → 模拟审稿 → 投稿 —— 通过调度已有 skill 与并行子代理，并用可续跑的 `workflow_state.json` 记录进度 | 端到端自动跑完一篇完整的实证社会科学论文 |
 
 > **为什么既要 DSL 又要显式三件套？** 信任一键 DSL 时用 StatsPAI；做教学、审计、或要逐个替换诊断时用 00.1/00.2/00.3。AER-skills 再把一份正确的分析推到录用门槛 —— 它们解决的是*不同*问题，可以组合。
@@ -382,7 +385,7 @@ make check        # 仓库校验 + 单元测试 + eval lint + 数值基准
 | **数值基准** | 报告数字与真实数据重算真值不符 —— 朴素 DID 符号陷阱、缺第一阶段 F 的弱 IV、交错时点下的 TWFE 偏误、RDD 趋势混淆、后处理坏控制、被合并均值掩盖的异质效应（CATE）、只看均值漏掉尾部的分位数效应、本地冲击混淆的移位份额（Bartik）IV、把中介当控制变量导致直接效应翻号、依赖参照组的 Oaxaca 分解拆分、kink 处超额质量被朴素密度掩盖的 bunching、未对内生价格做工具变量就估计需求并把系数当弹性报告（结构估计）、把已被外溢波及的邻居当干净对照组（干扰/外溢） | [`benchmark/`](../benchmark/) · 19 任务 |
 | **评测套件** | 散文级失误：弱 IV 假性安心、交错 DID 误用 TWFE、编造引用、不安全的 `curl \| bash` 安装、多重检验滥用、AER 合规缺口 | [`eval-harness/`](../eval-harness/) · 42 场景 / 217 rubric |
 | **安全审计** | pipe-to-shell、反向 shell、凭据外泄、prompt 注入等 13 类风险 —— 六阶段，40+ hook 脚本人工核查 | [`SECURITY-SCAN-REPORT.md`](../SECURITY-SCAN-REPORT.md) |
-| **来源与许可** | 未声明来源、许可风险、1,150 个编目 skill 的卫生度漂移 | [`LICENSE_AUDIT.md`](LICENSE_AUDIT.md) · [`SKILL_HYGIENE.md`](SKILL_HYGIENE.md) |
+| **来源与许可** | 未声明来源、许可风险、1,151 个编目 skill 的卫生度漂移 | [`LICENSE_AUDIT.md`](LICENSE_AUDIT.md) · [`SKILL_HYGIENE.md`](SKILL_HYGIENE.md) |
 | **CI 与兼容性** | catalog 新鲜度、本地死链、GitHub Actions 策略、Python 3.9 **与** 3.12 语法基线 | [`.github/workflows/`](../.github/workflows/) · 7 条 workflow |
 
 ```bash
@@ -397,7 +400,7 @@ make check       # 完整 gate：validate + Python 编译 + 单元测试 + eval 
 
 ## 浏览全景
 
-> 📚 完整的 **[77 合集目录 ↑](#全部-77-个-skill-合集一览)** 就在本 README 顶部 —— 本节按主题深入这个生态。
+> 📚 完整的 **[78 合集目录 ↑](#全部-78-个-skill-合集一览)** 就在本 README 顶部 —— 本节按主题深入这个生态。
 
 ### 按研究流程
 
@@ -486,7 +489,7 @@ make check       # 完整 gate：validate + Python 编译 + 单元测试 + eval 
 
 | 套件 | 核心特色 | 最适合 | 本地 |
 |------|---------|--------|------|
-| **de-AIGC-skills** 🇨🇳🇬🇧 | CoPaper.AI **原创**中英双语学术降 AIGC；英 22 + 中 17 类模式、含主张-证据审计的六步闭环、分章节策略、五维评分，面向经管社科实证论文；**2026-09 新增溯源层（去水印）** —— CJK 安全的隐藏 Unicode + docx / PNG / JPG / SVG / PDF 元数据清理（stdlib 脚本 `scripts/provenance_scrub.py`）、针对统计水印的作者重述流程 | Turnitin AI / GPTZero / 知网 / 万方 / 维普 · 隐藏字符 / C2PA / docx 元数据 | [`48`](../skills/48-de-AIGC-skills/) |
+| **de-AIGC-skills** 🇨🇳🇬🇧 | CoPaper.AI **原创**中英双语学术降 AIGC；英 30 + 中 28 类模式、含主张-证据审计的六步闭环（只诊断 / 编辑 / 作者重述三种模式）、分章节策略与改动上限、五维评分，面向经管社科实证论文；**2026-09 新增溯源层（去水印）** —— CJK 安全的隐藏 Unicode + docx / PNG / JPG / SVG / PDF 元数据清理（stdlib 脚本 `scripts/provenance_scrub.py`）、针对统计水印的作者重述流程；**2026-10 对照 GitHub 星数前十的去 AI 味 skill 升级** —— 新脚本 `scripts/aigc_audit.py`（确定性规则扫描 + 数字 / 引用 / 动词强度保真闸门 + 草稿保留率）、形近字符 / 行尾空白 / zip / docx 内嵌图片溯源检查、按实测数据修正节奏与"不得编造"规则，来源与取舍见 `references/lineage.md` | Turnitin AI / GPTZero / 知网 / 万方 / 维普 · 隐藏字符 / C2PA / docx 元数据 | [`48`](../skills/48-de-AIGC-skills/) |
 | [voidborne-d/humanize-chinese](../skills/49-voidborne-d-humanize-chinese/) 🇨🇳 | 同时提供 SKILL.md 与独立 Python CLI；17 类检测 + 7 风格改写器，LR ensemble 程序化打分。**License: MIT（非商用修改版）** | 中文学位论文 / 长篇 / 批量 pipeline | [`49`](../skills/49-voidborne-d-humanize-chinese/) |
 | [matsuikentaro1/humanizer_academic](https://github.com/matsuikentaro1/humanizer_academic) | 学术专用；34 类 AI 写作模式；保留合法学术过渡词 | 医学、生命科学、自然科学论文 | [`44`](../skills/44-matsuikentaro1-humanizer_academic/) |
 | [stephenturner/skill-deslop](https://github.com/stephenturner/skill-deslop) | 智能区分合法学科惯例 vs AI 痕迹；5 维评分 | 科学论文、技术博客 | [`45`](../skills/45-stephenturner-skill-deslop/) |
@@ -592,7 +595,7 @@ make check       # 完整 gate：validate + Python 编译 + 单元测试 + eval 
 <table>
   <tr>
     <td align="center">
-      <a href="https://copaper.ai"><img src="../images/copaper-logo.png" alt="CoPaper.AI" width="220" /></a>
+      <a href="https://github.com/brycewang-stanford/StatsPAI"><img src="../images/statspai-logo.png" alt="StatsPAI" width="260" /></a>
     </td>
     <td width="40"></td>
     <td align="center">
@@ -601,7 +604,7 @@ make check       # 完整 gate：validate + Python 编译 + 单元测试 + eval 
   </tr>
 </table>
 
-<sub><strong>Stanford REAP × CoPaper.AI</strong> · 实证研究 AI 工具的学术工业级产品</sub>
+<sub><strong>Stanford REAP × StatsPAI</strong> · 实证研究 AI 工具的学术工业级产品</sub>
 
 <br/>
 
