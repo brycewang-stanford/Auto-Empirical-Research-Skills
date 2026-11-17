@@ -362,7 +362,12 @@ def _stats_summary_html() -> str:
     scen = scenario_stats()
     bench = benchmark_stats()
     summary = catalog.get("summary", {})
-    methods = enriched.get("taxonomy", {}).get("method", {})
+    # `taxonomy.method` is a per-tag tally (a skill tagged iv + rdd + did adds
+    # to three counters), so summing it counts tag applications. The card is
+    # labelled as a skill count, so count the skills that carry a method tag.
+    method_skills = sum(
+        1 for s in enriched.get("skills", []) if s.get("tags", {}).get("method")
+    )
 
     cards = [
         ("Collections", summary.get("top_level_collections", "?"), "Top-level skill folders"),
@@ -371,7 +376,7 @@ def _stats_summary_html() -> str:
         ("Eval scenarios", scen["scenarios"], f"{scen['auto_checks']} auto-checkable rubric items"),
         ("Benchmark tasks", bench["tasks"], f"{bench['required_checks']} required gold checks"),
         ("Tools", len(tools.get("tools", [])), "Agent tools cataloged"),
-        ("Method-skills", sum(methods.values()), "Skills tagged with a method family"),
+        ("Method-skills", method_skills, "Skills tagged with a method family"),
     ]
     out = ['<section class="stat-grid" aria-label="Snapshot at a glance">']
     for label, value, hint in cards:
