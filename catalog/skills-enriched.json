@@ -10,7 +10,7 @@
     "tagged": 583,
     "with_eval_coverage": 21,
     "with_eval_coverage_pct": 1.8,
-    "total_eval_scenarios": 22,
+    "total_eval_scenarios": 42,
     "tiers": {
       "core": 23,
       "extended": 919,

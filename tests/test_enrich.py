@@ -71,6 +71,18 @@ class TestBuildAndFreshness(unittest.TestCase):
         missing = [s["path"] for s in payload["skills"] if not s["description_effective"]]
         self.assertEqual(missing, [], f"skills without effective description: {missing}")
 
+    def test_total_eval_scenarios_counts_scenarios_not_skills(self):
+        """`total_eval_scenarios` is published as "Total eval-harness scenarios
+        that target a specific skill". The coverage map is keyed by skill path
+        with a list of scenario ids, so its length counts targeted skills; two
+        scenarios aimed at one skill must count twice."""
+        targeting = [
+            p for p in sorted(enrich.EVAL_SCENARIOS_DIR.glob("*.toml"))
+            if enrich._parse_minimal_toml(p).get("skill")
+        ]
+        payload = enrich.build()
+        self.assertEqual(payload["summary"]["total_eval_scenarios"], len(targeting))
+
     def test_outputs_are_current(self):
         r = subprocess.run([sys.executable, "scripts/build-catalog-enrich.py", "--check"],
                            cwd=ROOT, capture_output=True, text=True)

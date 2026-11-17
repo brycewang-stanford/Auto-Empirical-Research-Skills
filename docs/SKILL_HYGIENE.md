@@ -16,7 +16,7 @@ A skill can be **well-formed** (high hygiene) yet **untested for the traps an ap
 - Skills scored: **1151**
 - Mean hygiene score: **99.4/100**
 - Skills with at least one eval scenario: **21** (1.8% of catalog)
-- Total eval-harness scenarios that target a specific skill: **22**
+- Total eval-harness scenarios that target a specific skill: **42**
 - Descriptions: 1151 from frontmatter, 0 body-derived, 0 none
 - Tagged with at least one taxonomy facet: 583
 

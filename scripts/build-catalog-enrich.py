@@ -366,7 +366,9 @@ def build() -> dict:
         "tagged": sum(1 for s in enriched if s["tags"]),
         "with_eval_coverage": n_with_eval,
         "with_eval_coverage_pct": round(100 * n_with_eval / len(enriched), 1) if enriched else 0,
-        "total_eval_scenarios": len(eval_coverage),
+        # eval_coverage maps skill path -> [scenario ids]; its len() would
+        # count targeted skills, not scenarios.
+        "total_eval_scenarios": sum(len(ids) for ids in eval_coverage.values()),
         "tiers": {t: sum(1 for s in enriched if s["tier"] == t) for t in TIERS},
         "uncurated_duplicate_names": uncurated_dups,
     }
