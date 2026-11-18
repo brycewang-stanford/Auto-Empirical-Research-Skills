@@ -78,6 +78,28 @@ class TestGeneratorFreshness(unittest.TestCase):
                     msg=f"{' '.join(cmd)} failed:\n{proc.stdout}\n{proc.stderr}",
                 )
 
+    def test_method_skills_card_counts_skills_not_tag_applications(self):
+        """The "Method-skills" card is labelled "Skills tagged with a method
+        family", so a skill carrying several method tags must count once.
+        `taxonomy.method` is a per-tag tally, and summing it counts a skill
+        tagged iv + rdd + did three times."""
+        import json
+
+        enriched = json.loads(
+            (ROOT / "catalog" / "skills-enriched.json").read_text(encoding="utf-8")
+        )
+        expected = sum(
+            1 for s in enriched["skills"] if s.get("tags", {}).get("method")
+        )
+        html = build_release_notes._stats_summary_html()
+        match = re.search(
+            r'<div class="stat-value">(\d+)</div>'
+            r'<div class="stat-label">Method-skills</div>',
+            html,
+        )
+        self.assertIsNotNone(match, "Method-skills card missing from release page")
+        self.assertEqual(int(match.group(1)), expected)
+
     def test_validate_gate_wires_the_lanes(self):
         makefile = (ROOT / "Makefile").read_text(encoding="utf-8")
         for script in (
