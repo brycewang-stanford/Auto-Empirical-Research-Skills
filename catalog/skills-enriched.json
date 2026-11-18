@@ -8,8 +8,8 @@
     "body_derived_description": 0,
     "no_description": 0,
     "tagged": 583,
-    "with_eval_coverage": 21,
-    "with_eval_coverage_pct": 1.8,
+    "with_eval_coverage": 22,
+    "with_eval_coverage_pct": 1.9,
     "total_eval_scenarios": 42,
     "tiers": {
       "core": 23,
@@ -4884,7 +4884,9 @@
       "commercial_use": "unknown",
       "source_url": "https://github.com/Learning-Bayesian-Statistics/baygent-skills",
       "sync": "manual vendor snapshot",
-      "eval_coverage": [],
+      "eval_coverage": [
+        "baygent-bayesian-diagnostics"
+      ],
       "tier": "extended"
     },
     {

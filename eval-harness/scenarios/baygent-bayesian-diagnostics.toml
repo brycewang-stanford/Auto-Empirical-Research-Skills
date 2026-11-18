@@ -1,5 +1,5 @@
 id = "baygent-bayesian-diagnostics"
-skill = "skills/23-Learning-Bayesian-Statistics-baygent-skills"
+skill = "skills/23-Learning-Bayesian-Statistics-baygent-skills/bayesian-workflow"
 title = "Bayesian estimates must report convergence diagnostics and prior sensitivity"
 category = "statistical-validity"
 severity = "high"

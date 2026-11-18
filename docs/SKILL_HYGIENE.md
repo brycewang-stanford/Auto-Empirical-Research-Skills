@@ -15,7 +15,7 @@ A skill can be **well-formed** (high hygiene) yet **untested for the traps an ap
 
 - Skills scored: **1151**
 - Mean hygiene score: **99.4/100**
-- Skills with at least one eval scenario: **21** (1.8% of catalog)
+- Skills with at least one eval scenario: **22** (1.9% of catalog)
 - Total eval-harness scenarios that target a specific skill: **42**
 - Descriptions: 1151 from frontmatter, 0 body-derived, 0 none
 - Tagged with at least one taxonomy facet: 583
@@ -50,7 +50,7 @@ A skill can be **well-formed** (high hygiene) yet **untested for the traps an ap
 | `20-wenddymacro-python-econ-skill` | 1 | 85.0 | 85 | 0 | 0 |
 | `21-claesbackman-AI-research-feedback` | 5 | 96.8 | 92 | 0 | 0 |
 | `22-christopherkenny-skills` | 11 | 100.0 | 100 | 0 | 0 |
-| `23-Learning-Bayesian-Statistics-baygent-skills` | 2 | 100.0 | 100 | 0 | 0 |
+| `23-Learning-Bayesian-Statistics-baygent-skills` | 2 | 100.0 | 100 | 1 | 1 |
 | `24-Imbad0202-academic-research-skills` | 4 | 100.0 | 100 | 0 | 0 |
 | `25-HosungYou-Diverga` | 34 | 95.1 | 85 | 0 | 0 |
 | `26-Data-Wise-scholar` | 17 | 93.5 | 85 | 0 | 0 |
@@ -145,13 +145,13 @@ A skill can be **well-formed** (high hygiene) yet **untested for the traps an ap
 | 1 | [`skills/00.2-Full-empirical-analysis-skill_Stata/SKILL.md`](../skills/00.2-Full-empirical-analysis-skill_Stata/SKILL.md) | 100 |
 | 1 | [`skills/00.3-Full-empirical-analysis-skill_R/SKILL.md`](../skills/00.3-Full-empirical-analysis-skill_R/SKILL.md) | 100 |
 | 1 | [`skills/10-Jill0099-causal-inference-mixtape/SKILL.md`](../skills/10-Jill0099-causal-inference-mixtape/SKILL.md) | 100 |
+| 1 | [`skills/23-Learning-Bayesian-Statistics-baygent-skills/bayesian-workflow/SKILL.md`](../skills/23-Learning-Bayesian-Statistics-baygent-skills/bayesian-workflow/SKILL.md) | 100 |
 | 1 | [`skills/39-vincentarelbundock-marginaleffects/SKILL.md`](../skills/39-vincentarelbundock-marginaleffects/SKILL.md) | 100 |
 | 1 | [`skills/40-py-econometrics-pyfixest/SKILL.md`](../skills/40-py-econometrics-pyfixest/SKILL.md) | 100 |
 | 1 | [`skills/41-sticerd-eee-sewage-econometrics-check/skills/audit-replication/SKILL.md`](../skills/41-sticerd-eee-sewage-econometrics-check/skills/audit-replication/SKILL.md) | 100 |
 | 1 | [`skills/47-conorbronsdon-avoid-ai-writing/SKILL.md`](../skills/47-conorbronsdon-avoid-ai-writing/SKILL.md) | 100 |
 | 1 | [`skills/48-de-AIGC-skills/SKILL.md`](../skills/48-de-AIGC-skills/SKILL.md) | 100 |
 | 1 | [`skills/50-brycewang-aer-skills/skills/aer-robustness/SKILL.md`](../skills/50-brycewang-aer-skills/skills/aer-robustness/SKILL.md) | 100 |
-| 1 | [`skills/50-brycewang-aer-skills/skills/aer-submission/SKILL.md`](../skills/50-brycewang-aer-skills/skills/aer-submission/SKILL.md) | 100 |
 
 ## Reading this report
 
