@@ -21,9 +21,15 @@ class TestRealScenarios(unittest.TestCase):
         self.assertEqual(problems, [], f"shipped scenarios invalid:\n" + "\n".join(problems))
 
     def test_every_scenario_skill_exists(self):
+        # A target must resolve to a SKILL.md, not merely an existing path: a
+        # collection directory without a root SKILL.md would pass an exists()
+        # check yet never count toward any skill's eval coverage in the catalog.
         for s in run_evals.load_scenarios():
-            self.assertTrue((run_evals.ROOT / s["skill"]).exists(),
-                            f"{s['id']} -> missing skill {s['skill']}")
+            target = run_evals.ROOT / s["skill"]
+            if target.name != "SKILL.md":
+                target = target / "SKILL.md"
+            self.assertTrue(target.is_file(),
+                            f"{s['id']} -> skill {s['skill']} has no SKILL.md")
 
 
 class TestScenarioSchema(unittest.TestCase):
