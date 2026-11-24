@@ -1169,17 +1169,32 @@
       "source_url": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills",
       "sync": "manual",
       "vendored_commit": null
+    },
+    {
+      "commercial_use": "share-alike",
+      "id": "75-social-science-research-agent-skills-2026",
+      "last_aers_review": "2026-07-22",
+      "license": "CC-BY-SA-4.0 (repository default)",
+      "license_file": null,
+      "origin": "direct community contribution",
+      "path": "skills/75-social-science-research-agent-skills-2026",
+      "security_review": "SECURITY-SCAN-REPORT.md",
+      "skill_count": 24,
+      "source_confidence": "high",
+      "source_url": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills",
+      "sync": "manual",
+      "vendored_commit": null
     }
   ],
   "generated_by": "scripts/build-provenance.py",
   "scan_date": "2026-07-22",
   "schema_version": "1.0",
   "summary": {
-    "collections": 78,
+    "collections": 79,
     "commercial_use": {
       "allowed": 40,
       "restricted": 2,
-      "share-alike": 10,
+      "share-alike": 11,
       "unknown": 26
     },
     "licenses": {
@@ -1187,7 +1202,7 @@
       "Apache-2.0": 1,
       "CC-BY-NC-4.0 (non-commercial)": 1,
       "CC-BY-SA-4.0": 1,
-      "CC-BY-SA-4.0 (repository default)": 7,
+      "CC-BY-SA-4.0 (repository default)": 8,
       "CC0-1.0": 1,
       "GPL-3.0": 1,
       "MIT": 38,
@@ -1196,7 +1211,7 @@
       "UNKNOWN - check upstream": 24
     },
     "source_confidence": {
-      "high": 46,
+      "high": 47,
       "low": 10,
       "medium": 22
     }

@@ -545,6 +545,13 @@
       "findings_total": 0,
       "findings_triaged_benign": 0,
       "findings_untriaged": 0
+    },
+    "75-social-science-research-agent-skills-2026": {
+      "files_scanned": 26,
+      "files_seen": 27,
+      "findings_total": 0,
+      "findings_triaged_benign": 0,
+      "findings_untriaged": 0
     }
   },
   "note": "Pattern scan only \u2014 the same class of evidence as the 2026-07-15 addendum in SECURITY-SCAN-REPORT.md, and strictly weaker than the baseline's multi-agent content read. A clean result means no known-bad pattern matched, not 'reviewed and safe'. Every entry under 'triaged' was inspected in context; the reason records what was found there.",

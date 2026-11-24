@@ -11742,16 +11742,256 @@
       "line_count": 155,
       "name": "spss-amos-sem",
       "path": "skills/74-brycewang-spss-amos-sem/spss-amos-sem/SKILL.md"
+    },
+    {
+      "collection": "75-social-science-research-agent-skills-2026",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 71,
+      "name": "causal-design-selector",
+      "path": "skills/75-social-science-research-agent-skills-2026/causal-design-selector/SKILL.md"
+    },
+    {
+      "collection": "75-social-science-research-agent-skills-2026",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 72,
+      "name": "causal-estimand-definer",
+      "path": "skills/75-social-science-research-agent-skills-2026/causal-estimand-definer/SKILL.md"
+    },
+    {
+      "collection": "75-social-science-research-agent-skills-2026",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 78,
+      "name": "claim-citation-fact-auditor",
+      "path": "skills/75-social-science-research-agent-skills-2026/claim-citation-fact-auditor/SKILL.md"
+    },
+    {
+      "collection": "75-social-science-research-agent-skills-2026",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 71,
+      "name": "cold-start-repro-reviewer",
+      "path": "skills/75-social-science-research-agent-skills-2026/cold-start-repro-reviewer/SKILL.md"
+    },
+    {
+      "collection": "75-social-science-research-agent-skills-2026",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 71,
+      "name": "contribution-auditor",
+      "path": "skills/75-social-science-research-agent-skills-2026/contribution-auditor/SKILL.md"
+    },
+    {
+      "collection": "75-social-science-research-agent-skills-2026",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 71,
+      "name": "data-dictionary-lineage",
+      "path": "skills/75-social-science-research-agent-skills-2026/data-dictionary-lineage/SKILL.md"
+    },
+    {
+      "collection": "75-social-science-research-agent-skills-2026",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 72,
+      "name": "data-merge-auditor",
+      "path": "skills/75-social-science-research-agent-skills-2026/data-merge-auditor/SKILL.md"
+    },
+    {
+      "collection": "75-social-science-research-agent-skills-2026",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 71,
+      "name": "doi-metadata-resolver",
+      "path": "skills/75-social-science-research-agent-skills-2026/doi-metadata-resolver/SKILL.md"
+    },
+    {
+      "collection": "75-social-science-research-agent-skills-2026",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 71,
+      "name": "evidence-extraction-schema",
+      "path": "skills/75-social-science-research-agent-skills-2026/evidence-extraction-schema/SKILL.md"
+    },
+    {
+      "collection": "75-social-science-research-agent-skills-2026",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 71,
+      "name": "fair-tier-package-auditor",
+      "path": "skills/75-social-science-research-agent-skills-2026/fair-tier-package-auditor/SKILL.md"
+    },
+    {
+      "collection": "75-social-science-research-agent-skills-2026",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 76,
+      "name": "identification-assumption-auditor",
+      "path": "skills/75-social-science-research-agent-skills-2026/identification-assumption-auditor/SKILL.md"
+    },
+    {
+      "collection": "75-social-science-research-agent-skills-2026",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 71,
+      "name": "literature-search-auditor",
+      "path": "skills/75-social-science-research-agent-skills-2026/literature-search-auditor/SKILL.md"
+    },
+    {
+      "collection": "75-social-science-research-agent-skills-2026",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 72,
+      "name": "llm-annotation-validator",
+      "path": "skills/75-social-science-research-agent-skills-2026/llm-annotation-validator/SKILL.md"
+    },
+    {
+      "collection": "75-social-science-research-agent-skills-2026",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 72,
+      "name": "multi-database-search-orchestrator",
+      "path": "skills/75-social-science-research-agent-skills-2026/multi-database-search-orchestrator/SKILL.md"
+    },
+    {
+      "collection": "75-social-science-research-agent-skills-2026",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 71,
+      "name": "novelty-checker",
+      "path": "skills/75-social-science-research-agent-skills-2026/novelty-checker/SKILL.md"
+    },
+    {
+      "collection": "75-social-science-research-agent-skills-2026",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 72,
+      "name": "process-tracing-evidence-auditor",
+      "path": "skills/75-social-science-research-agent-skills-2026/process-tracing-evidence-auditor/SKILL.md"
+    },
+    {
+      "collection": "75-social-science-research-agent-skills-2026",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 72,
+      "name": "public-data-scout",
+      "path": "skills/75-social-science-research-agent-skills-2026/public-data-scout/SKILL.md"
+    },
+    {
+      "collection": "75-social-science-research-agent-skills-2026",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 71,
+      "name": "qualitative-codebook-builder",
+      "path": "skills/75-social-science-research-agent-skills-2026/qualitative-codebook-builder/SKILL.md"
+    },
+    {
+      "collection": "75-social-science-research-agent-skills-2026",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 73,
+      "name": "research-question-decomposer",
+      "path": "skills/75-social-science-research-agent-skills-2026/research-question-decomposer/SKILL.md"
+    },
+    {
+      "collection": "75-social-science-research-agent-skills-2026",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 71,
+      "name": "retraction-correction-checker",
+      "path": "skills/75-social-science-research-agent-skills-2026/retraction-correction-checker/SKILL.md"
+    },
+    {
+      "collection": "75-social-science-research-agent-skills-2026",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 71,
+      "name": "reviewer-redteam-response",
+      "path": "skills/75-social-science-research-agent-skills-2026/reviewer-redteam-response/SKILL.md"
+    },
+    {
+      "collection": "75-social-science-research-agent-skills-2026",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 71,
+      "name": "survey-instrument-designer",
+      "path": "skills/75-social-science-research-agent-skills-2026/survey-instrument-designer/SKILL.md"
+    },
+    {
+      "collection": "75-social-science-research-agent-skills-2026",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 72,
+      "name": "text-preprocessing-auditor",
+      "path": "skills/75-social-science-research-agent-skills-2026/text-preprocessing-auditor/SKILL.md"
+    },
+    {
+      "collection": "75-social-science-research-agent-skills-2026",
+      "exact_case": true,
+      "has_description": true,
+      "has_frontmatter": true,
+      "has_name": true,
+      "line_count": 71,
+      "name": "title-abstract-screener",
+      "path": "skills/75-social-science-research-agent-skills-2026/title-abstract-screener/SKILL.md"
     }
   ],
   "schema_version": "1.0",
   "summary": {
     "duplicate_skill_names": 48,
-    "exact_case_skill_files": 1151,
+    "exact_case_skill_files": 1175,
     "missing_description": 0,
     "missing_frontmatter": 0,
     "non_exact_case_skill_files": 0,
     "over_500_lines": 94,
-    "skill_like_files": 1151
+    "skill_like_files": 1175
   }
 }

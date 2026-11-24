@@ -6,10 +6,10 @@ Scan date: 2026-07-22.
 
 ## Summary
 
-- Collections audited: 78
-- License buckets: AGPL-3.0=1, Apache-2.0=1, CC-BY-NC-4.0 (non-commercial)=1, CC-BY-SA-4.0=1, CC-BY-SA-4.0 (repository default)=7, CC0-1.0=1, GPL-3.0=1, MIT=38, MIT Non-Commercial=1, Mixed (per-skill; see folder)=2, UNKNOWN - check upstream=24
-- Commercial-use buckets: allowed=40, restricted=2, share-alike=10, unknown=26
-- Source-confidence buckets: high=46, low=10, medium=22
+- Collections audited: 79
+- License buckets: AGPL-3.0=1, Apache-2.0=1, CC-BY-NC-4.0 (non-commercial)=1, CC-BY-SA-4.0=1, CC-BY-SA-4.0 (repository default)=8, CC0-1.0=1, GPL-3.0=1, MIT=38, MIT Non-Commercial=1, Mixed (per-skill; see folder)=2, UNKNOWN - check upstream=24
+- Commercial-use buckets: allowed=40, restricted=2, share-alike=11, unknown=26
+- Source-confidence buckets: high=47, low=10, medium=22
 
 ## Interpretation
 
@@ -100,3 +100,4 @@ Scan date: 2026-07-22.
 | [`72-kaggle-research`](../skills/72-kaggle-research/) | [source](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills) | high | CC-BY-SA-4.0 (repository default) | share-alike | manual |
 | [`73-brycewang-p-hacking-skills`](../skills/73-brycewang-p-hacking-skills/) | [source](https://github.com/brycewang-stanford/p-hacking-skills) | high | MIT | allowed | manual |
 | [`74-brycewang-spss-amos-sem`](../skills/74-brycewang-spss-amos-sem/) | [source](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills) | high | CC-BY-SA-4.0 (repository default) | share-alike | manual |
+| [`75-social-science-research-agent-skills-2026`](../skills/75-social-science-research-agent-skills-2026/) | [source](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills) | high | CC-BY-SA-4.0 (repository default) | share-alike | manual |

@@ -8,13 +8,13 @@ Run `python3 scripts/quickstart.py --markdown` to refresh after `make catalog`.
 
 ## What is in this repo
 
-- **78** collections · **1151** skills
+- **79** collections · **1175** skills
 - **18** distinct method tags
 
 ### Top research stages
 
-- analysis: 144
-- writing: 89
+- analysis: 145
+- writing: 90
 - submission: 86
 - literature: 66
 - reproduction: 64
@@ -28,8 +28,8 @@ Run `python3 scripts/quickstart.py --markdown` to refresh after `make catalog`.
 
 ### Top method tags
 
-- iv: 30
-- rdd: 28
+- iv: 31
+- rdd: 29
 - panel-fe: 20
 - staggered-did: 19
 - bayesian: 13
@@ -43,7 +43,7 @@ Run `python3 scripts/quickstart.py --markdown` to refresh after `make catalog`.
 
 - MIT: 38 collection(s)
 - UNKNOWN - check upstream: 24 collection(s)
-- CC-BY-SA-4.0 (repository default): 7 collection(s)
+- CC-BY-SA-4.0 (repository default): 8 collection(s)
 - Mixed (per-skill; see folder): 2 collection(s)
 - MIT Non-Commercial: 1 collection(s)
 - Apache-2.0: 1 collection(s)
