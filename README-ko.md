@@ -54,18 +54,18 @@
 
 ## 먼저 보기: 저장소 전체는 하나의 AERS Router Skill입니다
 
-이 저장소는 루트 디렉터리를 Codex, CodeBuddy, Claude Code 또는 유사 IDE에 하나의 skill로 가져올 수 있습니다. 루트 [`SKILL.md`](SKILL.md)는 `auto-empirical-research-skills`를 등록하며, 78개 컬렉션과 1,151개 skill을 한 번에 컨텍스트에 로드하는 대신 연구 과제에 맞는 vendored 하위 skill로 라우팅합니다.
+이 저장소는 루트 디렉터리를 Codex, CodeBuddy, Claude Code 또는 유사 IDE에 하나의 skill로 가져올 수 있습니다. 루트 [`SKILL.md`](SKILL.md)는 `auto-empirical-research-skills`를 등록하며, 79개 컬렉션과 1,175개 skill을 한 번에 컨텍스트에 로드하는 대신 연구 과제에 맞는 vendored 하위 skill로 라우팅합니다.
 
 - **저장소 전체 가져오기**: 저장소 루트를 선택하고 [`agents/openai.yaml`](agents/openai.yaml)과 루트 [`SKILL.md`](SKILL.md)로 하나의 catalog router를 등록합니다. agent는 [`catalog/skills.json`](catalog/skills.json) 또는 [`docs/SKILL_CATALOG.md`](docs/SKILL_CATALOG.md)를 확인한 뒤 선택된 하위 skill만 읽어야 합니다.
-- **단일 skill 가져오기**: IDE가 "폴더 하나 = skill 하나"를 기대한다면 대상 `SKILL.md`를 직접 포함하는 하위 폴더를 복사하세요. 예: `skills/50-brycewang-aer-skills/skills/aer-workflow/`. IDE가 재귀 discovery를 명시적으로 지원하지 않는 한, 루트 가져오기가 1,151개의 개별 skill을 등록한다고 가정하지 마세요.
+- **단일 skill 가져오기**: IDE가 "폴더 하나 = skill 하나"를 기대한다면 대상 `SKILL.md`를 직접 포함하는 하위 폴더를 복사하세요. 예: `skills/50-brycewang-aer-skills/skills/aer-workflow/`. IDE가 재귀 discovery를 명시적으로 지원하지 않는 한, 루트 가져오기가 1,175개의 개별 skill을 등록한다고 가정하지 마세요.
 - **가장 쉬운 설치**: 클론한 폴더의 로컬 경로를 agent(Claude Code / Codex / WorkBuddy)에 복사해 주고 [`INSTALL.md`](INSTALL.md) 방법 0에 따라 설치하도록 요청하세요. Codex의 사용자 skill 디렉터리는 `~/.agents/skills/`(구버전: `~/.codex/skills/`)입니다. 자세한 내용은 [`INSTALL.md`](INSTALL.md) 2C를 참고하세요.
 - **설치 세부 사항**: [`docs/INSTALL.md`](docs/INSTALL.md)를 보세요. 기본 README는 간체 중국어 [`README.md`](README.md)이며 영어판은 [`README-en.md`](README-en.md)입니다.
 
 ---
 
-## 전체 78개 스킬 컬렉션 한눈에 보기
+## 전체 79개 스킬 컬렉션 한눈에 보기
 
-> **저장소를 열면 → 전체 라이브러리가 보입니다.** 모든 **78개 컬렉션 · 1,151개 스킬**을 `00 → 74`로 번호를 매겼으며, 하나도 빠짐없이 **본 저장소에 벤더링**되어(단순 외부 링크가 아님) [`catalog/skills.json`](catalog/skills.json)에서 추적됩니다. **아무 행이나 클릭하면 해당 폴더가 열립니다.** **⭐ = Stanford REAP × StatsPAI 팀이 직접 만든 자체 제작 스킬**이며, 나머지는 모두 큐레이션하고 보안 감사를 거친 커뮤니티 작업물입니다.
+> **저장소를 열면 → 전체 라이브러리가 보입니다.** 모든 **79개 컬렉션 · 1,175개 스킬**을 `00 → 75`로 번호를 매겼으며, 하나도 빠짐없이 **본 저장소에 벤더링**되어(단순 외부 링크가 아님) [`catalog/skills.json`](catalog/skills.json)에서 추적됩니다. **아무 행이나 클릭하면 해당 폴더가 열립니다.** **⭐ = Stanford REAP × StatsPAI 팀이 직접 만든 자체 제작 스킬**이며, 나머지는 모두 큐레이션하고 보안 감사를 거친 커뮤니티 작업물입니다.
 >
 > **테마 범례 —** 🚀 전체 파이프라인 & 오케스트레이터 · 🎯 인과추론 & 계량경제 · 📚 문헌 & 연구 설계 · ✍️ 글쓰기, 편집 & 탈AIGC · 📑 인용, 재현 & 동료 심사 · 🛠️ 데이터, 도구 & 인프라
 >
@@ -151,10 +151,11 @@
 | ⭐ **72** | **[Kaggle Research](skills/72-kaggle-research/)** 🧪 | 공식 CLI 기반의 안전하고 감사 가능한 Kaggle 검색 및 제한된 공개 데이터 다운로드 | 🛠️ | 1 | [⭐ 이 저장소](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills) |
 | ⭐ **73** | **[p-hacking-skills](skills/73-brycewang-p-hacking-skills/)** 🔬 | 실제 효과가 0인 데이터에서 계측된 사양 탐색 — 갈림길 지도, 탐색을 반영한 '정직한' p값, p-curve 탐지, 사전등록 면역화 (교육·감사용) | 📑 | 11 | [brycewang-stanford/p-hacking-skills](https://github.com/brycewang-stanford/p-hacking-skills) |
 | ⭐ **74** | **[spss-amos-sem](skills/74-brycewang-spss-amos-sem/)** 📋 | 설문 데이터 구조방정식 전 과정(SPSS + AMOS) — 정제, 신뢰도, EFA, CFA(CR / AVE / HTMT), 구조모형, bootstrap 매개, 다집단, PROCESS; SPSS 신택스·AMOS 프로그램·중국어 삼선표 자동 생성 | 📑 | 1 | [⭐ 이 저장소](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills) |
+| **75** | **[social-science-handbook](skills/75-social-science-research-agent-skills-2026/)** 📚 | 2026 사회과학 연구 에이전트 skill 핸드북 부록 — 연구 질문 분해, 기여·참신성, 다중 DB 검색, 체계적 문헌고찰, 데이터 발견, 연구 설계, 인과 식별, 질적 코딩, 계산 텍스트 분석, 집필까지 24개 연구 skill | 📚 | 24 | [⭐ 이 저장소](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills) |
 
-> ⭐ **우리가 직접 구축한 척추:** [StatsPAI](skills/00-Full-empirical-analysis-skill_StatsPAI/) (인과 엔진) · 명시적 [Python](skills/00.1-Full-empirical-analysis-skill_Python/) / [Stata](skills/00.2-Full-empirical-analysis-skill_Stata/) / [R](skills/00.3-Full-empirical-analysis-skill_R/) 전체 파이프라인 포트 · [AER-skills](skills/50-brycewang-aer-skills/) (top-5 투고 스택) · [de-AIGC-skills](skills/48-de-AIGC-skills/) · [Paper-WorkFlow](skills/69-Paper-WorkFlow/) (메타 오케스트레이터). 이들이 AERS의 척추입니다 — 전체 비교는 [플래그십 파이프라인 스킬 ↓](#플래그십-파이프라인-스킬)에서 확인하세요. 용도별로 둘러보고 싶으신가요? [동일한 78개를 하는 일별로 정리 ↓](#78개-컬렉션--용도별-분류)를 참고하세요.
+> ⭐ **우리가 직접 구축한 척추:** [StatsPAI](skills/00-Full-empirical-analysis-skill_StatsPAI/) (인과 엔진) · 명시적 [Python](skills/00.1-Full-empirical-analysis-skill_Python/) / [Stata](skills/00.2-Full-empirical-analysis-skill_Stata/) / [R](skills/00.3-Full-empirical-analysis-skill_R/) 전체 파이프라인 포트 · [AER-skills](skills/50-brycewang-aer-skills/) (top-5 투고 스택) · [de-AIGC-skills](skills/48-de-AIGC-skills/) · [Paper-WorkFlow](skills/69-Paper-WorkFlow/) (메타 오케스트레이터). 이들이 AERS의 척추입니다 — 전체 비교는 [플래그십 파이프라인 스킬 ↓](#플래그십-파이프라인-스킬)에서 확인하세요. 용도별로 둘러보고 싶으신가요? [동일한 79개를 하는 일별로 정리 ↓](#79개-컬렉션--용도별-분류)를 참고하세요.
 
-**실증 연구 전문가를 위한 에이전트 스킬 배포판.** 마케팅용 목록이 아닙니다 — 본 저장소에 **1,151개의 스킬을 직접 벤더링하고 카탈로그화**했으며, **수치 벤치마크, eval 하니스, 보안 감사, CI**로 감쌌고, 여기에 더 넓은 생태계의 **119개 저장소에 걸친 23,000개 이상의 스킬**을 정리한 큐레이션 지도를 더했습니다.
+**실증 연구 전문가를 위한 에이전트 스킬 배포판.** 마케팅용 목록이 아닙니다 — 본 저장소에 **1,175개의 스킬을 직접 벤더링하고 카탈로그화**했으며, **수치 벤치마크, eval 하니스, 보안 감사, CI**로 감쌌고, 여기에 더 넓은 생태계의 **119개 저장소에 걸친 23,000개 이상의 스킬**을 정리한 큐레이션 지도를 더했습니다.
 
 AERS는 두 가지를 동시에 제공합니다: (1) 완전한 실증 파이프라인 — 데이터 정제 → 식별 → 추정 → 강건성 → 표/그림 → 투고 가능한 초안 — 을 실행하는 소수의 **자체 제작 플래그십 스킬**, 그리고 (2) 연구 워크플로 단계별로 정리한, **큐레이션되고 보안을 고려한** 실증 연구 스킬 생태계 카탈로그입니다. 차별점은 개수가 아니라, 플래그십의 동작이 단지 주장에 그치지 않고 **알려진 정답에 대해 검증된다**는 점입니다.
 
@@ -168,8 +169,8 @@ AERS는 두 가지를 동시에 제공합니다: (1) 완전한 실증 파이프�
 
 ## 목차
 
-- [**전체 78개 스킬 컬렉션 한눈에 보기** (전체 `00 → 74` 인덱스)](#전체-78개-스킬-컬렉션-한눈에-보기)
-  - [78개 컬렉션, 하는 일별 분류](#78개-컬렉션--용도별-분류)
+- [**전체 79개 스킬 컬렉션 한눈에 보기** (전체 `00 → 75` 인덱스)](#전체-79개-스킬-컬렉션-한눈에-보기)
+  - [79개 컬렉션, 하는 일별 분류](#79개-컬렉션--용도별-분류)
 - [당신이 실제로 얻는 것 (정확한 숫자)](#당신이-실제로-얻는-것-정확한-숫자)
 - [2분 만에 직접 검증하기](#2분-만에-직접-검증하기)
 - [왜 신뢰할 수 있는가 — 세 개의 신뢰 층위](#왜-신뢰할-수-있는가--세-개의-신뢰-층위)
@@ -188,9 +189,9 @@ AERS는 두 가지를 동시에 제공합니다: (1) 완전한 실증 파이프�
 
 ---
 
-## 78개 컬렉션 · 용도별 분류
+## 79개 컬렉션 · 용도별 분류
 
-> 상단의 [순차 인덱스 ↑](#전체-78개-스킬-컬렉션-한눈에-보기)와 동일한 **78개 컬렉션 · 1,151개 스킬**을 — 여기서는 **연구 목적별로** 재정렬했으므로, 작업 중인 단계로 바로 훑어볼 수 있습니다. **⭐ = 자체 제작**(Stanford REAP × StatsPAI)이며, 나머지는 모두 큐레이션하고 보안 감사를 거친 커뮤니티 작업물입니다.
+> 상단의 [순차 인덱스 ↑](#전체-79개-스킬-컬렉션-한눈에-보기)와 동일한 **79개 컬렉션 · 1,175개 스킬**을 — 여기서는 **연구 목적별로** 재정렬했으므로, 작업 중인 단계로 바로 훑어볼 수 있습니다. **⭐ = 자체 제작**(Stanford REAP × StatsPAI)이며, 나머지는 모두 큐레이션하고 보안 감사를 거친 커뮤니티 작업물입니다.
 
 **🚀 전체 파이프라인 플래그십 & 오케스트레이터** — *한 번의 호출, 실증 루프 전체*
 
@@ -232,6 +233,7 @@ AERS는 두 가지를 동시에 제공합니다: (1) 완전한 실증 파이프�
 | [`63` · scientific-agent-skills](skills/63-tondevrel-scientific-agent-skills/) | DoWhy 식별–추정–반증 프레임워크 | 2 |
 | [`64` · mcp-stata](skills/64-tmonk-mcp-stata/) | 20개 Stata 인과추론 & 재현 스킬 | 20 |
 | ⭐ **[`74` · spss-amos-sem](skills/74-brycewang-spss-amos-sem/)** 📋 | 설문 SEM(SPSS + AMOS): 신뢰도·타당도, CFA, 매개, PROCESS | 1 |
+| **[`75` · social-science-handbook](skills/75-social-science-research-agent-skills-2026/)** 📚 | 연구 질문부터 투고까지 실증 파이프라인을 아우르는 24개 연구 skill | 24 |
 
 **📚 문헌, 읽기 & 연구 설계** — *질문에서 근거 기반까지*
 
@@ -307,8 +309,8 @@ AERS는 두 가지를 동시에 제공합니다: (1) 완전한 실증 파이프�
 
 | 무엇인가 | 개수 | 사실 출처 |
 |---|---:|---|
-| **본 저장소에 벤더링**되어 카탈로그화된 스킬 | **1,151** | [`catalog/skills.json`](catalog/skills.json) |
-| 벤더링된 **컬렉션(collections)** | **78** | [`catalog/skills.json`](catalog/skills.json) · [78개 전체 한눈에 보기 ↑](#전체-78개-스킬-컬렉션-한눈에-보기) |
+| **본 저장소에 벤더링**되어 카탈로그화된 스킬 | **1,175** | [`catalog/skills.json`](catalog/skills.json) |
+| 벤더링된 **컬렉션(collections)** | **79** | [`catalog/skills.json`](catalog/skills.json) · [79개 전체 한눈에 보기 ↑](#전체-79개-스킬-컬렉션-한눈에-보기) |
 | **자체 제작 플래그십** 전체 파이프라인 스킬 (StatsPAI DSL + 명시적 Python/Stata/R) | **4** | [`skills/00*`](skills/) |
 | 매 실행마다 데이터에서 gold 값을 재계산하는 수치 **벤치마크 과제** | **19** | [`benchmark/`](benchmark/) |
 | 행동 수준 **eval 시나리오 / 루브릭 항목** | **42 / 217** | [`eval-harness/`](eval-harness/) |
@@ -415,7 +417,7 @@ make check        # repo validation + unit tests + eval lint + numeric benchmark
 | **수치 벤치마크** | 실제 데이터에서 재계산한 진실과 일치하지 않는 보고 숫자 — 순진한 DID 부호 함정, 1단계 F 없는 약한 IV, staggered 타이밍 하의 TWFE 편향, RDD 추세 교란, 처치 후 나쁜 통제, 통합 평균이 숨기는 이질적 효과(CATE), 평균만 보면 놓치는 분위수 효과, 지역 충격에 교란된 시프트-셰어(Bartik) IV, 매개변수를 통제해 직접효과 부호가 뒤집히는 함정, 준거집단에 따라 달라지는 Oaxaca 분해, kink에서 잉여질량을 무보정 밀도가 숨기는 bunching, 내생적 가격을 도구변수로 다루지 않은 수요 추정과 계수를 그대로 탄력성으로 보고하는 오류(구조 추정), 처치 단위를 부분적으로 노출된 이웃과 비교하는 오류(간섭/스필오버) | [`benchmark/`](benchmark/) · 19개 과제 |
 | **Eval 하니스** | 산문 수준 실패: 약한 IV의 거짓 안심, staggered-DID의 TWFE 오용, 조작된 인용, 안전하지 않은 `curl \| bash` 설치, 다중 검정 남용, AER 준수 누락 | [`eval-harness/`](eval-harness/) · 42개 시나리오 / 217개 루브릭 항목 |
 | **보안 감사** | pipe-to-shell, 리버스 셸, 자격증명 유출, 프롬프트 인젝션을 13개 위험 카테고리에 걸쳐 점검 — 6단계, 40개 이상의 hook 스크립트를 손으로 검토 | [`SECURITY-SCAN-REPORT.md`](SECURITY-SCAN-REPORT.md) |
-| **출처 & 라이선스** | 벤더링되지 않은 출처, 라이선스 위험, 1,151개 카탈로그 스킬 전반의 위생 드리프트 | [`docs/LICENSE_AUDIT.md`](docs/LICENSE_AUDIT.md) · [`docs/SKILL_HYGIENE.md`](docs/SKILL_HYGIENE.md) |
+| **출처 & 라이선스** | 벤더링되지 않은 출처, 라이선스 위험, 1,175개 카탈로그 스킬 전반의 위생 드리프트 | [`docs/LICENSE_AUDIT.md`](docs/LICENSE_AUDIT.md) · [`docs/SKILL_HYGIENE.md`](docs/SKILL_HYGIENE.md) |
 | **CI & 호환성** | 카탈로그 신선도, 깨진 로컬 링크, GitHub Actions 정책, Python 3.9 **및** 3.12 문법 하한선 | [`.github/workflows/`](.github/workflows/) · 7개 워크플로 |
 
 ```bash
@@ -430,7 +432,7 @@ make check       # full gate: validate + Python compile + unit tests + eval lint
 
 ## 전체 지형 둘러보기
 
-> 📚 전체 **[78개 컬렉션 디렉터리 ↑](#전체-78개-스킬-컬렉션-한눈에-보기)**는 이 README 상단에 있습니다 — 이 섹션은 생태계를 테마별로 깊이 들여다봅니다.
+> 📚 전체 **[79개 컬렉션 디렉터리 ↑](#전체-79개-스킬-컬렉션-한눈에-보기)**는 이 README 상단에 있습니다 — 이 섹션은 생태계를 테마별로 깊이 들여다봅니다.
 
 ### 연구 단계별
 

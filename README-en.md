@@ -40,7 +40,7 @@
   <br/>
 </div>
 
-> ### 🚀 New here? Open the **[Skill Search →](docs/search.html)** to filter all 1,151 skills by method, stage, language, and license. The 5-minute tour (`make quickstart`) prints the same picture in your terminal.
+> ### 🚀 New here? Open the **[Skill Search →](docs/search.html)** to filter all 1,175 skills by method, stage, language, and license. The 5-minute tour (`make quickstart`) prints the same picture in your terminal.
 >
 > ### 🌐 **English readers:** you're in the right place. 🇨🇳 **中文用户请直接看 [`README.md`](README.md) (默认中文入口)** — the default repository README is the Chinese-language one.
 
@@ -60,18 +60,18 @@
 
 ## Start Here: The Repo Is One AERS Router Skill
 
-This repository can be imported from its root as one skill in Codex, CodeBuddy, Claude Code, or similar IDEs. The root [`SKILL.md`](SKILL.md) registers `auto-empirical-research-skills`; it routes each empirical-research task to the right vendored child skill instead of loading all 78 collections and 1,151 skills into context at once.
+This repository can be imported from its root as one skill in Codex, CodeBuddy, Claude Code, or similar IDEs. The root [`SKILL.md`](SKILL.md) registers `auto-empirical-research-skills`; it routes each empirical-research task to the right vendored child skill instead of loading all 79 collections and 1,175 skills into context at once.
 
 - **Whole-repo import**: select the repository root and let [`agents/openai.yaml`](agents/openai.yaml) plus the root [`SKILL.md`](SKILL.md) register one catalog router. The agent should inspect [`catalog/skills.json`](catalog/skills.json) or [`docs/SKILL_CATALOG.md`](docs/SKILL_CATALOG.md), then read only the selected child skill.
-- **Single-skill import**: if an IDE expects one folder per skill, copy the child folder that directly contains the target `SKILL.md`, such as `skills/50-brycewang-aer-skills/skills/aer-workflow/`. Do not expect a recursive import of the repo root to register 1,151 separate skills unless the IDE explicitly supports that.
+- **Single-skill import**: if an IDE expects one folder per skill, copy the child folder that directly contains the target `SKILL.md`, such as `skills/50-brycewang-aer-skills/skills/aer-workflow/`. Do not expect a recursive import of the repo root to register 1,175 separate skills unless the IDE explicitly supports that.
 - **Easiest install**: copy the local path of your clone to your agent (Claude Code / Codex / WorkBuddy) and ask it to install the skills by following [`INSTALL.md`](INSTALL.md) method 0. Codex reads user skills from `~/.agents/skills/` (older versions: `~/.codex/skills/`) — see [`INSTALL.md`](INSTALL.md) section 2C.
 - **Install details**: see [`docs/INSTALL.md`](docs/INSTALL.md). Simplified Chinese is now the default README at [`README.md`](README.md); this English version lives at [`README-en.md`](README-en.md).
 
 ---
 
-## All 78 skill collections at a glance
+## All 79 skill collections at a glance
 
-> **Open the repo → see the whole library.** All **78 collections · 1,151 skills**, numbered `00 → 74`, every one **vendored into this repo** (not just linked out) and tracked in [`catalog/skills.json`](catalog/skills.json). **Click any row to open its folder.** **⭐ = first-party skills built by the Stanford REAP × StatsPAI team**; everything else is curated, security-audited community work.
+> **Open the repo → see the whole library.** All **79 collections · 1,175 skills**, numbered `00 → 75`, every one **vendored into this repo** (not just linked out) and tracked in [`catalog/skills.json`](catalog/skills.json). **Click any row to open its folder.** **⭐ = first-party skills built by the Stanford REAP × StatsPAI team**; everything else is curated, security-audited community work.
 >
 > **Theme key —** 🚀 full-pipeline & orchestrators · 🎯 causal inference & econometrics · 📚 literature & research design · ✍️ writing, editing & de-AIGC · 📑 citation, replication & peer review · 🛠️ data, tooling & infrastructure
 >
@@ -157,10 +157,11 @@ This repository can be imported from its root as one skill in Codex, CodeBuddy, 
 | ⭐ **72** | **[Kaggle Research](skills/72-kaggle-research/)** 🧪 | Safe, audited Kaggle discovery and bounded public-data downloads through the official CLI | 🛠️ | 1 | [⭐ this repo](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills) |
 | ⭐ **73** | **[p-hacking-skills](skills/73-brycewang-p-hacking-skills/)** 🔬 | Instrumented specification search on known-null data — forking-path maps, search-adjusted *honest* p-values, p-curve detection, pre-registration immunization (teaching & audit) | 📑 | 11 | [brycewang-stanford/p-hacking-skills](https://github.com/brycewang-stanford/p-hacking-skills) |
 | ⭐ **74** | **[spss-amos-sem](skills/74-brycewang-spss-amos-sem/)** 📋 | Questionnaire SEM in the SPSS + AMOS thesis workflow — cleaning, reliability, EFA, CFA (CR / AVE / HTMT), structural model, bootstrap mediation, multi-group, PROCESS; writes SPSS syntax, AMOS programs and Chinese three-line tables | 📑 | 1 | [⭐ this repo](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills) |
+| **75** | **[social-science-handbook](skills/75-social-science-research-agent-skills-2026/)** 📚 | Companion pack to the 2026 social-science research agent-skills handbook — 24 research skills spanning question decomposition, contribution & novelty, multi-database search, systematic review, data discovery, design, causal identification, qualitative coding, computational text, and writing | 📚 | 24 | [⭐ this repo](https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills) |
 
-> ⭐ **The spine we built ourselves:** [StatsPAI](skills/00-Full-empirical-analysis-skill_StatsPAI/) (the causal engine) · the explicit [Python](skills/00.1-Full-empirical-analysis-skill_Python/) / [Stata](skills/00.2-Full-empirical-analysis-skill_Stata/) / [R](skills/00.3-Full-empirical-analysis-skill_R/) full-pipeline ports · [AER-skills](skills/50-brycewang-aer-skills/) (top-5 submission stack) · [de-AIGC-skills](skills/48-de-AIGC-skills/) · [Paper-WorkFlow](skills/69-Paper-WorkFlow/) (meta-orchestrator). These are the spine of AERS — full comparison in [The flagship pipeline skills ↓](#the-flagship-pipeline-skills). Prefer to browse by purpose? See [the same 78 grouped by what they do ↓](#the-78-grouped-by-what-they-do).
+> ⭐ **The spine we built ourselves:** [StatsPAI](skills/00-Full-empirical-analysis-skill_StatsPAI/) (the causal engine) · the explicit [Python](skills/00.1-Full-empirical-analysis-skill_Python/) / [Stata](skills/00.2-Full-empirical-analysis-skill_Stata/) / [R](skills/00.3-Full-empirical-analysis-skill_R/) full-pipeline ports · [AER-skills](skills/50-brycewang-aer-skills/) (top-5 submission stack) · [de-AIGC-skills](skills/48-de-AIGC-skills/) · [Paper-WorkFlow](skills/69-Paper-WorkFlow/) (meta-orchestrator). These are the spine of AERS — full comparison in [The flagship pipeline skills ↓](#the-flagship-pipeline-skills). Prefer to browse by purpose? See [the same 79 grouped by what they do ↓](#the-79-grouped-by-what-they-do).
 
-**The empirical-research specialist's agent-skills distribution.** Not a marketing list — **1,151 skills vendored and cataloged** in this repo, wrapped in a **numeric benchmark, an eval harness, a security audit, and CI**, plus a curated map of **23,000+ skills across 119 repositories** in the wider ecosystem.
+**The empirical-research specialist's agent-skills distribution.** Not a marketing list — **1,175 skills vendored and cataloged** in this repo, wrapped in a **numeric benchmark, an eval harness, a security audit, and CI**, plus a curated map of **23,000+ skills across 119 repositories** in the wider ecosystem.
 
 AERS is two things at once: (1) a small set of **first-party flagship skills** that run the full empirical pipeline — data cleaning → identification → estimation → robustness → tables/figures → submission-ready draft — and (2) a **curated, security-aware catalog** of the empirical-research skill ecosystem, organized by research-workflow stage. The differentiator is not the count; it is that the flagship behavior is **verified against known answers**, not asserted.
 
@@ -174,8 +175,8 @@ AERS is two things at once: (1) a small set of **first-party flagship skills** t
 
 ## Contents
 
-- [**All 78 skill collections at a glance** (the full `00 → 74` index)](#all-78-skill-collections-at-a-glance)
-  - [The 78, grouped by what they do](#the-78-grouped-by-what-they-do)
+- [**All 79 skill collections at a glance** (the full `00 → 75` index)](#all-79-skill-collections-at-a-glance)
+  - [The 79, grouped by what they do](#the-79-grouped-by-what-they-do)
 - [What you actually get (the numbers, precisely)](#what-you-actually-get-the-numbers-precisely)
 - [Verify it yourself in 2 minutes](#verify-it-yourself-in-2-minutes)
 - [Why trust this — three layers](#why-trust-this--three-layers)
@@ -194,9 +195,9 @@ AERS is two things at once: (1) a small set of **first-party flagship skills** t
 
 ---
 
-## The 78, grouped by what they do
+## The 79, grouped by what they do
 
-> Same **78 collections · 1,151 skills** as the [sequential index at the top ↑](#all-78-skill-collections-at-a-glance) — re-sorted here **by research purpose** so you can scan to the stage you're working on. **⭐ = first-party** (Stanford REAP × StatsPAI); everything else is curated, security-audited community work.
+> Same **79 collections · 1,175 skills** as the [sequential index at the top ↑](#all-79-skill-collections-at-a-glance) — re-sorted here **by research purpose** so you can scan to the stage you're working on. **⭐ = first-party** (Stanford REAP × StatsPAI); everything else is curated, security-audited community work.
 
 **🚀 Full-pipeline flagships & orchestrators** — *one call, the whole empirical loop*
 
@@ -238,6 +239,7 @@ AERS is two things at once: (1) a small set of **first-party flagship skills** t
 | [`63` · scientific-agent-skills](skills/63-tondevrel-scientific-agent-skills/) | DoWhy identify–estimate–refute framework | 2 |
 | [`64` · mcp-stata](skills/64-tmonk-mcp-stata/) | 20 Stata causal-inference & replication skills | 20 |
 | ⭐ **[`74` · spss-amos-sem](skills/74-brycewang-spss-amos-sem/)** 📋 | Questionnaire SEM with SPSS + AMOS: reliability, validity, CFA, mediation, PROCESS | 1 |
+| **[`75` · social-science-handbook](skills/75-social-science-research-agent-skills-2026/)** 📚 | 24 research skills across the empirical pipeline, from question to submission | 24 |
 
 **📚 Literature, reading & research design** — *from question to evidence base*
 
@@ -314,8 +316,8 @@ Numbers in this README are kept honest and disambiguated. "Vendored" means the f
 
 | What it is | Count | Source of truth |
 |---|---:|---|
-| Skills **vendored into this repo** and cataloged | **1,151** | [`catalog/skills.json`](catalog/skills.json) |
-| Vendored **collections** | **78** | [`catalog/skills.json`](catalog/skills.json) · [all 78 at a glance ↑](#all-78-skill-collections-at-a-glance) |
+| Skills **vendored into this repo** and cataloged | **1,175** | [`catalog/skills.json`](catalog/skills.json) |
+| Vendored **collections** | **79** | [`catalog/skills.json`](catalog/skills.json) · [all 79 at a glance ↑](#all-79-skill-collections-at-a-glance) |
 | **First-party flagship** full-pipeline skills (StatsPAI DSL + explicit Python/Stata/R) | **4** | [`skills/00*`](skills/) |
 | Numeric **benchmark tasks** with gold values recomputed from data each run | **19** | [`benchmark/`](benchmark/) |
 | Behavioral **eval scenarios / rubric items** | **42 / 217** | [`eval-harness/`](eval-harness/) |
@@ -424,7 +426,7 @@ Public-skill counts are easy to inflate, and recent studies show large skill ind
 | **Numeric benchmark** | Reported numbers that don't match truth recomputed from real data — the naive-DID sign trap, weak-IV without first-stage F, TWFE bias under staggered timing, RDD trend confound, post-treatment bad controls, omitted unit heterogeneity (panel FE), dynamic effects / pre-trends (event study), omitted-control bias under cross-fitting (DML), censoring (survival), prior sensitivity (Bayesian), pre-period donor fit (synthetic control), opposite-signed subgroup effects a pooled mean hides (CATE), tail-only gains a mean-only report misses (QTE), local-shock confounding in a shift-share (Bartik) IV, mediator-as-control sign flips (mediation), and reference-dependent gap splits (Oaxaca-Blinder), excess mass at a kink hidden by the unmodified baseline (bunching), and a demand system fit without instrumenting endogenous price, with the coefficient quoted as an elasticity (structural), and treated units compared to their partially-exposed untreated neighbours (interference) | [`benchmark/`](benchmark/) · 19 tasks |
 | **Eval harness** | Prose-level failures: weak-IV false reassurance, staggered-DID TWFE misuse, fabricated citations, unsafe `curl \| bash` setup, multiple-testing abuse, AER compliance gaps | [`eval-harness/`](eval-harness/) · 42 scenarios / 217 rubric items |
 | **Security audit** | Pipe-to-shell, reverse shells, credential exfiltration, prompt injection across 13 risk categories — 6-phase, 40+ hook scripts reviewed by hand | [`SECURITY-SCAN-REPORT.md`](SECURITY-SCAN-REPORT.md) |
-| **Provenance & license** | Unvendored sources, license risk, hygiene drift across all 1,151 cataloged skills | [`docs/LICENSE_AUDIT.md`](docs/LICENSE_AUDIT.md) · [`docs/SKILL_HYGIENE.md`](docs/SKILL_HYGIENE.md) |
+| **Provenance & license** | Unvendored sources, license risk, hygiene drift across all 1,175 cataloged skills | [`docs/LICENSE_AUDIT.md`](docs/LICENSE_AUDIT.md) · [`docs/SKILL_HYGIENE.md`](docs/SKILL_HYGIENE.md) |
 | **CI & compatibility** | Catalog freshness, broken local links, GitHub Actions policy, Python 3.9 **and** 3.12 syntax floor | [`.github/workflows/`](.github/workflows/) · 7 workflows |
 
 ```bash
@@ -439,7 +441,7 @@ The trust surface is **necessary, not sufficient** — regex rubrics don't certi
 
 ## Browse the landscape
 
-> 📚 The full **[78-collection directory ↑](#all-78-skill-collections-at-a-glance)** is at the top of this README — this section drills into the ecosystem by theme.
+> 📚 The full **[79-collection directory ↑](#all-79-skill-collections-at-a-glance)** is at the top of this README — this section drills into the ecosystem by theme.
 
 ### By research stage
 

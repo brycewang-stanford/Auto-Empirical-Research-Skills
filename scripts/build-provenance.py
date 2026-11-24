@@ -178,6 +178,16 @@ OVERRIDES: dict[str, dict[str, object]] = {
         "sync": "manual",
         "source_confidence": "high",
     },
+    "75-social-science-research-agent-skills-2026": {
+        # Contributed directly to this repository — the companion skill pack to
+        # 《社会科学研究Agent Skills手册·通用版2026》(计量经济圈), 24 of the
+        # handbook's installable skill templates. No external upstream repo.
+        "source_url": "https://github.com/brycewang-stanford/Auto-Empirical-Research-Skills",
+        "license": "CC-BY-SA-4.0 (repository default)",
+        "origin": "direct community contribution",
+        "sync": "manual",
+        "source_confidence": "high",
+    },
     "12-pedrohcgs-claude-code-my-workflow": {
         "source_url": "https://github.com/pedrohcgs/claude-code-my-workflow",
         "source_confidence": "high",
