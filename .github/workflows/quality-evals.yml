@@ -13,7 +13,10 @@ permissions:
 
 jobs:
   quality:
-    runs-on: ubuntu-latest
+    # ubuntu-latest moved to 26.04, where actions/setup-python no longer
+    # publishes Python 3.9 builds (3.9 tops out at 24.04); pin so the 3.9
+    # leg of the matrix can still install.
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     strategy:
       fail-fast: false
